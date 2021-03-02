@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png">
+  <link rel="mask-icon" href="/images/favicon.png" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"abrahum.link","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="热工基础复习提纲">
+<meta property="og:type" content="article">
+<meta property="og:title" content="热工基础">
+<meta property="og:url" content="http://abrahum.link/2016/11/01/%E7%83%AD%E5%B7%A5%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="AbrahumLink">
+<meta property="og:description" content="热工基础复习提纲">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2016-11-01T02:17:56.000Z">
+<meta property="article:modified_time" content="2021-02-04T07:38:47.906Z">
+<meta property="article:author" content="AbrahumLink">
+<meta property="article:tag" content="机械">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://abrahum.link/2016/11/01/%E7%83%AD%E5%B7%A5%E5%9F%BA%E7%A1%80/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>热工基础 | AbrahumLink</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">AbrahumLink</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-talk">
+
+    <a href="/talk/" rel="section"><i class="fa fa-fw fa-weixin"></i>talk</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://abrahum.link/2016/11/01/%E7%83%AD%E5%B7%A5%E5%9F%BA%E7%A1%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/head.png">
+      <meta itemprop="name" content="AbrahumLink">
+      <meta itemprop="description" content="平凡人而">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AbrahumLink">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          热工基础
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2016-11-01 10:17:56" itemprop="dateCreated datePublished" datetime="2016-11-01T10:17:56+08:00">2016-11-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-02-04 15:38:47" itemprop="dateModified" datetime="2021-02-04T15:38:47+08:00">2021-02-04</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9C%BA%E6%A2%B0/" itemprop="url" rel="index"><span itemprop="name">机械</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><em>热工基础复习提纲</em></p>
+<span id="more"></span>
+
+<h2 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h2><h3 id="热力系统"><a href="#热力系统" class="headerlink" title="热力系统"></a>热力系统</h3><p>凡是能将热能转换为机械能的机器统称为<strong>热力发动机</strong>，简称<strong>热机</strong>。</p>
+<p>热能和机械能之间的转换是通过媒介物质在热机中的一系列状态变化过程来实现的，这种媒介物质称为<strong>工质</strong>。</p>
+<p>热容量很大，并且在吸收和放出有限量热量时自身温度和其他热力学参数没有明显变化的物体称为<strong>热源</strong>。</p>
+<p>选取的一定的工质和空间作为研究对象，称为<strong>热力系统</strong>，简称<strong>系统</strong>。</p>
+<ul>
+<li>闭口系统：与外界无物质交换的系统。</li>
+<li>开口系统：与外界有物质交换的系统。</li>
+<li>绝热系统：与外界无热量交换的系统。</li>
+<li>孤立系统：与外界既无物质交换也无热量交换的系统。</li>
+</ul>
+<h3 id="平衡态和状参"><a href="#平衡态和状参" class="headerlink" title="平衡态和状参"></a>平衡态和状参</h3><p>当系统不受外界影响的条件下，工质的状态参数不随时间而变化的状态称为平衡状态。</p>
+<p>基本状态参数：</p>
+<ul>
+<li>压力：标准单位Pa：$p=\frac{F}{A}$</li>
+<li>温度：单位是K（开）：$T=t+273.15$</li>
+<li>比体积、密度：二者互为倒数：$v=\frac{V}{m}\qquad \rho=\frac{m}{V}$</li>
+</ul>
+<p>根据状态公理指出，对于简单的可压缩系统，只需要两个独立的状态参数便可确定它的平衡状态，可以列出状态方程式：$F(p,v,T)=0$</p>
+<h3 id="可逆过程"><a href="#可逆过程" class="headerlink" title="可逆过程"></a>可逆过程</h3><p>如果系统完成了某一过程之后，再沿着原路逆行而回复到原来的状态，外界也随之恢复到原来的状态，而不留下任何变化，则这一过程称为<strong>可逆过程</strong>。否则就是<strong>不可逆过程</strong>。</p>
+<p><em>可逆过程的条件：准平衡过程＋无耗散效应。</em></p>
+<h3 id="功量和热量"><a href="#功量和热量" class="headerlink" title="功量和热量"></a>功量和热量</h3><p>膨胀功是工质在体积膨胀时所作的功。$\delta W=Fdx\qquad W=\int_{x_1}^{x_2}Fdx$</p>
+<p>单位质量工质所做的膨胀功称为比膨胀功：$\delta w=pdv\qquad W=\int_{1}^{2}pdv$</p>
+<p>系统与外界之间依靠温差传递的能量。符号：Q ；单位：J 或kJ。单位质量工质所传递的热量用 q 表示，单位为 J/kg 或 kJ/kg。系统吸热热量为正，放热为负。</p>
+<p>引入熵（S），单位是J/K，定义：$dS=(\frac{\delta Q}{T})_{re}$</p>
+<p>同时定义单位质量的熵为比熵（s）。由此得：$q=\int_{1}^{2}Tds$</p>
+<h2 id="热力学第一定律"><a href="#热力学第一定律" class="headerlink" title="热力学第一定律"></a>热力学第一定律</h2><h3 id="储存能"><a href="#储存能" class="headerlink" title="储存能"></a>储存能</h3><p>气体工质的比热力学能：单位是J/kg或kJ/kg：$u=f(T,v)$</p>
+<p>宏观动能和宏观位能：$E_k=\frac{1}{2}mc_f^2\qquad E_p=mgz$</p>
+<p>储备能：$E=U+E_k+E_p\qquad e=u+e_k+e_p$</p>
+<h3 id="热力学第一定律及其流动能量方程式"><a href="#热力学第一定律及其流动能量方程式" class="headerlink" title="热力学第一定律及其流动能量方程式"></a>热力学第一定律及其流动能量方程式</h3><p>热力过程中的能量守恒和转换定律。：在热能与其它形式能的互相转换过程中，能的总量始终不变。</p>
+<p>工质在流过热工设备时，必须受外力推动，这种推动工质流动而做的功称为<strong>流动功</strong>或许<strong>推进功</strong>。</p>
+<p>$$\delta W_f=pAdx=pdV=pvdm\qquad w_f=\frac{\delta W_f}{dm}=pv$$</p>
+<p>比焓：$h=u+pv$</p>
+<p>技术功：$W_t=\frac{1}{2}m\Delta c_{f}^{2}+mg\Delta z+W_s$</p>
+<h2 id="理想气体的性质和热力过程"><a href="#理想气体的性质和热力过程" class="headerlink" title="理想气体的性质和热力过程"></a>理想气体的性质和热力过程</h2><h3 id="理想气体状态方程式"><a href="#理想气体状态方程式" class="headerlink" title="理想气体状态方程式"></a>理想气体状态方程式</h3><p>根据<strong>波义耳-马略特定律、盖-吕萨克定律和查理定律</strong>得出理想气体状态方程式，以及克拉贝龙方程式：</p>
+<p>$$pv=R_gT\qquad pV=mR_gT$$</p>
+<p>$R_g$是气体常数，当$M$表示表示气体的摩尔质量时，$R=MR_g$是常数 8.314$J/(mol\cdot K)$</p>
+<h3 id="理想气体的热容、热力学能、焓和熵"><a href="#理想气体的热容、热力学能、焓和熵" class="headerlink" title="理想气体的热容、热力学能、焓和熵"></a>理想气体的热容、热力学能、焓和熵</h3><p>物体温度升高1K所需的热量称为该物体的热容量或热容，单位质量的热容量，称为比热容。$ C=\frac{\delta Q}{dT}\qquad c=\frac{\delta q}{dt}$</p>
+<p>因为热量是与过程性质有关的量，因此如果工质的初终态不同，那么工质的比热容也会不同，常用的有定容比热容$c_v$和定压比热容$c_p$。</p>
+<p>根据焓的定义和理想气体状态方程，容易推出：</p>
+<p>$$c_V=\frac{du}{dT}\qquad c_p=\frac{dh}{dT}\qquad c_p=c_v+R_g$$</p>
+<p>定义有比热容比$\gamma=c_p/c_v$，也称为定熵指数（绝热指数）$\kappa$</p>
+<p>在对于计算要求不需要特别精确时，可以使用定值摩尔热容</p>
+<table>
+<thead>
+<tr>
+<th align="center">定值摩尔热容</th>
+<th align="center">单原子气体</th>
+<th align="center">双原子气体</th>
+<th align="center">多原子气体</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">$C_{V,m}$</td>
+<td align="center">$\frac{3}{2}R$</td>
+<td align="center">$\frac{5}{2}R$</td>
+<td align="center">$\frac{7}{2}R$</td>
+</tr>
+<tr>
+<td align="center">$C_{p,m}$</td>
+<td align="center">$\frac{5}{2}R$</td>
+<td align="center">$\frac{7}{2}R$</td>
+<td align="center">$\frac{9}{2}R$</td>
+</tr>
+<tr>
+<td align="center">$\gamma$</td>
+<td align="center">1.67</td>
+<td align="center">1.40</td>
+<td align="center">1.29</td>
+</tr>
+</tbody></table>
+<p>热力学能和焓：</p>
+<p>$$\Delta u=\int_{1}^{2}c_VdT\qquad \Delta h=\int_{1}^{2}c_pdT$$</p>
+<p>理想气体的熵：</p>
+<p>$$\begin{align}<br>\Delta s &amp; =c_Vln\frac{T_2}{T_1}+R_gln\frac{v_2}{v_1} \\<br> &amp; =c_pln\frac{T_2}{T_1}-R_gln\frac{p_2}{p_1} \\<br> &amp; =c_Vln\frac{p_2}{p_1}+c_pln\frac{v_2}{v_1} \\<br>\end{align}$$</p>
+<h3 id="理想气体的热力过程"><a href="#理想气体的热力过程" class="headerlink" title="理想气体的热力过程"></a>理想气体的热力过程</h3><p>理想气体的基本热力过程有：定容过程、定压过程、定温过程和定熵过程。</p>
+<p>便于记忆直接讨论结合在一起的多变过程。</p>
+<p>对于许多过程，可以近似的使用$pv^n=;$常数来描述，式中的n称为多变指数。</p>
+<table>
+<thead>
+<tr>
+<th align="center">n</th>
+<th align="center">过程类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">0</td>
+<td align="center">定压过程</td>
+</tr>
+<tr>
+<td align="center">1</td>
+<td align="center">定温过程</td>
+</tr>
+<tr>
+<td align="center">$\kappa$</td>
+<td align="center">定熵指数</td>
+</tr>
+<tr>
+<td align="center">$\pm\infty$</td>
+<td align="center">定容过程</td>
+</tr>
+</tbody></table>
+<p>过程方程式：$pv^n=x$</p>
+<p>初终态参数关系：$\frac{p_2}{p_1}=\left( \frac{v_1}{v_2} \right)^n\qquad \frac{T_2}{T_1}=\left( \frac{v_1}{v_2} \right)^{n-1}\qquad \frac{T_2}{T_1}=\left( \frac{p_2}{p_1} \right)^{\frac{n-1}{n}}$</p>
+<p>膨胀功：$w=\frac{p_1v_1-p_2v_2}{n-1}=\frac{R_g}{n-1}(T_1-T_2)$</p>
+<p>交换的功量（不含动能变化）：$w_t=nw$</p>
+<p>交换的热量：$c_n(T_2-T_1)\qquad c_n=\frac{n-\kappa }{n-1}c_V$</p>
+<h2 id="热力学第二定律"><a href="#热力学第二定律" class="headerlink" title="热力学第二定律"></a>热力学第二定律</h2><p>开尔文－普朗克表述：不可能从单一热源取热，并使之完全转变为有用功而不产生其它影响。</p>
+<p>克劳修斯表述：不可能将热从低温物体传至高温物体而不引起其它变化。</p>
+<p>热二律的实质：自发过程都是具有方向性的。</p>
+<h3 id="热力循环"><a href="#热力循环" class="headerlink" title="热力循环"></a>热力循环</h3><p>循环根据效果不同可以分为正向循环和逆向循环。</p>
+<p>正向循环在示意图上表示为顺时针方向，吸热，对外做功。热力循环的效率为热效率，用净功和吸热的比值定义：$\eta_t=\frac{W_{net}}{Q_1}=\frac{Q_1-Q_2}{Q_1}=1-\frac{Q_2}{Q_1}$</p>
+<p>反向循环在示意图上表示为逆时针方向，分为制冷系数：$\varepsilon =\frac{Q_2}{W_{net}}$和制热系数：$\varepsilon ‘=\frac{Q_1}{W_{net}}$</p>
+<h3 id="卡诺循环"><a href="#卡诺循环" class="headerlink" title="卡诺循环"></a>卡诺循环</h3><p>卡诺循环由两个可逆定温过程和两个可逆绝热过程组成。先定温吸热，然后绝热膨胀，再定温放热，最后绝热压缩。易推出，卡诺循环的热效率：$\eta_C=1-\frac{T_2}{T_1}\qquad \varepsilon_C =\frac{T_2}{T_1-T_2}\qquad \varepsilon_C ‘=\frac{T_1}{T_1-T_2}$</p>
+<p>热力循环可实现的要求是循环的热效率（制冷或制热系数）必须小于其卡诺循环的热效率（制冷或制热系数）。</p>
+<p>由卡诺在热机效率的基础上得出了卡诺定理：</p>
+<ul>
+<li>定理一：在相同的高温热源和低温热源间工作的一切可逆热机具有相同的热效率，与工质的性质无关。 </li>
+<li>定理二：在相同高温热源和低温热源间工作的任何不可逆热机的热效率都小于可逆热机的热效率。 </li>
+</ul>
+<h3 id="熵"><a href="#熵" class="headerlink" title="熵"></a>熵</h3><p><em>coming soon</em></p>
+<h2 id="热量传递的基本方式"><a href="#热量传递的基本方式" class="headerlink" title="热量传递的基本方式"></a>热量传递的基本方式</h2><p>热量传递有三种基本方式：热传导、热对流和热辐射。</p>
+<h3 id="热传导"><a href="#热传导" class="headerlink" title="热传导"></a>热传导</h3><p>实验证明：平面一维稳态导热的热流量与平壁的表面面积$A$两侧表面的温差成正比，与平壁的厚度$\delta $成反比：$\phi =\lambda A\frac{t_{w1}-t_{w2}}{\delta}$</p>
+<p>由此还定义出导热电阻$R_{\lambda}=\frac{\delta}{A\lambda};$以及热流密度$q = \frac{\phi}{A}$</p>
+<h3 id="热对流"><a href="#热对流" class="headerlink" title="热对流"></a>热对流</h3><p>热对流是指由于流体的宏观运动使温度不同的流体相对位移而产生的热量传递现象。</p>
+<p>牛顿冷却公式：</p>
+<p>$$\phi =Ah(t_w-t_f)=Ah\Delta t=\frac{\Delta t}{R_h}$$</p>
+<h3 id="热辐射"><a href="#热辐射" class="headerlink" title="热辐射"></a>热辐射</h3><p><em>coming soon</em></p>
+<h2 id="导热"><a href="#导热" class="headerlink" title="导热"></a>导热</h2><h3 id="导热理论基础"><a href="#导热理论基础" class="headerlink" title="导热理论基础"></a>导热理论基础</h3><p>温度场：某一时刻空间所有各点的温度分布，即$t=f(x,y,z,\tau )$</p>
+<p>不随时间按变化的温度场是稳态温度场，反之则是非稳态温度场。</p>
+<p>等温线（面）：在同一时刻，温度场中温度相同的点所连成的线或面。</p>
+<p>温度梯度：等温面（线）法线方向的温度变化率矢量。</p>
+<p>$$grad;t=\frac{\delta t}{\delta x}\overrightarrow{n}$$</p>
+<h3 id="傅立叶定律"><a href="#傅立叶定律" class="headerlink" title="傅立叶定律"></a>傅立叶定律</h3><p>傅立叶定律：$\overrightarrow{q}=-\lambda grad;t=-\lambda \frac{\delta t}{\delta n}\overrightarrow{n}$</p>
+<p>傅立叶定律表明：导热热流密度的大小与温度梯度的绝对值成正比，其方向与温度梯度相反。</p>
+<p>热导率是物质的重要热物性参数，根据傅立叶定律，有：$\lambda = \frac{q}{\left | grad; t \right |}$</p>
+<h2 id="对流换热"><a href="#对流换热" class="headerlink" title="对流换热"></a>对流换热</h2><blockquote>
+<p>奴赛尔数$Nu$、雷诺数$Re$、普朗特数$Pr$你好。<br>奴赛尔数$Nu$、雷诺数$Re$、普朗特数$Pr$再见！</p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%9C%BA%E6%A2%B0/" rel="tag"># 机械</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2016/10/30/%E6%9D%90%E6%96%99%E6%88%90%E5%9E%8B%E6%8A%80%E6%9C%AF%E5%9F%BA%E7%A1%80/" rel="prev" title="材料成型技术基础">
+      <i class="fa fa-chevron-left"></i> 材料成型技术基础
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2016/11/06/%E5%B7%A5%E7%A8%8B%E6%9D%90%E6%96%99%E5%8F%8A%E7%83%AD%E5%A4%84%E7%90%86/" rel="next" title="工程材料及热处理">
+      工程材料及热处理 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5"><span class="nav-number">1.</span> <span class="nav-text">基础概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%83%AD%E5%8A%9B%E7%B3%BB%E7%BB%9F"><span class="nav-number">1.1.</span> <span class="nav-text">热力系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B9%B3%E8%A1%A1%E6%80%81%E5%92%8C%E7%8A%B6%E5%8F%82"><span class="nav-number">1.2.</span> <span class="nav-text">平衡态和状参</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E9%80%86%E8%BF%87%E7%A8%8B"><span class="nav-number">1.3.</span> <span class="nav-text">可逆过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%9F%E9%87%8F%E5%92%8C%E7%83%AD%E9%87%8F"><span class="nav-number">1.4.</span> <span class="nav-text">功量和热量</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%83%AD%E5%8A%9B%E5%AD%A6%E7%AC%AC%E4%B8%80%E5%AE%9A%E5%BE%8B"><span class="nav-number">2.</span> <span class="nav-text">热力学第一定律</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%82%A8%E5%AD%98%E8%83%BD"><span class="nav-number">2.1.</span> <span class="nav-text">储存能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%83%AD%E5%8A%9B%E5%AD%A6%E7%AC%AC%E4%B8%80%E5%AE%9A%E5%BE%8B%E5%8F%8A%E5%85%B6%E6%B5%81%E5%8A%A8%E8%83%BD%E9%87%8F%E6%96%B9%E7%A8%8B%E5%BC%8F"><span class="nav-number">2.2.</span> <span class="nav-text">热力学第一定律及其流动能量方程式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%90%86%E6%83%B3%E6%B0%94%E4%BD%93%E7%9A%84%E6%80%A7%E8%B4%A8%E5%92%8C%E7%83%AD%E5%8A%9B%E8%BF%87%E7%A8%8B"><span class="nav-number">3.</span> <span class="nav-text">理想气体的性质和热力过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%90%86%E6%83%B3%E6%B0%94%E4%BD%93%E7%8A%B6%E6%80%81%E6%96%B9%E7%A8%8B%E5%BC%8F"><span class="nav-number">3.1.</span> <span class="nav-text">理想气体状态方程式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%90%86%E6%83%B3%E6%B0%94%E4%BD%93%E7%9A%84%E7%83%AD%E5%AE%B9%E3%80%81%E7%83%AD%E5%8A%9B%E5%AD%A6%E8%83%BD%E3%80%81%E7%84%93%E5%92%8C%E7%86%B5"><span class="nav-number">3.2.</span> <span class="nav-text">理想气体的热容、热力学能、焓和熵</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%90%86%E6%83%B3%E6%B0%94%E4%BD%93%E7%9A%84%E7%83%AD%E5%8A%9B%E8%BF%87%E7%A8%8B"><span class="nav-number">3.3.</span> <span class="nav-text">理想气体的热力过程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%83%AD%E5%8A%9B%E5%AD%A6%E7%AC%AC%E4%BA%8C%E5%AE%9A%E5%BE%8B"><span class="nav-number">4.</span> <span class="nav-text">热力学第二定律</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%83%AD%E5%8A%9B%E5%BE%AA%E7%8E%AF"><span class="nav-number">4.1.</span> <span class="nav-text">热力循环</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%A1%E8%AF%BA%E5%BE%AA%E7%8E%AF"><span class="nav-number">4.2.</span> <span class="nav-text">卡诺循环</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%86%B5"><span class="nav-number">4.3.</span> <span class="nav-text">熵</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%83%AD%E9%87%8F%E4%BC%A0%E9%80%92%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%96%B9%E5%BC%8F"><span class="nav-number">5.</span> <span class="nav-text">热量传递的基本方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%83%AD%E4%BC%A0%E5%AF%BC"><span class="nav-number">5.1.</span> <span class="nav-text">热传导</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%83%AD%E5%AF%B9%E6%B5%81"><span class="nav-number">5.2.</span> <span class="nav-text">热对流</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%83%AD%E8%BE%90%E5%B0%84"><span class="nav-number">5.3.</span> <span class="nav-text">热辐射</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%BC%E7%83%AD"><span class="nav-number">6.</span> <span class="nav-text">导热</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%BC%E7%83%AD%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80"><span class="nav-number">6.1.</span> <span class="nav-text">导热理论基础</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%82%85%E7%AB%8B%E5%8F%B6%E5%AE%9A%E5%BE%8B"><span class="nav-number">6.2.</span> <span class="nav-text">傅立叶定律</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E6%B5%81%E6%8D%A2%E7%83%AD"><span class="nav-number">7.</span> <span class="nav-text">对流换热</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="AbrahumLink"
+      src="/img/head.png">
+  <p class="site-author-name" itemprop="name">AbrahumLink</p>
+  <div class="site-description" itemprop="description">平凡人而</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/abrahum" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;abrahum" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="tencent://message/?menu=yes&uin=307887491&websitename=im.qq.com" title="QQ → tencent:&#x2F;&#x2F;message&#x2F;?menu&#x3D;yes&amp;uin&#x3D;307887491&amp;websitename&#x3D;im.qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>QQ</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://abrahum.coding.net/public" title="Coding → https:&#x2F;&#x2F;abrahum.coding.net&#x2F;public" rel="noopener" target="_blank"><i class="fa fa-fw fa-code"></i>Coding</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:307887491@qq.com" title="E-Mail → mailto:307887491@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      友链
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://zhangslob.github.io/" title="https:&#x2F;&#x2F;zhangslob.github.io&#x2F;" rel="noopener" target="_blank">崔斯特</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://www.netcan666.com/" title="http:&#x2F;&#x2F;www.netcan666.com&#x2F;" rel="noopener" target="_blank">Netcan_Space</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2016 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">AbrahumLink</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+          load: ['[tex]/mhchem'],
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+          packages: {'[+]': ['mhchem']},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '3a67ec83829f22b6553a',
+      clientSecret: 'ff2043b01c8a54b8b80d520a8045c0f04be45f0d',
+      repo        : 'BlogComment',
+      owner       : 'abrahum',
+      admin       : ['abrahum'],
+      id          : '07755f1b222ed3d366704bfc26e34028',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>

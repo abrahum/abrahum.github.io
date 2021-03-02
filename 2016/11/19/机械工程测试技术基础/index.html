@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png">
+  <link rel="mask-icon" href="/images/favicon.png" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"abrahum.link","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="简直药丸Orz">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机械工程测试技术基础">
+<meta property="og:url" content="http://abrahum.link/2016/11/19/%E6%9C%BA%E6%A2%B0%E5%B7%A5%E7%A8%8B%E6%B5%8B%E8%AF%95%E6%8A%80%E6%9C%AF%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="AbrahumLink">
+<meta property="og:description" content="简直药丸Orz">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2016-11-19T06:41:00.000Z">
+<meta property="article:modified_time" content="2021-02-04T07:38:47.905Z">
+<meta property="article:author" content="AbrahumLink">
+<meta property="article:tag" content="机械">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://abrahum.link/2016/11/19/%E6%9C%BA%E6%A2%B0%E5%B7%A5%E7%A8%8B%E6%B5%8B%E8%AF%95%E6%8A%80%E6%9C%AF%E5%9F%BA%E7%A1%80/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>机械工程测试技术基础 | AbrahumLink</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">AbrahumLink</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-talk">
+
+    <a href="/talk/" rel="section"><i class="fa fa-fw fa-weixin"></i>talk</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://abrahum.link/2016/11/19/%E6%9C%BA%E6%A2%B0%E5%B7%A5%E7%A8%8B%E6%B5%8B%E8%AF%95%E6%8A%80%E6%9C%AF%E5%9F%BA%E7%A1%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/head.png">
+      <meta itemprop="name" content="AbrahumLink">
+      <meta itemprop="description" content="平凡人而">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AbrahumLink">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          机械工程测试技术基础
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2016-11-19 14:41:00" itemprop="dateCreated datePublished" datetime="2016-11-19T14:41:00+08:00">2016-11-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-02-04 15:38:47" itemprop="dateModified" datetime="2021-02-04T15:38:47+08:00">2021-02-04</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9C%BA%E6%A2%B0/" itemprop="url" rel="index"><span itemprop="name">机械</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>简直药丸Orz</p>
+<span id="more"></span>
+
+<h2 id="信号及其描述"><a href="#信号及其描述" class="headerlink" title="信号及其描述"></a>信号及其描述</h2><h3 id="信号的分类"><a href="#信号的分类" class="headerlink" title="信号的分类"></a>信号的分类</h3><ul>
+<li>确定信号：可以表示为一个确定的时间关系式的信号</li>
+<li>周期信号：按一定时间间隔周而复始出现，无始无终，不断重复的信号<ul>
+<li>简单周期信号</li>
+<li>复杂周期信号</li>
+</ul>
+</li>
+<li>非周期信号：确定信号中，不具备周期重复性的信号<ul>
+<li>准周期信号：由两种以上的周期信号合成而来，因为组成分量无法找到公共周期，而失去周期性</li>
+<li>瞬变非周期信号：是一些或在一定时间内存在，或随时间增长而衰减至零的信号</li>
+</ul>
+</li>
+<li>非确定信号：不能准确预测未来瞬时值，也不能用确定的数学关系描述的信号</li>
+<li>非平稳随机过程</li>
+<li>平稳随机过程<ul>
+<li>个态历经随机过程</li>
+<li>非个态历经随机过程</li>
+</ul>
+</li>
+</ul>
+<p>连续信号：信号数学表达式中的独立变量是连续的。</p>
+<p>离散信号：数学表达式中的独立变量是离散的。</p>
+<p>能量信号：在无限时间内，信号的总能量是有限的信号。</p>
+<p>功率信号：在无限时间内，信号的总能量为无限的信号。</p>
+<p>实信号：物理可以实现的信号都是时间的实函数。</p>
+<p>复信号：为了理论分析，使用的分析模型。</p>
+<h3 id="信号的描述"><a href="#信号的描述" class="headerlink" title="信号的描述"></a>信号的描述</h3><p>时域描述：又称为波形描述，是指测量中所观测到或记录到的信号以时间为独立变量，称为信号的时域描述。</p>
+<p>频域描述：又称频谱描述，是指测量中所观测到或记录到的信号转换成以频率为独立变量来表述信号的频域描述。它可以表述信号的频率结构、各频率成分的幅值、相位关系。它和时域描述可以互相转换，包含相同信息量。</p>
+<p>傅立叶级数：任何周期信号在有限区间上，当其满足狄里赫来条件时，都可展开成一系列正交函数的线性组合的无穷级数。傅立叶级数有多种形式，三角展开和复数展开是常见的形式。</p>
+<p>傅立叶级数的三角展开式：</p>
+<p>$$x(t)=a_0+\sum_{n=1}^{\infty}A_nsin(n\omega _0t+\varphi _n),(n=1,2,3,…..)$$</p>
+<p>展开过程：</p>
+<p>$$x(t)=a_0+\sum_{n=1}^{\infty}[a_ncos(n\omega _0t)+b _ nsin(n\omega _0t)],(n=1,2,3,…..)$$</p>
+<p>其中参数：</p>
+<p>$$\begin{align}<br>a _ 0 =&amp; \frac{1}{T _ 0}\int_{-T _0/2}^{T _0/2}x(t)dt \\<br>a _ n =&amp; \frac{1}{T _ 0}\int_{-T _0/2}^{T _0/2}x(t)cos(n\omega _0)tdt \\<br>b _ n =&amp; \frac{1}{T _ 0}\int_{-T _0/2}^{T _0/2}x(t)sin(n\omega _0)tdt \\<br>\omega _0= &amp;\frac{2\pi }{T _0}\\<br>A _0 =&amp; \sqrt{a _n^{2}+b _n^{2}}\\<br>\varphi _0=&amp;arctan(\frac{a _n}{a _n})<br>\end{align}$$</p>
+<p>由此可见周期信号是由一个或多个乃至无穷个不同频率的谐波叠加而来。第一项$a _0$是常数项，周期信号的直流分量。$A _nsin(n\omega _0t+\varphi _n)$称为谐波，$A _n$是n次谐波的振幅，$\varphi _n$是其初相角。$a _n$是n次谐波的余弦分量的幅值，$b _n$是n次谐波的正弦分量的幅值。</p>
+<p>傅立叶级数的复数展开式：</p>
+<p>根据欧拉公式推出</p>
+<p>$$\begin{align}<br>x(t)=&amp;a_0+\sum_{n=1}^{\infty}[a_ncos(n\omega _0t)+b _ nsin(n\omega _0t)] \\<br>x(t)=&amp;a_0+\sum_{n=1}^{\infty}[a_n\frac{1}{2}(e^{-jn\omega _0t}+e^{jn\omega _0t})+b _ n\frac{j}{2}(e^{-jn\omega _0t}-e^{jn\omega _0t})] \\<br>x(t)=&amp;a_0+\sum_{n=1}^{\infty}[\frac{1}{2}(a _n+jb _n)e^{-jn\omega _0t}+\frac{1}{2}(a _n-jb _n)e^{jn\omega _0t}]\\<br>c _ n = &amp; \frac{1}{2}(a _n-jb _n)\\<br>c _ {-n}= &amp;\frac{1}{2}(a _n+jb _n)\\<br>c _0=&amp;a _0 \\<br>x(t)=&amp;a_0+\sum_{n=1}^{\infty}[c _ {-n}e^{-jn\omega _0t}+c _ ne^{jn\omega _0t}]\\<br>x(t)=&amp;a_0+\sum_{n=-\infty }^{\infty}c _ ne^{jn\omega _0t}\\<br>\end{align}$$</p>
+<p>周期信号的强度使用峰值、绝对均、有效值和平均功率来表述。</p>
+<p>峰值$x_p$是信号可能出现的最大瞬时值，峰峰值$x_{p-p}$是指最大瞬时值和最小瞬时值的差。</p>
+<p>均值的计算类似功率，绝对均值指全波整波之后的均值。</p>
+<p>有效值是均值的信号的均方根，平均功率是有效值的平方又叫均方值。</p>
+<h2 id="测试装置"><a href="#测试装置" class="headerlink" title="测试装置"></a>测试装置</h2><p>测量装置（测量系统）：为达到某些特定目的，由若干个互有关联的单元组成的有机整体。 </p>
+<h3 id="线性系统"><a href="#线性系统" class="headerlink" title="线性系统"></a>线性系统</h3><p>主要性质：</p>
+<ul>
+<li>符合叠加原理</li>
+<li>比例特性：$ax(t)\rightarrow ay(t)$</li>
+<li>系统对输入导数的响应等于对原输入响应的导数</li>
+<li>如系统的初始状态均为零，则系统对输入积分的响应等于对原输入响应的积分。 </li>
+<li>频率保持特性</li>
+</ul>
+<p><strong>静态特性</strong>是在静态测量情况下描述实际测量装置与理想时不变线性系统的接近程度。通过某种意义的静态标定过程确定的。</p>
+<p>测量装置的<strong>动态特性</strong>是当被测量即输入量随时间快速变化时，测量输入与响应输出之间动态关系的数学描述。</p>
+<p>当传感器安装到被测物体上或进入被测介质，要从物体与介质中吸收能量或产生干扰，使被测物理量偏离原有的量值，从而不可能实现理想的测量，这种现象称为<strong>负载效应</strong>。</p>
+<p>测量装置在测量过程中要受到各种干扰，包括电源干扰、环境干扰(电磁场、声、光、温度、振动等干扰)和信道干扰。这些干扰的影响决定于测量装置的<strong>抗干扰性能</strong>，并且与所采取的抗干扰措施有关。</p>
+<p>理想的定常线性系统，其输出将是输入的单调、线性比例函数，其中斜率S应是常数。然而，实际的测量装置并非理想的定常线性系统，S不是常数。</p>
+<h3 id="静态特性"><a href="#静态特性" class="headerlink" title="静态特性"></a>静态特性</h3><p>线性误差：测量装置校准曲线与规定曲线之间的最大偏差。</p>
+<p>灵敏度：单位输入变化所引起的输出变化。</p>
+<p>回程误差（迟滞）：测量装置同输入变化方向有关的输出特性。</p>
+<p>分辨力：引起测量装置产生一个可察觉变化的最小输入量。通常表示为它与可能输入范围之比的百分数。</p>
+<p>零点漂移：是测量装置的输出零点偏离原始零点的距离，它可以是随时间缓慢变化的量。</p>
+<p>灵敏度漂移：是由于材料性质的变化所引起的输入与输出关系(斜率)的变化。</p>
+<p>稳定度：是指测量装置在规定条件下保持其测量特性恒定不变的能力。</p>
+<h3 id="动态特性"><a href="#动态特性" class="headerlink" title="动态特性"></a>动态特性</h3><p>传递函数H(s)：对于特定的输入确定的给出相应输出，与输入、系统的初始状态无关。</p>
+<p>频率响应函数H($\omega $)：在频率域中描述系统特性的一种数学方法。</p>
+<p>脉冲响应函数h(t)： ···</p>
+<p>脉冲响应函数和传递函数是拉普拉斯变换对；频率响应函数和脉冲响应函数是傅立叶变换对；频率响应函数和传递函数其实是S和$j\omega $替换。</p>
+<p>一阶系统：输入输出的关系使用一阶微分方程来表述，时间常数是其重要参数。</p>
+<h2 id="传感器"><a href="#传感器" class="headerlink" title="传感器"></a>传感器</h2><p>传感器：直接作用于被测量，能按一定规律将其转换成同种或别种量值(电信号)输出的器件。</p>
+<h3 id="传感器分类"><a href="#传感器分类" class="headerlink" title="传感器分类"></a>传感器分类</h3><p>按工作原理分：电气式传感器、机械式传感器、光电式传感器等</p>
+<p>按被测量分：位移传感器、速度传感器、加速度传感器、应力传感器、温度传感器等</p>
+<p>按信号变换特征分：结构型传感器、物性型传感器</p>
+<p>按能量关系分：能量转换型传感器、能量控制型传感器</p>
+<h3 id="电阻、电容与电感式传感器"><a href="#电阻、电容与电感式传感器" class="headerlink" title="电阻、电容与电感式传感器"></a>电阻、电容与电感式传感器</h3><p>电阻式传感器：将被测量转化为电阻值变化的传感器。主要有变阻器式电阻传感器、应变式电阻传感器。</p>
+<p>电桥：电桥电路是将电阻、电容、电感的参量的变化转变为电压或电流信号输出的一种常用电路。</p>
+<p>直流电桥的平衡条件：相对桥臂的阻值乘积相等。交流电桥还需要相对电桥阻抗虚部与实部乘积相等。</p>
+<p>电容式传感器：将被测物理量转换为电容量变化的装置，它实质上是一个具有可变参数的电容器。</p>
+<p>根据电容器变化的参数，可分为：极距变化型、面积变化型、介质变化型</p>
+<p>电感传感器：把被测物理量转换为电感量变化的传感器。</p>
+<p>分类：自感型电感传感器（可变磁阻式、涡流式）、互感型电感传感器（差动变压器式电感传感器）</p>
+<h3 id="磁电、压电与热电式传感器"><a href="#磁电、压电与热电式传感器" class="headerlink" title="磁电、压电与热电式传感器"></a>磁电、压电与热电式传感器</h3><p>磁电式传感器：把被测物理量转换为感应电动势的一种传感器，又称电磁感应式或电动力式传感器。按照结构方式不同，磁电式传感器可分：动圈式、磁阻式</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%9C%BA%E6%A2%B0/" rel="tag"># 机械</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2016/11/16/%E7%AE%80%E6%98%93%E5%B1%80%E5%9F%9F%E7%BD%91%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%E8%84%9A%E6%9C%AC%E5%AE%9E%E7%8E%B0/" rel="prev" title="简易局域网文件传输脚本实现">
+      <i class="fa fa-chevron-left"></i> 简易局域网文件传输脚本实现
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2016/12/04/asyncio%E7%9A%84%E5%AD%A6%E4%B9%A0%E4%B8%8E%E5%BA%94%E7%94%A8/" rel="next" title="asyncio的学习与应用">
+      asyncio的学习与应用 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%A1%E5%8F%B7%E5%8F%8A%E5%85%B6%E6%8F%8F%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">信号及其描述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%A1%E5%8F%B7%E7%9A%84%E5%88%86%E7%B1%BB"><span class="nav-number">1.1.</span> <span class="nav-text">信号的分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%A1%E5%8F%B7%E7%9A%84%E6%8F%8F%E8%BF%B0"><span class="nav-number">1.2.</span> <span class="nav-text">信号的描述</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E8%A3%85%E7%BD%AE"><span class="nav-number">2.</span> <span class="nav-text">测试装置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E7%B3%BB%E7%BB%9F"><span class="nav-number">2.1.</span> <span class="nav-text">线性系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E7%89%B9%E6%80%A7"><span class="nav-number">2.2.</span> <span class="nav-text">静态特性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E7%89%B9%E6%80%A7"><span class="nav-number">2.3.</span> <span class="nav-text">动态特性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%A0%E6%84%9F%E5%99%A8"><span class="nav-number">3.</span> <span class="nav-text">传感器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%A0%E6%84%9F%E5%99%A8%E5%88%86%E7%B1%BB"><span class="nav-number">3.1.</span> <span class="nav-text">传感器分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%B5%E9%98%BB%E3%80%81%E7%94%B5%E5%AE%B9%E4%B8%8E%E7%94%B5%E6%84%9F%E5%BC%8F%E4%BC%A0%E6%84%9F%E5%99%A8"><span class="nav-number">3.2.</span> <span class="nav-text">电阻、电容与电感式传感器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A3%81%E7%94%B5%E3%80%81%E5%8E%8B%E7%94%B5%E4%B8%8E%E7%83%AD%E7%94%B5%E5%BC%8F%E4%BC%A0%E6%84%9F%E5%99%A8"><span class="nav-number">3.3.</span> <span class="nav-text">磁电、压电与热电式传感器</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="AbrahumLink"
+      src="/img/head.png">
+  <p class="site-author-name" itemprop="name">AbrahumLink</p>
+  <div class="site-description" itemprop="description">平凡人而</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/abrahum" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;abrahum" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="tencent://message/?menu=yes&uin=307887491&websitename=im.qq.com" title="QQ → tencent:&#x2F;&#x2F;message&#x2F;?menu&#x3D;yes&amp;uin&#x3D;307887491&amp;websitename&#x3D;im.qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>QQ</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://abrahum.coding.net/public" title="Coding → https:&#x2F;&#x2F;abrahum.coding.net&#x2F;public" rel="noopener" target="_blank"><i class="fa fa-fw fa-code"></i>Coding</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:307887491@qq.com" title="E-Mail → mailto:307887491@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      友链
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://zhangslob.github.io/" title="https:&#x2F;&#x2F;zhangslob.github.io&#x2F;" rel="noopener" target="_blank">崔斯特</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://www.netcan666.com/" title="http:&#x2F;&#x2F;www.netcan666.com&#x2F;" rel="noopener" target="_blank">Netcan_Space</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2016 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">AbrahumLink</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+          load: ['[tex]/mhchem'],
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+          packages: {'[+]': ['mhchem']},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '3a67ec83829f22b6553a',
+      clientSecret: 'ff2043b01c8a54b8b80d520a8045c0f04be45f0d',
+      repo        : 'BlogComment',
+      owner       : 'abrahum',
+      admin       : ['abrahum'],
+      id          : '762b0ba3382bc68e8a83a8449536ba29',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>

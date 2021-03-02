@@ -1,0 +1,1705 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>(c)ElemantTree模块快速使用</title>
+    <url>/2016/10/07/(c)ElementTree/</url>
+    <content><![CDATA[<p><em>以下使用ET指代本模组</em></p>
+<h2 id="xml的打开和基本操作"><a href="#xml的打开和基本操作" class="headerlink" title="xml的打开和基本操作"></a>xml的打开和基本操作</h2><p>在ET中使用<code>ElementTree</code>类代表整个xml树，<code>Element</code>表示树上的节点，其中<code>root</code>特指根节点。</p>
+<p><code>ET.parse(&#39;filename.xml&#39;)</code>从Path读取xml树。</p>
+<p><code>ET.fromstring(string)</code>从string读取xml树。</p>
+<p><code>ElementTree.getroot()</code>从<code>ElementTree</code>获取<code>root</code>节点。</p>
+<span id="more"></span>
+
+
+<h2 id="Element类型"><a href="#Element类型" class="headerlink" title="Element类型"></a><code>Element</code>类型</h2><p>属性：</p>
+<ol>
+<li><p><code>tag</code>：<code>string</code>对象，表示数据代表的种类。</p>
+</li>
+<li><p><code>attrib</code>：<code>dictionary</code>对象，表示<code>Elwment</code>的属性。</p>
+</li>
+<li><p><code>text</code>：表示<code>Element</code>的内容，<code>string</code>对象。</p>
+</li>
+<li><p><code>tail</code>：<code>string</code>对象，<code>Element</code>闭合后的尾迹</p>
+</li>
+<li><p>子节点。</p>
+</li>
+</ol>
+<p>创建<code>Element</code>对象：</p>
+<p>创建<code>Element</code>的方法有<code>ET.Element()</code>和<code>SubElement()</code>两种。</p>
+<p><code>ele = Element(tag,*)</code>构建一个独立的Element对象。</p>
+<p><code>ele.SubElement(tag,*)</code>添加一个子节点的Element对象。<em>暂时不会用这货</em></p>
+<blockquote>
+<p><em>可以使用<code>key:value</code>添加属性。</em></p>
+</blockquote>
+<p><code>Element</code>的遍历与查询：</p>
+<p>对于<code>Element</code>对象可以直接使用<code>Element[number]</code>直接访问子节点。</p>
+<p><code>Element.iter(tag=None)</code>：遍历所有子节点，如指定tag则仅遍历该tag。</p>
+<p><code>Element.findall(tag)</code>：list返回所有tag或Path匹配节点。</p>
+<p><code>Element.find(tag)</code>：返回匹配的首个节点。</p>
+<p><code>Element.get(key,default=None)</code>：获得指定key对应的属性值，没有该属性则返回default值。</p>
+<p><code>Element.append(SubElement)</code>或<code>Element.ET.extend(SubElement)</code>：添加直系子节点。</p>
+<p><code>Element.findtext(tag)</code>：获得首个匹配的节点并返回text值。</p>
+<p><code>Element.insert(index,SubElement)</code>：指定位置插入节点。</p>
+<p><code>Element.clear()</code>：清空所有。</p>
+<p><code>Element.set(key,value)</code>：设置新的属性。</p>
+<p><code>Element.remove(SubElement)</code>：删除子节点。</p>
+<h2 id="ElementTree类型"><a href="#ElementTree类型" class="headerlink" title="ElementTree类型"></a><code>ElementTree</code>类型</h2><p><code>ElementTree</code>的操作：</p>
+<p><code>ElementTree.write(Path,encoding=None)</code>：保存xml树至Path。</p>
+]]></content>
+      <categories>
+        <category>code</category>
+      </categories>
+      <tags>
+        <tag>xml</tag>
+        <tag>Python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>3D测试</title>
+    <url>/2017/02/24/3D%E6%B5%8B%E8%AF%95/</url>
+    <content><![CDATA[<p>Blend4Web的3D测试</p>
+<span id="more"></span>
+
+<iframe src="/3d/b4w.html?compressed_textures&alpha&no_social&autorotate&show_fps" width="100%" height="600px"></iframe>
+
+<p><a href='/3d/b4w.html?compressed_textures&alpha&no_social&autorotate&show_fps' target="_blank">Blend4Web的3D测试</a></p>
+]]></content>
+      <categories>
+        <category>3D</category>
+      </categories>
+      <tags>
+        <tag>3D</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hexo迁徙至5.0</title>
+    <url>/2020/12/22/Hexo%E8%BF%81%E5%BE%99%E8%87%B35-0/</url>
+    <content><![CDATA[<p>日前准备重新开始更新，结果安装的最新node14和hexo不兼容，虽然<code>hexo s</code>可以正常的渲染出预览画面，但是<code>hexo g</code>出来却是全部都是0kb的空文件。</p>
+<p>后续虽然安装切换回node12以后，问题解决了，干脆就再度迁移到hexo5.0与next主题的最新版。</p>
+<span id="more"></span>
+
+<p>本身的迁移非常简单，重新初始化一个博客文件夹就是</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cnpm install hexo-cli -g</span><br><span class="line">hexo init &lt;new folder&gt;</span><br><span class="line">cd &lt;new folder&gt;</span><br><span class="line">cnpm install</span><br></pre></td></tr></table></figure>
+<p>然后把原博客的themes、source和_config.yml文件夹拷贝过去（注意不要把package.json文件也拷贝过去，里面是node的package信息），再把主题替换成新的社区版next，并进行一些配置，不再赘述，下面说一些官方文档没有说明的点（至少不是显而易见的文档）。</p>
+<h2 id="语言配置"><a href="#语言配置" class="headerlink" title="语言配置"></a>语言配置</h2><p>最新的next主题配置里直接配置语言不会生效，需要删除language文件夹里的default文件才能是配置生效，配置的zh-Hans也变更为zh-CN了。</p>
+<h2 id="定制CSS"><a href="#定制CSS" class="headerlink" title="定制CSS"></a>定制CSS</h2><p>之前自己客制的一些CSS现在统一迁移到source的_data文件夹里，然后在next的配置文件里配置启用。<br>但是新的next的最大宽度有点宽，这一点没法使用外部css覆写，只能修改了主题的source/css/_variables/Pisces.styl文件里的宽度设置。</p>
+<h2 id="中文目录链接失效"><a href="#中文目录链接失效" class="headerlink" title="中文目录链接失效"></a>中文目录链接失效</h2><p>百度之后发现是一个主题固有问题，有<a href="https://github.com/theme-next/hexo-theme-next/pull/1540/files">issue #1540</a></p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>新的hexo没有自带hexo-deployer-git，需要额外安装。<br>虽然官方文档说需要卸载hexo-renderer-marked更换为hexo-renderer-pandoc才能正常显示MathJax，但是目前貌似没有显示问题，倒是MathJax2.7更新到3.1以后很多式子需要更新一下（速度快了很多好评）。</p>
+]]></content>
+      <categories>
+        <category>日常</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>Next</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Pixiv数据分析</title>
+    <url>/2017/03/02/Pixiv%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/</url>
+    <content><![CDATA[<p>寒假的时候利用家里不计费的网爬取了600w+P站的图片数据。一开始的目的是解决：由于P站本身的搜索页面1000页限制，而导致的无法通过搜索爬取较早图片信息，这一问题。所以在爬取的一开始，我的目标是获取高收藏的高质量作品。我采取的爬取策略是通过第一个画师的收藏夹开始，获取他收藏夹内的图片信息，接着将这些图片的画师id加入画师数据库。当当前画师的收藏夹爬取完毕后，就从画师数据库中随机抽取一个新的画师重复之前的步骤。这样的策略可以从点到面的快速、无休止地多线程爬取高质量的画作。</p>
+<span id="more"></span>
+
+<script crossorigin="anonymous" integrity="sha512-ZRdjJAYP8Kij8Lkln9uiGj0jIrMDLAALm1ZB2b3VfV9XJ0nR4zbJmHKB42/A4tgMlZS4DTPnSAmcYRoS0dginA==" src="https://lib.baomitu.com/echarts/5.0.0/echarts.min.js"></script>
+
+<p>从春节过后的初三开始，我断断续续爬了有近百小时（拜坑爹移动所赐，常常一百个链接404回来99个），一共爬了555781位画师的收藏夹，考虑到我的爬取策略会使得画作质量整体偏高，同时P站一共有六千万左右的画作，两千万左右的用户（前段时间还首页公告这个消息来着），我认为数据库对于收藏数一千以上的作品，收录基本完全。</p>
+<p>基于此数据库，我做了以下数据分析：</p>
+<div id="1wlike" style="height:400px;"></div>
+
+<p>首先说明下，为了避免一些标签的重复霸榜，我把所有xxxusers入り的标签都剔除了。</p>
+<p>那么在一万收藏的12058作中，第一位的是原创。嘛，在p站，这很政治正确。第二位ふつくしい是什麽鬼，是个梗吗······漫画这种标签竟然第三也是醉了。</p>
+<div id="1klike" style="height:400px;"></div>
+
+<p>价格来到千元机的档次（好像有什么不对······），一共363575作，R-18火箭上升至第一名···第二名，就是腐向···</p>
+<p>好孩子不要逛p站！好孩子不要逛p站！好孩子不要逛p站！</p>
+<p>关于R18的问题，我还有个有趣的发现：</p>
+<div id="10w18" style="height:400px;"></div>
+
+<p>十万以上的八位大佬均非R18作品。</p>
+<div id="1w18" style="height:400px;"></div>
+
+<p>在一万的档次，邪恶势力开始崭露头角。</p>
+<div id="1k18" style="height:400px;"></div>
+
+<p>千元机，R18怒占15%。</p>
+<div id="1h18" style="height:400px;"></div>
+
+<p>百元机虽然覆盖所有，但是也可以做个参考，那么就是说p站的R18大概占比15%～20%咯？</p>
+<p>为大家送上十万赞八位大佬的链接(数据截止2017.02)：</p>
+<ul>
+<li><a href="http://www.pixiv.net/member_illust.php?mode=medium&illust_id=54704433">ID：54704433 收藏数：108960 标题：構図メイキングみたいな</a></li>
+<li><a href="http://www.pixiv.net/member_illust.php?mode=medium&illust_id=29528285">ID：29528285 收藏数：122654 标题：人物の描き方</a></li>
+<li><a href="http://www.pixiv.net/member_illust.php?mode=medium&illust_id=24780663">ID：24780663 收藏数：127154 标题：色気のある足・脚の描き方</a></li>
+<li><a href="http://www.pixiv.net/member_illust.php?mode=medium&illust_id=12752243">ID：12752243 收藏数：147624 标题：手の苦手な人の為に</a></li>
+<li><a href="http://www.pixiv.net/member_illust.php?mode=medium&illust_id=42934122">ID：42934122 收藏数：150944 标题：ヲタクに恋は難しい</a></li>
+<li><a href="http://www.pixiv.net/member_illust.php?mode=medium&illust_id=31906341">ID：31906341 收藏数：162762 标题：スーツの描き方の基本</a></li>
+<li><a href="http://www.pixiv.net/member_illust.php?mode=medium&illust_id=24643629">ID：24643629 收藏数：173698 标题：色気のある手の描き方</a></li>
+<li><a href="http://www.pixiv.net/member_illust.php?mode=medium&illust_id=12192382">ID：12192382 收藏数：211231 标题：動きのあるポーズを描く時に）ry</a></li>
+</ul>
+<script src="/img/pixiv.js"></script>
+]]></content>
+      <categories>
+        <category>code</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+        <tag>Pixiv</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Pyinstaller打包PyQt5踩的坑</title>
+    <url>/2017/01/27/Pyinstaller%E6%89%93%E5%8C%85PyQt5%E8%B8%A9%E7%9A%84%E5%9D%91/</url>
+    <content><![CDATA[<p>在做完一个<a href="https://coding.net/u/Abrahum/p/pixiv2.0/git">P站的爬虫</a>后,我决定为之制作一个UI界面，并使用Pyinstaller打包为exe发布。</p>
+<p>然后呢，我不出意料的踩了很多坑_(:3」∠)_</p>
+<span id="more"></span>
+
+<h2 id="原文"><a href="#原文" class="headerlink" title="原文"></a>原文</h2><p>首先第一个就是关于Pyinstaller，它会生成两个文件夹（build和dist），其中build是工程文件夹（全是过程文件，没什么卵用），而dist才是最后生成的程序，年少无知的我在build里傻傻得找了很久exe文件。</p>
+<p>然后是关于bin检索的问题，PyQt5的一些模块不能正常的被识别，需要<code>-p C:\Python35\Lib\site-packages\PyQt5\Qt\bin</code>增加检索的目录。</p>
+<p>接着是api-ms-win-crt-runtime错误，原本本地编译完运行毫无问题，但是发个一win7-64bit的同学运行后报错dll丢失。<br>查到<a href="http://www.jianshu.com/p/c1e75244b6f3">简书</a>：</p>
+<blockquote>
+<p>PyInstaller打包之后的程序运行的时候发生api-ms-win-crt-runtime动态库之类的错误，似乎只有在Python 3.5下打包才会遇到。<br>因为Universal CRT（KB2999226）缺失，可以通过安装此更新来解决问题。<br>或者直接下载 Visual C++ Redistributable (<a href="http://download.microsoft.com/download/9/3/F/93FCF1E7-E6A4-478B-96E7-D4B285925B00/vc_redist.x86.exe">x86</a> ,<a href="http://download.microsoft.com/download/9/3/F/93FCF1E7-E6A4-478B-96E7-D4B285925B00/vc_redist.x64.exe">x64</a> )。</p>
+</blockquote>
+<p>最后遇到的是在PyQt5中使用的ico文件不能正常的打包如exe，最后pyrcc5解决，使用命令</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">pyrcc5 -o images.py images.qrc</span><br></pre></td></tr></table></figure>
+
+<p>images.qrc代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;RCC&gt;</span><br><span class="line">  &lt;qresource prefix&#x3D;&quot;&#x2F;&quot; &gt;</span><br><span class="line">    &lt;file&gt;img&#x2F;image1.png&lt;&#x2F;file&gt;</span><br><span class="line">    &lt;file&gt;img&#x2F;image2.png&lt;&#x2F;file&gt;</span><br><span class="line">    &lt;file&gt;img&#x2F;image3.png&lt;&#x2F;file&gt;</span><br><span class="line">  &lt;&#x2F;qresource&gt;</span><br><span class="line">&lt;&#x2F;RCC&gt;</span><br></pre></td></tr></table></figure>
+
+<p>最后将<code>import images</code>，使用例如<code>&#39;:/img/image1.png&#39;</code>引用即可。这个方法同样来自<a href="http://www.jianshu.com/p/c1e75244b6f3">简书</a></p>
+<h2 id="正月初一更新"><a href="#正月初一更新" class="headerlink" title="正月初一更新"></a>正月初一更新</h2><p>最近又发现了一个把资源文件打包进exe里的方法，在spec文件里<code>a.datas,</code>下一行加上行<code>[(filename,filepath,&#39;DATA&#39;)],</code>即可。</p>
+<p>这个方法最好的地方是可以用来打包-i参数加入的图标文件。</p>
+<p>接下来想要做的是做个进度条，当然要先结果目前一阻塞窗口就未响应的问题······</p>
+<h2 id="正月初三更新"><a href="#正月初三更新" class="headerlink" title="正月初三更新"></a>正月初三更新</h2><p>今天解决了之前的两大问题，使用QThread来保证UI不被阻塞。需要建立一个类继承<code>QtCore.QThread</code>然后重写run()函数</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">myQThread</span>(<span class="params">QtCore.QThread</span>):</span></span><br><span class="line">    done = QtCore.pyqtSignal()</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="built_in">super</span>(myQThread, self).__init__()</span><br><span class="line">        self.mod = <span class="string">&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">run</span>(<span class="params">self</span>):</span></span><br><span class="line">        time.sleep(<span class="number">1</span>)</span><br><span class="line">        self.done.emit()</span><br><span class="line"></span><br><span class="line">AQThread = myQThread()</span><br><span class="line">AQThread.start()</span><br><span class="line">AQThread.done.connect(donefun)</span><br></pre></td></tr></table></figure>
+
+<p>为了解决进度条的问题修改了之前的爬取内核，所以把新的版本就改为Ver.2.1～</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">dw</span>(<span class="params">QWidget</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="built_in">super</span>(dw, self).__init__()</span><br><span class="line">        self.timer = QtCore.QBasicTimer()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">timerEvent</span>(<span class="params">self, e</span>):</span></span><br><span class="line">        dosomething()</span><br><span class="line"></span><br><span class="line">w = dw()</span><br><span class="line">w.show()</span><br><span class="line">w.timer.start(<span class="number">100</span>, w)</span><br></pre></td></tr></table></figure>
+
+<p>以上代码重写了timeEvent函数，当计时器超时就会触发该函数，然后重绘ui，达到进度条等动态效果。</p>
+<p>转战Android，脚本保持维护，GUI版本不准备再更新了。</p>
+<h2 id="Pixiv-2-1-GUI"><a href="#Pixiv-2-1-GUI" class="headerlink" title="Pixiv-2.1-GUI"></a><a href="http://pan.baidu.com/s/1slplXFn">Pixiv-2.1-GUI</a></h2><p>Password: 1c3e</p>
+]]></content>
+      <categories>
+        <category>code</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Python常用库文档</title>
+    <url>/2016/10/09/Python%E5%B8%B8%E7%94%A8%E5%BA%93%E6%96%87%E6%A1%A3/</url>
+    <content><![CDATA[<p>现在的搜索引擎非常不讲武德，记录一些常用的Python库文档地址，为不时之需。</p>
+<span id="more"></span>
+
+<h1 id="官方"><a href="#官方" class="headerlink" title="官方"></a>官方</h1><h2 id="Python"><a href="#Python" class="headerlink" title="Python"></a><a href="https://docs.python.org/2/index.html">Python</a></h2><p>没啥好说的。为了世界和平，这里还有一个比较落后的<a href="http://python.usyiyi.cn/">中文文档站</a></p>
+<h2 id="PEP8"><a href="#PEP8" class="headerlink" title="PEP8"></a><a href="https://www.python.org/dev/peps/pep-0008/">PEP8</a></h2><p>Style Guide for Python Code：Python代码的编码规范</p>
+<h1 id="Python-1"><a href="#Python-1" class="headerlink" title="Python"></a>Python</h1><h2 id="Requests-让-HTTP-服务人类"><a href="#Requests-让-HTTP-服务人类" class="headerlink" title="Requests: 让 HTTP 服务人类"></a><a href="http://docs.python-requests.org/zh_CN/latest/index.html">Requests: 让 HTTP 服务人类</a></h2><p>Requests 唯一的一个非转基因的 Python HTTP 库，人类可以安全享用。<strong>警告</strong>：非专业使用其他 HTTP 库会导致危险的副作用，包括：安全缺陷症、冗余代码症、重新发明轮子症、啃文档症、抑郁、头疼、甚至死亡。</p>
+<h2 id="欢迎使用-Flask"><a href="#欢迎使用-Flask" class="headerlink" title="欢迎使用 Flask"></a><del><a href="http://docs.jinkan.org/docs/flask/">欢迎使用 Flask</a></del></h2><p>Flask 是一个 Python 实现的 Web 开发微框架。Flask 依赖两个外部库： Jinja2 模板引擎和 Werkzeug WSGI 工具集。( <a href="https://fastapi.tiangolo.com/">FastAPI</a> fastter than <a href="http://docs.jinkan.org/docs/flask/">Flask</a> ！）</p>
+<h2 id="Httpx"><a href="#Httpx" class="headerlink" title="Httpx"></a><a href="https://www.python-httpx.org/">Httpx</a></h2><p>一个异步的 requests ，aiohttp 的代替者。</p>
+<h2 id="Databases"><a href="#Databases" class="headerlink" title="Databases"></a><a href="https://www.encode.io/databases/">Databases</a></h2><p>encode双杀，一个协程数据库接口包，支持使用 <a href="https://docs.sqlalchemy.org/en/14/core/">SQLAlchemy Core</a> 作为扩展使用。</p>
+<h2 id="FastAPI"><a href="#FastAPI" class="headerlink" title="FastAPI"></a><a href="https://fastapi.tiangolo.com/">FastAPI</a></h2><blockquote>
+<p>FastAPI is a modern, fast (high-performance), web framework for building APIs with Python 3.6+ based on standard Python type hints.</p>
+</blockquote>
+<h2 id="pydantic"><a href="#pydantic" class="headerlink" title="pydantic"></a><a href="https://pydantic-docs.helpmanual.io/">pydantic</a></h2><p>类型检查库，暂时只会简单的使用。</p>
+<h2 id="Material-for-MkDocs"><a href="#Material-for-MkDocs" class="headerlink" title="Material for MkDocs"></a><a href="https://squidfunk.github.io/mkdocs-material/">Material for MkDocs</a></h2><p>一个 <a href="https://www.mkdocs.org/">MkDocs</a> 的 Material 主题，用来写漂亮美观的文档， Python<br>版的 VuePress 大概，记录一下以防有用。</p>
+<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><h2 id="Misaka"><a href="#Misaka" class="headerlink" title="Misaka"></a><a href="http://misaka.61924.nl/">Misaka</a></h2><blockquote>
+<p>Misaka is a CFFI-based binding for Hoedown, a fast markdown processing library written in C. It features a fast HTML renderer and functionality to make custom renderers (e.g. man pages or LaTeX).（用来代替坑爹Markdown模块的模块）</p>
+</blockquote>
+<h2 id="CookBook"><a href="#CookBook" class="headerlink" title="CookBook"></a><a href="http://python3-cookbook.readthedocs.io/zh_CN/latest/index.html">CookBook</a></h2><blockquote>
+<p>这本书的目标读者是那些想深入理解Python语言机制和最新编程技能的资深程序员。 很多讨论都是标准库，框架和应用程序使用到的高级技术。 本书所有示例均假设读者已经有了一定的编程背景并且可以很容易的读懂相关主题 (比如基本的计算机科学知识，数据结构知识，算法复杂度，系统编程，并行，C语言编程等)。 另外，每个示例都只是一个入门指导，如果读者想深入研究，需要自己去查阅更多资料。</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>code</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>asyncio的学习与应用</title>
+    <url>/2016/12/04/asyncio%E7%9A%84%E5%AD%A6%E4%B9%A0%E4%B8%8E%E5%BA%94%E7%94%A8/</url>
+    <content><![CDATA[<p>一直在制作完善pixiv的爬虫，最近遇到了一个问题，学校的网络环境太差了，导致了IO阻塞时间过长，常常出现线程长时间阻塞，占用了时间和内存。</p>
+<p>为了解决这个问题，我决定尝试制定一个超时的图片删除重新爬取的过程，三次爬取不全则log报错不再爬取。</p>
+<p>同时将整个脚本搬运至3.5版本，重新用asyncio异步编写，减少线程使用。</p>
+<span id="more"></span>
+
+<p>首先上一个asyncio的例子：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> asyncio</span><br><span class="line"></span><br><span class="line"><span class="meta">@asyncio.coroutine</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hello</span>():</span></span><br><span class="line">    print(<span class="string">&quot;Hello world!&quot;</span>)</span><br><span class="line">    <span class="comment"># 异步调用asyncio.sleep(1):</span></span><br><span class="line">    r = <span class="keyword">yield</span> <span class="keyword">from</span> asyncio.sleep(<span class="number">1</span>)</span><br><span class="line">    print(<span class="string">&quot;Hello again!&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取EventLoop:</span></span><br><span class="line">loop = asyncio.get_event_loop()</span><br><span class="line"><span class="comment"># 执行coroutine</span></span><br><span class="line">loop.run_until_complete(hello())</span><br><span class="line">loop.close()</span><br></pre></td></tr></table></figure>
+
+<p><code>@asyncio.coroutine</code>把一个generator标记为coroutine类型，然后把这个coroutine放入EventLoop中执行。</p>
+<h2 id="2017年更新"><a href="#2017年更新" class="headerlink" title="2017年更新"></a>2017年更新</h2><p>经过测试，协程的大数据IO使用协程爬取效率并没有想象的高，考虑到这一丢丢的进程不会达到吃电脑性能的程度，不再全面使用协程。这里仅记录下一些代码，一便下次查阅：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">loop = asyncio.get_event_loop()</span><br><span class="line">s = requests.session()</span><br><span class="line">s.headers = headers1</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get</span>(<span class="params">url, asession=s</span>):</span></span><br><span class="line">    <span class="keyword">return</span> loop.run_in_executor(<span class="literal">None</span>, asession.get, url)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">async_save</span>(<span class="params">dataids, cookies, path</span>):</span></span><br><span class="line">    s.cookies = requests.utils.cookiejar_from_dict(cookies)</span><br><span class="line">    tasks = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> dataids:</span><br><span class="line">        tasks.append(simgle_async_save(i, path))</span><br><span class="line">    loop.run_until_complete(asyncio.wait(tasks))</span><br><span class="line">    loop.close()</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">simgle_async_save</span>(<span class="params">i, path, ceiling=<span class="number">4</span></span>):</span></span><br><span class="line">    b = <span class="number">0</span></span><br><span class="line">    ·······</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> is_exists:</span><br><span class="line">            pic = <span class="keyword">await</span> get(originaltu)</span><br><span class="line">            fp = <span class="built_in">open</span>(path, <span class="string">&#x27;wb&#x27;</span>)</span><br><span class="line">            fp.write(pic.content)</span><br><span class="line">            fp.close()  <span class="comment"># 保存图片</span></span><br><span class="line">            <span class="string">&#x27;&#x27;&#x27;print(i+&#x27;-&#x27;+str(b) + &#x27; download is Success&#x27;)&#x27;&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>code</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ffmpeg使用笔记</title>
+    <url>/2016/10/07/ffmpeg/</url>
+    <content><![CDATA[<h2 id="基本命令模式"><a href="#基本命令模式" class="headerlink" title="基本命令模式"></a>基本命令模式</h2><pre><code>ffmpeg [options] [[infile options] -i infile]... &#123;[outfile options] outfile&#125;
+</code></pre>
+<h2 id="options"><a href="#options" class="headerlink" title="options"></a>options</h2><table>
+<thead>
+<tr>
+<th>options</th>
+<th align="left">功能说明</th>
+<th align="left">可选参数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>-preset</code></td>
+<td align="left">h264 自带的模式选择，仅影响转码速度，不影响质量，会影响码率。</td>
+<td align="left">ultrafast，superfast，veryfast，faster，fast，medium，slow，slower，veryslow和placebo。<strong>默认处在medium模式</strong> 例子：<code>-preset fast</code></td>
+</tr>
+<tr>
+<td><code>-crf</code></td>
+<td align="left">h264 影响最终视频的质量</td>
+<td align="left">0-51的数值 我貌似见到过低于51的质量 默认是23。例子：<code>-crf 20</code><strong>指定该参数后码率参数将会失效</strong></td>
+</tr>
+<tr>
+<td><code>-b</code></td>
+<td align="left">码率</td>
+<td align="left">例如：<code>-b:a 132k</code>即音频132kbps <code>-b:v 1800k</code>即视频1800kbps</td>
+</tr>
+<tr>
+<td><code>-vf</code></td>
+<td align="left">编辑视频分辨率</td>
+<td align="left"><code>-vf scale=1920:1080</code>即缩放为1080p <code>-vf crop=1280:720:0:0</code>即剪辑为720p，后面是剪辑区域左上角坐标</td>
+</tr>
+<tr>
+<td><code>-strict -2</code></td>
+<td align="left"><code>encoder &#39;acc&#39;</code></td>
+<td align="left">音频参数，不明，貌似是因为我使用的版本acc编码还在试验阶段</td>
+</tr>
+<tr>
+<td><code>-threads</code></td>
+<td align="left">多线程运算</td>
+<td align="left">例子：<code>-threads 2</code>双线程。</td>
+</tr>
+<tr>
+<td><code>-ss</code>和<code>-t</code></td>
+<td align="left">视频剪辑</td>
+<td align="left">例子：<code>-ss 00:00:00.00 -t 00:00:10.00</code>剪辑为前十秒钟的视频输出。</td>
+</tr>
+<tr>
+<td><code>-y</code></td>
+<td align="left">自动覆盖文件</td>
+<td align="left">略。</td>
+</tr>
+</tbody></table>
+<span id="more"></span>
+
+<h2 id="安装与版本更替"><a href="#安装与版本更替" class="headerlink" title="安装与版本更替"></a>安装与版本更替</h2><blockquote>
+<p><a href="http://ffmpeg.org/download.html">ffmpeg下载链接</a></p>
+</blockquote>
+<p>下载合适版本。</p>
+<p>1.解压包文件</p>
+<pre><code>tar -jxvf ffmpeg-*.tar.bz2 
+</code></pre>
+<p>2.进入目录</p>
+<pre><code>cd ffmpeg-* 
+</code></pre>
+<p>3.配置文件</p>
+<p>配置安装时的选项命令如下：</p>
+<pre><code>./configure --enable-shared --prefix=/usr/local/ffmpeg 
+</code></pre>
+<p><code>--enable-shared</code>表示生成动态链接库，添加后ffmpeg程序将依赖这些库，如不使用这是静态依赖，可执行文件将变大。</p>
+<p><code>--prefix=/usr/loacal/ffmpeg</code>指定了程序安装的目录。</p>
+<p><code>--disable-yasm</code>没有安装yasm时需要添加该选项保证编译时不使用yasm。</p>
+<blockquote>
+<p>yasm使用了汇编指令，可以提高ffmpeg的编译速度。<br><em>不过我使用apt-get安装时报错，无法安装</em></p>
+</blockquote>
+<p>4.编译安装</p>
+<pre><code>make
+
+sudo make install
+</code></pre>
+<p><em>我在编译过程中出现少量报错和警告，目前未影响使用</em></p>
+<p>5.路径配置</p>
+<p>首先解决动态链接库</p>
+<p>通过查看/etc/ld.so.conf文件，发现里面只有一句话：</p>
+<pre><code>include ld.so.conf.d/*.conf
+</code></pre>
+<p>表明其包含了ld.so.conf.d下所有的conf文件</p>
+<p>所以可以在/etc/ld.so.conf.d/目录下创建新的ffmpeg.conf文件，内容为：</p>
+<pre><code>/usr/local/ffmpeg/lib 
+</code></pre>
+<p>之后执行<code>ldconfig</code>使修改生效。</p>
+<p>解决可执行文件的直接运行</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">通过在/usr/local/<span class="built_in">bin</span>/文件夹下创建链接文件解决</span><br><span class="line">sudo ln -s /usr/local/ffmpeg/<span class="built_in">bin</span>/ffmpeg /usr/local/<span class="built_in">bin</span>/</span><br><span class="line">sudo ln -s /usr/local/ffmpeg/<span class="built_in">bin</span>/ffprobe /usr/local/<span class="built_in">bin</span>/</span><br><span class="line">sudo ln -s /usr/local/ffmpeg/<span class="built_in">bin</span>/ffserver /usr/local/<span class="built_in">bin</span>/ </span><br></pre></td></tr></table></figure>
+
+<h2 id="第三方编码器库"><a href="#第三方编码器库" class="headerlink" title="第三方编码器库"></a>第三方编码器库</h2><p>事情的起因是因为我发现版本升到3.0.2之后crf参数报错，所以才意识到h264编码器没有安装，故将解决办法记载下来，以备不时之需。</p>
+<p><em>以下所有内容均以h264为例</em></p>
+<p>1.下载x264工程代码</p>
+<pre><code>git clone git://git.videolan.org/x264.git 
+</code></pre>
+<p>或者从这里下载：<a href="http://www.videolan.org/developers/x264.html">x264</a></p>
+<p>其他常用库：<a href="http://sourceforge.net/project/showfiles.php?group_id=290&package_id=309">lame</a> <a href="http://www.xiph.org/downloads">libogg</a> <a href="http://downloads.xiph.org/releases/vorbis/libvorbis-1.3.3.tar.gz">libvorbis</a> <a href="http://downloads.xvid.org/downloads/xvidcore-1.3.2.tar.gz">xvid</a></p>
+<p><em>libvorbis 依赖于 libogg 所以必须先安装后者</em></p>
+<p>2.库的安装</p>
+<p>解包： </p>
+<p><code>tar</code></p>
+<p>配置：</p>
+<pre><code>./configure --enable-shared --enable-static 
+</code></pre>
+<p><code>--enable-shared</code>动态库，会生成.so或者.a在/usr/local/lib下，来被ffmpeg调用。</p>
+<p>编译安装：</p>
+<pre><code>make 
+
+sudo make install 
+</code></pre>
+<p>3.重新编译ffmpeg</p>
+<p>编译过程基本如前，但是在配置阶段需要加入以下参数：</p>
+<p><code>--enable-gpl</code>GPL协议</p>
+<p><code>--enable-libx264</code>允许调用x264库。</p>
+<p>4.其他注意事项</p>
+<p>ffmpeg程序默认调用的是/usr/lib下调用库文件，可能会报错。</p>
+<p>在/etc/ld.so.conf文件修改lib配置解决问题。</p>
+]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>ffmpeg</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>go语言学习笔记</title>
+    <url>/2017/07/29/go%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<p>开始学习Golang的语法。<br>主要记录go和python的异同点，随便写写，以供自励。</p>
+<span id="more"></span>
+
+<p>go的每一个单独运行程序，必须包含<code>main</code>包。程序入口也在<code>main</code>函数。</p>
+<p>go的定义方式很多，其中<code>:=</code>的形式与python的定义类似，可以自动判断变量的种类，但是这种定义方法只能在函数体内部使用，在全局只能使用<code>var</code>关键字定义。</p>
+<p>go的变量比python强大之处在于go支持指针，用法与C类似。</p>
+]]></content>
+      <categories>
+        <category>code</category>
+      </categories>
+      <tags>
+        <tag>Go</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>传感器原理和应用</title>
+    <url>/2017/04/15/%E4%BC%A0%E6%84%9F%E5%99%A8%E5%8E%9F%E7%90%86%E5%92%8C%E5%BA%94%E7%94%A8/</url>
+    <content><![CDATA[<p><em>传感器原理和应用复习提纲</em></p>
+<span id="more"></span>
+
+<h1 id="检测技术的基本概念"><a href="#检测技术的基本概念" class="headerlink" title="检测技术的基本概念"></a>检测技术的基本概念</h1><p>传感器是一种检测装置，能感受规定的被测量，并能将检测感受到的信息，按一定规律变换成为电信号或其他所需形式的信息输出，以满足信息的传输、处理、存储、显示、记录和控制等要求。</p>
+<h2 id="传感器分类"><a href="#传感器分类" class="headerlink" title="传感器分类"></a>传感器分类</h2><p>按被测物理量分类</p>
+<ul>
+<li>测量位移：电容传感器，电感传感器,霍尔传感器，光电开关，角编码器，光栅，容栅······</li>
+<li>测量线速度/角速度：超声波传感器，电涡流传感器，霍尔传感器，光电开关，角编码器······</li>
+<li>测量加速度：电容传感器，压电传感器······</li>
+<li>测量质量：应变片传感器，电容式传感器，电感式传感器······</li>
+<li>测量流量：超声波传感器，霍尔传感器，电容传感器······</li>
+<li>测量磁通量：电感式传感器，霍尔传感器······</li>
+<li>测量温度：热敏电阻，热电偶，光电池······</li>
+<li>······</li>
+</ul>
+<h2 id="传感器的特性参数"><a href="#传感器的特性参数" class="headerlink" title="传感器的特性参数"></a>传感器的特性参数</h2><p>灵敏度是指传感器或检测系统在稳态下输出量变化和引起此变化的输入量变化的比值。它是输入与输出特性曲线的斜率。</p>
+<p>线性传感器的灵敏度为常数；非线性传感器的灵敏度随输入量的变化而变化。</p>
+<p>分辨力指传感器能检出被测信号的最小变化量。</p>
+<p>分辨率：将分辨力除以仪表的满量程就是仪表的分辨率，分辨率常以百分比或几分之一表示，是量纲为1的数。</p>
+<h2 id="测量误差表示方法及数据处理"><a href="#测量误差表示方法及数据处理" class="headerlink" title="测量误差表示方法及数据处理"></a>测量误差表示方法及数据处理</h2><p>绝对误差：被测量值$A_x$与真值$A_0$之间总是存在着一个差值，这种差值称为绝对误差，用Δ表示：</p>
+<p>$$Δ=A_x－A_0$$</p>
+<p>真值有理论真值、约定真值、相对真值之分。准确度高2级以上的仪表的误差与准确度低的仪表的误差相比，则高一级仪表的测量值可以认为是相对真值。</p>
+<p>示值相对误差：$\gamma _x = \frac{\Delta}{A_x} \times 100 % $</p>
+<p>引用误差$γ_m$（也称满度相对误差）: $\gamma _m = \frac{\Delta}{A_m} \times 100 % $</p>
+<p>准确度等级S: $S=\frac{\left | \Delta_m \right |}{\left | A_m \right |} \times 100 $</p>
+<p>我国的工业模拟仪表有下列常用的7种等级：0.1、0.2、0.5、1.0、1.5、2.5、5.0。</p>
+<h3 id="测量误差的分类"><a href="#测量误差的分类" class="headerlink" title="测量误差的分类"></a>测量误差的分类</h3><p>静态误差（粗大误差，系统误差，随机误差）:</p>
+<ul>
+<li>粗大误差：超出在规定条件下预计的误差，或明显偏离真值的误差称为粗大误差，也叫过失误差、疏忽误差或粗差。</li>
+<li>系统误差：在重复性条件下，对同一被测量进行无限多次测量所得结果的平均值与被测量的真值之差，称为系统误差。</li>
+<li>随机误差：在同一条件下，多次测量同一被测量，有时会发现测量值时大时小，误差的绝对值及正、负以不可预见的方式变化，该误差称为随机误差。 </li>
+</ul>
+<h1 id="电阻传感器"><a href="#电阻传感器" class="headerlink" title="电阻传感器"></a>电阻传感器</h1><h2 id="应变片式传感器"><a href="#应变片式传感器" class="headerlink" title="应变片式传感器"></a>应变片式传感器</h2><p>电阻丝受拉后，长度增加，直径变小，电阻变大。</p>
+<p>$$\frac {\Delta R}{R} = \left ( 1+2 \mu + \frac{\Delta \rho / \rho}{\varepsilon _x} \right )\varepsilon _x = K_{0} \varepsilon _x$$</p>
+<p>对于金属材料$K_0 \approx 1+2\rho$，其值一般为2左右。</p>
+<p>$$\frac{\Delta R}{R} = K \varepsilon_{x} = K\frac{F}{AE} $$</p>
+<p>上式中K为灵敏度，略大于$K_0$，F为应变力，A为截面积，E为弹性模量。</p>
+<h3 id="非平衡电桥结构"><a href="#非平衡电桥结构" class="headerlink" title="非平衡电桥结构"></a>非平衡电桥结构</h3><p>非平衡电桥由四个电阻R1、R2、R3、R4组成一个四边形的回路，每一边称作电桥的“桥臂”。有4个结点a、b、c、d。在a、c结点之间接入电源$U_i$，而另一对结点（b、d）之间的电压差作为输出电压$U_o$端。</p>
+<p>b、d点对负极（a点）的电压相等时称作 “电桥平衡”；反之，称作“电桥不平衡”。</p>
+<p>电桥平衡的条件是:</p>
+<p>上下两个桥臂的左右桥臂的电阻比例相等。即：R1/R2=R4/R3或R1•R3=R4•R2</p>
+<p>若桥路的4个桥臂相邻电阻的电阻值变化趋势相同，桥路的输出电压为零。若相邻电阻的电阻值变化趋势相反，桥路就产生输出电压：</p>
+<p>$$ U_o = \frac{U_i}{4}\left ( \frac{\Delta R_1}{R_1} - \frac{\Delta R_2}{R_2} + \frac{\Delta R_3}{R_3} - \frac{\Delta R_4}{R_4} \right ) $$</p>
+<p>非平衡电桥可以分为单臂、双臂、全桥电桥</p>
+<ul>
+<li>单臂电桥是指四个桥臂中只有一个电阻可变，仅R1为应变片。</li>
+<li>双臂电桥是指四个桥臂中有R1和R2两个电阻均为应变片。</li>
+<li>全桥电桥是指四个桥臂均为应变片。</li>
+</ul>
+<p>全桥电桥在环境温度升高时，四个桥臂上的应变片温度同时升高，假设温度引起的电阻值漂移数值一致，就可以相互抵消，所以全桥能实现温度自补偿。</p>
+<h2 id="金属热电阻"><a href="#金属热电阻" class="headerlink" title="金属热电阻"></a>金属热电阻</h2><p>温度升高，金属内部原子晶格的振动加剧，从而使金属内部的自由电子通过金属导体时的阻碍增大，宏观上表现出电阻率变大，电阻值增加，称其为正温度系数，即电阻值与温度的变化趋势相同。</p>
+<p>热电阻的$R_t$与温度t之间不完全是线性关系，在规定的测温范围内，根据国际电工委员会（IEC）颁布的分度表数值，列出每隔1℃的$R_t$电阻值，这种表格称为热电阻分度表。</p>
+<p>在工程中，若不考虑线性度误差的影响，有时也可以利用温度系数α来近似计算热电阻的阻值Rt。即：</p>
+<p>$$ R_t = R_o \left ( 1+\alpha t \right ) $$</p>
+<h1 id="电感传感器"><a href="#电感传感器" class="headerlink" title="电感传感器"></a>电感传感器</h1><p>测物体位移等的变化转换为线圈电感量的变化，再将电感量的变化转换为电流、电压或者频率的变化，实现非电量到电量的转换。</p>
+<p>电感传感器可分为自感式和互感式两大类。电感式传感器通常是指自感传感器。自感系数常用L来表示，简称自感或电感。</p>
+<p>自感的单位是亨利,简称亨,符号是H。常用的较小的单位有毫亨(mH)和微亨(μH)。自感传感器的数值多为mH数量级。</p>
+<h2 id="变隙式电感传感器"><a href="#变隙式电感传感器" class="headerlink" title="变隙式电感传感器"></a>变隙式电感传感器</h2><p>对于变隙式电感传感器，其电感量为$L=\frac{N^2}{R_m}$</p>
+<p>其中N是绕组匝数，$R_m$是磁路总磁阻</p>
+<p>$$R_m\approx \frac{2\delta}{\mu_0A}$$</p>
+<p>其灵敏度</p>
+<p>$$ K_\delta = \frac{dL}{d\delta} = -\frac{N^2\mu_0A}{2\delta^2} = -\frac{L_0}{\delta} $$</p>
+<p>因此，气隙$\delta$越小，灵敏度越高，因此适合小量程位移的测量。</p>
+<h2 id="螺线管式电感传感器"><a href="#螺线管式电感传感器" class="headerlink" title="螺线管式电感传感器"></a>螺线管式电感传感器</h2><p>螺线管是具有多重卷绕的导线，卷绕内部可以是空心的，或者有一个磁芯。当有电流通过导线时，螺线管中间部位会产生比较均匀的磁场。作为传感器，螺线管电感传感器的主要元器件是一只螺线管和一根可移动的圆柱形衔铁。衔铁插入绕组后，将引起螺线管内部的磁阻的减小，电感随插入的深度而增大。</p>
+<p>螺线管越长，线性区就越大。螺线管式电感传感器的线性区约为螺线管长度的1/10。</p>
+<h2 id="差动电感传感器"><a href="#差动电感传感器" class="headerlink" title="差动电感传感器"></a>差动电感传感器</h2><p>当衔铁偏离中间位置时，两个绕组的电感一个增加,一个减小,形成差动形式。差动结构可以减少衔铁因为电磁吸力导致的震动引起的误差。</p>
+<h2 id="测量转换电路"><a href="#测量转换电路" class="headerlink" title="测量转换电路"></a>测量转换电路</h2><p>电感传感器的测量转换电路可以采用电桥电路，作用是吧电感量的变化转化为电压或者电流信号，以便送入放大器进行放大，然后用仪表指示或者记录下来。</p>
+<p>检波电路的作用是将电感的变化转换为直流电压或者电流，但若仅使用电桥电路搭配普通检波电路，则只能判别位移的大小，无法判断输出电压的相位和位移方向。</p>
+<p>如果在输出电压送到指示仪之前，经过一个能判别相位的检波电路，则不但可以反映幅值，还可以反映输出电压的相位。这种电路称为相敏检波电路。</p>
+<h1 id="电涡流传感器"><a href="#电涡流传感器" class="headerlink" title="电涡流传感器"></a>电涡流传感器</h1><p>电涡流传感器的基本工作原理是电涡流效应。根据法拉第电磁感应定律，金属导体置于变化的磁场中时，导体的表面就会形成感应电流。感应电涡流并不是均匀分布的，其在纵深方向，主要是集中在金属导体的表面，称为趋肤效应或者集肤效应。交变磁场的频率越高，电涡流的渗透深度越浅，趋肤效应越严重，可以用趋肤效应来控制非电量的测量深度。</p>
+<p>设电涡流线圈在高频时的等效电阻为$R_1$（大于直流电阻），电感为$L_1$。当有被测导体靠近电涡流线圈时，则被测导体等效为一个短路环，电涡流线圈$L_1$与导体之间存在一个互感$M$。互感随线圈与导体之间距离的减小而增大。</p>
+<p>设$R$为等效电阻，$L$为等效电感，电涡流线圈的等效阻抗为</p>
+<p>$$Z=R+j \omega L$$</p>
+<p>当被测物与电涡流线圈的间距δ减小时，电涡流线圈与被测金属的互感量M增大，等效电感L减小，等效电阻R增大，品质因数Q值降低：$Q=\omega \frac{L}{R}$。</p>
+<p>等效电阻上消耗的有功功率增大：$P=I^2R$</p>
+<p>即当电涡流线圈与金属板的距离x 减小时，电涡流线圈的等效电感L减小，等效电阻R增大，Q值降低，流过电涡流线圈的电流$i_1$增大。</p>
+<p>调频式电路：当电涡流线圈与被测体的距离x变小时，电涡流线圈的电感量L也随之变小（非铁质），同时引起LC振荡器的输出电压及频率变高。如果希望用模拟仪表进行显示或记录时，使用“鉴频器”，可以将$\Delta f$转换为电压$\Delta U_o$。</p>
+<h1 id="电容传感器"><a href="#电容传感器" class="headerlink" title="电容传感器"></a>电容传感器</h1><p>电容传感器的工作原理可以用平板电容器来说明。当忽略边缘效应时，其电容为</p>
+<p>$$C= \frac{\varepsilon A}{d} = \frac{\varepsilon _0 \varepsilon _r A}{d} $$</p>
+<ul>
+<li>$A$：两极板相互遮盖的有效面积。($m^2$)</li>
+<li>$d$：两极板之间的距离，也称作极距。(m)</li>
+<li>$\varepsilon $：两极板之间介质的介电常数。(F/m)</li>
+<li>$\varepsilon _r$：两极板之间介质的相对介电常数。</li>
+<li>$\varepsilon _0$：真空介电常数，$\varepsilon _0 = 8.85 \times 10^{-12}$(F/m)</li>
+</ul>
+<p>根据电容原理，可以制作三种类型的电容传感器：变面积式电容传感器、变极距式电容传感器、变介电常数式电容传感器。</p>
+<h2 id="变极距式电容传感器"><a href="#变极距式电容传感器" class="headerlink" title="变极距式电容传感器"></a>变极距式电容传感器</h2><p>在$x&lt;&lt;d_0$时，有灵敏度$K_x\approx-\frac{C_0}{d_0} $</p>
+<p>实际使用时，总是使初始极距$d_0$尽量小些，以提高灵敏度，但这也带来了变极距式电容器的行程较小的缺点。</p>
+<h2 id="变面积式电容传感器"><a href="#变面积式电容传感器" class="headerlink" title="变面积式电容传感器"></a>变面积式电容传感器</h2><p>变面积式电容传感器的输出特性在一小段范围内是线性的，灵敏度是常数。这一类传感器多用于检测直线位移、角位移、尺寸等参量。</p>
+<h1 id="压电传感器"><a href="#压电传感器" class="headerlink" title="压电传感器"></a>压电传感器</h1><p>压电效应：石英等部分晶体与材料在受到压力时，晶格产生变形，表面产生电荷，这种现象称为压电效应。电介质材料中一种机械能与电能互换的现象。</p>
+<p>晶体沿x面受压力时的带电时，石英晶体的正负电荷中心分离，宏观上看，x面的上表面带正电，下表面带负电。</p>
+<p>x面上电荷为$Q=d_{11}F_x$ ($d_{11}$为压电常数)。</p>
+<p>当力的方向改变时，电荷的极性随之改变，输出电压的频率与动态力的频率相同；当施加静态力时，在初始瞬间，产生与力成正比的电荷，但由于表面漏电，所产生的电荷很快泄漏，并消失。<strong>所以压电元件不可用于静态力的测量。</strong></p>
+<h2 id="压电振动加速度传感器"><a href="#压电振动加速度传感器" class="headerlink" title="压电振动加速度传感器"></a>压电振动加速度传感器</h2><ul>
+<li>灵敏度K：输出量是电荷量，通常为pC级；输入量是加速度，单位是$m/s^2$；所以单位是$pC/ms^{-2}$或者$pC/g$，其范围通常是10～100。<blockquote>
+<p>目前也有许多压电加速度传感器输出是电压，所以灵敏度单位也可是mV/g，通常为10～1000mV/g。</p>
+</blockquote>
+</li>
+<li>频率范围：常见的压电加速度传感器频率范围为0.01Hz～20kHz。</li>
+<li>动态范围：常用的测量范围是0.1～100g，或1000$m/s^2$，<strong>测量冲击振动时应选用100～10000g的高频加速度传感器</strong>，而测量桥梁、地基等<strong>微弱振动往往要选择0.001～10g的高灵敏度的低频加速度传感器</strong>。</li>
+</ul>
+<h2 id="电荷放大器"><a href="#电荷放大器" class="headerlink" title="电荷放大器"></a>电荷放大器</h2><p><img src="/img/dianhefangda.jpg" alt="电荷放大器"></p>
+<ol>
+<li>压电传感器</li>
+<li>屏蔽电缆线</li>
+<li>传输线分布电容</li>
+<li>电荷放大器</li>
+</ol>
+<p>电荷放大器是一个具有反馈电容$C_f$的高增益运算放大器电路。当放大器开环增益A和输入电阻$R_i$、反馈电阻$R_f$（用于防止放大器的直流饱和）相当大时，放大器的输出电压$U_o$正比于输入电荷Q，反比于反馈电容$C_f$，而基本上与$C_c$、$C_a$、$C_i$无关：</p>
+<p>$$U_o \approx \frac{-AQ}{\left ( 1+A \right ) C_f} \approx -\frac{Q}{C_f} $$<br>$$U_{om}\approx -\frac{d \times F}{C_f} $$<br>$$K_u = \frac{U_{om}}{F} \approx -\frac{d}{C_f} $$</p>
+<h1 id="超声波传感器"><a href="#超声波传感器" class="headerlink" title="超声波传感器"></a>超声波传感器</h1><p>声波的分类：次声波、可闻声波与超声波。频率高于20kHz的机械振动波称为超声波。超声波的特性是指向性好，能量集中。1MHz的超声波的能量,相当于振幅相同,频率为1000Hz可闻声波的100万倍,能穿透几米厚的钢板,而能量损失不大。在遇到两种介质的分界面(例如钢板与空气的交界面)时,能产生明显的反射和折射现象。</p>
+<p><img src="/img/light.jpg" alt="折射示意图"></p>
+<p>超声波从声阻抗大的材料透射到声阻抗小的材料时，声压的大部分被反射。本例中，反射率γ高达93.8%，透射到水中的声压$p_{d1}$只有6.2%。如果钢板的底面是与空气交界时，则泄漏量就更小了。超声波的这一特性有利于金属探伤和测厚。</p>
+<h1 id="霍尔传感器"><a href="#霍尔传感器" class="headerlink" title="霍尔传感器"></a>霍尔传感器</h1><p>霍尔效应是霍尔在美国霍普金斯大学研究生期间，研究关于载流导体在磁场中的受力性质时发现的一种现象。在长方形导体薄板上通以电流，沿电流垂直方向施加磁场，就会在与电流和磁场两者垂直的方向上产生电势差，这种现象称为霍尔效应，所产生的电势差称为霍尔电压。</p>
+<p>用在半导体薄片上的磁场强度B越强，霍尔电势也就越高。霍尔电势EH可用下式表示：</p>
+<p>$$E_H=\frac {IB}{ne\delta} =K_HIB$$</p>
+<p>n、e、$\delta$在薄片的尺寸、材料确定后均为常数，$K_H$为霍尔元件的灵敏度。</p>
+<h1 id="热电偶传感器"><a href="#热电偶传感器" class="headerlink" title="热电偶传感器"></a>热电偶传感器</h1><p>热电效应：两种不同材料的导体组成的闭合回路中，当两个节点温度不同时，回路中将产生电动势，这种现象称为热电效应，两种材料组成的回路成为热电偶，组成热电偶的导体称为热电极，热电偶产生的电动势称为热电动势。</p>
+<p>热电偶的两个节点中，置于被测温度中的是测量端，又称为工作段或者热端；置于参考温度中的，称为参考段，或者自由端、冷端。</p>
+<p><strong>热电偶的线性较差，多数情况下采用查表法</strong></p>
+<p>我国从1991年开始采用国际计量委员会规定的“1990年国际温标”(简称ITS-90)的新标准。按此标准,制定了相应的分度表,并且有相应的线性化集成电路与之对应，并由计算机查表。直接从热电偶的分度表查温度与热电动势的关系时的约束条件是：<strong>自由端（冷端）温度必须为0℃</strong>。</p>
+<p>当参考端温度不是0℃时，可以用下式修正测量误差：</p>
+<p>$$E_{AB}\left ( t,0^{\circ}C \right ) = E_{AB}\left ( t,t_0 \right ) + E_{AB}\left ( t_0,0^{\circ}C \right ) $$</p>
+<h1 id="光电传感器"><a href="#光电传感器" class="headerlink" title="光电传感器"></a>光电传感器</h1><p>当光子冲击半导体材料表面时，半导体材料中处于价带的电子吸收足够的光子能量后，会跃迁至更高的能级—导带，成为自由电子，形成电子-空穴对，使材料电阻率下降，表现出导电性。这就是光电效应，基于光电效应的器件有光敏电阻、光敏二极管、光敏晶体管。</p>
+<p>当光敏电阻受到光照时，光生电子-空穴对增加，阻值减小，电流增大。</p>
+<p>暗电流是指器件在反偏压条件下,没有入射光时产生的反向直流电流.(它包括晶体材料表面缺陷形成的泄漏电流和载流子热扩散形成的本征暗电流.)</p>
+]]></content>
+      <categories>
+        <category>机械</category>
+      </categories>
+      <tags>
+        <tag>机械</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>工程材料及热处理</title>
+    <url>/2016/11/06/%E5%B7%A5%E7%A8%8B%E6%9D%90%E6%96%99%E5%8F%8A%E7%83%AD%E5%A4%84%E7%90%86/</url>
+    <content><![CDATA[<p><em>工程材料及热处理复习提纲</em></p>
+<span id="more"></span>
+
+<h2 id="晶体"><a href="#晶体" class="headerlink" title="晶体"></a>晶体</h2><p>晶体：材料中的原子（离子、分子）在三维空间呈规则，周期性排列—长程有序。</p>
+<p>非晶体：原子无规则堆积，也称为 “过冷液体”—短程有序。</p>
+<p>空间点阵：将晶体内部的原子（离子）或原子群（离子群）抽象为无数点子按一定的方式在空间做有规则的周期性分布，这些几何点子的总体称为空间点阵，这些点称为阵点或节点。</p>
+<p>晶格：用一系列假想的平行直线将空间点阵的阵点联结起来，形成的空间网络称为空间格子，也称晶格。</p>
+<p>晶胞：为了研究空间点阵的排列特点，从点阵中取出一个反映点阵特征的基本单元（通常是一个平行六面体）作为其组成单元，这个平行六面体称为晶胞。</p>
+<p>晶向指数：晶胞内任意两原子连线方向称之为晶向，立方晶系的晶向指数用[uvw]来表示，是晶向向量在空间坐标系下的最小简单整数，负值标记在数字上方。</p>
+<p>晶面系数：晶胞内，用(hkl)来表示晶面，在直角空间坐标系下，该面在每个坐标轴截距倒数的最小简单整数。</p>
+<p>金属晶体结构：</p>
+<table>
+<thead>
+<tr>
+<th align="center">结构参数</th>
+<th align="center">体心立方晶格</th>
+<th align="center">面心立方晶格</th>
+<th align="center">密排六方晶格</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">晶格常数</td>
+<td align="center">a=b=c 90°</td>
+<td align="center">a=b=c 90°</td>
+<td align="center">底边长a 底边间隔c 侧面角120°</td>
+</tr>
+<tr>
+<td align="center">晶胞原子数</td>
+<td align="center">2</td>
+<td align="center">4</td>
+<td align="center">6</td>
+</tr>
+<tr>
+<td align="center">原子半径</td>
+<td align="center">$\frac{\sqrt{3}}{4}a$</td>
+<td align="center">$\frac{\sqrt{2}}{4}a$</td>
+<td align="center">$\frac{a}{2}$</td>
+</tr>
+<tr>
+<td align="center">致密度</td>
+<td align="center">0.68</td>
+<td align="center">0.74</td>
+<td align="center">0.74</td>
+</tr>
+<tr>
+<td align="center">配位数</td>
+<td align="center">8</td>
+<td align="center">4</td>
+<td align="center">12</td>
+</tr>
+</tbody></table>
+<h3 id="晶体缺陷"><a href="#晶体缺陷" class="headerlink" title="晶体缺陷"></a>晶体缺陷</h3><p>点缺陷是晶体中在X,Y,Z三维方向上尺寸都很小的晶体缺陷，主要有四类：空位；间隙原子（有同类和异类之分）；置换原子（有大小之分）；复合空位。 </p>
+<p>线缺陷：晶体中在一维方向上尺寸很大，而在另外二维方向上的尺寸很小的晶体缺陷，它的主要形式是位错。</p>
+<p>面缺陷是指晶体中在二维方向上尺寸很大，而在另一维方向上尺寸很小的晶体缺陷。主要包括晶体的外表面、堆垛层错、晶界、亚晶界、孪晶界和相界面等。</p>
+<h3 id="合金中的相结构的类型"><a href="#合金中的相结构的类型" class="headerlink" title="合金中的相结构的类型"></a>合金中的相结构的类型</h3><p>固溶体：间隙固溶体、置换固溶体。</p>
+<p>金属间化合物：正常价化合物、电子化合物、间隙化合物。</p>
+<h2 id="纯金属结晶"><a href="#纯金属结晶" class="headerlink" title="纯金属结晶"></a>纯金属结晶</h2><p>金属材料的性能：</p>
+<ul>
+<li>使用性能</li>
+<li>机械性能：强度（屈服强度、抗拉强度、断裂强度）、硬度、塑性、韧性等</li>
+<li>物理性能：导电、导热、电磁、膨胀等</li>
+<li>化学性能：抗氧化性、耐腐蚀性等</li>
+<li>加工工艺性能</li>
+<li>铸造性能：流动性、收缩性等</li>
+<li>锻造性能：压力加工成型性等</li>
+<li>切削加工性能：车铣刨磨切削量，光洁程度等</li>
+<li>焊接性能：熔焊性、焊缝强度、偏析等</li>
+<li>热处理性能：淬透性、回火稳定性等</li>
+</ul>
+<h3 id="结晶条件"><a href="#结晶条件" class="headerlink" title="结晶条件"></a>结晶条件</h3><p>过冷现象：液态金属必须冷却至理论结晶温度以下某个温度时才开始结晶，这个现象称之为过冷。过冷度<br>越大，结晶的驱动力越大。</p>
+<p>结晶潜热：伴随着液态向固态转变而释放的热量称之为结晶潜热。</p>
+<p>结晶时具有小晶体，称为晶核，该过程称之为形核。</p>
+<h3 id="结晶过程"><a href="#结晶过程" class="headerlink" title="结晶过程"></a>结晶过程</h3><p>结晶时的形核一般认为有两种：均质形核（自发形成的晶核）和异质形核（模壁或者液相中未熔固相质点表面）</p>
+<p>晶体的生长在光滑界面以侧向长大机制生长，在粗糙界面以连续垂直长大机制生长。而完全光滑的界面一般以二维晶核机制生长，有缺陷的光滑界面以晶体缺陷生长机制生长。</p>
+<p>而在正温度梯度下，晶体按平面状生长，在负温度梯度下，晶体按枝晶生长。晶枝互相垂直，且在三维空间均衡发展，最后得到等轴晶粒。</p>
+<p>晶粒越细小，其强度、硬度、塑性、韧性越好。而细化晶粒的途径主要有增大形核率和降低长大速度。过冷度越大，形核率增大，虽然长大速度也增大，但前者效果大于后者，可使晶粒细化。孕育（变质）处理也可以使晶粒细化。</p>
+<h2 id="相图"><a href="#相图" class="headerlink" title="相图"></a>相图</h2><p>合金：由金属元素与其他元素（金属元素或非金属元素均可）组成的有<strong>金属特征</strong>的金属材料。</p>
+<p>组元：组成合金独立的最基本单元。组元可以是<strong>元素</strong>或是<strong>稳定化合物</strong>。</p>
+<p>相：具有相同结构，相同成分和性能（也可以是连续变化的）并以界面相互分开的均匀组成部分，如液相、固相是两个不同的相。 </p>
+<p>组织：用肉眼或显微镜观察到的材料内部形貌图像的统称（宏观组织、微观组织）。组织是影响材料性能的重要因素。</p>
+<h3 id="二元合金相图"><a href="#二元合金相图" class="headerlink" title="二元合金相图"></a>二元合金相图</h3><p>典型的二元合金相图以纵坐标表示温度，横坐标表示成分（浓度），由一根液相线和固相线组成。相图中任一点都能表示定比例成分的合金在定温度下，称为表象点。从上至下分为液相区、固液两相区和固相区，横坐标两端可以表示组元的纯净物。</p>
+<p><img src="/img/erxiang.jpg" alt="二相图"></p>
+<p>杠杆定理：$$\frac{Q_l}{Q_\alpha}=\frac{c-b}{b-a}=\frac{bc}{ab}\qquad Q_l\cdot ab=Q_\alpha \cdot bc$$</p>
+<h4 id="均晶相图"><a href="#均晶相图" class="headerlink" title="均晶相图"></a>均晶相图</h4><p><img src="/img/junjing.jpg" alt="均晶不平衡结晶相图"></p>
+<p>匀晶合金与纯金属不同，它没有一个恒定的熔点，而是在液、固相线划定的温区内进行结晶。</p>
+<p>均晶结晶特点：</p>
+<ul>
+<li>生核与长大：与纯金属一样，也存在生核与长大两个过程，但固溶体更趋向于树枝状长大。</li>
+<li>变温结晶：固溶体结晶在一个温度区间内进行，即为一个变温结晶过程。</li>
+<li>两相成分、质量比的确定：杠杆定理。</li>
+</ul>
+<p>固溶体结晶时成分是变化的　（固相线和液相线），如冷却较快，原子扩散不能充分进行，则会形成成分不均匀的固溶体，固溶体一般都以枝晶状方式结晶，这种现象称为<strong>枝晶偏析</strong>。</p>
+<p>枝晶偏析的合金对合金的力学性能影响较大，容易导致合金塑性韧性下降；易引起晶间腐蚀，降低合金的抗蚀性能。消除枝晶偏析的方法采用<strong>扩散退火</strong>。</p>
+<p>通过对非平衡凝固分析得到如下结论：</p>
+<ul>
+<li>固相、液相的平均成分分别与固相线、液相线不同，有一定的偏离（固相成分按平均成分线变化），其偏离程度与冷却速度有关。冷却速度越大，其偏离程度越严重；冷却速度越小，偏离程度越小，越接近于平衡条件。</li>
+<li>先结晶部分含有较多的高熔点组元(Ni)，后结晶部分含有较多的低熔点组元(Cu)。</li>
+<li>非平衡结晶条件下，凝固的终结温度低于平衡结晶时的终止温度。 </li>
+</ul>
+<h4 id="共晶相图"><a href="#共晶相图" class="headerlink" title="共晶相图"></a>共晶相图</h4><p><img src="/img/gongjing.jpg" alt="共晶相图"></p>
+<p>液相组元无限互溶，固相组元有限溶解的合金系，当溶质超出固溶体溶解极限时，冷却过程中发生共晶转变，这类合金构成的相图称为共晶相图。</p>
+<p>共晶转变要点：</p>
+<ul>
+<li>共晶转变在恒温下进行。</li>
+<li>转变结果是从一种液相中结晶出两个不同的固相。</li>
+<li>存在一个确定的共晶点。在该点凝固温度最低。</li>
+<li>成分在共晶线范围的合金都要经历共晶转变。</li>
+</ul>
+<h4 id="共析相图"><a href="#共析相图" class="headerlink" title="共析相图"></a>共析相图</h4><p><img src="/img/gongxi.jpg" alt="共析相图"></p>
+<p>两组元在液态能够无限互溶，在固态只能有限互溶，并具有共析转变。</p>
+<h4 id="包晶相图"><a href="#包晶相图" class="headerlink" title="包晶相图"></a>包晶相图</h4><p><img src="/img/baojing.jpg" alt="包晶相图"></p>
+<p>液相组元无限互溶，固相组元有限溶解的合金系，当溶质超出固溶体溶解极限时，冷却过程中发生包晶转变，这类合金构成的相图称为包晶相图。</p>
+<p>一种液相与一种固相反应生成另一种固相的转变过程称为包晶转变。</p>
+<h3 id="铁碳相图"><a href="#铁碳相图" class="headerlink" title="铁碳相图"></a>铁碳相图</h3><p>纯铁的同素异构转变：</p>
+<p><img src="/img/chuntie.jpg" alt="纯铁的同素异构转变"></p>
+<p>铁碳合金中的 基本相和组织：</p>
+<ul>
+<li>组元：纯铁、渗碳体</li>
+<li>基本相：液相（L铁和碳在液相能无限互溶）、高温铁素体（δ碳溶解在δ-Fe中形成的间隙固溶体）、铁素体（α碳溶解在α-Fe中形成的间隙固溶体）、奥氏体（γ碳溶解在γ-Fe中形成的间隙固溶体）、中间相（$Fe_3C$铁和碳形成的间隙化合物，称为渗碳体，是稳定化合物）</li>
+<li>基本组织：珠光体（P $\alpha +Fe_3C$）、莱氏体（Le/Le’ $\gamma +Fe_3C$）</li>
+</ul>
+<p><img src="/img/tietan.jpg" alt="铁碳相图"></p>
+<p>特征点：</p>
+<table>
+<thead>
+<tr>
+<th>特征点</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A(0-1538)</td>
+<td>纯铁的熔点</td>
+</tr>
+<tr>
+<td>B(0.53-1495)</td>
+<td>包晶转换液相成分</td>
+</tr>
+<tr>
+<td>C(4.3-1148)</td>
+<td>共晶点</td>
+</tr>
+<tr>
+<td>D(6.69-1227)</td>
+<td>渗碳体熔点</td>
+</tr>
+<tr>
+<td>E(2.11-1148)</td>
+<td>碳在γ-Fe中的最大溶解点，共晶转化为奥氏体，钢与铸铁的分界点</td>
+</tr>
+<tr>
+<td>F(6.69-1148)</td>
+<td>共晶转变时渗碳体的成分</td>
+</tr>
+<tr>
+<td>G(0-912)</td>
+<td>纯铁的异构转变点</td>
+</tr>
+<tr>
+<td>H(0.09-1495)</td>
+<td>碳在δ-Fe中的最大溶解点，包晶转化为高温铁素体</td>
+</tr>
+<tr>
+<td>J(0.17-1495)</td>
+<td>包晶点</td>
+</tr>
+<tr>
+<td>K(6.69-727)</td>
+<td>共析转变时铁素体的成分点</td>
+</tr>
+<tr>
+<td>M(0-770)</td>
+<td>纯铁的居里点</td>
+</tr>
+<tr>
+<td>N(0-1394)</td>
+<td>铁素体的同素异构点</td>
+</tr>
+<tr>
+<td>O(0.5-770)</td>
+<td>含碳0.5合金的磁性转变点</td>
+</tr>
+<tr>
+<td>P(0.0218-727)</td>
+<td>碳在α-Fe中的最大溶解点，共析转化为铁素体，工业纯铁和钢的分界点</td>
+</tr>
+<tr>
+<td>S(0.77-727)</td>
+<td>共析点，析出珠光体</td>
+</tr>
+<tr>
+<td>Q(小于0.001-室温)</td>
+<td>室温时碳在α-Fe中的溶解度</td>
+</tr>
+</tbody></table>
+<h2 id="金属塑性加工"><a href="#金属塑性加工" class="headerlink" title="金属塑性加工"></a>金属塑性加工</h2><p><em>coming soon</em></p>
+<h2 id="钢的热处理"><a href="#钢的热处理" class="headerlink" title="钢的热处理"></a>钢的热处理</h2><p>热处理：通过对钢件加热、保温和冷却的操作方法，来改善其内部组织结构，以获得所需要性能的一种加工工艺。</p>
+<p>钢在临界温度以上，会获得全部或者部分的奥氏体组织，这一过程称之为完全/部分奥氏体化。奥氏体化的过程可以分为四个部分：奥氏体晶核形成、晶核长大、剩余渗碳体溶解和奥氏体均匀化。</p>
+<p>奥氏体晶粒度：起始晶粒度、实际晶粒度和本质晶粒度。</p>
+<p>影响奥氏体晶粒尺寸的因素：</p>
+<ul>
+<li>温度越高，保温时间越长，奥氏体晶粒长大越明显</li>
+<li>加热速度越快，晶粒细化</li>
+<li>晶界上存在未溶的碳化物时，会对晶粒长大起阻碍作用，使奥氏体晶粒长大倾向减小</li>
+<li>合金元素，也影响奥氏体晶粒长大，除锰、磷外几乎所有合金元素都阻碍奥氏体晶粒长大</li>
+</ul>
+<p>过冷奥氏体：在临界点以下存在的不稳定的且将要发生转变的奥氏体，称为过冷奥氏体。</p>
+<p>过冷奥氏体的转化：</p>
+<ul>
+<li>珠光体（$A_1$～550℃）：珠光体（P 大于650℃）、索氏体（S 600℃～650℃）和屈氏体（T 550℃～600℃）</li>
+<li>贝氏体（550℃～$M_s$）：上贝氏体（B上 350℃～550℃）和下贝氏体（B下 230℃～350℃）</li>
+<li>马氏体（M $M_f$：230℃以下）</li>
+</ul>
+<h3 id="钢的退火"><a href="#钢的退火" class="headerlink" title="钢的退火"></a>钢的退火</h3><p>完全退火：加热至$A_{c3}$20-30℃以上，保温一段时间后缓慢冷却至室温。完全退火仅适用与共析钢和亚共析钢，且退火时间较长。</p>
+<p>等温退火：加热至$A_{c3}$20-30℃以上，保温一段时间后快速冷却至珠光体形成温度保温后出炉空冷，比完全退火更快速，等温温度越高，钢的硬度越低。</p>
+<p>球化退火：球化退火是不完全退火，将钢中的渗碳体球化以降低硬度，提高韧性，为之后的切削或者淬火做准备。球化退火基本操作时将工件加热至$A_{c1}$20-30℃以上，保温一段时间后缓慢冷却至室温，又分为一般球化退火、等温球化退火和周期球化退火。主要适用于共析钢和过共析钢。</p>
+<p>高温扩散（均匀化）退火：为减少钢锭、铸件或锻坯的化学成分和组织不均匀性，将其加热到略低于固相线（固相线以下100℃～200℃）的温度，长时间保温（10h～15h），并进行缓慢冷却的热处理工艺，称为扩散退火或均匀化退火。扩散退火后钢的晶粒很粗大，因此一般再进行完全退火或正火处理。</p>
+<p>去应力退火：加热至500～650℃保温一段时间后炉冷至200℃后空冷。去应力退火无相变。</p>
+<h3 id="钢的正火"><a href="#钢的正火" class="headerlink" title="钢的正火"></a>钢的正火</h3><p>将钢加热至$A_{c3}(A_{ccm})$以上30～50℃后保温一段时间后空冷。正火后一般生成索氏体和少量屈氏体。</p>
+<p>正火主要用于：</p>
+<ul>
+<li>普通结构零件，作为最终热处理，细化晶粒提高机械性能。</li>
+<li>低、中碳钢作为预先热处理，得合适的硬度便于切削加工。</li>
+<li>过共析钢，消除网状Fe3CⅡ，有利于球化退火的进行。</li>
+</ul>
+<h3 id="钢的淬火"><a href="#钢的淬火" class="headerlink" title="钢的淬火"></a>钢的淬火</h3><p>将钢件加热到$A_{c3}$（亚共析钢）或$A_{c1}$（共析钢和过共析钢）以上30～50℃，保温一定时间，然后快速冷却（一般为油冷或水冷），从而得马氏体（或下贝氏体）的一种操作。</p>
+<p>生产中常用的淬火介质：</p>
+<table>
+<thead>
+<tr>
+<th align="center">-</th>
+<th align="center">高温区（650-550℃）</th>
+<th align="center">低温区（300-200℃）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">理想介质</td>
+<td align="center">快</td>
+<td align="center">慢</td>
+</tr>
+<tr>
+<td align="center">水</td>
+<td align="center">慢</td>
+<td align="center">快</td>
+</tr>
+<tr>
+<td align="center">盐水</td>
+<td align="center">快</td>
+<td align="center">快</td>
+</tr>
+<tr>
+<td align="center">油</td>
+<td align="center">慢</td>
+<td align="center">慢</td>
+</tr>
+<tr>
+<td align="center">碱/硝盐浴</td>
+<td align="center">慢</td>
+<td align="center">特慢</td>
+</tr>
+</tbody></table>
+<p>淬火根据冷却介质分为：单液淬火、双液淬火、分级淬火和等温淬火。</p>
+<p>淬透性：奥氏体化后的钢在淬火时获得马氏体的能力，其大小可用钢在一定条件下淬火获得淬透层的深度表示。淬透层越深，表明钢的淬透性越好。</p>
+<p>淬硬性：钢淬火获得M的硬度。</p>
+<p>淬火后的工件会残留淬火应力。</p>
+<h3 id="钢的回火"><a href="#钢的回火" class="headerlink" title="钢的回火"></a>钢的回火</h3><p>是将淬火钢加热到临界点$A_{c1}$以下的某一温度，保温后以适当方式（一般空冷）冷却到室温的一种热处理工艺。主要用于降低脆性、稳定组织和工件尺寸、获得要求的机械性能、消除淬火应力。</p>
+<p>根据回火的温度分为：</p>
+<ul>
+<li>低温回火（150℃～250℃）：亚共析钢和共析钢生成回火马氏体和少量残余奥氏体，过共析钢额外含有碳化物。</li>
+<li>中温会后（350℃～500℃）：回火组织为回火屈氏体。</li>
+<li>高温回火（500℃～650℃）：又称为调质处理，主要生成回火索氏体。</li>
+</ul>
+<h2 id="工业用钢"><a href="#工业用钢" class="headerlink" title="工业用钢"></a>工业用钢</h2><h3 id="碳素钢"><a href="#碳素钢" class="headerlink" title="碳素钢"></a>碳素钢</h3><p>主要元素C：0.0218-2.11%</p>
+<p>有益常存元素Si、Mn：产生固溶强化</p>
+<p>有害常存元素：</p>
+<ul>
+<li>P：冷脆</li>
+<li>S：热脆</li>
+<li>O、H、N：强度、塑性、韧性降低</li>
+</ul>
+<p>碳素结构钢：含碳量在0.06-0.38%之间；非金属夹杂物和有害元素含量较高。牌号：（屈服强度）-（质量等级），（脱氧方法）。例如：Q-235-A,F</p>
+<p>优质碳素钢：含碳量在0.05-0.7%之间；有害元素含量较低。例如：45号钢</p>
+<p>碳素工具钢：含碳量较高；S和P的含量严格控制。例如：T8钢</p>
+<h3 id="合金钢"><a href="#合金钢" class="headerlink" title="合金钢"></a>合金钢</h3><p>牌号：（含碳量万分之一）（元素符号）（元素含量百分之一为单位）······（优质钢A）</p>
+<p>牌号特例：</p>
+<ul>
+<li>滚动轴承钢（GCr15）：G表示滚动轴承，Cr为常加元素，15为千分之十五</li>
+<li>易切削钢（Y40Mn）：前面加Y表示易切削。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">合金元素</th>
+<th align="center">常见作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Cr</td>
+<td align="center">提高淬透性，强化铁素体，增加珠光体，对于特殊钢还有耐磨耐腐蚀特性</td>
+</tr>
+<tr>
+<td align="center">Mn</td>
+<td align="center">强化铁素体，增加珠光体，提高淬透性，降低脆转程度，在耐磨钢中形成奥氏体组织</td>
+</tr>
+<tr>
+<td align="center">Ti</td>
+<td align="center">细化晶粒，防止晶间腐蚀，弥散强化</td>
+</tr>
+<tr>
+<td align="center">Ni</td>
+<td align="center">提高淬透性，强化铁素体，形成奥氏体组织</td>
+</tr>
+<tr>
+<td align="center">Mo</td>
+<td align="center">防止第二类回火脆性，对耐热钢提高再结晶温度</td>
+</tr>
+<tr>
+<td align="center">Si</td>
+<td align="center">提高屈强比，提高淬透性，提高抗氧化性</td>
+</tr>
+<tr>
+<td align="center">W</td>
+<td align="center">提高热硬、耐磨性</td>
+</tr>
+<tr>
+<td align="center">V</td>
+<td align="center">提高热硬、耐磨性、弥散强化</td>
+</tr>
+</tbody></table>
+]]></content>
+      <categories>
+        <category>机械</category>
+      </categories>
+      <tags>
+        <tag>机械</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>常用命令工具记录</title>
+    <url>/2021/03/02/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E5%B7%A5%E5%85%B7%E8%AE%B0%E5%BD%95/</url>
+    <content><![CDATA[<p>几个命令工具的备忘录，纯自用，忘了啥写啥。</p>
+<span id="more"></span>
+
+<h2 id="Poetry"><a href="#Poetry" class="headerlink" title="Poetry"></a>Poetry</h2><p><code>poetry env [use &#123;python&#125;]</code> 创建虚拟环境，使用 <code>poetry shell</code> 激活当前目录虚拟环境。</p>
+<p><code>poetry add &#123;package_name&#125;</code> 当前目录增加包，若不存在虚拟环境则会创建。</p>
+<p><code>poetry init</code> 当前目录创建包</p>
+<p><code>poetry build/publish</code> 打包/发布包</p>
+<blockquote>
+<p>Future will add more.</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>code</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+        <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>新的开始</title>
+    <url>/2016/10/08/%E6%96%B0%E7%9A%84%E5%BC%80%E5%A7%8B/</url>
+    <content><![CDATA[<img src="/img/hexo.png" class="full-image" />
+
+<p><strong>Hello Hexo!</strong></p>
+<span id="more"></span>
+
+<p>其实我一开始想要建个博客是从Flask开始的，第一次接触到这么便捷的Web开发方式（其实也是我第一次接触Web），所以我就学习了各种Html、CSS、Javascript等知识，想着自己给自己做一个很炫酷的Blog。</p>
+<p>然而现实是我当时找不到一个适合我的云服务器（对，就是免费，只可惜我没有早一点接触到SAE），所以嘛就走上了这条静态页面+GitHub Page的路子（现在在国内的Coding上）。</p>
+<p>我一开始走这条路子也不是直接使用的Hexo，我试着过自己做轮子，也试过Python的pelican（Markdown模块有点恶心）。最后嘛，我发现Blog最重要的还是内容······所以选了省心一点的Hexo（安装Jekyll需要的Ruby的gem无法在国内愉快的使用所以Jekyll同学被我pass了）。</p>
+<p>最后我把我以前觉得有点卵用的两篇搬了过来，然后呢这里还要留下一些有用链接。</p>
+<h2 id="Next"><a href="#Next" class="headerlink" title="Next"></a><a href="http://theme-next.iissnan.com/">Next</a></h2><img src="/img/next.png" class="full-image" />
+
+<h2 id="Hexo"><a href="#Hexo" class="headerlink" title="Hexo"></a><a href="https://hexo.io/zh-cn/">Hexo</a></h2><img src="/img/hexo.png" class="full-image" />]]></content>
+      <categories>
+        <category>日常</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>Next</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>机械制造技术基础-刀具</title>
+    <url>/2017/02/25/%E6%9C%BA%E6%A2%B0%E5%88%B6%E9%80%A0%E6%8A%80%E6%9C%AF%E5%9F%BA%E7%A1%80-%E5%88%80%E5%85%B7/</url>
+    <content><![CDATA[<p>写了一些机械制造技术基础中，刀具学习相关的内容。</p>
+<p>听说刀具参考系是难点，做了个3d小模型。</p>
+<p><a href='/3d/chedao2.html' target="_blank">3D车刀</a></p>
+<span id="more"></span>
+
+<iframe src="/3d/chedao2.html" width="100%" height="600px"></iframe>
+
+<h2 id="刀具标注角度参考系"><a href="#刀具标注角度参考系" class="headerlink" title="刀具标注角度参考系"></a>刀具标注角度参考系</h2><p>对于所有标注角度参考系，首先便于测量，做出以下两个假设：1.假设运动条件是不考虑进给运动的影响，2.假设安装条件是安装车刀时刀尖与工件中心等高，并且车刀刀杆中心线与工件中心线垂直，且主切削刃上选定点与工件中心等高。</p>
+<h3 id="主剖面参考系"><a href="#主剖面参考系" class="headerlink" title="主剖面参考系"></a>主剖面参考系</h3><ul>
+<li>基面$P_r$：通过主切削刃上选定点，并与该点切削速度方向相垂直的平面。</li>
+<li>切削平面$P_s$：通过主切削刃上选定点，与主切削刃相切并垂直于该点基面的平面。</li>
+<li>主剖面$P_o$：通过主切削刃上选定点，同时垂直于基面和切削平面的平面。</li>
+</ul>
+<h3 id="法剖面参考系"><a href="#法剖面参考系" class="headerlink" title="法剖面参考系"></a>法剖面参考系</h3><p>基面和切削平面的定义和主剖面参考系相同。</p>
+<ul>
+<li>法剖面$P_n$：通过切削刃上选定点，同时垂直于切削刃或其切线的平面。</li>
+</ul>
+<h3 id="进给剖面和切深剖面参考系"><a href="#进给剖面和切深剖面参考系" class="headerlink" title="进给剖面和切深剖面参考系"></a>进给剖面和切深剖面参考系</h3><p>基面定义同上。</p>
+<ul>
+<li>进给剖面$P_f$：通过切削刃上选定点，同时垂直于刀杆中心线与基面的平面。</li>
+<li>切深剖面$P_p$：通过切削刃上选定点，同时平行于刀杆中心线并垂直于基面的平面，垂直于进给运动方向。</li>
+</ul>
+<h2 id="刀具工作角度参考系"><a href="#刀具工作角度参考系" class="headerlink" title="刀具工作角度参考系"></a>刀具工作角度参考系</h2><p>在之前的参考系中做出了两点假设，而如果考虑进给运动和刀具实际安装情况，基面的位置选取应该垂直于合成切削运动速度方向，这时候建立的参考系称为刀具工作角度参考系。</p>
+<ul>
+<li>工作基面$P_{re}$：垂直于合成切削速度方向的平面。</li>
+<li>工作切削平面$P_{se}$：与切削刃相切并垂直与工作基面的平面。</li>
+<li>工作主剖面$P_{oe}$：同时垂直与工作基面和工作切削平面的平面。</li>
+<li>切削刃法剖面$P_{ne}$：与法剖面的定义相同。</li>
+<li>工作进给剖面$P_{fe}$：由主运动方向和进给运动方向组成的平面，工作进给剖面和工作基面相垂直。</li>
+<li>工作切深剖面$P_{pe}$：同时垂直于工作基面和工作进给剖面的平面。</li>
+</ul>
+<h2 id="刀具标注角度"><a href="#刀具标注角度" class="headerlink" title="刀具标注角度"></a>刀具标注角度</h2><p>刀具在各种参考系中测得的角度，称为标注角度。标注角度应该标注在刀具的设计图中，用于刀具制造、刃磨和测量。</p>
+<h3 id="主剖面参考系下的标注角度"><a href="#主剖面参考系下的标注角度" class="headerlink" title="主剖面参考系下的标注角度"></a>主剖面参考系下的标注角度</h3><p>在主剖面$P_o$内标注的角度</p>
+<ul>
+<li>前角$\gamma_o$：前刀面和基面之间的夹角。</li>
+<li>后角$\alpha _o$：主后刀面和切削平面的夹角。</li>
+</ul>
+<p>在基面$P_r$内标注的角度</p>
+<ul>
+<li>主偏角$\kappa_r$：主切削刃和基面上的投影与进给运动方向的夹角。</li>
+</ul>
+<p>在切削平面$P_s$内标注的角度</p>
+<ul>
+<li>刃倾角$\lambda_o$：主切削刃与基面之间的夹角</li>
+</ul>
+<blockquote>
+<p>其他角度略</p>
+</blockquote>
+<h2 id="刀具材料"><a href="#刀具材料" class="headerlink" title="刀具材料"></a>刀具材料</h2><p>刀具的切削性能优劣取决于刀具切削部分的材料、几何形状以及刀具结构。刀具切削部分材料的选择对刀具寿命、加工质量、生产效率影响较大，因此对于刀具材料的选择应该合理。</p>
+<p>作为刀具的切削部分材料，其必须具备以下基本性能：</p>
+<ul>
+<li>高的硬度</li>
+<li>高的耐磨性</li>
+<li>高的耐热性</li>
+<li>足够的强度和韧性</li>
+<li>良好的热物理性能和耐热热冲击性能</li>
+<li>良好的减磨性</li>
+<li>良好的工艺性和经济性</li>
+</ul>
+<p>对于常见的刀具材料，有以下的性能指标：</p>
+<table>
+<thead>
+<tr>
+<th align="center">刀具材料</th>
+<th align="center">耐热性/（°C）</th>
+<th align="center">硬度（HRA）</th>
+<th align="center">切削速度大致比值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">碳素工具钢</td>
+<td align="center">200～300</td>
+<td align="center">HRC62</td>
+<td align="center">0.32～0.40</td>
+</tr>
+<tr>
+<td align="center">高速钢</td>
+<td align="center">600～700</td>
+<td align="center">84～85</td>
+<td align="center">1.00～1.20</td>
+</tr>
+<tr>
+<td align="center">硬质合金</td>
+<td align="center">K系列：800～900 P系列：900～1000</td>
+<td align="center">91～93（K系列) 90～92（P系列)</td>
+<td align="center">3.2～8.0</td>
+</tr>
+<tr>
+<td align="center">氧化铝陶瓷</td>
+<td align="center">1200</td>
+<td align="center">92.5～93.5</td>
+<td align="center">8.0～12.0</td>
+</tr>
+<tr>
+<td align="center">TiC基硬质合金</td>
+<td align="center">1000～1100</td>
+<td align="center">91～93</td>
+<td align="center">-</td>
+</tr>
+<tr>
+<td align="center">聚晶立方氮化硼</td>
+<td align="center">1000～1300</td>
+<td align="center">HV4500</td>
+<td align="center">-</td>
+</tr>
+<tr>
+<td align="center">人造金刚石</td>
+<td align="center">700～800</td>
+<td align="center">&gt;HV9000</td>
+<td align="center">&gt;25（有色金属）</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>需要注意的是材料的硬度越高，其韧性越差，相应的刀具耐冲击性就差，加工时要求的背吃刀量就越小。</p>
+</blockquote>
+<p>有时候还需要考虑刀具材料和工件材料的化学性能也要相匹配。</p>
+]]></content>
+      <categories>
+        <category>机械</category>
+      </categories>
+      <tags>
+        <tag>3D</tag>
+        <tag>机械</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>机械工程测试技术基础</title>
+    <url>/2016/11/19/%E6%9C%BA%E6%A2%B0%E5%B7%A5%E7%A8%8B%E6%B5%8B%E8%AF%95%E6%8A%80%E6%9C%AF%E5%9F%BA%E7%A1%80/</url>
+    <content><![CDATA[<p>简直药丸Orz</p>
+<span id="more"></span>
+
+<h2 id="信号及其描述"><a href="#信号及其描述" class="headerlink" title="信号及其描述"></a>信号及其描述</h2><h3 id="信号的分类"><a href="#信号的分类" class="headerlink" title="信号的分类"></a>信号的分类</h3><ul>
+<li>确定信号：可以表示为一个确定的时间关系式的信号</li>
+<li>周期信号：按一定时间间隔周而复始出现，无始无终，不断重复的信号<ul>
+<li>简单周期信号</li>
+<li>复杂周期信号</li>
+</ul>
+</li>
+<li>非周期信号：确定信号中，不具备周期重复性的信号<ul>
+<li>准周期信号：由两种以上的周期信号合成而来，因为组成分量无法找到公共周期，而失去周期性</li>
+<li>瞬变非周期信号：是一些或在一定时间内存在，或随时间增长而衰减至零的信号</li>
+</ul>
+</li>
+<li>非确定信号：不能准确预测未来瞬时值，也不能用确定的数学关系描述的信号</li>
+<li>非平稳随机过程</li>
+<li>平稳随机过程<ul>
+<li>个态历经随机过程</li>
+<li>非个态历经随机过程</li>
+</ul>
+</li>
+</ul>
+<p>连续信号：信号数学表达式中的独立变量是连续的。</p>
+<p>离散信号：数学表达式中的独立变量是离散的。</p>
+<p>能量信号：在无限时间内，信号的总能量是有限的信号。</p>
+<p>功率信号：在无限时间内，信号的总能量为无限的信号。</p>
+<p>实信号：物理可以实现的信号都是时间的实函数。</p>
+<p>复信号：为了理论分析，使用的分析模型。</p>
+<h3 id="信号的描述"><a href="#信号的描述" class="headerlink" title="信号的描述"></a>信号的描述</h3><p>时域描述：又称为波形描述，是指测量中所观测到或记录到的信号以时间为独立变量，称为信号的时域描述。</p>
+<p>频域描述：又称频谱描述，是指测量中所观测到或记录到的信号转换成以频率为独立变量来表述信号的频域描述。它可以表述信号的频率结构、各频率成分的幅值、相位关系。它和时域描述可以互相转换，包含相同信息量。</p>
+<p>傅立叶级数：任何周期信号在有限区间上，当其满足狄里赫来条件时，都可展开成一系列正交函数的线性组合的无穷级数。傅立叶级数有多种形式，三角展开和复数展开是常见的形式。</p>
+<p>傅立叶级数的三角展开式：</p>
+<p>$$x(t)=a_0+\sum_{n=1}^{\infty}A_nsin(n\omega _0t+\varphi _n),(n=1,2,3,…..)$$</p>
+<p>展开过程：</p>
+<p>$$x(t)=a_0+\sum_{n=1}^{\infty}[a_ncos(n\omega _0t)+b _ nsin(n\omega _0t)],(n=1,2,3,…..)$$</p>
+<p>其中参数：</p>
+<p>$$\begin{align}<br>a _ 0 =&amp; \frac{1}{T _ 0}\int_{-T _0/2}^{T _0/2}x(t)dt \\<br>a _ n =&amp; \frac{1}{T _ 0}\int_{-T _0/2}^{T _0/2}x(t)cos(n\omega _0)tdt \\<br>b _ n =&amp; \frac{1}{T _ 0}\int_{-T _0/2}^{T _0/2}x(t)sin(n\omega _0)tdt \\<br>\omega _0= &amp;\frac{2\pi }{T _0}\\<br>A _0 =&amp; \sqrt{a _n^{2}+b _n^{2}}\\<br>\varphi _0=&amp;arctan(\frac{a _n}{a _n})<br>\end{align}$$</p>
+<p>由此可见周期信号是由一个或多个乃至无穷个不同频率的谐波叠加而来。第一项$a _0$是常数项，周期信号的直流分量。$A _nsin(n\omega _0t+\varphi _n)$称为谐波，$A _n$是n次谐波的振幅，$\varphi _n$是其初相角。$a _n$是n次谐波的余弦分量的幅值，$b _n$是n次谐波的正弦分量的幅值。</p>
+<p>傅立叶级数的复数展开式：</p>
+<p>根据欧拉公式推出</p>
+<p>$$\begin{align}<br>x(t)=&amp;a_0+\sum_{n=1}^{\infty}[a_ncos(n\omega _0t)+b _ nsin(n\omega _0t)] \\<br>x(t)=&amp;a_0+\sum_{n=1}^{\infty}[a_n\frac{1}{2}(e^{-jn\omega _0t}+e^{jn\omega _0t})+b _ n\frac{j}{2}(e^{-jn\omega _0t}-e^{jn\omega _0t})] \\<br>x(t)=&amp;a_0+\sum_{n=1}^{\infty}[\frac{1}{2}(a _n+jb _n)e^{-jn\omega _0t}+\frac{1}{2}(a _n-jb _n)e^{jn\omega _0t}]\\<br>c _ n = &amp; \frac{1}{2}(a _n-jb _n)\\<br>c _ {-n}= &amp;\frac{1}{2}(a _n+jb _n)\\<br>c _0=&amp;a _0 \\<br>x(t)=&amp;a_0+\sum_{n=1}^{\infty}[c _ {-n}e^{-jn\omega _0t}+c _ ne^{jn\omega _0t}]\\<br>x(t)=&amp;a_0+\sum_{n=-\infty }^{\infty}c _ ne^{jn\omega _0t}\\<br>\end{align}$$</p>
+<p>周期信号的强度使用峰值、绝对均、有效值和平均功率来表述。</p>
+<p>峰值$x_p$是信号可能出现的最大瞬时值，峰峰值$x_{p-p}$是指最大瞬时值和最小瞬时值的差。</p>
+<p>均值的计算类似功率，绝对均值指全波整波之后的均值。</p>
+<p>有效值是均值的信号的均方根，平均功率是有效值的平方又叫均方值。</p>
+<h2 id="测试装置"><a href="#测试装置" class="headerlink" title="测试装置"></a>测试装置</h2><p>测量装置（测量系统）：为达到某些特定目的，由若干个互有关联的单元组成的有机整体。 </p>
+<h3 id="线性系统"><a href="#线性系统" class="headerlink" title="线性系统"></a>线性系统</h3><p>主要性质：</p>
+<ul>
+<li>符合叠加原理</li>
+<li>比例特性：$ax(t)\rightarrow ay(t)$</li>
+<li>系统对输入导数的响应等于对原输入响应的导数</li>
+<li>如系统的初始状态均为零，则系统对输入积分的响应等于对原输入响应的积分。 </li>
+<li>频率保持特性</li>
+</ul>
+<p><strong>静态特性</strong>是在静态测量情况下描述实际测量装置与理想时不变线性系统的接近程度。通过某种意义的静态标定过程确定的。</p>
+<p>测量装置的<strong>动态特性</strong>是当被测量即输入量随时间快速变化时，测量输入与响应输出之间动态关系的数学描述。</p>
+<p>当传感器安装到被测物体上或进入被测介质，要从物体与介质中吸收能量或产生干扰，使被测物理量偏离原有的量值，从而不可能实现理想的测量，这种现象称为<strong>负载效应</strong>。</p>
+<p>测量装置在测量过程中要受到各种干扰，包括电源干扰、环境干扰(电磁场、声、光、温度、振动等干扰)和信道干扰。这些干扰的影响决定于测量装置的<strong>抗干扰性能</strong>，并且与所采取的抗干扰措施有关。</p>
+<p>理想的定常线性系统，其输出将是输入的单调、线性比例函数，其中斜率S应是常数。然而，实际的测量装置并非理想的定常线性系统，S不是常数。</p>
+<h3 id="静态特性"><a href="#静态特性" class="headerlink" title="静态特性"></a>静态特性</h3><p>线性误差：测量装置校准曲线与规定曲线之间的最大偏差。</p>
+<p>灵敏度：单位输入变化所引起的输出变化。</p>
+<p>回程误差（迟滞）：测量装置同输入变化方向有关的输出特性。</p>
+<p>分辨力：引起测量装置产生一个可察觉变化的最小输入量。通常表示为它与可能输入范围之比的百分数。</p>
+<p>零点漂移：是测量装置的输出零点偏离原始零点的距离，它可以是随时间缓慢变化的量。</p>
+<p>灵敏度漂移：是由于材料性质的变化所引起的输入与输出关系(斜率)的变化。</p>
+<p>稳定度：是指测量装置在规定条件下保持其测量特性恒定不变的能力。</p>
+<h3 id="动态特性"><a href="#动态特性" class="headerlink" title="动态特性"></a>动态特性</h3><p>传递函数H(s)：对于特定的输入确定的给出相应输出，与输入、系统的初始状态无关。</p>
+<p>频率响应函数H($\omega $)：在频率域中描述系统特性的一种数学方法。</p>
+<p>脉冲响应函数h(t)： ···</p>
+<p>脉冲响应函数和传递函数是拉普拉斯变换对；频率响应函数和脉冲响应函数是傅立叶变换对；频率响应函数和传递函数其实是S和$j\omega $替换。</p>
+<p>一阶系统：输入输出的关系使用一阶微分方程来表述，时间常数是其重要参数。</p>
+<h2 id="传感器"><a href="#传感器" class="headerlink" title="传感器"></a>传感器</h2><p>传感器：直接作用于被测量，能按一定规律将其转换成同种或别种量值(电信号)输出的器件。</p>
+<h3 id="传感器分类"><a href="#传感器分类" class="headerlink" title="传感器分类"></a>传感器分类</h3><p>按工作原理分：电气式传感器、机械式传感器、光电式传感器等</p>
+<p>按被测量分：位移传感器、速度传感器、加速度传感器、应力传感器、温度传感器等</p>
+<p>按信号变换特征分：结构型传感器、物性型传感器</p>
+<p>按能量关系分：能量转换型传感器、能量控制型传感器</p>
+<h3 id="电阻、电容与电感式传感器"><a href="#电阻、电容与电感式传感器" class="headerlink" title="电阻、电容与电感式传感器"></a>电阻、电容与电感式传感器</h3><p>电阻式传感器：将被测量转化为电阻值变化的传感器。主要有变阻器式电阻传感器、应变式电阻传感器。</p>
+<p>电桥：电桥电路是将电阻、电容、电感的参量的变化转变为电压或电流信号输出的一种常用电路。</p>
+<p>直流电桥的平衡条件：相对桥臂的阻值乘积相等。交流电桥还需要相对电桥阻抗虚部与实部乘积相等。</p>
+<p>电容式传感器：将被测物理量转换为电容量变化的装置，它实质上是一个具有可变参数的电容器。</p>
+<p>根据电容器变化的参数，可分为：极距变化型、面积变化型、介质变化型</p>
+<p>电感传感器：把被测物理量转换为电感量变化的传感器。</p>
+<p>分类：自感型电感传感器（可变磁阻式、涡流式）、互感型电感传感器（差动变压器式电感传感器）</p>
+<h3 id="磁电、压电与热电式传感器"><a href="#磁电、压电与热电式传感器" class="headerlink" title="磁电、压电与热电式传感器"></a>磁电、压电与热电式传感器</h3><p>磁电式传感器：把被测物理量转换为感应电动势的一种传感器，又称电磁感应式或电动力式传感器。按照结构方式不同，磁电式传感器可分：动圈式、磁阻式</p>
+]]></content>
+      <categories>
+        <category>机械</category>
+      </categories>
+      <tags>
+        <tag>机械</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>热工基础</title>
+    <url>/2016/11/01/%E7%83%AD%E5%B7%A5%E5%9F%BA%E7%A1%80/</url>
+    <content><![CDATA[<p><em>热工基础复习提纲</em></p>
+<span id="more"></span>
+
+<h2 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h2><h3 id="热力系统"><a href="#热力系统" class="headerlink" title="热力系统"></a>热力系统</h3><p>凡是能将热能转换为机械能的机器统称为<strong>热力发动机</strong>，简称<strong>热机</strong>。</p>
+<p>热能和机械能之间的转换是通过媒介物质在热机中的一系列状态变化过程来实现的，这种媒介物质称为<strong>工质</strong>。</p>
+<p>热容量很大，并且在吸收和放出有限量热量时自身温度和其他热力学参数没有明显变化的物体称为<strong>热源</strong>。</p>
+<p>选取的一定的工质和空间作为研究对象，称为<strong>热力系统</strong>，简称<strong>系统</strong>。</p>
+<ul>
+<li>闭口系统：与外界无物质交换的系统。</li>
+<li>开口系统：与外界有物质交换的系统。</li>
+<li>绝热系统：与外界无热量交换的系统。</li>
+<li>孤立系统：与外界既无物质交换也无热量交换的系统。</li>
+</ul>
+<h3 id="平衡态和状参"><a href="#平衡态和状参" class="headerlink" title="平衡态和状参"></a>平衡态和状参</h3><p>当系统不受外界影响的条件下，工质的状态参数不随时间而变化的状态称为平衡状态。</p>
+<p>基本状态参数：</p>
+<ul>
+<li>压力：标准单位Pa：$p=\frac{F}{A}$</li>
+<li>温度：单位是K（开）：$T=t+273.15$</li>
+<li>比体积、密度：二者互为倒数：$v=\frac{V}{m}\qquad \rho=\frac{m}{V}$</li>
+</ul>
+<p>根据状态公理指出，对于简单的可压缩系统，只需要两个独立的状态参数便可确定它的平衡状态，可以列出状态方程式：$F(p,v,T)=0$</p>
+<h3 id="可逆过程"><a href="#可逆过程" class="headerlink" title="可逆过程"></a>可逆过程</h3><p>如果系统完成了某一过程之后，再沿着原路逆行而回复到原来的状态，外界也随之恢复到原来的状态，而不留下任何变化，则这一过程称为<strong>可逆过程</strong>。否则就是<strong>不可逆过程</strong>。</p>
+<p><em>可逆过程的条件：准平衡过程＋无耗散效应。</em></p>
+<h3 id="功量和热量"><a href="#功量和热量" class="headerlink" title="功量和热量"></a>功量和热量</h3><p>膨胀功是工质在体积膨胀时所作的功。$\delta W=Fdx\qquad W=\int_{x_1}^{x_2}Fdx$</p>
+<p>单位质量工质所做的膨胀功称为比膨胀功：$\delta w=pdv\qquad W=\int_{1}^{2}pdv$</p>
+<p>系统与外界之间依靠温差传递的能量。符号：Q ；单位：J 或kJ。单位质量工质所传递的热量用 q 表示，单位为 J/kg 或 kJ/kg。系统吸热热量为正，放热为负。</p>
+<p>引入熵（S），单位是J/K，定义：$dS=(\frac{\delta Q}{T})_{re}$</p>
+<p>同时定义单位质量的熵为比熵（s）。由此得：$q=\int_{1}^{2}Tds$</p>
+<h2 id="热力学第一定律"><a href="#热力学第一定律" class="headerlink" title="热力学第一定律"></a>热力学第一定律</h2><h3 id="储存能"><a href="#储存能" class="headerlink" title="储存能"></a>储存能</h3><p>气体工质的比热力学能：单位是J/kg或kJ/kg：$u=f(T,v)$</p>
+<p>宏观动能和宏观位能：$E_k=\frac{1}{2}mc_f^2\qquad E_p=mgz$</p>
+<p>储备能：$E=U+E_k+E_p\qquad e=u+e_k+e_p$</p>
+<h3 id="热力学第一定律及其流动能量方程式"><a href="#热力学第一定律及其流动能量方程式" class="headerlink" title="热力学第一定律及其流动能量方程式"></a>热力学第一定律及其流动能量方程式</h3><p>热力过程中的能量守恒和转换定律。：在热能与其它形式能的互相转换过程中，能的总量始终不变。</p>
+<p>工质在流过热工设备时，必须受外力推动，这种推动工质流动而做的功称为<strong>流动功</strong>或许<strong>推进功</strong>。</p>
+<p>$$\delta W_f=pAdx=pdV=pvdm\qquad w_f=\frac{\delta W_f}{dm}=pv$$</p>
+<p>比焓：$h=u+pv$</p>
+<p>技术功：$W_t=\frac{1}{2}m\Delta c_{f}^{2}+mg\Delta z+W_s$</p>
+<h2 id="理想气体的性质和热力过程"><a href="#理想气体的性质和热力过程" class="headerlink" title="理想气体的性质和热力过程"></a>理想气体的性质和热力过程</h2><h3 id="理想气体状态方程式"><a href="#理想气体状态方程式" class="headerlink" title="理想气体状态方程式"></a>理想气体状态方程式</h3><p>根据<strong>波义耳-马略特定律、盖-吕萨克定律和查理定律</strong>得出理想气体状态方程式，以及克拉贝龙方程式：</p>
+<p>$$pv=R_gT\qquad pV=mR_gT$$</p>
+<p>$R_g$是气体常数，当$M$表示表示气体的摩尔质量时，$R=MR_g$是常数 8.314$J/(mol\cdot K)$</p>
+<h3 id="理想气体的热容、热力学能、焓和熵"><a href="#理想气体的热容、热力学能、焓和熵" class="headerlink" title="理想气体的热容、热力学能、焓和熵"></a>理想气体的热容、热力学能、焓和熵</h3><p>物体温度升高1K所需的热量称为该物体的热容量或热容，单位质量的热容量，称为比热容。$ C=\frac{\delta Q}{dT}\qquad c=\frac{\delta q}{dt}$</p>
+<p>因为热量是与过程性质有关的量，因此如果工质的初终态不同，那么工质的比热容也会不同，常用的有定容比热容$c_v$和定压比热容$c_p$。</p>
+<p>根据焓的定义和理想气体状态方程，容易推出：</p>
+<p>$$c_V=\frac{du}{dT}\qquad c_p=\frac{dh}{dT}\qquad c_p=c_v+R_g$$</p>
+<p>定义有比热容比$\gamma=c_p/c_v$，也称为定熵指数（绝热指数）$\kappa$</p>
+<p>在对于计算要求不需要特别精确时，可以使用定值摩尔热容</p>
+<table>
+<thead>
+<tr>
+<th align="center">定值摩尔热容</th>
+<th align="center">单原子气体</th>
+<th align="center">双原子气体</th>
+<th align="center">多原子气体</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">$C_{V,m}$</td>
+<td align="center">$\frac{3}{2}R$</td>
+<td align="center">$\frac{5}{2}R$</td>
+<td align="center">$\frac{7}{2}R$</td>
+</tr>
+<tr>
+<td align="center">$C_{p,m}$</td>
+<td align="center">$\frac{5}{2}R$</td>
+<td align="center">$\frac{7}{2}R$</td>
+<td align="center">$\frac{9}{2}R$</td>
+</tr>
+<tr>
+<td align="center">$\gamma$</td>
+<td align="center">1.67</td>
+<td align="center">1.40</td>
+<td align="center">1.29</td>
+</tr>
+</tbody></table>
+<p>热力学能和焓：</p>
+<p>$$\Delta u=\int_{1}^{2}c_VdT\qquad \Delta h=\int_{1}^{2}c_pdT$$</p>
+<p>理想气体的熵：</p>
+<p>$$\begin{align}<br>\Delta s &amp; =c_Vln\frac{T_2}{T_1}+R_gln\frac{v_2}{v_1} \\<br> &amp; =c_pln\frac{T_2}{T_1}-R_gln\frac{p_2}{p_1} \\<br> &amp; =c_Vln\frac{p_2}{p_1}+c_pln\frac{v_2}{v_1} \\<br>\end{align}$$</p>
+<h3 id="理想气体的热力过程"><a href="#理想气体的热力过程" class="headerlink" title="理想气体的热力过程"></a>理想气体的热力过程</h3><p>理想气体的基本热力过程有：定容过程、定压过程、定温过程和定熵过程。</p>
+<p>便于记忆直接讨论结合在一起的多变过程。</p>
+<p>对于许多过程，可以近似的使用$pv^n=;$常数来描述，式中的n称为多变指数。</p>
+<table>
+<thead>
+<tr>
+<th align="center">n</th>
+<th align="center">过程类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">0</td>
+<td align="center">定压过程</td>
+</tr>
+<tr>
+<td align="center">1</td>
+<td align="center">定温过程</td>
+</tr>
+<tr>
+<td align="center">$\kappa$</td>
+<td align="center">定熵指数</td>
+</tr>
+<tr>
+<td align="center">$\pm\infty$</td>
+<td align="center">定容过程</td>
+</tr>
+</tbody></table>
+<p>过程方程式：$pv^n=x$</p>
+<p>初终态参数关系：$\frac{p_2}{p_1}=\left( \frac{v_1}{v_2} \right)^n\qquad \frac{T_2}{T_1}=\left( \frac{v_1}{v_2} \right)^{n-1}\qquad \frac{T_2}{T_1}=\left( \frac{p_2}{p_1} \right)^{\frac{n-1}{n}}$</p>
+<p>膨胀功：$w=\frac{p_1v_1-p_2v_2}{n-1}=\frac{R_g}{n-1}(T_1-T_2)$</p>
+<p>交换的功量（不含动能变化）：$w_t=nw$</p>
+<p>交换的热量：$c_n(T_2-T_1)\qquad c_n=\frac{n-\kappa }{n-1}c_V$</p>
+<h2 id="热力学第二定律"><a href="#热力学第二定律" class="headerlink" title="热力学第二定律"></a>热力学第二定律</h2><p>开尔文－普朗克表述：不可能从单一热源取热，并使之完全转变为有用功而不产生其它影响。</p>
+<p>克劳修斯表述：不可能将热从低温物体传至高温物体而不引起其它变化。</p>
+<p>热二律的实质：自发过程都是具有方向性的。</p>
+<h3 id="热力循环"><a href="#热力循环" class="headerlink" title="热力循环"></a>热力循环</h3><p>循环根据效果不同可以分为正向循环和逆向循环。</p>
+<p>正向循环在示意图上表示为顺时针方向，吸热，对外做功。热力循环的效率为热效率，用净功和吸热的比值定义：$\eta_t=\frac{W_{net}}{Q_1}=\frac{Q_1-Q_2}{Q_1}=1-\frac{Q_2}{Q_1}$</p>
+<p>反向循环在示意图上表示为逆时针方向，分为制冷系数：$\varepsilon =\frac{Q_2}{W_{net}}$和制热系数：$\varepsilon ‘=\frac{Q_1}{W_{net}}$</p>
+<h3 id="卡诺循环"><a href="#卡诺循环" class="headerlink" title="卡诺循环"></a>卡诺循环</h3><p>卡诺循环由两个可逆定温过程和两个可逆绝热过程组成。先定温吸热，然后绝热膨胀，再定温放热，最后绝热压缩。易推出，卡诺循环的热效率：$\eta_C=1-\frac{T_2}{T_1}\qquad \varepsilon_C =\frac{T_2}{T_1-T_2}\qquad \varepsilon_C ‘=\frac{T_1}{T_1-T_2}$</p>
+<p>热力循环可实现的要求是循环的热效率（制冷或制热系数）必须小于其卡诺循环的热效率（制冷或制热系数）。</p>
+<p>由卡诺在热机效率的基础上得出了卡诺定理：</p>
+<ul>
+<li>定理一：在相同的高温热源和低温热源间工作的一切可逆热机具有相同的热效率，与工质的性质无关。 </li>
+<li>定理二：在相同高温热源和低温热源间工作的任何不可逆热机的热效率都小于可逆热机的热效率。 </li>
+</ul>
+<h3 id="熵"><a href="#熵" class="headerlink" title="熵"></a>熵</h3><p><em>coming soon</em></p>
+<h2 id="热量传递的基本方式"><a href="#热量传递的基本方式" class="headerlink" title="热量传递的基本方式"></a>热量传递的基本方式</h2><p>热量传递有三种基本方式：热传导、热对流和热辐射。</p>
+<h3 id="热传导"><a href="#热传导" class="headerlink" title="热传导"></a>热传导</h3><p>实验证明：平面一维稳态导热的热流量与平壁的表面面积$A$两侧表面的温差成正比，与平壁的厚度$\delta $成反比：$\phi =\lambda A\frac{t_{w1}-t_{w2}}{\delta}$</p>
+<p>由此还定义出导热电阻$R_{\lambda}=\frac{\delta}{A\lambda};$以及热流密度$q = \frac{\phi}{A}$</p>
+<h3 id="热对流"><a href="#热对流" class="headerlink" title="热对流"></a>热对流</h3><p>热对流是指由于流体的宏观运动使温度不同的流体相对位移而产生的热量传递现象。</p>
+<p>牛顿冷却公式：</p>
+<p>$$\phi =Ah(t_w-t_f)=Ah\Delta t=\frac{\Delta t}{R_h}$$</p>
+<h3 id="热辐射"><a href="#热辐射" class="headerlink" title="热辐射"></a>热辐射</h3><p><em>coming soon</em></p>
+<h2 id="导热"><a href="#导热" class="headerlink" title="导热"></a>导热</h2><h3 id="导热理论基础"><a href="#导热理论基础" class="headerlink" title="导热理论基础"></a>导热理论基础</h3><p>温度场：某一时刻空间所有各点的温度分布，即$t=f(x,y,z,\tau )$</p>
+<p>不随时间按变化的温度场是稳态温度场，反之则是非稳态温度场。</p>
+<p>等温线（面）：在同一时刻，温度场中温度相同的点所连成的线或面。</p>
+<p>温度梯度：等温面（线）法线方向的温度变化率矢量。</p>
+<p>$$grad;t=\frac{\delta t}{\delta x}\overrightarrow{n}$$</p>
+<h3 id="傅立叶定律"><a href="#傅立叶定律" class="headerlink" title="傅立叶定律"></a>傅立叶定律</h3><p>傅立叶定律：$\overrightarrow{q}=-\lambda grad;t=-\lambda \frac{\delta t}{\delta n}\overrightarrow{n}$</p>
+<p>傅立叶定律表明：导热热流密度的大小与温度梯度的绝对值成正比，其方向与温度梯度相反。</p>
+<p>热导率是物质的重要热物性参数，根据傅立叶定律，有：$\lambda = \frac{q}{\left | grad; t \right |}$</p>
+<h2 id="对流换热"><a href="#对流换热" class="headerlink" title="对流换热"></a>对流换热</h2><blockquote>
+<p>奴赛尔数$Nu$、雷诺数$Re$、普朗特数$Pr$你好。<br>奴赛尔数$Nu$、雷诺数$Re$、普朗特数$Pr$再见！</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>机械</category>
+      </categories>
+      <tags>
+        <tag>机械</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>简易局域网共享服务器2.0</title>
+    <url>/2017/03/01/%E7%AE%80%E6%98%93%E5%B1%80%E5%9F%9F%E7%BD%91%E5%85%B1%E4%BA%AB%E6%9C%8D%E5%8A%A1%E5%99%A82-0/</url>
+    <content><![CDATA[<p>之前做了一个<a href="/2016/11/16/%E7%AE%80%E6%98%93%E5%B1%80%E5%9F%9F%E7%BD%91%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%E8%84%9A%E6%9C%AC%E5%AE%9E%E7%8E%B0/">小脚本</a>来共享文件，最初的作用是在寝室床上可以愉快的访问存在下面电脑里的文件。但是在使用中还是感觉不太便利，一是需要特定的文件结构，二是需要flask（事实证明杀鸡焉用牛刀）。所以有必要对之前的脚本做一个小小的升级。我想到了之前用来测试的<code>http.server</code>模块可以很好的适用于这种需求，所以查阅了<code>http.server</code>模块的文档后，做了如下脚本。</p>
+<span id="more"></span>
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> socket</span><br><span class="line"><span class="keyword">import</span> http.server</span><br><span class="line"><span class="keyword">import</span> socketserver</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getip</span>(<span class="params">head</span>):</span></span><br><span class="line">    IPs = socket.gethostbyname_ex(socket.gethostname())[-<span class="number">1</span>]</span><br><span class="line">    localIP = <span class="string">&#x27;&#x27;</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> IPs:</span><br><span class="line">        <span class="keyword">if</span> i[<span class="number">0</span>:<span class="number">3</span>] == head:</span><br><span class="line">            localIP = i</span><br><span class="line">    <span class="keyword">return</span> localIP</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    PORT = <span class="number">666</span></span><br><span class="line">    <span class="keyword">if</span> sys.argv[<span class="number">1</span>:]:</span><br><span class="line">        head = sys.argv[<span class="number">1</span>]</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        head = <span class="string">&#x27;172&#x27;</span></span><br><span class="line">    PORT = <span class="number">666</span></span><br><span class="line">    Handler = http.server.SimpleHTTPRequestHandler</span><br><span class="line">    IP = getip(head)</span><br><span class="line">    <span class="keyword">if</span> IP:</span><br><span class="line">        httpd = socketserver.TCPServer((getip(head), PORT), Handler)</span><br><span class="line">        print(<span class="string">&quot;serving at &quot;</span>+getip(head)+<span class="string">&quot;:666&quot;</span>)</span><br><span class="line">        httpd.serve_forever()</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        print(<span class="string">&#x27;Invalid domain&#x27;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>这一次的脚本对文件的结构完全没有要求。</p>
+<p><code>getip()</code>沿用了之前的函数，这一次可以指定ip的关键字。整个脚本等效于：</p>
+<pre><code>python -m http.server 8000 --bind &lt;your ip&gt;
+</code></pre>
+]]></content>
+      <categories>
+        <category>code</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>简易局域网文件传输脚本实现</title>
+    <url>/2016/11/16/%E7%AE%80%E6%98%93%E5%B1%80%E5%9F%9F%E7%BD%91%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%E8%84%9A%E6%9C%AC%E5%AE%9E%E7%8E%B0/</url>
+    <content><![CDATA[<p>就是一个很简单的基于flask服务器脚本。</p>
+<span id="more"></span>
+
+<p>使用脚本时的文件结构：</p>
+<ul>
+<li>脚本文件</li>
+<li>分类文件夹1</li>
+<li>文件1</li>
+<li>文件2</li>
+<li>······</li>
+<li>分类文件夹2</li>
+<li>文件1</li>
+<li>文件2</li>
+<li>······</li>
+<li>······</li>
+</ul>
+<p><em>脚本的使用环境是windous，因为校内网段是172，所以使用172检索，普通路由器可以使用192来检索。</em></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> socket</span><br><span class="line"></span><br><span class="line">app = Flask(__name__,static_url_path=<span class="string">&#x27;&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/&#x27;</span></span>)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span>():</span></span><br><span class="line">    date = []</span><br><span class="line">    date = gettarget()</span><br><span class="line">    <span class="keyword">return</span> <span class="string">u&#x27;&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&quot;UTF-8&quot;/&gt;&lt;title&gt; LinksMoviesServer&lt;/title&gt;&lt;style&gt;a&#123;font-size: 200%;display: block;margin-left: 10vw;&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot;background:#666;width:100%;padding-top:10vh&quot;&gt;&#x27;</span>+date+<span class="string">&#x27;&lt;/body&gt;&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/&lt;dirname&gt;&#x27;</span></span>)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">moviesdir</span>(<span class="params">dirname</span>):</span></span><br><span class="line">    date = []</span><br><span class="line">    date = gettarget(pwd=dirname)</span><br><span class="line">    <span class="keyword">return</span> <span class="string">u&#x27;&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&quot;UTF-8&quot;/&gt;&lt;title&gt;LinksMoviesServer&lt;/title&gt;&lt;style&gt;a&#123;font-size: 200%;display: block;margin-left: 10vw;&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot;background:#666;width:100%;padding-top:10vh&quot;&gt;&#x27;</span>+date+<span class="string">&#x27;&lt;/body&gt;&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/&lt;dirname&gt;/&lt;moviesname&gt;&#x27;</span></span>)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">movies</span>(<span class="params">dirname,moviesname</span>):</span></span><br><span class="line">    <span class="keyword">return</span> send_from_directory(dirname,moviesname)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gettarget</span>(<span class="params">pwd=<span class="string">&#x27;&#x27;</span>,moviename=<span class="string">&#x27;&#x27;</span></span>):</span></span><br><span class="line">    ospwd = os.getcwd()</span><br><span class="line">    ospwd = ospwd + <span class="string">&#x27;\\&#x27;</span> + pwd</span><br><span class="line">    dirlist = os.listdir(ospwd) </span><br><span class="line">    target = <span class="string">&#x27;&#x27;</span></span><br><span class="line">    <span class="keyword">if</span> pwd == <span class="string">&#x27;&#x27;</span>:</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> dirlist:</span><br><span class="line">            target = target + <span class="string">&#x27;&lt;a href=&quot;/&#x27;</span>+ i +<span class="string">&#x27;&quot;&gt;&#x27;</span>+i+<span class="string">&#x27;&lt;/a&gt;&#x27;</span></span><br><span class="line">    <span class="keyword">elif</span> moviename==<span class="string">&#x27;&#x27;</span> :</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> dirlist:</span><br><span class="line">            target = target + <span class="string">&#x27;&lt;a href=&quot;/&#x27;</span> + pwd + <span class="string">&#x27;/&#x27;</span> + i +<span class="string">&#x27;&quot;&gt;&#x27;</span>+i+<span class="string">&#x27;&lt;/a&gt;&#x27;</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        target = ospwd + <span class="string">&#x27;\\&#x27;</span> + moviename</span><br><span class="line">    <span class="keyword">return</span> target</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getip</span>():</span></span><br><span class="line">    IPs = socket.gethostbyname_ex(socket.gethostname())[-<span class="number">1</span>]</span><br><span class="line">    localIP = <span class="string">&#x27;&#x27;</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> IPs:</span><br><span class="line">        <span class="keyword">if</span> i[<span class="number">0</span>:<span class="number">3</span>]==<span class="string">&#x27;172&#x27;</span>:</span><br><span class="line">            localIP = i</span><br><span class="line">    <span class="keyword">return</span> localIP</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    app.run(host=getip(),threaded=<span class="literal">True</span>,port=<span class="number">666</span>)</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>code</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>魔方</title>
+    <url>/2016/10/12/%E9%AD%94%E6%96%B9/</url>
+    <content><![CDATA[<p>为了写出一个Python版的二阶段算法求解魔方。</p>
+<p>今天开始学cpp（蜜汁需求得到的蜜汁结果）。</p>
+<p>就酱紫。</p>
+<p>随时更新。</p>
+<span id="more"></span>
+
+<p>使用魔方中心块的相对位置来表示魔方块。例如一个已复原的魔方的表示为：UF  UR  UB  UL  DF  DR  DB  DL  FR  FL  BR  BL  UFR  URB UBL  ULF  DRF DFL  DLB  DBR</p>
+<p>解魔方算法的Cpp表达</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span> ;</span><br><span class="line"><span class="keyword">char</span></span><br><span class="line">         </span><br><span class="line">        *faces=<span class="string">&quot;RLFBUD&quot;</span>,</span><br><span class="line">         </span><br><span class="line">        *order=<span class="string">&quot;AECGBFDHIJKLMSNTROQP&quot;</span>,</span><br><span class="line">         </span><br><span class="line">        *bithash=<span class="string">&quot;TdXhQaRbEFIJUZfijeYV&quot;</span>,</span><br><span class="line">           </span><br><span class="line">        *perm=<span class="string">&quot;AIBJTMROCLDKSNQPEKFIMSPRGJHLNTOQAGCEMTNSBFDHORPQ&quot;</span>,</span><br><span class="line"> </span><br><span class="line">        pos[<span class="number">20</span>],ori[<span class="number">20</span>],val[<span class="number">20</span>],</span><br><span class="line"> </span><br><span class="line">        TEMP,</span><br><span class="line"> </span><br><span class="line">        *tables[<span class="number">8</span>];</span><br><span class="line"> </span><br><span class="line"><span class="keyword">int</span> movecube[<span class="number">20</span>],moveamount[<span class="number">20</span>],</span><br><span class="line"> </span><br><span class="line">        phase=<span class="number">0</span>,</span><br><span class="line"> </span><br><span class="line">        tablesize[]=&#123;<span class="number">1</span>,<span class="number">4096</span>,  <span class="number">6561</span>,<span class="number">4096</span>,  <span class="number">256</span>,<span class="number">1536</span>,  <span class="number">13824</span>,<span class="number">576</span>&#125;;</span><br><span class="line"> </span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SWAP(a,b) TEMP=a;a=b;b=TEMP;</span></span><br><span class="line"> </span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CHAROFFSET 65</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">static</span> <span class="built_in">string</span> answer = <span class="string">&quot;&quot;</span>;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">cycle</span><span class="params">(<span class="keyword">char</span>*p,<span class="keyword">char</span>*a)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">        SWAP(p[*a-CHAROFFSET],p[a[<span class="number">1</span>]-CHAROFFSET]);</span><br><span class="line">        SWAP(p[*a-CHAROFFSET],p[a[<span class="number">2</span>]-CHAROFFSET]);</span><br><span class="line">        SWAP(p[*a-CHAROFFSET],p[a[<span class="number">3</span>]-CHAROFFSET]);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">twist</span><span class="params">(<span class="keyword">int</span> i,<span class="keyword">int</span> a)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">        i-=CHAROFFSET;</span><br><span class="line">        ori[i]=(ori[i]+a+<span class="number">1</span>)%val[i];</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">reset</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">        <span class="keyword">for</span>( <span class="keyword">int</span> i=<span class="number">0</span>; i&lt;<span class="number">20</span>; pos[i]=i, ori[i++]=<span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">permtonum</span><span class="params">(<span class="keyword">char</span>* p)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> ( <span class="keyword">int</span> a=<span class="number">0</span>; a&lt;<span class="number">4</span>; a++)</span><br><span class="line">        &#123;</span><br><span class="line"> </span><br><span class="line">                n*=<span class="number">4</span>-a;</span><br><span class="line">                <span class="keyword">for</span>( <span class="keyword">int</span> b=a; ++b&lt;<span class="number">4</span>; )</span><br><span class="line">                        <span class="keyword">if</span> (p&lt;p[a]) n++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> n;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">numtoperm</span><span class="params">(<span class="keyword">char</span>* p,<span class="keyword">int</span> n,<span class="keyword">int</span> o)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">        p+=o;</span><br><span class="line">        p[<span class="number">3</span>]=o;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> a=<span class="number">3</span>; a--;)</span><br><span class="line">        &#123;</span><br><span class="line">                p[a] = n%(<span class="number">4</span>-a) +o;</span><br><span class="line">                n/=<span class="number">4</span>-a;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> b=a; ++b&lt;<span class="number">4</span>; )</span><br><span class="line">                        <span class="keyword">if</span> ( p &gt;= p[a]) p++;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getposition</span><span class="params">(<span class="keyword">int</span> t)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> i=<span class="number">-1</span>,n=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">switch</span>(t)</span><br><span class="line">        &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">                <span class="keyword">for</span>(;++i&lt;<span class="number">12</span>;) n+= ori[i]&lt;&lt;i;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">                <span class="keyword">for</span>(i=<span class="number">20</span>;--i&gt;<span class="number">11</span>;) n=n*<span class="number">3</span>+ori[i];</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">                <span class="keyword">for</span>(;++i&lt;<span class="number">12</span>;) n+= (pos[i]&amp;<span class="number">8</span>)?(<span class="number">1</span>&lt;&lt;i):<span class="number">0</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">4</span>:</span><br><span class="line">                <span class="keyword">for</span>(;++i&lt;<span class="number">8</span>;) n+= (pos[i]&amp;<span class="number">4</span>)?(<span class="number">1</span>&lt;&lt;i):<span class="number">0</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">5</span>:</span><br><span class="line">                <span class="keyword">int</span> corn[<span class="number">8</span>],j,k,l,corn2[<span class="number">4</span>];</span><br><span class="line">                k=j=<span class="number">0</span>;</span><br><span class="line">                <span class="keyword">for</span>(;++i&lt;<span class="number">8</span>;)</span><br><span class="line">                        <span class="keyword">if</span>((l=pos[i+<span class="number">12</span>]<span class="number">-12</span>)&amp;<span class="number">4</span>)</span><br><span class="line">                        &#123;</span><br><span class="line">                                corn[l]=k++;</span><br><span class="line">                                n+=<span class="number">1</span>&lt;&lt;i;</span><br><span class="line">                        &#125;<span class="keyword">else</span> corn[j++]=l;</span><br><span class="line">                <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;<span class="number">4</span>;i++) corn2[i]=corn[<span class="number">4</span>+corn[i]];</span><br><span class="line">                <span class="keyword">for</span>(;--i;) corn2[i]^=corn2[<span class="number">0</span>];</span><br><span class="line">                n=n*<span class="number">6</span>+corn2[<span class="number">1</span>]*<span class="number">2</span><span class="number">-2</span>;</span><br><span class="line">                <span class="keyword">if</span>(corn2[<span class="number">3</span>]&lt;corn2[<span class="number">2</span>])n++;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">6</span>:</span><br><span class="line">                n=permtonum(pos)*<span class="number">576</span>+permtonum(pos+<span class="number">4</span>)*<span class="number">24</span>+permtonum(pos+<span class="number">12</span>);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">7</span>:</span><br><span class="line">                n=permtonum(pos+<span class="number">8</span>)*<span class="number">24</span>+permtonum(pos+<span class="number">16</span>);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> n;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">setposition</span><span class="params">(<span class="keyword">int</span> t, <span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> i=<span class="number">0</span>,j=<span class="number">12</span>,k=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">char</span> *corn=<span class="string">&quot;QRSTQRTSQSRTQTRSQSTRQTSR&quot;</span>;</span><br><span class="line">        reset();</span><br><span class="line">        <span class="keyword">switch</span>(t)&#123;</span><br><span class="line">         </span><br><span class="line">        <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">                <span class="keyword">for</span>(;i&lt;<span class="number">12</span>;i++,n&gt;&gt;=<span class="number">1</span>) ori[i]=n&amp;<span class="number">1</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">                <span class="keyword">for</span>(i=<span class="number">12</span>;i&lt;<span class="number">20</span>;i++,n/=<span class="number">3</span>) ori[i]=n%<span class="number">3</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">                <span class="keyword">for</span>(;i&lt;<span class="number">12</span>;i++,n&gt;&gt;=<span class="number">1</span>) pos[i]= <span class="number">8</span>*n&amp;<span class="number">8</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">4</span>:</span><br><span class="line">                <span class="keyword">for</span>(;i&lt;<span class="number">8</span>;i++,n&gt;&gt;=<span class="number">1</span>) pos[i]= <span class="number">4</span>*n&amp;<span class="number">4</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">5</span>:</span><br><span class="line">                corn+=n%<span class="number">6</span>*<span class="number">4</span>;</span><br><span class="line">                n/=<span class="number">6</span>;</span><br><span class="line">                <span class="keyword">for</span>(;i&lt;<span class="number">8</span>;i++,n&gt;&gt;=<span class="number">1</span>)</span><br><span class="line">                        pos[i+<span class="number">12</span>]= n&amp;<span class="number">1</span> ? corn[k++]-CHAROFFSET : j++;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">6</span>:</span><br><span class="line">                numtoperm(pos,n%<span class="number">24</span>,<span class="number">12</span>);n/=<span class="number">24</span>;</span><br><span class="line">                numtoperm(pos,n%<span class="number">24</span>,<span class="number">4</span>); n/=<span class="number">24</span>;</span><br><span class="line">                numtoperm(pos,n   ,<span class="number">0</span>);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">7</span>:</span><br><span class="line">                numtoperm(pos,n/<span class="number">24</span>,<span class="number">8</span>);</span><br><span class="line">                numtoperm(pos,n%<span class="number">24</span>,<span class="number">16</span>);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">domove</span><span class="params">(<span class="keyword">int</span> m)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">        <span class="keyword">char</span> *p=perm+<span class="number">8</span>*m, i=<span class="number">8</span>;</span><br><span class="line"> </span><br><span class="line">        cycle(pos,p);</span><br><span class="line">        cycle(ori,p);</span><br><span class="line">        cycle(pos,p+<span class="number">4</span>);</span><br><span class="line">        cycle(ori,p+<span class="number">4</span>);</span><br><span class="line">        <span class="keyword">if</span>(m&lt;<span class="number">4</span>)</span><br><span class="line">                <span class="keyword">for</span>(;--i&gt;<span class="number">3</span>;) twist(p[i],i&amp;<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">if</span>(m&lt;<span class="number">2</span>)</span><br><span class="line">                <span class="keyword">for</span>(i=<span class="number">4</span>;i--;) twist(p[i],<span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">filltable</span><span class="params">(<span class="keyword">int</span> ti)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n=<span class="number">1</span>,l=<span class="number">1</span>, tl=tablesize[ti];</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">char</span>* tb = tables[ti]=<span class="keyword">new</span> <span class="keyword">char</span>[tl];</span><br><span class="line"> </span><br><span class="line">        <span class="built_in">memset</span>( tb, <span class="number">0</span>, tl);</span><br><span class="line">        reset();</span><br><span class="line">        tb[getposition(ti)]=<span class="number">1</span>;</span><br><span class="line">         </span><br><span class="line">        <span class="keyword">while</span>(n)</span><br><span class="line">        &#123;</span><br><span class="line">                n=<span class="number">0</span>;</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;tl;i++)&#123;</span><br><span class="line">                        <span class="keyword">if</span>( tb[i]==l )</span><br><span class="line">                        &#123;</span><br><span class="line">                                setposition(ti,i);</span><br><span class="line">                                <span class="keyword">for</span>( <span class="keyword">int</span> f=<span class="number">0</span>; f&lt;<span class="number">6</span>; f++)</span><br><span class="line">                                &#123;</span><br><span class="line">                                        <span class="keyword">for</span>( <span class="keyword">int</span> q=<span class="number">1</span>;q&lt;<span class="number">4</span>;q++)</span><br><span class="line">                                        &#123;</span><br><span class="line">                                                domove(f);</span><br><span class="line">                                                <span class="keyword">int</span> r=getposition(ti);</span><br><span class="line">                                                <span class="keyword">if</span>( ( q==<span class="number">2</span> || f&gt;=(ti&amp;<span class="number">6</span>) ) &amp;&amp; !tb[r])</span><br><span class="line">                                                &#123;</span><br><span class="line">                                                        tb[r]=l+<span class="number">1</span>;</span><br><span class="line">                                                        n++;</span><br><span class="line">                                                &#125;</span><br><span class="line">                                        &#125;</span><br><span class="line">                                        domove(f);</span><br><span class="line">                                &#125;</span><br><span class="line">                        &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                l++;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">searchphase</span><span class="params">(<span class="keyword">int</span> movesleft, <span class="keyword">int</span> movesdone,<span class="keyword">int</span> lastmove)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>( tables[phase  ][getposition(phase  )]<span class="number">-1</span> &gt; movesleft ||</span><br><span class="line">            tables[phase+<span class="number">1</span>][getposition(phase+<span class="number">1</span>)]<span class="number">-1</span> &gt; movesleft ) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">if</span>(!movesleft) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">for</span>( <span class="keyword">int</span> i=<span class="number">6</span>;i--;)&#123;</span><br><span class="line">                <span class="keyword">if</span>( i-lastmove &amp;&amp; (i-lastmove+<span class="number">1</span> || i|<span class="number">1</span> ) )</span><br><span class="line">                &#123;</span><br><span class="line">                        movecube[movesdone]=i;</span><br><span class="line">                        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;++j&lt;<span class="number">4</span>;)&#123;</span><br><span class="line">                                domove(i);</span><br><span class="line">                                moveamount[movesdone]=j;</span><br><span class="line">                                <span class="keyword">if</span>( (j==<span class="number">2</span> || i&gt;=phase ) &amp;&amp;</span><br><span class="line">                                        searchphase(movesleft<span class="number">-1</span>,movesdone+<span class="number">1</span>,i) ) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">                        &#125;</span><br><span class="line">                        domove(i);</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">check</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;answer.length()<span class="number">-2</span>;i+=<span class="number">2</span>)</span><br><span class="line">        &#123;</span><br><span class="line">                <span class="keyword">if</span>(answer[i] == answer[i+<span class="number">2</span>])</span><br><span class="line">                &#123;</span><br><span class="line">                        answer[i+<span class="number">1</span>]=(answer[i+<span class="number">1</span>]+answer[i+<span class="number">3</span>])%<span class="number">4</span>+<span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">                        answer.erase(i+<span class="number">2</span>,<span class="number">2</span>);</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">solveCube</span><span class="params">(<span class="built_in">string</span> state[])</span><span class="comment">//调用入口</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> f,i=<span class="number">0</span>,j=<span class="number">0</span>,k=<span class="number">0</span>,pc,mor;</span><br><span class="line">        <span class="keyword">for</span>(; k&lt;<span class="number">20</span>; k++) val[k]=k&lt;<span class="number">12</span>?<span class="number">2</span>:<span class="number">3</span>;</span><br><span class="line">        <span class="keyword">for</span>(; j&lt;<span class="number">8</span>; j++) filltable(j);</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">for</span>(; i&lt;<span class="number">20</span>; i++)</span><br><span class="line">        &#123;</span><br><span class="line">                f=pc=k=mor=<span class="number">0</span>; </span><br><span class="line">                <span class="keyword">for</span>(;f&lt;val[i];f++)</span><br><span class="line">                &#123;</span><br><span class="line">                        j=<span class="built_in">strchr</span>(faces,state[i][f])-faces;</span><br><span class="line">                        <span class="keyword">if</span>(j&gt;k) &#123;k=j;mor=f;&#125;</span><br><span class="line">                        pc+= <span class="number">1</span>&lt;&lt;j;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">for</span>(f=<span class="number">0</span>; f&lt;<span class="number">20</span>; f++)</span><br><span class="line">                        <span class="keyword">if</span>( pc==bithash[f]<span class="number">-64</span> ) <span class="keyword">break</span>;</span><br><span class="line">                pos[order[i]-CHAROFFSET]=f;</span><br><span class="line">                ori[order[i]-CHAROFFSET]=mor%val[i];</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">for</span>( ; phase&lt;<span class="number">8</span>; phase+=<span class="number">2</span>)</span><br><span class="line">        &#123;</span><br><span class="line">                <span class="keyword">for</span>( j=<span class="number">0</span>; !searchphase(j,<span class="number">0</span>,<span class="number">9</span>); j++);</span><br><span class="line">                <span class="keyword">for</span>( i=<span class="number">0</span>; i&lt;j; i++)</span><br><span class="line">                &#123;</span><br><span class="line">                        answer += <span class="string">&quot;FBRLUD&quot;</span>[movecube[i]];</span><br><span class="line">                        answer += (moveamount[i] + <span class="string">&#x27;0&#x27;</span>);</span><br><span class="line">                &#125;</span><br><span class="line">                 </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="built_in">endl</span>&lt;&lt;<span class="string">&quot;answer:&quot;</span>&lt;&lt;answer&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        check();</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;checking......\nanswer:&quot;</span>&lt;&lt;answer&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;send command&quot;</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">         </span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>code</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+        <tag>魔方</tag>
+        <tag>Cpp</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>黑群晖相关折腾</title>
+    <url>/2020/05/17/%E9%BB%91%E7%BE%A4%E6%99%96%E7%9B%B8%E5%85%B3%E6%8A%98%E8%85%BE/</url>
+    <content><![CDATA[<p>已经跳槽QNAP啦，怀念群晖。</p>
+<span id="more"></span>]]></content>
+  </entry>
+  <entry>
+    <title>材料成型技术基础</title>
+    <url>/2016/10/30/%E6%9D%90%E6%96%99%E6%88%90%E5%9E%8B%E6%8A%80%E6%9C%AF%E5%9F%BA%E7%A1%80/</url>
+    <content><![CDATA[<p><em>材料成型复习提纲</em></p>
+<span id="more"></span>
+
+<h2 id="铸造"><a href="#铸造" class="headerlink" title="铸造"></a>铸造</h2><blockquote>
+<p>铸造指熔炼金属、制造铸型并将熔融金属浇入铸型凝固后，获得具有一定形状、尺寸和性能的金属零件或毛坯的成型技术。</p>
+</blockquote>
+<p>优点：铸造的工艺适应性强，铸件的结构形状和尺寸几乎不受限制；工业上常用的合金几乎都能铸造；铸造原材料来源广泛，价格低廉，设备投资少；铸造适于制造形状复杂、特别是内腔形状复杂的零件或毛坯，尤其是要求承压、抗振或耐磨的零件。</p>
+<p>缺点：铸件的质量取决于成形工艺、铸型材料、合金的熔炼与浇注等诸多因素，易出现浇不到、缩孔、气孔、裂纹等缺陷，且往往组织疏松，晶粒粗大。</p>
+<h3 id="金属液的充型能力"><a href="#金属液的充型能力" class="headerlink" title="金属液的充型能力"></a>金属液的充型能力</h3><p>金属液的充型能力指金属液充满铸型型腔，获得轮廓清晰、形状准确的铸件的能力。</p>
+<p>影响金属充型能力的因素有三个：金属的流动性、铸型条件、浇注条件。</p>
+<p>金属的流动性取决于金属的合金成分、质量热容、密度和热导率。</p>
+<blockquote>
+<p>金属根据合金成分可分为共晶和非共晶，以及三种凝固方式：逐层凝固、中间凝固和糊状凝固。</p>
+</blockquote>
+<p>铸型条件有：铸型的蓄热系数、铸型温度和铸型中的气体。</p>
+<p>浇注条件有：浇铸温度和充型压力。</p>
+<h3 id="金属的收缩特性"><a href="#金属的收缩特性" class="headerlink" title="金属的收缩特性"></a>金属的收缩特性</h3><p>金属收缩可以分为<strong>液态收缩</strong>、<strong>凝固收缩</strong>和<strong>固态收缩</strong>三个阶段。</p>
+<p>液态收缩是金属液在液态时由于温度降低而产生的体积收缩，液态收缩量与金属液的过热度成正比。</p>
+<p>凝固收缩是金属在凝固阶段的体积收缩。<strong>液态收缩和凝固收缩是铸件出现缩孔的根本原因</strong></p>
+<p>固态收缩是金属在凝固后由于温度降低而产生的体积收缩。固态收缩一般表现为线尺寸的缩小，股一般使用线收缩率来表示。<strong>固态收缩是产生变形、裂纹等缺陷的主要原因</strong></p>
+<p>缩孔容易出现在逐层凝固的共晶合金中，缩松容易出现在铸件的轴线附近以及热节部位。缩孔缩松容易造成铸件的力学性能下降，可以采用顺序凝固原则以及加压补缩避免缺陷的出现。</p>
+<p>铸造应力是铸件在凝固和冷却的过程中由受阻收缩、热作用和相变等因素引起的内应力。</p>
+<p>由铸型自身结构引起的铸造应力是收缩应力，采用提高沙型的退让性、合理设置浇注系统和及时开箱落沙等措施，可以有效减少收缩应力。</p>
+<p>热应力则是铸件在冷却过程中因为不同部位的温差造成不均匀收缩而引起的铸造应力。具体体现为先冷却的部位受到拉应力，后冷却的受到压应力。铸造应力可以采用合理设计的铸型结构、同时凝固原则、去应力退火和反变形法等措施减少。</p>
+<p>铸件裂纹可以分为热裂和冷裂：热裂断面严重氧化，无金属光泽外形弯曲不规则；冷裂表面有光泽，多为直线或圆锥曲线。减小铸造应力以及严格限制铸件中的硫、磷含量可以降低裂纹的出现几率。</p>
+<h3 id="常见铸造合金的铸造性能"><a href="#常见铸造合金的铸造性能" class="headerlink" title="常见铸造合金的铸造性能"></a>常见铸造合金的铸造性能</h3><table>
+<thead>
+<tr>
+<th>金属类别</th>
+<th>命名规则</th>
+<th>铸造性能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>灰铸铁</td>
+<td>HT(抗拉强度值MPa)</td>
+<td>铸造性能极佳，可采用同时凝固原则</td>
+</tr>
+<tr>
+<td>球墨铸铁</td>
+<td>QT(抗拉强度值MPa)-(伸长率)</td>
+<td>铸造性能较好，采用顺序凝固原则</td>
+</tr>
+<tr>
+<td>可锻铸铁（不可锻造）</td>
+<td>KTH(Z)(最低抗拉强度值MPa)-(伸长率)</td>
+<td>铸造性能一般，采用顺序凝固原则</td>
+</tr>
+<tr>
+<td>铸钢</td>
+<td>ZG(屈服强度MPa)-(抗拉强度MPa)</td>
+<td>铸造性能较差，采用顺序凝固原则</td>
+</tr>
+<tr>
+<td>铸造铝合金</td>
+<td>-</td>
+<td>铝硅合金为共晶，铸造性能好，其他铝合金铸造性能差，采用顺序凝固原则。大批量或重要零件宜采用特种铸造</td>
+</tr>
+<tr>
+<td>铸造铜合金</td>
+<td>-</td>
+<td>铸造性能较差，成糊状凝固，采用顺序凝固原则。在致密度要求不高时，可以采用同时凝固原则。</td>
+</tr>
+</tbody></table>
+<h3 id="特种铸造方法"><a href="#特种铸造方法" class="headerlink" title="特种铸造方法"></a>特种铸造方法</h3><table>
+<thead>
+<tr>
+<th>铸造方法</th>
+<th>主要特点</th>
+<th>适用范围</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>金属型铸造</td>
+<td>节约材料减少污染，工艺简单利于自动化，铸件精度高，表面粗糙度低，力学性能好。但铸件冷却快不宜铸造结构复杂的铸件</td>
+<td>成批大量生产铝、铜合金等非铁中小铸件，如：活塞、缸体、液压泵壳体、轴瓦和轴套</td>
+</tr>
+<tr>
+<td>压力铸造</td>
+<td>压力铸造生产率高，操作简便，可获得形状复杂的薄壁件，且铸件精度高、表面粗糙度地、组织致密力学性能好。但是设备投资达，铸型的寿命较短，同时因为空气排出困难，容易出现气泡。因此压铸件不能进行切削加工和热处理</td>
+<td>铝、锌、镁等非铁合金中小型铸件的大量生产，如：内燃机缸体、缸盖、仪表和电器零件</td>
+</tr>
+<tr>
+<td>低压铸造</td>
+<td>夹杂气孔较少，铸型的形状可以较为复杂，精度高，铸件的组织致密，力学性能</td>
+<td>铝、镁合金等非铁合金中小型铸件的成批大量生产，适用于复杂的薄壁件，如：内燃机活塞、缸盖和缸体</td>
+</tr>
+<tr>
+<td>离心铸造</td>
+<td>易于补缩且渣粒、砂子和气体等易向内表面浮动，铸件组织致密，内部不容易产生缩孔缩松等铸造缺陷，力学性能高。而且还可以用来生产双金属铸件</td>
+<td>各类铸造合金及各种尺寸的铸件成批大量铸造，尤其是回转体件，如：铸铁管、气缸套和滑动轴承</td>
+</tr>
+<tr>
+<td>熔模铸造</td>
+<td>铸件精度高，表面粗糙度低，形状可较复杂。但是工序繁复、生产周期长，原料昂贵，大尺寸的蜡模容易变形</td>
+<td>高熔点、难加工合金的小型铸件成批大量生产，如：汽轮机叶片、成型刀具和小型零件等</td>
+</tr>
+<tr>
+<td>实型铸造</td>
+<td>不用起模造型，工序少，生产效率高，几乎不受铸件结构、尺寸、重量和合金种类的限制，铸件的精度高，形状可以比较复杂。但是存在污染环境，铸钢件表面易增碳等问题</td>
+<td>形状复杂的铸件生产</td>
+</tr>
+<tr>
+<td>连续铸造</td>
+<td>工艺简便、生产效率高，铸件组织致密、力学性能好。但是此方法仅适用于等截面的长铸件的大批量生产</td>
+<td>铸钢、铸铁、铜合金和铝合金的等截面长铸体的成批大量生产，如：铸铁管和型材</td>
+</tr>
+</tbody></table>
+<h3 id="铸造工艺设计"><a href="#铸造工艺设计" class="headerlink" title="铸造工艺设计"></a>铸造工艺设计</h3><p>浇注位置的选择原则：</p>
+<ul>
+<li>铸件的重要加工面或主要工作面应处于底面或侧面，以避免出现气孔、砂眼、缩孔、缩松等铸造缺陷。</li>
+<li>铸件的大平面应尽可能朝下或采用倾斜浇注，以避免产生夹砂、夹渣、气孔等缺陷。</li>
+<li>铸件的薄壁部分应放在铸型的下面或侧面，以免产生浇不到、冷隔等铸造缺陷。</li>
+<li>对于收缩大的铸件，为利于设置冒口进行补缩，厚实部位应置于上方。</li>
+</ul>
+<p>分型面的选择原则：</p>
+<ul>
+<li>铸件全部或大部置于下箱难以做到时，铸件上的机械加工面及加工和测量基准面应尽量放在同一砂箱中。</li>
+<li>分型面尽量少而平，以减少砂箱数，简化造型工艺。</li>
+<li>应尽量减少型芯、活块的数量，以减少成本、提高工效。</li>
+<li>主要型芯应尽量放在下半铸型中，以利于下芯、合型和检查型腔尺寸。</li>
+</ul>
+<p>铸造工艺参数有：铸件尺寸公差、要求的机械加工余量、铸件线收缩率、起模斜度。</p>
+<p>合金的铸造性能对零件结构的要求：</p>
+<ul>
+<li>铸件壁厚（铸件壁厚应适当，铸件壁厚应均匀，内壁的厚度应小于外壁）</li>
+<li>铸件壁的连接（转角处应采取圆角过度，应避免壁的交叉和锐角连接）</li>
+<li>防止铸件变形</li>
+<li>避免较大的水平面</li>
+<li>减少轮形铸件的内应力</li>
+</ul>
+<p>铸造工艺对零件结构的要求：</p>
+<ul>
+<li>铸件外形（有利于减少和简化铸型的分型面，侧凹和凸台不应妨碍起模，垂直分型面的非加工面应该具有结构斜度）</li>
+<li>铸件的内腔（内腔形状应利于制芯或省去型芯，应利于型芯的固定、排气和清理）</li>
+<li>大件和形状复杂件可采用组合结构</li>
+</ul>
+<h2 id="塑性成形"><a href="#塑性成形" class="headerlink" title="塑性成形"></a>塑性成形</h2><p>单晶体的塑性成形的主要机理是单晶体滑移；多晶体的塑性成形包括晶内变形和晶间变形：晶内变形主要是以滑移方式进行，晶间变形则是晶间的相对滑动和转动。</p>
+<p>金属的加工硬化是金属在低于再结晶温度加工时，由于塑性应变而产生的硬度和强度增加现象。主要是晶粒沿变形方向被拉长，滑移面附近晶格产生畸变，并出现许多微小碎晶。加工硬化会使后续的切削加工难度加大，应此在大多数情况下应给予消除。</p>
+<p>回复是在冷成型后，加热至回复温度$$0.25T_{m.p.}K-0.3T_{m.p.}K$$回复使晶格畸变减轻或消失，但晶粒不变，适用于保持较高强度且降低脆性的场合。</p>
+<p>再结晶是塑性变形后金属被拉长了晶粒重新生核、结晶，变为等轴晶粒的现象，可以使加工硬化现象完全消除，再结晶温度在$$0.4T_{m.p.}K$$以上。</p>
+<p>冷成型是坯料在回复温度以下进行的塑性成形，热成型是坯料在再结晶温度以上进行的塑性成形，温成型是坯料在回复温度与再结晶温度之间进行的塑性成形。</p>
+<p>锻造比是锻造时变形的一种表示方法，通常为变形前后的截面比、长度比或高度比。</p>
+<p>例如，拔长时：</p>
+<p>$$y=A_o/A=L/L_o$$</p>
+<p>镦粗时：</p>
+<p>$$y=A/A_o=H_o/H$$</p>
+<p>塑性杂质随省金属变形沿主要伸长方向呈带状分布，这样热锻后的金属组织就具有一定的方向性，通常称为锻造流线。锻造流线分布：工作时最大正应力方向与流线方向一致，切应力方向与流线方向垂直，且流线沿零件轮廓分布而不被切断。</p>
+<h3 id="锻造"><a href="#锻造" class="headerlink" title="锻造"></a>锻造</h3><p><em>coming soon</em></p>
+<h2 id="焊接"><a href="#焊接" class="headerlink" title="焊接"></a>焊接</h2><blockquote>
+<p>焊接是通过加热、加压或者二者并用，并且用或者不用补充材料，使工件达到结合的一种方法。根据焊接的特点可以分成：熔焊、压焊和钎焊。</p>
+</blockquote>
+<p>焊接焊头的组织转变：</p>
+<ul>
+<li>焊缝金属区：由焊缝表面和熔合线所包围的区域，可能出现淬硬组织甚至焊接裂缝。</li>
+<li>熔合区：母材和焊缝的交接过渡区，可能出现淬硬组织，是焊接接头中最薄弱的部位，常是焊接裂缝的发源地。</li>
+<li>热影响区：</li>
+</ul>
+<ol>
+<li>过热区：热影响区力学性能最差的部位，对于易淬火钢，易转变为淬硬组织，力学性能更差。</li>
+<li>相变重结晶区：热影响区中具有正火组织，是焊接接头中性能最好的区域，但对于易淬火钢，亦易转变为淬硬组织。</li>
+<li>不完全重结晶区：晶粒和组织不均匀，力学性能差，对于易淬火钢，易转变为淬硬组织。</li>
+</ol>
+<h3 id="焊接应力与变形"><a href="#焊接应力与变形" class="headerlink" title="焊接应力与变形"></a>焊接应力与变形</h3><p>焊接的残余应力基本是双轴分布：厚度方向的残余应力很小；纵向残余应力在焊缝区是拉应力，其他部位是压应力；横向残余应力在焊缝两端是压应力，中部是拉应力。</p>
+<p>焊接残余变形有五种：收缩变形、角变形、弯曲变形、扭曲变形和失稳变形。</p>
+<p>焊接残余变形的矫正方法：机械矫正法和火焰矫正法。</p>
+<h3 id="熔焊"><a href="#熔焊" class="headerlink" title="熔焊"></a>熔焊</h3><table>
+<thead>
+<tr>
+<th>熔焊方法</th>
+<th>主要特点</th>
+<th>适用范围</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>埋弧焊</td>
+<td>焊缝质量好、表面光滑美观，节约焊接材料和电能</td>
+<td>大电流焊接较厚板料的长、直焊缝和较大直径的环形焊缝</td>
+</tr>
+<tr>
+<td>气体保护电弧焊</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>- 熔化极气体保护焊</td>
+<td>焊缝深大、焊接速度快、生产效率高，明弧可见，便于操作，工艺适应性强，可全位置焊接，焊接材料利用率高，能耗低。但设备成本和维修成本高，且焊接区的气体保护易受外来气体干扰</td>
+<td>易氧化的非铁合金和要求较高的各类合金钢的焊接</td>
+</tr>
+<tr>
+<td>- 钨极惰性气体保护焊</td>
+<td>电弧燃烧稳定，焊接过程明弧可见，便于操作，焊缝区金属含氢量低，适用于对氢致裂敏感的钢材。但钨极载流能力弱，焊接效率低，成本高</td>
+<td>不锈钢、耐热钢和各种非铁金属及其合金的焊接</td>
+</tr>
+<tr>
+<td>电渣焊</td>
+<td>熔覆速度高，加热冷却速度慢，不易产生缺陷，焊缝质量高。但是接头高温停留时间长，热影响区大，所以焊后必须进行正火处理</td>
+<td>焊接厚度30mm以上的厚板和大截面结构，碳钢、合金钢、铝等金属材料均可焊接</td>
+</tr>
+<tr>
+<td>堆焊</td>
+<td>堆焊可以提高零件的使用寿命，易于调节熔覆金属的成分和组织，熔覆速度快、效率高，且可使用已有的焊接设备。但是往往需要焊接异种金属，难度大、技术要求高，且容易产生焊接应力和变形</td>
+<td>广泛用于机械零件和工具、模具的制造和修复</td>
+</tr>
+</tbody></table>
+<h3 id="压焊"><a href="#压焊" class="headerlink" title="压焊"></a>压焊</h3><table>
+<thead>
+<tr>
+<th>压焊方法</th>
+<th>主要特点</th>
+<th>适用范围</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>电阻点焊</td>
+<td>焊接头质量高，内应力与变形小，不需要填充材料，生产率高，劳动条件好。但好似所需设备功率大，接头无损检查困难，而且非导电材料无法焊接</td>
+<td>薄板、网和空间结构等，焊件厚度一般为0.3-6mm，钢筋和棒料直径最高可达25mm</td>
+</tr>
+<tr>
+<td>电阻缝焊</td>
+<td>基本与点焊相同，但生产率更高</td>
+<td>焊接厚度0.2-2mm，焊接较规则的钢件和轻合金焊件，常用于焊接各类有密闭性要求的容器，如：油箱、罐体和散热器等</td>
+</tr>
+<tr>
+<td>电阻对焊</td>
+<td>设备和操作简便，接头外形匀称，但焊接处的形状需要尽量相同，待焊断面需要严格清理，且接头力学性能较差</td>
+<td>焊接断面紧凑、直径小于20mm的低碳钢棒料和管子，以及直径小于8mm的非铁金属棒料和管子</td>
+</tr>
+<tr>
+<td>闪光对焊</td>
+<td>较之电阻对焊接头夹渣少、质量高、力学性能好，待焊面不需要清理，可以焊接较大截面。但是设备操作复杂，端面需要尽量相同，且接头有毛刺，劳动条件差</td>
+<td>各种金属材料和各种断面的焊件，如：钻头、刀具、钢轨和大型管道等</td>
+</tr>
+<tr>
+<td>摩擦焊</td>
+<td>接头质量好，焊接精度高，劳动条件好，生产效率高且可以焊接异种材料。但非圆形截面、大型盘状或薄壁件，以及摩擦系数少或易碎的材料难于焊接，且设备投资较大</td>
+<td>圆形、管形截面工件的对接，如：刀具、阀门和钻杆</td>
+</tr>
+</tbody></table>
+<h3 id="钎焊"><a href="#钎焊" class="headerlink" title="钎焊"></a>钎焊</h3><p>钎料指钎焊时用于填充金属的材料，按熔点分为熔点低于450摄氏度的软钎料（锡铅基、铅基、镉基等合金）和高于450摄氏度的硬钎料（铝基、铜基、银基、镍基等合金）。</p>
+<p>钎焊焊剂是用于清除钎料和母材表面的氧化物，并在钎焊过程中保护焊件和液态钎料以免氧化，且改善液态钎料对焊件的润湿性。常见的焊剂有松香、氯化锌水溶液、磷酸水溶液等。</p>
+<p>钎焊常见的接头型式有：平面搭接接头、T形接头、角接接头和套管接头。</p>
+<p>钎焊的加热方式有烙铁加热、火焰加热、电阻加热、感应加热、浸渍加热和炉中加热等。</p>
+<p>钎焊加热温度较低、接头光滑平整，组织和力学性能变化小，焊接变形小，且适于焊接异种材料，可同时焊多焊件、多接头，生产效率高。但其接头强度和耐热性能较低，焊前清理和装配要求高|换热器、夹层结构、电真空器件和硬质合金刀具|</p>
+<h3 id="其他焊接方法"><a href="#其他焊接方法" class="headerlink" title="其他焊接方法"></a>其他焊接方法</h3><p>等离子弧焊、电子束焊、激光焊和扩散焊。</p>
+<h3 id="材料的焊接性"><a href="#材料的焊接性" class="headerlink" title="材料的焊接性"></a>材料的焊接性</h3><p>材料的焊接性是材料在限定的施工条件下焊接成按规定设定要求的构件，并满足预定服役条件的能力。</p>
+<p>材料焊接性的影响因素：</p>
+<ul>
+<li>材料的化学成分</li>
+<li>焊接方法</li>
+<li>焊接材料</li>
+<li>焊件结构类型</li>
+<li>服役要求</li>
+</ul>
+<p>用碳当量评价钢的焊接性：</p>
+<p>$$CE =[\omega(C)+ \frac{\omega(Mn)}{6}+\frac{\omega(Cr)+\omega(Mo)+\omega(V)}{5}+\frac{\omega(Ni)+\omega(Cu)}{15}]\times100% $$</p>
+<table>
+<thead>
+<tr>
+<th>材料类型</th>
+<th>焊接要求</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>低碳钢（CE小于百分之0.4）</td>
+<td>焊接性良好，当母材碳含量偏高或在低温下焊接刚性较大结构时，采用预热、后热及使用低氢型焊条或高碱度焊剂等措施</td>
+</tr>
+<tr>
+<td>中碳钢（CE一般在0.4% - 0.6%）</td>
+<td>焊接性较差，一般进行预热和后热，使用低氢型焊条或高碱度焊剂，使用小电流、低焊速和多层焊，而且焊后应立即热处理</td>
+</tr>
+<tr>
+<td>高碳钢（CE高于0.6%）</td>
+<td>焊接性更差，采用更高的预热温度和更严格的工艺措施，在实际使用中，高碳钢一般只用于工具、模具的修补和钢轨的对接</td>
+</tr>
+</tbody></table>
+<h3 id="焊接结设计和工艺设计"><a href="#焊接结设计和工艺设计" class="headerlink" title="焊接结设计和工艺设计"></a>焊接结设计和工艺设计</h3><p>结构材料的选择：</p>
+<ul>
+<li>在满足使用性能要求的前提下，尽量使用焊接性好的材料。</li>
+<li>尽量选用廉价材料，仅在有特殊要求的部位采用特种材料，以降低成本。</li>
+<li>尽量选用轧制型材，以减少备料工作量和焊缝数量，降低成本，且减少焊接应力、变形和焊接缺陷。</li>
+</ul>
+<p>焊缝布置：</p>
+<ul>
+<li>应有足够的操作空间。</li>
+<li>应避免焊缝密集或汇交。</li>
+<li>应使焊缝尽量避开工作应力较大和易产生应力集中的部位。</li>
+<li>应避免母材厚度方向工作时受拉。</li>
+<li>应尽量使焊缝避开机加工面。</li>
+</ul>
+<p>焊接方法的选择应考虑到：材料的焊接性、焊件的结构特征、生产批次以及经济性。</p>
+<p>焊接接头：</p>
+<table>
+<thead>
+<tr>
+<th>接头形式</th>
+<th>接头特点</th>
+<th>适用范围</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>对接接头</td>
+<td>承载载荷时应力分布较均匀，承载能力较强，且节约材料，但焊前备料和装配要求较高</td>
+<td>广泛应用</td>
+</tr>
+<tr>
+<td>搭接接头</td>
+<td>焊前备料和装配简易，但是承载载荷时应力分布不均匀且受剪应力作用，故承载能力不高，且耗材较大</td>
+<td>受力不大、板厚较小或现场安装的结构</td>
+</tr>
+<tr>
+<td>角接接头和T形接头</td>
+<td>可承受不同方向的力和力矩，但容易产生应力集中、承载能力不高</td>
+<td>桁架、底座和立柱等结构</td>
+</tr>
+</tbody></table>
+<p>对于焊接接头的选择需要同时考虑焊接方法和焊接结构特点和使用要求。对于电阻点焊必须使用搭接，对焊和摩擦焊必须使用对接，而钎焊一般使用搭接。载荷较大的接头一般使用对接，反之则可以使用其他类型的接头。</p>
+<h2 id="粉末冶金"><a href="#粉末冶金" class="headerlink" title="粉末冶金"></a>粉末冶金</h2><blockquote>
+<p>粉末冶金是制取金属粉末并通过成型和烧结等工艺将金属粉末或与非金属粉末的混合物制成成品的加工方法。</p>
+</blockquote>
+<p>常用的粉末冶金材料有：硬质合金（刀具、冷作模具、量具以及不受冲击和振动的高耐磨材料）、烧结减摩材料和烧结摩擦材料（制动带和离合器片）和烧结钢（电钻齿轮、油泵齿轮和发动机连杆）</p>
+<p>粉末的制取方法：机械法（球磨法、研磨法、雾化法）和物理化学法（还原法、电解法、热离解法）</p>
+<p>粉末的预处理包括：分级、混合和制粒。</p>
+<p>成形的几种方法有：模压、粉末轧制、挤压成形、等静压制、松装烧结成型、粉末浇注和爆炸成形。</p>
+<p>烧结：</p>
+<ul>
+<li>连续烧结在同一炉内分段经过不同区域的烧结工序，适合大批大量生产，效率高；间歇烧结通过调节炉温进行不同烧结工序，效率低下，适合单件、小批量生产。</li>
+<li>固相烧结温度低、烧结速度慢、制品强度低；液相烧结温度高、制品强度高且烧结速度快。</li>
+<li>烧结的成品质量取决于烧结温度和时间以及烧结气氛。</li>
+</ul>
+<p>后处理：复压、浸渍、热处理和表面处理</p>
+]]></content>
+      <categories>
+        <category>机械</category>
+      </categories>
+      <tags>
+        <tag>机械</tag>
+      </tags>
+  </entry>
+</search>
