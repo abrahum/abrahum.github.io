@@ -75,7 +75,7 @@
     <title>Hexo迁徙至5.0</title>
     <url>/2020/12/22/Hexo%E8%BF%81%E5%BE%99%E8%87%B35-0/</url>
     <content><![CDATA[<p>日前准备重新开始更新，结果安装的最新node14和hexo不兼容，虽然<code>hexo s</code>可以正常的渲染出预览画面，但是<code>hexo g</code>出来却是全部都是0kb的空文件。</p>
-<p>后续虽然安装切换回 node12 以后，问题解决了，干脆就再度迁移到hexo5.0与next主题的最新版。</p>
+<p>后续虽然安装切换回 node12 以后，问题解决了，干脆就再度迁移到 hexo5.0 与 next 主题的最新版。</p>
 <span id="more"></span>
 
 <p>本身的迁移非常简单，重新初始化一个博客文件夹就是</p>
@@ -189,7 +189,7 @@
   <entry>
     <title>Python常用库文档</title>
     <url>/2016/10/09/Python%E5%B8%B8%E7%94%A8%E5%BA%93%E6%96%87%E6%A1%A3/</url>
-    <content><![CDATA[<p>现在的搜索引擎非常不讲武德，记录一些常用的Python库文档地址，为不时之需。</p>
+    <content><![CDATA[<p>现在的搜索引擎非常不讲武德，记录一些常用的 Python 库文档地址，为不时之需。</p>
 <span id="more"></span>
 
 <h1 id="官方"><a href="#官方" class="headerlink" title="官方"></a>官方</h1><h2 id="Python"><a href="#Python" class="headerlink" title="Python"></a><a href="https://docs.python.org/zh-cn/3.10/index.html">Python</a></h2><p>没啥好说的。为了世界和平，这里还有一个比较落后的<del><a href="http://python.usyiyi.cn/">中文文档站</a></del>（貌似挂了）</p>
