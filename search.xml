@@ -74,7 +74,7 @@
   <entry>
     <title>Hexo迁徙至5.0</title>
     <url>/2020/12/22/Hexo%E8%BF%81%E5%BE%99%E8%87%B35-0/</url>
-    <content><![CDATA[<p>日前准备重新开始更新，结果安装的最新node14和hexo不兼容，虽然<code>hexo s</code>可以正常的渲染出预览画面，但是<code>hexo g</code>出来却是全部都是0kb的空文件。</p>
+    <content><![CDATA[<p>日前准备重新开始更新，结果安装的最新 node14 和 hexo 不兼容，虽然 <code>hexo s</code> 可以正常的渲染出预览画面，但是 <code>hexo g</code> 出来却是全部都是 0kb 的空文件。</p>
 <p>后续虽然安装切换回 node12 以后，问题解决了，干脆就再度迁移到 hexo5.0 与 next 主题的最新版。</p>
 <span id="more"></span>
 
