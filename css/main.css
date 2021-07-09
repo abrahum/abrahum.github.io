@@ -192,7 +192,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Ma Shan Zheng', "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-family: Courier New, 'Ma Shan Zheng', "PingFang SC", "Microsoft YaHei", sans-serif;
   font-weight: bold;
   line-height: 1.5;
   margin: 20px 0 15px;
@@ -1172,7 +1172,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #ff1;
+  background: #c3498c;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
