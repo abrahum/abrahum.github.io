@@ -1,4 +1,4 @@
-var myChart = echarts.init(document.getElementById('1wlike'));
+<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script>var myChart = echarts.init(document.getElementById('1wlike'));
 var option = {
     title: {
         text: "1w收藏以上的标签分布",

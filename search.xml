@@ -3,7 +3,7 @@
   <entry>
     <title>(c)ElemantTree模块快速使用</title>
     <url>/2016/10/07/(c)ElementTree/</url>
-    <content><![CDATA[<p><em>以下使用ET指代本模组</em></p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><p><em>以下使用ET指代本模组</em></p>
 <h2 id="xml的打开和基本操作"><a href="#xml的打开和基本操作" class="headerlink" title="xml的打开和基本操作"></a>xml的打开和基本操作</h2><p>在ET中使用<code>ElementTree</code>类代表整个xml树，<code>Element</code>表示树上的节点，其中<code>root</code>特指根节点。</p>
 <p><code>ET.parse(&#39;filename.xml&#39;)</code>从Path读取xml树。</p>
 <p><code>ET.fromstring(string)</code>从string读取xml树。</p>
@@ -57,7 +57,7 @@
   <entry>
     <title>3D测试</title>
     <url>/2017/02/24/3D%E6%B5%8B%E8%AF%95/</url>
-    <content><![CDATA[<p>Blend4Web的3D测试</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><p>Blend4Web的3D测试</p>
 <span id="more"></span>
 
 <iframe src="/3d/b4w.html?compressed_textures&alpha&no_social&autorotate&show_fps" width="100%" height="600px"></iframe>
@@ -74,7 +74,7 @@
   <entry>
     <title>Hexo迁徙至5.0</title>
     <url>/2020/12/22/Hexo%E8%BF%81%E5%BE%99%E8%87%B35-0/</url>
-    <content><![CDATA[<p>日前准备重新开始更新，结果安装的最新 node14 和 hexo 不兼容，虽然 <code>hexo s</code> 可以正常的渲染出预览画面，但是 <code>hexo g</code> 出来却是全部都是 0kb 的空文件。</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><p>日前准备重新开始更新，结果安装的最新 node14 和 hexo 不兼容，虽然 <code>hexo s</code> 可以正常的渲染出预览画面，但是 <code>hexo g</code> 出来却是全部都是 0kb 的空文件。</p>
 <p>后续虽然安装切换回 node12 以后，问题解决了，干脆就再度迁移到 hexo5.0 与 next 主题的最新版。</p>
 <span id="more"></span>
 
@@ -97,7 +97,7 @@
   <entry>
     <title>Pixiv数据分析</title>
     <url>/2017/03/02/Pixiv%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/</url>
-    <content><![CDATA[<p>寒假的时候利用家里不计费的网爬取了600w+P站的图片数据。一开始的目的是解决：由于P站本身的搜索页面1000页限制，而导致的无法通过搜索爬取较早图片信息，这一问题。所以在爬取的一开始，我的目标是获取高收藏的高质量作品。我采取的爬取策略是通过第一个画师的收藏夹开始，获取他收藏夹内的图片信息，接着将这些图片的画师id加入画师数据库。当当前画师的收藏夹爬取完毕后，就从画师数据库中随机抽取一个新的画师重复之前的步骤。这样的策略可以从点到面的快速、无休止地多线程爬取高质量的画作。</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><p>寒假的时候利用家里不计费的网爬取了600w+P站的图片数据。一开始的目的是解决：由于P站本身的搜索页面1000页限制，而导致的无法通过搜索爬取较早图片信息，这一问题。所以在爬取的一开始，我的目标是获取高收藏的高质量作品。我采取的爬取策略是通过第一个画师的收藏夹开始，获取他收藏夹内的图片信息，接着将这些图片的画师id加入画师数据库。当当前画师的收藏夹爬取完毕后，就从画师数据库中随机抽取一个新的画师重复之前的步骤。这样的策略可以从点到面的快速、无休止地多线程爬取高质量的画作。</p>
 <span id="more"></span>
 
 <script crossorigin="anonymous" integrity="sha512-ZRdjJAYP8Kij8Lkln9uiGj0jIrMDLAALm1ZB2b3VfV9XJ0nR4zbJmHKB42/A4tgMlZS4DTPnSAmcYRoS0dginA==" src="https://lib.baomitu.com/echarts/5.0.0/echarts.min.js"></script>
@@ -149,7 +149,7 @@
   <entry>
     <title>Pyinstaller打包PyQt5踩的坑</title>
     <url>/2017/01/27/Pyinstaller%E6%89%93%E5%8C%85PyQt5%E8%B8%A9%E7%9A%84%E5%9D%91/</url>
-    <content><![CDATA[<p>在做完一个<a href="https://coding.net/u/Abrahum/p/pixiv2.0/git">P站的爬虫</a>后,我决定为之制作一个UI界面，并使用Pyinstaller打包为exe发布。</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><p>在做完一个<a href="https://coding.net/u/Abrahum/p/pixiv2.0/git">P站的爬虫</a>后,我决定为之制作一个UI界面，并使用Pyinstaller打包为exe发布。</p>
 <p>然后呢，我不出意料的踩了很多坑_(:3」∠)_</p>
 <span id="more"></span>
 
@@ -189,7 +189,7 @@
   <entry>
     <title>Python常用库文档</title>
     <url>/2016/10/09/Python%E5%B8%B8%E7%94%A8%E5%BA%93%E6%96%87%E6%A1%A3/</url>
-    <content><![CDATA[<p>现在的搜索引擎非常不讲武德，记录一些常用的 Python 库文档地址，为不时之需。</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><p>现在的搜索引擎非常不讲武德，记录一些常用的 Python 库文档地址，为不时之需。</p>
 <span id="more"></span>
 
 <h1 id="官方"><a href="#官方" class="headerlink" title="官方"></a>官方</h1><h2 id="Python"><a href="#Python" class="headerlink" title="Python"></a><a href="https://docs.python.org/zh-cn/3.10/index.html">Python</a></h2><p>没啥好说的。为了世界和平，这里还有一个比较落后的<del><a href="http://python.usyiyi.cn/">中文文档站</a></del>（貌似挂了）</p>
@@ -220,7 +220,7 @@
   <entry>
     <title>asyncio的学习与应用</title>
     <url>/2016/12/04/asyncio%E7%9A%84%E5%AD%A6%E4%B9%A0%E4%B8%8E%E5%BA%94%E7%94%A8/</url>
-    <content><![CDATA[<p>一直在制作完善pixiv的爬虫，最近遇到了一个问题，学校的网络环境太差了，导致了IO阻塞时间过长，常常出现线程长时间阻塞，占用了时间和内存。</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><p>一直在制作完善pixiv的爬虫，最近遇到了一个问题，学校的网络环境太差了，导致了IO阻塞时间过长，常常出现线程长时间阻塞，占用了时间和内存。</p>
 <p>为了解决这个问题，我决定尝试制定一个超时的图片删除重新爬取的过程，三次爬取不全则log报错不再爬取。</p>
 <p>同时将整个脚本搬运至3.5版本，重新用asyncio异步编写，减少线程使用。</p>
 <span id="more"></span>
@@ -241,7 +241,7 @@
   <entry>
     <title>ffmpeg使用笔记</title>
     <url>/2016/10/07/ffmpeg/</url>
-    <content><![CDATA[<h2 id="基本命令模式"><a href="#基本命令模式" class="headerlink" title="基本命令模式"></a>基本命令模式</h2><pre><code>ffmpeg [options] [[infile options] -i infile]... &#123;[outfile options] outfile&#125;
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h2 id="基本命令模式"><a href="#基本命令模式" class="headerlink" title="基本命令模式"></a>基本命令模式</h2><pre><code>ffmpeg [options] [[infile options] -i infile]... &#123;[outfile options] outfile&#125;
 </code></pre>
 <h2 id="options"><a href="#options" class="headerlink" title="options"></a>options</h2><table>
 <thead>
@@ -372,7 +372,7 @@ sudo make install 
   <entry>
     <title>go语言学习笔记</title>
     <url>/2017/07/29/go%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<p>开始学习Golang的语法。<br>主要记录go和python的异同点，随便写写，以供自励。</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><p>开始学习Golang的语法。<br>主要记录go和python的异同点，随便写写，以供自励。</p>
 <span id="more"></span>
 
 <p>go的每一个单独运行程序，必须包含<code>main</code>包。程序入口也在<code>main</code>函数。</p>
@@ -389,7 +389,7 @@ sudo make install 
   <entry>
     <title>传感器原理和应用</title>
     <url>/2017/04/15/%E4%BC%A0%E6%84%9F%E5%99%A8%E5%8E%9F%E7%90%86%E5%92%8C%E5%BA%94%E7%94%A8/</url>
-    <content><![CDATA[<p><em>传感器原理和应用复习提纲</em></p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><p><em>传感器原理和应用复习提纲</em></p>
 <span id="more"></span>
 
 <h1 id="检测技术的基本概念"><a href="#检测技术的基本概念" class="headerlink" title="检测技术的基本概念"></a>检测技术的基本概念</h1><p>传感器是一种检测装置，能感受规定的被测量，并能将检测感受到的信息，按一定规律变换成为电信号或其他所需形式的信息输出，以满足信息的传输、处理、存储、显示、记录和控制等要求。</p>
@@ -527,7 +527,7 @@ sudo make install 
   <entry>
     <title>常用命令工具记录</title>
     <url>/2021/03/02/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E5%B7%A5%E5%85%B7%E8%AE%B0%E5%BD%95/</url>
-    <content><![CDATA[<p>几个命令工具的备忘录，纯自用，忘了啥写啥。</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><p>几个命令工具的备忘录，纯自用，忘了啥写啥。</p>
 <span id="more"></span>
 
 <h2 id="Poetry"><a href="#Poetry" class="headerlink" title="Poetry"></a>Poetry</h2><p><code>poetry env [use &#123;python&#125;]</code> 创建虚拟环境，使用 <code>poetry shell</code> 激活当前目录虚拟环境。</p>
@@ -549,7 +549,7 @@ sudo make install 
   <entry>
     <title>新的开始</title>
     <url>/2016/10/08/%E6%96%B0%E7%9A%84%E5%BC%80%E5%A7%8B/</url>
-    <content><![CDATA[<img src="/img/hexo.png" class="full-image" />
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><img src="/img/hexo.png" class="full-image" />
 
 <p><strong>Hello Hexo!</strong></p>
 <span id="more"></span>
@@ -572,7 +572,7 @@ sudo make install 
   <entry>
     <title>机械制造技术基础-刀具</title>
     <url>/2017/02/25/%E6%9C%BA%E6%A2%B0%E5%88%B6%E9%80%A0%E6%8A%80%E6%9C%AF%E5%9F%BA%E7%A1%80-%E5%88%80%E5%85%B7/</url>
-    <content><![CDATA[<p>写了一些机械制造技术基础中，刀具学习相关的内容。</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><p>写了一些机械制造技术基础中，刀具学习相关的内容。</p>
 <p>听说刀具参考系是难点，做了个3d小模型。</p>
 <p><a href='/3d/chedao2.html' target="_blank">3D车刀</a></p>
 <span id="more"></span>
@@ -700,7 +700,7 @@ sudo make install 
   <entry>
     <title>机械工程测试技术基础</title>
     <url>/2016/11/19/%E6%9C%BA%E6%A2%B0%E5%B7%A5%E7%A8%8B%E6%B5%8B%E8%AF%95%E6%8A%80%E6%9C%AF%E5%9F%BA%E7%A1%80/</url>
-    <content><![CDATA[<p>简直药丸Orz</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><p>简直药丸Orz</p>
 <span id="more"></span>
 
 <h2 id="信号及其描述"><a href="#信号及其描述" class="headerlink" title="信号及其描述"></a>信号及其描述</h2><h3 id="信号的分类"><a href="#信号的分类" class="headerlink" title="信号的分类"></a>信号的分类</h3><ul>
@@ -796,7 +796,7 @@ sudo make install 
   <entry>
     <title>污染控制设计理论</title>
     <url>/2021/07/08/%E6%B1%A1%E6%9F%93%E6%8E%A7%E5%88%B6%E8%AE%BE%E8%AE%A1%E7%90%86%E8%AE%BA/</url>
-    <content><![CDATA[<p><em>大气污染控制设计理论学习备忘</em></p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><p><em>大气污染控制设计理论学习备忘</em></p>
 <span id="more"></span>
 
 <h2 id="物质扩散理论"><a href="#物质扩散理论" class="headerlink" title="物质扩散理论"></a>物质扩散理论</h2><h3 id="物料衡算"><a href="#物料衡算" class="headerlink" title="物料衡算"></a>物料衡算</h3><p>物料衡量即一句质量守恒定律：[输入的物料量]=[输出的物料量]+[积累的物料量]</p>
@@ -899,7 +899,7 @@ sudo make install 
   <entry>
     <title>烟气处理设备相关</title>
     <url>/2021/07/06/%E7%83%9F%E6%B0%94%E5%A4%84%E7%90%86%E8%AE%BE%E5%A4%87%E7%9B%B8%E5%85%B3/</url>
-    <content><![CDATA[<p><em>一些常用的设备选型参数学习备忘</em></p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><p><em>一些常用的设备选型参数学习备忘</em></p>
 <span id="more"></span>
 
 <h2 id="泵"><a href="#泵" class="headerlink" title="泵"></a>泵</h2><h3 id="主要参数指标"><a href="#主要参数指标" class="headerlink" title="主要参数指标"></a>主要参数指标</h3><h4 id="流量-Q"><a href="#流量-Q" class="headerlink" title="流量 $Q$"></a>流量 $Q$</h4><p>水泵的流量又称为输水量，它是指水泵在单位时间内输送水的体积。</p>
@@ -1020,7 +1020,7 @@ sudo make install 
   <entry>
     <title>热工基础</title>
     <url>/2016/11/01/%E7%83%AD%E5%B7%A5%E5%9F%BA%E7%A1%80/</url>
-    <content><![CDATA[<p><em>热工基础复习提纲</em></p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><p><em>热工基础复习提纲</em></p>
 <span id="more"></span>
 
 <h2 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h2><h3 id="热力系统"><a href="#热力系统" class="headerlink" title="热力系统"></a>热力系统</h3><p>凡是能将热能转换为机械能的机器统称为<strong>热力发动机</strong>，简称<strong>热机</strong>。</p>
@@ -1172,7 +1172,7 @@ sudo make install 
   <entry>
     <title>简易局域网共享服务器2.0</title>
     <url>/2017/03/01/%E7%AE%80%E6%98%93%E5%B1%80%E5%9F%9F%E7%BD%91%E5%85%B1%E4%BA%AB%E6%9C%8D%E5%8A%A1%E5%99%A82-0/</url>
-    <content><![CDATA[<p>之前做了一个<a href="/2016/11/16/%E7%AE%80%E6%98%93%E5%B1%80%E5%9F%9F%E7%BD%91%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%E8%84%9A%E6%9C%AC%E5%AE%9E%E7%8E%B0/">小脚本</a>来共享文件，最初的作用是在寝室床上可以愉快的访问存在下面电脑里的文件。但是在使用中还是感觉不太便利，一是需要特定的文件结构，二是需要flask（事实证明杀鸡焉用牛刀）。所以有必要对之前的脚本做一个小小的升级。我想到了之前用来测试的<code>http.server</code>模块可以很好的适用于这种需求，所以查阅了<code>http.server</code>模块的文档后，做了如下脚本。</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><p>之前做了一个<a href="/2016/11/16/%E7%AE%80%E6%98%93%E5%B1%80%E5%9F%9F%E7%BD%91%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%E8%84%9A%E6%9C%AC%E5%AE%9E%E7%8E%B0/">小脚本</a>来共享文件，最初的作用是在寝室床上可以愉快的访问存在下面电脑里的文件。但是在使用中还是感觉不太便利，一是需要特定的文件结构，二是需要flask（事实证明杀鸡焉用牛刀）。所以有必要对之前的脚本做一个小小的升级。我想到了之前用来测试的<code>http.server</code>模块可以很好的适用于这种需求，所以查阅了<code>http.server</code>模块的文档后，做了如下脚本。</p>
 <span id="more"></span>
 
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> socket</span><br><span class="line"><span class="keyword">import</span> http.server</span><br><span class="line"><span class="keyword">import</span> socketserver</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getip</span>(<span class="params">head</span>):</span></span><br><span class="line">    IPs = socket.gethostbyname_ex(socket.gethostname())[-<span class="number">1</span>]</span><br><span class="line">    localIP = <span class="string">&#x27;&#x27;</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> IPs:</span><br><span class="line">        <span class="keyword">if</span> i[<span class="number">0</span>:<span class="number">3</span>] == head:</span><br><span class="line">            localIP = i</span><br><span class="line">    <span class="keyword">return</span> localIP</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    PORT = <span class="number">666</span></span><br><span class="line">    <span class="keyword">if</span> sys.argv[<span class="number">1</span>:]:</span><br><span class="line">        head = sys.argv[<span class="number">1</span>]</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        head = <span class="string">&#x27;172&#x27;</span></span><br><span class="line">    PORT = <span class="number">666</span></span><br><span class="line">    Handler = http.server.SimpleHTTPRequestHandler</span><br><span class="line">    IP = getip(head)</span><br><span class="line">    <span class="keyword">if</span> IP:</span><br><span class="line">        httpd = socketserver.TCPServer((getip(head), PORT), Handler)</span><br><span class="line">        print(<span class="string">&quot;serving at &quot;</span>+getip(head)+<span class="string">&quot;:666&quot;</span>)</span><br><span class="line">        httpd.serve_forever()</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        print(<span class="string">&#x27;Invalid domain&#x27;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
@@ -1192,7 +1192,7 @@ sudo make install 
   <entry>
     <title>简易局域网文件传输脚本实现</title>
     <url>/2016/11/16/%E7%AE%80%E6%98%93%E5%B1%80%E5%9F%9F%E7%BD%91%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%E8%84%9A%E6%9C%AC%E5%AE%9E%E7%8E%B0/</url>
-    <content><![CDATA[<p>就是一个很简单的基于flask服务器脚本。</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><p>就是一个很简单的基于flask服务器脚本。</p>
 <span id="more"></span>
 
 <p>使用脚本时的文件结构：</p>
@@ -1220,7 +1220,7 @@ sudo make install 
   <entry>
     <title>魔方</title>
     <url>/2016/10/12/%E9%AD%94%E6%96%B9/</url>
-    <content><![CDATA[<p>为了写出一个Python版的二阶段算法求解魔方。</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><p>为了写出一个Python版的二阶段算法求解魔方。</p>
 <p>今天开始学cpp（蜜汁需求得到的蜜汁结果）。</p>
 <p>就酱紫。</p>
 <p>随时更新。</p>
@@ -1241,13 +1241,13 @@ sudo make install 
   <entry>
     <title>黑群晖相关折腾</title>
     <url>/2020/05/17/%E9%BB%91%E7%BE%A4%E6%99%96%E7%9B%B8%E5%85%B3%E6%8A%98%E8%85%BE/</url>
-    <content><![CDATA[<p>已经跳槽QNAP啦，怀念群晖。</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><p>已经跳槽QNAP啦，怀念群晖。</p>
 <span id="more"></span>]]></content>
   </entry>
   <entry>
     <title>工程材料及热处理</title>
     <url>/2016/11/06/%E5%B7%A5%E7%A8%8B%E6%9D%90%E6%96%99%E5%8F%8A%E7%83%AD%E5%A4%84%E7%90%86/</url>
-    <content><![CDATA[<p><em>工程材料及热处理复习提纲</em></p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><p><em>工程材料及热处理复习提纲</em></p>
 <span id="more"></span>
 
 <h2 id="晶体"><a href="#晶体" class="headerlink" title="晶体"></a>晶体</h2><p>晶体：材料中的原子（离子、分子）在三维空间呈规则，周期性排列—长程有序。</p>
@@ -1587,7 +1587,7 @@ sudo make install 
   <entry>
     <title>材料成型技术基础</title>
     <url>/2016/10/30/%E6%9D%90%E6%96%99%E6%88%90%E5%9E%8B%E6%8A%80%E6%9C%AF%E5%9F%BA%E7%A1%80/</url>
-    <content><![CDATA[<p><em>材料成型复习提纲</em></p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><p><em>材料成型复习提纲</em></p>
 <span id="more"></span>
 
 <h2 id="铸造"><a href="#铸造" class="headerlink" title="铸造"></a>铸造</h2><blockquote>
