@@ -525,6 +525,720 @@ sudo make install 
       </tags>
   </entry>
   <entry>
+    <title>常用命令工具记录</title>
+    <url>/2021/03/02/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E5%B7%A5%E5%85%B7%E8%AE%B0%E5%BD%95/</url>
+    <content><![CDATA[<p>几个命令工具的备忘录，纯自用，忘了啥写啥。</p>
+<span id="more"></span>
+
+<h2 id="Poetry"><a href="#Poetry" class="headerlink" title="Poetry"></a>Poetry</h2><p><code>poetry env [use &#123;python&#125;]</code> 创建虚拟环境，使用 <code>poetry shell</code> 激活当前目录虚拟环境。</p>
+<p><code>poetry add &#123;package_name&#125;</code> 当前目录增加包，若不存在虚拟环境则会创建。</p>
+<p><code>poetry init</code> 当前目录创建包</p>
+<p><code>poetry build/publish</code> 打包/发布包</p>
+<blockquote>
+<p>Future will add more.</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>code</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+        <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>新的开始</title>
+    <url>/2016/10/08/%E6%96%B0%E7%9A%84%E5%BC%80%E5%A7%8B/</url>
+    <content><![CDATA[<img src="/img/hexo.png" class="full-image" />
+
+<p><strong>Hello Hexo!</strong></p>
+<span id="more"></span>
+
+<p>其实我一开始想要建个博客是从Flask开始的，第一次接触到这么便捷的Web开发方式（其实也是我第一次接触Web），所以我就学习了各种Html、CSS、Javascript等知识，想着自己给自己做一个很炫酷的Blog。</p>
+<p>然而现实是我当时找不到一个适合我的云服务器（对，就是免费，只可惜我没有早一点接触到SAE），所以嘛就走上了这条静态页面+GitHub Page的路子（现在在国内的Coding上）。</p>
+<p>我一开始走这条路子也不是直接使用的Hexo，我试着过自己做轮子，也试过Python的pelican（Markdown模块有点恶心）。最后嘛，我发现Blog最重要的还是内容······所以选了省心一点的Hexo（安装Jekyll需要的Ruby的gem无法在国内愉快的使用所以Jekyll同学被我pass了）。</p>
+<p>最后我把我以前觉得有点卵用的两篇搬了过来，然后呢这里还要留下一些有用链接。</p>
+<h2 id="Next"><a href="#Next" class="headerlink" title="Next"></a><a href="http://theme-next.iissnan.com/">Next</a></h2><img src="/img/next.png" class="full-image" />
+
+<h2 id="Hexo"><a href="#Hexo" class="headerlink" title="Hexo"></a><a href="https://hexo.io/zh-cn/">Hexo</a></h2><img src="/img/hexo.png" class="full-image" />]]></content>
+      <categories>
+        <category>日常</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>Next</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>机械制造技术基础-刀具</title>
+    <url>/2017/02/25/%E6%9C%BA%E6%A2%B0%E5%88%B6%E9%80%A0%E6%8A%80%E6%9C%AF%E5%9F%BA%E7%A1%80-%E5%88%80%E5%85%B7/</url>
+    <content><![CDATA[<p>写了一些机械制造技术基础中，刀具学习相关的内容。</p>
+<p>听说刀具参考系是难点，做了个3d小模型。</p>
+<p><a href='/3d/chedao2.html' target="_blank">3D车刀</a></p>
+<span id="more"></span>
+
+<iframe src="/3d/chedao2.html" width="100%" height="600px"></iframe>
+
+<h2 id="刀具标注角度参考系"><a href="#刀具标注角度参考系" class="headerlink" title="刀具标注角度参考系"></a>刀具标注角度参考系</h2><p>对于所有标注角度参考系，首先便于测量，做出以下两个假设：1.假设运动条件是不考虑进给运动的影响，2.假设安装条件是安装车刀时刀尖与工件中心等高，并且车刀刀杆中心线与工件中心线垂直，且主切削刃上选定点与工件中心等高。</p>
+<h3 id="主剖面参考系"><a href="#主剖面参考系" class="headerlink" title="主剖面参考系"></a>主剖面参考系</h3><ul>
+<li>基面$P_r$：通过主切削刃上选定点，并与该点切削速度方向相垂直的平面。</li>
+<li>切削平面$P_s$：通过主切削刃上选定点，与主切削刃相切并垂直于该点基面的平面。</li>
+<li>主剖面$P_o$：通过主切削刃上选定点，同时垂直于基面和切削平面的平面。</li>
+</ul>
+<h3 id="法剖面参考系"><a href="#法剖面参考系" class="headerlink" title="法剖面参考系"></a>法剖面参考系</h3><p>基面和切削平面的定义和主剖面参考系相同。</p>
+<ul>
+<li>法剖面$P_n$：通过切削刃上选定点，同时垂直于切削刃或其切线的平面。</li>
+</ul>
+<h3 id="进给剖面和切深剖面参考系"><a href="#进给剖面和切深剖面参考系" class="headerlink" title="进给剖面和切深剖面参考系"></a>进给剖面和切深剖面参考系</h3><p>基面定义同上。</p>
+<ul>
+<li>进给剖面$P_f$：通过切削刃上选定点，同时垂直于刀杆中心线与基面的平面。</li>
+<li>切深剖面$P_p$：通过切削刃上选定点，同时平行于刀杆中心线并垂直于基面的平面，垂直于进给运动方向。</li>
+</ul>
+<h2 id="刀具工作角度参考系"><a href="#刀具工作角度参考系" class="headerlink" title="刀具工作角度参考系"></a>刀具工作角度参考系</h2><p>在之前的参考系中做出了两点假设，而如果考虑进给运动和刀具实际安装情况，基面的位置选取应该垂直于合成切削运动速度方向，这时候建立的参考系称为刀具工作角度参考系。</p>
+<ul>
+<li>工作基面$P_{re}$：垂直于合成切削速度方向的平面。</li>
+<li>工作切削平面$P_{se}$：与切削刃相切并垂直与工作基面的平面。</li>
+<li>工作主剖面$P_{oe}$：同时垂直与工作基面和工作切削平面的平面。</li>
+<li>切削刃法剖面$P_{ne}$：与法剖面的定义相同。</li>
+<li>工作进给剖面$P_{fe}$：由主运动方向和进给运动方向组成的平面，工作进给剖面和工作基面相垂直。</li>
+<li>工作切深剖面$P_{pe}$：同时垂直于工作基面和工作进给剖面的平面。</li>
+</ul>
+<h2 id="刀具标注角度"><a href="#刀具标注角度" class="headerlink" title="刀具标注角度"></a>刀具标注角度</h2><p>刀具在各种参考系中测得的角度，称为标注角度。标注角度应该标注在刀具的设计图中，用于刀具制造、刃磨和测量。</p>
+<h3 id="主剖面参考系下的标注角度"><a href="#主剖面参考系下的标注角度" class="headerlink" title="主剖面参考系下的标注角度"></a>主剖面参考系下的标注角度</h3><p>在主剖面$P_o$内标注的角度</p>
+<ul>
+<li>前角$\gamma_o$：前刀面和基面之间的夹角。</li>
+<li>后角$\alpha _o$：主后刀面和切削平面的夹角。</li>
+</ul>
+<p>在基面$P_r$内标注的角度</p>
+<ul>
+<li>主偏角$\kappa_r$：主切削刃和基面上的投影与进给运动方向的夹角。</li>
+</ul>
+<p>在切削平面$P_s$内标注的角度</p>
+<ul>
+<li>刃倾角$\lambda_o$：主切削刃与基面之间的夹角</li>
+</ul>
+<blockquote>
+<p>其他角度略</p>
+</blockquote>
+<h2 id="刀具材料"><a href="#刀具材料" class="headerlink" title="刀具材料"></a>刀具材料</h2><p>刀具的切削性能优劣取决于刀具切削部分的材料、几何形状以及刀具结构。刀具切削部分材料的选择对刀具寿命、加工质量、生产效率影响较大，因此对于刀具材料的选择应该合理。</p>
+<p>作为刀具的切削部分材料，其必须具备以下基本性能：</p>
+<ul>
+<li>高的硬度</li>
+<li>高的耐磨性</li>
+<li>高的耐热性</li>
+<li>足够的强度和韧性</li>
+<li>良好的热物理性能和耐热热冲击性能</li>
+<li>良好的减磨性</li>
+<li>良好的工艺性和经济性</li>
+</ul>
+<p>对于常见的刀具材料，有以下的性能指标：</p>
+<table>
+<thead>
+<tr>
+<th align="center">刀具材料</th>
+<th align="center">耐热性/（°C）</th>
+<th align="center">硬度（HRA）</th>
+<th align="center">切削速度大致比值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">碳素工具钢</td>
+<td align="center">200～300</td>
+<td align="center">HRC62</td>
+<td align="center">0.32～0.40</td>
+</tr>
+<tr>
+<td align="center">高速钢</td>
+<td align="center">600～700</td>
+<td align="center">84～85</td>
+<td align="center">1.00～1.20</td>
+</tr>
+<tr>
+<td align="center">硬质合金</td>
+<td align="center">K系列：800～900 P系列：900～1000</td>
+<td align="center">91～93（K系列) 90～92（P系列)</td>
+<td align="center">3.2～8.0</td>
+</tr>
+<tr>
+<td align="center">氧化铝陶瓷</td>
+<td align="center">1200</td>
+<td align="center">92.5～93.5</td>
+<td align="center">8.0～12.0</td>
+</tr>
+<tr>
+<td align="center">TiC基硬质合金</td>
+<td align="center">1000～1100</td>
+<td align="center">91～93</td>
+<td align="center">-</td>
+</tr>
+<tr>
+<td align="center">聚晶立方氮化硼</td>
+<td align="center">1000～1300</td>
+<td align="center">HV4500</td>
+<td align="center">-</td>
+</tr>
+<tr>
+<td align="center">人造金刚石</td>
+<td align="center">700～800</td>
+<td align="center">&gt;HV9000</td>
+<td align="center">&gt;25（有色金属）</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>需要注意的是材料的硬度越高，其韧性越差，相应的刀具耐冲击性就差，加工时要求的背吃刀量就越小。</p>
+</blockquote>
+<p>有时候还需要考虑刀具材料和工件材料的化学性能也要相匹配。</p>
+]]></content>
+      <categories>
+        <category>机械</category>
+      </categories>
+      <tags>
+        <tag>3D</tag>
+        <tag>机械</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>机械工程测试技术基础</title>
+    <url>/2016/11/19/%E6%9C%BA%E6%A2%B0%E5%B7%A5%E7%A8%8B%E6%B5%8B%E8%AF%95%E6%8A%80%E6%9C%AF%E5%9F%BA%E7%A1%80/</url>
+    <content><![CDATA[<p>简直药丸Orz</p>
+<span id="more"></span>
+
+<h2 id="信号及其描述"><a href="#信号及其描述" class="headerlink" title="信号及其描述"></a>信号及其描述</h2><h3 id="信号的分类"><a href="#信号的分类" class="headerlink" title="信号的分类"></a>信号的分类</h3><ul>
+<li>确定信号：可以表示为一个确定的时间关系式的信号</li>
+<li>周期信号：按一定时间间隔周而复始出现，无始无终，不断重复的信号<ul>
+<li>简单周期信号</li>
+<li>复杂周期信号</li>
+</ul>
+</li>
+<li>非周期信号：确定信号中，不具备周期重复性的信号<ul>
+<li>准周期信号：由两种以上的周期信号合成而来，因为组成分量无法找到公共周期，而失去周期性</li>
+<li>瞬变非周期信号：是一些或在一定时间内存在，或随时间增长而衰减至零的信号</li>
+</ul>
+</li>
+<li>非确定信号：不能准确预测未来瞬时值，也不能用确定的数学关系描述的信号</li>
+<li>非平稳随机过程</li>
+<li>平稳随机过程<ul>
+<li>个态历经随机过程</li>
+<li>非个态历经随机过程</li>
+</ul>
+</li>
+</ul>
+<p>连续信号：信号数学表达式中的独立变量是连续的。</p>
+<p>离散信号：数学表达式中的独立变量是离散的。</p>
+<p>能量信号：在无限时间内，信号的总能量是有限的信号。</p>
+<p>功率信号：在无限时间内，信号的总能量为无限的信号。</p>
+<p>实信号：物理可以实现的信号都是时间的实函数。</p>
+<p>复信号：为了理论分析，使用的分析模型。</p>
+<h3 id="信号的描述"><a href="#信号的描述" class="headerlink" title="信号的描述"></a>信号的描述</h3><p>时域描述：又称为波形描述，是指测量中所观测到或记录到的信号以时间为独立变量，称为信号的时域描述。</p>
+<p>频域描述：又称频谱描述，是指测量中所观测到或记录到的信号转换成以频率为独立变量来表述信号的频域描述。它可以表述信号的频率结构、各频率成分的幅值、相位关系。它和时域描述可以互相转换，包含相同信息量。</p>
+<p>傅立叶级数：任何周期信号在有限区间上，当其满足狄里赫来条件时，都可展开成一系列正交函数的线性组合的无穷级数。傅立叶级数有多种形式，三角展开和复数展开是常见的形式。</p>
+<p>傅立叶级数的三角展开式：</p>
+<p>$$x(t)=a_0+\sum_{n=1}^{\infty}A_nsin(n\omega _0t+\varphi _n),(n=1,2,3,…..)$$</p>
+<p>展开过程：</p>
+<p>$$x(t)=a_0+\sum_{n=1}^{\infty}[a_ncos(n\omega _0t)+b _ nsin(n\omega _0t)],(n=1,2,3,…..)$$</p>
+<p>其中参数：</p>
+<p>$$\begin{align}<br>a _ 0 =&amp; \frac{1}{T _ 0}\int_{-T _0/2}^{T _0/2}x(t)dt \\<br>a _ n =&amp; \frac{1}{T _ 0}\int_{-T _0/2}^{T _0/2}x(t)cos(n\omega _0)tdt \\<br>b _ n =&amp; \frac{1}{T _ 0}\int_{-T _0/2}^{T _0/2}x(t)sin(n\omega _0)tdt \\<br>\omega _0= &amp;\frac{2\pi }{T _0}\\<br>A _0 =&amp; \sqrt{a _n^{2}+b _n^{2}}\\<br>\varphi _0=&amp;arctan(\frac{a _n}{a _n})<br>\end{align}$$</p>
+<p>由此可见周期信号是由一个或多个乃至无穷个不同频率的谐波叠加而来。第一项$a _0$是常数项，周期信号的直流分量。$A _nsin(n\omega _0t+\varphi _n)$称为谐波，$A _n$是n次谐波的振幅，$\varphi _n$是其初相角。$a _n$是n次谐波的余弦分量的幅值，$b _n$是n次谐波的正弦分量的幅值。</p>
+<p>傅立叶级数的复数展开式：</p>
+<p>根据欧拉公式推出</p>
+<p>$$\begin{align}<br>x(t)=&amp;a_0+\sum_{n=1}^{\infty}[a_ncos(n\omega _0t)+b _ nsin(n\omega _0t)] \\<br>x(t)=&amp;a_0+\sum_{n=1}^{\infty}[a_n\frac{1}{2}(e^{-jn\omega _0t}+e^{jn\omega _0t})+b _ n\frac{j}{2}(e^{-jn\omega _0t}-e^{jn\omega _0t})] \\<br>x(t)=&amp;a_0+\sum_{n=1}^{\infty}[\frac{1}{2}(a _n+jb _n)e^{-jn\omega _0t}+\frac{1}{2}(a _n-jb _n)e^{jn\omega _0t}]\\<br>c _ n = &amp; \frac{1}{2}(a _n-jb _n)\\<br>c _ {-n}= &amp;\frac{1}{2}(a _n+jb _n)\\<br>c _0=&amp;a _0 \\<br>x(t)=&amp;a_0+\sum_{n=1}^{\infty}[c _ {-n}e^{-jn\omega _0t}+c _ ne^{jn\omega _0t}]\\<br>x(t)=&amp;a_0+\sum_{n=-\infty }^{\infty}c _ ne^{jn\omega _0t}\\<br>\end{align}$$</p>
+<p>周期信号的强度使用峰值、绝对均、有效值和平均功率来表述。</p>
+<p>峰值$x_p$是信号可能出现的最大瞬时值，峰峰值$x_{p-p}$是指最大瞬时值和最小瞬时值的差。</p>
+<p>均值的计算类似功率，绝对均值指全波整波之后的均值。</p>
+<p>有效值是均值的信号的均方根，平均功率是有效值的平方又叫均方值。</p>
+<h2 id="测试装置"><a href="#测试装置" class="headerlink" title="测试装置"></a>测试装置</h2><p>测量装置（测量系统）：为达到某些特定目的，由若干个互有关联的单元组成的有机整体。 </p>
+<h3 id="线性系统"><a href="#线性系统" class="headerlink" title="线性系统"></a>线性系统</h3><p>主要性质：</p>
+<ul>
+<li>符合叠加原理</li>
+<li>比例特性：$ax(t)\rightarrow ay(t)$</li>
+<li>系统对输入导数的响应等于对原输入响应的导数</li>
+<li>如系统的初始状态均为零，则系统对输入积分的响应等于对原输入响应的积分。 </li>
+<li>频率保持特性</li>
+</ul>
+<p><strong>静态特性</strong>是在静态测量情况下描述实际测量装置与理想时不变线性系统的接近程度。通过某种意义的静态标定过程确定的。</p>
+<p>测量装置的<strong>动态特性</strong>是当被测量即输入量随时间快速变化时，测量输入与响应输出之间动态关系的数学描述。</p>
+<p>当传感器安装到被测物体上或进入被测介质，要从物体与介质中吸收能量或产生干扰，使被测物理量偏离原有的量值，从而不可能实现理想的测量，这种现象称为<strong>负载效应</strong>。</p>
+<p>测量装置在测量过程中要受到各种干扰，包括电源干扰、环境干扰(电磁场、声、光、温度、振动等干扰)和信道干扰。这些干扰的影响决定于测量装置的<strong>抗干扰性能</strong>，并且与所采取的抗干扰措施有关。</p>
+<p>理想的定常线性系统，其输出将是输入的单调、线性比例函数，其中斜率S应是常数。然而，实际的测量装置并非理想的定常线性系统，S不是常数。</p>
+<h3 id="静态特性"><a href="#静态特性" class="headerlink" title="静态特性"></a>静态特性</h3><p>线性误差：测量装置校准曲线与规定曲线之间的最大偏差。</p>
+<p>灵敏度：单位输入变化所引起的输出变化。</p>
+<p>回程误差（迟滞）：测量装置同输入变化方向有关的输出特性。</p>
+<p>分辨力：引起测量装置产生一个可察觉变化的最小输入量。通常表示为它与可能输入范围之比的百分数。</p>
+<p>零点漂移：是测量装置的输出零点偏离原始零点的距离，它可以是随时间缓慢变化的量。</p>
+<p>灵敏度漂移：是由于材料性质的变化所引起的输入与输出关系(斜率)的变化。</p>
+<p>稳定度：是指测量装置在规定条件下保持其测量特性恒定不变的能力。</p>
+<h3 id="动态特性"><a href="#动态特性" class="headerlink" title="动态特性"></a>动态特性</h3><p>传递函数H(s)：对于特定的输入确定的给出相应输出，与输入、系统的初始状态无关。</p>
+<p>频率响应函数H($\omega $)：在频率域中描述系统特性的一种数学方法。</p>
+<p>脉冲响应函数h(t)： ···</p>
+<p>脉冲响应函数和传递函数是拉普拉斯变换对；频率响应函数和脉冲响应函数是傅立叶变换对；频率响应函数和传递函数其实是S和$j\omega $替换。</p>
+<p>一阶系统：输入输出的关系使用一阶微分方程来表述，时间常数是其重要参数。</p>
+<h2 id="传感器"><a href="#传感器" class="headerlink" title="传感器"></a>传感器</h2><p>传感器：直接作用于被测量，能按一定规律将其转换成同种或别种量值(电信号)输出的器件。</p>
+<h3 id="传感器分类"><a href="#传感器分类" class="headerlink" title="传感器分类"></a>传感器分类</h3><p>按工作原理分：电气式传感器、机械式传感器、光电式传感器等</p>
+<p>按被测量分：位移传感器、速度传感器、加速度传感器、应力传感器、温度传感器等</p>
+<p>按信号变换特征分：结构型传感器、物性型传感器</p>
+<p>按能量关系分：能量转换型传感器、能量控制型传感器</p>
+<h3 id="电阻、电容与电感式传感器"><a href="#电阻、电容与电感式传感器" class="headerlink" title="电阻、电容与电感式传感器"></a>电阻、电容与电感式传感器</h3><p>电阻式传感器：将被测量转化为电阻值变化的传感器。主要有变阻器式电阻传感器、应变式电阻传感器。</p>
+<p>电桥：电桥电路是将电阻、电容、电感的参量的变化转变为电压或电流信号输出的一种常用电路。</p>
+<p>直流电桥的平衡条件：相对桥臂的阻值乘积相等。交流电桥还需要相对电桥阻抗虚部与实部乘积相等。</p>
+<p>电容式传感器：将被测物理量转换为电容量变化的装置，它实质上是一个具有可变参数的电容器。</p>
+<p>根据电容器变化的参数，可分为：极距变化型、面积变化型、介质变化型</p>
+<p>电感传感器：把被测物理量转换为电感量变化的传感器。</p>
+<p>分类：自感型电感传感器（可变磁阻式、涡流式）、互感型电感传感器（差动变压器式电感传感器）</p>
+<h3 id="磁电、压电与热电式传感器"><a href="#磁电、压电与热电式传感器" class="headerlink" title="磁电、压电与热电式传感器"></a>磁电、压电与热电式传感器</h3><p>磁电式传感器：把被测物理量转换为感应电动势的一种传感器，又称电磁感应式或电动力式传感器。按照结构方式不同，磁电式传感器可分：动圈式、磁阻式</p>
+]]></content>
+      <categories>
+        <category>机械</category>
+      </categories>
+      <tags>
+        <tag>机械</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>污染控制设计理论</title>
+    <url>/2021/07/08/%E6%B1%A1%E6%9F%93%E6%8E%A7%E5%88%B6%E8%AE%BE%E8%AE%A1%E7%90%86%E8%AE%BA/</url>
+    <content><![CDATA[<p><em>大气污染控制设计理论学习备忘</em></p>
+<span id="more"></span>
+
+<h2 id="物质扩散理论"><a href="#物质扩散理论" class="headerlink" title="物质扩散理论"></a>物质扩散理论</h2><h3 id="物料衡算"><a href="#物料衡算" class="headerlink" title="物料衡算"></a>物料衡算</h3><p>物料衡量即一句质量守恒定律：[输入的物料量]=[输出的物料量]+[积累的物料量]</p>
+<p>如果存在化学反应，则有：[输入的物料量]±[反应生成或消耗的物料量]=[输出的物料量]+[积累的物料量]</p>
+<p>若体系为稳定状态，则不存在积累的物料量：[输入的物料量]±[反应生成或消耗的物料量]=[输出的物料量]</p>
+<p>物料衡算的基本方法：</p>
+<ol>
+<li>确定衡算体系</li>
+<li>收集计算数据，统一单位制</li>
+<li>画出物料流程简图</li>
+<li>写出化学反应方程</li>
+<li>选择合适的计算基准</li>
+<li>列出物料衡算式</li>
+</ol>
+<h3 id="气体扩散"><a href="#气体扩散" class="headerlink" title="气体扩散"></a>气体扩散</h3><p>假设混合物存在 A、B 两个组分，在恒定温度、压力下，两组分扩散服从费克定律：</p>
+<p>$$N_{A}=-D_{AB}\frac{dC_{A}}{dZ}$$</p>
+<ul>
+<li>$N_{A}$ ：A 组分在 z 方向的扩散通量，量纲为 $kmol/(m^{2} \cdot s)$</li>
+<li>$C_{A}$ ：A 组分的摩尔浓度，$kmol/m^{3}$</li>
+<li>$Z$ ：z 方向上的距离</li>
+<li>$D_{AB}$ ：A 组分在 A、B 两组分混合物种的扩散系数，$m^{2}/s$</li>
+<li>$\frac{dC_{A}}{dZ}$ ：浓度梯度</li>
+</ul>
+<p>气体在气相中的扩散系数可以通过修正的吉里兰方程计算得出：</p>
+<p>$$D_{AB}=1.8 \times 10^{-4} \times \frac{ \sqrt{T} }{ \sqrt{\overline{V} _ {A}}+\sqrt{\overline{V} _ {B}}}\times\frac{M _ {A}}{\rho _ {A}}\sqrt{\frac{1}{M _ {A}}+\frac{1}{M _ {B}}}$$</p>
+<ul>
+<li>$T$ ：温度，$K$</li>
+<li>$M$ ：气体摩尔质量，$g/mol$</li>
+<li>$\overline{V}$ ：气体在沸点下呈液态时的摩尔体积，$cm^{3}/mol$</li>
+<li>$\rho_{A}$ ：气体密度，$g/cm^{3}$</li>
+</ul>
+<p>气体 A 在液相 B 中的扩散可以通过下式计算：</p>
+<p>$$D_{AB}=7.4\times10^{-10}\frac{T\sqrt{\beta M_{B}}}{\mu_{B}\overline{V}_{A}^{0.6}}$$</p>
+<ul>
+<li>$\mu_{B}$ ：溶液的黏度，$mPa\cdot s$</li>
+<li>$\beta$ ：溶剂的缔结因数</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">液体B</th>
+<th align="center">缔结因数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">水</td>
+<td align="center">2.6</td>
+</tr>
+<tr>
+<td align="center">甲醇</td>
+<td align="center">1.9</td>
+</tr>
+<tr>
+<td align="center">乙醇</td>
+<td align="center">1.5</td>
+</tr>
+<tr>
+<td align="center">非缔结溶剂，如苯、乙醚</td>
+<td align="center">1</td>
+</tr>
+</tbody></table>
+<h2 id="吸收法净化理论"><a href="#吸收法净化理论" class="headerlink" title="吸收法净化理论"></a>吸收法净化理论</h2><p>当回合气体和吸收剂接触时，气相中的可吸收组分会向液相进行质量传递，成为吸收过程；同时液相中被吸收的组分也会向气相溢出，称为解吸过程；温度压力一定，当吸收和解吸的速率达成相等，物质传递达成动态平衡，此时气体在液相中的浓度即为当前温度压力下的溶解度。</p>
+<p>当温度一定、总压小于5个大气压时，气液平衡关系可以用亨利定律来描述：</p>
+<p>$$C=Hp^{*}$$</p>
+<p>$$x=\frac{p^{ * }}{E}$$</p>
+<p>$$or\qquad\qquad y^{ * }=mx\qquad\qquad\quad$$</p>
+<ul>
+<li>$p^{*}$ ：溶质组分在气相中的分压，$Pa$</li>
+<li>$C$ ：平衡时的体积摩尔浓度， $mol/m^{3}$</li>
+<li>$H$ ：亨利系数之一， $mol/(m^{3}\cdot Pa)$ </li>
+<li>$x$ ：平衡浓度， 摩尔分数，无量纲</li>
+<li>$E$ ：亨利系数之二，单位与分压单位一致</li>
+<li>$y^{*}$ ：溶质组分在气相中的摩尔分数，无量纲</li>
+<li>$m$ ：相平衡常数，气相中组分的摩尔分数与其液相中的摩尔分数的比值，无量纲 $m=\frac{E}{P}$</li>
+</ul>
+<blockquote>
+<p>亨利常数之间的关系：<br>$$H=\frac{C _ {总}}{E}=\frac{\rho}{(M _ {A}x _ {A}+M _ {s}x _ {s})E}$$</p>
+<ul>
+<li>$M_{A}$：溶质的摩尔质量，$g/mol$</li>
+<li>$M_{s}$：溶液的摩尔质量，$g/mol$</li>
+<li>$x_{A}$：溶质的摩尔分数</li>
+<li>$x_{s}$：溶质的摩尔分数<br>稀溶液中可以近似为下式：<br>$$H=\frac{\rho_{s}}{M_{s}E}$$</li>
+</ul>
+</blockquote>
+<p>当使用化学吸收法时，此时的总溶解量由两部分组成：</p>
+<p>$$C_{A}=[A] _ {物料平衡}+[A] _ {化学平衡}$$</p>
+<p>对于如下反应：</p>
+<p>$$\begin{align}<br>&amp;aA _ {(气)} \tag{}\\<br>&amp;\ \Updownarrow\tag{}\\<br>&amp;aA _ {(液)}+bB\rightleftharpoons mM+nN \tag{}\\<br>\end{align} $$</p>
+<p>有物理平衡：$[A] _ {物理平衡}=H _ {A}p _ {A}^{*}$</p>
+<p>有化学平衡：$K=\frac{[M] ^ {m} [N] ^ n}{[A] ^ {a}[B] ^ {b}}$</p>
+<h2 id="吸收速率"><a href="#吸收速率" class="headerlink" title="吸收速率"></a>吸收速率</h2><p><em>To-Do</em></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>烟气处理设备相关</title>
+    <url>/2021/07/06/%E7%83%9F%E6%B0%94%E5%A4%84%E7%90%86%E8%AE%BE%E5%A4%87%E7%9B%B8%E5%85%B3/</url>
+    <content><![CDATA[<p><em>一些常用的设备选型参数学习备忘</em></p>
+<span id="more"></span>
+
+<h2 id="泵"><a href="#泵" class="headerlink" title="泵"></a>泵</h2><h3 id="主要参数指标"><a href="#主要参数指标" class="headerlink" title="主要参数指标"></a>主要参数指标</h3><h4 id="流量-Q"><a href="#流量-Q" class="headerlink" title="流量 $Q$"></a>流量 $Q$</h4><p>水泵的流量又称为输水量，它是指水泵在单位时间内输送水的体积。</p>
+<h4 id="扬程-H"><a href="#扬程-H" class="headerlink" title="扬程 $H$"></a>扬程 $H$</h4><p>水泵的扬程是指水泵能够扬水的高度，通常用 $H$ 表示，单位是 $m$ 。</p>
+<p>$$H=\frac{(p_{2}-p_{1})}{\rho g}+\frac{(v_{2}^{2}-v_{1}^{2})}{2g}+z_{2}-z_{1}$$</p>
+<p>从水泵叶轮中心线至水源水面的垂直高度，即水泵能把水吸上来的高度，叫做吸水扬程，简称吸程；</p>
+<p>从水泵叶轮中心线至出水水面的垂直高度，即水泵能把水压上去的高度，叫做压水扬程，简称压程。</p>
+<p>应当指出，铭牌上标示的扬程是指水泵本身所能产生的扬程，它不含管道水流受摩擦阻力而引起的损失扬程。</p>
+<h4 id="功率-N"><a href="#功率-N" class="headerlink" title="功率 $N$"></a>功率 $N$</h4><p>在单位时间内，机器所做功的大小叫做功率。 轴功率为轴上输入功率。</p>
+<p>$$N_{real}=QH\rho g$$</p>
+<h4 id="汽蚀余量-NPSH"><a href="#汽蚀余量-NPSH" class="headerlink" title="汽蚀余量 $NPSH$"></a>汽蚀余量 $NPSH$</h4><p>又称动压降，泵的进口单位体积液体所具的超过汽化压力的富裕能量，是用来计算水泵吸水高度的一种方法,单位为米。</p>
+<ul>
+<li>$NPSHr$：泵的汽蚀余量，又称泵进口动压降或必需汽蚀余量，泵本身水力模型和制造质量确定的动压降</li>
+<li>$NPSHa$：装置汽蚀余量，又称有效汽蚀余量，与泵的安装高度有关。</li>
+<li>$NPSHc$：临界汽蚀余量，泵内最低压力点的压力为汽化压力时的汽蚀余量</li>
+<li>$[NPSH]$：许用汽蚀余量，确认泵使用条件用的汽蚀余量，通常取$[NPSH]=(1.1～1.5)NPSHc$</li>
+</ul>
+<p>$$NPSHr = \frac{v_{0}^{2}}{2g}+\sigma \frac{w_{0}^{2}}{2g}$$</p>
+<blockquote>
+<ul>
+<li>$v_{0}$ ：叶片进口前的绝对速度</li>
+<li>$w_{0}$ ：叶片进口前的相对速度</li>
+<li>$\sigma$ ：叶片进口压降系数</li>
+<li>$g$ ：重力加速度</li>
+</ul>
+</blockquote>
+<p>$$NPSHa = \frac{p_{c}}{\rho g}-h_{g}-h_{c}-\frac{p_{v}}{\rho g}$$</p>
+<blockquote>
+<ul>
+<li>$p_{c}$ ：进口水池液面绝对压力</li>
+<li>$p_{v}$ ：液体饱和蒸汽压</li>
+<li>$h_{g}$ ：泵安装高度，最大值即为泵的吸程。</li>
+<li>$h_{c}$ ：进水管路水头损失</li>
+<li>$\rho$ ：水的容重</li>
+<li>$g$ ：重力加速度</li>
+</ul>
+</blockquote>
+<p><img src="/img/pump.jpg" alt="水泵特性曲线"></p>
+<h2 id="增压风机"><a href="#增压风机" class="headerlink" title="增压风机"></a>增压风机</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>主要应用于烟气脱硫系统中，用来客服烟气脱硫装置的烟气阻力，将原烟气引入脱硫系统中的设备。</p>
+<p>风机按照工作原理，可以分为叶片式和容积式两种，叶片式主要是离心式风机、轴流式风机、混流式风机以及横流式风机；容积式由往复式风机、回转式风机，回转式风机又可以分为罗茨风机和叶氏风机。</p>
+<blockquote>
+<p>风机按照产生的全压高低可以分为：通风机（产生的额定全压值 98 ~ 14700$Pa$ ）、鼓风机（产生的额定全压值 14700 ~ 196140$Pa$ ）、压缩机（产生的额定全压值大于 196120$Pa$ 或压缩比大于 3.5 的风机）、风扇（产生的额定全压值低于 98$Pa$ ）。</p>
+</blockquote>
+<p>对于风机来说主要运行特点时低压头、大流量、低转速。</p>
+<p>一般有离心式、动叶可调轴流式和静叶可调子午加速轴流式三种。</p>
+<h3 id="离心式风机"><a href="#离心式风机" class="headerlink" title="离心式风机"></a>离心式风机</h3><p>烟气由轴向进入，被叶轮带动受离心力加压排出，离心式风机<strong>压头高、流量大、结构简单、易于维护</strong>。但离心式风机<strong>高效区相对较窄</strong>，在低负载运行时效率低下，无法满足节能需求，比转速 $n_{s}$ （离心式一般15~100）不符合一般实际需求，故通常不推荐选用。</p>
+<blockquote>
+<p>比转速 $n_{s}$ ：用于描述流（风）量、扬程和转速的综合特征数，数值上等于风机全压为 $1Pa$ ，流量为 $1m^{3}/s$ 时的转速；比转速小反应机器流量小，全压高，反之则流量大、全压低。</br><br>比转数大小也反映叶轮的形状。比转数越大叶轮外径就越小，而宽度越大。反之，比转数越小，则叶轮外径越大，宽度越小。<br>在一定流量和全压（或扬程、水头）下，比转数与机器转速成正比。提高转速可减小叶轮外径，增加宽度；而降低转速，则须增加叶轮外径，减小宽度。</p>
+</blockquote>
+<blockquote>
+<p>泵的比转数在数值上等于几何相似的泵在流量为 $0.075m^{3}/s$ 、扬程达 $1m$ 时的转数。</br><br>水轮机的比转数在数值上等于几何相似的水轮机在 $1m$ 水头下发出 $1kW$ 功率时的转速。</p>
+</blockquote>
+<h3 id="轴流式风机"><a href="#轴流式风机" class="headerlink" title="轴流式风机"></a>轴流式风机</h3><p>轴流式风机比转速 $n_{s}$ 范围 90 ~ 300 ，当比转速 75 ~ 120 时，离心式轴流式都可以选用，比转速更大时，只能采用轴流式风机。</p>
+<ul>
+<li>动叶可调轴流风机：利用调整动叶角度来适应负载的变化，使效率最优化，功率随动叶角度的减小而降低。<br>动叶可调的轴流风机的动叶调节机构由机械传动和液压传动调节两种，通常采用液压传动调节。</li>
+<li>静叶可调子午加速轴流风机：延气流通道的子午截面尺寸显著缩小，使气流通过子午面中获得加速；常见的子午加速轴流风机主要有两种：等压风机，国外称“许赫特”( Schicht )风机；子午加速高压风机，国外称“爱克”( Eck )风机。<br>等压风机的叶轮进出口静压不变，利用子午面上的加速保持相对速度不变，最高效率 80% ，但调节幅度较大。<br>高压风机原理相反，尽可能产生高的静压，风机效率可高达 88% 。</li>
+</ul>
+<h2 id="空气压缩机"><a href="#空气压缩机" class="headerlink" title="空气压缩机"></a>空气压缩机</h2><h3 id="常用各类压缩机气量、压力范围"><a href="#常用各类压缩机气量、压力范围" class="headerlink" title="常用各类压缩机气量、压力范围"></a>常用各类压缩机气量、压力范围</h3><table>
+<thead>
+<tr>
+<th>类型</th>
+<th align="center">通常单机容量</th>
+<th align="center">通常排气压力</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>活塞式空气压缩机</td>
+<td align="center">$\le 100m^{3}/min$</td>
+<td align="center">$0.1-32MPa$</td>
+</tr>
+<tr>
+<td>螺杆式空气压缩机</td>
+<td align="center">$50-250m^{3}/min$</td>
+<td align="center">$0.1-2.0MPa$</td>
+</tr>
+<tr>
+<td>离心式空气压缩机</td>
+<td align="center">$&gt;100m^{3}/min$</td>
+<td align="center">$0.1-6.0MPa$</td>
+</tr>
+</tbody></table>
+<h2 id="除尘设备"><a href="#除尘设备" class="headerlink" title="除尘设备"></a>除尘设备</h2><h3 id="旋风除尘器"><a href="#旋风除尘器" class="headerlink" title="旋风除尘器"></a>旋风除尘器</h3><p>利用含尘气体做旋转运动产生的立行立改，将粉尘分离捕集。旋风除尘器结构简单、没有运动部件、除尘效率较高、适应性较强，对捕集 5 ~ 10$\mu m$ 的尘粒，其除尘效率可达 90% 。</p>
+<h3 id="袋式除尘器"><a href="#袋式除尘器" class="headerlink" title="袋式除尘器"></a>袋式除尘器</h3><p>利用过滤技术将空气中的固体颗粒物进行分离，滤袋积附一定厚度粉尘后，需要清灰，滤尘与清灰交替进行。主要特点如下：</p>
+<ul>
+<li>除尘效果好，对微细粉尘除尘效率也可达 99% 以上；</li>
+<li>适应性强，对多类性质粉尘都有很高的除尘效率，含尘浓度影响不大；</li>
+<li>规格多样，应用灵活，小到不足 $200m^{3}/h$ ，最大可超过 $5\times10^{6}m^{3}/h$；</li>
+<li>便于回收干物料，无污泥处理、废水污染以及腐蚀等问题；</li>
+<li>可以使用耐高温的滤材材料；</li>
+<li>在捕集粘性强及吸湿性强的粉尘，或处理露点很高的延期是，滤袋同意损坏，换袋困难；</li>
+<li>压力损失较大、设备庞大、滤袋易损坏、损坏后换袋困难。</li>
+</ul>
+<h3 id="电除尘器"><a href="#电除尘器" class="headerlink" title="电除尘器"></a>电除尘器</h3><p>使用负高压直流电在阴极放电，在阳极接地吸尘。主要特点：</p>
+<p>优点：</p>
+<ul>
+<li>除尘率高：普遍除尘效率 99% ，可以达到 99.9% ；</li>
+<li>设备阻力小、总的能耗低；</li>
+<li>处理烟气量大，结构上易于模块化，容易实现装置大型化，目前单机通流截面积可达 $400m^{2}$ ，处理烟气量可超过 $200\times10^{4}m^{3}/h$；</li>
+<li>耐高温，能捕集腐蚀性大、黏附性强的气溶胶颗粒；</li>
+<li>操作简单，维护保养工作量小，运行费用低；</li>
+<li>能干法分级回收粉尘。</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>一次性投资、钢材消耗量大；</li>
+<li>占地面积和占用空间大；</li>
+<li>对制造、安装和运行水平要求较高；</li>
+<li>易受工况条件影响。</li>
+</ul>
+]]></content>
+      <categories>
+        <category>机械</category>
+      </categories>
+      <tags>
+        <tag>机械</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>热工基础</title>
+    <url>/2016/11/01/%E7%83%AD%E5%B7%A5%E5%9F%BA%E7%A1%80/</url>
+    <content><![CDATA[<p><em>热工基础复习提纲</em></p>
+<span id="more"></span>
+
+<h2 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h2><h3 id="热力系统"><a href="#热力系统" class="headerlink" title="热力系统"></a>热力系统</h3><p>凡是能将热能转换为机械能的机器统称为<strong>热力发动机</strong>，简称<strong>热机</strong>。</p>
+<p>热能和机械能之间的转换是通过媒介物质在热机中的一系列状态变化过程来实现的，这种媒介物质称为<strong>工质</strong>。</p>
+<p>热容量很大，并且在吸收和放出有限量热量时自身温度和其他热力学参数没有明显变化的物体称为<strong>热源</strong>。</p>
+<p>选取的一定的工质和空间作为研究对象，称为<strong>热力系统</strong>，简称<strong>系统</strong>。</p>
+<ul>
+<li>闭口系统：与外界无物质交换的系统。</li>
+<li>开口系统：与外界有物质交换的系统。</li>
+<li>绝热系统：与外界无热量交换的系统。</li>
+<li>孤立系统：与外界既无物质交换也无热量交换的系统。</li>
+</ul>
+<h3 id="平衡态和状参"><a href="#平衡态和状参" class="headerlink" title="平衡态和状参"></a>平衡态和状参</h3><p>当系统不受外界影响的条件下，工质的状态参数不随时间而变化的状态称为平衡状态。</p>
+<p>基本状态参数：</p>
+<ul>
+<li>压力：标准单位$Pa$：$p=\frac{F}{A}$</li>
+<li>温度：单位是$K$（开）：$T=t+273.15$</li>
+<li>比体积、密度：二者互为倒数：$v=\frac{V}{m}\qquad \rho=\frac{m}{V}$</li>
+</ul>
+<p>根据状态公理指出，对于简单的可压缩系统，只需要两个独立的状态参数便可确定它的平衡状态，可以列出状态方程式：$F(p,v,T)=0$</p>
+<h3 id="可逆过程"><a href="#可逆过程" class="headerlink" title="可逆过程"></a>可逆过程</h3><p>如果系统完成了某一过程之后，再沿着原路逆行而回复到原来的状态，外界也随之恢复到原来的状态，而不留下任何变化，则这一过程称为<strong>可逆过程</strong>。否则就是<strong>不可逆过程</strong>。</p>
+<p><em>可逆过程的条件：准平衡过程＋无耗散效应。</em></p>
+<h3 id="功量和热量"><a href="#功量和热量" class="headerlink" title="功量和热量"></a>功量和热量</h3><p>膨胀功是工质在体积膨胀时所作的功。$\delta W=Fdx\qquad W=\int_{x_1}^{x_2}Fdx$</p>
+<p>单位质量工质所做的膨胀功称为比膨胀功：$\delta w=pdv\qquad W=\int_{1}^{2}pdv$</p>
+<p>系统与外界之间依靠温差传递的能量。符号：$Q$ ；单位：$J$ 或 $kJ$ 。单位质量工质所传递的热量用 $q$ 表示，单位为 $J/kg$ 或 $kJ/kg$ 。系统吸热热量为正，放热为负。</p>
+<p>引入熵（$S$），单位是$J/K$，定义：$dS=(\frac{\delta Q}{T})_{re}$</p>
+<p>同时定义单位质量的熵为比熵（$s$）。由此得：$q=\int_{1}^{2}Tds$</p>
+<h2 id="热力学第一定律"><a href="#热力学第一定律" class="headerlink" title="热力学第一定律"></a>热力学第一定律</h2><h3 id="储存能"><a href="#储存能" class="headerlink" title="储存能"></a>储存能</h3><p>气体工质的比热力学能：单位是 $J/kg$ 或 $kJ/kg$ ：$u=f(T,v)$</p>
+<p>宏观动能和宏观位能：$E_k=\frac{1}{2}mc_f^2\qquad E_p=mgz$</p>
+<p>储备能：$E=U+E_k+E_p\qquad e=u+e_k+e_p$</p>
+<h3 id="热力学第一定律及其流动能量方程式"><a href="#热力学第一定律及其流动能量方程式" class="headerlink" title="热力学第一定律及其流动能量方程式"></a>热力学第一定律及其流动能量方程式</h3><p>热力过程中的能量守恒和转换定律。：在热能与其它形式能的互相转换过程中，能的总量始终不变。</p>
+<p>工质在流过热工设备时，必须受外力推动，这种推动工质流动而做的功称为<strong>流动功</strong>或许<strong>推进功</strong>。</p>
+<p>$$\delta W_f=pAdx=pdV=pvdm\qquad w_f=\frac{\delta W_f}{dm}=pv$$</p>
+<p>比焓：$h=u+pv$</p>
+<p>技术功：$W_t=\frac{1}{2}m\Delta c_{f}^{2}+mg\Delta z+W_s$</p>
+<h2 id="理想气体的性质和热力过程"><a href="#理想气体的性质和热力过程" class="headerlink" title="理想气体的性质和热力过程"></a>理想气体的性质和热力过程</h2><h3 id="理想气体状态方程式"><a href="#理想气体状态方程式" class="headerlink" title="理想气体状态方程式"></a>理想气体状态方程式</h3><p>根据<strong>波义耳-马略特定律、盖-吕萨克定律和查理定律</strong>得出理想气体状态方程式，以及克拉贝龙方程式：</p>
+<p>$$pv=R_gT\qquad pV=mR_gT$$</p>
+<p>$R_g$ 是气体常数，当$M$表示表示气体的摩尔质量时，$R=MR_g$ 是常数 8.314$J/(mol\cdot K)$</p>
+<h3 id="理想气体的热容、热力学能、焓和熵"><a href="#理想气体的热容、热力学能、焓和熵" class="headerlink" title="理想气体的热容、热力学能、焓和熵"></a>理想气体的热容、热力学能、焓和熵</h3><p>物体温度升高1K所需的热量称为该物体的热容量或热容，单位质量的热容量，称为比热容。$ C=\frac{\delta Q}{dT}\qquad c=\frac{\delta q}{dt}$</p>
+<p>因为热量是与过程性质有关的量，因此如果工质的初终态不同，那么工质的比热容也会不同，常用的有定容比热容$c_v$和定压比热容$c_p$。</p>
+<p>根据焓的定义和理想气体状态方程，容易推出：</p>
+<p>$$c_V=\frac{du}{dT}\qquad c_p=\frac{dh}{dT}\qquad c_p=c_v+R_g$$</p>
+<p>定义有比热容比$\gamma=c_p/c_v$，也称为定熵指数（绝热指数）$\kappa$</p>
+<p>在对于计算要求不需要特别精确时，可以使用定值摩尔热容</p>
+<table>
+<thead>
+<tr>
+<th align="center">定值摩尔热容</th>
+<th align="center">单原子气体</th>
+<th align="center">双原子气体</th>
+<th align="center">多原子气体</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">$C_{V,m}$</td>
+<td align="center">$\frac{3}{2}R$</td>
+<td align="center">$\frac{5}{2}R$</td>
+<td align="center">$\frac{7}{2}R$</td>
+</tr>
+<tr>
+<td align="center">$C_{p,m}$</td>
+<td align="center">$\frac{5}{2}R$</td>
+<td align="center">$\frac{7}{2}R$</td>
+<td align="center">$\frac{9}{2}R$</td>
+</tr>
+<tr>
+<td align="center">$\gamma$</td>
+<td align="center">1.67</td>
+<td align="center">1.40</td>
+<td align="center">1.29</td>
+</tr>
+</tbody></table>
+<p>热力学能和焓：</p>
+<p>$$\Delta u=\int_{1}^{2}c_VdT\qquad \Delta h=\int_{1}^{2}c_pdT$$</p>
+<p>理想气体的熵：</p>
+<p>$$\begin{align}<br>\Delta s &amp; =c_Vln\frac{T_2}{T_1}+R_gln\frac{v_2}{v_1} \\<br> &amp; =c_pln\frac{T_2}{T_1}-R_gln\frac{p_2}{p_1} \\<br> &amp; =c_Vln\frac{p_2}{p_1}+c_pln\frac{v_2}{v_1} \\<br>\end{align}$$</p>
+<h3 id="理想气体的热力过程"><a href="#理想气体的热力过程" class="headerlink" title="理想气体的热力过程"></a>理想气体的热力过程</h3><p>理想气体的基本热力过程有：定容过程、定压过程、定温过程和定熵过程。</p>
+<p>便于记忆直接讨论结合在一起的多变过程。</p>
+<p>对于许多过程，可以近似的使用$pv^n=;$常数来描述，式中的 $n$ 称为多变指数。</p>
+<table>
+<thead>
+<tr>
+<th align="center">$n$</th>
+<th align="center">过程类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">0</td>
+<td align="center">定压过程</td>
+</tr>
+<tr>
+<td align="center">1</td>
+<td align="center">定温过程</td>
+</tr>
+<tr>
+<td align="center">$\kappa$</td>
+<td align="center">定熵指数</td>
+</tr>
+<tr>
+<td align="center">$\pm\infty$</td>
+<td align="center">定容过程</td>
+</tr>
+</tbody></table>
+<p>过程方程式：$pv^n=x$</p>
+<p>初终态参数关系：$\frac{p_2}{p_1}=\left( \frac{v_1}{v_2} \right)^n\qquad \frac{T_2}{T_1}=\left( \frac{v_1}{v_2} \right)^{n-1}\qquad \frac{T_2}{T_1}=\left( \frac{p_2}{p_1} \right)^{\frac{n-1}{n}}$</p>
+<p>膨胀功：$w=\frac{p_1v_1-p_2v_2}{n-1}=\frac{R_g}{n-1}(T_1-T_2)$</p>
+<p>交换的功量（不含动能变化）：$w_t=nw$</p>
+<p>交换的热量：$c_n(T_2-T_1)\qquad c_n=\frac{n-\kappa }{n-1}c_V$</p>
+<h2 id="热力学第二定律"><a href="#热力学第二定律" class="headerlink" title="热力学第二定律"></a>热力学第二定律</h2><p>开尔文－普朗克表述：不可能从单一热源取热，并使之完全转变为有用功而不产生其它影响。</p>
+<p>克劳修斯表述：不可能将热从低温物体传至高温物体而不引起其它变化。</p>
+<p>热二律的实质：自发过程都是具有方向性的。</p>
+<h3 id="热力循环"><a href="#热力循环" class="headerlink" title="热力循环"></a>热力循环</h3><p>循环根据效果不同可以分为正向循环和逆向循环。</p>
+<p>正向循环在示意图上表示为顺时针方向，吸热，对外做功。热力循环的效率为热效率，用净功和吸热的比值定义：$\eta_t=\frac{W_{net}}{Q_1}=\frac{Q_1-Q_2}{Q_1}=1-\frac{Q_2}{Q_1}$</p>
+<p>反向循环在示意图上表示为逆时针方向，分为制冷系数：$\varepsilon =\frac{Q_2}{W_{net}}$和制热系数：$\varepsilon ‘=\frac{Q_1}{W_{net}}$</p>
+<h3 id="卡诺循环"><a href="#卡诺循环" class="headerlink" title="卡诺循环"></a>卡诺循环</h3><p>卡诺循环由两个可逆定温过程和两个可逆绝热过程组成。先定温吸热，然后绝热膨胀，再定温放热，最后绝热压缩。易推出，卡诺循环的热效率：$\eta_C=1-\frac{T_2}{T_1}\qquad \varepsilon_C =\frac{T_2}{T_1-T_2}\qquad \varepsilon_C ‘=\frac{T_1}{T_1-T_2}$</p>
+<p>热力循环可实现的要求是循环的热效率（制冷或制热系数）必须小于其卡诺循环的热效率（制冷或制热系数）。</p>
+<p>由卡诺在热机效率的基础上得出了卡诺定理：</p>
+<ul>
+<li>定理一：在相同的高温热源和低温热源间工作的一切可逆热机具有相同的热效率，与工质的性质无关。 </li>
+<li>定理二：在相同高温热源和低温热源间工作的任何不可逆热机的热效率都小于可逆热机的热效率。 </li>
+</ul>
+<h3 id="熵"><a href="#熵" class="headerlink" title="熵"></a>熵</h3><p><em>coming soon</em></p>
+<h2 id="热量传递的基本方式"><a href="#热量传递的基本方式" class="headerlink" title="热量传递的基本方式"></a>热量传递的基本方式</h2><p>热量传递有三种基本方式：热传导、热对流和热辐射。</p>
+<h3 id="热传导"><a href="#热传导" class="headerlink" title="热传导"></a>热传导</h3><p>实验证明：平面一维稳态导热的热流量与平壁的表面面积 $A$ 两侧表面的温差成正比，与平壁的厚度 $\delta$ 成反比：$\phi =\lambda A\frac{t_{w1}-t_{w2}}{\delta}$</p>
+<p>由此还定义出导热电阻 $R_{\lambda}=\frac{\delta}{A\lambda};$以及热流密度$q = \frac{\phi}{A}$</p>
+<h3 id="热对流"><a href="#热对流" class="headerlink" title="热对流"></a>热对流</h3><p>热对流是指由于流体的宏观运动使温度不同的流体相对位移而产生的热量传递现象。</p>
+<p>牛顿冷却公式：</p>
+<p>$$\phi =Ah(t_w-t_f)=Ah\Delta t=\frac{\Delta t}{R_h}$$</p>
+<h3 id="热辐射"><a href="#热辐射" class="headerlink" title="热辐射"></a>热辐射</h3><p><em>coming soon</em></p>
+<h2 id="导热"><a href="#导热" class="headerlink" title="导热"></a>导热</h2><h3 id="导热理论基础"><a href="#导热理论基础" class="headerlink" title="导热理论基础"></a>导热理论基础</h3><p>温度场：某一时刻空间所有各点的温度分布，即$t=f(x,y,z,\tau )$</p>
+<p>不随时间按变化的温度场是稳态温度场，反之则是非稳态温度场。</p>
+<p>等温线（面）：在同一时刻，温度场中温度相同的点所连成的线或面。</p>
+<p>温度梯度：等温面（线）法线方向的温度变化率矢量。</p>
+<p>$$grad;t=\frac{\delta t}{\delta x}\overrightarrow{n}$$</p>
+<h3 id="傅立叶定律"><a href="#傅立叶定律" class="headerlink" title="傅立叶定律"></a>傅立叶定律</h3><p>傅立叶定律：$\overrightarrow{q}=-\lambda grad;t=-\lambda \frac{\delta t}{\delta n}\overrightarrow{n}$</p>
+<p>傅立叶定律表明：导热热流密度的大小与温度梯度的绝对值成正比，其方向与温度梯度相反。</p>
+<p>热导率是物质的重要热物性参数，根据傅立叶定律，有：$\lambda = \frac{q}{\left | grad; t \right |}$</p>
+<h2 id="对流换热"><a href="#对流换热" class="headerlink" title="对流换热"></a>对流换热</h2><blockquote>
+<p>奴赛尔数$Nu$、雷诺数$Re$、普朗特数$Pr$你好。<br>奴赛尔数$Nu$、雷诺数$Re$、普朗特数$Pr$再见！</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>机械</category>
+      </categories>
+      <tags>
+        <tag>机械</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>简易局域网共享服务器2.0</title>
+    <url>/2017/03/01/%E7%AE%80%E6%98%93%E5%B1%80%E5%9F%9F%E7%BD%91%E5%85%B1%E4%BA%AB%E6%9C%8D%E5%8A%A1%E5%99%A82-0/</url>
+    <content><![CDATA[<p>之前做了一个<a href="/2016/11/16/%E7%AE%80%E6%98%93%E5%B1%80%E5%9F%9F%E7%BD%91%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%E8%84%9A%E6%9C%AC%E5%AE%9E%E7%8E%B0/">小脚本</a>来共享文件，最初的作用是在寝室床上可以愉快的访问存在下面电脑里的文件。但是在使用中还是感觉不太便利，一是需要特定的文件结构，二是需要flask（事实证明杀鸡焉用牛刀）。所以有必要对之前的脚本做一个小小的升级。我想到了之前用来测试的<code>http.server</code>模块可以很好的适用于这种需求，所以查阅了<code>http.server</code>模块的文档后，做了如下脚本。</p>
+<span id="more"></span>
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> socket</span><br><span class="line"><span class="keyword">import</span> http.server</span><br><span class="line"><span class="keyword">import</span> socketserver</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getip</span>(<span class="params">head</span>):</span></span><br><span class="line">    IPs = socket.gethostbyname_ex(socket.gethostname())[-<span class="number">1</span>]</span><br><span class="line">    localIP = <span class="string">&#x27;&#x27;</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> IPs:</span><br><span class="line">        <span class="keyword">if</span> i[<span class="number">0</span>:<span class="number">3</span>] == head:</span><br><span class="line">            localIP = i</span><br><span class="line">    <span class="keyword">return</span> localIP</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    PORT = <span class="number">666</span></span><br><span class="line">    <span class="keyword">if</span> sys.argv[<span class="number">1</span>:]:</span><br><span class="line">        head = sys.argv[<span class="number">1</span>]</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        head = <span class="string">&#x27;172&#x27;</span></span><br><span class="line">    PORT = <span class="number">666</span></span><br><span class="line">    Handler = http.server.SimpleHTTPRequestHandler</span><br><span class="line">    IP = getip(head)</span><br><span class="line">    <span class="keyword">if</span> IP:</span><br><span class="line">        httpd = socketserver.TCPServer((getip(head), PORT), Handler)</span><br><span class="line">        print(<span class="string">&quot;serving at &quot;</span>+getip(head)+<span class="string">&quot;:666&quot;</span>)</span><br><span class="line">        httpd.serve_forever()</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        print(<span class="string">&#x27;Invalid domain&#x27;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>这一次的脚本对文件的结构完全没有要求。</p>
+<p><code>getip()</code>沿用了之前的函数，这一次可以指定ip的关键字。整个脚本等效于：</p>
+<pre><code>python -m http.server 8000 --bind &lt;your ip&gt;
+</code></pre>
+]]></content>
+      <categories>
+        <category>code</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>简易局域网文件传输脚本实现</title>
+    <url>/2016/11/16/%E7%AE%80%E6%98%93%E5%B1%80%E5%9F%9F%E7%BD%91%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%E8%84%9A%E6%9C%AC%E5%AE%9E%E7%8E%B0/</url>
+    <content><![CDATA[<p>就是一个很简单的基于flask服务器脚本。</p>
+<span id="more"></span>
+
+<p>使用脚本时的文件结构：</p>
+<ul>
+<li>脚本文件</li>
+<li>分类文件夹1</li>
+<li>文件1</li>
+<li>文件2</li>
+<li>······</li>
+<li>分类文件夹2</li>
+<li>文件1</li>
+<li>文件2</li>
+<li>······</li>
+<li>······</li>
+</ul>
+<p><em>脚本的使用环境是windous，因为校内网段是172，所以使用172检索，普通路由器可以使用192来检索。</em></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> socket</span><br><span class="line"></span><br><span class="line">app = Flask(__name__,static_url_path=<span class="string">&#x27;&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/&#x27;</span></span>)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span>():</span></span><br><span class="line">    date = []</span><br><span class="line">    date = gettarget()</span><br><span class="line">    <span class="keyword">return</span> <span class="string">u&#x27;&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&quot;UTF-8&quot;/&gt;&lt;title&gt; LinksMoviesServer&lt;/title&gt;&lt;style&gt;a&#123;font-size: 200%;display: block;margin-left: 10vw;&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot;background:#666;width:100%;padding-top:10vh&quot;&gt;&#x27;</span>+date+<span class="string">&#x27;&lt;/body&gt;&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/&lt;dirname&gt;&#x27;</span></span>)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">moviesdir</span>(<span class="params">dirname</span>):</span></span><br><span class="line">    date = []</span><br><span class="line">    date = gettarget(pwd=dirname)</span><br><span class="line">    <span class="keyword">return</span> <span class="string">u&#x27;&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&quot;UTF-8&quot;/&gt;&lt;title&gt;LinksMoviesServer&lt;/title&gt;&lt;style&gt;a&#123;font-size: 200%;display: block;margin-left: 10vw;&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot;background:#666;width:100%;padding-top:10vh&quot;&gt;&#x27;</span>+date+<span class="string">&#x27;&lt;/body&gt;&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/&lt;dirname&gt;/&lt;moviesname&gt;&#x27;</span></span>)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">movies</span>(<span class="params">dirname,moviesname</span>):</span></span><br><span class="line">    <span class="keyword">return</span> send_from_directory(dirname,moviesname)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gettarget</span>(<span class="params">pwd=<span class="string">&#x27;&#x27;</span>,moviename=<span class="string">&#x27;&#x27;</span></span>):</span></span><br><span class="line">    ospwd = os.getcwd()</span><br><span class="line">    ospwd = ospwd + <span class="string">&#x27;\\&#x27;</span> + pwd</span><br><span class="line">    dirlist = os.listdir(ospwd) </span><br><span class="line">    target = <span class="string">&#x27;&#x27;</span></span><br><span class="line">    <span class="keyword">if</span> pwd == <span class="string">&#x27;&#x27;</span>:</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> dirlist:</span><br><span class="line">            target = target + <span class="string">&#x27;&lt;a href=&quot;/&#x27;</span>+ i +<span class="string">&#x27;&quot;&gt;&#x27;</span>+i+<span class="string">&#x27;&lt;/a&gt;&#x27;</span></span><br><span class="line">    <span class="keyword">elif</span> moviename==<span class="string">&#x27;&#x27;</span> :</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> dirlist:</span><br><span class="line">            target = target + <span class="string">&#x27;&lt;a href=&quot;/&#x27;</span> + pwd + <span class="string">&#x27;/&#x27;</span> + i +<span class="string">&#x27;&quot;&gt;&#x27;</span>+i+<span class="string">&#x27;&lt;/a&gt;&#x27;</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        target = ospwd + <span class="string">&#x27;\\&#x27;</span> + moviename</span><br><span class="line">    <span class="keyword">return</span> target</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getip</span>():</span></span><br><span class="line">    IPs = socket.gethostbyname_ex(socket.gethostname())[-<span class="number">1</span>]</span><br><span class="line">    localIP = <span class="string">&#x27;&#x27;</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> IPs:</span><br><span class="line">        <span class="keyword">if</span> i[<span class="number">0</span>:<span class="number">3</span>]==<span class="string">&#x27;172&#x27;</span>:</span><br><span class="line">            localIP = i</span><br><span class="line">    <span class="keyword">return</span> localIP</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    app.run(host=getip(),threaded=<span class="literal">True</span>,port=<span class="number">666</span>)</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>code</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>魔方</title>
+    <url>/2016/10/12/%E9%AD%94%E6%96%B9/</url>
+    <content><![CDATA[<p>为了写出一个Python版的二阶段算法求解魔方。</p>
+<p>今天开始学cpp（蜜汁需求得到的蜜汁结果）。</p>
+<p>就酱紫。</p>
+<p>随时更新。</p>
+<span id="more"></span>
+
+<p>使用魔方中心块的相对位置来表示魔方块。例如一个已复原的魔方的表示为：UF  UR  UB  UL  DF  DR  DB  DL  FR  FL  BR  BL  UFR  URB UBL  ULF  DRF DFL  DLB  DBR</p>
+<p>解魔方算法的Cpp表达</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span> ;</span><br><span class="line"><span class="keyword">char</span></span><br><span class="line">         </span><br><span class="line">        *faces=<span class="string">&quot;RLFBUD&quot;</span>,</span><br><span class="line">         </span><br><span class="line">        *order=<span class="string">&quot;AECGBFDHIJKLMSNTROQP&quot;</span>,</span><br><span class="line">         </span><br><span class="line">        *bithash=<span class="string">&quot;TdXhQaRbEFIJUZfijeYV&quot;</span>,</span><br><span class="line">           </span><br><span class="line">        *perm=<span class="string">&quot;AIBJTMROCLDKSNQPEKFIMSPRGJHLNTOQAGCEMTNSBFDHORPQ&quot;</span>,</span><br><span class="line"> </span><br><span class="line">        pos[<span class="number">20</span>],ori[<span class="number">20</span>],val[<span class="number">20</span>],</span><br><span class="line"> </span><br><span class="line">        TEMP,</span><br><span class="line"> </span><br><span class="line">        *tables[<span class="number">8</span>];</span><br><span class="line"> </span><br><span class="line"><span class="keyword">int</span> movecube[<span class="number">20</span>],moveamount[<span class="number">20</span>],</span><br><span class="line"> </span><br><span class="line">        phase=<span class="number">0</span>,</span><br><span class="line"> </span><br><span class="line">        tablesize[]=&#123;<span class="number">1</span>,<span class="number">4096</span>,  <span class="number">6561</span>,<span class="number">4096</span>,  <span class="number">256</span>,<span class="number">1536</span>,  <span class="number">13824</span>,<span class="number">576</span>&#125;;</span><br><span class="line"> </span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SWAP(a,b) TEMP=a;a=b;b=TEMP;</span></span><br><span class="line"> </span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CHAROFFSET 65</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">static</span> <span class="built_in">string</span> answer = <span class="string">&quot;&quot;</span>;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">cycle</span><span class="params">(<span class="keyword">char</span>*p,<span class="keyword">char</span>*a)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">        SWAP(p[*a-CHAROFFSET],p[a[<span class="number">1</span>]-CHAROFFSET]);</span><br><span class="line">        SWAP(p[*a-CHAROFFSET],p[a[<span class="number">2</span>]-CHAROFFSET]);</span><br><span class="line">        SWAP(p[*a-CHAROFFSET],p[a[<span class="number">3</span>]-CHAROFFSET]);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">twist</span><span class="params">(<span class="keyword">int</span> i,<span class="keyword">int</span> a)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">        i-=CHAROFFSET;</span><br><span class="line">        ori[i]=(ori[i]+a+<span class="number">1</span>)%val[i];</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">reset</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">        <span class="keyword">for</span>( <span class="keyword">int</span> i=<span class="number">0</span>; i&lt;<span class="number">20</span>; pos[i]=i, ori[i++]=<span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">permtonum</span><span class="params">(<span class="keyword">char</span>* p)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> ( <span class="keyword">int</span> a=<span class="number">0</span>; a&lt;<span class="number">4</span>; a++)</span><br><span class="line">        &#123;</span><br><span class="line"> </span><br><span class="line">                n*=<span class="number">4</span>-a;</span><br><span class="line">                <span class="keyword">for</span>( <span class="keyword">int</span> b=a; ++b&lt;<span class="number">4</span>; )</span><br><span class="line">                        <span class="keyword">if</span> (p&lt;p[a]) n++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> n;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">numtoperm</span><span class="params">(<span class="keyword">char</span>* p,<span class="keyword">int</span> n,<span class="keyword">int</span> o)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">        p+=o;</span><br><span class="line">        p[<span class="number">3</span>]=o;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> a=<span class="number">3</span>; a--;)</span><br><span class="line">        &#123;</span><br><span class="line">                p[a] = n%(<span class="number">4</span>-a) +o;</span><br><span class="line">                n/=<span class="number">4</span>-a;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> b=a; ++b&lt;<span class="number">4</span>; )</span><br><span class="line">                        <span class="keyword">if</span> ( p &gt;= p[a]) p++;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getposition</span><span class="params">(<span class="keyword">int</span> t)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> i=<span class="number">-1</span>,n=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">switch</span>(t)</span><br><span class="line">        &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">                <span class="keyword">for</span>(;++i&lt;<span class="number">12</span>;) n+= ori[i]&lt;&lt;i;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">                <span class="keyword">for</span>(i=<span class="number">20</span>;--i&gt;<span class="number">11</span>;) n=n*<span class="number">3</span>+ori[i];</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">                <span class="keyword">for</span>(;++i&lt;<span class="number">12</span>;) n+= (pos[i]&amp;<span class="number">8</span>)?(<span class="number">1</span>&lt;&lt;i):<span class="number">0</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">4</span>:</span><br><span class="line">                <span class="keyword">for</span>(;++i&lt;<span class="number">8</span>;) n+= (pos[i]&amp;<span class="number">4</span>)?(<span class="number">1</span>&lt;&lt;i):<span class="number">0</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">5</span>:</span><br><span class="line">                <span class="keyword">int</span> corn[<span class="number">8</span>],j,k,l,corn2[<span class="number">4</span>];</span><br><span class="line">                k=j=<span class="number">0</span>;</span><br><span class="line">                <span class="keyword">for</span>(;++i&lt;<span class="number">8</span>;)</span><br><span class="line">                        <span class="keyword">if</span>((l=pos[i+<span class="number">12</span>]<span class="number">-12</span>)&amp;<span class="number">4</span>)</span><br><span class="line">                        &#123;</span><br><span class="line">                                corn[l]=k++;</span><br><span class="line">                                n+=<span class="number">1</span>&lt;&lt;i;</span><br><span class="line">                        &#125;<span class="keyword">else</span> corn[j++]=l;</span><br><span class="line">                <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;<span class="number">4</span>;i++) corn2[i]=corn[<span class="number">4</span>+corn[i]];</span><br><span class="line">                <span class="keyword">for</span>(;--i;) corn2[i]^=corn2[<span class="number">0</span>];</span><br><span class="line">                n=n*<span class="number">6</span>+corn2[<span class="number">1</span>]*<span class="number">2</span><span class="number">-2</span>;</span><br><span class="line">                <span class="keyword">if</span>(corn2[<span class="number">3</span>]&lt;corn2[<span class="number">2</span>])n++;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">6</span>:</span><br><span class="line">                n=permtonum(pos)*<span class="number">576</span>+permtonum(pos+<span class="number">4</span>)*<span class="number">24</span>+permtonum(pos+<span class="number">12</span>);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">7</span>:</span><br><span class="line">                n=permtonum(pos+<span class="number">8</span>)*<span class="number">24</span>+permtonum(pos+<span class="number">16</span>);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> n;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">setposition</span><span class="params">(<span class="keyword">int</span> t, <span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> i=<span class="number">0</span>,j=<span class="number">12</span>,k=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">char</span> *corn=<span class="string">&quot;QRSTQRTSQSRTQTRSQSTRQTSR&quot;</span>;</span><br><span class="line">        reset();</span><br><span class="line">        <span class="keyword">switch</span>(t)&#123;</span><br><span class="line">         </span><br><span class="line">        <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">                <span class="keyword">for</span>(;i&lt;<span class="number">12</span>;i++,n&gt;&gt;=<span class="number">1</span>) ori[i]=n&amp;<span class="number">1</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">                <span class="keyword">for</span>(i=<span class="number">12</span>;i&lt;<span class="number">20</span>;i++,n/=<span class="number">3</span>) ori[i]=n%<span class="number">3</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">                <span class="keyword">for</span>(;i&lt;<span class="number">12</span>;i++,n&gt;&gt;=<span class="number">1</span>) pos[i]= <span class="number">8</span>*n&amp;<span class="number">8</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">4</span>:</span><br><span class="line">                <span class="keyword">for</span>(;i&lt;<span class="number">8</span>;i++,n&gt;&gt;=<span class="number">1</span>) pos[i]= <span class="number">4</span>*n&amp;<span class="number">4</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">5</span>:</span><br><span class="line">                corn+=n%<span class="number">6</span>*<span class="number">4</span>;</span><br><span class="line">                n/=<span class="number">6</span>;</span><br><span class="line">                <span class="keyword">for</span>(;i&lt;<span class="number">8</span>;i++,n&gt;&gt;=<span class="number">1</span>)</span><br><span class="line">                        pos[i+<span class="number">12</span>]= n&amp;<span class="number">1</span> ? corn[k++]-CHAROFFSET : j++;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">6</span>:</span><br><span class="line">                numtoperm(pos,n%<span class="number">24</span>,<span class="number">12</span>);n/=<span class="number">24</span>;</span><br><span class="line">                numtoperm(pos,n%<span class="number">24</span>,<span class="number">4</span>); n/=<span class="number">24</span>;</span><br><span class="line">                numtoperm(pos,n   ,<span class="number">0</span>);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">7</span>:</span><br><span class="line">                numtoperm(pos,n/<span class="number">24</span>,<span class="number">8</span>);</span><br><span class="line">                numtoperm(pos,n%<span class="number">24</span>,<span class="number">16</span>);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">domove</span><span class="params">(<span class="keyword">int</span> m)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">        <span class="keyword">char</span> *p=perm+<span class="number">8</span>*m, i=<span class="number">8</span>;</span><br><span class="line"> </span><br><span class="line">        cycle(pos,p);</span><br><span class="line">        cycle(ori,p);</span><br><span class="line">        cycle(pos,p+<span class="number">4</span>);</span><br><span class="line">        cycle(ori,p+<span class="number">4</span>);</span><br><span class="line">        <span class="keyword">if</span>(m&lt;<span class="number">4</span>)</span><br><span class="line">                <span class="keyword">for</span>(;--i&gt;<span class="number">3</span>;) twist(p[i],i&amp;<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">if</span>(m&lt;<span class="number">2</span>)</span><br><span class="line">                <span class="keyword">for</span>(i=<span class="number">4</span>;i--;) twist(p[i],<span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">filltable</span><span class="params">(<span class="keyword">int</span> ti)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n=<span class="number">1</span>,l=<span class="number">1</span>, tl=tablesize[ti];</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">char</span>* tb = tables[ti]=<span class="keyword">new</span> <span class="keyword">char</span>[tl];</span><br><span class="line"> </span><br><span class="line">        <span class="built_in">memset</span>( tb, <span class="number">0</span>, tl);</span><br><span class="line">        reset();</span><br><span class="line">        tb[getposition(ti)]=<span class="number">1</span>;</span><br><span class="line">         </span><br><span class="line">        <span class="keyword">while</span>(n)</span><br><span class="line">        &#123;</span><br><span class="line">                n=<span class="number">0</span>;</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;tl;i++)&#123;</span><br><span class="line">                        <span class="keyword">if</span>( tb[i]==l )</span><br><span class="line">                        &#123;</span><br><span class="line">                                setposition(ti,i);</span><br><span class="line">                                <span class="keyword">for</span>( <span class="keyword">int</span> f=<span class="number">0</span>; f&lt;<span class="number">6</span>; f++)</span><br><span class="line">                                &#123;</span><br><span class="line">                                        <span class="keyword">for</span>( <span class="keyword">int</span> q=<span class="number">1</span>;q&lt;<span class="number">4</span>;q++)</span><br><span class="line">                                        &#123;</span><br><span class="line">                                                domove(f);</span><br><span class="line">                                                <span class="keyword">int</span> r=getposition(ti);</span><br><span class="line">                                                <span class="keyword">if</span>( ( q==<span class="number">2</span> || f&gt;=(ti&amp;<span class="number">6</span>) ) &amp;&amp; !tb[r])</span><br><span class="line">                                                &#123;</span><br><span class="line">                                                        tb[r]=l+<span class="number">1</span>;</span><br><span class="line">                                                        n++;</span><br><span class="line">                                                &#125;</span><br><span class="line">                                        &#125;</span><br><span class="line">                                        domove(f);</span><br><span class="line">                                &#125;</span><br><span class="line">                        &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                l++;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">searchphase</span><span class="params">(<span class="keyword">int</span> movesleft, <span class="keyword">int</span> movesdone,<span class="keyword">int</span> lastmove)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>( tables[phase  ][getposition(phase  )]<span class="number">-1</span> &gt; movesleft ||</span><br><span class="line">            tables[phase+<span class="number">1</span>][getposition(phase+<span class="number">1</span>)]<span class="number">-1</span> &gt; movesleft ) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">if</span>(!movesleft) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">for</span>( <span class="keyword">int</span> i=<span class="number">6</span>;i--;)&#123;</span><br><span class="line">                <span class="keyword">if</span>( i-lastmove &amp;&amp; (i-lastmove+<span class="number">1</span> || i|<span class="number">1</span> ) )</span><br><span class="line">                &#123;</span><br><span class="line">                        movecube[movesdone]=i;</span><br><span class="line">                        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;++j&lt;<span class="number">4</span>;)&#123;</span><br><span class="line">                                domove(i);</span><br><span class="line">                                moveamount[movesdone]=j;</span><br><span class="line">                                <span class="keyword">if</span>( (j==<span class="number">2</span> || i&gt;=phase ) &amp;&amp;</span><br><span class="line">                                        searchphase(movesleft<span class="number">-1</span>,movesdone+<span class="number">1</span>,i) ) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">                        &#125;</span><br><span class="line">                        domove(i);</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">check</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;answer.length()<span class="number">-2</span>;i+=<span class="number">2</span>)</span><br><span class="line">        &#123;</span><br><span class="line">                <span class="keyword">if</span>(answer[i] == answer[i+<span class="number">2</span>])</span><br><span class="line">                &#123;</span><br><span class="line">                        answer[i+<span class="number">1</span>]=(answer[i+<span class="number">1</span>]+answer[i+<span class="number">3</span>])%<span class="number">4</span>+<span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">                        answer.erase(i+<span class="number">2</span>,<span class="number">2</span>);</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">solveCube</span><span class="params">(<span class="built_in">string</span> state[])</span><span class="comment">//调用入口</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> f,i=<span class="number">0</span>,j=<span class="number">0</span>,k=<span class="number">0</span>,pc,mor;</span><br><span class="line">        <span class="keyword">for</span>(; k&lt;<span class="number">20</span>; k++) val[k]=k&lt;<span class="number">12</span>?<span class="number">2</span>:<span class="number">3</span>;</span><br><span class="line">        <span class="keyword">for</span>(; j&lt;<span class="number">8</span>; j++) filltable(j);</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">for</span>(; i&lt;<span class="number">20</span>; i++)</span><br><span class="line">        &#123;</span><br><span class="line">                f=pc=k=mor=<span class="number">0</span>; </span><br><span class="line">                <span class="keyword">for</span>(;f&lt;val[i];f++)</span><br><span class="line">                &#123;</span><br><span class="line">                        j=<span class="built_in">strchr</span>(faces,state[i][f])-faces;</span><br><span class="line">                        <span class="keyword">if</span>(j&gt;k) &#123;k=j;mor=f;&#125;</span><br><span class="line">                        pc+= <span class="number">1</span>&lt;&lt;j;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">for</span>(f=<span class="number">0</span>; f&lt;<span class="number">20</span>; f++)</span><br><span class="line">                        <span class="keyword">if</span>( pc==bithash[f]<span class="number">-64</span> ) <span class="keyword">break</span>;</span><br><span class="line">                pos[order[i]-CHAROFFSET]=f;</span><br><span class="line">                ori[order[i]-CHAROFFSET]=mor%val[i];</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">for</span>( ; phase&lt;<span class="number">8</span>; phase+=<span class="number">2</span>)</span><br><span class="line">        &#123;</span><br><span class="line">                <span class="keyword">for</span>( j=<span class="number">0</span>; !searchphase(j,<span class="number">0</span>,<span class="number">9</span>); j++);</span><br><span class="line">                <span class="keyword">for</span>( i=<span class="number">0</span>; i&lt;j; i++)</span><br><span class="line">                &#123;</span><br><span class="line">                        answer += <span class="string">&quot;FBRLUD&quot;</span>[movecube[i]];</span><br><span class="line">                        answer += (moveamount[i] + <span class="string">&#x27;0&#x27;</span>);</span><br><span class="line">                &#125;</span><br><span class="line">                 </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="built_in">endl</span>&lt;&lt;<span class="string">&quot;answer:&quot;</span>&lt;&lt;answer&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        check();</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;checking......\nanswer:&quot;</span>&lt;&lt;answer&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;send command&quot;</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">         </span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>code</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+        <tag>魔方</tag>
+        <tag>Cpp</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>黑群晖相关折腾</title>
+    <url>/2020/05/17/%E9%BB%91%E7%BE%A4%E6%99%96%E7%9B%B8%E5%85%B3%E6%8A%98%E8%85%BE/</url>
+    <content><![CDATA[<p>已经跳槽QNAP啦，怀念群晖。</p>
+<span id="more"></span>]]></content>
+  </entry>
+  <entry>
     <title>工程材料及热处理</title>
     <url>/2016/11/06/%E5%B7%A5%E7%A8%8B%E6%9D%90%E6%96%99%E5%8F%8A%E7%83%AD%E5%A4%84%E7%90%86/</url>
     <content><![CDATA[<p><em>工程材料及热处理复习提纲</em></p>
@@ -863,502 +1577,6 @@ sudo make install 
       <tags>
         <tag>机械</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>常用命令工具记录</title>
-    <url>/2021/03/02/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E5%B7%A5%E5%85%B7%E8%AE%B0%E5%BD%95/</url>
-    <content><![CDATA[<p>几个命令工具的备忘录，纯自用，忘了啥写啥。</p>
-<span id="more"></span>
-
-<h2 id="Poetry"><a href="#Poetry" class="headerlink" title="Poetry"></a>Poetry</h2><p><code>poetry env [use &#123;python&#125;]</code> 创建虚拟环境，使用 <code>poetry shell</code> 激活当前目录虚拟环境。</p>
-<p><code>poetry add &#123;package_name&#125;</code> 当前目录增加包，若不存在虚拟环境则会创建。</p>
-<p><code>poetry init</code> 当前目录创建包</p>
-<p><code>poetry build/publish</code> 打包/发布包</p>
-<blockquote>
-<p>Future will add more.</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>code</category>
-      </categories>
-      <tags>
-        <tag>Python</tag>
-        <tag>Linux</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>新的开始</title>
-    <url>/2016/10/08/%E6%96%B0%E7%9A%84%E5%BC%80%E5%A7%8B/</url>
-    <content><![CDATA[<img src="/img/hexo.png" class="full-image" />
-
-<p><strong>Hello Hexo!</strong></p>
-<span id="more"></span>
-
-<p>其实我一开始想要建个博客是从Flask开始的，第一次接触到这么便捷的Web开发方式（其实也是我第一次接触Web），所以我就学习了各种Html、CSS、Javascript等知识，想着自己给自己做一个很炫酷的Blog。</p>
-<p>然而现实是我当时找不到一个适合我的云服务器（对，就是免费，只可惜我没有早一点接触到SAE），所以嘛就走上了这条静态页面+GitHub Page的路子（现在在国内的Coding上）。</p>
-<p>我一开始走这条路子也不是直接使用的Hexo，我试着过自己做轮子，也试过Python的pelican（Markdown模块有点恶心）。最后嘛，我发现Blog最重要的还是内容······所以选了省心一点的Hexo（安装Jekyll需要的Ruby的gem无法在国内愉快的使用所以Jekyll同学被我pass了）。</p>
-<p>最后我把我以前觉得有点卵用的两篇搬了过来，然后呢这里还要留下一些有用链接。</p>
-<h2 id="Next"><a href="#Next" class="headerlink" title="Next"></a><a href="http://theme-next.iissnan.com/">Next</a></h2><img src="/img/next.png" class="full-image" />
-
-<h2 id="Hexo"><a href="#Hexo" class="headerlink" title="Hexo"></a><a href="https://hexo.io/zh-cn/">Hexo</a></h2><img src="/img/hexo.png" class="full-image" />]]></content>
-      <categories>
-        <category>日常</category>
-      </categories>
-      <tags>
-        <tag>Hexo</tag>
-        <tag>Next</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>机械制造技术基础-刀具</title>
-    <url>/2017/02/25/%E6%9C%BA%E6%A2%B0%E5%88%B6%E9%80%A0%E6%8A%80%E6%9C%AF%E5%9F%BA%E7%A1%80-%E5%88%80%E5%85%B7/</url>
-    <content><![CDATA[<p>写了一些机械制造技术基础中，刀具学习相关的内容。</p>
-<p>听说刀具参考系是难点，做了个3d小模型。</p>
-<p><a href='/3d/chedao2.html' target="_blank">3D车刀</a></p>
-<span id="more"></span>
-
-<iframe src="/3d/chedao2.html" width="100%" height="600px"></iframe>
-
-<h2 id="刀具标注角度参考系"><a href="#刀具标注角度参考系" class="headerlink" title="刀具标注角度参考系"></a>刀具标注角度参考系</h2><p>对于所有标注角度参考系，首先便于测量，做出以下两个假设：1.假设运动条件是不考虑进给运动的影响，2.假设安装条件是安装车刀时刀尖与工件中心等高，并且车刀刀杆中心线与工件中心线垂直，且主切削刃上选定点与工件中心等高。</p>
-<h3 id="主剖面参考系"><a href="#主剖面参考系" class="headerlink" title="主剖面参考系"></a>主剖面参考系</h3><ul>
-<li>基面$P_r$：通过主切削刃上选定点，并与该点切削速度方向相垂直的平面。</li>
-<li>切削平面$P_s$：通过主切削刃上选定点，与主切削刃相切并垂直于该点基面的平面。</li>
-<li>主剖面$P_o$：通过主切削刃上选定点，同时垂直于基面和切削平面的平面。</li>
-</ul>
-<h3 id="法剖面参考系"><a href="#法剖面参考系" class="headerlink" title="法剖面参考系"></a>法剖面参考系</h3><p>基面和切削平面的定义和主剖面参考系相同。</p>
-<ul>
-<li>法剖面$P_n$：通过切削刃上选定点，同时垂直于切削刃或其切线的平面。</li>
-</ul>
-<h3 id="进给剖面和切深剖面参考系"><a href="#进给剖面和切深剖面参考系" class="headerlink" title="进给剖面和切深剖面参考系"></a>进给剖面和切深剖面参考系</h3><p>基面定义同上。</p>
-<ul>
-<li>进给剖面$P_f$：通过切削刃上选定点，同时垂直于刀杆中心线与基面的平面。</li>
-<li>切深剖面$P_p$：通过切削刃上选定点，同时平行于刀杆中心线并垂直于基面的平面，垂直于进给运动方向。</li>
-</ul>
-<h2 id="刀具工作角度参考系"><a href="#刀具工作角度参考系" class="headerlink" title="刀具工作角度参考系"></a>刀具工作角度参考系</h2><p>在之前的参考系中做出了两点假设，而如果考虑进给运动和刀具实际安装情况，基面的位置选取应该垂直于合成切削运动速度方向，这时候建立的参考系称为刀具工作角度参考系。</p>
-<ul>
-<li>工作基面$P_{re}$：垂直于合成切削速度方向的平面。</li>
-<li>工作切削平面$P_{se}$：与切削刃相切并垂直与工作基面的平面。</li>
-<li>工作主剖面$P_{oe}$：同时垂直与工作基面和工作切削平面的平面。</li>
-<li>切削刃法剖面$P_{ne}$：与法剖面的定义相同。</li>
-<li>工作进给剖面$P_{fe}$：由主运动方向和进给运动方向组成的平面，工作进给剖面和工作基面相垂直。</li>
-<li>工作切深剖面$P_{pe}$：同时垂直于工作基面和工作进给剖面的平面。</li>
-</ul>
-<h2 id="刀具标注角度"><a href="#刀具标注角度" class="headerlink" title="刀具标注角度"></a>刀具标注角度</h2><p>刀具在各种参考系中测得的角度，称为标注角度。标注角度应该标注在刀具的设计图中，用于刀具制造、刃磨和测量。</p>
-<h3 id="主剖面参考系下的标注角度"><a href="#主剖面参考系下的标注角度" class="headerlink" title="主剖面参考系下的标注角度"></a>主剖面参考系下的标注角度</h3><p>在主剖面$P_o$内标注的角度</p>
-<ul>
-<li>前角$\gamma_o$：前刀面和基面之间的夹角。</li>
-<li>后角$\alpha _o$：主后刀面和切削平面的夹角。</li>
-</ul>
-<p>在基面$P_r$内标注的角度</p>
-<ul>
-<li>主偏角$\kappa_r$：主切削刃和基面上的投影与进给运动方向的夹角。</li>
-</ul>
-<p>在切削平面$P_s$内标注的角度</p>
-<ul>
-<li>刃倾角$\lambda_o$：主切削刃与基面之间的夹角</li>
-</ul>
-<blockquote>
-<p>其他角度略</p>
-</blockquote>
-<h2 id="刀具材料"><a href="#刀具材料" class="headerlink" title="刀具材料"></a>刀具材料</h2><p>刀具的切削性能优劣取决于刀具切削部分的材料、几何形状以及刀具结构。刀具切削部分材料的选择对刀具寿命、加工质量、生产效率影响较大，因此对于刀具材料的选择应该合理。</p>
-<p>作为刀具的切削部分材料，其必须具备以下基本性能：</p>
-<ul>
-<li>高的硬度</li>
-<li>高的耐磨性</li>
-<li>高的耐热性</li>
-<li>足够的强度和韧性</li>
-<li>良好的热物理性能和耐热热冲击性能</li>
-<li>良好的减磨性</li>
-<li>良好的工艺性和经济性</li>
-</ul>
-<p>对于常见的刀具材料，有以下的性能指标：</p>
-<table>
-<thead>
-<tr>
-<th align="center">刀具材料</th>
-<th align="center">耐热性/（°C）</th>
-<th align="center">硬度（HRA）</th>
-<th align="center">切削速度大致比值</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">碳素工具钢</td>
-<td align="center">200～300</td>
-<td align="center">HRC62</td>
-<td align="center">0.32～0.40</td>
-</tr>
-<tr>
-<td align="center">高速钢</td>
-<td align="center">600～700</td>
-<td align="center">84～85</td>
-<td align="center">1.00～1.20</td>
-</tr>
-<tr>
-<td align="center">硬质合金</td>
-<td align="center">K系列：800～900 P系列：900～1000</td>
-<td align="center">91～93（K系列) 90～92（P系列)</td>
-<td align="center">3.2～8.0</td>
-</tr>
-<tr>
-<td align="center">氧化铝陶瓷</td>
-<td align="center">1200</td>
-<td align="center">92.5～93.5</td>
-<td align="center">8.0～12.0</td>
-</tr>
-<tr>
-<td align="center">TiC基硬质合金</td>
-<td align="center">1000～1100</td>
-<td align="center">91～93</td>
-<td align="center">-</td>
-</tr>
-<tr>
-<td align="center">聚晶立方氮化硼</td>
-<td align="center">1000～1300</td>
-<td align="center">HV4500</td>
-<td align="center">-</td>
-</tr>
-<tr>
-<td align="center">人造金刚石</td>
-<td align="center">700～800</td>
-<td align="center">&gt;HV9000</td>
-<td align="center">&gt;25（有色金属）</td>
-</tr>
-</tbody></table>
-<blockquote>
-<p>需要注意的是材料的硬度越高，其韧性越差，相应的刀具耐冲击性就差，加工时要求的背吃刀量就越小。</p>
-</blockquote>
-<p>有时候还需要考虑刀具材料和工件材料的化学性能也要相匹配。</p>
-]]></content>
-      <categories>
-        <category>机械</category>
-      </categories>
-      <tags>
-        <tag>3D</tag>
-        <tag>机械</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>机械工程测试技术基础</title>
-    <url>/2016/11/19/%E6%9C%BA%E6%A2%B0%E5%B7%A5%E7%A8%8B%E6%B5%8B%E8%AF%95%E6%8A%80%E6%9C%AF%E5%9F%BA%E7%A1%80/</url>
-    <content><![CDATA[<p>简直药丸Orz</p>
-<span id="more"></span>
-
-<h2 id="信号及其描述"><a href="#信号及其描述" class="headerlink" title="信号及其描述"></a>信号及其描述</h2><h3 id="信号的分类"><a href="#信号的分类" class="headerlink" title="信号的分类"></a>信号的分类</h3><ul>
-<li>确定信号：可以表示为一个确定的时间关系式的信号</li>
-<li>周期信号：按一定时间间隔周而复始出现，无始无终，不断重复的信号<ul>
-<li>简单周期信号</li>
-<li>复杂周期信号</li>
-</ul>
-</li>
-<li>非周期信号：确定信号中，不具备周期重复性的信号<ul>
-<li>准周期信号：由两种以上的周期信号合成而来，因为组成分量无法找到公共周期，而失去周期性</li>
-<li>瞬变非周期信号：是一些或在一定时间内存在，或随时间增长而衰减至零的信号</li>
-</ul>
-</li>
-<li>非确定信号：不能准确预测未来瞬时值，也不能用确定的数学关系描述的信号</li>
-<li>非平稳随机过程</li>
-<li>平稳随机过程<ul>
-<li>个态历经随机过程</li>
-<li>非个态历经随机过程</li>
-</ul>
-</li>
-</ul>
-<p>连续信号：信号数学表达式中的独立变量是连续的。</p>
-<p>离散信号：数学表达式中的独立变量是离散的。</p>
-<p>能量信号：在无限时间内，信号的总能量是有限的信号。</p>
-<p>功率信号：在无限时间内，信号的总能量为无限的信号。</p>
-<p>实信号：物理可以实现的信号都是时间的实函数。</p>
-<p>复信号：为了理论分析，使用的分析模型。</p>
-<h3 id="信号的描述"><a href="#信号的描述" class="headerlink" title="信号的描述"></a>信号的描述</h3><p>时域描述：又称为波形描述，是指测量中所观测到或记录到的信号以时间为独立变量，称为信号的时域描述。</p>
-<p>频域描述：又称频谱描述，是指测量中所观测到或记录到的信号转换成以频率为独立变量来表述信号的频域描述。它可以表述信号的频率结构、各频率成分的幅值、相位关系。它和时域描述可以互相转换，包含相同信息量。</p>
-<p>傅立叶级数：任何周期信号在有限区间上，当其满足狄里赫来条件时，都可展开成一系列正交函数的线性组合的无穷级数。傅立叶级数有多种形式，三角展开和复数展开是常见的形式。</p>
-<p>傅立叶级数的三角展开式：</p>
-<p>$$x(t)=a_0+\sum_{n=1}^{\infty}A_nsin(n\omega _0t+\varphi _n),(n=1,2,3,…..)$$</p>
-<p>展开过程：</p>
-<p>$$x(t)=a_0+\sum_{n=1}^{\infty}[a_ncos(n\omega _0t)+b _ nsin(n\omega _0t)],(n=1,2,3,…..)$$</p>
-<p>其中参数：</p>
-<p>$$\begin{align}<br>a _ 0 =&amp; \frac{1}{T _ 0}\int_{-T _0/2}^{T _0/2}x(t)dt \\<br>a _ n =&amp; \frac{1}{T _ 0}\int_{-T _0/2}^{T _0/2}x(t)cos(n\omega _0)tdt \\<br>b _ n =&amp; \frac{1}{T _ 0}\int_{-T _0/2}^{T _0/2}x(t)sin(n\omega _0)tdt \\<br>\omega _0= &amp;\frac{2\pi }{T _0}\\<br>A _0 =&amp; \sqrt{a _n^{2}+b _n^{2}}\\<br>\varphi _0=&amp;arctan(\frac{a _n}{a _n})<br>\end{align}$$</p>
-<p>由此可见周期信号是由一个或多个乃至无穷个不同频率的谐波叠加而来。第一项$a _0$是常数项，周期信号的直流分量。$A _nsin(n\omega _0t+\varphi _n)$称为谐波，$A _n$是n次谐波的振幅，$\varphi _n$是其初相角。$a _n$是n次谐波的余弦分量的幅值，$b _n$是n次谐波的正弦分量的幅值。</p>
-<p>傅立叶级数的复数展开式：</p>
-<p>根据欧拉公式推出</p>
-<p>$$\begin{align}<br>x(t)=&amp;a_0+\sum_{n=1}^{\infty}[a_ncos(n\omega _0t)+b _ nsin(n\omega _0t)] \\<br>x(t)=&amp;a_0+\sum_{n=1}^{\infty}[a_n\frac{1}{2}(e^{-jn\omega _0t}+e^{jn\omega _0t})+b _ n\frac{j}{2}(e^{-jn\omega _0t}-e^{jn\omega _0t})] \\<br>x(t)=&amp;a_0+\sum_{n=1}^{\infty}[\frac{1}{2}(a _n+jb _n)e^{-jn\omega _0t}+\frac{1}{2}(a _n-jb _n)e^{jn\omega _0t}]\\<br>c _ n = &amp; \frac{1}{2}(a _n-jb _n)\\<br>c _ {-n}= &amp;\frac{1}{2}(a _n+jb _n)\\<br>c _0=&amp;a _0 \\<br>x(t)=&amp;a_0+\sum_{n=1}^{\infty}[c _ {-n}e^{-jn\omega _0t}+c _ ne^{jn\omega _0t}]\\<br>x(t)=&amp;a_0+\sum_{n=-\infty }^{\infty}c _ ne^{jn\omega _0t}\\<br>\end{align}$$</p>
-<p>周期信号的强度使用峰值、绝对均、有效值和平均功率来表述。</p>
-<p>峰值$x_p$是信号可能出现的最大瞬时值，峰峰值$x_{p-p}$是指最大瞬时值和最小瞬时值的差。</p>
-<p>均值的计算类似功率，绝对均值指全波整波之后的均值。</p>
-<p>有效值是均值的信号的均方根，平均功率是有效值的平方又叫均方值。</p>
-<h2 id="测试装置"><a href="#测试装置" class="headerlink" title="测试装置"></a>测试装置</h2><p>测量装置（测量系统）：为达到某些特定目的，由若干个互有关联的单元组成的有机整体。 </p>
-<h3 id="线性系统"><a href="#线性系统" class="headerlink" title="线性系统"></a>线性系统</h3><p>主要性质：</p>
-<ul>
-<li>符合叠加原理</li>
-<li>比例特性：$ax(t)\rightarrow ay(t)$</li>
-<li>系统对输入导数的响应等于对原输入响应的导数</li>
-<li>如系统的初始状态均为零，则系统对输入积分的响应等于对原输入响应的积分。 </li>
-<li>频率保持特性</li>
-</ul>
-<p><strong>静态特性</strong>是在静态测量情况下描述实际测量装置与理想时不变线性系统的接近程度。通过某种意义的静态标定过程确定的。</p>
-<p>测量装置的<strong>动态特性</strong>是当被测量即输入量随时间快速变化时，测量输入与响应输出之间动态关系的数学描述。</p>
-<p>当传感器安装到被测物体上或进入被测介质，要从物体与介质中吸收能量或产生干扰，使被测物理量偏离原有的量值，从而不可能实现理想的测量，这种现象称为<strong>负载效应</strong>。</p>
-<p>测量装置在测量过程中要受到各种干扰，包括电源干扰、环境干扰(电磁场、声、光、温度、振动等干扰)和信道干扰。这些干扰的影响决定于测量装置的<strong>抗干扰性能</strong>，并且与所采取的抗干扰措施有关。</p>
-<p>理想的定常线性系统，其输出将是输入的单调、线性比例函数，其中斜率S应是常数。然而，实际的测量装置并非理想的定常线性系统，S不是常数。</p>
-<h3 id="静态特性"><a href="#静态特性" class="headerlink" title="静态特性"></a>静态特性</h3><p>线性误差：测量装置校准曲线与规定曲线之间的最大偏差。</p>
-<p>灵敏度：单位输入变化所引起的输出变化。</p>
-<p>回程误差（迟滞）：测量装置同输入变化方向有关的输出特性。</p>
-<p>分辨力：引起测量装置产生一个可察觉变化的最小输入量。通常表示为它与可能输入范围之比的百分数。</p>
-<p>零点漂移：是测量装置的输出零点偏离原始零点的距离，它可以是随时间缓慢变化的量。</p>
-<p>灵敏度漂移：是由于材料性质的变化所引起的输入与输出关系(斜率)的变化。</p>
-<p>稳定度：是指测量装置在规定条件下保持其测量特性恒定不变的能力。</p>
-<h3 id="动态特性"><a href="#动态特性" class="headerlink" title="动态特性"></a>动态特性</h3><p>传递函数H(s)：对于特定的输入确定的给出相应输出，与输入、系统的初始状态无关。</p>
-<p>频率响应函数H($\omega $)：在频率域中描述系统特性的一种数学方法。</p>
-<p>脉冲响应函数h(t)： ···</p>
-<p>脉冲响应函数和传递函数是拉普拉斯变换对；频率响应函数和脉冲响应函数是傅立叶变换对；频率响应函数和传递函数其实是S和$j\omega $替换。</p>
-<p>一阶系统：输入输出的关系使用一阶微分方程来表述，时间常数是其重要参数。</p>
-<h2 id="传感器"><a href="#传感器" class="headerlink" title="传感器"></a>传感器</h2><p>传感器：直接作用于被测量，能按一定规律将其转换成同种或别种量值(电信号)输出的器件。</p>
-<h3 id="传感器分类"><a href="#传感器分类" class="headerlink" title="传感器分类"></a>传感器分类</h3><p>按工作原理分：电气式传感器、机械式传感器、光电式传感器等</p>
-<p>按被测量分：位移传感器、速度传感器、加速度传感器、应力传感器、温度传感器等</p>
-<p>按信号变换特征分：结构型传感器、物性型传感器</p>
-<p>按能量关系分：能量转换型传感器、能量控制型传感器</p>
-<h3 id="电阻、电容与电感式传感器"><a href="#电阻、电容与电感式传感器" class="headerlink" title="电阻、电容与电感式传感器"></a>电阻、电容与电感式传感器</h3><p>电阻式传感器：将被测量转化为电阻值变化的传感器。主要有变阻器式电阻传感器、应变式电阻传感器。</p>
-<p>电桥：电桥电路是将电阻、电容、电感的参量的变化转变为电压或电流信号输出的一种常用电路。</p>
-<p>直流电桥的平衡条件：相对桥臂的阻值乘积相等。交流电桥还需要相对电桥阻抗虚部与实部乘积相等。</p>
-<p>电容式传感器：将被测物理量转换为电容量变化的装置，它实质上是一个具有可变参数的电容器。</p>
-<p>根据电容器变化的参数，可分为：极距变化型、面积变化型、介质变化型</p>
-<p>电感传感器：把被测物理量转换为电感量变化的传感器。</p>
-<p>分类：自感型电感传感器（可变磁阻式、涡流式）、互感型电感传感器（差动变压器式电感传感器）</p>
-<h3 id="磁电、压电与热电式传感器"><a href="#磁电、压电与热电式传感器" class="headerlink" title="磁电、压电与热电式传感器"></a>磁电、压电与热电式传感器</h3><p>磁电式传感器：把被测物理量转换为感应电动势的一种传感器，又称电磁感应式或电动力式传感器。按照结构方式不同，磁电式传感器可分：动圈式、磁阻式</p>
-]]></content>
-      <categories>
-        <category>机械</category>
-      </categories>
-      <tags>
-        <tag>机械</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>热工基础</title>
-    <url>/2016/11/01/%E7%83%AD%E5%B7%A5%E5%9F%BA%E7%A1%80/</url>
-    <content><![CDATA[<p><em>热工基础复习提纲</em></p>
-<span id="more"></span>
-
-<h2 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h2><h3 id="热力系统"><a href="#热力系统" class="headerlink" title="热力系统"></a>热力系统</h3><p>凡是能将热能转换为机械能的机器统称为<strong>热力发动机</strong>，简称<strong>热机</strong>。</p>
-<p>热能和机械能之间的转换是通过媒介物质在热机中的一系列状态变化过程来实现的，这种媒介物质称为<strong>工质</strong>。</p>
-<p>热容量很大，并且在吸收和放出有限量热量时自身温度和其他热力学参数没有明显变化的物体称为<strong>热源</strong>。</p>
-<p>选取的一定的工质和空间作为研究对象，称为<strong>热力系统</strong>，简称<strong>系统</strong>。</p>
-<ul>
-<li>闭口系统：与外界无物质交换的系统。</li>
-<li>开口系统：与外界有物质交换的系统。</li>
-<li>绝热系统：与外界无热量交换的系统。</li>
-<li>孤立系统：与外界既无物质交换也无热量交换的系统。</li>
-</ul>
-<h3 id="平衡态和状参"><a href="#平衡态和状参" class="headerlink" title="平衡态和状参"></a>平衡态和状参</h3><p>当系统不受外界影响的条件下，工质的状态参数不随时间而变化的状态称为平衡状态。</p>
-<p>基本状态参数：</p>
-<ul>
-<li>压力：标准单位Pa：$p=\frac{F}{A}$</li>
-<li>温度：单位是K（开）：$T=t+273.15$</li>
-<li>比体积、密度：二者互为倒数：$v=\frac{V}{m}\qquad \rho=\frac{m}{V}$</li>
-</ul>
-<p>根据状态公理指出，对于简单的可压缩系统，只需要两个独立的状态参数便可确定它的平衡状态，可以列出状态方程式：$F(p,v,T)=0$</p>
-<h3 id="可逆过程"><a href="#可逆过程" class="headerlink" title="可逆过程"></a>可逆过程</h3><p>如果系统完成了某一过程之后，再沿着原路逆行而回复到原来的状态，外界也随之恢复到原来的状态，而不留下任何变化，则这一过程称为<strong>可逆过程</strong>。否则就是<strong>不可逆过程</strong>。</p>
-<p><em>可逆过程的条件：准平衡过程＋无耗散效应。</em></p>
-<h3 id="功量和热量"><a href="#功量和热量" class="headerlink" title="功量和热量"></a>功量和热量</h3><p>膨胀功是工质在体积膨胀时所作的功。$\delta W=Fdx\qquad W=\int_{x_1}^{x_2}Fdx$</p>
-<p>单位质量工质所做的膨胀功称为比膨胀功：$\delta w=pdv\qquad W=\int_{1}^{2}pdv$</p>
-<p>系统与外界之间依靠温差传递的能量。符号：Q ；单位：J 或kJ。单位质量工质所传递的热量用 q 表示，单位为 J/kg 或 kJ/kg。系统吸热热量为正，放热为负。</p>
-<p>引入熵（S），单位是J/K，定义：$dS=(\frac{\delta Q}{T})_{re}$</p>
-<p>同时定义单位质量的熵为比熵（s）。由此得：$q=\int_{1}^{2}Tds$</p>
-<h2 id="热力学第一定律"><a href="#热力学第一定律" class="headerlink" title="热力学第一定律"></a>热力学第一定律</h2><h3 id="储存能"><a href="#储存能" class="headerlink" title="储存能"></a>储存能</h3><p>气体工质的比热力学能：单位是J/kg或kJ/kg：$u=f(T,v)$</p>
-<p>宏观动能和宏观位能：$E_k=\frac{1}{2}mc_f^2\qquad E_p=mgz$</p>
-<p>储备能：$E=U+E_k+E_p\qquad e=u+e_k+e_p$</p>
-<h3 id="热力学第一定律及其流动能量方程式"><a href="#热力学第一定律及其流动能量方程式" class="headerlink" title="热力学第一定律及其流动能量方程式"></a>热力学第一定律及其流动能量方程式</h3><p>热力过程中的能量守恒和转换定律。：在热能与其它形式能的互相转换过程中，能的总量始终不变。</p>
-<p>工质在流过热工设备时，必须受外力推动，这种推动工质流动而做的功称为<strong>流动功</strong>或许<strong>推进功</strong>。</p>
-<p>$$\delta W_f=pAdx=pdV=pvdm\qquad w_f=\frac{\delta W_f}{dm}=pv$$</p>
-<p>比焓：$h=u+pv$</p>
-<p>技术功：$W_t=\frac{1}{2}m\Delta c_{f}^{2}+mg\Delta z+W_s$</p>
-<h2 id="理想气体的性质和热力过程"><a href="#理想气体的性质和热力过程" class="headerlink" title="理想气体的性质和热力过程"></a>理想气体的性质和热力过程</h2><h3 id="理想气体状态方程式"><a href="#理想气体状态方程式" class="headerlink" title="理想气体状态方程式"></a>理想气体状态方程式</h3><p>根据<strong>波义耳-马略特定律、盖-吕萨克定律和查理定律</strong>得出理想气体状态方程式，以及克拉贝龙方程式：</p>
-<p>$$pv=R_gT\qquad pV=mR_gT$$</p>
-<p>$R_g$是气体常数，当$M$表示表示气体的摩尔质量时，$R=MR_g$是常数 8.314$J/(mol\cdot K)$</p>
-<h3 id="理想气体的热容、热力学能、焓和熵"><a href="#理想气体的热容、热力学能、焓和熵" class="headerlink" title="理想气体的热容、热力学能、焓和熵"></a>理想气体的热容、热力学能、焓和熵</h3><p>物体温度升高1K所需的热量称为该物体的热容量或热容，单位质量的热容量，称为比热容。$ C=\frac{\delta Q}{dT}\qquad c=\frac{\delta q}{dt}$</p>
-<p>因为热量是与过程性质有关的量，因此如果工质的初终态不同，那么工质的比热容也会不同，常用的有定容比热容$c_v$和定压比热容$c_p$。</p>
-<p>根据焓的定义和理想气体状态方程，容易推出：</p>
-<p>$$c_V=\frac{du}{dT}\qquad c_p=\frac{dh}{dT}\qquad c_p=c_v+R_g$$</p>
-<p>定义有比热容比$\gamma=c_p/c_v$，也称为定熵指数（绝热指数）$\kappa$</p>
-<p>在对于计算要求不需要特别精确时，可以使用定值摩尔热容</p>
-<table>
-<thead>
-<tr>
-<th align="center">定值摩尔热容</th>
-<th align="center">单原子气体</th>
-<th align="center">双原子气体</th>
-<th align="center">多原子气体</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">$C_{V,m}$</td>
-<td align="center">$\frac{3}{2}R$</td>
-<td align="center">$\frac{5}{2}R$</td>
-<td align="center">$\frac{7}{2}R$</td>
-</tr>
-<tr>
-<td align="center">$C_{p,m}$</td>
-<td align="center">$\frac{5}{2}R$</td>
-<td align="center">$\frac{7}{2}R$</td>
-<td align="center">$\frac{9}{2}R$</td>
-</tr>
-<tr>
-<td align="center">$\gamma$</td>
-<td align="center">1.67</td>
-<td align="center">1.40</td>
-<td align="center">1.29</td>
-</tr>
-</tbody></table>
-<p>热力学能和焓：</p>
-<p>$$\Delta u=\int_{1}^{2}c_VdT\qquad \Delta h=\int_{1}^{2}c_pdT$$</p>
-<p>理想气体的熵：</p>
-<p>$$\begin{align}<br>\Delta s &amp; =c_Vln\frac{T_2}{T_1}+R_gln\frac{v_2}{v_1} \\<br> &amp; =c_pln\frac{T_2}{T_1}-R_gln\frac{p_2}{p_1} \\<br> &amp; =c_Vln\frac{p_2}{p_1}+c_pln\frac{v_2}{v_1} \\<br>\end{align}$$</p>
-<h3 id="理想气体的热力过程"><a href="#理想气体的热力过程" class="headerlink" title="理想气体的热力过程"></a>理想气体的热力过程</h3><p>理想气体的基本热力过程有：定容过程、定压过程、定温过程和定熵过程。</p>
-<p>便于记忆直接讨论结合在一起的多变过程。</p>
-<p>对于许多过程，可以近似的使用$pv^n=;$常数来描述，式中的n称为多变指数。</p>
-<table>
-<thead>
-<tr>
-<th align="center">n</th>
-<th align="center">过程类型</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">0</td>
-<td align="center">定压过程</td>
-</tr>
-<tr>
-<td align="center">1</td>
-<td align="center">定温过程</td>
-</tr>
-<tr>
-<td align="center">$\kappa$</td>
-<td align="center">定熵指数</td>
-</tr>
-<tr>
-<td align="center">$\pm\infty$</td>
-<td align="center">定容过程</td>
-</tr>
-</tbody></table>
-<p>过程方程式：$pv^n=x$</p>
-<p>初终态参数关系：$\frac{p_2}{p_1}=\left( \frac{v_1}{v_2} \right)^n\qquad \frac{T_2}{T_1}=\left( \frac{v_1}{v_2} \right)^{n-1}\qquad \frac{T_2}{T_1}=\left( \frac{p_2}{p_1} \right)^{\frac{n-1}{n}}$</p>
-<p>膨胀功：$w=\frac{p_1v_1-p_2v_2}{n-1}=\frac{R_g}{n-1}(T_1-T_2)$</p>
-<p>交换的功量（不含动能变化）：$w_t=nw$</p>
-<p>交换的热量：$c_n(T_2-T_1)\qquad c_n=\frac{n-\kappa }{n-1}c_V$</p>
-<h2 id="热力学第二定律"><a href="#热力学第二定律" class="headerlink" title="热力学第二定律"></a>热力学第二定律</h2><p>开尔文－普朗克表述：不可能从单一热源取热，并使之完全转变为有用功而不产生其它影响。</p>
-<p>克劳修斯表述：不可能将热从低温物体传至高温物体而不引起其它变化。</p>
-<p>热二律的实质：自发过程都是具有方向性的。</p>
-<h3 id="热力循环"><a href="#热力循环" class="headerlink" title="热力循环"></a>热力循环</h3><p>循环根据效果不同可以分为正向循环和逆向循环。</p>
-<p>正向循环在示意图上表示为顺时针方向，吸热，对外做功。热力循环的效率为热效率，用净功和吸热的比值定义：$\eta_t=\frac{W_{net}}{Q_1}=\frac{Q_1-Q_2}{Q_1}=1-\frac{Q_2}{Q_1}$</p>
-<p>反向循环在示意图上表示为逆时针方向，分为制冷系数：$\varepsilon =\frac{Q_2}{W_{net}}$和制热系数：$\varepsilon ‘=\frac{Q_1}{W_{net}}$</p>
-<h3 id="卡诺循环"><a href="#卡诺循环" class="headerlink" title="卡诺循环"></a>卡诺循环</h3><p>卡诺循环由两个可逆定温过程和两个可逆绝热过程组成。先定温吸热，然后绝热膨胀，再定温放热，最后绝热压缩。易推出，卡诺循环的热效率：$\eta_C=1-\frac{T_2}{T_1}\qquad \varepsilon_C =\frac{T_2}{T_1-T_2}\qquad \varepsilon_C ‘=\frac{T_1}{T_1-T_2}$</p>
-<p>热力循环可实现的要求是循环的热效率（制冷或制热系数）必须小于其卡诺循环的热效率（制冷或制热系数）。</p>
-<p>由卡诺在热机效率的基础上得出了卡诺定理：</p>
-<ul>
-<li>定理一：在相同的高温热源和低温热源间工作的一切可逆热机具有相同的热效率，与工质的性质无关。 </li>
-<li>定理二：在相同高温热源和低温热源间工作的任何不可逆热机的热效率都小于可逆热机的热效率。 </li>
-</ul>
-<h3 id="熵"><a href="#熵" class="headerlink" title="熵"></a>熵</h3><p><em>coming soon</em></p>
-<h2 id="热量传递的基本方式"><a href="#热量传递的基本方式" class="headerlink" title="热量传递的基本方式"></a>热量传递的基本方式</h2><p>热量传递有三种基本方式：热传导、热对流和热辐射。</p>
-<h3 id="热传导"><a href="#热传导" class="headerlink" title="热传导"></a>热传导</h3><p>实验证明：平面一维稳态导热的热流量与平壁的表面面积$A$两侧表面的温差成正比，与平壁的厚度$\delta $成反比：$\phi =\lambda A\frac{t_{w1}-t_{w2}}{\delta}$</p>
-<p>由此还定义出导热电阻$R_{\lambda}=\frac{\delta}{A\lambda};$以及热流密度$q = \frac{\phi}{A}$</p>
-<h3 id="热对流"><a href="#热对流" class="headerlink" title="热对流"></a>热对流</h3><p>热对流是指由于流体的宏观运动使温度不同的流体相对位移而产生的热量传递现象。</p>
-<p>牛顿冷却公式：</p>
-<p>$$\phi =Ah(t_w-t_f)=Ah\Delta t=\frac{\Delta t}{R_h}$$</p>
-<h3 id="热辐射"><a href="#热辐射" class="headerlink" title="热辐射"></a>热辐射</h3><p><em>coming soon</em></p>
-<h2 id="导热"><a href="#导热" class="headerlink" title="导热"></a>导热</h2><h3 id="导热理论基础"><a href="#导热理论基础" class="headerlink" title="导热理论基础"></a>导热理论基础</h3><p>温度场：某一时刻空间所有各点的温度分布，即$t=f(x,y,z,\tau )$</p>
-<p>不随时间按变化的温度场是稳态温度场，反之则是非稳态温度场。</p>
-<p>等温线（面）：在同一时刻，温度场中温度相同的点所连成的线或面。</p>
-<p>温度梯度：等温面（线）法线方向的温度变化率矢量。</p>
-<p>$$grad;t=\frac{\delta t}{\delta x}\overrightarrow{n}$$</p>
-<h3 id="傅立叶定律"><a href="#傅立叶定律" class="headerlink" title="傅立叶定律"></a>傅立叶定律</h3><p>傅立叶定律：$\overrightarrow{q}=-\lambda grad;t=-\lambda \frac{\delta t}{\delta n}\overrightarrow{n}$</p>
-<p>傅立叶定律表明：导热热流密度的大小与温度梯度的绝对值成正比，其方向与温度梯度相反。</p>
-<p>热导率是物质的重要热物性参数，根据傅立叶定律，有：$\lambda = \frac{q}{\left | grad; t \right |}$</p>
-<h2 id="对流换热"><a href="#对流换热" class="headerlink" title="对流换热"></a>对流换热</h2><blockquote>
-<p>奴赛尔数$Nu$、雷诺数$Re$、普朗特数$Pr$你好。<br>奴赛尔数$Nu$、雷诺数$Re$、普朗特数$Pr$再见！</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>机械</category>
-      </categories>
-      <tags>
-        <tag>机械</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>简易局域网共享服务器2.0</title>
-    <url>/2017/03/01/%E7%AE%80%E6%98%93%E5%B1%80%E5%9F%9F%E7%BD%91%E5%85%B1%E4%BA%AB%E6%9C%8D%E5%8A%A1%E5%99%A82-0/</url>
-    <content><![CDATA[<p>之前做了一个<a href="/2016/11/16/%E7%AE%80%E6%98%93%E5%B1%80%E5%9F%9F%E7%BD%91%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%E8%84%9A%E6%9C%AC%E5%AE%9E%E7%8E%B0/">小脚本</a>来共享文件，最初的作用是在寝室床上可以愉快的访问存在下面电脑里的文件。但是在使用中还是感觉不太便利，一是需要特定的文件结构，二是需要flask（事实证明杀鸡焉用牛刀）。所以有必要对之前的脚本做一个小小的升级。我想到了之前用来测试的<code>http.server</code>模块可以很好的适用于这种需求，所以查阅了<code>http.server</code>模块的文档后，做了如下脚本。</p>
-<span id="more"></span>
-
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> socket</span><br><span class="line"><span class="keyword">import</span> http.server</span><br><span class="line"><span class="keyword">import</span> socketserver</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getip</span>(<span class="params">head</span>):</span></span><br><span class="line">    IPs = socket.gethostbyname_ex(socket.gethostname())[-<span class="number">1</span>]</span><br><span class="line">    localIP = <span class="string">&#x27;&#x27;</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> IPs:</span><br><span class="line">        <span class="keyword">if</span> i[<span class="number">0</span>:<span class="number">3</span>] == head:</span><br><span class="line">            localIP = i</span><br><span class="line">    <span class="keyword">return</span> localIP</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    PORT = <span class="number">666</span></span><br><span class="line">    <span class="keyword">if</span> sys.argv[<span class="number">1</span>:]:</span><br><span class="line">        head = sys.argv[<span class="number">1</span>]</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        head = <span class="string">&#x27;172&#x27;</span></span><br><span class="line">    PORT = <span class="number">666</span></span><br><span class="line">    Handler = http.server.SimpleHTTPRequestHandler</span><br><span class="line">    IP = getip(head)</span><br><span class="line">    <span class="keyword">if</span> IP:</span><br><span class="line">        httpd = socketserver.TCPServer((getip(head), PORT), Handler)</span><br><span class="line">        print(<span class="string">&quot;serving at &quot;</span>+getip(head)+<span class="string">&quot;:666&quot;</span>)</span><br><span class="line">        httpd.serve_forever()</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        print(<span class="string">&#x27;Invalid domain&#x27;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>这一次的脚本对文件的结构完全没有要求。</p>
-<p><code>getip()</code>沿用了之前的函数，这一次可以指定ip的关键字。整个脚本等效于：</p>
-<pre><code>python -m http.server 8000 --bind &lt;your ip&gt;
-</code></pre>
-]]></content>
-      <categories>
-        <category>code</category>
-      </categories>
-      <tags>
-        <tag>Python</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>简易局域网文件传输脚本实现</title>
-    <url>/2016/11/16/%E7%AE%80%E6%98%93%E5%B1%80%E5%9F%9F%E7%BD%91%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%E8%84%9A%E6%9C%AC%E5%AE%9E%E7%8E%B0/</url>
-    <content><![CDATA[<p>就是一个很简单的基于flask服务器脚本。</p>
-<span id="more"></span>
-
-<p>使用脚本时的文件结构：</p>
-<ul>
-<li>脚本文件</li>
-<li>分类文件夹1</li>
-<li>文件1</li>
-<li>文件2</li>
-<li>······</li>
-<li>分类文件夹2</li>
-<li>文件1</li>
-<li>文件2</li>
-<li>······</li>
-<li>······</li>
-</ul>
-<p><em>脚本的使用环境是windous，因为校内网段是172，所以使用172检索，普通路由器可以使用192来检索。</em></p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> socket</span><br><span class="line"></span><br><span class="line">app = Flask(__name__,static_url_path=<span class="string">&#x27;&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/&#x27;</span></span>)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span>():</span></span><br><span class="line">    date = []</span><br><span class="line">    date = gettarget()</span><br><span class="line">    <span class="keyword">return</span> <span class="string">u&#x27;&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&quot;UTF-8&quot;/&gt;&lt;title&gt; LinksMoviesServer&lt;/title&gt;&lt;style&gt;a&#123;font-size: 200%;display: block;margin-left: 10vw;&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot;background:#666;width:100%;padding-top:10vh&quot;&gt;&#x27;</span>+date+<span class="string">&#x27;&lt;/body&gt;&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/&lt;dirname&gt;&#x27;</span></span>)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">moviesdir</span>(<span class="params">dirname</span>):</span></span><br><span class="line">    date = []</span><br><span class="line">    date = gettarget(pwd=dirname)</span><br><span class="line">    <span class="keyword">return</span> <span class="string">u&#x27;&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&quot;UTF-8&quot;/&gt;&lt;title&gt;LinksMoviesServer&lt;/title&gt;&lt;style&gt;a&#123;font-size: 200%;display: block;margin-left: 10vw;&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot;background:#666;width:100%;padding-top:10vh&quot;&gt;&#x27;</span>+date+<span class="string">&#x27;&lt;/body&gt;&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/&lt;dirname&gt;/&lt;moviesname&gt;&#x27;</span></span>)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">movies</span>(<span class="params">dirname,moviesname</span>):</span></span><br><span class="line">    <span class="keyword">return</span> send_from_directory(dirname,moviesname)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gettarget</span>(<span class="params">pwd=<span class="string">&#x27;&#x27;</span>,moviename=<span class="string">&#x27;&#x27;</span></span>):</span></span><br><span class="line">    ospwd = os.getcwd()</span><br><span class="line">    ospwd = ospwd + <span class="string">&#x27;\\&#x27;</span> + pwd</span><br><span class="line">    dirlist = os.listdir(ospwd) </span><br><span class="line">    target = <span class="string">&#x27;&#x27;</span></span><br><span class="line">    <span class="keyword">if</span> pwd == <span class="string">&#x27;&#x27;</span>:</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> dirlist:</span><br><span class="line">            target = target + <span class="string">&#x27;&lt;a href=&quot;/&#x27;</span>+ i +<span class="string">&#x27;&quot;&gt;&#x27;</span>+i+<span class="string">&#x27;&lt;/a&gt;&#x27;</span></span><br><span class="line">    <span class="keyword">elif</span> moviename==<span class="string">&#x27;&#x27;</span> :</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> dirlist:</span><br><span class="line">            target = target + <span class="string">&#x27;&lt;a href=&quot;/&#x27;</span> + pwd + <span class="string">&#x27;/&#x27;</span> + i +<span class="string">&#x27;&quot;&gt;&#x27;</span>+i+<span class="string">&#x27;&lt;/a&gt;&#x27;</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        target = ospwd + <span class="string">&#x27;\\&#x27;</span> + moviename</span><br><span class="line">    <span class="keyword">return</span> target</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getip</span>():</span></span><br><span class="line">    IPs = socket.gethostbyname_ex(socket.gethostname())[-<span class="number">1</span>]</span><br><span class="line">    localIP = <span class="string">&#x27;&#x27;</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> IPs:</span><br><span class="line">        <span class="keyword">if</span> i[<span class="number">0</span>:<span class="number">3</span>]==<span class="string">&#x27;172&#x27;</span>:</span><br><span class="line">            localIP = i</span><br><span class="line">    <span class="keyword">return</span> localIP</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    app.run(host=getip(),threaded=<span class="literal">True</span>,port=<span class="number">666</span>)</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>code</category>
-      </categories>
-      <tags>
-        <tag>Python</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>魔方</title>
-    <url>/2016/10/12/%E9%AD%94%E6%96%B9/</url>
-    <content><![CDATA[<p>为了写出一个Python版的二阶段算法求解魔方。</p>
-<p>今天开始学cpp（蜜汁需求得到的蜜汁结果）。</p>
-<p>就酱紫。</p>
-<p>随时更新。</p>
-<span id="more"></span>
-
-<p>使用魔方中心块的相对位置来表示魔方块。例如一个已复原的魔方的表示为：UF  UR  UB  UL  DF  DR  DB  DL  FR  FL  BR  BL  UFR  URB UBL  ULF  DRF DFL  DLB  DBR</p>
-<p>解魔方算法的Cpp表达</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span> ;</span><br><span class="line"><span class="keyword">char</span></span><br><span class="line">         </span><br><span class="line">        *faces=<span class="string">&quot;RLFBUD&quot;</span>,</span><br><span class="line">         </span><br><span class="line">        *order=<span class="string">&quot;AECGBFDHIJKLMSNTROQP&quot;</span>,</span><br><span class="line">         </span><br><span class="line">        *bithash=<span class="string">&quot;TdXhQaRbEFIJUZfijeYV&quot;</span>,</span><br><span class="line">           </span><br><span class="line">        *perm=<span class="string">&quot;AIBJTMROCLDKSNQPEKFIMSPRGJHLNTOQAGCEMTNSBFDHORPQ&quot;</span>,</span><br><span class="line"> </span><br><span class="line">        pos[<span class="number">20</span>],ori[<span class="number">20</span>],val[<span class="number">20</span>],</span><br><span class="line"> </span><br><span class="line">        TEMP,</span><br><span class="line"> </span><br><span class="line">        *tables[<span class="number">8</span>];</span><br><span class="line"> </span><br><span class="line"><span class="keyword">int</span> movecube[<span class="number">20</span>],moveamount[<span class="number">20</span>],</span><br><span class="line"> </span><br><span class="line">        phase=<span class="number">0</span>,</span><br><span class="line"> </span><br><span class="line">        tablesize[]=&#123;<span class="number">1</span>,<span class="number">4096</span>,  <span class="number">6561</span>,<span class="number">4096</span>,  <span class="number">256</span>,<span class="number">1536</span>,  <span class="number">13824</span>,<span class="number">576</span>&#125;;</span><br><span class="line"> </span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SWAP(a,b) TEMP=a;a=b;b=TEMP;</span></span><br><span class="line"> </span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CHAROFFSET 65</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">static</span> <span class="built_in">string</span> answer = <span class="string">&quot;&quot;</span>;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">cycle</span><span class="params">(<span class="keyword">char</span>*p,<span class="keyword">char</span>*a)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">        SWAP(p[*a-CHAROFFSET],p[a[<span class="number">1</span>]-CHAROFFSET]);</span><br><span class="line">        SWAP(p[*a-CHAROFFSET],p[a[<span class="number">2</span>]-CHAROFFSET]);</span><br><span class="line">        SWAP(p[*a-CHAROFFSET],p[a[<span class="number">3</span>]-CHAROFFSET]);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">twist</span><span class="params">(<span class="keyword">int</span> i,<span class="keyword">int</span> a)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">        i-=CHAROFFSET;</span><br><span class="line">        ori[i]=(ori[i]+a+<span class="number">1</span>)%val[i];</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">reset</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">        <span class="keyword">for</span>( <span class="keyword">int</span> i=<span class="number">0</span>; i&lt;<span class="number">20</span>; pos[i]=i, ori[i++]=<span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">permtonum</span><span class="params">(<span class="keyword">char</span>* p)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> ( <span class="keyword">int</span> a=<span class="number">0</span>; a&lt;<span class="number">4</span>; a++)</span><br><span class="line">        &#123;</span><br><span class="line"> </span><br><span class="line">                n*=<span class="number">4</span>-a;</span><br><span class="line">                <span class="keyword">for</span>( <span class="keyword">int</span> b=a; ++b&lt;<span class="number">4</span>; )</span><br><span class="line">                        <span class="keyword">if</span> (p&lt;p[a]) n++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> n;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">numtoperm</span><span class="params">(<span class="keyword">char</span>* p,<span class="keyword">int</span> n,<span class="keyword">int</span> o)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">        p+=o;</span><br><span class="line">        p[<span class="number">3</span>]=o;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> a=<span class="number">3</span>; a--;)</span><br><span class="line">        &#123;</span><br><span class="line">                p[a] = n%(<span class="number">4</span>-a) +o;</span><br><span class="line">                n/=<span class="number">4</span>-a;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> b=a; ++b&lt;<span class="number">4</span>; )</span><br><span class="line">                        <span class="keyword">if</span> ( p &gt;= p[a]) p++;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getposition</span><span class="params">(<span class="keyword">int</span> t)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> i=<span class="number">-1</span>,n=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">switch</span>(t)</span><br><span class="line">        &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">                <span class="keyword">for</span>(;++i&lt;<span class="number">12</span>;) n+= ori[i]&lt;&lt;i;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">                <span class="keyword">for</span>(i=<span class="number">20</span>;--i&gt;<span class="number">11</span>;) n=n*<span class="number">3</span>+ori[i];</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">                <span class="keyword">for</span>(;++i&lt;<span class="number">12</span>;) n+= (pos[i]&amp;<span class="number">8</span>)?(<span class="number">1</span>&lt;&lt;i):<span class="number">0</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">4</span>:</span><br><span class="line">                <span class="keyword">for</span>(;++i&lt;<span class="number">8</span>;) n+= (pos[i]&amp;<span class="number">4</span>)?(<span class="number">1</span>&lt;&lt;i):<span class="number">0</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">5</span>:</span><br><span class="line">                <span class="keyword">int</span> corn[<span class="number">8</span>],j,k,l,corn2[<span class="number">4</span>];</span><br><span class="line">                k=j=<span class="number">0</span>;</span><br><span class="line">                <span class="keyword">for</span>(;++i&lt;<span class="number">8</span>;)</span><br><span class="line">                        <span class="keyword">if</span>((l=pos[i+<span class="number">12</span>]<span class="number">-12</span>)&amp;<span class="number">4</span>)</span><br><span class="line">                        &#123;</span><br><span class="line">                                corn[l]=k++;</span><br><span class="line">                                n+=<span class="number">1</span>&lt;&lt;i;</span><br><span class="line">                        &#125;<span class="keyword">else</span> corn[j++]=l;</span><br><span class="line">                <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;<span class="number">4</span>;i++) corn2[i]=corn[<span class="number">4</span>+corn[i]];</span><br><span class="line">                <span class="keyword">for</span>(;--i;) corn2[i]^=corn2[<span class="number">0</span>];</span><br><span class="line">                n=n*<span class="number">6</span>+corn2[<span class="number">1</span>]*<span class="number">2</span><span class="number">-2</span>;</span><br><span class="line">                <span class="keyword">if</span>(corn2[<span class="number">3</span>]&lt;corn2[<span class="number">2</span>])n++;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">6</span>:</span><br><span class="line">                n=permtonum(pos)*<span class="number">576</span>+permtonum(pos+<span class="number">4</span>)*<span class="number">24</span>+permtonum(pos+<span class="number">12</span>);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">7</span>:</span><br><span class="line">                n=permtonum(pos+<span class="number">8</span>)*<span class="number">24</span>+permtonum(pos+<span class="number">16</span>);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> n;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">setposition</span><span class="params">(<span class="keyword">int</span> t, <span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> i=<span class="number">0</span>,j=<span class="number">12</span>,k=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">char</span> *corn=<span class="string">&quot;QRSTQRTSQSRTQTRSQSTRQTSR&quot;</span>;</span><br><span class="line">        reset();</span><br><span class="line">        <span class="keyword">switch</span>(t)&#123;</span><br><span class="line">         </span><br><span class="line">        <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">                <span class="keyword">for</span>(;i&lt;<span class="number">12</span>;i++,n&gt;&gt;=<span class="number">1</span>) ori[i]=n&amp;<span class="number">1</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">                <span class="keyword">for</span>(i=<span class="number">12</span>;i&lt;<span class="number">20</span>;i++,n/=<span class="number">3</span>) ori[i]=n%<span class="number">3</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">                <span class="keyword">for</span>(;i&lt;<span class="number">12</span>;i++,n&gt;&gt;=<span class="number">1</span>) pos[i]= <span class="number">8</span>*n&amp;<span class="number">8</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">4</span>:</span><br><span class="line">                <span class="keyword">for</span>(;i&lt;<span class="number">8</span>;i++,n&gt;&gt;=<span class="number">1</span>) pos[i]= <span class="number">4</span>*n&amp;<span class="number">4</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">5</span>:</span><br><span class="line">                corn+=n%<span class="number">6</span>*<span class="number">4</span>;</span><br><span class="line">                n/=<span class="number">6</span>;</span><br><span class="line">                <span class="keyword">for</span>(;i&lt;<span class="number">8</span>;i++,n&gt;&gt;=<span class="number">1</span>)</span><br><span class="line">                        pos[i+<span class="number">12</span>]= n&amp;<span class="number">1</span> ? corn[k++]-CHAROFFSET : j++;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">6</span>:</span><br><span class="line">                numtoperm(pos,n%<span class="number">24</span>,<span class="number">12</span>);n/=<span class="number">24</span>;</span><br><span class="line">                numtoperm(pos,n%<span class="number">24</span>,<span class="number">4</span>); n/=<span class="number">24</span>;</span><br><span class="line">                numtoperm(pos,n   ,<span class="number">0</span>);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">7</span>:</span><br><span class="line">                numtoperm(pos,n/<span class="number">24</span>,<span class="number">8</span>);</span><br><span class="line">                numtoperm(pos,n%<span class="number">24</span>,<span class="number">16</span>);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">domove</span><span class="params">(<span class="keyword">int</span> m)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">        <span class="keyword">char</span> *p=perm+<span class="number">8</span>*m, i=<span class="number">8</span>;</span><br><span class="line"> </span><br><span class="line">        cycle(pos,p);</span><br><span class="line">        cycle(ori,p);</span><br><span class="line">        cycle(pos,p+<span class="number">4</span>);</span><br><span class="line">        cycle(ori,p+<span class="number">4</span>);</span><br><span class="line">        <span class="keyword">if</span>(m&lt;<span class="number">4</span>)</span><br><span class="line">                <span class="keyword">for</span>(;--i&gt;<span class="number">3</span>;) twist(p[i],i&amp;<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">if</span>(m&lt;<span class="number">2</span>)</span><br><span class="line">                <span class="keyword">for</span>(i=<span class="number">4</span>;i--;) twist(p[i],<span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">filltable</span><span class="params">(<span class="keyword">int</span> ti)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n=<span class="number">1</span>,l=<span class="number">1</span>, tl=tablesize[ti];</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">char</span>* tb = tables[ti]=<span class="keyword">new</span> <span class="keyword">char</span>[tl];</span><br><span class="line"> </span><br><span class="line">        <span class="built_in">memset</span>( tb, <span class="number">0</span>, tl);</span><br><span class="line">        reset();</span><br><span class="line">        tb[getposition(ti)]=<span class="number">1</span>;</span><br><span class="line">         </span><br><span class="line">        <span class="keyword">while</span>(n)</span><br><span class="line">        &#123;</span><br><span class="line">                n=<span class="number">0</span>;</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;tl;i++)&#123;</span><br><span class="line">                        <span class="keyword">if</span>( tb[i]==l )</span><br><span class="line">                        &#123;</span><br><span class="line">                                setposition(ti,i);</span><br><span class="line">                                <span class="keyword">for</span>( <span class="keyword">int</span> f=<span class="number">0</span>; f&lt;<span class="number">6</span>; f++)</span><br><span class="line">                                &#123;</span><br><span class="line">                                        <span class="keyword">for</span>( <span class="keyword">int</span> q=<span class="number">1</span>;q&lt;<span class="number">4</span>;q++)</span><br><span class="line">                                        &#123;</span><br><span class="line">                                                domove(f);</span><br><span class="line">                                                <span class="keyword">int</span> r=getposition(ti);</span><br><span class="line">                                                <span class="keyword">if</span>( ( q==<span class="number">2</span> || f&gt;=(ti&amp;<span class="number">6</span>) ) &amp;&amp; !tb[r])</span><br><span class="line">                                                &#123;</span><br><span class="line">                                                        tb[r]=l+<span class="number">1</span>;</span><br><span class="line">                                                        n++;</span><br><span class="line">                                                &#125;</span><br><span class="line">                                        &#125;</span><br><span class="line">                                        domove(f);</span><br><span class="line">                                &#125;</span><br><span class="line">                        &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                l++;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">searchphase</span><span class="params">(<span class="keyword">int</span> movesleft, <span class="keyword">int</span> movesdone,<span class="keyword">int</span> lastmove)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>( tables[phase  ][getposition(phase  )]<span class="number">-1</span> &gt; movesleft ||</span><br><span class="line">            tables[phase+<span class="number">1</span>][getposition(phase+<span class="number">1</span>)]<span class="number">-1</span> &gt; movesleft ) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">if</span>(!movesleft) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">for</span>( <span class="keyword">int</span> i=<span class="number">6</span>;i--;)&#123;</span><br><span class="line">                <span class="keyword">if</span>( i-lastmove &amp;&amp; (i-lastmove+<span class="number">1</span> || i|<span class="number">1</span> ) )</span><br><span class="line">                &#123;</span><br><span class="line">                        movecube[movesdone]=i;</span><br><span class="line">                        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;++j&lt;<span class="number">4</span>;)&#123;</span><br><span class="line">                                domove(i);</span><br><span class="line">                                moveamount[movesdone]=j;</span><br><span class="line">                                <span class="keyword">if</span>( (j==<span class="number">2</span> || i&gt;=phase ) &amp;&amp;</span><br><span class="line">                                        searchphase(movesleft<span class="number">-1</span>,movesdone+<span class="number">1</span>,i) ) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">                        &#125;</span><br><span class="line">                        domove(i);</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">check</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;answer.length()<span class="number">-2</span>;i+=<span class="number">2</span>)</span><br><span class="line">        &#123;</span><br><span class="line">                <span class="keyword">if</span>(answer[i] == answer[i+<span class="number">2</span>])</span><br><span class="line">                &#123;</span><br><span class="line">                        answer[i+<span class="number">1</span>]=(answer[i+<span class="number">1</span>]+answer[i+<span class="number">3</span>])%<span class="number">4</span>+<span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">                        answer.erase(i+<span class="number">2</span>,<span class="number">2</span>);</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">solveCube</span><span class="params">(<span class="built_in">string</span> state[])</span><span class="comment">//调用入口</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> f,i=<span class="number">0</span>,j=<span class="number">0</span>,k=<span class="number">0</span>,pc,mor;</span><br><span class="line">        <span class="keyword">for</span>(; k&lt;<span class="number">20</span>; k++) val[k]=k&lt;<span class="number">12</span>?<span class="number">2</span>:<span class="number">3</span>;</span><br><span class="line">        <span class="keyword">for</span>(; j&lt;<span class="number">8</span>; j++) filltable(j);</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">for</span>(; i&lt;<span class="number">20</span>; i++)</span><br><span class="line">        &#123;</span><br><span class="line">                f=pc=k=mor=<span class="number">0</span>; </span><br><span class="line">                <span class="keyword">for</span>(;f&lt;val[i];f++)</span><br><span class="line">                &#123;</span><br><span class="line">                        j=<span class="built_in">strchr</span>(faces,state[i][f])-faces;</span><br><span class="line">                        <span class="keyword">if</span>(j&gt;k) &#123;k=j;mor=f;&#125;</span><br><span class="line">                        pc+= <span class="number">1</span>&lt;&lt;j;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">for</span>(f=<span class="number">0</span>; f&lt;<span class="number">20</span>; f++)</span><br><span class="line">                        <span class="keyword">if</span>( pc==bithash[f]<span class="number">-64</span> ) <span class="keyword">break</span>;</span><br><span class="line">                pos[order[i]-CHAROFFSET]=f;</span><br><span class="line">                ori[order[i]-CHAROFFSET]=mor%val[i];</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">for</span>( ; phase&lt;<span class="number">8</span>; phase+=<span class="number">2</span>)</span><br><span class="line">        &#123;</span><br><span class="line">                <span class="keyword">for</span>( j=<span class="number">0</span>; !searchphase(j,<span class="number">0</span>,<span class="number">9</span>); j++);</span><br><span class="line">                <span class="keyword">for</span>( i=<span class="number">0</span>; i&lt;j; i++)</span><br><span class="line">                &#123;</span><br><span class="line">                        answer += <span class="string">&quot;FBRLUD&quot;</span>[movecube[i]];</span><br><span class="line">                        answer += (moveamount[i] + <span class="string">&#x27;0&#x27;</span>);</span><br><span class="line">                &#125;</span><br><span class="line">                 </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="built_in">endl</span>&lt;&lt;<span class="string">&quot;answer:&quot;</span>&lt;&lt;answer&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        check();</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;checking......\nanswer:&quot;</span>&lt;&lt;answer&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;send command&quot;</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">         </span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>code</category>
-      </categories>
-      <tags>
-        <tag>Python</tag>
-        <tag>魔方</tag>
-        <tag>Cpp</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>黑群晖相关折腾</title>
-    <url>/2020/05/17/%E9%BB%91%E7%BE%A4%E6%99%96%E7%9B%B8%E5%85%B3%E6%8A%98%E8%85%BE/</url>
-    <content><![CDATA[<p>已经跳槽QNAP啦，怀念群晖。</p>
-<span id="more"></span>]]></content>
   </entry>
   <entry>
     <title>材料成型技术基础</title>
