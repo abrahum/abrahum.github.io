@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.4.0">
+<meta name="generator" content="Hexo 5.3.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png">
@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"abrahum.link","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"abrahum.link","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="寒假的时候利用家里不计费的网爬取了600w+P站的图片数据。一开始的目的是解决：由于P站本身的搜索页面1000页限制，而导致的无法通过搜索爬取较早图片信息，这一问题。所以在爬取的一开始，我的目标是获取高收藏的高质量作品。我采取的爬取策略是通过第一个画师的收藏夹开始，获取他收藏夹内的图片信息，接着将这些图片的画师id加入画师数据库。当当前画师的收藏夹爬取完毕后，就从画师数据库中随机抽取一个新的画师重">
@@ -142,7 +142,7 @@
   </li>
         <li class="menu-item menu-item-talk">
 
-    <a href="/talk/" rel="section"><i class="fa fa-fw fa-weixin"></i>talk</a>
+    <a href="/talk/" rel="section"><i class="fa fa-fw fa-weixin"></i>留言</a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -254,7 +254,7 @@
 
       
         <p>寒假的时候利用家里不计费的网爬取了600w+P站的图片数据。一开始的目的是解决：由于P站本身的搜索页面1000页限制，而导致的无法通过搜索爬取较早图片信息，这一问题。所以在爬取的一开始，我的目标是获取高收藏的高质量作品。我采取的爬取策略是通过第一个画师的收藏夹开始，获取他收藏夹内的图片信息，接着将这些图片的画师id加入画师数据库。当当前画师的收藏夹爬取完毕后，就从画师数据库中随机抽取一个新的画师重复之前的步骤。这样的策略可以从点到面的快速、无休止地多线程爬取高质量的画作。</p>
-<span id="more"></span>
+<a id="more"></a>
 
 <script crossorigin="anonymous" integrity="sha512-ZRdjJAYP8Kij8Lkln9uiGj0jIrMDLAALm1ZB2b3VfV9XJ0nR4zbJmHKB42/A4tgMlZS4DTPnSAmcYRoS0dginA==" src="https://lib.baomitu.com/echarts/5.0.0/echarts.min.js"></script>
 
@@ -406,7 +406,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-count">13</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

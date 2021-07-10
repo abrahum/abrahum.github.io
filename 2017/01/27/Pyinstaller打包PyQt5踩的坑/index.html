@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.4.0">
+<meta name="generator" content="Hexo 5.3.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png">
@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"abrahum.link","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"abrahum.link","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="在做完一个P站的爬虫后,我决定为之制作一个UI界面，并使用Pyinstaller打包为exe发布。 然后呢，我不出意料的踩了很多坑_(:3」∠)_">
@@ -141,7 +141,7 @@
   </li>
         <li class="menu-item menu-item-talk">
 
-    <a href="/talk/" rel="section"><i class="fa fa-fw fa-weixin"></i>talk</a>
+    <a href="/talk/" rel="section"><i class="fa fa-fw fa-weixin"></i>留言</a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -254,7 +254,7 @@
       
         <p>在做完一个<a target="_blank" rel="noopener" href="https://coding.net/u/Abrahum/p/pixiv2.0/git">P站的爬虫</a>后,我决定为之制作一个UI界面，并使用Pyinstaller打包为exe发布。</p>
 <p>然后呢，我不出意料的踩了很多坑_(:3」∠)_</p>
-<span id="more"></span>
+<a id="more"></a>
 
 <h2 id="原文"><a href="#原文" class="headerlink" title="原文"></a>原文</h2><p>首先第一个就是关于Pyinstaller，它会生成两个文件夹（build和dist），其中build是工程文件夹（全是过程文件，没什么卵用），而dist才是最后生成的程序，年少无知的我在build里傻傻得找了很久exe文件。</p>
 <p>然后是关于bin检索的问题，PyQt5的一些模块不能正常的被识别，需要<code>-p C:\Python35\Lib\site-packages\PyQt5\Qt\bin</code>增加检索的目录。</p>
@@ -264,20 +264,16 @@
 </blockquote>
 <p>最后遇到的是在PyQt5中使用的ico文件不能正常的打包如exe，最后pyrcc5解决，使用命令</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pyrcc5 -o images.py images.qrc</span><br></pre></td></tr></table></figure>
-
 <p>images.qrc代码如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;RCC&gt;</span><br><span class="line">  &lt;qresource prefix&#x3D;&quot;&#x2F;&quot; &gt;</span><br><span class="line">    &lt;file&gt;img&#x2F;image1.png&lt;&#x2F;file&gt;</span><br><span class="line">    &lt;file&gt;img&#x2F;image2.png&lt;&#x2F;file&gt;</span><br><span class="line">    &lt;file&gt;img&#x2F;image3.png&lt;&#x2F;file&gt;</span><br><span class="line">  &lt;&#x2F;qresource&gt;</span><br><span class="line">&lt;&#x2F;RCC&gt;</span><br></pre></td></tr></table></figure>
-
 <p>最后将<code>import images</code>，使用例如<code>&#39;:/img/image1.png&#39;</code>引用即可。这个方法同样来自<a target="_blank" rel="noopener" href="http://www.jianshu.com/p/c1e75244b6f3">简书</a></p>
 <h2 id="正月初一更新"><a href="#正月初一更新" class="headerlink" title="正月初一更新"></a>正月初一更新</h2><p>最近又发现了一个把资源文件打包进exe里的方法，在spec文件里<code>a.datas,</code>下一行加上行<code>[(filename,filepath,&#39;DATA&#39;)],</code>即可。</p>
 <p>这个方法最好的地方是可以用来打包-i参数加入的图标文件。</p>
 <p>接下来想要做的是做个进度条，当然要先结果目前一阻塞窗口就未响应的问题······</p>
 <h2 id="正月初三更新"><a href="#正月初三更新" class="headerlink" title="正月初三更新"></a>正月初三更新</h2><p>今天解决了之前的两大问题，使用QThread来保证UI不被阻塞。需要建立一个类继承<code>QtCore.QThread</code>然后重写run()函数</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">myQThread</span>(<span class="params">QtCore.QThread</span>):</span></span><br><span class="line">    done = QtCore.pyqtSignal()</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="built_in">super</span>(myQThread, self).__init__()</span><br><span class="line">        self.mod = <span class="string">&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">run</span>(<span class="params">self</span>):</span></span><br><span class="line">        time.sleep(<span class="number">1</span>)</span><br><span class="line">        self.done.emit()</span><br><span class="line"></span><br><span class="line">AQThread = myQThread()</span><br><span class="line">AQThread.start()</span><br><span class="line">AQThread.done.connect(donefun)</span><br></pre></td></tr></table></figure>
-
 <p>为了解决进度条的问题修改了之前的爬取内核，所以把新的版本就改为Ver.2.1～</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">dw</span>(<span class="params">QWidget</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="built_in">super</span>(dw, self).__init__()</span><br><span class="line">        self.timer = QtCore.QBasicTimer()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">timerEvent</span>(<span class="params">self, e</span>):</span></span><br><span class="line">        dosomething()</span><br><span class="line"></span><br><span class="line">w = dw()</span><br><span class="line">w.show()</span><br><span class="line">w.timer.start(<span class="number">100</span>, w)</span><br></pre></td></tr></table></figure>
-
 <p>以上代码重写了timeEvent函数，当计时器超时就会触发该函数，然后重绘ui，达到进度条等动态效果。</p>
 <p>转战Android，脚本保持维护，GUI版本不准备再更新了。</p>
 <h2 id="Pixiv-2-1-GUI"><a href="#Pixiv-2-1-GUI" class="headerlink" title="Pixiv-2.1-GUI"></a><a target="_blank" rel="noopener" href="http://pan.baidu.com/s/1slplXFn">Pixiv-2.1-GUI</a></h2><p>Password: 1c3e</p>
@@ -394,7 +390,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-count">13</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.4.0">
+<meta name="generator" content="Hexo 5.3.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png">
@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"abrahum.link","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"abrahum.link","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="一直在制作完善pixiv的爬虫，最近遇到了一个问题，学校的网络环境太差了，导致了IO阻塞时间过长，常常出现线程长时间阻塞，占用了时间和内存。 为了解决这个问题，我决定尝试制定一个超时的图片删除重新爬取的过程，三次爬取不全则log报错不再爬取。 同时将整个脚本搬运至3.5版本，重新用asyncio异步编写，减少线程使用。">
@@ -141,7 +141,7 @@
   </li>
         <li class="menu-item menu-item-talk">
 
-    <a href="/talk/" rel="section"><i class="fa fa-fw fa-weixin"></i>talk</a>
+    <a href="/talk/" rel="section"><i class="fa fa-fw fa-weixin"></i>留言</a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -255,11 +255,10 @@
         <p>一直在制作完善pixiv的爬虫，最近遇到了一个问题，学校的网络环境太差了，导致了IO阻塞时间过长，常常出现线程长时间阻塞，占用了时间和内存。</p>
 <p>为了解决这个问题，我决定尝试制定一个超时的图片删除重新爬取的过程，三次爬取不全则log报错不再爬取。</p>
 <p>同时将整个脚本搬运至3.5版本，重新用asyncio异步编写，减少线程使用。</p>
-<span id="more"></span>
+<a id="more"></a>
 
 <p>首先上一个asyncio的例子：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> asyncio</span><br><span class="line"></span><br><span class="line"><span class="meta">@asyncio.coroutine</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hello</span>():</span></span><br><span class="line">    print(<span class="string">&quot;Hello world!&quot;</span>)</span><br><span class="line">    <span class="comment"># 异步调用asyncio.sleep(1):</span></span><br><span class="line">    r = <span class="keyword">yield</span> <span class="keyword">from</span> asyncio.sleep(<span class="number">1</span>)</span><br><span class="line">    print(<span class="string">&quot;Hello again!&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取EventLoop:</span></span><br><span class="line">loop = asyncio.get_event_loop()</span><br><span class="line"><span class="comment"># 执行coroutine</span></span><br><span class="line">loop.run_until_complete(hello())</span><br><span class="line">loop.close()</span><br></pre></td></tr></table></figure>
-
 <p><code>@asyncio.coroutine</code>把一个generator标记为coroutine类型，然后把这个coroutine放入EventLoop中执行。</p>
 <h2 id="2017年更新"><a href="#2017年更新" class="headerlink" title="2017年更新"></a>2017年更新</h2><p>经过测试，协程的大数据IO使用协程爬取效率并没有想象的高，考虑到这一丢丢的进程不会达到吃电脑性能的程度，不再全面使用协程。这里仅记录下一些代码，一便下次查阅：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">loop = asyncio.get_event_loop()</span><br><span class="line">s = requests.session()</span><br><span class="line">s.headers = headers1</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get</span>(<span class="params">url, asession=s</span>):</span></span><br><span class="line">    <span class="keyword">return</span> loop.run_in_executor(<span class="literal">None</span>, asession.get, url)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">async_save</span>(<span class="params">dataids, cookies, path</span>):</span></span><br><span class="line">    s.cookies = requests.utils.cookiejar_from_dict(cookies)</span><br><span class="line">    tasks = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> dataids:</span><br><span class="line">        tasks.append(simgle_async_save(i, path))</span><br><span class="line">    loop.run_until_complete(asyncio.wait(tasks))</span><br><span class="line">    loop.close()</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">simgle_async_save</span>(<span class="params">i, path, ceiling=<span class="number">4</span></span>):</span></span><br><span class="line">    b = <span class="number">0</span></span><br><span class="line">    ·······</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> is_exists:</span><br><span class="line">            pic = <span class="keyword">await</span> get(originaltu)</span><br><span class="line">            fp = <span class="built_in">open</span>(path, <span class="string">&#x27;wb&#x27;</span>)</span><br><span class="line">            fp.write(pic.content)</span><br><span class="line">            fp.close()  <span class="comment"># 保存图片</span></span><br><span class="line">            <span class="string">&#x27;&#x27;&#x27;print(i+&#x27;-&#x27;+str(b) + &#x27; download is Success&#x27;)&#x27;&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
@@ -375,7 +374,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-count">13</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

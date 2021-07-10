@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.4.0">
+<meta name="generator" content="Hexo 5.3.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png">
@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"abrahum.link","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"abrahum.link","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="之前做了一个小脚本来共享文件，最初的作用是在寝室床上可以愉快的访问存在下面电脑里的文件。但是在使用中还是感觉不太便利，一是需要特定的文件结构，二是需要flask（事实证明杀鸡焉用牛刀）。所以有必要对之前的脚本做一个小小的升级。我想到了之前用来测试的http.server模块可以很好的适用于这种需求，所以查阅了http.server模块的文档后，做了如下脚本。">
@@ -141,7 +141,7 @@
   </li>
         <li class="menu-item menu-item-talk">
 
-    <a href="/talk/" rel="section"><i class="fa fa-fw fa-weixin"></i>talk</a>
+    <a href="/talk/" rel="section"><i class="fa fa-fw fa-weixin"></i>留言</a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -253,10 +253,9 @@
 
       
         <p>之前做了一个<a href="/2016/11/16/%E7%AE%80%E6%98%93%E5%B1%80%E5%9F%9F%E7%BD%91%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%E8%84%9A%E6%9C%AC%E5%AE%9E%E7%8E%B0/">小脚本</a>来共享文件，最初的作用是在寝室床上可以愉快的访问存在下面电脑里的文件。但是在使用中还是感觉不太便利，一是需要特定的文件结构，二是需要flask（事实证明杀鸡焉用牛刀）。所以有必要对之前的脚本做一个小小的升级。我想到了之前用来测试的<code>http.server</code>模块可以很好的适用于这种需求，所以查阅了<code>http.server</code>模块的文档后，做了如下脚本。</p>
-<span id="more"></span>
+<a id="more"></a>
 
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> socket</span><br><span class="line"><span class="keyword">import</span> http.server</span><br><span class="line"><span class="keyword">import</span> socketserver</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getip</span>(<span class="params">head</span>):</span></span><br><span class="line">    IPs = socket.gethostbyname_ex(socket.gethostname())[-<span class="number">1</span>]</span><br><span class="line">    localIP = <span class="string">&#x27;&#x27;</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> IPs:</span><br><span class="line">        <span class="keyword">if</span> i[<span class="number">0</span>:<span class="number">3</span>] == head:</span><br><span class="line">            localIP = i</span><br><span class="line">    <span class="keyword">return</span> localIP</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    PORT = <span class="number">666</span></span><br><span class="line">    <span class="keyword">if</span> sys.argv[<span class="number">1</span>:]:</span><br><span class="line">        head = sys.argv[<span class="number">1</span>]</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        head = <span class="string">&#x27;172&#x27;</span></span><br><span class="line">    PORT = <span class="number">666</span></span><br><span class="line">    Handler = http.server.SimpleHTTPRequestHandler</span><br><span class="line">    IP = getip(head)</span><br><span class="line">    <span class="keyword">if</span> IP:</span><br><span class="line">        httpd = socketserver.TCPServer((getip(head), PORT), Handler)</span><br><span class="line">        print(<span class="string">&quot;serving at &quot;</span>+getip(head)+<span class="string">&quot;:666&quot;</span>)</span><br><span class="line">        httpd.serve_forever()</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        print(<span class="string">&#x27;Invalid domain&#x27;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
 <p>这一次的脚本对文件的结构完全没有要求。</p>
 <p><code>getip()</code>沿用了之前的函数，这一次可以指定ip的关键字。整个脚本等效于：</p>
 <pre><code>python -m http.server 8000 --bind &lt;your ip&gt;
@@ -373,7 +372,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-count">13</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

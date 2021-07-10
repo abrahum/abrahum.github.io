@@ -1172,7 +1172,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #ff8b7f;
+  background: #add74a;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -1492,10 +1492,7 @@ pre .javascript .function {
   position: fixed;
   transition-property: bottom;
   z-index: 1300;
-  width: 24px;
-}
-.back-to-top span {
-  display: none;
+  width: initial;
 }
 .back-to-top:hover {
   color: #fc6423;
@@ -2554,6 +2551,9 @@ mjx-container + br {
 }
 body {
   background: #555;
+}
+.site-nav,
+.sidebar {
   text-shadow: 0.005em 0.005em 0.005em #999 !important;
 }
 a {
@@ -2579,6 +2579,23 @@ h2 a {
 .posts-expand .post-title {
   margin-bottom: 0.5em;
 }
-.post-block {
-  text-shadow: 0.001em 0.001em 0.001em #999 !important;
+.post-body h2 {
+  border-bottom: 1px solid #999;
+}
+.site-overview-wrap.sidebar-panel.sidebar-panel-active {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+li.menu-item {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.posts-collapse {
+  font-family: Courier New, 'Ma Shan Zheng', "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+.posts-collapse .post-title {
+  font-size: 1.1em;
+}
+.posts-collapse .post-meta {
+  font-size: 1.1em;
 }

@@ -8,7 +8,7 @@
 <p><code>ET.parse(&#39;filename.xml&#39;)</code>从Path读取xml树。</p>
 <p><code>ET.fromstring(string)</code>从string读取xml树。</p>
 <p><code>ElementTree.getroot()</code>从<code>ElementTree</code>获取<code>root</code>节点。</p>
-<span id="more"></span>
+<a id="more"></a>
 
 
 <h2 id="Element类型"><a href="#Element类型" class="headerlink" title="Element类型"></a><code>Element</code>类型</h2><p>属性：</p>
@@ -58,7 +58,7 @@
     <title>3D测试</title>
     <url>/2017/02/24/3D%E6%B5%8B%E8%AF%95/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><p>Blend4Web的3D测试</p>
-<span id="more"></span>
+<a id="more"></a>
 
 <iframe src="/3d/b4w.html?compressed_textures&alpha&no_social&autorotate&show_fps" width="100%" height="600px"></iframe>
 
@@ -76,7 +76,7 @@
     <url>/2020/12/22/Hexo%E8%BF%81%E5%BE%99%E8%87%B35-0/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><p>日前准备重新开始更新，结果安装的最新 node14 和 hexo 不兼容，虽然 <code>hexo s</code> 可以正常的渲染出预览画面，但是 <code>hexo g</code> 出来却是全部都是 0kb 的空文件。</p>
 <p>后续虽然安装切换回 node12 以后，问题解决了，干脆就再度迁移到 hexo5.0 与 next 主题的最新版。</p>
-<span id="more"></span>
+<a id="more"></a>
 
 <p>本身的迁移非常简单，重新初始化一个博客文件夹就是</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cnpm install hexo-cli -g</span><br><span class="line">hexo init &lt;new folder&gt;</span><br><span class="line">cd &lt;new folder&gt;</span><br><span class="line">cnpm install</span><br></pre></td></tr></table></figure>
@@ -98,7 +98,7 @@
     <title>Pixiv数据分析</title>
     <url>/2017/03/02/Pixiv%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><p>寒假的时候利用家里不计费的网爬取了600w+P站的图片数据。一开始的目的是解决：由于P站本身的搜索页面1000页限制，而导致的无法通过搜索爬取较早图片信息，这一问题。所以在爬取的一开始，我的目标是获取高收藏的高质量作品。我采取的爬取策略是通过第一个画师的收藏夹开始，获取他收藏夹内的图片信息，接着将这些图片的画师id加入画师数据库。当当前画师的收藏夹爬取完毕后，就从画师数据库中随机抽取一个新的画师重复之前的步骤。这样的策略可以从点到面的快速、无休止地多线程爬取高质量的画作。</p>
-<span id="more"></span>
+<a id="more"></a>
 
 <script crossorigin="anonymous" integrity="sha512-ZRdjJAYP8Kij8Lkln9uiGj0jIrMDLAALm1ZB2b3VfV9XJ0nR4zbJmHKB42/A4tgMlZS4DTPnSAmcYRoS0dginA==" src="https://lib.baomitu.com/echarts/5.0.0/echarts.min.js"></script>
 
@@ -151,7 +151,7 @@
     <url>/2017/01/27/Pyinstaller%E6%89%93%E5%8C%85PyQt5%E8%B8%A9%E7%9A%84%E5%9D%91/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><p>在做完一个<a href="https://coding.net/u/Abrahum/p/pixiv2.0/git">P站的爬虫</a>后,我决定为之制作一个UI界面，并使用Pyinstaller打包为exe发布。</p>
 <p>然后呢，我不出意料的踩了很多坑_(:3」∠)_</p>
-<span id="more"></span>
+<a id="more"></a>
 
 <h2 id="原文"><a href="#原文" class="headerlink" title="原文"></a>原文</h2><p>首先第一个就是关于Pyinstaller，它会生成两个文件夹（build和dist），其中build是工程文件夹（全是过程文件，没什么卵用），而dist才是最后生成的程序，年少无知的我在build里傻傻得找了很久exe文件。</p>
 <p>然后是关于bin检索的问题，PyQt5的一些模块不能正常的被识别，需要<code>-p C:\Python35\Lib\site-packages\PyQt5\Qt\bin</code>增加检索的目录。</p>
@@ -161,20 +161,16 @@
 </blockquote>
 <p>最后遇到的是在PyQt5中使用的ico文件不能正常的打包如exe，最后pyrcc5解决，使用命令</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">pyrcc5 -o images.py images.qrc</span><br></pre></td></tr></table></figure>
-
 <p>images.qrc代码如下：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;RCC&gt;</span><br><span class="line">  &lt;qresource prefix&#x3D;&quot;&#x2F;&quot; &gt;</span><br><span class="line">    &lt;file&gt;img&#x2F;image1.png&lt;&#x2F;file&gt;</span><br><span class="line">    &lt;file&gt;img&#x2F;image2.png&lt;&#x2F;file&gt;</span><br><span class="line">    &lt;file&gt;img&#x2F;image3.png&lt;&#x2F;file&gt;</span><br><span class="line">  &lt;&#x2F;qresource&gt;</span><br><span class="line">&lt;&#x2F;RCC&gt;</span><br></pre></td></tr></table></figure>
-
 <p>最后将<code>import images</code>，使用例如<code>&#39;:/img/image1.png&#39;</code>引用即可。这个方法同样来自<a href="http://www.jianshu.com/p/c1e75244b6f3">简书</a></p>
 <h2 id="正月初一更新"><a href="#正月初一更新" class="headerlink" title="正月初一更新"></a>正月初一更新</h2><p>最近又发现了一个把资源文件打包进exe里的方法，在spec文件里<code>a.datas,</code>下一行加上行<code>[(filename,filepath,&#39;DATA&#39;)],</code>即可。</p>
 <p>这个方法最好的地方是可以用来打包-i参数加入的图标文件。</p>
 <p>接下来想要做的是做个进度条，当然要先结果目前一阻塞窗口就未响应的问题······</p>
 <h2 id="正月初三更新"><a href="#正月初三更新" class="headerlink" title="正月初三更新"></a>正月初三更新</h2><p>今天解决了之前的两大问题，使用QThread来保证UI不被阻塞。需要建立一个类继承<code>QtCore.QThread</code>然后重写run()函数</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">myQThread</span>(<span class="params">QtCore.QThread</span>):</span></span><br><span class="line">    done = QtCore.pyqtSignal()</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="built_in">super</span>(myQThread, self).__init__()</span><br><span class="line">        self.mod = <span class="string">&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">run</span>(<span class="params">self</span>):</span></span><br><span class="line">        time.sleep(<span class="number">1</span>)</span><br><span class="line">        self.done.emit()</span><br><span class="line"></span><br><span class="line">AQThread = myQThread()</span><br><span class="line">AQThread.start()</span><br><span class="line">AQThread.done.connect(donefun)</span><br></pre></td></tr></table></figure>
-
 <p>为了解决进度条的问题修改了之前的爬取内核，所以把新的版本就改为Ver.2.1～</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">dw</span>(<span class="params">QWidget</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="built_in">super</span>(dw, self).__init__()</span><br><span class="line">        self.timer = QtCore.QBasicTimer()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">timerEvent</span>(<span class="params">self, e</span>):</span></span><br><span class="line">        dosomething()</span><br><span class="line"></span><br><span class="line">w = dw()</span><br><span class="line">w.show()</span><br><span class="line">w.timer.start(<span class="number">100</span>, w)</span><br></pre></td></tr></table></figure>
-
 <p>以上代码重写了timeEvent函数，当计时器超时就会触发该函数，然后重绘ui，达到进度条等动态效果。</p>
 <p>转战Android，脚本保持维护，GUI版本不准备再更新了。</p>
 <h2 id="Pixiv-2-1-GUI"><a href="#Pixiv-2-1-GUI" class="headerlink" title="Pixiv-2.1-GUI"></a><a href="http://pan.baidu.com/s/1slplXFn">Pixiv-2.1-GUI</a></h2><p>Password: 1c3e</p>
@@ -190,7 +186,7 @@
     <title>Python常用库文档</title>
     <url>/2016/10/09/Python%E5%B8%B8%E7%94%A8%E5%BA%93%E6%96%87%E6%A1%A3/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><p>现在的搜索引擎非常不讲武德，记录一些常用的 Python 库文档地址，为不时之需。</p>
-<span id="more"></span>
+<a id="more"></a>
 
 <h1 id="官方"><a href="#官方" class="headerlink" title="官方"></a>官方</h1><h2 id="Python"><a href="#Python" class="headerlink" title="Python"></a><a href="https://docs.python.org/zh-cn/3.10/index.html">Python</a></h2><p>没啥好说的。为了世界和平，这里还有一个比较落后的<del><a href="http://python.usyiyi.cn/">中文文档站</a></del>（貌似挂了）</p>
 <h2 id="PEP8"><a href="#PEP8" class="headerlink" title="PEP8"></a><a href="https://www.python.org/dev/peps/pep-0008/">PEP8</a></h2><p>Style Guide for Python Code：Python代码的编码规范</p>
@@ -223,11 +219,10 @@
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><p>一直在制作完善pixiv的爬虫，最近遇到了一个问题，学校的网络环境太差了，导致了IO阻塞时间过长，常常出现线程长时间阻塞，占用了时间和内存。</p>
 <p>为了解决这个问题，我决定尝试制定一个超时的图片删除重新爬取的过程，三次爬取不全则log报错不再爬取。</p>
 <p>同时将整个脚本搬运至3.5版本，重新用asyncio异步编写，减少线程使用。</p>
-<span id="more"></span>
+<a id="more"></a>
 
 <p>首先上一个asyncio的例子：</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> asyncio</span><br><span class="line"></span><br><span class="line"><span class="meta">@asyncio.coroutine</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hello</span>():</span></span><br><span class="line">    print(<span class="string">&quot;Hello world!&quot;</span>)</span><br><span class="line">    <span class="comment"># 异步调用asyncio.sleep(1):</span></span><br><span class="line">    r = <span class="keyword">yield</span> <span class="keyword">from</span> asyncio.sleep(<span class="number">1</span>)</span><br><span class="line">    print(<span class="string">&quot;Hello again!&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取EventLoop:</span></span><br><span class="line">loop = asyncio.get_event_loop()</span><br><span class="line"><span class="comment"># 执行coroutine</span></span><br><span class="line">loop.run_until_complete(hello())</span><br><span class="line">loop.close()</span><br></pre></td></tr></table></figure>
-
 <p><code>@asyncio.coroutine</code>把一个generator标记为coroutine类型，然后把这个coroutine放入EventLoop中执行。</p>
 <h2 id="2017年更新"><a href="#2017年更新" class="headerlink" title="2017年更新"></a>2017年更新</h2><p>经过测试，协程的大数据IO使用协程爬取效率并没有想象的高，考虑到这一丢丢的进程不会达到吃电脑性能的程度，不再全面使用协程。这里仅记录下一些代码，一便下次查阅：</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">loop = asyncio.get_event_loop()</span><br><span class="line">s = requests.session()</span><br><span class="line">s.headers = headers1</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get</span>(<span class="params">url, asession=s</span>):</span></span><br><span class="line">    <span class="keyword">return</span> loop.run_in_executor(<span class="literal">None</span>, asession.get, url)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">async_save</span>(<span class="params">dataids, cookies, path</span>):</span></span><br><span class="line">    s.cookies = requests.utils.cookiejar_from_dict(cookies)</span><br><span class="line">    tasks = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> dataids:</span><br><span class="line">        tasks.append(simgle_async_save(i, path))</span><br><span class="line">    loop.run_until_complete(asyncio.wait(tasks))</span><br><span class="line">    loop.close()</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">simgle_async_save</span>(<span class="params">i, path, ceiling=<span class="number">4</span></span>):</span></span><br><span class="line">    b = <span class="number">0</span></span><br><span class="line">    ·······</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> is_exists:</span><br><span class="line">            pic = <span class="keyword">await</span> get(originaltu)</span><br><span class="line">            fp = <span class="built_in">open</span>(path, <span class="string">&#x27;wb&#x27;</span>)</span><br><span class="line">            fp.write(pic.content)</span><br><span class="line">            fp.close()  <span class="comment"># 保存图片</span></span><br><span class="line">            <span class="string">&#x27;&#x27;&#x27;print(i+&#x27;-&#x27;+str(b) + &#x27; download is Success&#x27;)&#x27;&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>]]></content>
@@ -292,7 +287,7 @@
 <td align="left">略。</td>
 </tr>
 </tbody></table>
-<span id="more"></span>
+<a id="more"></a>
 
 <h2 id="安装与版本更替"><a href="#安装与版本更替" class="headerlink" title="安装与版本更替"></a>安装与版本更替</h2><blockquote>
 <p><a href="http://ffmpeg.org/download.html">ffmpeg下载链接</a></p>
@@ -332,7 +327,6 @@ sudo make install
 <p>之后执行<code>ldconfig</code>使修改生效。</p>
 <p>解决可执行文件的直接运行</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">通过在/usr/local/<span class="built_in">bin</span>/文件夹下创建链接文件解决</span><br><span class="line">sudo ln -s /usr/local/ffmpeg/<span class="built_in">bin</span>/ffmpeg /usr/local/<span class="built_in">bin</span>/</span><br><span class="line">sudo ln -s /usr/local/ffmpeg/<span class="built_in">bin</span>/ffprobe /usr/local/<span class="built_in">bin</span>/</span><br><span class="line">sudo ln -s /usr/local/ffmpeg/<span class="built_in">bin</span>/ffserver /usr/local/<span class="built_in">bin</span>/ </span><br></pre></td></tr></table></figure>
-
 <h2 id="第三方编码器库"><a href="#第三方编码器库" class="headerlink" title="第三方编码器库"></a>第三方编码器库</h2><p>事情的起因是因为我发现版本升到3.0.2之后crf参数报错，所以才意识到h264编码器没有安装，故将解决办法记载下来，以备不时之需。</p>
 <p><em>以下所有内容均以h264为例</em></p>
 <p>1.下载x264工程代码</p>
@@ -373,7 +367,7 @@ sudo make install 
     <title>go语言学习笔记</title>
     <url>/2017/07/29/go%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><p>开始学习Golang的语法。<br>主要记录go和python的异同点，随便写写，以供自励。</p>
-<span id="more"></span>
+<a id="more"></a>
 
 <p>go的每一个单独运行程序，必须包含<code>main</code>包。程序入口也在<code>main</code>函数。</p>
 <p>go的定义方式很多，其中<code>:=</code>的形式与python的定义类似，可以自动判断变量的种类，但是这种定义方法只能在函数体内部使用，在全局只能使用<code>var</code>关键字定义。</p>
@@ -390,7 +384,7 @@ sudo make install 
     <title>传感器原理和应用</title>
     <url>/2017/04/15/%E4%BC%A0%E6%84%9F%E5%99%A8%E5%8E%9F%E7%90%86%E5%92%8C%E5%BA%94%E7%94%A8/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><p><em>传感器原理和应用复习提纲</em></p>
-<span id="more"></span>
+<a id="more"></a>
 
 <h1 id="检测技术的基本概念"><a href="#检测技术的基本概念" class="headerlink" title="检测技术的基本概念"></a>检测技术的基本概念</h1><p>传感器是一种检测装置，能感受规定的被测量，并能将检测感受到的信息，按一定规律变换成为电信号或其他所需形式的信息输出，以满足信息的传输、处理、存储、显示、记录和控制等要求。</p>
 <h2 id="传感器分类"><a href="#传感器分类" class="headerlink" title="传感器分类"></a>传感器分类</h2><p>按被测物理量分类</p>
@@ -528,7 +522,7 @@ sudo make install 
     <title>常用命令工具记录</title>
     <url>/2021/03/02/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E5%B7%A5%E5%85%B7%E8%AE%B0%E5%BD%95/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><p>几个命令工具的备忘录，纯自用，忘了啥写啥。</p>
-<span id="more"></span>
+<a id="more"></a>
 
 <h2 id="Poetry"><a href="#Poetry" class="headerlink" title="Poetry"></a>Poetry</h2><p><code>poetry env [use &#123;python&#125;]</code> 创建虚拟环境，使用 <code>poetry shell</code> 激活当前目录虚拟环境。</p>
 <p><code>poetry add &#123;package_name&#125;</code> 当前目录增加包，若不存在虚拟环境则会创建。</p>
@@ -552,7 +546,7 @@ sudo make install 
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><img src="/img/hexo.png" class="full-image" />
 
 <p><strong>Hello Hexo!</strong></p>
-<span id="more"></span>
+<a id="more"></a>
 
 <p>其实我一开始想要建个博客是从Flask开始的，第一次接触到这么便捷的Web开发方式（其实也是我第一次接触Web），所以我就学习了各种Html、CSS、Javascript等知识，想着自己给自己做一个很炫酷的Blog。</p>
 <p>然而现实是我当时找不到一个适合我的云服务器（对，就是免费，只可惜我没有早一点接触到SAE），所以嘛就走上了这条静态页面+GitHub Page的路子（现在在国内的Coding上）。</p>
@@ -575,7 +569,7 @@ sudo make install 
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><p>写了一些机械制造技术基础中，刀具学习相关的内容。</p>
 <p>听说刀具参考系是难点，做了个3d小模型。</p>
 <p><a href='/3d/chedao2.html' target="_blank">3D车刀</a></p>
-<span id="more"></span>
+<a id="more"></a>
 
 <iframe src="/3d/chedao2.html" width="100%" height="600px"></iframe>
 
@@ -701,7 +695,7 @@ sudo make install 
     <title>机械工程测试技术基础</title>
     <url>/2016/11/19/%E6%9C%BA%E6%A2%B0%E5%B7%A5%E7%A8%8B%E6%B5%8B%E8%AF%95%E6%8A%80%E6%9C%AF%E5%9F%BA%E7%A1%80/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><p>简直药丸Orz</p>
-<span id="more"></span>
+<a id="more"></a>
 
 <h2 id="信号及其描述"><a href="#信号及其描述" class="headerlink" title="信号及其描述"></a>信号及其描述</h2><h3 id="信号的分类"><a href="#信号的分类" class="headerlink" title="信号的分类"></a>信号的分类</h3><ul>
 <li>确定信号：可以表示为一个确定的时间关系式的信号</li>
@@ -797,7 +791,7 @@ sudo make install 
     <title>污染控制设计理论</title>
     <url>/2021/07/08/%E6%B1%A1%E6%9F%93%E6%8E%A7%E5%88%B6%E8%AE%BE%E8%AE%A1%E7%90%86%E8%AE%BA/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><p><em>大气污染控制设计理论学习备忘</em></p>
-<span id="more"></span>
+<a id="more"></a>
 
 <h2 id="物质扩散理论"><a href="#物质扩散理论" class="headerlink" title="物质扩散理论"></a>物质扩散理论</h2><h3 id="物料衡算"><a href="#物料衡算" class="headerlink" title="物料衡算"></a>物料衡算</h3><p>物料衡量即一句质量守恒定律：[输入的物料量]=[输出的物料量]+[积累的物料量]</p>
 <p>如果存在化学反应，则有：[输入的物料量]±[反应生成或消耗的物料量]=[输出的物料量]+[积累的物料量]</p>
@@ -860,9 +854,7 @@ sudo make install 
 </tbody></table>
 <h2 id="吸收法净化理论"><a href="#吸收法净化理论" class="headerlink" title="吸收法净化理论"></a>吸收法净化理论</h2><p>当回合气体和吸收剂接触时，气相中的可吸收组分会向液相进行质量传递，成为吸收过程；同时液相中被吸收的组分也会向气相溢出，称为解吸过程；温度压力一定，当吸收和解吸的速率达成相等，物质传递达成动态平衡，此时气体在液相中的浓度即为当前温度压力下的溶解度。</p>
 <p>当温度一定、总压小于5个大气压时，气液平衡关系可以用亨利定律来描述：</p>
-<p>$$C=Hp^{*}$$</p>
-<p>$$x=\frac{p^{ * }}{E}$$</p>
-<p>$$or\qquad\qquad y^{ * }=mx\qquad\qquad\quad$$</p>
+<p>$$C=Hp^{*}$$<br>$$\style{line-height:0.1}{x=\frac{p^{ * }}{E}}$$<br>$$or\qquad\qquad y^{ * }=mx\qquad\qquad\quad$$</p>
 <ul>
 <li>$p^{*}$ ：溶质组分在气相中的分压，$Pa$</li>
 <li>$C$ ：平衡时的体积摩尔浓度， $mol/m^{3}$</li>
@@ -878,13 +870,13 @@ sudo make install 
 <li>$M_{A}$：溶质的摩尔质量，$g/mol$</li>
 <li>$M_{s}$：溶液的摩尔质量，$g/mol$</li>
 <li>$x_{A}$：溶质的摩尔分数</li>
-<li>$x_{s}$：溶质的摩尔分数<br>稀溶液中可以近似为下式：<br>$$H=\frac{\rho_{s}}{M_{s}E}$$</li>
+<li>$x_{s}$：溶质的摩尔分数<br>稀溶液中可以近似为下式：<br>$$\style{line-height:0.1}{H=\frac{\rho_{s}}{M_{s}E}}$$</li>
 </ul>
 </blockquote>
 <p>当使用化学吸收法时，此时的总溶解量由两部分组成：</p>
 <p>$$C_{A}=[A] _ {物料平衡}+[A] _ {化学平衡}$$</p>
 <p>对于如下反应：</p>
-<p>$$\begin{align}<br>&amp;aA _ {(气)} \tag{}\\<br>&amp;\ \Updownarrow\tag{}\\<br>&amp;aA _ {(液)}+bB\rightleftharpoons mM+nN \tag{}\\<br>\end{align} $$</p>
+<p>$$\begin{align}<br>&amp;aA _ {(气)} \tag{}\\<br>&amp;\ \Updownarrow\tag{}\\<br>&amp;\ce{aA_{(液)} + bB &lt;=&gt; mM + nN \tag{}}\\<br>\end{align} $$</p>
 <p>有物理平衡：$[A] _ {物理平衡}=H _ {A}p _ {A}^{*}$</p>
 <p>有化学平衡：$K=\frac{[M] ^ {m} [N] ^ n}{[A] ^ {a}[B] ^ {b}}$</p>
 <h2 id="吸收速率"><a href="#吸收速率" class="headerlink" title="吸收速率"></a>吸收速率</h2><p><em>To-Do</em></p>
@@ -894,13 +886,14 @@ sudo make install 
       </categories>
       <tags>
         <tag>机械</tag>
+        <tag>烟气处理</tag>
       </tags>
   </entry>
   <entry>
     <title>烟气处理设备相关</title>
     <url>/2021/07/06/%E7%83%9F%E6%B0%94%E5%A4%84%E7%90%86%E8%AE%BE%E5%A4%87%E7%9B%B8%E5%85%B3/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><p><em>一些常用的设备选型参数学习备忘</em></p>
-<span id="more"></span>
+<a id="more"></a>
 
 <h2 id="泵"><a href="#泵" class="headerlink" title="泵"></a>泵</h2><h3 id="主要参数指标"><a href="#主要参数指标" class="headerlink" title="主要参数指标"></a>主要参数指标</h3><h4 id="流量-Q"><a href="#流量-Q" class="headerlink" title="流量 $Q$"></a>流量 $Q$</h4><p>水泵的流量又称为输水量，它是指水泵在单位时间内输送水的体积。</p>
 <h4 id="扬程-H"><a href="#扬程-H" class="headerlink" title="扬程 $H$"></a>扬程 $H$</h4><p>水泵的扬程是指水泵能够扬水的高度，通常用 $H$ 表示，单位是 $m$ 。</p>
@@ -909,7 +902,7 @@ sudo make install 
 <p>从水泵叶轮中心线至出水水面的垂直高度，即水泵能把水压上去的高度，叫做压水扬程，简称压程。</p>
 <p>应当指出，铭牌上标示的扬程是指水泵本身所能产生的扬程，它不含管道水流受摩擦阻力而引起的损失扬程。</p>
 <h4 id="功率-N"><a href="#功率-N" class="headerlink" title="功率 $N$"></a>功率 $N$</h4><p>在单位时间内，机器所做功的大小叫做功率。 轴功率为轴上输入功率。</p>
-<p>$$N_{real}=QH\rho g$$</p>
+<p>$$\style{line-height:0.1}{N_{real}=QH\rho g}$$</p>
 <h4 id="汽蚀余量-NPSH"><a href="#汽蚀余量-NPSH" class="headerlink" title="汽蚀余量 $NPSH$"></a>汽蚀余量 $NPSH$</h4><p>又称动压降，泵的进口单位体积液体所具的超过汽化压力的富裕能量，是用来计算水泵吸水高度的一种方法,单位为米。</p>
 <ul>
 <li>$NPSHr$：泵的汽蚀余量，又称泵进口动压降或必需汽蚀余量，泵本身水力模型和制造质量确定的动压降</li>
@@ -989,7 +982,7 @@ sudo make install 
 <li>规格多样，应用灵活，小到不足 $200m^{3}/h$ ，最大可超过 $5\times10^{6}m^{3}/h$；</li>
 <li>便于回收干物料，无污泥处理、废水污染以及腐蚀等问题；</li>
 <li>可以使用耐高温的滤材材料；</li>
-<li>在捕集粘性强及吸湿性强的粉尘，或处理露点很高的延期是，滤袋同意损坏，换袋困难；</li>
+<li>在捕集粘性强及吸湿性强的粉尘，或处理露点很高的烟气时，滤袋同意损坏，换袋困难；</li>
 <li>压力损失较大、设备庞大、滤袋易损坏、损坏后换袋困难。</li>
 </ul>
 <h3 id="电除尘器"><a href="#电除尘器" class="headerlink" title="电除尘器"></a>电除尘器</h3><p>使用负高压直流电在阴极放电，在阳极接地吸尘。主要特点：</p>
@@ -1015,13 +1008,14 @@ sudo make install 
       </categories>
       <tags>
         <tag>机械</tag>
+        <tag>烟气处理</tag>
       </tags>
   </entry>
   <entry>
     <title>热工基础</title>
     <url>/2016/11/01/%E7%83%AD%E5%B7%A5%E5%9F%BA%E7%A1%80/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><p><em>热工基础复习提纲</em></p>
-<span id="more"></span>
+<a id="more"></a>
 
 <h2 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h2><h3 id="热力系统"><a href="#热力系统" class="headerlink" title="热力系统"></a>热力系统</h3><p>凡是能将热能转换为机械能的机器统称为<strong>热力发动机</strong>，简称<strong>热机</strong>。</p>
 <p>热能和机械能之间的转换是通过媒介物质在热机中的一系列状态变化过程来实现的，这种媒介物质称为<strong>工质</strong>。</p>
@@ -1173,10 +1167,9 @@ sudo make install 
     <title>简易局域网共享服务器2.0</title>
     <url>/2017/03/01/%E7%AE%80%E6%98%93%E5%B1%80%E5%9F%9F%E7%BD%91%E5%85%B1%E4%BA%AB%E6%9C%8D%E5%8A%A1%E5%99%A82-0/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><p>之前做了一个<a href="/2016/11/16/%E7%AE%80%E6%98%93%E5%B1%80%E5%9F%9F%E7%BD%91%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%E8%84%9A%E6%9C%AC%E5%AE%9E%E7%8E%B0/">小脚本</a>来共享文件，最初的作用是在寝室床上可以愉快的访问存在下面电脑里的文件。但是在使用中还是感觉不太便利，一是需要特定的文件结构，二是需要flask（事实证明杀鸡焉用牛刀）。所以有必要对之前的脚本做一个小小的升级。我想到了之前用来测试的<code>http.server</code>模块可以很好的适用于这种需求，所以查阅了<code>http.server</code>模块的文档后，做了如下脚本。</p>
-<span id="more"></span>
+<a id="more"></a>
 
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> socket</span><br><span class="line"><span class="keyword">import</span> http.server</span><br><span class="line"><span class="keyword">import</span> socketserver</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getip</span>(<span class="params">head</span>):</span></span><br><span class="line">    IPs = socket.gethostbyname_ex(socket.gethostname())[-<span class="number">1</span>]</span><br><span class="line">    localIP = <span class="string">&#x27;&#x27;</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> IPs:</span><br><span class="line">        <span class="keyword">if</span> i[<span class="number">0</span>:<span class="number">3</span>] == head:</span><br><span class="line">            localIP = i</span><br><span class="line">    <span class="keyword">return</span> localIP</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    PORT = <span class="number">666</span></span><br><span class="line">    <span class="keyword">if</span> sys.argv[<span class="number">1</span>:]:</span><br><span class="line">        head = sys.argv[<span class="number">1</span>]</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        head = <span class="string">&#x27;172&#x27;</span></span><br><span class="line">    PORT = <span class="number">666</span></span><br><span class="line">    Handler = http.server.SimpleHTTPRequestHandler</span><br><span class="line">    IP = getip(head)</span><br><span class="line">    <span class="keyword">if</span> IP:</span><br><span class="line">        httpd = socketserver.TCPServer((getip(head), PORT), Handler)</span><br><span class="line">        print(<span class="string">&quot;serving at &quot;</span>+getip(head)+<span class="string">&quot;:666&quot;</span>)</span><br><span class="line">        httpd.serve_forever()</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        print(<span class="string">&#x27;Invalid domain&#x27;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
 <p>这一次的脚本对文件的结构完全没有要求。</p>
 <p><code>getip()</code>沿用了之前的函数，这一次可以指定ip的关键字。整个脚本等效于：</p>
 <pre><code>python -m http.server 8000 --bind &lt;your ip&gt;
@@ -1193,19 +1186,23 @@ sudo make install 
     <title>简易局域网文件传输脚本实现</title>
     <url>/2016/11/16/%E7%AE%80%E6%98%93%E5%B1%80%E5%9F%9F%E7%BD%91%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%E8%84%9A%E6%9C%AC%E5%AE%9E%E7%8E%B0/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><p>就是一个很简单的基于flask服务器脚本。</p>
-<span id="more"></span>
+<a id="more"></a>
 
 <p>使用脚本时的文件结构：</p>
 <ul>
 <li>脚本文件</li>
-<li>分类文件夹1</li>
+<li>分类文件夹1<ul>
 <li>文件1</li>
 <li>文件2</li>
 <li>······</li>
-<li>分类文件夹2</li>
+</ul>
+</li>
+<li>分类文件夹2<ul>
 <li>文件1</li>
 <li>文件2</li>
 <li>······</li>
+</ul>
+</li>
 <li>······</li>
 </ul>
 <p><em>脚本的使用环境是windous，因为校内网段是172，所以使用172检索，普通路由器可以使用192来检索。</em></p>
@@ -1224,7 +1221,7 @@ sudo make install 
 <p>今天开始学cpp（蜜汁需求得到的蜜汁结果）。</p>
 <p>就酱紫。</p>
 <p>随时更新。</p>
-<span id="more"></span>
+<a id="more"></a>
 
 <p>使用魔方中心块的相对位置来表示魔方块。例如一个已复原的魔方的表示为：UF  UR  UB  UL  DF  DR  DB  DL  FR  FL  BR  BL  UFR  URB UBL  ULF  DRF DFL  DLB  DBR</p>
 <p>解魔方算法的Cpp表达</p>
@@ -1242,13 +1239,13 @@ sudo make install 
     <title>黑群晖相关折腾</title>
     <url>/2020/05/17/%E9%BB%91%E7%BE%A4%E6%99%96%E7%9B%B8%E5%85%B3%E6%8A%98%E8%85%BE/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><p>已经跳槽QNAP啦，怀念群晖。</p>
-<span id="more"></span>]]></content>
+<a id="more"></a>]]></content>
   </entry>
   <entry>
     <title>工程材料及热处理</title>
     <url>/2016/11/06/%E5%B7%A5%E7%A8%8B%E6%9D%90%E6%96%99%E5%8F%8A%E7%83%AD%E5%A4%84%E7%90%86/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><p><em>工程材料及热处理复习提纲</em></p>
-<span id="more"></span>
+<a id="more"></a>
 
 <h2 id="晶体"><a href="#晶体" class="headerlink" title="晶体"></a>晶体</h2><p>晶体：材料中的原子（离子、分子）在三维空间呈规则，周期性排列—长程有序。</p>
 <p>非晶体：原子无规则堆积，也称为 “过冷液体”—短程有序。</p>
@@ -1588,7 +1585,7 @@ sudo make install 
     <title>材料成型技术基础</title>
     <url>/2016/10/30/%E6%9D%90%E6%96%99%E6%88%90%E5%9E%8B%E6%8A%80%E6%9C%AF%E5%9F%BA%E7%A1%80/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><p><em>材料成型复习提纲</em></p>
-<span id="more"></span>
+<a id="more"></a>
 
 <h2 id="铸造"><a href="#铸造" class="headerlink" title="铸造"></a>铸造</h2><blockquote>
 <p>铸造指熔炼金属、制造铸型并将熔融金属浇入铸型凝固后，获得具有一定形状、尺寸和性能的金属零件或毛坯的成型技术。</p>
