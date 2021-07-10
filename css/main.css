@@ -1172,7 +1172,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #add74a;
+  background: #4a4762;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2597,5 +2597,10 @@ li.menu-item {
   font-size: 1.1em;
 }
 .posts-collapse .post-meta {
+  font-size: 1.1em;
+}
+.site-author-name {
+  font-family: 'Otomanopee One';
+  margin-top: 0.8em;
   font-size: 1.1em;
 }
