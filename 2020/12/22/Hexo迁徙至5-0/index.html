@@ -28,7 +28,7 @@
 <meta property="og:description" content="日前准备重新开始更新，结果安装的最新 node14 和 hexo 不兼容，虽然 hexo s 可以正常的渲染出预览画面，但是 hexo g 出来却是全部都是 0kb 的空文件。 后续虽然安装切换回 node12 以后，问题解决了，干脆就再度迁移到 hexo5.0 与 next 主题的最新版。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-12-22T04:21:00.000Z">
-<meta property="article:modified_time" content="2021-07-10T09:30:11.359Z">
+<meta property="article:modified_time" content="2021-07-13T08:07:53.279Z">
 <meta property="article:author" content="AbrahumLink">
 <meta property="article:tag" content="Hexo">
 <meta property="article:tag" content="Next">
@@ -46,6 +46,9 @@
     lang   : 'zh-CN'
   };
 </script>
+<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css">
+<script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script>
+<script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script>
 
   <title>Hexo迁徙至5.0 | AbrahumLink</title>
   
@@ -230,7 +233,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-07-10 17:30:11" itemprop="dateModified" datetime="2021-07-10T17:30:11+08:00">2021-07-10</time>
+                <time title="修改时间：2021-07-13 16:07:53" itemprop="dateModified" datetime="2021-07-13T16:07:53+08:00">2021-07-13</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -264,6 +267,24 @@
 <h2 id="定制CSS"><a href="#定制CSS" class="headerlink" title="定制CSS"></a>定制CSS</h2><p>之前自己客制的一些 CSS 现在统一迁移到 source 的 _data 文件夹里，然后在 next 的配置文件里配置启用。<br>但是新的 next 的最大宽度有点宽，这一点没法使用外部 css 覆写，只能修改了主题的 source/css/_variables/Pisces.styl 文件里的宽度设置。</p>
 <h2 id="中文目录链接失效"><a href="#中文目录链接失效" class="headerlink" title="中文目录链接失效"></a>中文目录链接失效</h2><p>百度之后发现是一个主题固有问题，有<a target="_blank" rel="noopener" href="https://github.com/theme-next/hexo-theme-next/pull/1540/files">issue #1540</a></p>
 <h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>新的 hexo 没有自带 hexo-deployer-git ，需要额外安装。<br>虽然官方文档说需要卸载 hexo-renderer-marked 更换为 hexo-renderer-pandoc 才能正常显示 MathJax ，但是目前貌似没有显示问题，倒是 MathJax2.7 更新到 3.1 以后很多式子需要更新一下（速度快了很多好评）。</p>
+<h2 id="2021-07-13-折腾Aplayer"><a href="#2021-07-13-折腾Aplayer" class="headerlink" title="2021/07/13 折腾Aplayer"></a>2021/07/13 折腾Aplayer</h2><p>网易自带的播放器莫名其妙失效了，使用 Aplayer 代替之，但是 Aplayer 的自动注入会破坏我原有的一些 js 文件，故需要做以下变更。</p>
+<p>感谢<a target="_blank" rel="noopener" href="https://github.com/MoePlayer/hexo-tag-aplayer/issues/44#issuecomment-631379359">MeteorVE在#44的回复</a></p>
+<blockquote>
+<ol>
+<li><p>在 hexo config 那邊，如同這個 repo 的 readme 所寫，新增 asset_inject 這個選項。</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">aplayer:</span></span><br><span class="line">  <span class="attr">asset_inject:</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure></li>
+<li><p>再來我們必須自己引入 js 和 css 等檔案。<br>我原本在 hexo 3.x 版本 配上 next 7.1.1 版本 ，自動注入就能 work 了<br>現在升級了才發生這個問題，但是相對的，override 的功能也做得更完善。<br>以下方式是適用 “如果你是 next 最新版本主題” :</p>
+</li>
+<li><p>建立 blog資料夾/source/_data/head.swig<br>_data 這個資料夾預設沒有，自己創。</p>
+</li>
+<li><p>在 /source/_data/next.yml 內<br>搜尋 head: source/_data/head.swig 將他取消註釋。<br>(註 : next.yml 這個配置又得講到 next 的資料分離功能，有點扯遠，但要麻煩自行去 next repo 看)</p>
+</li>
+<li><p>在 /head.swig 內放入以下內容</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- require APlayer --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">href</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- require MetingJS --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/meting@2.0.1/dist/Meting.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>如果你說，步驟 2 後面的東西都看不懂怎麼辦。<br>那也可以直接做 file inject，就是直接修改源碼<br>在 next 主題資料夾內，找 layout/_partials/head/head.swig<br>在最後面加入上面那份引入的區塊就可以了。</p>
+</blockquote>
+<p>但是我在如此操作后并无效果，多次尝试后，使用生成在 assets 文件夹的文件链接代替之，解决问题（可能是 APlayer 和 Meting 的版本问题）。</p>
 
     </div>
 
@@ -349,7 +370,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%AD%E8%A8%80%E9%85%8D%E7%BD%AE"><span class="nav-number">1.</span> <span class="nav-text">语言配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E5%88%B6CSS"><span class="nav-number">2.</span> <span class="nav-text">定制CSS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%AD%E6%96%87%E7%9B%AE%E5%BD%95%E9%93%BE%E6%8E%A5%E5%A4%B1%E6%95%88"><span class="nav-number">3.</span> <span class="nav-text">中文目录链接失效</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96"><span class="nav-number">4.</span> <span class="nav-text">其他</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%AD%E8%A8%80%E9%85%8D%E7%BD%AE"><span class="nav-number">1.</span> <span class="nav-text">语言配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E5%88%B6CSS"><span class="nav-number">2.</span> <span class="nav-text">定制CSS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%AD%E6%96%87%E7%9B%AE%E5%BD%95%E9%93%BE%E6%8E%A5%E5%A4%B1%E6%95%88"><span class="nav-number">3.</span> <span class="nav-text">中文目录链接失效</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96"><span class="nav-number">4.</span> <span class="nav-text">其他</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2021-07-13-%E6%8A%98%E8%85%BEAplayer"><span class="nav-number">5.</span> <span class="nav-text">2021&#x2F;07&#x2F;13 折腾Aplayer</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
