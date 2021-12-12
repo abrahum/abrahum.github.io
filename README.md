@@ -1,0 +1,1 @@
+Just my personal blog -> [abrahum.link](http://abrahum.link)
