@@ -56,7 +56,7 @@ images.qrc代码如下：
 
 今天解决了之前的两大问题，使用QThread来保证UI不被阻塞。需要建立一个类继承`QtCore.QThread`然后重写run()函数
 
-```Python
+```Python,linenos
 class myQThread(QtCore.QThread):
     done = QtCore.pyqtSignal()
     def __init__(self):
@@ -74,7 +74,7 @@ AQThread.done.connect(donefun)
 
 为了解决进度条的问题修改了之前的爬取内核，所以把新的版本就改为Ver.2.1～
 
-```Python
+```Python,linenos
 class dw(QWidget):
     def __init__(self):
         super(dw, self).__init__()
