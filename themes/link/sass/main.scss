@@ -130,9 +130,22 @@ th, td {
     border: 1px double lightgrey;
 }
 
-code td {
-    padding: 0 0.6em 0.1em 0.1em;
+pre[data-linenos] {
+    padding: 1em 0;
+}
+
+pre table {
+    width: auto;
+}
+
+pre table td {
+    padding: 0 0 0 1em;
     border: none;
+}
+
+pre table td:nth-of-type(1) {
+    text-align: center;
+    user-select: none;
 }
 
 
@@ -148,9 +161,9 @@ pre {
 code,
 pre,
 kbd {
-    font-family: 'CaskaydiaCove Nerd Font', monospace;
-    font-size: 0.95em;
-    line-height: 1.4;
+    font-family: 'CaskaydiaCove Nerd Font', Consolas, monospace;
+    // font-size: 0.95em;
+    line-height: 1.6em;
 }
 
 /* Styles */
@@ -184,9 +197,9 @@ header {
 }
 
 header h1 {
-    font-size: 2em;
+    font-size: 1.8em;
     margin-top: 1em;
-    margin-bottom: 1em;
+    margin-bottom: 0.5em;
     font-weight: normal;
 }
 
@@ -385,6 +398,10 @@ ul.language-select > li {
 /* Media Queries */
 
 @media (max-width: 840px) {
+    body {
+        font-size: 14px;
+    }
+
     .main-wrapper {
         margin: 0;
         max-width: none;
