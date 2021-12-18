@@ -1,5 +1,5 @@
 # The URL the site will be built for
-base_url = "http://abrahum.link"
+base_url = "https://abrahum.link"
 
 theme = "link"
 title = "Abrahum Link"

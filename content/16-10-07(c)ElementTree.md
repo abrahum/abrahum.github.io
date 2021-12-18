@@ -20,7 +20,6 @@ taxonomies:
 
 <!-- more -->
 
-
 ## `Element`类型
 
 属性：
@@ -68,7 +67,6 @@ taxonomies:
 `Element.set(key,value)`：设置新的属性。
 
 `Element.remove(SubElement)`：删除子节点。
-
 
 ## `ElementTree`类型
 

@@ -15,7 +15,7 @@ taxonomies:
 
 首先上一个asyncio的例子：
 
-``` python,linenos
+```python,linenos
 import asyncio
 
 @asyncio.coroutine
@@ -38,7 +38,7 @@ loop.close()
 
 经过测试，协程的大数据IO使用协程爬取效率并没有想象的高，考虑到这一丢丢的进程不会达到吃电脑性能的程度，不再全面使用协程。这里仅记录下一些代码，一便下次查阅：
 
-``` python,linenos
+```python,linenos
 loop = asyncio.get_event_loop()
 s = requests.session()
 s.headers = headers1
