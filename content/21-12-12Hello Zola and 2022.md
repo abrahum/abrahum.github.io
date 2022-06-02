@@ -66,10 +66,10 @@ Rust 的编译器检查非常严格，配合上 Rust Analyzer，能够在学习�
 
 2022 年我计划中的 Rust 项目主要有以下几个: 
 
-- Walle-Hub: 一个 Onebot 协议的中间件，考虑到 Rust 语言用户并不多，确实客观存在上手难度，作为中间件就可以避免，Hub 主要提供多实现端到多应用端的多种逻辑转发、均衡负载、预过滤、限速等简单逻辑
+- ~~Walle-Hub~~(暂缓): 一个 Onebot 协议的中间件，考虑到 Rust 语言用户并不多，确实客观存在上手难度，作为中间件就可以避免，Hub 主要提供多实现端到多应用端的多种逻辑转发、均衡负载、预过滤、限速等简单逻辑
 - [rs-qq](https://github.com/lz1998/rs-qq): 一个 MiraiGo 的 Rust 移植，主要是给 lz1998 打打下手
-- eve: 使用 Walle-core 和 rs-qq 的协议端实现
-- Diro: 桌游骰子表达式的解析执行器，可能附属一些简单的骰娘功能，目前还不明确，计划包装成 FFI 和 pyo3 包装的 Pymodule
+- [Walle-Q](https://github.com/abrahum/walle-q): 使用 Walle-core 和 rs-qq 的协议端实现
+- [Diro](https://github.com/abrahum/diro): 桌游骰子表达式的解析执行器，可能附属一些简单的骰娘功能，目前还不明确，计划包装成 FFI 和 pyo3 包装的 Pymodule
 
 其他学习计划：
 
