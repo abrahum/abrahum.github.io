@@ -6,13 +6,25 @@
 {% block content %}
 <h1>Tags</h1>
 
-<ul class="terms">
+<ul class="terms" id="tag-ul">
     {% for term in terms %}
-    <li>
+    <li class="tags" count="{{ term.pages | length }}">
         <a href="{{ term.permalink }}">
         #{{ term.name }}
         </a>
     </li>
     {% endfor %}
 </ul>
+
+<script type="text/javascript">
+    var lis = document.getElementsByClassName("tags");
+    var liarray = Array.from(lis);
+    liarray.sort((li0, li1) => {
+        return li1.attributes.count.value - li0.attributes.count.value;
+    });
+    var terms = document.getElementById("tag-ul");
+    for (i=0;i<liarray.length;i++) {
+        terms.appendChild(liarray[i]);
+    }
+</script>
 {% endblock content %}
