@@ -3,9 +3,7 @@ base_url = "https://abrahum.link"
 
 theme = "link"
 title = "Abrahum Link"
-taxonomies = [
-    {name = "tags"}
-]
+taxonomies = [{ name = "tags" }]
 
 # Whether to automatically compile all Sass files in the sass directory
 compile_sass = true
@@ -21,7 +19,7 @@ highlight_code = true
 [extra]
 # Put all your custom variables here
 links = [
-    { name="Tags", url = "$BASE_URL/tags" },
-    { name="About", url = "$BASE_URL/about" },
-    { name="GitHub", url = "https://github.com/abrahum" }
+    { name = "Tags", url = "$BASE_URL/tags" },
+    { name = "About", url = "$BASE_URL/about" },
+    { name = "GitHub", url = "https://github.com/abrahum" },
 ]
