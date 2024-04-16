@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+
+    <title>搅拌器设计</title>
+    <meta name="description" content="">
+
+    <link rel="stylesheet" href="https://abrahum.link/main.css">
+
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.15.1/katex.min.css" integrity="sha384-R4558gYOUz8mP9YWpZJjofhk+zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs" crossorigin="anonymous">
+    <script defer src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.15.1/katex.min.js" integrity="sha384-z1fJDqw8ZApjGO3/unPWUPsIymfsJmyrDVWC8Tv/a1HeOtGmkwNd/7xUS0Xcnvsx" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.15.1/contrib/auto-render.min.js" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+              // customised options
+              // • auto-render specific keys, e.g.:
+              delimiters: [
+                  {left: '$$', right: '$$', display: true},
+                  {left: '$', right: '$', display: false},
+                  {left: '\\(', right: '\\)', display: false},
+                  {left: '\\[', right: '\\]', display: true}
+              ],
+              // • rendering keys, e.g.:
+              throwOnError : false
+            });
+        });
+    </script>
+
+    
+
+    
+    
+</head>
+<body>
+    <a class="skip-main" href="#main">Skip to content</a>
+    <div class="container">
+        <header> 
+            <h1 class="site-header">
+                <a href="https:&#x2F;&#x2F;abrahum.link">Abrahum Link</a>
+            </h1> 
+            <nav>
+                
+                    
+                        
+                        <a  href="https:&#x2F;&#x2F;abrahum.link&#x2F;tags">Tags</a>
+                    
+                        
+                        <a  href="https:&#x2F;&#x2F;abrahum.link&#x2F;about">About</a>
+                    
+                        
+                        <a  href="https:&#x2F;&#x2F;github.com&#x2F;abrahum">GitHub</a>
+                    
+                
+            </nav>
+        </header>
+        <main id="main" tabindex="-1">
+            
+
+<article class="post">
+    <header>
+        <h1>搅拌器设计</h1>
+    </header>
+    <div class="content">
+        <p>水处理、制浆搅拌器相关设计参考资料，主要来自于给排水设计手册。</p>
+<span id="continue-reading"></span><h2 id="can-shu-ding-yi">参数定义</h2>
+<ul>
+<li>$D (m)$: 搅拌罐直径</li>
+<li>$H (m)$: 搅拌罐高度</li>
+<li>$\mu (Pa·s)$: 液体粘度</li>
+<li>$n (r/s)$: 搅拌器转速</li>
+<li>$\rho (kg/m^3)$: 液体密度</li>
+<li>$Re$: 雷诺准数，$Re = {d^2n\rho \over \mu}$</li>
+</ul>
+<h2 id="jiao-ban-qi-you-guan-can-shu-xuan-yong">搅拌器有关参数选用</h2>
+<table><thead><tr><th>项目</th><th style="text-align: center">桨式</th><th style="text-align: center">推进式</th></tr></thead><tbody>
+<tr><td>外缘线速度 $v(m/s)$</td><td style="text-align: center">$1.0\sim5.0$</td><td style="text-align: center">$3\sim15$</td></tr>
+<tr><td>直径 $d(m)$</td><td style="text-align: center">${1\over3}\sim{2\over3} D$</td><td style="text-align: center">$(0.2\sim0.5)D$</td></tr>
+<tr><td>距池底高度 $H_b(m)$</td><td style="text-align: center">$0.5\sim 1.0 d$</td><td style="text-align: center">无导流筒 $\to H_b = d$<br>有导流筒 $\to H_b \ge 1.2d$</td></tr>
+<tr><td>搅拌器桨叶数 $Z$</td><td style="text-align: center">$2, 4$</td><td style="text-align: center">$3$</td></tr>
+<tr><td>搅拌器宽度 $b(m)$</td><td style="text-align: center">$0.1\sim 0.25 d$</td><td style="text-align: center">-</td></tr>
+<tr><td>搅拌器螺距  $S(m)$</td><td style="text-align: center">-</td><td style="text-align: center">$d$</td></tr>
+<tr><td>桨叶角度 $\theta(°)$</td><td style="text-align: center">$45°$</td><td style="text-align: center">-</td></tr>
+<tr><td>搅拌器层数 $e$</td><td style="text-align: center">${H\over D}\le1.2\to e=1$<br>${H\over D}&gt;1.2\to e&gt;1$</td><td style="text-align: center">${H\over d}\le4\to e=1$<br>${H\over d}&gt;4 \to e&gt;1$</td></tr>
+<tr><td>层间距 $S_0(m)$</td><td style="text-align: center">$(1.0\sim1.5)d$</td><td style="text-align: center">$(1.0\sim1.5)d$</td></tr>
+</tbody></table>
+<h2 id="hun-he-jiao-ban-she-ji">混合搅拌设计</h2>
+
+    </div>
+
+    
+    <div class="article-info">
+        
+        <div class="article-date">26 October 2022</div>
+        
+        <div class="article-taxonomies">
+            
+            
+                <ul class="article-tags">
+                    
+                    <li><a href="https://abrahum.link/tags/ji-jie/">#机械</a></li>
+                    
+                </ul>
+            
+        </div>
+    </div>
+
+</article>
+
+<script src="https://utteranc.es/client.js"
+    repo="abrahum/abrahum.github.io"
+    issue-term="pathname"
+    theme="github-light"
+    crossorigin="anonymous"
+    async>
+</script>
+
+        </main>
+        <footer>
+            <p>
+                © Abrahum Link 2024<br>
+                Powered by <a target="_blank" href="https://getzola.org/">Zola</a>, Theme Link.
+            </p>
+            <p>
+                
+                
+            </p>
+        </footer>
+    </div>
+</body>
+</html>

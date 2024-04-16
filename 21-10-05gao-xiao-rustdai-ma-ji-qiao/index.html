@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+
+    <title>高效Rust代码技巧</title>
+    <meta name="description" content="">
+
+    <link rel="stylesheet" href="https://abrahum.link/main.css">
+
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.15.1/katex.min.css" integrity="sha384-R4558gYOUz8mP9YWpZJjofhk+zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs" crossorigin="anonymous">
+    <script defer src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.15.1/katex.min.js" integrity="sha384-z1fJDqw8ZApjGO3/unPWUPsIymfsJmyrDVWC8Tv/a1HeOtGmkwNd/7xUS0Xcnvsx" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.15.1/contrib/auto-render.min.js" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+              // customised options
+              // • auto-render specific keys, e.g.:
+              delimiters: [
+                  {left: '$$', right: '$$', display: true},
+                  {left: '$', right: '$', display: false},
+                  {left: '\\(', right: '\\)', display: false},
+                  {left: '\\[', right: '\\]', display: true}
+              ],
+              // • rendering keys, e.g.:
+              throwOnError : false
+            });
+        });
+    </script>
+
+    
+
+    
+    
+</head>
+<body>
+    <a class="skip-main" href="#main">Skip to content</a>
+    <div class="container">
+        <header> 
+            <h1 class="site-header">
+                <a href="https:&#x2F;&#x2F;abrahum.link">Abrahum Link</a>
+            </h1> 
+            <nav>
+                
+                    
+                        
+                        <a  href="https:&#x2F;&#x2F;abrahum.link&#x2F;tags">Tags</a>
+                    
+                        
+                        <a  href="https:&#x2F;&#x2F;abrahum.link&#x2F;about">About</a>
+                    
+                        
+                        <a  href="https:&#x2F;&#x2F;github.com&#x2F;abrahum">GitHub</a>
+                    
+                
+            </nav>
+        </header>
+        <main id="main" tabindex="-1">
+            
+
+<article class="post">
+    <header>
+        <h1>高效Rust代码技巧</h1>
+    </header>
+    <div class="content">
+        <p>How to write fast Rust code</p>
+<blockquote>
+<p>翻译自:</p>
+<ul>
+<li><a href="https://renato.athaydes.com/posts/how-to-write-fast-rust-code.html">How to write fast Rust code</a></li>
+</ul>
+</blockquote>
+<span id="continue-reading"></span>
+<p>之前该博主尝试将 Lisp 代码移植到 Rust ，结果发现执行效率实在不敢恭维，经过多次优化，性能得到了很大的提升。</p>
+<p>让我们从原博主的错误出发，避坑，出发~</p>
+<h2 id="wu-yong-yun-suan-fu">误用运算符</h2>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">let mut</span><span> n: BigUint = </span><span style="color:#d08770;">1</span><span style="color:#b48ead;">u8</span><span>.</span><span style="color:#96b5b4;">into</span><span>();
+</span><span style="color:#b48ead;">let</span><span> ten: BigUint = </span><span style="color:#d08770;">10</span><span style="color:#b48ead;">u8</span><span>.</span><span style="color:#96b5b4;">into</span><span>();
+</span><span>
+</span><span style="color:#65737e;">// 这将分配一个新的 BigUint
+</span><span>n = n * &amp;ten;
+</span><span>
+</span><span style="color:#65737e;">// 这不会分配新的实例
+</span><span>n = n * ten;
+</span><span>
+</span><span style="color:#65737e;">// 这也不会
+</span><span>n *= ten;
+</span></code></pre>
+<p>译注：其实就是需要注意使用借用则将重新分配。</p>
+<h2 id="clone-bu-bi-yao-de-shu-ju">Clone 不必要的数据</h2>
+<p>在 Rust 中每个数据都只有一个所有者，如果你正在使用一个临时数据结构，那么你应该使用数据的借用，而非拷贝数据</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#65737e;">// String 数据的拥有者
+</span><span style="color:#b48ead;">let mut</span><span> vec: Vec&lt;String&gt; = Vec::new();
+</span><span>vec.</span><span style="color:#96b5b4;">push</span><span>(&quot;</span><span style="color:#a3be8c;">a</span><span>&quot;.</span><span style="color:#96b5b4;">to_owned</span><span>());
+</span><span>vec.</span><span style="color:#96b5b4;">push</span><span>(&quot;</span><span style="color:#a3be8c;">b</span><span>&quot;.</span><span style="color:#96b5b4;">to_owned</span><span>());
+</span><span>
+</span><span>{
+</span><span>    </span><span style="color:#65737e;">// 使用借用数据组成的数据结构
+</span><span>    </span><span style="color:#b48ead;">let mut</span><span> temp_vec: Vec&lt;&amp;</span><span style="color:#b48ead;">str</span><span>&gt; = Vec::new();
+</span><span>    </span><span style="color:#65737e;">// 将原 String 借用为 &amp;str
+</span><span>    temp_vec.</span><span style="color:#96b5b4;">push</span><span>(&amp;vec[</span><span style="color:#d08770;">0</span><span>]);
+</span><span>}
+</span><span>
+</span><span>{
+</span><span>    </span><span style="color:#65737e;">// 有所有权的数据结构
+</span><span>    </span><span style="color:#b48ead;">let mut</span><span> greedy_vec: Vec&lt;String&gt; = Vec::new();
+</span><span>    </span><span style="color:#65737e;">// 你需要 Clone 数据，否则将会报错
+</span><span>    greedy_vec.</span><span style="color:#96b5b4;">push</span><span>(vec[</span><span style="color:#d08770;">1</span><span>].</span><span style="color:#96b5b4;">to_owned</span><span>());
+</span><span>}
+</span></code></pre>
+<p>需要注意的是使用包含引用的数据结构通常需要使用生命周期（lifetime），当可以避免克隆数据的成本（尽情的和生命周期 PvP 吧！编译器会慢慢把你“调教”成生命周期人形计算器的~）。</p>
+<h2 id="shi-yong-di-xiao-de-de-bu-ke-bian-shu-ju-jie-gou">使用低效的的不可变数据结构</h2>
+<p>关于这一点可能存在一些争议，当使用不可变数据结构时可能会造成一些额外的 Clone，而不可变的数据本身更有效率。但不可否认的时：总是需要使用可变数据结构的。</p>
+<p>特别是，当使用 Rust 的基本数据结构，比如 Vec ，任何操作都将克隆整个结构体，而不是像一些函数式语言那样使用 persistent data structures（持久数据结构）更有效率的运行。</p>
+<p>因此需要如下优化：</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#65737e;">/// before
+</span><span style="color:#b48ead;">for</span><span> word in found_words {
+</span><span>    found_word = </span><span style="color:#d08770;">true</span><span>;
+</span><span>    </span><span style="color:#b48ead;">let mut</span><span> partial_solution = words.</span><span style="color:#96b5b4;">clone</span><span>();
+</span><span>    partial_solution.</span><span style="color:#96b5b4;">push</span><span>(word);
+</span><span>    </span><span style="color:#96b5b4;">print_translations</span><span>(num, digits, i + </span><span style="color:#d08770;">1</span><span>, partial_solution, dict)?;
+</span><span>}
+</span><span>
+</span><span style="color:#65737e;">/// after
+</span><span style="color:#b48ead;">for</span><span> word in found_words {
+</span><span>    found_word = </span><span style="color:#d08770;">true</span><span>;
+</span><span>    words.</span><span style="color:#96b5b4;">push</span><span>(word);
+</span><span>    </span><span style="color:#96b5b4;">print_translations</span><span>(num, digits, i + </span><span style="color:#d08770;">1</span><span>, words, dict)?;
+</span><span>    words.</span><span style="color:#96b5b4;">pop</span><span>();
+</span><span>}
+</span></code></pre>
+<h2 id="naive-da-yin-shu-chu">Naive! 打印输出</h2>
+<p>IO 操作是非常缓慢的，除了调试需要，请避免任何不必要的打印操作（这往往经常被大家忽略）</p>
+<p>每一次打印都将获取 stdout 上的锁，然后调用 format! 宏解析格式，然后系统调用实际打印（听着就知道这很慢），同时这些所有的操作都是不带缓冲区的（即使有缓冲也于事无补）。</p>
+<h2 id="shi-yong-criterion-rs-ping-gu-xing-neng">使用 Criterion.rs 评估性能</h2>
+<p>当我们需要分辨两种写法，谁会谁慢，你需要 Benchmark。<a href="https://bheisler.github.io/criterion.rs/book/">Criterion.rs</a> 是一个 Benchmark 微框架。（Rust 自带的 bench 还未 stable）</p>
+<p>具体如何使用请查看官方文档吧。（Rust 的 Debug 与 release 性能差距巨大哦）</p>
+<h2 id="shi-yong-smallvec-bi-mian-dui-fen-pei">使用 <a href="https://crates.io/crates/smallvec">SmallVec</a> 避免堆分配</h2>
+<p>众所周知，Rust 的 <code>Vec</code> 是堆分配的，如果已经知道要使用一个非常小的 <code>Vec</code> 那么使用 <code>SmallVec</code> 就值得考虑了，它提供了和 <code>Vec</code> 类似的接口，同时却不是总是堆分配的，仅在需要“溢出”到堆上时，才是堆分配的。</p>
+<p>原博主尝试使用它来代替 <code>Vec</code> 保存单词，但是使用 Criterion 进行 Benchmark 测试却并没取得预期的结果，实际性能都出现了不同程度的下降（最好的情况是时间上升了 15%），使用宏基准测试也证实了这一点，最好的情况下，也是二者没有区别</p>
+<p>因此这一点需要进一步测试确定。</p>
+<h2 id="shi-yong-geng-kuai-de-bigint-shi-xian">使用更快的 BigInt 实现</h2>
+<blockquote>
+<p>因为不是很常用，这一节我就省略了（懒），总而言之就是，有用，但是不大，我宁愿使用 <code>Vec&lt;u8&gt;</code>。</p>
+</blockquote>
+<h2 id="shi-yong-bytes-die-dai-str-er-bu-shi-chars">使用 bytes 迭代 str 而不是 chars</h2>
+<p>有人在 Reddit 上建议原博主使用 bytes 而不是 chars 迭代字符传，原本原博主对此表示不信，他认为 chars 应该是零成本的，但是他还是决定一试。</p>
+<p>虽然在原博主的代码中，这样的改变仅仅提升了 3% 左右的性能，但是基准测试中，使用 bytes 迭代比使用 chars 迭代几乎快了整整一倍！</p>
+<p>所以当你确定你输入的字符串仅包含 ASCII 时，使用 bytes 迭代它吧！</p>
+<h2 id="shi-yong-vec-u8-dai-ti-biguint">使用 <code>Vec&lt;u8&gt;</code> 代替 <code>BigUint</code></h2>
+<p>这样做，在原博主的代码中带来了 7% 的提升，而另一位澳大利亚老哥在他的基础上移除了递归，这带来了 30% 的提升！</p>
+<p>所以除非你确定你一定需要，不要使用 <code>BigUint</code>。</p>
+<h2 id="shi-yong-ya-suo-zi-jie-shi-xian-geng-gao-xiao-de-cun-chu">使用压缩字节实现更高效的存储</h2>
+<p>大多数情况下 <code>Vec</code> 都是极高性能的，但是它却是是堆分配的，相比于执行 CPU 指令的时间相比，还是显得比较昂贵的。</p>
+<p>因此，我们需要一个更优化的数据结构来打包传递信息。</p>
+<blockquote>
+<p>涉及原博主的具体算法我就不搬运了，感兴趣可以查看原帖。</p>
+</blockquote>
+<h2 id="shi-yong-geng-kuai-de-ha-xi-han-shu">使用更快的哈希函数</h2>
+<p>Rust 的标准库 Hash 使用 <a href="https://doc.rust-lang.org/book/ch08-03-hash-maps.html#hashing-functions">DoS-resistant</a> 实现（安全性更好，但是性能并不是最优），当性能优先级很高的情况下，可以使用一些其他 hasher （比如 <a href="https://docs.rs/ahash/0.7.4/ahash/">ahash</a> ）作为替代。</p>
+<p>原博主的算法在替换后，获得了 20% 到 40% 的性能提升。</p>
+<h2 id="bloom-filter-deng-gai-lu-jie-gou">Bloom Filter 等概率结构</h2>
+<blockquote>
+<p>暂时没看懂 T-T，也是优化数据结构啥的</p>
+</blockquote>
+<blockquote>
+<p><strong>Todo</strong></p>
+</blockquote>
+
+    </div>
+
+    
+    <div class="article-info">
+        
+        <div class="article-date"> 5 October 2021</div>
+        
+        <div class="article-taxonomies">
+            
+            
+                <ul class="article-tags">
+                    
+                    <li><a href="https://abrahum.link/tags/code/">#Code</a></li>
+                    
+                    <li><a href="https://abrahum.link/tags/rust/">#Rust</a></li>
+                    
+                </ul>
+            
+        </div>
+    </div>
+
+</article>
+
+<script src="https://utteranc.es/client.js"
+    repo="abrahum/abrahum.github.io"
+    issue-term="pathname"
+    theme="github-light"
+    crossorigin="anonymous"
+    async>
+</script>
+
+        </main>
+        <footer>
+            <p>
+                © Abrahum Link 2024<br>
+                Powered by <a target="_blank" href="https://getzola.org/">Zola</a>, Theme Link.
+            </p>
+            <p>
+                
+                
+            </p>
+        </footer>
+    </div>
+</body>
+</html>

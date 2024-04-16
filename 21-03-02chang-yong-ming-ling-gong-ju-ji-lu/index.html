@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+
+    <title>常用命令工具记录</title>
+    <meta name="description" content="">
+
+    <link rel="stylesheet" href="https://abrahum.link/main.css">
+
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.15.1/katex.min.css" integrity="sha384-R4558gYOUz8mP9YWpZJjofhk+zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs" crossorigin="anonymous">
+    <script defer src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.15.1/katex.min.js" integrity="sha384-z1fJDqw8ZApjGO3/unPWUPsIymfsJmyrDVWC8Tv/a1HeOtGmkwNd/7xUS0Xcnvsx" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.15.1/contrib/auto-render.min.js" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+              // customised options
+              // • auto-render specific keys, e.g.:
+              delimiters: [
+                  {left: '$$', right: '$$', display: true},
+                  {left: '$', right: '$', display: false},
+                  {left: '\\(', right: '\\)', display: false},
+                  {left: '\\[', right: '\\]', display: true}
+              ],
+              // • rendering keys, e.g.:
+              throwOnError : false
+            });
+        });
+    </script>
+
+    
+
+    
+    
+</head>
+<body>
+    <a class="skip-main" href="#main">Skip to content</a>
+    <div class="container">
+        <header> 
+            <h1 class="site-header">
+                <a href="https:&#x2F;&#x2F;abrahum.link">Abrahum Link</a>
+            </h1> 
+            <nav>
+                
+                    
+                        
+                        <a  href="https:&#x2F;&#x2F;abrahum.link&#x2F;tags">Tags</a>
+                    
+                        
+                        <a  href="https:&#x2F;&#x2F;abrahum.link&#x2F;about">About</a>
+                    
+                        
+                        <a  href="https:&#x2F;&#x2F;github.com&#x2F;abrahum">GitHub</a>
+                    
+                
+            </nav>
+        </header>
+        <main id="main" tabindex="-1">
+            
+
+<article class="post">
+    <header>
+        <h1>常用命令工具记录</h1>
+    </header>
+    <div class="content">
+        <p>几个命令工具的备忘录，纯自用，忘了啥写啥。</p>
+<span id="continue-reading"></span><h2 id="poetry">Poetry</h2>
+<p><code>poetry env [use {python}]</code> 创建虚拟环境，使用 <code>poetry shell</code> 激活当前目录虚拟环境</p>
+<p><code>poetry add {package_name}</code> 当前目录增加包，若不存在虚拟环境则会创建</p>
+<p><code>poetry init</code> 当前目录创建包</p>
+<p><code>poetry build/publish</code> 打包/发布包</p>
+<p><code>poetry config</code> 配置 <code>poetry</code> 的默认行为，例如： <code>poetry config virtualenvs.in-project true</code> 设置默认将虚拟环境创建在项目文件内</p>
+<p>希望 <code>poetry</code> 使用 PYPI 镜像，需要在 <code>pyproject.toml</code> 添加如下配置：</p>
+<pre data-lang="toml" style="background-color:#2b303b;color:#c0c5ce;" class="language-toml "><code class="language-toml" data-lang="toml"><span>[[tool.poetry.source]]
+</span><span style="color:#bf616a;">name </span><span>= &quot;</span><span style="color:#a3be8c;">tsinghua</span><span>&quot;
+</span><span style="color:#bf616a;">default </span><span>= </span><span style="color:#d08770;">true
+</span><span style="color:#bf616a;">url </span><span>= &quot;</span><span style="color:#a3be8c;">https://pypi.tuna.tsinghua.edu.cn/simple</span><span>&quot;
+</span></code></pre>
+<blockquote>
+<p>Future will add more.</p>
+</blockquote>
+
+    </div>
+
+    
+    <div class="article-info">
+        
+        <div class="article-date"> 2 March 2021</div>
+        
+        <div class="article-taxonomies">
+            
+            
+                <ul class="article-tags">
+                    
+                    <li><a href="https://abrahum.link/tags/linux/">#Linux</a></li>
+                    
+                    <li><a href="https://abrahum.link/tags/python/">#Python</a></li>
+                    
+                    <li><a href="https://abrahum.link/tags/code/">#Code</a></li>
+                    
+                </ul>
+            
+        </div>
+    </div>
+
+</article>
+
+<script src="https://utteranc.es/client.js"
+    repo="abrahum/abrahum.github.io"
+    issue-term="pathname"
+    theme="github-light"
+    crossorigin="anonymous"
+    async>
+</script>
+
+        </main>
+        <footer>
+            <p>
+                © Abrahum Link 2024<br>
+                Powered by <a target="_blank" href="https://getzola.org/">Zola</a>, Theme Link.
+            </p>
+            <p>
+                
+                
+            </p>
+        </footer>
+    </div>
+</body>
+</html>

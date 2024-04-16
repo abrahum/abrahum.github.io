@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+
+    <title>(c)ElemantTree模块快速使用</title>
+    <meta name="description" content="">
+
+    <link rel="stylesheet" href="https://abrahum.link/main.css">
+
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.15.1/katex.min.css" integrity="sha384-R4558gYOUz8mP9YWpZJjofhk+zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs" crossorigin="anonymous">
+    <script defer src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.15.1/katex.min.js" integrity="sha384-z1fJDqw8ZApjGO3/unPWUPsIymfsJmyrDVWC8Tv/a1HeOtGmkwNd/7xUS0Xcnvsx" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.15.1/contrib/auto-render.min.js" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+              // customised options
+              // • auto-render specific keys, e.g.:
+              delimiters: [
+                  {left: '$$', right: '$$', display: true},
+                  {left: '$', right: '$', display: false},
+                  {left: '\\(', right: '\\)', display: false},
+                  {left: '\\[', right: '\\]', display: true}
+              ],
+              // • rendering keys, e.g.:
+              throwOnError : false
+            });
+        });
+    </script>
+
+    
+
+    
+    
+</head>
+<body>
+    <a class="skip-main" href="#main">Skip to content</a>
+    <div class="container">
+        <header> 
+            <h1 class="site-header">
+                <a href="https:&#x2F;&#x2F;abrahum.link">Abrahum Link</a>
+            </h1> 
+            <nav>
+                
+                    
+                        
+                        <a  href="https:&#x2F;&#x2F;abrahum.link&#x2F;tags">Tags</a>
+                    
+                        
+                        <a  href="https:&#x2F;&#x2F;abrahum.link&#x2F;about">About</a>
+                    
+                        
+                        <a  href="https:&#x2F;&#x2F;github.com&#x2F;abrahum">GitHub</a>
+                    
+                
+            </nav>
+        </header>
+        <main id="main" tabindex="-1">
+            
+
+<article class="post">
+    <header>
+        <h1>(c)ElemantTree模块快速使用</h1>
+    </header>
+    <div class="content">
+        <p><em>以下使用ET指代本模组</em></p>
+<h2 id="xmlde-da-kai-he-ji-ben-cao-zuo">xml的打开和基本操作</h2>
+<p>在ET中使用<code>ElementTree</code>类代表整个xml树，<code>Element</code>表示树上的节点，其中<code>root</code>特指根节点。</p>
+<p><code>ET.parse('filename.xml')</code>从Path读取xml树。</p>
+<p><code>ET.fromstring(string)</code>从string读取xml树。</p>
+<p><code>ElementTree.getroot()</code>从<code>ElementTree</code>获取<code>root</code>节点。</p>
+<span id="continue-reading"></span><h2 id="elementlei-xing"><code>Element</code>类型</h2>
+<p>属性：</p>
+<ol>
+<li>
+<p><code>tag</code>：<code>string</code>对象，表示数据代表的种类。</p>
+</li>
+<li>
+<p><code>attrib</code>：<code>dictionary</code>对象，表示<code>Elwment</code>的属性。</p>
+</li>
+<li>
+<p><code>text</code>：表示<code>Element</code>的内容，<code>string</code>对象。</p>
+</li>
+<li>
+<p><code>tail</code>：<code>string</code>对象，<code>Element</code>闭合后的尾迹</p>
+</li>
+<li>
+<p>子节点。</p>
+</li>
+</ol>
+<p>创建<code>Element</code>对象：</p>
+<p>创建<code>Element</code>的方法有<code>ET.Element()</code>和<code>SubElement()</code>两种。</p>
+<p><code>ele = Element(tag,*)</code>构建一个独立的Element对象。</p>
+<p><code>ele.SubElement(tag,*)</code>添加一个子节点的Element对象。<em>暂时不会用这货</em></p>
+<blockquote>
+<p><em>可以使用<code>key:value</code>添加属性。</em></p>
+</blockquote>
+<p><code>Element</code>的遍历与查询：</p>
+<p>对于<code>Element</code>对象可以直接使用<code>Element[number]</code>直接访问子节点。</p>
+<p><code>Element.iter(tag=None)</code>：遍历所有子节点，如指定tag则仅遍历该tag。</p>
+<p><code>Element.findall(tag)</code>：list返回所有tag或Path匹配节点。</p>
+<p><code>Element.find(tag)</code>：返回匹配的首个节点。</p>
+<p><code>Element.get(key,default=None)</code>：获得指定key对应的属性值，没有该属性则返回default值。</p>
+<p><code>Element.append(SubElement)</code>或<code>Element.ET.extend(SubElement)</code>：添加直系子节点。</p>
+<p><code>Element.findtext(tag)</code>：获得首个匹配的节点并返回text值。</p>
+<p><code>Element.insert(index,SubElement)</code>：指定位置插入节点。</p>
+<p><code>Element.clear()</code>：清空所有。</p>
+<p><code>Element.set(key,value)</code>：设置新的属性。</p>
+<p><code>Element.remove(SubElement)</code>：删除子节点。</p>
+<h2 id="elementtreelei-xing"><code>ElementTree</code>类型</h2>
+<p><code>ElementTree</code>的操作：</p>
+<p><code>ElementTree.write(Path,encoding=None)</code>：保存xml树至Path。</p>
+
+    </div>
+
+    
+    <div class="article-info">
+        
+        <div class="article-date"> 7 October 2016</div>
+        
+        <div class="article-taxonomies">
+            
+            
+                <ul class="article-tags">
+                    
+                    <li><a href="https://abrahum.link/tags/code/">#code</a></li>
+                    
+                </ul>
+            
+        </div>
+    </div>
+
+</article>
+
+<script src="https://utteranc.es/client.js"
+    repo="abrahum/abrahum.github.io"
+    issue-term="pathname"
+    theme="github-light"
+    crossorigin="anonymous"
+    async>
+</script>
+
+        </main>
+        <footer>
+            <p>
+                © Abrahum Link 2024<br>
+                Powered by <a target="_blank" href="https://getzola.org/">Zola</a>, Theme Link.
+            </p>
+            <p>
+                
+                
+            </p>
+        </footer>
+    </div>
+</body>
+</html>
