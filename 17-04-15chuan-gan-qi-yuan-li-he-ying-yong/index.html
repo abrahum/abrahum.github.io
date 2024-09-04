@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+
+    <title>传感器原理和应用</title>
+    <meta name="description" content="">
+
+    <link rel="stylesheet" href="https://abrahum.link/main.css">
+
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.15.1/katex.min.css" integrity="sha384-R4558gYOUz8mP9YWpZJjofhk+zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs" crossorigin="anonymous">
+    <script defer src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.15.1/katex.min.js" integrity="sha384-z1fJDqw8ZApjGO3/unPWUPsIymfsJmyrDVWC8Tv/a1HeOtGmkwNd/7xUS0Xcnvsx" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.15.1/contrib/auto-render.min.js" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+              // customised options
+              // • auto-render specific keys, e.g.:
+              delimiters: [
+                  {left: '$$', right: '$$', display: true},
+                  {left: '$', right: '$', display: false},
+                  {left: '\\(', right: '\\)', display: false},
+                  {left: '\\[', right: '\\]', display: true}
+              ],
+              // • rendering keys, e.g.:
+              throwOnError : false
+            });
+        });
+    </script>
+
+    
+
+    
+    
+</head>
+<body>
+    <a class="skip-main" href="#main">Skip to content</a>
+    <div class="container">
+        <header> 
+            <h1 class="site-header">
+                <a href="https:&#x2F;&#x2F;abrahum.link">Abrahum Link</a>
+            </h1> 
+            <nav>
+                
+                    
+                        
+                        <a  href="https:&#x2F;&#x2F;abrahum.link&#x2F;tags">Tags</a>
+                    
+                        
+                        <a  href="https:&#x2F;&#x2F;abrahum.link&#x2F;about">About</a>
+                    
+                        
+                        <a  href="https:&#x2F;&#x2F;github.com&#x2F;abrahum">GitHub</a>
+                    
+                
+            </nav>
+        </header>
+        <main id="main" tabindex="-1">
+            
+
+<article class="post">
+    <header>
+        <h1>传感器原理和应用</h1>
+    </header>
+    <div class="content">
+        <p><em>传感器原理和应用复习提纲</em></p>
+<span id="continue-reading"></span><h1 id="jian-ce-ji-shu-de-ji-ben-gai-nian">检测技术的基本概念</h1>
+<p>传感器是一种检测装置，能感受规定的被测量，并能将检测感受到的信息，按一定规律变换成为电信号或其他所需形式的信息输出，以满足信息的传输、处理、存储、显示、记录和控制等要求。</p>
+<h2 id="chuan-gan-qi-fen-lei">传感器分类</h2>
+<p>按被测物理量分类</p>
+<ul>
+<li>测量位移：电容传感器，电感传感器,霍尔传感器，光电开关，角编码器，光栅，容栅······</li>
+<li>测量线速度/角速度：超声波传感器，电涡流传感器，霍尔传感器，光电开关，角编码器······</li>
+<li>测量加速度：电容传感器，压电传感器······</li>
+<li>测量质量：应变片传感器，电容式传感器，电感式传感器······</li>
+<li>测量流量：超声波传感器，霍尔传感器，电容传感器······</li>
+<li>测量磁通量：电感式传感器，霍尔传感器······</li>
+<li>测量温度：热敏电阻，热电偶，光电池······</li>
+<li>······</li>
+</ul>
+<h2 id="chuan-gan-qi-de-te-xing-can-shu">传感器的特性参数</h2>
+<p>灵敏度是指传感器或检测系统在稳态下输出量变化和引起此变化的输入量变化的比值。它是输入与输出特性曲线的斜率。</p>
+<p>线性传感器的灵敏度为常数；非线性传感器的灵敏度随输入量的变化而变化。</p>
+<p>分辨力指传感器能检出被测信号的最小变化量。</p>
+<p>分辨率：将分辨力除以仪表的满量程就是仪表的分辨率，分辨率常以百分比或几分之一表示，是量纲为1的数。</p>
+<h2 id="ce-liang-wu-chai-biao-shi-fang-fa-ji-shu-ju-chu-li">测量误差表示方法及数据处理</h2>
+<p>绝对误差：被测量值$A_x$与真值$A_0$之间总是存在着一个差值，这种差值称为绝对误差，用Δ表示：</p>
+<p>$$Δ=A_x－A_0$$</p>
+<p>真值有理论真值、约定真值、相对真值之分。准确度高2级以上的仪表的误差与准确度低的仪表的误差相比，则高一级仪表的测量值可以认为是相对真值。</p>
+<p>示值相对误差：$\gamma _x = \frac{\Delta}{A_x} \times 100 % $</p>
+<p>引用误差$γ_m$（也称满度相对误差）: $\gamma _m = \frac{\Delta}{A_m} \times 100 % $</p>
+<p>准确度等级S: $S=\frac{\left | \Delta_m \right |}{\left | A_m \right |} \times 100 $</p>
+<p>我国的工业模拟仪表有下列常用的7种等级：0.1、0.2、0.5、1.0、1.5、2.5、5.0。</p>
+<h3 id="ce-liang-wu-chai-de-fen-lei">测量误差的分类</h3>
+<p>静态误差（粗大误差，系统误差，随机误差）:</p>
+<ul>
+<li>粗大误差：超出在规定条件下预计的误差，或明显偏离真值的误差称为粗大误差，也叫过失误差、疏忽误差或粗差。</li>
+<li>系统误差：在重复性条件下，对同一被测量进行无限多次测量所得结果的平均值与被测量的真值之差，称为系统误差。</li>
+<li>随机误差：在同一条件下，多次测量同一被测量，有时会发现测量值时大时小，误差的绝对值及正、负以不可预见的方式变化，该误差称为随机误差。</li>
+</ul>
+<h1 id="dian-zu-chuan-gan-qi">电阻传感器</h1>
+<h2 id="ying-bian-pian-shi-chuan-gan-qi">应变片式传感器</h2>
+<p>电阻丝受拉后，长度增加，直径变小，电阻变大。</p>
+<p>$$\frac {\Delta R}{R} = \left ( 1+2 \mu + \frac{\Delta \rho / \rho}{\varepsilon _x} \right )\varepsilon _x = K_{0} \varepsilon _x$$</p>
+<p>对于金属材料$K_0 \approx 1+2\rho$，其值一般为2左右。</p>
+<p>$$\frac{\Delta R}{R} = K \varepsilon_{x} = K\frac{F}{AE} $$</p>
+<p>上式中K为灵敏度，略大于$K_0$，F为应变力，A为截面积，E为弹性模量。</p>
+<h3 id="fei-ping-heng-dian-qiao-jie-gou">非平衡电桥结构</h3>
+<p>非平衡电桥由四个电阻R1、R2、R3、R4组成一个四边形的回路，每一边称作电桥的“桥臂”。有4个结点a、b、c、d。在a、c结点之间接入电源$U_i$，而另一对结点（b、d）之间的电压差作为输出电压$U_o$端。</p>
+<p>b、d点对负极（a点）的电压相等时称作 “电桥平衡”；反之，称作“电桥不平衡”。</p>
+<p>电桥平衡的条件是:</p>
+<p>上下两个桥臂的左右桥臂的电阻比例相等。即：R1/R2=R4/R3或R1•R3=R4•R2</p>
+<p>若桥路的4个桥臂相邻电阻的电阻值变化趋势相同，桥路的输出电压为零。若相邻电阻的电阻值变化趋势相反，桥路就产生输出电压：</p>
+<p>$$ U_o = \frac{U_i}{4}\left ( \frac{\Delta R_1}{R_1} - \frac{\Delta R_2}{R_2} + \frac{\Delta R_3}{R_3} - \frac{\Delta R_4}{R_4} \right ) $$</p>
+<p>非平衡电桥可以分为单臂、双臂、全桥电桥</p>
+<ul>
+<li>单臂电桥是指四个桥臂中只有一个电阻可变，仅R1为应变片。</li>
+<li>双臂电桥是指四个桥臂中有R1和R2两个电阻均为应变片。</li>
+<li>全桥电桥是指四个桥臂均为应变片。</li>
+</ul>
+<p>全桥电桥在环境温度升高时，四个桥臂上的应变片温度同时升高，假设温度引起的电阻值漂移数值一致，就可以相互抵消，所以全桥能实现温度自补偿。</p>
+<h2 id="jin-shu-re-dian-zu">金属热电阻</h2>
+<p>温度升高，金属内部原子晶格的振动加剧，从而使金属内部的自由电子通过金属导体时的阻碍增大，宏观上表现出电阻率变大，电阻值增加，称其为正温度系数，即电阻值与温度的变化趋势相同。</p>
+<p>热电阻的$R_t$与温度t之间不完全是线性关系，在规定的测温范围内，根据国际电工委员会（IEC）颁布的分度表数值，列出每隔1℃的$R_t$电阻值，这种表格称为热电阻分度表。</p>
+<p>在工程中，若不考虑线性度误差的影响，有时也可以利用温度系数α来近似计算热电阻的阻值Rt。即：</p>
+<p>$$ R_t = R_o \left ( 1+\alpha t \right ) $$</p>
+<h1 id="dian-gan-chuan-gan-qi">电感传感器</h1>
+<p>测物体位移等的变化转换为线圈电感量的变化，再将电感量的变化转换为电流、电压或者频率的变化，实现非电量到电量的转换。</p>
+<p>电感传感器可分为自感式和互感式两大类。电感式传感器通常是指自感传感器。自感系数常用L来表示，简称自感或电感。</p>
+<p>自感的单位是亨利,简称亨,符号是H。常用的较小的单位有毫亨(mH)和微亨(μH)。自感传感器的数值多为mH数量级。</p>
+<h2 id="bian-xi-shi-dian-gan-chuan-gan-qi">变隙式电感传感器</h2>
+<p>对于变隙式电感传感器，其电感量为$L=\frac{N^2}{R_m}$</p>
+<p>其中N是绕组匝数，$R_m$是磁路总磁阻</p>
+<p>$$R_m\approx \frac{2\delta}{\mu_0A}$$</p>
+<p>其灵敏度</p>
+<p>$$ K_\delta = \frac{dL}{d\delta} = -\frac{N^2\mu_0A}{2\delta^2} = -\frac{L_0}{\delta} $$</p>
+<p>因此，气隙$\delta$越小，灵敏度越高，因此适合小量程位移的测量。</p>
+<h2 id="luo-xian-guan-shi-dian-gan-chuan-gan-qi">螺线管式电感传感器</h2>
+<p>螺线管是具有多重卷绕的导线，卷绕内部可以是空心的，或者有一个磁芯。当有电流通过导线时，螺线管中间部位会产生比较均匀的磁场。作为传感器，螺线管电感传感器的主要元器件是一只螺线管和一根可移动的圆柱形衔铁。衔铁插入绕组后，将引起螺线管内部的磁阻的减小，电感随插入的深度而增大。</p>
+<p>螺线管越长，线性区就越大。螺线管式电感传感器的线性区约为螺线管长度的1/10。</p>
+<h2 id="chai-dong-dian-gan-chuan-gan-qi">差动电感传感器</h2>
+<p>当衔铁偏离中间位置时，两个绕组的电感一个增加,一个减小,形成差动形式。差动结构可以减少衔铁因为电磁吸力导致的震动引起的误差。</p>
+<h2 id="ce-liang-zhuan-huan-dian-lu">测量转换电路</h2>
+<p>电感传感器的测量转换电路可以采用电桥电路，作用是吧电感量的变化转化为电压或者电流信号，以便送入放大器进行放大，然后用仪表指示或者记录下来。</p>
+<p>检波电路的作用是将电感的变化转换为直流电压或者电流，但若仅使用电桥电路搭配普通检波电路，则只能判别位移的大小，无法判断输出电压的相位和位移方向。</p>
+<p>如果在输出电压送到指示仪之前，经过一个能判别相位的检波电路，则不但可以反映幅值，还可以反映输出电压的相位。这种电路称为相敏检波电路。</p>
+<h1 id="dian-wo-liu-chuan-gan-qi">电涡流传感器</h1>
+<p>电涡流传感器的基本工作原理是电涡流效应。根据法拉第电磁感应定律，金属导体置于变化的磁场中时，导体的表面就会形成感应电流。感应电涡流并不是均匀分布的，其在纵深方向，主要是集中在金属导体的表面，称为趋肤效应或者集肤效应。交变磁场的频率越高，电涡流的渗透深度越浅，趋肤效应越严重，可以用趋肤效应来控制非电量的测量深度。</p>
+<p>设电涡流线圈在高频时的等效电阻为$R_1$（大于直流电阻），电感为$L_1$。当有被测导体靠近电涡流线圈时，则被测导体等效为一个短路环，电涡流线圈$L_1$与导体之间存在一个互感$M$。互感随线圈与导体之间距离的减小而增大。</p>
+<p>设$R$为等效电阻，$L$为等效电感，电涡流线圈的等效阻抗为</p>
+<p>$$Z=R+j \omega L$$</p>
+<p>当被测物与电涡流线圈的间距δ减小时，电涡流线圈与被测金属的互感量M增大，等效电感L减小，等效电阻R增大，品质因数Q值降低：$Q=\omega \frac{L}{R}$。</p>
+<p>等效电阻上消耗的有功功率增大：$P=I^2R$</p>
+<p>即当电涡流线圈与金属板的距离x 减小时，电涡流线圈的等效电感L减小，等效电阻R增大，Q值降低，流过电涡流线圈的电流$i_1$增大。</p>
+<p>调频式电路：当电涡流线圈与被测体的距离x变小时，电涡流线圈的电感量L也随之变小（非铁质），同时引起LC振荡器的输出电压及频率变高。如果希望用模拟仪表进行显示或记录时，使用“鉴频器”，可以将$\Delta f$转换为电压$\Delta U_o$。</p>
+<h1 id="dian-rong-chuan-gan-qi">电容传感器</h1>
+<p>电容传感器的工作原理可以用平板电容器来说明。当忽略边缘效应时，其电容为</p>
+<p>$$C= \frac{\varepsilon A}{d} = \frac{\varepsilon _0 \varepsilon _r A}{d} $$</p>
+<ul>
+<li>$A$：两极板相互遮盖的有效面积。($m^2$)</li>
+<li>$d$：两极板之间的距离，也称作极距。(m)</li>
+<li>$\varepsilon $：两极板之间介质的介电常数。(F/m)</li>
+<li>$\varepsilon _r$：两极板之间介质的相对介电常数。</li>
+<li>$\varepsilon _0$：真空介电常数，$\varepsilon _0 = 8.85 \times 10^{-12}$(F/m)</li>
+</ul>
+<p>根据电容原理，可以制作三种类型的电容传感器：变面积式电容传感器、变极距式电容传感器、变介电常数式电容传感器。</p>
+<h2 id="bian-ji-ju-shi-dian-rong-chuan-gan-qi">变极距式电容传感器</h2>
+<p>在$x&lt;&lt;d_0$时，有灵敏度$K_x\approx-\frac{C_0}{d_0} $</p>
+<p>实际使用时，总是使初始极距$d_0$尽量小些，以提高灵敏度，但这也带来了变极距式电容器的行程较小的缺点。</p>
+<h2 id="bian-mian-ji-shi-dian-rong-chuan-gan-qi">变面积式电容传感器</h2>
+<p>变面积式电容传感器的输出特性在一小段范围内是线性的，灵敏度是常数。这一类传感器多用于检测直线位移、角位移、尺寸等参量。</p>
+<h1 id="ya-dian-chuan-gan-qi">压电传感器</h1>
+<p>压电效应：石英等部分晶体与材料在受到压力时，晶格产生变形，表面产生电荷，这种现象称为压电效应。电介质材料中一种机械能与电能互换的现象。</p>
+<p>晶体沿x面受压力时的带电时，石英晶体的正负电荷中心分离，宏观上看，x面的上表面带正电，下表面带负电。</p>
+<p>x面上电荷为$Q=d_{11}F_x$ ($d_{11}$为压电常数)。</p>
+<p>当力的方向改变时，电荷的极性随之改变，输出电压的频率与动态力的频率相同；当施加静态力时，在初始瞬间，产生与力成正比的电荷，但由于表面漏电，所产生的电荷很快泄漏，并消失。<strong>所以压电元件不可用于静态力的测量。</strong></p>
+<h2 id="ya-dian-zhen-dong-jia-su-du-chuan-gan-qi">压电振动加速度传感器</h2>
+<ul>
+<li>
+<p>灵敏度K：输出量是电荷量，通常为pC级；输入量是加速度，单位是$m/s^2$；所以单位是$pC/ms^{-2}$或者$pC/g$，其范围通常是10～100。</p>
+<blockquote>
+<p>目前也有许多压电加速度传感器输出是电压，所以灵敏度单位也可是mV/g，通常为10～1000mV/g。</p>
+</blockquote>
+</li>
+<li>
+<p>频率范围：常见的压电加速度传感器频率范围为0.01Hz～20kHz。</p>
+</li>
+<li>
+<p>动态范围：常用的测量范围是0.1～100g，或1000$m/s^2$，<strong>测量冲击振动时应选用100～10000g的高频加速度传感器</strong>，而测量桥梁、地基等<strong>微弱振动往往要选择0.001～10g的高灵敏度的低频加速度传感器</strong>。</p>
+</li>
+</ul>
+<h2 id="dian-he-fang-da-qi">电荷放大器</h2>
+<p><img src="/img/dianhefangda.jpg" alt="电荷放大器" /></p>
+<ol>
+<li>压电传感器</li>
+<li>屏蔽电缆线</li>
+<li>传输线分布电容</li>
+<li>电荷放大器</li>
+</ol>
+<p>电荷放大器是一个具有反馈电容$C_f$的高增益运算放大器电路。当放大器开环增益A和输入电阻$R_i$、反馈电阻$R_f$（用于防止放大器的直流饱和）相当大时，放大器的输出电压$U_o$正比于输入电荷Q，反比于反馈电容$C_f$，而基本上与$C_c$、$C_a$、$C_i$无关：</p>
+<p>$$U_o \approx \frac{-AQ}{\left ( 1+A \right ) C_f} \approx -\frac{Q}{C_f} $$
+$$U_{om}\approx -\frac{d \times F}{C_f} $$
+$$K_u = \frac{U_{om}}{F} \approx -\frac{d}{C_f} $$</p>
+<h1 id="chao-sheng-bo-chuan-gan-qi">超声波传感器</h1>
+<p>声波的分类：次声波、可闻声波与超声波。频率高于20kHz的机械振动波称为超声波。超声波的特性是指向性好，能量集中。1MHz的超声波的能量,相当于振幅相同,频率为1000Hz可闻声波的100万倍,能穿透几米厚的钢板,而能量损失不大。在遇到两种介质的分界面(例如钢板与空气的交界面)时,能产生明显的反射和折射现象。</p>
+<p><img src="/img/light.jpg" alt="折射示意图" /></p>
+<p>超声波从声阻抗大的材料透射到声阻抗小的材料时，声压的大部分被反射。本例中，反射率γ高达93.8%，透射到水中的声压$p_{d1}$只有6.2%。如果钢板的底面是与空气交界时，则泄漏量就更小了。超声波的这一特性有利于金属探伤和测厚。</p>
+<h1 id="huo-er-chuan-gan-qi">霍尔传感器</h1>
+<p>霍尔效应是霍尔在美国霍普金斯大学研究生期间，研究关于载流导体在磁场中的受力性质时发现的一种现象。在长方形导体薄板上通以电流，沿电流垂直方向施加磁场，就会在与电流和磁场两者垂直的方向上产生电势差，这种现象称为霍尔效应，所产生的电势差称为霍尔电压。</p>
+<p>用在半导体薄片上的磁场强度B越强，霍尔电势也就越高。霍尔电势EH可用下式表示：</p>
+<p>$$E_H=\frac {IB}{ne\delta} =K_HIB$$</p>
+<p>n、e、$\delta$在薄片的尺寸、材料确定后均为常数，$K_H$为霍尔元件的灵敏度。</p>
+<h1 id="re-dian-ou-chuan-gan-qi">热电偶传感器</h1>
+<p>热电效应：两种不同材料的导体组成的闭合回路中，当两个节点温度不同时，回路中将产生电动势，这种现象称为热电效应，两种材料组成的回路成为热电偶，组成热电偶的导体称为热电极，热电偶产生的电动势称为热电动势。</p>
+<p>热电偶的两个节点中，置于被测温度中的是测量端，又称为工作段或者热端；置于参考温度中的，称为参考段，或者自由端、冷端。</p>
+<p><strong>热电偶的线性较差，多数情况下采用查表法</strong></p>
+<p>我国从1991年开始采用国际计量委员会规定的“1990年国际温标”(简称ITS-90)的新标准。按此标准,制定了相应的分度表,并且有相应的线性化集成电路与之对应，并由计算机查表。直接从热电偶的分度表查温度与热电动势的关系时的约束条件是：<strong>自由端（冷端）温度必须为0℃</strong>。</p>
+<p>当参考端温度不是0℃时，可以用下式修正测量误差：</p>
+<p>$$E_{AB}\left ( t,0^{\circ}C \right ) = E_{AB}\left ( t,t_0 \right ) + E_{AB}\left ( t_0,0^{\circ}C \right ) $$</p>
+<h1 id="guang-dian-chuan-gan-qi">光电传感器</h1>
+<p>当光子冲击半导体材料表面时，半导体材料中处于价带的电子吸收足够的光子能量后，会跃迁至更高的能级—导带，成为自由电子，形成电子-空穴对，使材料电阻率下降，表现出导电性。这就是光电效应，基于光电效应的器件有光敏电阻、光敏二极管、光敏晶体管。</p>
+<p>当光敏电阻受到光照时，光生电子-空穴对增加，阻值减小，电流增大。</p>
+<p>暗电流是指器件在反偏压条件下,没有入射光时产生的反向直流电流.(它包括晶体材料表面缺陷形成的泄漏电流和载流子热扩散形成的本征暗电流.)</p>
+
+    </div>
+
+    
+    <div class="article-info">
+        
+        <div class="article-date">15 April 2017</div>
+        
+        <div class="article-taxonomies">
+            
+            
+                <ul class="article-tags">
+                    
+                    <li><a href="https://abrahum.link/tags/ji-jie/">#机械</a></li>
+                    
+                </ul>
+            
+        </div>
+    </div>
+
+</article>
+
+<script src="https://utteranc.es/client.js"
+    repo="abrahum/abrahum.github.io"
+    issue-term="pathname"
+    theme="github-light"
+    crossorigin="anonymous"
+    async>
+</script>
+
+        </main>
+        <footer>
+            <p>
+                © Abrahum Link 2024<br>
+                Powered by <a target="_blank" href="https://getzola.org/">Zola</a>, Theme Link.
+            </p>
+            <p>
+                
+                
+            </p>
+        </footer>
+    </div>
+</body>
+</html>

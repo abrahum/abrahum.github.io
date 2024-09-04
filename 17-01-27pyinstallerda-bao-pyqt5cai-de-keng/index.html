@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+
+    <title>Pyinstaller打包PyQt5踩的坑</title>
+    <meta name="description" content="">
+
+    <link rel="stylesheet" href="https://abrahum.link/main.css">
+
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.15.1/katex.min.css" integrity="sha384-R4558gYOUz8mP9YWpZJjofhk+zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs" crossorigin="anonymous">
+    <script defer src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.15.1/katex.min.js" integrity="sha384-z1fJDqw8ZApjGO3/unPWUPsIymfsJmyrDVWC8Tv/a1HeOtGmkwNd/7xUS0Xcnvsx" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.15.1/contrib/auto-render.min.js" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+              // customised options
+              // • auto-render specific keys, e.g.:
+              delimiters: [
+                  {left: '$$', right: '$$', display: true},
+                  {left: '$', right: '$', display: false},
+                  {left: '\\(', right: '\\)', display: false},
+                  {left: '\\[', right: '\\]', display: true}
+              ],
+              // • rendering keys, e.g.:
+              throwOnError : false
+            });
+        });
+    </script>
+
+    
+
+    
+    
+</head>
+<body>
+    <a class="skip-main" href="#main">Skip to content</a>
+    <div class="container">
+        <header> 
+            <h1 class="site-header">
+                <a href="https:&#x2F;&#x2F;abrahum.link">Abrahum Link</a>
+            </h1> 
+            <nav>
+                
+                    
+                        
+                        <a  href="https:&#x2F;&#x2F;abrahum.link&#x2F;tags">Tags</a>
+                    
+                        
+                        <a  href="https:&#x2F;&#x2F;abrahum.link&#x2F;about">About</a>
+                    
+                        
+                        <a  href="https:&#x2F;&#x2F;github.com&#x2F;abrahum">GitHub</a>
+                    
+                
+            </nav>
+        </header>
+        <main id="main" tabindex="-1">
+            
+
+<article class="post">
+    <header>
+        <h1>Pyinstaller打包PyQt5踩的坑</h1>
+    </header>
+    <div class="content">
+        <p>在做完一个<a href="https://coding.net/u/Abrahum/p/pixiv2.0/git">P站的爬虫</a>后,我决定为之制作一个UI界面，并使用Pyinstaller打包为exe发布。</p>
+<p>然后呢，我不出意料的踩了很多坑_(:3」∠)_</p>
+<span id="continue-reading"></span><h2 id="yuan-wen">原文</h2>
+<p>首先第一个就是关于Pyinstaller，它会生成两个文件夹（build和dist），其中build是工程文件夹（全是过程文件，没什么卵用），而dist才是最后生成的程序，年少无知的我在build里傻傻得找了很久exe文件。</p>
+<p>然后是关于bin检索的问题，PyQt5的一些模块不能正常的被识别，需要<code>-p C:\Python35\Lib\site-packages\PyQt5\Qt\bin</code>增加检索的目录。</p>
+<p>接着是api-ms-win-crt-runtime错误，原本本地编译完运行毫无问题，但是发个一win7-64bit的同学运行后报错dll丢失。
+查到<a href="http://www.jianshu.com/p/c1e75244b6f3">简书</a>：</p>
+<blockquote>
+<p>PyInstaller打包之后的程序运行的时候发生api-ms-win-crt-runtime动态库之类的错误，似乎只有在Python 3.5下打包才会遇到。
+因为Universal CRT（KB2999226）缺失，可以通过安装此更新来解决问题。
+或者直接下载 Visual C++ Redistributable (<a href="http://download.microsoft.com/download/9/3/F/93FCF1E7-E6A4-478B-96E7-D4B285925B00/vc_redist.x86.exe">x86</a> ,<a href="http://download.microsoft.com/download/9/3/F/93FCF1E7-E6A4-478B-96E7-D4B285925B00/vc_redist.x64.exe">x64</a> )。</p>
+</blockquote>
+<p>最后遇到的是在PyQt5中使用的ico文件不能正常的打包如exe，最后pyrcc5解决，使用命令</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>pyrcc5 -o images.py images.qrc
+</span></code></pre>
+<p>images.qrc代码如下：</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>&lt;RCC&gt;
+</span><span>  &lt;qresource prefix=&quot;/&quot; &gt;
+</span><span>    &lt;file&gt;img/image1.png&lt;/file&gt;
+</span><span>    &lt;file&gt;img/image2.png&lt;/file&gt;
+</span><span>    &lt;file&gt;img/image3.png&lt;/file&gt;
+</span><span>  &lt;/qresource&gt;
+</span><span>&lt;/RCC&gt;
+</span></code></pre>
+<p>最后将<code>import images</code>，使用例如<code>':/img/image1.png'</code>引用即可。这个方法同样来自<a href="http://www.jianshu.com/p/c1e75244b6f3">简书</a></p>
+<h2 id="zheng-yue-chu-yi-geng-xin">正月初一更新</h2>
+<p>最近又发现了一个把资源文件打包进exe里的方法，在spec文件里<code>a.datas,</code>下一行加上行<code>[(filename,filepath,'DATA')],</code>即可。</p>
+<p>这个方法最好的地方是可以用来打包-i参数加入的图标文件。</p>
+<p>接下来想要做的是做个进度条，当然要先结果目前一阻塞窗口就未响应的问题······</p>
+<h2 id="zheng-yue-chu-san-geng-xin">正月初三更新</h2>
+<p>今天解决了之前的两大问题，使用QThread来保证UI不被阻塞。需要建立一个类继承<code>QtCore.QThread</code>然后重写run()函数</p>
+<pre data-linenos data-lang="Python" style="background-color:#2b303b;color:#c0c5ce;" class="language-Python "><code class="language-Python" data-lang="Python"><table><tbody><tr><td>1</td><td><span style="color:#b48ead;">class </span><span style="color:#ebcb8b;">myQThread</span><span style="color:#eff1f5;">(</span><span style="color:#a3be8c;">QtCore.QThread</span><span style="color:#eff1f5;">):
+</span></td></tr><tr><td>2</td><td><span>    done = QtCore.</span><span style="color:#bf616a;">pyqtSignal</span><span>()
+</span></td></tr><tr><td>3</td><td><span>    </span><span style="color:#b48ead;">def </span><span style="color:#96b5b4;">__init__</span><span>(</span><span style="color:#bf616a;">self</span><span>):
+</span></td></tr><tr><td>4</td><td><span>        </span><span style="color:#96b5b4;">super</span><span>(myQThread, </span><span style="color:#bf616a;">self</span><span>).</span><span style="color:#96b5b4;">__init__</span><span>()
+</span></td></tr><tr><td>5</td><td><span>        </span><span style="color:#bf616a;">self</span><span>.mod = &#39;&#39;
+</span></td></tr><tr><td>6</td><td><span>
+</span></td></tr><tr><td>7</td><td><span>    </span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">run</span><span>(</span><span style="color:#bf616a;">self</span><span>):
+</span></td></tr><tr><td>8</td><td><span>        time.</span><span style="color:#bf616a;">sleep</span><span>(</span><span style="color:#d08770;">1</span><span>)
+</span></td></tr><tr><td>9</td><td><span>        </span><span style="color:#bf616a;">self</span><span>.done.</span><span style="color:#bf616a;">emit</span><span>()
+</span></td></tr><tr><td>10</td><td><span>
+</span></td></tr><tr><td>11</td><td><span>AQThread = </span><span style="color:#bf616a;">myQThread</span><span>()
+</span></td></tr><tr><td>12</td><td><span>AQThread.</span><span style="color:#bf616a;">start</span><span>()
+</span></td></tr><tr><td>13</td><td><span>AQThread.done.</span><span style="color:#bf616a;">connect</span><span>(donefun)
+</span></td></tr></tbody></table></code></pre>
+<p>为了解决进度条的问题修改了之前的爬取内核，所以把新的版本就改为Ver.2.1～</p>
+<pre data-linenos data-lang="Python" style="background-color:#2b303b;color:#c0c5ce;" class="language-Python "><code class="language-Python" data-lang="Python"><table><tbody><tr><td>1</td><td><span style="color:#b48ead;">class </span><span style="color:#ebcb8b;">dw</span><span style="color:#eff1f5;">(</span><span style="color:#a3be8c;">QWidget</span><span style="color:#eff1f5;">):
+</span></td></tr><tr><td>2</td><td><span>    </span><span style="color:#b48ead;">def </span><span style="color:#96b5b4;">__init__</span><span>(</span><span style="color:#bf616a;">self</span><span>):
+</span></td></tr><tr><td>3</td><td><span>        </span><span style="color:#96b5b4;">super</span><span>(dw, </span><span style="color:#bf616a;">self</span><span>).</span><span style="color:#96b5b4;">__init__</span><span>()
+</span></td></tr><tr><td>4</td><td><span>        </span><span style="color:#bf616a;">self</span><span>.timer = QtCore.</span><span style="color:#bf616a;">QBasicTimer</span><span>()
+</span></td></tr><tr><td>5</td><td><span>
+</span></td></tr><tr><td>6</td><td><span>    </span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">timerEvent</span><span>(</span><span style="color:#bf616a;">self</span><span>, </span><span style="color:#bf616a;">e</span><span>):
+</span></td></tr><tr><td>7</td><td><span>        </span><span style="color:#bf616a;">dosomething</span><span>()
+</span></td></tr><tr><td>8</td><td><span>
+</span></td></tr><tr><td>9</td><td><span>w = </span><span style="color:#bf616a;">dw</span><span>()
+</span></td></tr><tr><td>10</td><td><span>w.</span><span style="color:#bf616a;">show</span><span>()
+</span></td></tr><tr><td>11</td><td><span>w.timer.</span><span style="color:#bf616a;">start</span><span>(</span><span style="color:#d08770;">100</span><span>, w)
+</span></td></tr></tbody></table></code></pre>
+<p>以上代码重写了timeEvent函数，当计时器超时就会触发该函数，然后重绘ui，达到进度条等动态效果。</p>
+<p>转战Android，脚本保持维护，GUI版本不准备再更新了。</p>
+<h2 id="pixiv-2-1-gui"><a href="http://pan.baidu.com/s/1slplXFn">Pixiv-2.1-GUI</a></h2>
+<p>Password: 1c3e</p>
+
+    </div>
+
+    
+    <div class="article-info">
+        
+        <div class="article-date">27 January 2017</div>
+        
+        <div class="article-taxonomies">
+            
+            
+                <ul class="article-tags">
+                    
+                    <li><a href="https://abrahum.link/tags/python/">#Python</a></li>
+                    
+                    <li><a href="https://abrahum.link/tags/code/">#Code</a></li>
+                    
+                </ul>
+            
+        </div>
+    </div>
+
+</article>
+
+<script src="https://utteranc.es/client.js"
+    repo="abrahum/abrahum.github.io"
+    issue-term="pathname"
+    theme="github-light"
+    crossorigin="anonymous"
+    async>
+</script>
+
+        </main>
+        <footer>
+            <p>
+                © Abrahum Link 2024<br>
+                Powered by <a target="_blank" href="https://getzola.org/">Zola</a>, Theme Link.
+            </p>
+            <p>
+                
+                
+            </p>
+        </footer>
+    </div>
+</body>
+</html>
