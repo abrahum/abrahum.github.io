@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+
+    <title>asyncio的学习与应用</title>
+    <meta name="description" content="">
+
+    <link rel="stylesheet" href="https://abrahum.link/main.css">
+
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.15.1/katex.min.css" integrity="sha384-R4558gYOUz8mP9YWpZJjofhk+zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs" crossorigin="anonymous">
+    <script defer src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.15.1/katex.min.js" integrity="sha384-z1fJDqw8ZApjGO3/unPWUPsIymfsJmyrDVWC8Tv/a1HeOtGmkwNd/7xUS0Xcnvsx" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.15.1/contrib/auto-render.min.js" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+              // customised options
+              // • auto-render specific keys, e.g.:
+              delimiters: [
+                  {left: '$$', right: '$$', display: true},
+                  {left: '$', right: '$', display: false},
+                  {left: '\\(', right: '\\)', display: false},
+                  {left: '\\[', right: '\\]', display: true}
+              ],
+              // • rendering keys, e.g.:
+              throwOnError : false
+            });
+        });
+    </script>
+
+    
+
+    
+    
+</head>
+<body>
+    <a class="skip-main" href="#main">Skip to content</a>
+    <div class="container">
+        <header> 
+            <h1 class="site-header">
+                <a href="https:&#x2F;&#x2F;abrahum.link">Abrahum Link</a>
+            </h1> 
+            <nav>
+                
+                    
+                        
+                        <a  href="https:&#x2F;&#x2F;abrahum.link&#x2F;tags">Tags</a>
+                    
+                        
+                        <a  href="https:&#x2F;&#x2F;abrahum.link&#x2F;about">About</a>
+                    
+                        
+                        <a  href="https:&#x2F;&#x2F;github.com&#x2F;abrahum">GitHub</a>
+                    
+                
+            </nav>
+        </header>
+        <main id="main" tabindex="-1">
+            
+
+<article class="post">
+    <header>
+        <h1>asyncio的学习与应用</h1>
+    </header>
+    <div class="content">
+        <p>一直在制作完善pixiv的爬虫，最近遇到了一个问题，学校的网络环境太差了，导致了IO阻塞时间过长，常常出现线程长时间阻塞，占用了时间和内存。</p>
+<p>为了解决这个问题，我决定尝试制定一个超时的图片删除重新爬取的过程，三次爬取不全则log报错不再爬取。</p>
+<p>同时将整个脚本搬运至3.5版本，重新用asyncio异步编写，减少线程使用。</p>
+<span id="continue-reading"></span>
+<p>首先上一个asyncio的例子：</p>
+<pre data-linenos data-lang="python" style="background-color:#2b303b;color:#c0c5ce;" class="language-python "><code class="language-python" data-lang="python"><table><tbody><tr><td>1</td><td><span style="color:#b48ead;">import </span><span>asyncio
+</span></td></tr><tr><td>2</td><td><span>
+</span></td></tr><tr><td>3</td><td><span>@asyncio.</span><span style="color:#bf616a;">coroutine
+</span></td></tr><tr><td>4</td><td><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">hello</span><span>():
+</span></td></tr><tr><td>5</td><td><span>    </span><span style="color:#96b5b4;">print</span><span>(&quot;</span><span style="color:#a3be8c;">Hello world!</span><span>&quot;)
+</span></td></tr><tr><td>6</td><td><span>    </span><span style="color:#65737e;"># 异步调用asyncio.sleep(1):
+</span></td></tr><tr><td>7</td><td><span>    r = </span><span style="color:#b48ead;">yield from </span><span>asyncio.</span><span style="color:#bf616a;">sleep</span><span>(</span><span style="color:#d08770;">1</span><span>)
+</span></td></tr><tr><td>8</td><td><span>    </span><span style="color:#96b5b4;">print</span><span>(&quot;</span><span style="color:#a3be8c;">Hello again!</span><span>&quot;)
+</span></td></tr><tr><td>9</td><td><span>
+</span></td></tr><tr><td>10</td><td><span style="color:#65737e;"># 获取EventLoop:
+</span></td></tr><tr><td>11</td><td><span>loop = asyncio.</span><span style="color:#bf616a;">get_event_loop</span><span>()
+</span></td></tr><tr><td>12</td><td><span style="color:#65737e;"># 执行coroutine
+</span></td></tr><tr><td>13</td><td><span>loop.</span><span style="color:#bf616a;">run_until_complete</span><span>(</span><span style="color:#bf616a;">hello</span><span>())
+</span></td></tr><tr><td>14</td><td><span>loop.</span><span style="color:#bf616a;">close</span><span>()
+</span></td></tr></tbody></table></code></pre>
+<p><code>@asyncio.coroutine</code>把一个generator标记为coroutine类型，然后把这个coroutine放入EventLoop中执行。</p>
+<h2 id="2017nian-geng-xin">2017年更新</h2>
+<p>经过测试，协程的大数据IO使用协程爬取效率并没有想象的高，考虑到这一丢丢的进程不会达到吃电脑性能的程度，不再全面使用协程。这里仅记录下一些代码，一便下次查阅：</p>
+<pre data-linenos data-lang="python" style="background-color:#2b303b;color:#c0c5ce;" class="language-python "><code class="language-python" data-lang="python"><table><tbody><tr><td>1</td><td><span>loop = asyncio.</span><span style="color:#bf616a;">get_event_loop</span><span>()
+</span></td></tr><tr><td>2</td><td><span>s = requests.</span><span style="color:#bf616a;">session</span><span>()
+</span></td></tr><tr><td>3</td><td><span>s.headers = headers1
+</span></td></tr><tr><td>4</td><td><span>
+</span></td></tr><tr><td>5</td><td><span>
+</span></td></tr><tr><td>6</td><td><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">get</span><span>(</span><span style="color:#bf616a;">url</span><span>, </span><span style="color:#bf616a;">asession</span><span>=s):
+</span></td></tr><tr><td>7</td><td><span>    </span><span style="color:#b48ead;">return </span><span>loop.</span><span style="color:#bf616a;">run_in_executor</span><span>(</span><span style="color:#d08770;">None</span><span>, asession.get, url)
+</span></td></tr><tr><td>8</td><td><span>
+</span></td></tr><tr><td>9</td><td><span>
+</span></td></tr><tr><td>10</td><td><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">async_save</span><span>(</span><span style="color:#bf616a;">dataids</span><span>, </span><span style="color:#bf616a;">cookies</span><span>, </span><span style="color:#bf616a;">path</span><span>):
+</span></td></tr><tr><td>11</td><td><span>    s.cookies = requests.utils.</span><span style="color:#bf616a;">cookiejar_from_dict</span><span>(cookies)
+</span></td></tr><tr><td>12</td><td><span>    tasks = []
+</span></td></tr><tr><td>13</td><td><span>    </span><span style="color:#b48ead;">for </span><span>i </span><span style="color:#b48ead;">in </span><span>dataids:
+</span></td></tr><tr><td>14</td><td><span>        tasks.</span><span style="color:#bf616a;">append</span><span>(</span><span style="color:#bf616a;">simgle_async_save</span><span>(i, path))
+</span></td></tr><tr><td>15</td><td><span>    loop.</span><span style="color:#bf616a;">run_until_complete</span><span>(asyncio.</span><span style="color:#bf616a;">wait</span><span>(tasks))
+</span></td></tr><tr><td>16</td><td><span>    loop.</span><span style="color:#bf616a;">close</span><span>()
+</span></td></tr><tr><td>17</td><td><span>    </span><span style="color:#b48ead;">return </span><span style="color:#d08770;">0
+</span></td></tr><tr><td>18</td><td><span>
+</span></td></tr><tr><td>19</td><td><span>
+</span></td></tr><tr><td>20</td><td><span style="color:#b48ead;">async def </span><span style="color:#8fa1b3;">simgle_async_save</span><span>(</span><span style="color:#bf616a;">i</span><span>, </span><span style="color:#bf616a;">path</span><span>, </span><span style="color:#bf616a;">ceiling</span><span>=</span><span style="color:#d08770;">4</span><span>):
+</span></td></tr><tr><td>21</td><td><span>    b = </span><span style="color:#d08770;">0
+</span></td></tr><tr><td>22</td><td><span>    ·······
+</span></td></tr><tr><td>23</td><td><span>        </span><span style="color:#b48ead;">if </span><span>not is_exists:
+</span></td></tr><tr><td>24</td><td><span>            pic = </span><span style="color:#b48ead;">await </span><span style="color:#bf616a;">get</span><span>(originaltu)
+</span></td></tr><tr><td>25</td><td><span>            fp = </span><span style="color:#96b5b4;">open</span><span>(path, &#39;</span><span style="color:#a3be8c;">wb</span><span>&#39;)
+</span></td></tr><tr><td>26</td><td><span>            fp.</span><span style="color:#bf616a;">write</span><span>(pic.content)
+</span></td></tr><tr><td>27</td><td><span>            fp.</span><span style="color:#bf616a;">close</span><span>()  </span><span style="color:#65737e;"># 保存图片
+</span></td></tr><tr><td>28</td><td><span>            </span><span style="color:#65737e;">&#39;&#39;&#39;print(i+&#39;-&#39;+str(b) + &#39; download is Success&#39;)&#39;&#39;&#39;
+</span></td></tr></tbody></table></code></pre>
+
+    </div>
+
+    
+    <div class="article-info">
+        
+        <div class="article-date"> 4 December 2016</div>
+        
+        <div class="article-taxonomies">
+            
+            
+                <ul class="article-tags">
+                    
+                    <li><a href="https://abrahum.link/tags/python/">#Python</a></li>
+                    
+                    <li><a href="https://abrahum.link/tags/code/">#Code</a></li>
+                    
+                </ul>
+            
+        </div>
+    </div>
+
+</article>
+
+<script src="https://utteranc.es/client.js"
+    repo="abrahum/abrahum.github.io"
+    issue-term="pathname"
+    theme="github-light"
+    crossorigin="anonymous"
+    async>
+</script>
+
+        </main>
+        <footer>
+            <p>
+                © Abrahum Link 2024<br>
+                Powered by <a target="_blank" href="https://getzola.org/">Zola</a>, Theme Link.
+            </p>
+            <p>
+                
+                
+            </p>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+
+    <title>Hexo迁徙至5.0</title>
+    <meta name="description" content="">
+
+    <link rel="stylesheet" href="https://abrahum.link/main.css">
+
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.15.1/katex.min.css" integrity="sha384-R4558gYOUz8mP9YWpZJjofhk+zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs" crossorigin="anonymous">
+    <script defer src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.15.1/katex.min.js" integrity="sha384-z1fJDqw8ZApjGO3/unPWUPsIymfsJmyrDVWC8Tv/a1HeOtGmkwNd/7xUS0Xcnvsx" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.15.1/contrib/auto-render.min.js" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+              // customised options
+              // • auto-render specific keys, e.g.:
+              delimiters: [
+                  {left: '$$', right: '$$', display: true},
+                  {left: '$', right: '$', display: false},
+                  {left: '\\(', right: '\\)', display: false},
+                  {left: '\\[', right: '\\]', display: true}
+              ],
+              // • rendering keys, e.g.:
+              throwOnError : false
+            });
+        });
+    </script>
+
+    
+
+    
+    
+</head>
+<body>
+    <a class="skip-main" href="#main">Skip to content</a>
+    <div class="container">
+        <header> 
+            <h1 class="site-header">
+                <a href="https:&#x2F;&#x2F;abrahum.link">Abrahum Link</a>
+            </h1> 
+            <nav>
+                
+                    
+                        
+                        <a  href="https:&#x2F;&#x2F;abrahum.link&#x2F;tags">Tags</a>
+                    
+                        
+                        <a  href="https:&#x2F;&#x2F;abrahum.link&#x2F;about">About</a>
+                    
+                        
+                        <a  href="https:&#x2F;&#x2F;github.com&#x2F;abrahum">GitHub</a>
+                    
+                
+            </nav>
+        </header>
+        <main id="main" tabindex="-1">
+            
+
+<article class="post">
+    <header>
+        <h1>Hexo迁徙至5.0</h1>
+    </header>
+    <div class="content">
+        <p>日前准备重新开始更新，结果安装的最新 node14 和 hexo 不兼容，虽然 <code>hexo s</code> 可以正常的渲染出预览画面，但是 <code>hexo g</code> 出来却是全部都是 0kb 的空文件。</p>
+<p>后续虽然安装切换回 node12 以后，问题解决了，干脆就再度迁移到 hexo5.0 与 next 主题的最新版。</p>
+<span id="continue-reading"></span>
+<p>本身的迁移非常简单，重新初始化一个博客文件夹就是</p>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">cnpm</span><span> install hexo-cli</span><span style="color:#bf616a;"> -g
+</span><span style="color:#bf616a;">hexo</span><span> init &lt;new folder&gt;
+</span><span style="color:#96b5b4;">cd </span><span>&lt;new folder&gt;
+</span><span style="color:#bf616a;">cnpm</span><span> install
+</span></code></pre>
+<p>然后把原博客的 themes 、 source 和 _config.yml 文件夹拷贝过去（注意不要把 package.json 文件也拷贝过去，里面是 node 的 package 信息），再把主题替换成新的社区版 next ，并进行一些配置，不再赘述，下面说一些官方文档没有说明的点（至少不是显而易见的文档）。</p>
+<h2 id="yu-yan-pei-zhi">语言配置</h2>
+<p>最新的 next 主题配置里直接配置语言不会生效，需要删除 language 文件夹里的 default 文件才能是配置生效，配置的 zh-Hans 也变更为 zh-CN 了。</p>
+<h2 id="ding-zhi-css">定制CSS</h2>
+<p>之前自己客制的一些 CSS 现在统一迁移到 source 的 _data 文件夹里，然后在 next 的配置文件里配置启用。
+但是新的 next 的最大宽度有点宽，这一点没法使用外部 css 覆写，只能修改了主题的 source/css/_variables/Pisces.styl 文件里的宽度设置。</p>
+<h2 id="zhong-wen-mu-lu-lian-jie-shi-xiao">中文目录链接失效</h2>
+<p>百度之后发现是一个主题固有问题，有<a href="https://github.com/theme-next/hexo-theme-next/pull/1540/files">issue #1540</a></p>
+<h2 id="qi-ta">其他</h2>
+<p>新的 hexo 没有自带 hexo-deployer-git ，需要额外安装。
+虽然官方文档说需要卸载 hexo-renderer-marked 更换为 hexo-renderer-pandoc 才能正常显示 MathJax ，但是目前貌似没有显示问题，倒是 MathJax2.7 更新到 3.1 以后很多式子需要更新一下（速度快了很多好评）。</p>
+<h2 id="2021-07-13-zhe-teng-aplayer">2021/07/13 折腾Aplayer</h2>
+<p>网易自带的播放器莫名其妙失效了，使用 Aplayer 代替之，但是 Aplayer 的自动注入会破坏我原有的一些 js 文件，故需要做以下变更。</p>
+<p>感谢<a href="https://github.com/MoePlayer/hexo-tag-aplayer/issues/44#issuecomment-631379359">MeteorVE在#44的回复</a></p>
+<blockquote>
+<ol>
+<li>
+<p>在 hexo config 那邊，如同這個 repo 的 readme 所寫，新增 asset_inject 這個選項。</p>
+<pre data-lang="yml" style="background-color:#2b303b;color:#c0c5ce;" class="language-yml "><code class="language-yml" data-lang="yml"><span style="color:#bf616a;">aplayer</span><span>:
+</span><span>  </span><span style="color:#bf616a;">asset_inject</span><span>: </span><span style="color:#d08770;">false
+</span></code></pre>
+</li>
+<li>
+<p>再來我們必須自己引入 js 和 css 等檔案。
+我原本在 hexo 3.x 版本 配上 next 7.1.1 版本 ，自動注入就能 work 了
+現在升級了才發生這個問題，但是相對的，override 的功能也做得更完善。
+以下方式是適用 "如果你是 next 最新版本主題" :</p>
+</li>
+<li>
+<p>建立 blog資料夾/source/_data/head.swig
+_data 這個資料夾預設沒有，自己創。</p>
+</li>
+<li>
+<p>在 /source/_data/next.yml 內
+搜尋 head: source/_data/head.swig 將他取消註釋。
+(註 : next.yml 這個配置又得講到 next 的資料分離功能，有點扯遠，但要麻煩自行去 next repo 看)</p>
+</li>
+<li>
+<p>在 /head.swig 內放入以下內容</p>
+<pre data-lang="html" style="background-color:#2b303b;color:#c0c5ce;" class="language-html "><code class="language-html" data-lang="html"><span style="color:#65737e;">&lt;!-- require APlayer --&gt;
+</span><span>&lt;</span><span style="color:#bf616a;">link </span><span style="color:#d08770;">rel</span><span>=&quot;</span><span style="color:#a3be8c;">stylesheet</span><span>&quot; </span><span style="color:#d08770;">href</span><span>=&quot;</span><span style="color:#a3be8c;">https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css</span><span>&quot;&gt;
+</span><span>&lt;</span><span style="color:#bf616a;">script </span><span style="color:#d08770;">src</span><span>=&quot;</span><span style="color:#a3be8c;">https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js</span><span>&quot;&gt;&lt;/</span><span style="color:#bf616a;">script</span><span>&gt;
+</span><span style="color:#65737e;">&lt;!-- require MetingJS --&gt;
+</span><span>&lt;</span><span style="color:#bf616a;">script </span><span style="color:#d08770;">src</span><span>=&quot;</span><span style="color:#a3be8c;">https://cdn.jsdelivr.net/npm/meting@2.0.1/dist/Meting.min.js</span><span>&quot;&gt;&lt;/</span><span style="color:#bf616a;">script</span><span>&gt;
+</span></code></pre>
+</li>
+</ol>
+<p>如果你說，步驟 2 後面的東西都看不懂怎麼辦。
+那也可以直接做 file inject，就是直接修改源碼
+在 next 主題資料夾內，找 layout/_partials/head/head.swig
+在最後面加入上面那份引入的區塊就可以了。</p>
+</blockquote>
+<p>但是我在如此操作后并无效果，多次尝试后，使用生成在 assets 文件夹的文件链接代替之，解决问题（可能是 APlayer 和 Meting 的版本问题）。</p>
+
+    </div>
+
+    
+    <div class="article-info">
+        
+        <div class="article-date">22 December 2020</div>
+        
+        <div class="article-taxonomies">
+            
+            
+                <ul class="article-tags">
+                    
+                    <li><a href="https://abrahum.link/tags/hexo/">#Hexo</a></li>
+                    
+                    <li><a href="https://abrahum.link/tags/next/">#Next</a></li>
+                    
+                </ul>
+            
+        </div>
+    </div>
+
+</article>
+
+<script src="https://utteranc.es/client.js"
+    repo="abrahum/abrahum.github.io"
+    issue-term="pathname"
+    theme="github-light"
+    crossorigin="anonymous"
+    async>
+</script>
+
+        </main>
+        <footer>
+            <p>
+                © Abrahum Link 2024<br>
+                Powered by <a target="_blank" href="https://getzola.org/">Zola</a>, Theme Link.
+            </p>
+            <p>
+                
+                
+            </p>
+        </footer>
+    </div>
+</body>
+</html>

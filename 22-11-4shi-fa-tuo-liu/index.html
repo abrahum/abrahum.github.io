@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+
+    <title>湿法脱硫</title>
+    <meta name="description" content="">
+
+    <link rel="stylesheet" href="https://abrahum.link/main.css">
+
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.15.1/katex.min.css" integrity="sha384-R4558gYOUz8mP9YWpZJjofhk+zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs" crossorigin="anonymous">
+    <script defer src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.15.1/katex.min.js" integrity="sha384-z1fJDqw8ZApjGO3/unPWUPsIymfsJmyrDVWC8Tv/a1HeOtGmkwNd/7xUS0Xcnvsx" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.15.1/contrib/auto-render.min.js" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+              // customised options
+              // • auto-render specific keys, e.g.:
+              delimiters: [
+                  {left: '$$', right: '$$', display: true},
+                  {left: '$', right: '$', display: false},
+                  {left: '\\(', right: '\\)', display: false},
+                  {left: '\\[', right: '\\]', display: true}
+              ],
+              // • rendering keys, e.g.:
+              throwOnError : false
+            });
+        });
+    </script>
+
+    
+
+    
+    
+</head>
+<body>
+    <a class="skip-main" href="#main">Skip to content</a>
+    <div class="container">
+        <header> 
+            <h1 class="site-header">
+                <a href="https:&#x2F;&#x2F;abrahum.link">Abrahum Link</a>
+            </h1> 
+            <nav>
+                
+                    
+                        
+                        <a  href="https:&#x2F;&#x2F;abrahum.link&#x2F;tags">Tags</a>
+                    
+                        
+                        <a  href="https:&#x2F;&#x2F;abrahum.link&#x2F;about">About</a>
+                    
+                        
+                        <a  href="https:&#x2F;&#x2F;github.com&#x2F;abrahum">GitHub</a>
+                    
+                
+            </nav>
+        </header>
+        <main id="main" tabindex="-1">
+            
+
+<article class="post">
+    <header>
+        <h1>湿法脱硫</h1>
+    </header>
+    <div class="content">
+        <p>湿法脱硫相关设计</p>
+<span id="continue-reading"></span><h2 id="yuan-li">原理</h2>
+<p>气相 $SO_2$ 被液相吸收</p>
+<p>$$SO_2(g) + H_2O \rightleftharpoons H_2SO_3(l)\rightleftharpoons H^+ + HSO_3^-\rightleftharpoons 2H^+ + SO_3^{2-}$$</p>
+<p>气相 $SO_3$ 被液相吸收</p>
+<p>$$SO_3(g) + H_2O \rightleftharpoons H_2SO_4(l)\rightleftharpoons 2H^+ + SO_4^{2-}$$</p>
+<p>吸收剂中和反应</p>
+<p>$$CaCO_3 + H^+ + HSO_3^- \rightarrow Ca^{2+} + SO_3^{2-} + H_2O + CO_2$$
+$$CaCO_3 + 2H^+ + SO_4^{2-} \rightarrow Ca^{2+} + SO_4^{2-} + H_2O + CO_2$$</p>
+<p>氧化反应</p>
+<p>$$2SO_3^{2-}+O_2 \rightarrow 2SO_4^{2-}$$</p>
+<p>结晶析出</p>
+<p>$$Ca^{2+} + SO_3^{2-} + 1/2H_2O \rightarrow CaSO_3·1/2H_2O\darr$$
+$$Ca^{2+} + SO_4^{2-} + 2H_2O \rightarrow CaSO_4·2H_2O\darr$$</p>
+<p>其中较合理的反应温度应为 50 ~ 60 ℃ 过高不利于二氧化硫的溶解，过低不利于中和反应。</p>
+<h2 id="she-ji-yuan-ze">设计原则</h2>
+<p>湿法脱硫过程中只要设计目标为降低延期中的硫氧化合物含量</p>
+<p>设计过程中主要需要达成热平衡、水平衡、物料平衡</p>
+<p>热平衡：</p>
+<table><thead><tr><th style="text-align: center">热源输入</th><th style="text-align: center">吸热方式</th></tr></thead><tbody>
+<tr><td style="text-align: center">烟气降温放热</td><td style="text-align: center">塔内水蒸发吸热</td></tr>
+<tr><td style="text-align: center">吸收剂中和反应放热</td><td style="text-align: center">塔外补充浆液、水温升吸热</td></tr>
+</tbody></table>
+<p>塔内水平衡与热平衡息息相关，主要由烟气温度、含水量、温度等决定</p>
+<table><thead><tr><th style="text-align: center">水输入</th><th style="text-align: center">水输出</th></tr></thead><tbody>
+<tr><td style="text-align: center">进塔烟气带入明水</td><td style="text-align: center">出塔烟气带出明水</td></tr>
+<tr><td style="text-align: center">塔外补充浆液含水</td><td style="text-align: center">外排浆液含水</td></tr>
+<tr><td style="text-align: center">进塔烟气含水</td><td style="text-align: center">出塔烟气含水</td></tr>
+<tr><td style="text-align: center">氧化空气含水</td><td style="text-align: center">石膏中结晶水</td></tr>
+</tbody></table>
+<p>物料平衡即输入的石灰石与反应后排出的石膏摩尔量应达成平衡，但是通常工程实践中钙硫摩尔比需要大于 1，可以达到 1.01~1.10 ，当石灰石品质（即 $CaCO_3$ 含量）高于 90%时，要求钙硫比不超过 1.03。</p>
+<h2 id="zhong-dian-she-ji-can-shu">重点设计参数</h2>
+<ol>
+<li>烟气流速，可取 3 ~ 6 m/s 通常取 3.5 ~ 4.5 m/s。</li>
+<li>液气比，循环吸收浆液量与烟气量的比值，通常取 10 ~ 15 $L/Nm^3$。</li>
+<li>氧化池容量，氧化池需满足浆液停留时间 2 ~ 5 min，非浓浆（含固量小于 25%）停留时间不小于 3.5 min，通常停留时间 4 ~ 5 min。</li>
+<li>氧化风，氧化风量根据需氧化硫摩尔量计算，使用氧化喷枪氧化时，氧化倍率取 1.8 ~ 2.5，使用氧化分布管时，氧化倍率不低于 2.8，风压保证略高于管出口压力，压力过高过低均不利于氧化空气分布。</li>
+</ol>
+<h2 id="yun-xing-can-shu">运行参数</h2>
+<ul>
+<li>吸收塔浆液密度：吸收塔浆液密度需要控制在 1150~1250 $kg/m^3$之间，密度大于该值则应该停止补充石灰石浆液，视 pH 值和 ORP 值情况安排排浆制石膏。</li>
+<li>pH 值：pH值控制在 5.0~5.8 之间，低于该值则补充石灰石浆液，高于该值停止补充石灰石浆液。</li>
+<li>ORP 值：氧化还原电位应该在 350~500 mV 之间，低于该值增加氧化风量，高于该值减少氧化风量。</li>
+<li>吸收塔液位：液位按吸收塔设计液位控制，低补高停。</li>
+</ul>
+
+    </div>
+
+    
+    <div class="article-info">
+        
+        <div class="article-date"> 4 November 2022</div>
+        
+        <div class="article-taxonomies">
+            
+            
+                <ul class="article-tags">
+                    
+                    <li><a href="https://abrahum.link/tags/ji-jie/">#机械</a></li>
+                    
+                </ul>
+            
+        </div>
+    </div>
+
+</article>
+
+<script src="https://utteranc.es/client.js"
+    repo="abrahum/abrahum.github.io"
+    issue-term="pathname"
+    theme="github-light"
+    crossorigin="anonymous"
+    async>
+</script>
+
+        </main>
+        <footer>
+            <p>
+                © Abrahum Link 2024<br>
+                Powered by <a target="_blank" href="https://getzola.org/">Zola</a>, Theme Link.
+            </p>
+            <p>
+                
+                
+            </p>
+        </footer>
+    </div>
+</body>
+</html>

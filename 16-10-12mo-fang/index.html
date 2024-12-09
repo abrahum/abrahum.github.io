@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+
+    <title>魔方</title>
+    <meta name="description" content="">
+
+    <link rel="stylesheet" href="https://abrahum.link/main.css">
+
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.15.1/katex.min.css" integrity="sha384-R4558gYOUz8mP9YWpZJjofhk+zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs" crossorigin="anonymous">
+    <script defer src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.15.1/katex.min.js" integrity="sha384-z1fJDqw8ZApjGO3/unPWUPsIymfsJmyrDVWC8Tv/a1HeOtGmkwNd/7xUS0Xcnvsx" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.15.1/contrib/auto-render.min.js" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+              // customised options
+              // • auto-render specific keys, e.g.:
+              delimiters: [
+                  {left: '$$', right: '$$', display: true},
+                  {left: '$', right: '$', display: false},
+                  {left: '\\(', right: '\\)', display: false},
+                  {left: '\\[', right: '\\]', display: true}
+              ],
+              // • rendering keys, e.g.:
+              throwOnError : false
+            });
+        });
+    </script>
+
+    
+
+    
+    
+</head>
+<body>
+    <a class="skip-main" href="#main">Skip to content</a>
+    <div class="container">
+        <header> 
+            <h1 class="site-header">
+                <a href="https:&#x2F;&#x2F;abrahum.link">Abrahum Link</a>
+            </h1> 
+            <nav>
+                
+                    
+                        
+                        <a  href="https:&#x2F;&#x2F;abrahum.link&#x2F;tags">Tags</a>
+                    
+                        
+                        <a  href="https:&#x2F;&#x2F;abrahum.link&#x2F;about">About</a>
+                    
+                        
+                        <a  href="https:&#x2F;&#x2F;github.com&#x2F;abrahum">GitHub</a>
+                    
+                
+            </nav>
+        </header>
+        <main id="main" tabindex="-1">
+            
+
+<article class="post">
+    <header>
+        <h1>魔方</h1>
+    </header>
+    <div class="content">
+        <p>为了写出一个Python版的二阶段算法求解魔方。</p>
+<p>今天开始学cpp（蜜汁需求得到的蜜汁结果）。</p>
+<p>就酱紫。</p>
+<p>随时更新。</p>
+<span id="continue-reading"></span>
+<p>使用魔方中心块的相对位置来表示魔方块。例如一个已复原的魔方的表示为：UF  UR  UB  UL  DF  DR  DB  DL  FR  FL  BR  BL  UFR  URB UBL  ULF  DRF DFL  DLB  DBR</p>
+<p>解魔方算法的Cpp表达</p>
+<pre data-linenos data-lang="cpp" style="background-color:#2b303b;color:#c0c5ce;" class="language-cpp "><code class="language-cpp" data-lang="cpp"><table><tbody><tr><td>1</td><td><span style="color:#b48ead;">#include </span><span>&lt;</span><span style="color:#a3be8c;">iostream</span><span>&gt;
+</span></td></tr><tr><td>2</td><td><span style="color:#b48ead;">#include </span><span>&lt;</span><span style="color:#a3be8c;">string</span><span>&gt;
+</span></td></tr><tr><td>3</td><td><span>
+</span></td></tr><tr><td>4</td><td><span style="color:#b48ead;">using namespace</span><span> std ;
+</span></td></tr><tr><td>5</td><td><span style="color:#b48ead;">char
+</span></td></tr><tr><td>6</td><td><span>
+</span></td></tr><tr><td>7</td><td><span>        *faces=&quot;</span><span style="color:#a3be8c;">RLFBUD</span><span>&quot;,
+</span></td></tr><tr><td>8</td><td><span>
+</span></td></tr><tr><td>9</td><td><span>        *order=&quot;</span><span style="color:#a3be8c;">AECGBFDHIJKLMSNTROQP</span><span>&quot;,
+</span></td></tr><tr><td>10</td><td><span>
+</span></td></tr><tr><td>11</td><td><span>        *bithash=&quot;</span><span style="color:#a3be8c;">TdXhQaRbEFIJUZfijeYV</span><span>&quot;,
+</span></td></tr><tr><td>12</td><td><span>
+</span></td></tr><tr><td>13</td><td><span>        *perm=&quot;</span><span style="color:#a3be8c;">AIBJTMROCLDKSNQPEKFIMSPRGJHLNTOQAGCEMTNSBFDHORPQ</span><span>&quot;,
+</span></td></tr><tr><td>14</td><td><span>
+</span></td></tr><tr><td>15</td><td><span>        pos[</span><span style="color:#d08770;">20</span><span>],ori[</span><span style="color:#d08770;">20</span><span>],val[</span><span style="color:#d08770;">20</span><span>],
+</span></td></tr><tr><td>16</td><td><span>
+</span></td></tr><tr><td>17</td><td><span>        TEMP,
+</span></td></tr><tr><td>18</td><td><span>
+</span></td></tr><tr><td>19</td><td><span>        *tables[</span><span style="color:#d08770;">8</span><span>];
+</span></td></tr><tr><td>20</td><td><span>
+</span></td></tr><tr><td>21</td><td><span style="color:#b48ead;">int</span><span> movecube[</span><span style="color:#d08770;">20</span><span>],moveamount[</span><span style="color:#d08770;">20</span><span>],
+</span></td></tr><tr><td>22</td><td><span>
+</span></td></tr><tr><td>23</td><td><span>        phase=</span><span style="color:#d08770;">0</span><span>,
+</span></td></tr><tr><td>24</td><td><span>
+</span></td></tr><tr><td>25</td><td><span>        tablesize[]={</span><span style="color:#d08770;">1</span><span>,</span><span style="color:#d08770;">4096</span><span>,  </span><span style="color:#d08770;">6561</span><span>,</span><span style="color:#d08770;">4096</span><span>,  </span><span style="color:#d08770;">256</span><span>,</span><span style="color:#d08770;">1536</span><span>,  </span><span style="color:#d08770;">13824</span><span>,</span><span style="color:#d08770;">576</span><span>};
+</span></td></tr><tr><td>26</td><td><span>
+</span></td></tr><tr><td>27</td><td><span style="color:#b48ead;">#define </span><span style="color:#8fa1b3;">SWAP</span><span>(</span><span style="color:#bf616a;">a</span><span>,</span><span style="color:#bf616a;">b</span><span>) TEMP=a;a=b;b=TEMP;
+</span></td></tr><tr><td>28</td><td><span>
+</span></td></tr><tr><td>29</td><td><span style="color:#b48ead;">#define </span><span>CHAROFFSET </span><span style="color:#d08770;">65
+</span></td></tr><tr><td>30</td><td><span>
+</span></td></tr><tr><td>31</td><td><span style="color:#b48ead;">static</span><span> string answer = &quot;&quot;;
+</span></td></tr><tr><td>32</td><td><span>
+</span></td></tr><tr><td>33</td><td><span style="color:#b48ead;">void </span><span style="color:#8fa1b3;">cycle</span><span>(</span><span style="color:#b48ead;">char</span><span>*</span><span style="color:#bf616a;">p</span><span>,</span><span style="color:#b48ead;">char</span><span>*</span><span style="color:#bf616a;">a</span><span>)
+</span></td></tr><tr><td>34</td><td><span>{
+</span></td></tr><tr><td>35</td><td><span>        </span><span style="color:#bf616a;">SWAP</span><span>(p[*a-CHAROFFSET],p[a[</span><span style="color:#d08770;">1</span><span>]-CHAROFFSET]);
+</span></td></tr><tr><td>36</td><td><span>        </span><span style="color:#bf616a;">SWAP</span><span>(p[*a-CHAROFFSET],p[a[</span><span style="color:#d08770;">2</span><span>]-CHAROFFSET]);
+</span></td></tr><tr><td>37</td><td><span>        </span><span style="color:#bf616a;">SWAP</span><span>(p[*a-CHAROFFSET],p[a[</span><span style="color:#d08770;">3</span><span>]-CHAROFFSET]);
+</span></td></tr><tr><td>38</td><td><span>}
+</span></td></tr><tr><td>39</td><td><span>
+</span></td></tr><tr><td>40</td><td><span style="color:#b48ead;">void </span><span style="color:#8fa1b3;">twist</span><span>(</span><span style="color:#b48ead;">int </span><span style="color:#bf616a;">i</span><span>,</span><span style="color:#b48ead;">int </span><span style="color:#bf616a;">a</span><span>)
+</span></td></tr><tr><td>41</td><td><span>{
+</span></td></tr><tr><td>42</td><td><span>        i-=CHAROFFSET;
+</span></td></tr><tr><td>43</td><td><span>        ori[i]=(ori[i]+a+</span><span style="color:#d08770;">1</span><span>)%val[i];
+</span></td></tr><tr><td>44</td><td><span>}
+</span></td></tr><tr><td>45</td><td><span>
+</span></td></tr><tr><td>46</td><td><span style="color:#b48ead;">void </span><span style="color:#8fa1b3;">reset</span><span>()
+</span></td></tr><tr><td>47</td><td><span>{
+</span></td></tr><tr><td>48</td><td><span>        </span><span style="color:#b48ead;">for</span><span>( </span><span style="color:#b48ead;">int</span><span> i=</span><span style="color:#d08770;">0</span><span>; i&lt;</span><span style="color:#d08770;">20</span><span>; pos[i]=i, ori[i++]=</span><span style="color:#d08770;">0</span><span>);
+</span></td></tr><tr><td>49</td><td><span>}
+</span></td></tr><tr><td>50</td><td><span>
+</span></td></tr><tr><td>51</td><td><span style="color:#b48ead;">int </span><span style="color:#8fa1b3;">permtonum</span><span>(</span><span style="color:#b48ead;">char</span><span>* </span><span style="color:#bf616a;">p</span><span>)
+</span></td></tr><tr><td>52</td><td><span>{
+</span></td></tr><tr><td>53</td><td><span>        </span><span style="color:#b48ead;">int</span><span> n=</span><span style="color:#d08770;">0</span><span>;
+</span></td></tr><tr><td>54</td><td><span>        </span><span style="color:#b48ead;">for </span><span>( </span><span style="color:#b48ead;">int</span><span> a=</span><span style="color:#d08770;">0</span><span>; a&lt;</span><span style="color:#d08770;">4</span><span>; a++)
+</span></td></tr><tr><td>55</td><td><span>        {
+</span></td></tr><tr><td>56</td><td><span>
+</span></td></tr><tr><td>57</td><td><span>                n*=</span><span style="color:#d08770;">4</span><span>-a;
+</span></td></tr><tr><td>58</td><td><span>                </span><span style="color:#b48ead;">for</span><span>( </span><span style="color:#b48ead;">int</span><span> b=a; ++b&lt;</span><span style="color:#d08770;">4</span><span>; )
+</span></td></tr><tr><td>59</td><td><span>                        </span><span style="color:#b48ead;">if </span><span>(p&lt;p[a]) n++;
+</span></td></tr><tr><td>60</td><td><span>        }
+</span></td></tr><tr><td>61</td><td><span>        </span><span style="color:#b48ead;">return</span><span> n;
+</span></td></tr><tr><td>62</td><td><span>}
+</span></td></tr><tr><td>63</td><td><span>
+</span></td></tr><tr><td>64</td><td><span style="color:#b48ead;">void </span><span style="color:#8fa1b3;">numtoperm</span><span>(</span><span style="color:#b48ead;">char</span><span>* </span><span style="color:#bf616a;">p</span><span>,</span><span style="color:#b48ead;">int </span><span style="color:#bf616a;">n</span><span>,</span><span style="color:#b48ead;">int </span><span style="color:#bf616a;">o</span><span>)
+</span></td></tr><tr><td>65</td><td><span>{
+</span></td></tr><tr><td>66</td><td><span>        p+=o;
+</span></td></tr><tr><td>67</td><td><span>        p[</span><span style="color:#d08770;">3</span><span>]=o;
+</span></td></tr><tr><td>68</td><td><span>        </span><span style="color:#b48ead;">for </span><span>(</span><span style="color:#b48ead;">int</span><span> a=</span><span style="color:#d08770;">3</span><span>; a--;)
+</span></td></tr><tr><td>69</td><td><span>        {
+</span></td></tr><tr><td>70</td><td><span>                p[a] = n%(</span><span style="color:#d08770;">4</span><span>-a) +o;
+</span></td></tr><tr><td>71</td><td><span>                n/=</span><span style="color:#d08770;">4</span><span>-a;
+</span></td></tr><tr><td>72</td><td><span>                </span><span style="color:#b48ead;">for </span><span>(</span><span style="color:#b48ead;">int</span><span> b=a; ++b&lt;</span><span style="color:#d08770;">4</span><span>; )
+</span></td></tr><tr><td>73</td><td><span>                        </span><span style="color:#b48ead;">if </span><span>( p &gt;= p[a]) p++;
+</span></td></tr><tr><td>74</td><td><span>        }
+</span></td></tr><tr><td>75</td><td><span>}
+</span></td></tr><tr><td>76</td><td><span>
+</span></td></tr><tr><td>77</td><td><span style="color:#b48ead;">int </span><span style="color:#8fa1b3;">getposition</span><span>(</span><span style="color:#b48ead;">int </span><span style="color:#bf616a;">t</span><span>)
+</span></td></tr><tr><td>78</td><td><span>{
+</span></td></tr><tr><td>79</td><td><span>        </span><span style="color:#b48ead;">int</span><span> i=-</span><span style="color:#d08770;">1</span><span>,n=</span><span style="color:#d08770;">0</span><span>;
+</span></td></tr><tr><td>80</td><td><span>        </span><span style="color:#b48ead;">switch</span><span>(t)
+</span></td></tr><tr><td>81</td><td><span>        {
+</span></td></tr><tr><td>82</td><td><span>        </span><span style="color:#b48ead;">case </span><span style="color:#d08770;">1</span><span>:
+</span></td></tr><tr><td>83</td><td><span>                </span><span style="color:#b48ead;">for</span><span>(;++i&lt;</span><span style="color:#d08770;">12</span><span>;) n+= ori[i]&lt;&lt;i;
+</span></td></tr><tr><td>84</td><td><span>                </span><span style="color:#b48ead;">break</span><span>;
+</span></td></tr><tr><td>85</td><td><span>        </span><span style="color:#b48ead;">case </span><span style="color:#d08770;">2</span><span>:
+</span></td></tr><tr><td>86</td><td><span>                </span><span style="color:#b48ead;">for</span><span>(i=</span><span style="color:#d08770;">20</span><span>;--i&gt;</span><span style="color:#d08770;">11</span><span>;) n=n*</span><span style="color:#d08770;">3</span><span>+ori[i];
+</span></td></tr><tr><td>87</td><td><span>                </span><span style="color:#b48ead;">break</span><span>;
+</span></td></tr><tr><td>88</td><td><span>        </span><span style="color:#b48ead;">case </span><span style="color:#d08770;">3</span><span>:
+</span></td></tr><tr><td>89</td><td><span>                </span><span style="color:#b48ead;">for</span><span>(;++i&lt;</span><span style="color:#d08770;">12</span><span>;) n+= (pos[i]&amp;</span><span style="color:#d08770;">8</span><span>)?(</span><span style="color:#d08770;">1</span><span>&lt;&lt;i):</span><span style="color:#d08770;">0</span><span>;
+</span></td></tr><tr><td>90</td><td><span>                </span><span style="color:#b48ead;">break</span><span>;
+</span></td></tr><tr><td>91</td><td><span>        </span><span style="color:#b48ead;">case </span><span style="color:#d08770;">4</span><span>:
+</span></td></tr><tr><td>92</td><td><span>                </span><span style="color:#b48ead;">for</span><span>(;++i&lt;</span><span style="color:#d08770;">8</span><span>;) n+= (pos[i]&amp;</span><span style="color:#d08770;">4</span><span>)?(</span><span style="color:#d08770;">1</span><span>&lt;&lt;i):</span><span style="color:#d08770;">0</span><span>;
+</span></td></tr><tr><td>93</td><td><span>                </span><span style="color:#b48ead;">break</span><span>;
+</span></td></tr><tr><td>94</td><td><span>        </span><span style="color:#b48ead;">case </span><span style="color:#d08770;">5</span><span>:
+</span></td></tr><tr><td>95</td><td><span>                </span><span style="color:#b48ead;">int</span><span> corn[</span><span style="color:#d08770;">8</span><span>],j,k,l,corn2[</span><span style="color:#d08770;">4</span><span>];
+</span></td></tr><tr><td>96</td><td><span>                k=j=</span><span style="color:#d08770;">0</span><span>;
+</span></td></tr><tr><td>97</td><td><span>                </span><span style="color:#b48ead;">for</span><span>(;++i&lt;</span><span style="color:#d08770;">8</span><span>;)
+</span></td></tr><tr><td>98</td><td><span>                        </span><span style="color:#b48ead;">if</span><span>((l=pos[i+</span><span style="color:#d08770;">12</span><span>]-</span><span style="color:#d08770;">12</span><span>)&amp;</span><span style="color:#d08770;">4</span><span>)
+</span></td></tr><tr><td>99</td><td><span>                        {
+</span></td></tr><tr><td>100</td><td><span>                                corn[l]=k++;
+</span></td></tr><tr><td>101</td><td><span>                                n+=</span><span style="color:#d08770;">1</span><span>&lt;&lt;i;
+</span></td></tr><tr><td>102</td><td><span>                        }</span><span style="color:#b48ead;">else</span><span> corn[j++]=l;
+</span></td></tr><tr><td>103</td><td><span>                </span><span style="color:#b48ead;">for</span><span>(i=</span><span style="color:#d08770;">0</span><span>;i&lt;</span><span style="color:#d08770;">4</span><span>;i++) corn2[i]=corn[</span><span style="color:#d08770;">4</span><span>+corn[i]];
+</span></td></tr><tr><td>104</td><td><span>                </span><span style="color:#b48ead;">for</span><span>(;--i;) corn2[i]^=corn2[</span><span style="color:#d08770;">0</span><span>];
+</span></td></tr><tr><td>105</td><td><span>                n=n*</span><span style="color:#d08770;">6</span><span>+corn2[</span><span style="color:#d08770;">1</span><span>]*</span><span style="color:#d08770;">2</span><span>-</span><span style="color:#d08770;">2</span><span>;
+</span></td></tr><tr><td>106</td><td><span>                </span><span style="color:#b48ead;">if</span><span>(corn2[</span><span style="color:#d08770;">3</span><span>]&lt;corn2[</span><span style="color:#d08770;">2</span><span>])n++;
+</span></td></tr><tr><td>107</td><td><span>                </span><span style="color:#b48ead;">break</span><span>;
+</span></td></tr><tr><td>108</td><td><span>        </span><span style="color:#b48ead;">case </span><span style="color:#d08770;">6</span><span>:
+</span></td></tr><tr><td>109</td><td><span>                n=</span><span style="color:#bf616a;">permtonum</span><span>(pos)*</span><span style="color:#d08770;">576</span><span>+</span><span style="color:#bf616a;">permtonum</span><span>(pos+</span><span style="color:#d08770;">4</span><span>)*</span><span style="color:#d08770;">24</span><span>+</span><span style="color:#bf616a;">permtonum</span><span>(pos+</span><span style="color:#d08770;">12</span><span>);
+</span></td></tr><tr><td>110</td><td><span>                </span><span style="color:#b48ead;">break</span><span>;
+</span></td></tr><tr><td>111</td><td><span>        </span><span style="color:#b48ead;">case </span><span style="color:#d08770;">7</span><span>:
+</span></td></tr><tr><td>112</td><td><span>                n=</span><span style="color:#bf616a;">permtonum</span><span>(pos+</span><span style="color:#d08770;">8</span><span>)*</span><span style="color:#d08770;">24</span><span>+</span><span style="color:#bf616a;">permtonum</span><span>(pos+</span><span style="color:#d08770;">16</span><span>);
+</span></td></tr><tr><td>113</td><td><span>                </span><span style="color:#b48ead;">break</span><span>;
+</span></td></tr><tr><td>114</td><td><span>        }
+</span></td></tr><tr><td>115</td><td><span>        </span><span style="color:#b48ead;">return</span><span> n;
+</span></td></tr><tr><td>116</td><td><span>}
+</span></td></tr><tr><td>117</td><td><span>
+</span></td></tr><tr><td>118</td><td><span style="color:#b48ead;">void </span><span style="color:#8fa1b3;">setposition</span><span>(</span><span style="color:#b48ead;">int </span><span style="color:#bf616a;">t</span><span>, </span><span style="color:#b48ead;">int </span><span style="color:#bf616a;">n</span><span>)
+</span></td></tr><tr><td>119</td><td><span>{
+</span></td></tr><tr><td>120</td><td><span>        </span><span style="color:#b48ead;">int</span><span> i=</span><span style="color:#d08770;">0</span><span>,j=</span><span style="color:#d08770;">12</span><span>,k=</span><span style="color:#d08770;">0</span><span>;
+</span></td></tr><tr><td>121</td><td><span>        </span><span style="color:#b48ead;">char </span><span>*corn=&quot;</span><span style="color:#a3be8c;">QRSTQRTSQSRTQTRSQSTRQTSR</span><span>&quot;;
+</span></td></tr><tr><td>122</td><td><span>        </span><span style="color:#bf616a;">reset</span><span>();
+</span></td></tr><tr><td>123</td><td><span>        </span><span style="color:#b48ead;">switch</span><span>(t){
+</span></td></tr><tr><td>124</td><td><span>
+</span></td></tr><tr><td>125</td><td><span>        </span><span style="color:#b48ead;">case </span><span style="color:#d08770;">1</span><span>:
+</span></td></tr><tr><td>126</td><td><span>                </span><span style="color:#b48ead;">for</span><span>(;i&lt;</span><span style="color:#d08770;">12</span><span>;i++,n&gt;&gt;=</span><span style="color:#d08770;">1</span><span>) ori[i]=n&amp;</span><span style="color:#d08770;">1</span><span>;
+</span></td></tr><tr><td>127</td><td><span>                </span><span style="color:#b48ead;">break</span><span>;
+</span></td></tr><tr><td>128</td><td><span>        </span><span style="color:#b48ead;">case </span><span style="color:#d08770;">2</span><span>:
+</span></td></tr><tr><td>129</td><td><span>                </span><span style="color:#b48ead;">for</span><span>(i=</span><span style="color:#d08770;">12</span><span>;i&lt;</span><span style="color:#d08770;">20</span><span>;i++,n/=</span><span style="color:#d08770;">3</span><span>) ori[i]=n%</span><span style="color:#d08770;">3</span><span>;
+</span></td></tr><tr><td>130</td><td><span>                </span><span style="color:#b48ead;">break</span><span>;
+</span></td></tr><tr><td>131</td><td><span>        </span><span style="color:#b48ead;">case </span><span style="color:#d08770;">3</span><span>:
+</span></td></tr><tr><td>132</td><td><span>                </span><span style="color:#b48ead;">for</span><span>(;i&lt;</span><span style="color:#d08770;">12</span><span>;i++,n&gt;&gt;=</span><span style="color:#d08770;">1</span><span>) pos[i]= </span><span style="color:#d08770;">8</span><span>*n&amp;</span><span style="color:#d08770;">8</span><span>;
+</span></td></tr><tr><td>133</td><td><span>                </span><span style="color:#b48ead;">break</span><span>;
+</span></td></tr><tr><td>134</td><td><span>        </span><span style="color:#b48ead;">case </span><span style="color:#d08770;">4</span><span>:
+</span></td></tr><tr><td>135</td><td><span>                </span><span style="color:#b48ead;">for</span><span>(;i&lt;</span><span style="color:#d08770;">8</span><span>;i++,n&gt;&gt;=</span><span style="color:#d08770;">1</span><span>) pos[i]= </span><span style="color:#d08770;">4</span><span>*n&amp;</span><span style="color:#d08770;">4</span><span>;
+</span></td></tr><tr><td>136</td><td><span>                </span><span style="color:#b48ead;">break</span><span>;
+</span></td></tr><tr><td>137</td><td><span>        </span><span style="color:#b48ead;">case </span><span style="color:#d08770;">5</span><span>:
+</span></td></tr><tr><td>138</td><td><span>                corn+=n%</span><span style="color:#d08770;">6</span><span>*</span><span style="color:#d08770;">4</span><span>;
+</span></td></tr><tr><td>139</td><td><span>                n/=</span><span style="color:#d08770;">6</span><span>;
+</span></td></tr><tr><td>140</td><td><span>                </span><span style="color:#b48ead;">for</span><span>(;i&lt;</span><span style="color:#d08770;">8</span><span>;i++,n&gt;&gt;=</span><span style="color:#d08770;">1</span><span>)
+</span></td></tr><tr><td>141</td><td><span>                        pos[i+</span><span style="color:#d08770;">12</span><span>]= n&amp;</span><span style="color:#d08770;">1 </span><span>? corn[k++]-CHAROFFSET : j++;
+</span></td></tr><tr><td>142</td><td><span>                </span><span style="color:#b48ead;">break</span><span>;
+</span></td></tr><tr><td>143</td><td><span>        </span><span style="color:#b48ead;">case </span><span style="color:#d08770;">6</span><span>:
+</span></td></tr><tr><td>144</td><td><span>                </span><span style="color:#bf616a;">numtoperm</span><span>(pos,n%</span><span style="color:#d08770;">24</span><span>,</span><span style="color:#d08770;">12</span><span>);n/=</span><span style="color:#d08770;">24</span><span>;
+</span></td></tr><tr><td>145</td><td><span>                </span><span style="color:#bf616a;">numtoperm</span><span>(pos,n%</span><span style="color:#d08770;">24</span><span>,</span><span style="color:#d08770;">4</span><span>); n/=</span><span style="color:#d08770;">24</span><span>;
+</span></td></tr><tr><td>146</td><td><span>                </span><span style="color:#bf616a;">numtoperm</span><span>(pos,n   ,</span><span style="color:#d08770;">0</span><span>);
+</span></td></tr><tr><td>147</td><td><span>                </span><span style="color:#b48ead;">break</span><span>;
+</span></td></tr><tr><td>148</td><td><span>        </span><span style="color:#b48ead;">case </span><span style="color:#d08770;">7</span><span>:
+</span></td></tr><tr><td>149</td><td><span>                </span><span style="color:#bf616a;">numtoperm</span><span>(pos,n/</span><span style="color:#d08770;">24</span><span>,</span><span style="color:#d08770;">8</span><span>);
+</span></td></tr><tr><td>150</td><td><span>                </span><span style="color:#bf616a;">numtoperm</span><span>(pos,n%</span><span style="color:#d08770;">24</span><span>,</span><span style="color:#d08770;">16</span><span>);
+</span></td></tr><tr><td>151</td><td><span>                </span><span style="color:#b48ead;">break</span><span>;
+</span></td></tr><tr><td>152</td><td><span>        }
+</span></td></tr><tr><td>153</td><td><span>}
+</span></td></tr><tr><td>154</td><td><span>
+</span></td></tr><tr><td>155</td><td><span style="color:#b48ead;">void </span><span style="color:#8fa1b3;">domove</span><span>(</span><span style="color:#b48ead;">int </span><span style="color:#bf616a;">m</span><span>)
+</span></td></tr><tr><td>156</td><td><span>{
+</span></td></tr><tr><td>157</td><td><span>        </span><span style="color:#b48ead;">char </span><span>*p=perm+</span><span style="color:#d08770;">8</span><span>*m, i=</span><span style="color:#d08770;">8</span><span>;
+</span></td></tr><tr><td>158</td><td><span>
+</span></td></tr><tr><td>159</td><td><span>        </span><span style="color:#bf616a;">cycle</span><span>(pos,p);
+</span></td></tr><tr><td>160</td><td><span>        </span><span style="color:#bf616a;">cycle</span><span>(ori,p);
+</span></td></tr><tr><td>161</td><td><span>        </span><span style="color:#bf616a;">cycle</span><span>(pos,p+</span><span style="color:#d08770;">4</span><span>);
+</span></td></tr><tr><td>162</td><td><span>        </span><span style="color:#bf616a;">cycle</span><span>(ori,p+</span><span style="color:#d08770;">4</span><span>);
+</span></td></tr><tr><td>163</td><td><span>        </span><span style="color:#b48ead;">if</span><span>(m&lt;</span><span style="color:#d08770;">4</span><span>)
+</span></td></tr><tr><td>164</td><td><span>                </span><span style="color:#b48ead;">for</span><span>(;--i&gt;</span><span style="color:#d08770;">3</span><span>;) </span><span style="color:#bf616a;">twist</span><span>(p[i],i&amp;</span><span style="color:#d08770;">1</span><span>);
+</span></td></tr><tr><td>165</td><td><span>        </span><span style="color:#b48ead;">if</span><span>(m&lt;</span><span style="color:#d08770;">2</span><span>)
+</span></td></tr><tr><td>166</td><td><span>                </span><span style="color:#b48ead;">for</span><span>(i=</span><span style="color:#d08770;">4</span><span>;i--;) </span><span style="color:#bf616a;">twist</span><span>(p[i],</span><span style="color:#d08770;">0</span><span>);
+</span></td></tr><tr><td>167</td><td><span>}
+</span></td></tr><tr><td>168</td><td><span>
+</span></td></tr><tr><td>169</td><td><span style="color:#b48ead;">void </span><span style="color:#8fa1b3;">filltable</span><span>(</span><span style="color:#b48ead;">int </span><span style="color:#bf616a;">ti</span><span>)
+</span></td></tr><tr><td>170</td><td><span>{
+</span></td></tr><tr><td>171</td><td><span>        </span><span style="color:#b48ead;">int</span><span> n=</span><span style="color:#d08770;">1</span><span>,l=</span><span style="color:#d08770;">1</span><span>, tl=tablesize[ti];
+</span></td></tr><tr><td>172</td><td><span>
+</span></td></tr><tr><td>173</td><td><span>        </span><span style="color:#b48ead;">char</span><span>* tb = tables[ti]=</span><span style="color:#b48ead;">new char</span><span>[tl];
+</span></td></tr><tr><td>174</td><td><span>
+</span></td></tr><tr><td>175</td><td><span>        </span><span style="color:#96b5b4;">memset</span><span>( tb, </span><span style="color:#d08770;">0</span><span>, tl);
+</span></td></tr><tr><td>176</td><td><span>        </span><span style="color:#bf616a;">reset</span><span>();
+</span></td></tr><tr><td>177</td><td><span>        tb[</span><span style="color:#bf616a;">getposition</span><span>(ti)]=</span><span style="color:#d08770;">1</span><span>;
+</span></td></tr><tr><td>178</td><td><span>
+</span></td></tr><tr><td>179</td><td><span>        </span><span style="color:#b48ead;">while</span><span>(n)
+</span></td></tr><tr><td>180</td><td><span>        {
+</span></td></tr><tr><td>181</td><td><span>                n=</span><span style="color:#d08770;">0</span><span>;
+</span></td></tr><tr><td>182</td><td><span>                </span><span style="color:#b48ead;">for</span><span>(</span><span style="color:#b48ead;">int</span><span> i=</span><span style="color:#d08770;">0</span><span>;i&lt;tl;i++){
+</span></td></tr><tr><td>183</td><td><span>                        </span><span style="color:#b48ead;">if</span><span>( tb[i]==l )
+</span></td></tr><tr><td>184</td><td><span>                        {
+</span></td></tr><tr><td>185</td><td><span>                                </span><span style="color:#bf616a;">setposition</span><span>(ti,i);
+</span></td></tr><tr><td>186</td><td><span>                                </span><span style="color:#b48ead;">for</span><span>( </span><span style="color:#b48ead;">int</span><span> f=</span><span style="color:#d08770;">0</span><span>; f&lt;</span><span style="color:#d08770;">6</span><span>; f++)
+</span></td></tr><tr><td>187</td><td><span>                                {
+</span></td></tr><tr><td>188</td><td><span>                                        </span><span style="color:#b48ead;">for</span><span>( </span><span style="color:#b48ead;">int</span><span> q=</span><span style="color:#d08770;">1</span><span>;q&lt;</span><span style="color:#d08770;">4</span><span>;q++)
+</span></td></tr><tr><td>189</td><td><span>                                        {
+</span></td></tr><tr><td>190</td><td><span>                                                </span><span style="color:#bf616a;">domove</span><span>(f);
+</span></td></tr><tr><td>191</td><td><span>                                                </span><span style="color:#b48ead;">int</span><span> r=</span><span style="color:#bf616a;">getposition</span><span>(ti);
+</span></td></tr><tr><td>192</td><td><span>                                                </span><span style="color:#b48ead;">if</span><span>( ( q==</span><span style="color:#d08770;">2 </span><span>|| f&gt;=(ti&amp;</span><span style="color:#d08770;">6</span><span>) ) &amp;&amp; !tb[r])
+</span></td></tr><tr><td>193</td><td><span>                                                {
+</span></td></tr><tr><td>194</td><td><span>                                                        tb[r]=l+</span><span style="color:#d08770;">1</span><span>;
+</span></td></tr><tr><td>195</td><td><span>                                                        n++;
+</span></td></tr><tr><td>196</td><td><span>                                                }
+</span></td></tr><tr><td>197</td><td><span>                                        }
+</span></td></tr><tr><td>198</td><td><span>                                        </span><span style="color:#bf616a;">domove</span><span>(f);
+</span></td></tr><tr><td>199</td><td><span>                                }
+</span></td></tr><tr><td>200</td><td><span>                        }
+</span></td></tr><tr><td>201</td><td><span>                }
+</span></td></tr><tr><td>202</td><td><span>                l++;
+</span></td></tr><tr><td>203</td><td><span>        }
+</span></td></tr><tr><td>204</td><td><span>}
+</span></td></tr><tr><td>205</td><td><span>
+</span></td></tr><tr><td>206</td><td><span style="color:#b48ead;">bool </span><span style="color:#8fa1b3;">searchphase</span><span>(</span><span style="color:#b48ead;">int </span><span style="color:#bf616a;">movesleft</span><span>, </span><span style="color:#b48ead;">int </span><span style="color:#bf616a;">movesdone</span><span>,</span><span style="color:#b48ead;">int </span><span style="color:#bf616a;">lastmove</span><span>)
+</span></td></tr><tr><td>207</td><td><span>{
+</span></td></tr><tr><td>208</td><td><span>        </span><span style="color:#b48ead;">if</span><span>( tables[phase  ][</span><span style="color:#bf616a;">getposition</span><span>(phase  )]-</span><span style="color:#d08770;">1 </span><span>&gt; movesleft ||
+</span></td></tr><tr><td>209</td><td><span>            tables[phase+</span><span style="color:#d08770;">1</span><span>][</span><span style="color:#bf616a;">getposition</span><span>(phase+</span><span style="color:#d08770;">1</span><span>)]-</span><span style="color:#d08770;">1 </span><span>&gt; movesleft ) </span><span style="color:#b48ead;">return </span><span style="color:#d08770;">false</span><span>;
+</span></td></tr><tr><td>210</td><td><span>
+</span></td></tr><tr><td>211</td><td><span>        </span><span style="color:#b48ead;">if</span><span>(!movesleft) </span><span style="color:#b48ead;">return </span><span style="color:#d08770;">true</span><span>;
+</span></td></tr><tr><td>212</td><td><span>
+</span></td></tr><tr><td>213</td><td><span>        </span><span style="color:#b48ead;">for</span><span>( </span><span style="color:#b48ead;">int</span><span> i=</span><span style="color:#d08770;">6</span><span>;i--;){
+</span></td></tr><tr><td>214</td><td><span>                </span><span style="color:#b48ead;">if</span><span>( i-lastmove &amp;&amp; (i-lastmove+</span><span style="color:#d08770;">1 </span><span>|| i|</span><span style="color:#d08770;">1 </span><span>) )
+</span></td></tr><tr><td>215</td><td><span>                {
+</span></td></tr><tr><td>216</td><td><span>                        movecube[movesdone]=i;
+</span></td></tr><tr><td>217</td><td><span>                        </span><span style="color:#b48ead;">for</span><span>(</span><span style="color:#b48ead;">int</span><span> j=</span><span style="color:#d08770;">0</span><span>;++j&lt;</span><span style="color:#d08770;">4</span><span>;){
+</span></td></tr><tr><td>218</td><td><span>                                </span><span style="color:#bf616a;">domove</span><span>(i);
+</span></td></tr><tr><td>219</td><td><span>                                moveamount[movesdone]=j;
+</span></td></tr><tr><td>220</td><td><span>                                </span><span style="color:#b48ead;">if</span><span>( (j==</span><span style="color:#d08770;">2 </span><span>|| i&gt;=phase ) &amp;&amp;
+</span></td></tr><tr><td>221</td><td><span>                                        </span><span style="color:#bf616a;">searchphase</span><span>(movesleft-</span><span style="color:#d08770;">1</span><span>,movesdone+</span><span style="color:#d08770;">1</span><span>,i) ) </span><span style="color:#b48ead;">return </span><span style="color:#d08770;">true</span><span>;
+</span></td></tr><tr><td>222</td><td><span>                        }
+</span></td></tr><tr><td>223</td><td><span>                        </span><span style="color:#bf616a;">domove</span><span>(i);
+</span></td></tr><tr><td>224</td><td><span>                }
+</span></td></tr><tr><td>225</td><td><span>        }
+</span></td></tr><tr><td>226</td><td><span>        </span><span style="color:#b48ead;">return </span><span style="color:#d08770;">false</span><span>;
+</span></td></tr><tr><td>227</td><td><span>}
+</span></td></tr><tr><td>228</td><td><span>
+</span></td></tr><tr><td>229</td><td><span style="color:#b48ead;">int </span><span style="color:#8fa1b3;">check</span><span>()
+</span></td></tr><tr><td>230</td><td><span>{
+</span></td></tr><tr><td>231</td><td><span>        </span><span style="color:#b48ead;">for</span><span>(</span><span style="color:#b48ead;">int</span><span> i=</span><span style="color:#d08770;">0</span><span>;i&lt;answer.</span><span style="color:#bf616a;">length</span><span>()-</span><span style="color:#d08770;">2</span><span>;i+=</span><span style="color:#d08770;">2</span><span>)
+</span></td></tr><tr><td>232</td><td><span>        {
+</span></td></tr><tr><td>233</td><td><span>                </span><span style="color:#b48ead;">if</span><span>(answer[i] == answer[i+</span><span style="color:#d08770;">2</span><span>])
+</span></td></tr><tr><td>234</td><td><span>                {
+</span></td></tr><tr><td>235</td><td><span>                        answer[i+</span><span style="color:#d08770;">1</span><span>]=(answer[i+</span><span style="color:#d08770;">1</span><span>]+answer[i+</span><span style="color:#d08770;">3</span><span>])%</span><span style="color:#d08770;">4</span><span>+&#39;</span><span style="color:#a3be8c;">0</span><span>&#39;;
+</span></td></tr><tr><td>236</td><td><span>                        answer.</span><span style="color:#bf616a;">erase</span><span>(i+</span><span style="color:#d08770;">2</span><span>,</span><span style="color:#d08770;">2</span><span>);
+</span></td></tr><tr><td>237</td><td><span>                }
+</span></td></tr><tr><td>238</td><td><span>        }
+</span></td></tr><tr><td>239</td><td><span>        </span><span style="color:#b48ead;">return </span><span style="color:#d08770;">1</span><span>;
+</span></td></tr><tr><td>240</td><td><span>}
+</span></td></tr><tr><td>241</td><td><span>
+</span></td></tr><tr><td>242</td><td><span style="color:#b48ead;">int </span><span style="color:#8fa1b3;">solveCube</span><span>(string </span><span style="color:#bf616a;">state</span><span>[])</span><span style="color:#65737e;">//调用入口
+</span></td></tr><tr><td>243</td><td><span>{
+</span></td></tr><tr><td>244</td><td><span>        </span><span style="color:#b48ead;">int</span><span> f,i=</span><span style="color:#d08770;">0</span><span>,j=</span><span style="color:#d08770;">0</span><span>,k=</span><span style="color:#d08770;">0</span><span>,pc,mor;
+</span></td></tr><tr><td>245</td><td><span>        </span><span style="color:#b48ead;">for</span><span>(; k&lt;</span><span style="color:#d08770;">20</span><span>; k++) val[k]=k&lt;</span><span style="color:#d08770;">12</span><span>?</span><span style="color:#d08770;">2</span><span>:</span><span style="color:#d08770;">3</span><span>;
+</span></td></tr><tr><td>246</td><td><span>        </span><span style="color:#b48ead;">for</span><span>(; j&lt;</span><span style="color:#d08770;">8</span><span>; j++) </span><span style="color:#bf616a;">filltable</span><span>(j);
+</span></td></tr><tr><td>247</td><td><span>
+</span></td></tr><tr><td>248</td><td><span>        </span><span style="color:#b48ead;">for</span><span>(; i&lt;</span><span style="color:#d08770;">20</span><span>; i++)
+</span></td></tr><tr><td>249</td><td><span>        {
+</span></td></tr><tr><td>250</td><td><span>                f=pc=k=mor=</span><span style="color:#d08770;">0</span><span>; 
+</span></td></tr><tr><td>251</td><td><span>                </span><span style="color:#b48ead;">for</span><span>(;f&lt;val[i];f++)
+</span></td></tr><tr><td>252</td><td><span>                {
+</span></td></tr><tr><td>253</td><td><span>                        j=</span><span style="color:#96b5b4;">strchr</span><span>(faces,state[i][f])-faces;
+</span></td></tr><tr><td>254</td><td><span>                        </span><span style="color:#b48ead;">if</span><span>(j&gt;k) {k=j;mor=f;}
+</span></td></tr><tr><td>255</td><td><span>                        pc+= </span><span style="color:#d08770;">1</span><span>&lt;&lt;j;
+</span></td></tr><tr><td>256</td><td><span>                }
+</span></td></tr><tr><td>257</td><td><span>                </span><span style="color:#b48ead;">for</span><span>(f=</span><span style="color:#d08770;">0</span><span>; f&lt;</span><span style="color:#d08770;">20</span><span>; f++)
+</span></td></tr><tr><td>258</td><td><span>                        </span><span style="color:#b48ead;">if</span><span>( pc==bithash[f]-</span><span style="color:#d08770;">64 </span><span>) </span><span style="color:#b48ead;">break</span><span>;
+</span></td></tr><tr><td>259</td><td><span>                pos[order[i]-CHAROFFSET]=f;
+</span></td></tr><tr><td>260</td><td><span>                ori[order[i]-CHAROFFSET]=mor%val[i];
+</span></td></tr><tr><td>261</td><td><span>        }
+</span></td></tr><tr><td>262</td><td><span>
+</span></td></tr><tr><td>263</td><td><span>        </span><span style="color:#b48ead;">for</span><span>( ; phase&lt;</span><span style="color:#d08770;">8</span><span>; phase+=</span><span style="color:#d08770;">2</span><span>)
+</span></td></tr><tr><td>264</td><td><span>        {
+</span></td></tr><tr><td>265</td><td><span>                </span><span style="color:#b48ead;">for</span><span>( j=</span><span style="color:#d08770;">0</span><span>; !</span><span style="color:#bf616a;">searchphase</span><span>(j,</span><span style="color:#d08770;">0</span><span>,</span><span style="color:#d08770;">9</span><span>); j++);
+</span></td></tr><tr><td>266</td><td><span>                </span><span style="color:#b48ead;">for</span><span>( i=</span><span style="color:#d08770;">0</span><span>; i&lt;j; i++)
+</span></td></tr><tr><td>267</td><td><span>                {
+</span></td></tr><tr><td>268</td><td><span>                        answer += &quot;</span><span style="color:#a3be8c;">FBRLUD</span><span>&quot;[movecube[i]];
+</span></td></tr><tr><td>269</td><td><span>                        answer += (moveamount[i] + &#39;</span><span style="color:#a3be8c;">0</span><span>&#39;);
+</span></td></tr><tr><td>270</td><td><span>                }
+</span></td></tr><tr><td>271</td><td><span>
+</span></td></tr><tr><td>272</td><td><span>        }
+</span></td></tr><tr><td>273</td><td><span>        cout&lt;&lt;endl&lt;&lt;&quot;</span><span style="color:#a3be8c;">answer:</span><span>&quot;&lt;&lt;answer&lt;&lt;endl;
+</span></td></tr><tr><td>274</td><td><span>        </span><span style="color:#bf616a;">check</span><span>();
+</span></td></tr><tr><td>275</td><td><span>        cout&lt;&lt;&quot;</span><span style="color:#a3be8c;">checking......</span><span style="color:#96b5b4;">\n</span><span style="color:#a3be8c;">answer:</span><span>&quot;&lt;&lt;answer&lt;&lt;endl;
+</span></td></tr><tr><td>276</td><td><span>        </span><span style="color:#b48ead;">return </span><span style="color:#d08770;">1</span><span>;
+</span></td></tr><tr><td>277</td><td><span>        cout&lt;&lt;&quot;</span><span style="color:#a3be8c;">send command</span><span>&quot;&lt;&lt;endl;
+</span></td></tr><tr><td>278</td><td><span>
+</span></td></tr><tr><td>279</td><td><span>}
+</span></td></tr></tbody></table></code></pre>
+
+    </div>
+
+    
+    <div class="article-info">
+        
+        <div class="article-date">12 October 2016</div>
+        
+        <div class="article-taxonomies">
+            
+            
+                <ul class="article-tags">
+                    
+                    <li><a href="https://abrahum.link/tags/mo-fang/">#魔方</a></li>
+                    
+                    <li><a href="https://abrahum.link/tags/cpp/">#Cpp</a></li>
+                    
+                    <li><a href="https://abrahum.link/tags/python/">#Python</a></li>
+                    
+                </ul>
+            
+        </div>
+    </div>
+
+</article>
+
+<script src="https://utteranc.es/client.js"
+    repo="abrahum/abrahum.github.io"
+    issue-term="pathname"
+    theme="github-light"
+    crossorigin="anonymous"
+    async>
+</script>
+
+        </main>
+        <footer>
+            <p>
+                © Abrahum Link 2024<br>
+                Powered by <a target="_blank" href="https://getzola.org/">Zola</a>, Theme Link.
+            </p>
+            <p>
+                
+                
+            </p>
+        </footer>
+    </div>
+</body>
+</html>

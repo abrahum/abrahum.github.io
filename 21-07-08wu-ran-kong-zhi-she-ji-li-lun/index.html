@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+
+    <title>污染控制设计理论</title>
+    <meta name="description" content="">
+
+    <link rel="stylesheet" href="https://abrahum.link/main.css">
+
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.15.1/katex.min.css" integrity="sha384-R4558gYOUz8mP9YWpZJjofhk+zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs" crossorigin="anonymous">
+    <script defer src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.15.1/katex.min.js" integrity="sha384-z1fJDqw8ZApjGO3/unPWUPsIymfsJmyrDVWC8Tv/a1HeOtGmkwNd/7xUS0Xcnvsx" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.15.1/contrib/auto-render.min.js" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+              // customised options
+              // • auto-render specific keys, e.g.:
+              delimiters: [
+                  {left: '$$', right: '$$', display: true},
+                  {left: '$', right: '$', display: false},
+                  {left: '\\(', right: '\\)', display: false},
+                  {left: '\\[', right: '\\]', display: true}
+              ],
+              // • rendering keys, e.g.:
+              throwOnError : false
+            });
+        });
+    </script>
+
+    
+
+    
+    
+</head>
+<body>
+    <a class="skip-main" href="#main">Skip to content</a>
+    <div class="container">
+        <header> 
+            <h1 class="site-header">
+                <a href="https:&#x2F;&#x2F;abrahum.link">Abrahum Link</a>
+            </h1> 
+            <nav>
+                
+                    
+                        
+                        <a  href="https:&#x2F;&#x2F;abrahum.link&#x2F;tags">Tags</a>
+                    
+                        
+                        <a  href="https:&#x2F;&#x2F;abrahum.link&#x2F;about">About</a>
+                    
+                        
+                        <a  href="https:&#x2F;&#x2F;github.com&#x2F;abrahum">GitHub</a>
+                    
+                
+            </nav>
+        </header>
+        <main id="main" tabindex="-1">
+            
+
+<article class="post">
+    <header>
+        <h1>污染控制设计理论</h1>
+    </header>
+    <div class="content">
+        <p><em>大气污染控制设计理论学习备忘</em></p>
+<span id="continue-reading"></span><h2 id="wu-zhi-kuo-san-li-lun">物质扩散理论</h2>
+<h3 id="wu-liao-heng-suan">物料衡算</h3>
+<p>物料衡量即一句质量守恒定律：[输入的物料量]=[输出的物料量]+[积累的物料量]</p>
+<p>如果存在化学反应，则有：[输入的物料量]±[反应生成或消耗的物料量]=[输出的物料量]+[积累的物料量]</p>
+<p>若体系为稳定状态，则不存在积累的物料量：[输入的物料量]±[反应生成或消耗的物料量]=[输出的物料量]</p>
+<p>物料衡算的基本方法：</p>
+<ol>
+<li>确定衡算体系</li>
+<li>收集计算数据，统一单位制</li>
+<li>画出物料流程简图</li>
+<li>写出化学反应方程</li>
+<li>选择合适的计算基准</li>
+<li>列出物料衡算式</li>
+</ol>
+<h3 id="qi-ti-kuo-san">气体扩散</h3>
+<p>假设混合物存在 A、B 两个组分，在恒定温度、压力下，两组分扩散服从费克定律：</p>
+<p>$$N_{A}=-D_{AB}\frac{dC_{A}}{dZ}$$</p>
+<ul>
+<li>$N_{A}$ ：A 组分在 z 方向的扩散通量，量纲为 $kmol/(m^{2} \cdot s)$</li>
+<li>$C_{A}$ ：A 组分的摩尔浓度，$kmol/m^{3}$</li>
+<li>$Z$ ：z 方向上的距离</li>
+<li>$D_{AB}$ ：A 组分在 A、B 两组分混合物种的扩散系数，$m^{2}/s$</li>
+<li>$\frac{dC_{A}}{dZ}$ ：浓度梯度</li>
+</ul>
+<p>气体在气相中的扩散系数可以通过修正的吉里兰方程计算得出：</p>
+<p>$$D_{AB}=1.8 \times 10^{-4} \times \frac{ \sqrt{T} }{ \sqrt{\overline{V} _ {A}}+\sqrt{\overline{V} _ {B}}}\times\frac{M _ {A}}{\rho _ {A}}\sqrt{\frac{1}{M _ {A}}+\frac{1}{M _ {B}}}$$</p>
+<ul>
+<li>$T$ ：温度，$K$</li>
+<li>$M$ ：气体摩尔质量，$g/mol$</li>
+<li>$\overline{V}$ ：气体在沸点下呈液态时的摩尔体积，$cm^{3}/mol$</li>
+<li>$\rho_{A}$ ：气体密度，$g/cm^{3}$</li>
+</ul>
+<p>气体 A 在液相 B 中的扩散可以通过下式计算：</p>
+<p>$$D_{AB}=7.4\times10^{-10}\frac{T\sqrt{\beta M_{B}}}{\mu_{B}\overline{V}_{A}^{0.6}}$$</p>
+<ul>
+<li>$\mu_{B}$ ：溶液的黏度，$mPa\cdot s$</li>
+<li>$\beta$ ：溶剂的缔结因数</li>
+</ul>
+<table><thead><tr><th style="text-align: center">液体B</th><th style="text-align: center">缔结因数</th></tr></thead><tbody>
+<tr><td style="text-align: center">水</td><td style="text-align: center">2.6</td></tr>
+<tr><td style="text-align: center">甲醇</td><td style="text-align: center">1.9</td></tr>
+<tr><td style="text-align: center">乙醇</td><td style="text-align: center">1.5</td></tr>
+<tr><td style="text-align: center">非缔结溶剂，如苯、乙醚</td><td style="text-align: center">1</td></tr>
+</tbody></table>
+<h2 id="xi-shou-fa-jing-hua-li-lun">吸收法净化理论</h2>
+<p>当回合气体和吸收剂接触时，气相中的可吸收组分会向液相进行质量传递，成为吸收过程；同时液相中被吸收的组分也会向气相溢出，称为解吸过程；温度压力一定，当吸收和解吸的速率达成相等，物质传递达成动态平衡，此时气体在液相中的浓度即为当前温度压力下的溶解度。</p>
+<p>当温度一定、总压小于5个大气压时，气液平衡关系可以用亨利定律来描述：</p>
+<p>$$C=Hp^{*}$$
+$${x=\frac{p^{ * }}{E}}$$
+$$or\qquad\qquad y^{ * }=mx\qquad\qquad\quad$$</p>
+<ul>
+<li>$p^{*}$ ：溶质组分在气相中的分压，$Pa$</li>
+<li>$C$ ：平衡时的体积摩尔浓度， $mol/m^{3}$</li>
+<li>$H$ ：亨利系数之一， $mol/(m^{3}\cdot Pa)$</li>
+<li>$x$ ：平衡浓度， 摩尔分数，无量纲</li>
+<li>$E$ ：亨利系数之二，单位与分压单位一致</li>
+<li>$y^{*}$ ：溶质组分在气相中的摩尔分数，无量纲</li>
+<li>$m$ ：相平衡常数，气相中组分的摩尔分数与其液相中的摩尔分数的比值，无量纲 $m=\frac{E}{P}$</li>
+</ul>
+<blockquote>
+<p>亨利常数之间的关系：
+$$H=\frac{C _ {总}}{E}=\frac{\rho}{(M _ {A}x _ {A}+M _ {s}x _ {s})E}$$</p>
+<ul>
+<li>$M_{A}$：溶质的摩尔质量，$g/mol$</li>
+<li>$M_{s}$：溶液的摩尔质量，$g/mol$</li>
+<li>$x_{A}$：溶质的摩尔分数</li>
+<li>$x_{s}$：溶质的摩尔分数
+稀溶液中可以近似为下式：
+$${H=\frac{\rho_{s}}{M_{s}E}}$$</li>
+</ul>
+</blockquote>
+<p>当使用化学吸收法时，此时的总溶解量由两部分组成：</p>
+<p>$$C_{A}=[A] _ {物料平衡}+[A] _ {化学平衡}$$</p>
+<p>对于如下反应：</p>
+<p>$$\begin{align}
+&amp;aA _ {(气)} \tag{}\\
+&amp;\ \Updownarrow\tag{}\\
+&amp;\ce{aA_{(液)} + bB &lt;=&gt; mM + nN \tag{}}\\
+\end{align} $$</p>
+<p>有物理平衡：$[A] _ {物理平衡}=H _ {A}p _ {A}^{*}$</p>
+<p>有化学平衡：$K=\frac{[M] ^ {m} [N] ^ n}{[A] ^ {a}[B] ^ {b}}$</p>
+<h2 id="xi-shou-su-lu">吸收速率</h2>
+<p><em>To-Do</em></p>
+
+    </div>
+
+    
+    <div class="article-info">
+        
+        <div class="article-date"> 8 July 2021</div>
+        
+        <div class="article-taxonomies">
+            
+            
+                <ul class="article-tags">
+                    
+                    <li><a href="https://abrahum.link/tags/ji-jie/">#机械</a></li>
+                    
+                    <li><a href="https://abrahum.link/tags/yan-qi-chu-li/">#烟气处理</a></li>
+                    
+                </ul>
+            
+        </div>
+    </div>
+
+</article>
+
+<script src="https://utteranc.es/client.js"
+    repo="abrahum/abrahum.github.io"
+    issue-term="pathname"
+    theme="github-light"
+    crossorigin="anonymous"
+    async>
+</script>
+
+        </main>
+        <footer>
+            <p>
+                © Abrahum Link 2024<br>
+                Powered by <a target="_blank" href="https://getzola.org/">Zola</a>, Theme Link.
+            </p>
+            <p>
+                
+                
+            </p>
+        </footer>
+    </div>
+</body>
+</html>

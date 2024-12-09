@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+
+    <title>go语言学习笔记</title>
+    <meta name="description" content="">
+
+    <link rel="stylesheet" href="https://abrahum.link/main.css">
+
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.15.1/katex.min.css" integrity="sha384-R4558gYOUz8mP9YWpZJjofhk+zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs" crossorigin="anonymous">
+    <script defer src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.15.1/katex.min.js" integrity="sha384-z1fJDqw8ZApjGO3/unPWUPsIymfsJmyrDVWC8Tv/a1HeOtGmkwNd/7xUS0Xcnvsx" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.15.1/contrib/auto-render.min.js" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+              // customised options
+              // • auto-render specific keys, e.g.:
+              delimiters: [
+                  {left: '$$', right: '$$', display: true},
+                  {left: '$', right: '$', display: false},
+                  {left: '\\(', right: '\\)', display: false},
+                  {left: '\\[', right: '\\]', display: true}
+              ],
+              // • rendering keys, e.g.:
+              throwOnError : false
+            });
+        });
+    </script>
+
+    
+
+    
+    
+</head>
+<body>
+    <a class="skip-main" href="#main">Skip to content</a>
+    <div class="container">
+        <header> 
+            <h1 class="site-header">
+                <a href="https:&#x2F;&#x2F;abrahum.link">Abrahum Link</a>
+            </h1> 
+            <nav>
+                
+                    
+                        
+                        <a  href="https:&#x2F;&#x2F;abrahum.link&#x2F;tags">Tags</a>
+                    
+                        
+                        <a  href="https:&#x2F;&#x2F;abrahum.link&#x2F;about">About</a>
+                    
+                        
+                        <a  href="https:&#x2F;&#x2F;github.com&#x2F;abrahum">GitHub</a>
+                    
+                
+            </nav>
+        </header>
+        <main id="main" tabindex="-1">
+            
+
+<article class="post">
+    <header>
+        <h1>go语言学习笔记</h1>
+    </header>
+    <div class="content">
+        <p>开始学习 Golang 的语法。</p>
+<p>主要记录 go 和 python 的异同点，随便写写，以供自励。</p>
+<span id="continue-reading"></span><h2 id="bao-guan-li">包管理</h2>
+<p>同一文件夹下的文件均应属于同一<code>package</code>，同一包下的文件不需要<code>import</code>即可直接调用，同一内应有且只有一个<code>main</code>函数。</p>
+<p>只有以大写字母开头的变量/函数/结构体包外可见，包内无影响。</p>
+<h2 id="bian-liang-lei-xing">变量类型</h2>
+<p>基本类型：布尔、整数、浮点、字符串等</p>
+<p>引用类型：切片(<code>slice</code>)、map、接口(<code>interface</code>)、函数类型(<code>func</code>)、<code>chan</code>；引用类型的本质是在传递时传递指针，所以引用中会改变变量原本的值。</p>
+<p>需要注意 Go 是强类型语言，且不会做隐形转化，所以<code>0!=false</code></p>
+<pre data-linenos data-lang="go" style="background-color:#2b303b;color:#c0c5ce;" class="language-go "><code class="language-go" data-lang="go"><table><tbody><tr><td>1</td><td><span style="color:#b48ead;">package </span><span style="color:#bf616a;">main
+</span></td></tr><tr><td>2</td><td><span>
+</span></td></tr><tr><td>3</td><td><span style="color:#b48ead;">import </span><span>(
+</span></td></tr><tr><td>4</td><td><span>    &quot;</span><span style="color:#a3be8c;">fmt</span><span>&quot;
+</span></td></tr><tr><td>5</td><td><span>    &quot;</span><span style="color:#a3be8c;">math</span><span>&quot;
+</span></td></tr><tr><td>6</td><td><span>    &quot;</span><span style="color:#a3be8c;">reflect</span><span>&quot;
+</span></td></tr><tr><td>7</td><td><span>)
+</span></td></tr><tr><td>8</td><td><span>
+</span></td></tr><tr><td>9</td><td><span style="color:#b48ead;">var </span><span style="color:#bf616a;">a_bool </span><span style="color:#b48ead;">bool          </span><span style="color:#65737e;">// true or false 全局变量声明必须以 var 关键字开头
+</span></td></tr><tr><td>10</td><td><span style="color:#b48ead;">var </span><span style="color:#bf616a;">A_can_be_import </span><span style="color:#b48ead;">bool </span><span style="color:#65737e;">// 如果想要在外部包中使用全局变量的首字母必须大写
+</span></td></tr><tr><td>11</td><td><span style="color:#b48ead;">var </span><span>(
+</span></td></tr><tr><td>12</td><td><span>    </span><span style="color:#bf616a;">a_string  </span><span style="color:#b48ead;">string
+</span></td></tr><tr><td>13</td><td><span>    </span><span style="color:#bf616a;">a_int     </span><span style="color:#b48ead;">int     </span><span style="color:#65737e;">// int8 int16 int32 int64 有符号整数
+</span></td></tr><tr><td>14</td><td><span>    </span><span style="color:#bf616a;">a_uint    </span><span style="color:#b48ead;">uint    </span><span style="color:#65737e;">// uint8 uint16 uint32 uint64 无符号整数
+</span></td></tr><tr><td>15</td><td><span>    </span><span style="color:#bf616a;">a_uintprt </span><span style="color:#b48ead;">uintptr </span><span style="color:#65737e;">// uintptr 无符号整数，容纳指针，仅用于底层编程
+</span></td></tr><tr><td>16</td><td><span>    </span><span style="color:#bf616a;">a_byte    </span><span style="color:#b48ead;">byte    </span><span style="color:#65737e;">// byte == uint8
+</span></td></tr><tr><td>17</td><td><span>    </span><span style="color:#bf616a;">a_rune    </span><span style="color:#b48ead;">rune    </span><span style="color:#65737e;">// rune == int32  an Unicode code
+</span></td></tr><tr><td>18</td><td><span>    </span><span style="color:#bf616a;">a_float32 </span><span style="color:#b48ead;">float32 </span><span style="color:#65737e;">// float32 or float64
+</span></td></tr><tr><td>19</td><td><span>    </span><span style="color:#bf616a;">a_pointer </span><span>*</span><span style="color:#b48ead;">int    </span><span>= &amp;</span><span style="color:#bf616a;">a_int
+</span></td></tr><tr><td>20</td><td><span>)
+</span></td></tr><tr><td>21</td><td><span>
+</span></td></tr><tr><td>22</td><td><span style="color:#b48ead;">const </span><span style="color:#bf616a;">A_const </span><span>= </span><span style="color:#d08770;">1e11 </span><span style="color:#65737e;">// 常量
+</span></td></tr><tr><td>23</td><td><span>
+</span></td></tr><tr><td>24</td><td><span style="color:#b48ead;">func </span><span style="color:#8fa1b3;">b_func</span><span>() </span><span style="color:#b48ead;">bool </span><span>{
+</span></td></tr><tr><td>25</td><td><span>    </span><span style="color:#bf616a;">b_bool </span><span>:= </span><span style="color:#d08770;">false </span><span style="color:#65737e;">// only inside func
+</span></td></tr><tr><td>26</td><td><span>    </span><span style="color:#b48ead;">return </span><span style="color:#bf616a;">b_bool
+</span></td></tr><tr><td>27</td><td><span>}
+</span></td></tr><tr><td>28</td><td><span>
+</span></td></tr><tr><td>29</td><td><span style="color:#b48ead;">func </span><span style="color:#8fa1b3;">main</span><span>() {
+</span></td></tr><tr><td>30</td><td><span>    </span><span style="color:#b48ead;">var </span><span style="color:#bf616a;">attack </span><span>= </span><span style="color:#d08770;">40 </span><span style="color:#65737e;">// 局部变量
+</span></td></tr><tr><td>31</td><td><span>    </span><span style="color:#b48ead;">var </span><span style="color:#bf616a;">defence </span><span>= </span><span style="color:#d08770;">20
+</span></td></tr><tr><td>32</td><td><span>    </span><span style="color:#b48ead;">var </span><span style="color:#bf616a;">hitted </span><span>= </span><span style="color:#d08770;">false
+</span></td></tr><tr><td>33</td><td><span>    </span><span style="color:#b48ead;">var </span><span style="color:#bf616a;">missed </span><span>= </span><span style="color:#d08770;">true
+</span></td></tr><tr><td>34</td><td><span>    </span><span style="color:#b48ead;">var </span><span style="color:#bf616a;">hitormiss </span><span style="color:#b48ead;">bool
+</span></td></tr><tr><td>35</td><td><span>    </span><span style="color:#b48ead;">var </span><span style="color:#bf616a;">hitrate </span><span>= </span><span style="color:#d08770;">0.2
+</span></td></tr><tr><td>36</td><td><span>    </span><span style="color:#bf616a;">hitted </span><span>= !</span><span style="color:#bf616a;">missed                </span><span style="color:#65737e;">// NOT
+</span></td></tr><tr><td>37</td><td><span>    </span><span style="color:#bf616a;">hitormiss </span><span>= </span><span style="color:#bf616a;">hitted </span><span>&amp;&amp; </span><span style="color:#bf616a;">missed    </span><span style="color:#65737e;">// AND
+</span></td></tr><tr><td>38</td><td><span>    </span><span style="color:#bf616a;">hitormiss </span><span>= </span><span style="color:#bf616a;">hitormiss </span><span>|| </span><span style="color:#bf616a;">missed </span><span style="color:#65737e;">// OR
+</span></td></tr><tr><td>39</td><td><span>    </span><span style="color:#bf616a;">_ </span><span>= </span><span style="color:#bf616a;">attack </span><span>&amp; </span><span style="color:#bf616a;">defence            </span><span style="color:#65737e;">// 按位与 _匿名变量，赋值立即丢弃
+</span></td></tr><tr><td>40</td><td><span>    </span><span style="color:#bf616a;">_ </span><span>= </span><span style="color:#bf616a;">attack </span><span>| </span><span style="color:#bf616a;">defence            </span><span style="color:#65737e;">// 按位或
+</span></td></tr><tr><td>41</td><td><span>    </span><span style="color:#bf616a;">_ </span><span>= </span><span style="color:#bf616a;">attack </span><span>^ </span><span style="color:#bf616a;">defence            </span><span style="color:#65737e;">// 按位异或
+</span></td></tr><tr><td>42</td><td><span>    </span><span style="color:#bf616a;">_ </span><span>= </span><span style="color:#bf616a;">attack </span><span>&lt;&lt; </span><span style="color:#d08770;">2                 </span><span style="color:#65737e;">// 左移位
+</span></td></tr><tr><td>43</td><td><span>    </span><span style="color:#bf616a;">attack </span><span>&gt;&gt;= </span><span style="color:#d08770;">1                    </span><span style="color:#65737e;">// 右移位
+</span></td></tr><tr><td>44</td><td><span>    </span><span style="color:#bf616a;">attack</span><span>, </span><span style="color:#bf616a;">defence </span><span>= </span><span style="color:#bf616a;">defence</span><span>, </span><span style="color:#bf616a;">attack
+</span></td></tr><tr><td>45</td><td><span>    </span><span style="color:#b48ead;">var </span><span style="color:#bf616a;">hitrate_type </span><span>= </span><span style="color:#bf616a;">reflect</span><span>.</span><span style="color:#bf616a;">TypeOf</span><span>(</span><span style="color:#bf616a;">hitrate</span><span>) </span><span style="color:#65737e;">// float64
+</span></td></tr><tr><td>46</td><td><span>    </span><span style="color:#bf616a;">fmt</span><span>.</span><span style="color:#bf616a;">Println</span><span>(</span><span style="color:#bf616a;">attack</span><span>, </span><span style="color:#bf616a;">defence</span><span>, </span><span style="color:#bf616a;">hitrate_type</span><span>)
+</span></td></tr><tr><td>47</td><td><span>    </span><span style="color:#bf616a;">fmt</span><span>.</span><span style="color:#bf616a;">Printf</span><span>(&quot;</span><span style="color:#d08770;">%.9f</span><span style="color:#96b5b4;">\n</span><span>&quot;, </span><span style="color:#bf616a;">math</span><span>.</span><span style="color:#bf616a;">Pi</span><span>)
+</span></td></tr><tr><td>48</td><td><span>}
+</span></td></tr></tbody></table></code></pre>
+<h2 id="tiao-jian-yu-ju">条件语句</h2>
+<pre data-linenos data-lang="go" style="background-color:#2b303b;color:#c0c5ce;" class="language-go "><code class="language-go" data-lang="go"><table><tbody><tr><td>1</td><td><span style="color:#b48ead;">package </span><span style="color:#bf616a;">main
+</span></td></tr><tr><td>2</td><td><span>
+</span></td></tr><tr><td>3</td><td><span style="color:#b48ead;">import </span><span>&quot;</span><span style="color:#a3be8c;">fmt</span><span>&quot;
+</span></td></tr><tr><td>4</td><td><span>
+</span></td></tr><tr><td>5</td><td><span style="color:#b48ead;">func </span><span style="color:#8fa1b3;">main</span><span>() {
+</span></td></tr><tr><td>6</td><td><span>    </span><span style="color:#b48ead;">var </span><span style="color:#bf616a;">eatted </span><span>= </span><span style="color:#d08770;">false
+</span></td></tr><tr><td>7</td><td><span>    </span><span style="color:#b48ead;">var </span><span style="color:#bf616a;">later </span><span>= </span><span style="color:#d08770;">false
+</span></td></tr><tr><td>8</td><td><span>    </span><span style="color:#b48ead;">if </span><span style="color:#bf616a;">eatted </span><span>{
+</span></td></tr><tr><td>9</td><td><span>        </span><span style="color:#bf616a;">fmt</span><span>.</span><span style="color:#bf616a;">Println</span><span>(&quot;</span><span style="color:#a3be8c;">True</span><span>&quot;)
+</span></td></tr><tr><td>10</td><td><span>    } </span><span style="color:#b48ead;">else if </span><span style="color:#bf616a;">later </span><span>{
+</span></td></tr><tr><td>11</td><td><span>        </span><span style="color:#bf616a;">fmt</span><span>.</span><span style="color:#bf616a;">Println</span><span>(&quot;</span><span style="color:#a3be8c;">Later</span><span>&quot;)
+</span></td></tr><tr><td>12</td><td><span>    } </span><span style="color:#b48ead;">else </span><span>{
+</span></td></tr><tr><td>13</td><td><span>        </span><span style="color:#bf616a;">fmt</span><span>.</span><span style="color:#bf616a;">Println</span><span>(&quot;</span><span style="color:#a3be8c;">Not</span><span>&quot;)
+</span></td></tr><tr><td>14</td><td><span>    }
+</span></td></tr><tr><td>15</td><td><span>
+</span></td></tr><tr><td>16</td><td><span>    </span><span style="color:#b48ead;">var </span><span style="color:#bf616a;">a_int </span><span>= </span><span style="color:#d08770;">1
+</span></td></tr><tr><td>17</td><td><span>    </span><span style="color:#b48ead;">switch </span><span style="color:#bf616a;">a_int </span><span>{
+</span></td></tr><tr><td>18</td><td><span>    </span><span style="color:#b48ead;">case </span><span style="color:#d08770;">0</span><span>:
+</span></td></tr><tr><td>19</td><td><span>        </span><span style="color:#bf616a;">fmt</span><span>.</span><span style="color:#bf616a;">Println</span><span>(</span><span style="color:#d08770;">0</span><span>)
+</span></td></tr><tr><td>20</td><td><span>        </span><span style="color:#b48ead;">fallthrough </span><span style="color:#65737e;">// 强制执行下一个case，不会会判断
+</span></td></tr><tr><td>21</td><td><span>    </span><span style="color:#b48ead;">case </span><span style="color:#d08770;">1</span><span>:
+</span></td></tr><tr><td>22</td><td><span>        </span><span style="color:#bf616a;">fmt</span><span>.</span><span style="color:#bf616a;">Println</span><span>(</span><span style="color:#d08770;">1</span><span>)
+</span></td></tr><tr><td>23</td><td><span>    </span><span style="color:#b48ead;">case </span><span style="color:#d08770;">3</span><span>, </span><span style="color:#d08770;">4</span><span>:
+</span></td></tr><tr><td>24</td><td><span>        </span><span style="color:#bf616a;">fmt</span><span>.</span><span style="color:#bf616a;">Println</span><span>(</span><span style="color:#d08770;">3</span><span>)
+</span></td></tr><tr><td>25</td><td><span>    </span><span style="color:#b48ead;">default</span><span>:
+</span></td></tr><tr><td>26</td><td><span>        </span><span style="color:#bf616a;">fmt</span><span>.</span><span style="color:#bf616a;">Println</span><span>(&quot;</span><span style="color:#a3be8c;">Default</span><span>&quot;)
+</span></td></tr><tr><td>27</td><td><span>    }
+</span></td></tr><tr><td>28</td><td><span>
+</span></td></tr><tr><td>29</td><td><span>    </span><span style="color:#b48ead;">switch </span><span>{
+</span></td></tr><tr><td>30</td><td><span>    </span><span style="color:#b48ead;">case </span><span style="color:#d08770;">true</span><span>:
+</span></td></tr><tr><td>31</td><td><span>        </span><span style="color:#bf616a;">fmt</span><span>.</span><span style="color:#bf616a;">Println</span><span>(&quot;</span><span style="color:#a3be8c;">the default switch is true</span><span>&quot;) </span><span style="color:#65737e;">// true
+</span></td></tr><tr><td>32</td><td><span>    </span><span style="color:#b48ead;">case </span><span style="color:#d08770;">false</span><span>:
+</span></td></tr><tr><td>33</td><td><span>        </span><span style="color:#bf616a;">fmt</span><span>.</span><span style="color:#bf616a;">Println</span><span>(&quot;</span><span style="color:#a3be8c;">the default switch is false</span><span>&quot;)
+</span></td></tr><tr><td>34</td><td><span>    }
+</span></td></tr><tr><td>35</td><td><span>}
+</span></td></tr></tbody></table></code></pre>
+<h2 id="xun-huan">循环</h2>
+<pre data-linenos data-lang="go" style="background-color:#2b303b;color:#c0c5ce;" class="language-go "><code class="language-go" data-lang="go"><table><tbody><tr><td>1</td><td><span style="color:#b48ead;">package </span><span style="color:#bf616a;">main
+</span></td></tr><tr><td>2</td><td><span>
+</span></td></tr><tr><td>3</td><td><span style="color:#b48ead;">import </span><span>(
+</span></td></tr><tr><td>4</td><td><span>    &quot;</span><span style="color:#a3be8c;">fmt</span><span>&quot;
+</span></td></tr><tr><td>5</td><td><span>)
+</span></td></tr><tr><td>6</td><td><span>
+</span></td></tr><tr><td>7</td><td><span style="color:#b48ead;">func </span><span style="color:#8fa1b3;">main</span><span>() {
+</span></td></tr><tr><td>8</td><td><span>    </span><span style="color:#b48ead;">for </span><span style="color:#d08770;">true </span><span>{ </span><span style="color:#65737e;">// true can be omitted
+</span></td></tr><tr><td>9</td><td><span>        </span><span style="color:#bf616a;">fmt</span><span>.</span><span style="color:#bf616a;">Println</span><span>(&quot;</span><span style="color:#a3be8c;">This is a endless loop.</span><span>&quot;)
+</span></td></tr><tr><td>10</td><td><span>        </span><span style="color:#b48ead;">break </span><span style="color:#65737e;">// break the loop
+</span></td></tr><tr><td>11</td><td><span>    }
+</span></td></tr><tr><td>12</td><td><span>
+</span></td></tr><tr><td>13</td><td><span style="color:#bf616a;">LOOP</span><span>:
+</span></td></tr><tr><td>14</td><td><span>    </span><span style="color:#b48ead;">for </span><span style="color:#bf616a;">i </span><span>:= </span><span style="color:#d08770;">0</span><span>; </span><span style="color:#bf616a;">i </span><span>&lt; </span><span style="color:#d08770;">10</span><span>; </span><span style="color:#bf616a;">i</span><span>++ {
+</span></td></tr><tr><td>15</td><td><span>        </span><span style="color:#b48ead;">if </span><span style="color:#bf616a;">i </span><span>== </span><span style="color:#d08770;">0 </span><span>{
+</span></td></tr><tr><td>16</td><td><span>            </span><span style="color:#bf616a;">fmt</span><span>.</span><span style="color:#bf616a;">Println</span><span>(&quot;</span><span style="color:#a3be8c;">i==0 continue</span><span>&quot;)
+</span></td></tr><tr><td>17</td><td><span>            </span><span style="color:#b48ead;">continue </span><span style="color:#65737e;">// skip the rest continue next loop
+</span></td></tr><tr><td>18</td><td><span>        }
+</span></td></tr><tr><td>19</td><td><span>        </span><span style="color:#b48ead;">for </span><span style="color:#bf616a;">j </span><span>:= </span><span style="color:#d08770;">0</span><span>; </span><span style="color:#bf616a;">j </span><span>&lt;= </span><span style="color:#bf616a;">i</span><span>; </span><span style="color:#bf616a;">j</span><span>++ {
+</span></td></tr><tr><td>20</td><td><span>            </span><span style="color:#b48ead;">if </span><span style="color:#bf616a;">j </span><span>== </span><span style="color:#d08770;">0 </span><span>{
+</span></td></tr><tr><td>21</td><td><span>                </span><span style="color:#b48ead;">continue
+</span></td></tr><tr><td>22</td><td><span>            }
+</span></td></tr><tr><td>23</td><td><span>            </span><span style="color:#bf616a;">fmt</span><span>.</span><span style="color:#bf616a;">Printf</span><span>(&quot;</span><span style="color:#d08770;">%d</span><span style="color:#a3be8c;">*</span><span style="color:#d08770;">%d</span><span style="color:#a3be8c;">=</span><span style="color:#d08770;">%d </span><span>&quot;, </span><span style="color:#bf616a;">j</span><span>, </span><span style="color:#bf616a;">i</span><span>, </span><span style="color:#bf616a;">i</span><span>*</span><span style="color:#bf616a;">j</span><span>)
+</span></td></tr><tr><td>24</td><td><span>        }
+</span></td></tr><tr><td>25</td><td><span>        </span><span style="color:#bf616a;">fmt</span><span>.</span><span style="color:#bf616a;">Print</span><span>(&quot;</span><span style="color:#96b5b4;">\n</span><span>&quot;)
+</span></td></tr><tr><td>26</td><td><span>    }
+</span></td></tr><tr><td>27</td><td><span>
+</span></td></tr><tr><td>28</td><td><span>    </span><span style="color:#bf616a;">numbers </span><span>:= [</span><span style="color:#d08770;">5</span><span>]</span><span style="color:#b48ead;">int</span><span>{</span><span style="color:#d08770;">1</span><span>, </span><span style="color:#d08770;">3</span><span>, </span><span style="color:#d08770;">5</span><span>, </span><span style="color:#d08770;">7</span><span>}
+</span></td></tr><tr><td>29</td><td><span>    </span><span style="color:#b48ead;">for </span><span style="color:#bf616a;">i</span><span>, </span><span style="color:#bf616a;">x </span><span>:= </span><span style="color:#b48ead;">range </span><span style="color:#bf616a;">numbers </span><span>{
+</span></td></tr><tr><td>30</td><td><span>        </span><span style="color:#bf616a;">fmt</span><span>.</span><span style="color:#bf616a;">Printf</span><span>(&quot;</span><span style="color:#a3be8c;">the list-</span><span style="color:#d08770;">%d</span><span style="color:#a3be8c;"> is </span><span style="color:#d08770;">%d</span><span style="color:#96b5b4;">\n</span><span>&quot;, </span><span style="color:#bf616a;">i</span><span>, </span><span style="color:#bf616a;">x</span><span>)
+</span></td></tr><tr><td>31</td><td><span>    }
+</span></td></tr><tr><td>32</td><td><span>
+</span></td></tr><tr><td>33</td><td><span>    </span><span style="color:#b48ead;">goto </span><span style="color:#bf616a;">LOOP </span><span style="color:#65737e;">// Not recommend
+</span></td></tr><tr><td>34</td><td><span>}
+</span></td></tr></tbody></table></code></pre>
+<h2 id="qie-pian-shu-zu-map">切片/数组/Map</h2>
+<pre data-linenos data-lang="go" style="background-color:#2b303b;color:#c0c5ce;" class="language-go "><code class="language-go" data-lang="go"><table><tbody><tr><td>1</td><td><span style="color:#b48ead;">package </span><span style="color:#bf616a;">main
+</span></td></tr><tr><td>2</td><td><span>
+</span></td></tr><tr><td>3</td><td><span style="color:#b48ead;">import </span><span>(
+</span></td></tr><tr><td>4</td><td><span>    </span><span style="color:#bf616a;">F </span><span>&quot;</span><span style="color:#a3be8c;">fmt</span><span>&quot;
+</span></td></tr><tr><td>5</td><td><span>)
+</span></td></tr><tr><td>6</td><td><span>
+</span></td></tr><tr><td>7</td><td><span style="color:#b48ead;">func </span><span style="color:#8fa1b3;">aSlice</span><span>() {
+</span></td></tr><tr><td>8</td><td><span>    </span><span style="color:#b48ead;">var </span><span style="color:#bf616a;">aIntSlice </span><span>[]</span><span style="color:#b48ead;">int </span><span>= </span><span style="color:#96b5b4;">make</span><span>([]</span><span style="color:#b48ead;">int</span><span>, </span><span style="color:#d08770;">5</span><span>)
+</span></td></tr><tr><td>9</td><td><span>    </span><span style="color:#65737e;">// or
+</span></td></tr><tr><td>10</td><td><span>    </span><span style="color:#bf616a;">aFloat32Slice </span><span>:= </span><span style="color:#96b5b4;">make</span><span>([]</span><span style="color:#b48ead;">float32</span><span>, </span><span style="color:#d08770;">2</span><span>)
+</span></td></tr><tr><td>11</td><td><span>    </span><span style="color:#bf616a;">aBoolSlice </span><span>:= []</span><span style="color:#b48ead;">bool</span><span>{</span><span style="color:#d08770;">true</span><span>, </span><span style="color:#d08770;">false</span><span>}
+</span></td></tr><tr><td>12</td><td><span>    </span><span style="color:#bf616a;">aFloat64Array </span><span>:= [</span><span style="color:#d08770;">4</span><span>]</span><span style="color:#b48ead;">float64</span><span>{</span><span style="color:#d08770;">1.1</span><span>, </span><span style="color:#d08770;">2.2</span><span>}
+</span></td></tr><tr><td>13</td><td><span>    </span><span style="color:#bf616a;">F</span><span>.</span><span style="color:#bf616a;">Println</span><span>(
+</span></td></tr><tr><td>14</td><td><span>        </span><span style="color:#bf616a;">aIntSlice</span><span>,
+</span></td></tr><tr><td>15</td><td><span>        </span><span style="color:#bf616a;">aFloat32Slice</span><span>,
+</span></td></tr><tr><td>16</td><td><span>        </span><span style="color:#bf616a;">aBoolSlice</span><span>,
+</span></td></tr><tr><td>17</td><td><span>        </span><span style="color:#bf616a;">aFloat64Array</span><span>,
+</span></td></tr><tr><td>18</td><td><span>    )
+</span></td></tr><tr><td>19</td><td><span>
+</span></td></tr><tr><td>20</td><td><span>    </span><span style="color:#bf616a;">aDict </span><span>:= </span><span style="color:#96b5b4;">make</span><span>(</span><span style="color:#b48ead;">map</span><span>[</span><span style="color:#b48ead;">string</span><span>]</span><span style="color:#b48ead;">int</span><span>)
+</span></td></tr><tr><td>21</td><td><span>    </span><span style="color:#bf616a;">aDict</span><span>[&quot;</span><span style="color:#a3be8c;">a</span><span>&quot;] = </span><span style="color:#d08770;">1
+</span></td></tr><tr><td>22</td><td><span>    </span><span style="color:#65737e;">// or
+</span></td></tr><tr><td>23</td><td><span>    </span><span style="color:#bf616a;">bDict </span><span>:= </span><span style="color:#b48ead;">map</span><span>[</span><span style="color:#b48ead;">string</span><span>]</span><span style="color:#b48ead;">int</span><span>{&quot;</span><span style="color:#a3be8c;">b</span><span>&quot;: </span><span style="color:#d08770;">2</span><span>}
+</span></td></tr><tr><td>24</td><td><span>    </span><span style="color:#bf616a;">F</span><span>.</span><span style="color:#bf616a;">Println</span><span>(</span><span style="color:#bf616a;">bDict</span><span>[&quot;</span><span style="color:#a3be8c;">c</span><span>&quot;]) </span><span style="color:#65737e;">// &quot;c&quot; not exists return 0
+</span></td></tr><tr><td>25</td><td><span>    </span><span style="color:#bf616a;">c</span><span>, </span><span style="color:#bf616a;">exists </span><span>:= </span><span style="color:#bf616a;">bDict</span><span>[&quot;</span><span style="color:#a3be8c;">c</span><span>&quot;]
+</span></td></tr><tr><td>26</td><td><span>    </span><span style="color:#bf616a;">F</span><span>.</span><span style="color:#bf616a;">Println</span><span>(</span><span style="color:#bf616a;">c</span><span>, </span><span style="color:#bf616a;">exists</span><span>) </span><span style="color:#65737e;">// 0 false
+</span></td></tr><tr><td>27</td><td><span>    </span><span style="color:#96b5b4;">delete</span><span>(</span><span style="color:#bf616a;">bDict</span><span>, &quot;</span><span style="color:#a3be8c;">b</span><span>&quot;)   </span><span style="color:#65737e;">// delete &quot;b&quot;
+</span></td></tr><tr><td>28</td><td><span>    </span><span style="color:#bf616a;">F</span><span>.</span><span style="color:#bf616a;">Println</span><span>(</span><span style="color:#bf616a;">bDict</span><span>)     </span><span style="color:#65737e;">// map[]
+</span></td></tr><tr><td>29</td><td><span>    </span><span style="color:#96b5b4;">delete</span><span>(</span><span style="color:#bf616a;">aDict</span><span>, &quot;</span><span style="color:#a3be8c;">b</span><span>&quot;)   </span><span style="color:#65737e;">// no effect
+</span></td></tr><tr><td>30</td><td><span>    </span><span style="color:#bf616a;">F</span><span>.</span><span style="color:#bf616a;">Println</span><span>(</span><span style="color:#bf616a;">aDict</span><span>)     </span><span style="color:#65737e;">// map[a:1]
+</span></td></tr><tr><td>31</td><td><span>}
+</span></td></tr></tbody></table></code></pre>
+<p>切片的底层由数组实现，数组的长度、容量固定，所以无法像<code>Python</code>一样使用<code>append</code>方法，切片的长度容量不固定，具有<code>append</code>方法。</p>
+<p>传参时时数组为复制引用，而切片是传递指针，与<code>Map</code>相同，所以是直接使用。</p>
+<h2 id="jie-gou-lei-xing">结构类型</h2>
+<pre data-linenos data-lang="go" style="background-color:#2b303b;color:#c0c5ce;" class="language-go "><code class="language-go" data-lang="go"><table><tbody><tr><td>1</td><td><span style="color:#b48ead;">package </span><span style="color:#bf616a;">main
+</span></td></tr><tr><td>2</td><td><span>
+</span></td></tr><tr><td>3</td><td><span style="color:#b48ead;">import </span><span style="color:#bf616a;">F </span><span>&quot;</span><span style="color:#a3be8c;">fmt</span><span>&quot;
+</span></td></tr><tr><td>4</td><td><span>
+</span></td></tr><tr><td>5</td><td><span style="color:#b48ead;">type </span><span>person </span><span style="color:#b48ead;">struct </span><span>{
+</span></td></tr><tr><td>6</td><td><span>    </span><span style="color:#bf616a;">name </span><span style="color:#b48ead;">string
+</span></td></tr><tr><td>7</td><td><span>    </span><span style="color:#bf616a;">age  </span><span style="color:#b48ead;">int
+</span></td></tr><tr><td>8</td><td><span>    </span><span style="color:#65737e;">// adult bool = true   can&#39;t do like this in golang
+</span></td></tr><tr><td>9</td><td><span>    </span><span style="color:#bf616a;">adult </span><span style="color:#b48ead;">bool
+</span></td></tr><tr><td>10</td><td><span>}
+</span></td></tr><tr><td>11</td><td><span>
+</span></td></tr><tr><td>12</td><td><span style="color:#b48ead;">func </span><span>(</span><span style="color:#bf616a;">p </span><span style="color:#b48ead;">person</span><span>) </span><span style="color:#8fa1b3;">isAdult</span><span>() </span><span style="color:#b48ead;">string </span><span>{
+</span></td></tr><tr><td>13</td><td><span>    </span><span style="color:#b48ead;">if </span><span style="color:#bf616a;">p</span><span>.</span><span style="color:#bf616a;">adult </span><span>{
+</span></td></tr><tr><td>14</td><td><span>        </span><span style="color:#b48ead;">return </span><span style="color:#bf616a;">p</span><span>.</span><span style="color:#bf616a;">name </span><span>+ &quot;</span><span style="color:#a3be8c;"> is adult.</span><span>&quot;
+</span></td></tr><tr><td>15</td><td><span>    } </span><span style="color:#b48ead;">else </span><span>{
+</span></td></tr><tr><td>16</td><td><span>        </span><span style="color:#b48ead;">return </span><span style="color:#bf616a;">p</span><span>.</span><span style="color:#bf616a;">name </span><span>+ &quot;</span><span style="color:#a3be8c;"> is not adult.</span><span>&quot;
+</span></td></tr><tr><td>17</td><td><span>    }
+</span></td></tr><tr><td>18</td><td><span>}
+</span></td></tr><tr><td>19</td><td><span>
+</span></td></tr><tr><td>20</td><td><span style="color:#b48ead;">func </span><span style="color:#8fa1b3;">Struct</span><span>() {
+</span></td></tr><tr><td>21</td><td><span>    </span><span style="color:#b48ead;">var </span><span style="color:#bf616a;">man </span><span style="color:#b48ead;">person
+</span></td></tr><tr><td>22</td><td><span>    </span><span style="color:#b48ead;">var </span><span style="color:#bf616a;">p </span><span>= </span><span style="color:#bf616a;">NewPerson</span><span>()
+</span></td></tr><tr><td>23</td><td><span>    </span><span style="color:#bf616a;">Bob </span><span>:= </span><span style="color:#bf616a;">person</span><span>{&quot;</span><span style="color:#a3be8c;">Bob</span><span>&quot;, </span><span style="color:#d08770;">20</span><span>, </span><span style="color:#d08770;">false</span><span>} </span><span style="color:#65737e;">// must had all args
+</span></td></tr><tr><td>24</td><td><span>    </span><span style="color:#65737e;">// or
+</span></td></tr><tr><td>25</td><td><span>    </span><span style="color:#bf616a;">Alice </span><span>:= </span><span style="color:#bf616a;">person</span><span>{</span><span style="color:#bf616a;">name</span><span>: &quot;</span><span style="color:#a3be8c;">Alice</span><span>&quot;, </span><span style="color:#bf616a;">age</span><span>: </span><span style="color:#d08770;">30</span><span>}
+</span></td></tr><tr><td>26</td><td><span>    </span><span style="color:#bf616a;">F</span><span>.</span><span style="color:#bf616a;">Println</span><span>(
+</span></td></tr><tr><td>27</td><td><span>        </span><span style="color:#bf616a;">man</span><span>,             </span><span style="color:#65737e;">// { 0 false}
+</span></td></tr><tr><td>28</td><td><span>        </span><span style="color:#bf616a;">p</span><span>.</span><span style="color:#bf616a;">name </span><span>== &quot;&quot;,    </span><span style="color:#65737e;">// true
+</span></td></tr><tr><td>29</td><td><span>        </span><span style="color:#bf616a;">Bob</span><span>,             </span><span style="color:#65737e;">// {Bob 20 false}
+</span></td></tr><tr><td>30</td><td><span>        </span><span style="color:#bf616a;">Alice</span><span>,           </span><span style="color:#65737e;">// {Alice 30 false}
+</span></td></tr><tr><td>31</td><td><span>        </span><span style="color:#bf616a;">Alice</span><span>.</span><span style="color:#bf616a;">isAdult</span><span>(), </span><span style="color:#65737e;">// Alice is not adult.
+</span></td></tr><tr><td>32</td><td><span>    )
+</span></td></tr><tr><td>33</td><td><span>
+</span></td></tr><tr><td>34</td><td><span>}
+</span></td></tr><tr><td>35</td><td><span>
+</span></td></tr><tr><td>36</td><td><span style="color:#b48ead;">func </span><span style="color:#8fa1b3;">NewPerson</span><span>() </span><span style="color:#b48ead;">person </span><span>{
+</span></td></tr><tr><td>37</td><td><span>    </span><span style="color:#b48ead;">return </span><span style="color:#bf616a;">person</span><span>{</span><span style="color:#bf616a;">adult</span><span>: </span><span style="color:#d08770;">true</span><span>}
+</span></td></tr><tr><td>38</td><td><span>}
+</span></td></tr></tbody></table></code></pre>
+<p>结构体同样传递的是复制的值，如果需要传递本身，需要使用其指针。</p>
+
+    </div>
+
+    
+    <div class="article-info">
+        
+        <div class="article-date">29 July 2017</div>
+        
+        <div class="article-taxonomies">
+            
+            
+                <ul class="article-tags">
+                    
+                    <li><a href="https://abrahum.link/tags/go/">#Go</a></li>
+                    
+                    <li><a href="https://abrahum.link/tags/code/">#Code</a></li>
+                    
+                </ul>
+            
+        </div>
+    </div>
+
+</article>
+
+<script src="https://utteranc.es/client.js"
+    repo="abrahum/abrahum.github.io"
+    issue-term="pathname"
+    theme="github-light"
+    crossorigin="anonymous"
+    async>
+</script>
+
+        </main>
+        <footer>
+            <p>
+                © Abrahum Link 2024<br>
+                Powered by <a target="_blank" href="https://getzola.org/">Zola</a>, Theme Link.
+            </p>
+            <p>
+                
+                
+            </p>
+        </footer>
+    </div>
+</body>
+</html>

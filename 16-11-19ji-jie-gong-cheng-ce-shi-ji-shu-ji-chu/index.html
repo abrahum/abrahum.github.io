@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+
+    <title>机械工程测试技术基础</title>
+    <meta name="description" content="">
+
+    <link rel="stylesheet" href="https://abrahum.link/main.css">
+
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.15.1/katex.min.css" integrity="sha384-R4558gYOUz8mP9YWpZJjofhk+zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs" crossorigin="anonymous">
+    <script defer src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.15.1/katex.min.js" integrity="sha384-z1fJDqw8ZApjGO3/unPWUPsIymfsJmyrDVWC8Tv/a1HeOtGmkwNd/7xUS0Xcnvsx" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.15.1/contrib/auto-render.min.js" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+              // customised options
+              // • auto-render specific keys, e.g.:
+              delimiters: [
+                  {left: '$$', right: '$$', display: true},
+                  {left: '$', right: '$', display: false},
+                  {left: '\\(', right: '\\)', display: false},
+                  {left: '\\[', right: '\\]', display: true}
+              ],
+              // • rendering keys, e.g.:
+              throwOnError : false
+            });
+        });
+    </script>
+
+    
+
+    
+    
+</head>
+<body>
+    <a class="skip-main" href="#main">Skip to content</a>
+    <div class="container">
+        <header> 
+            <h1 class="site-header">
+                <a href="https:&#x2F;&#x2F;abrahum.link">Abrahum Link</a>
+            </h1> 
+            <nav>
+                
+                    
+                        
+                        <a  href="https:&#x2F;&#x2F;abrahum.link&#x2F;tags">Tags</a>
+                    
+                        
+                        <a  href="https:&#x2F;&#x2F;abrahum.link&#x2F;about">About</a>
+                    
+                        
+                        <a  href="https:&#x2F;&#x2F;github.com&#x2F;abrahum">GitHub</a>
+                    
+                
+            </nav>
+        </header>
+        <main id="main" tabindex="-1">
+            
+
+<article class="post">
+    <header>
+        <h1>机械工程测试技术基础</h1>
+    </header>
+    <div class="content">
+        <p>简直药丸Orz</p>
+<span id="continue-reading"></span><h2 id="xin-hao-ji-qi-miao-shu">信号及其描述</h2>
+<h3 id="xin-hao-de-fen-lei">信号的分类</h3>
+<ul>
+<li>确定信号：可以表示为一个确定的时间关系式的信号
+<ul>
+<li>周期信号：按一定时间间隔周而复始出现，无始无终，不断重复的信号
+<ul>
+<li>简单周期信号</li>
+<li>复杂周期信号</li>
+</ul>
+</li>
+<li>非周期信号：确定信号中，不具备周期重复性的信号
+<ul>
+<li>准周期信号：由两种以上的周期信号合成而来，因为组成分量无法找到公共周期，而失去周期性</li>
+<li>瞬变非周期信号：是一些或在一定时间内存在，或随时间增长而衰减至零的信号</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>非确定信号：不能准确预测未来瞬时值，也不能用确定的数学关系描述的信号
+<ul>
+<li>非平稳随机过程</li>
+<li>平稳随机过程
+<ul>
+<li>个态历经随机过程</li>
+<li>非个态历经随机过程</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>连续信号：信号数学表达式中的独立变量是连续的。</p>
+<p>离散信号：数学表达式中的独立变量是离散的。</p>
+<p>能量信号：在无限时间内，信号的总能量是有限的信号。</p>
+<p>功率信号：在无限时间内，信号的总能量为无限的信号。</p>
+<p>实信号：物理可以实现的信号都是时间的实函数。</p>
+<p>复信号：为了理论分析，使用的分析模型。</p>
+<h3 id="xin-hao-de-miao-shu">信号的描述</h3>
+<p>时域描述：又称为波形描述，是指测量中所观测到或记录到的信号以时间为独立变量，称为信号的时域描述。</p>
+<p>频域描述：又称频谱描述，是指测量中所观测到或记录到的信号转换成以频率为独立变量来表述信号的频域描述。它可以表述信号的频率结构、各频率成分的幅值、相位关系。它和时域描述可以互相转换，包含相同信息量。</p>
+<p>傅立叶级数：任何周期信号在有限区间上，当其满足狄里赫来条件时，都可展开成一系列正交函数的线性组合的无穷级数。傅立叶级数有多种形式，三角展开和复数展开是常见的形式。</p>
+<p>傅立叶级数的三角展开式：</p>
+<p>$$x(t)=a_0+\sum_{n=1}^{\infty}A_nsin(n\omega _0t+\varphi _n),(n=1,2,3,.....)$$</p>
+<p>展开过程：</p>
+<p>$$x(t)=a_0+\sum_{n=1}^{\infty}[a_ncos(n\omega _0t)+b _ nsin(n\omega _0t)],(n=1,2,3,.....)$$</p>
+<p>其中参数：</p>
+<p>$$\begin{align}
+a _ 0 =&amp; \frac{1}{T _ 0}\int_{-T _0/2}^{T _0/2}x(t)dt \\
+a _ n =&amp; \frac{1}{T _ 0}\int_{-T _0/2}^{T _0/2}x(t)cos(n\omega _0)tdt \\
+b _ n =&amp; \frac{1}{T _ 0}\int_{-T _0/2}^{T _0/2}x(t)sin(n\omega _0)tdt \\
+\omega _0= &amp;\frac{2\pi }{T _0}\\
+A _0 =&amp; \sqrt{a _n^{2}+b _n^{2}}\\
+\varphi _0=&amp;arctan(\frac{a _n}{a _n})
+\end{align}$$</p>
+<p>由此可见周期信号是由一个或多个乃至无穷个不同频率的谐波叠加而来。第一项$a _0$是常数项，周期信号的直流分量。$A _nsin(n\omega _0t+\varphi _n)$称为谐波，$A _n$是n次谐波的振幅，$\varphi _n$是其初相角。$a _n$是n次谐波的余弦分量的幅值，$b _n$是n次谐波的正弦分量的幅值。</p>
+<p>傅立叶级数的复数展开式：</p>
+<p>根据欧拉公式推出</p>
+<p>$$\begin{align}
+x(t)=&amp;a_0+\sum_{n=1}^{\infty}[a_ncos(n\omega _0t)+b _ nsin(n\omega _0t)] \\
+x(t)=&amp;a_0+\sum_{n=1}^{\infty}[a_n\frac{1}{2}(e^{-jn\omega _0t}+e^{jn\omega _0t})+b _ n\frac{j}{2}(e^{-jn\omega _0t}-e^{jn\omega _0t})] \\
+x(t)=&amp;a_0+\sum_{n=1}^{\infty}[\frac{1}{2}(a _n+jb _n)e^{-jn\omega _0t}+\frac{1}{2}(a _n-jb _n)e^{jn\omega _0t}]\\
+c _ n = &amp; \frac{1}{2}(a _n-jb _n)\\
+c _ {-n}= &amp;\frac{1}{2}(a _n+jb _n)\\
+c _0=&amp;a _0 \\
+x(t)=&amp;a_0+\sum_{n=1}^{\infty}[c _ {-n}e^{-jn\omega _0t}+c _ ne^{jn\omega _0t}]\\
+x(t)=&amp;a_0+\sum_{n=-\infty }^{\infty}c _ ne^{jn\omega _0t}\\
+\end{align}$$</p>
+<p>周期信号的强度使用峰值、绝对均、有效值和平均功率来表述。</p>
+<p>峰值$x_p$是信号可能出现的最大瞬时值，峰峰值$x_{p-p}$是指最大瞬时值和最小瞬时值的差。</p>
+<p>均值的计算类似功率，绝对均值指全波整波之后的均值。</p>
+<p>有效值是均值的信号的均方根，平均功率是有效值的平方又叫均方值。</p>
+<h2 id="ce-shi-zhuang-zhi">测试装置</h2>
+<p>测量装置（测量系统）：为达到某些特定目的，由若干个互有关联的单元组成的有机整体。</p>
+<h3 id="xian-xing-xi-tong">线性系统</h3>
+<p>主要性质：</p>
+<ul>
+<li>符合叠加原理</li>
+<li>比例特性：$ax(t)\rightarrow ay(t)$</li>
+<li>系统对输入导数的响应等于对原输入响应的导数</li>
+<li>如系统的初始状态均为零，则系统对输入积分的响应等于对原输入响应的积分。</li>
+<li>频率保持特性</li>
+</ul>
+<p><strong>静态特性</strong>是在静态测量情况下描述实际测量装置与理想时不变线性系统的接近程度。通过某种意义的静态标定过程确定的。</p>
+<p>测量装置的<strong>动态特性</strong>是当被测量即输入量随时间快速变化时，测量输入与响应输出之间动态关系的数学描述。</p>
+<p>当传感器安装到被测物体上或进入被测介质，要从物体与介质中吸收能量或产生干扰，使被测物理量偏离原有的量值，从而不可能实现理想的测量，这种现象称为<strong>负载效应</strong>。</p>
+<p>测量装置在测量过程中要受到各种干扰，包括电源干扰、环境干扰(电磁场、声、光、温度、振动等干扰)和信道干扰。这些干扰的影响决定于测量装置的<strong>抗干扰性能</strong>，并且与所采取的抗干扰措施有关。</p>
+<p>理想的定常线性系统，其输出将是输入的单调、线性比例函数，其中斜率S应是常数。然而，实际的测量装置并非理想的定常线性系统，S不是常数。</p>
+<h3 id="jing-tai-te-xing">静态特性</h3>
+<p>线性误差：测量装置校准曲线与规定曲线之间的最大偏差。</p>
+<p>灵敏度：单位输入变化所引起的输出变化。</p>
+<p>回程误差（迟滞）：测量装置同输入变化方向有关的输出特性。</p>
+<p>分辨力：引起测量装置产生一个可察觉变化的最小输入量。通常表示为它与可能输入范围之比的百分数。</p>
+<p>零点漂移：是测量装置的输出零点偏离原始零点的距离，它可以是随时间缓慢变化的量。</p>
+<p>灵敏度漂移：是由于材料性质的变化所引起的输入与输出关系(斜率)的变化。</p>
+<p>稳定度：是指测量装置在规定条件下保持其测量特性恒定不变的能力。</p>
+<h3 id="dong-tai-te-xing">动态特性</h3>
+<p>传递函数H(s)：对于特定的输入确定的给出相应输出，与输入、系统的初始状态无关。</p>
+<p>频率响应函数H($\omega $)：在频率域中描述系统特性的一种数学方法。</p>
+<p>脉冲响应函数h(t)： ···</p>
+<p>脉冲响应函数和传递函数是拉普拉斯变换对；频率响应函数和脉冲响应函数是傅立叶变换对；频率响应函数和传递函数其实是S和$j\omega $替换。</p>
+<p>一阶系统：输入输出的关系使用一阶微分方程来表述，时间常数是其重要参数。</p>
+<h2 id="chuan-gan-qi">传感器</h2>
+<p>传感器：直接作用于被测量，能按一定规律将其转换成同种或别种量值(电信号)输出的器件。</p>
+<h3 id="chuan-gan-qi-fen-lei">传感器分类</h3>
+<p>按工作原理分：电气式传感器、机械式传感器、光电式传感器等</p>
+<p>按被测量分：位移传感器、速度传感器、加速度传感器、应力传感器、温度传感器等</p>
+<p>按信号变换特征分：结构型传感器、物性型传感器</p>
+<p>按能量关系分：能量转换型传感器、能量控制型传感器</p>
+<h3 id="dian-zu-dian-rong-yu-dian-gan-shi-chuan-gan-qi">电阻、电容与电感式传感器</h3>
+<p>电阻式传感器：将被测量转化为电阻值变化的传感器。主要有变阻器式电阻传感器、应变式电阻传感器。</p>
+<p>电桥：电桥电路是将电阻、电容、电感的参量的变化转变为电压或电流信号输出的一种常用电路。</p>
+<p>直流电桥的平衡条件：相对桥臂的阻值乘积相等。交流电桥还需要相对电桥阻抗虚部与实部乘积相等。</p>
+<p>电容式传感器：将被测物理量转换为电容量变化的装置，它实质上是一个具有可变参数的电容器。</p>
+<p>根据电容器变化的参数，可分为：极距变化型、面积变化型、介质变化型</p>
+<p>电感传感器：把被测物理量转换为电感量变化的传感器。</p>
+<p>分类：自感型电感传感器（可变磁阻式、涡流式）、互感型电感传感器（差动变压器式电感传感器）</p>
+<h3 id="ci-dian-ya-dian-yu-re-dian-shi-chuan-gan-qi">磁电、压电与热电式传感器</h3>
+<p>磁电式传感器：把被测物理量转换为感应电动势的一种传感器，又称电磁感应式或电动力式传感器。按照结构方式不同，磁电式传感器可分：动圈式、磁阻式</p>
+
+    </div>
+
+    
+    <div class="article-info">
+        
+        <div class="article-date">19 November 2016</div>
+        
+        <div class="article-taxonomies">
+            
+            
+                <ul class="article-tags">
+                    
+                    <li><a href="https://abrahum.link/tags/ji-jie/">#机械</a></li>
+                    
+                </ul>
+            
+        </div>
+    </div>
+
+</article>
+
+<script src="https://utteranc.es/client.js"
+    repo="abrahum/abrahum.github.io"
+    issue-term="pathname"
+    theme="github-light"
+    crossorigin="anonymous"
+    async>
+</script>
+
+        </main>
+        <footer>
+            <p>
+                © Abrahum Link 2024<br>
+                Powered by <a target="_blank" href="https://getzola.org/">Zola</a>, Theme Link.
+            </p>
+            <p>
+                
+                
+            </p>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+
+    <title>热工基础</title>
+    <meta name="description" content="">
+
+    <link rel="stylesheet" href="https://abrahum.link/main.css">
+
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.15.1/katex.min.css" integrity="sha384-R4558gYOUz8mP9YWpZJjofhk+zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs" crossorigin="anonymous">
+    <script defer src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.15.1/katex.min.js" integrity="sha384-z1fJDqw8ZApjGO3/unPWUPsIymfsJmyrDVWC8Tv/a1HeOtGmkwNd/7xUS0Xcnvsx" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.15.1/contrib/auto-render.min.js" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+              // customised options
+              // • auto-render specific keys, e.g.:
+              delimiters: [
+                  {left: '$$', right: '$$', display: true},
+                  {left: '$', right: '$', display: false},
+                  {left: '\\(', right: '\\)', display: false},
+                  {left: '\\[', right: '\\]', display: true}
+              ],
+              // • rendering keys, e.g.:
+              throwOnError : false
+            });
+        });
+    </script>
+
+    
+
+    
+    
+</head>
+<body>
+    <a class="skip-main" href="#main">Skip to content</a>
+    <div class="container">
+        <header> 
+            <h1 class="site-header">
+                <a href="https:&#x2F;&#x2F;abrahum.link">Abrahum Link</a>
+            </h1> 
+            <nav>
+                
+                    
+                        
+                        <a  href="https:&#x2F;&#x2F;abrahum.link&#x2F;tags">Tags</a>
+                    
+                        
+                        <a  href="https:&#x2F;&#x2F;abrahum.link&#x2F;about">About</a>
+                    
+                        
+                        <a  href="https:&#x2F;&#x2F;github.com&#x2F;abrahum">GitHub</a>
+                    
+                
+            </nav>
+        </header>
+        <main id="main" tabindex="-1">
+            
+
+<article class="post">
+    <header>
+        <h1>热工基础</h1>
+    </header>
+    <div class="content">
+        <p><em>热工基础复习提纲</em></p>
+<span id="continue-reading"></span><h2 id="ji-chu-gai-nian">基础概念</h2>
+<h3 id="re-li-xi-tong">热力系统</h3>
+<p>凡是能将热能转换为机械能的机器统称为<strong>热力发动机</strong>，简称<strong>热机</strong>。</p>
+<p>热能和机械能之间的转换是通过媒介物质在热机中的一系列状态变化过程来实现的，这种媒介物质称为<strong>工质</strong>。</p>
+<p>热容量很大，并且在吸收和放出有限量热量时自身温度和其他热力学参数没有明显变化的物体称为<strong>热源</strong>。</p>
+<p>选取的一定的工质和空间作为研究对象，称为<strong>热力系统</strong>，简称<strong>系统</strong>。</p>
+<ul>
+<li>闭口系统：与外界无物质交换的系统。</li>
+<li>开口系统：与外界有物质交换的系统。</li>
+<li>绝热系统：与外界无热量交换的系统。</li>
+<li>孤立系统：与外界既无物质交换也无热量交换的系统。</li>
+</ul>
+<h3 id="ping-heng-tai-he-zhuang-can">平衡态和状参</h3>
+<p>当系统不受外界影响的条件下，工质的状态参数不随时间而变化的状态称为平衡状态。</p>
+<p>基本状态参数：</p>
+<ul>
+<li>压力：标准单位$Pa$：$p=\frac{F}{A}$</li>
+<li>温度：单位是$K$（开）：$T=t+273.15$</li>
+<li>比体积、密度：二者互为倒数：$v=\frac{V}{m}\qquad \rho=\frac{m}{V}$</li>
+</ul>
+<p>根据状态公理指出，对于简单的可压缩系统，只需要两个独立的状态参数便可确定它的平衡状态，可以列出状态方程式：$F(p,v,T)=0$</p>
+<h3 id="ke-ni-guo-cheng">可逆过程</h3>
+<p>如果系统完成了某一过程之后，再沿着原路逆行而回复到原来的状态，外界也随之恢复到原来的状态，而不留下任何变化，则这一过程称为<strong>可逆过程</strong>。否则就是<strong>不可逆过程</strong>。</p>
+<p><em>可逆过程的条件：准平衡过程＋无耗散效应。</em></p>
+<h3 id="gong-liang-he-re-liang">功量和热量</h3>
+<p>膨胀功是工质在体积膨胀时所作的功。$\delta W=Fdx\qquad W=\int_{x_1}^{x_2}Fdx$</p>
+<p>单位质量工质所做的膨胀功称为比膨胀功：$\delta w=pdv\qquad W=\int_{1}^{2}pdv$</p>
+<p>系统与外界之间依靠温差传递的能量。符号：$Q$ ；单位：$J$ 或 $kJ$ 。单位质量工质所传递的热量用 $q$ 表示，单位为 $J/kg$ 或 $kJ/kg$ 。系统吸热热量为正，放热为负。</p>
+<p>引入熵（$S$），单位是$J/K$，定义：$dS=(\frac{\delta Q}{T})_{re}$</p>
+<p>同时定义单位质量的熵为比熵（$s$）。由此得：$q=\int_{1}^{2}Tds$</p>
+<h2 id="re-li-xue-di-yi-ding-lu">热力学第一定律</h2>
+<h3 id="chu-cun-neng">储存能</h3>
+<p>气体工质的比热力学能：单位是 $J/kg$ 或 $kJ/kg$ ：$u=f(T,v)$</p>
+<p>宏观动能和宏观位能：$E_k=\frac{1}{2}mc_f^2\qquad E_p=mgz$</p>
+<p>储备能：$E=U+E_k+E_p\qquad e=u+e_k+e_p$</p>
+<h3 id="re-li-xue-di-yi-ding-lu-ji-qi-liu-dong-neng-liang-fang-cheng-shi">热力学第一定律及其流动能量方程式</h3>
+<p>热力过程中的能量守恒和转换定律。：在热能与其它形式能的互相转换过程中，能的总量始终不变。</p>
+<p>工质在流过热工设备时，必须受外力推动，这种推动工质流动而做的功称为<strong>流动功</strong>或许<strong>推进功</strong>。</p>
+<p>$$\delta W_f=pAdx=pdV=pvdm\qquad w_f=\frac{\delta W_f}{dm}=pv$$</p>
+<p>比焓：$h=u+pv$</p>
+<p>技术功：$W_t=\frac{1}{2}m\Delta c_{f}^{2}+mg\Delta z+W_s$</p>
+<h2 id="li-xiang-qi-ti-de-xing-zhi-he-re-li-guo-cheng">理想气体的性质和热力过程</h2>
+<h3 id="li-xiang-qi-ti-zhuang-tai-fang-cheng-shi">理想气体状态方程式</h3>
+<p>根据<strong>波义耳-马略特定律、盖-吕萨克定律和查理定律</strong>得出理想气体状态方程式，以及克拉贝龙方程式：</p>
+<p>$$pv=R_gT\qquad pV=mR_gT$$</p>
+<p>$R_g$ 是气体常数，当$M$表示表示气体的摩尔质量时，$R=MR_g$ 是常数 8.314$J/(mol\cdot K)$</p>
+<h3 id="li-xiang-qi-ti-de-re-rong-re-li-xue-neng-han-he-shang">理想气体的热容、热力学能、焓和熵</h3>
+<p>物体温度升高1K所需的热量称为该物体的热容量或热容，单位质量的热容量，称为比热容。$ C=\frac{\delta Q}{dT}\qquad c=\frac{\delta q}{dt}$</p>
+<p>因为热量是与过程性质有关的量，因此如果工质的初终态不同，那么工质的比热容也会不同，常用的有定容比热容$c_v$和定压比热容$c_p$。</p>
+<p>根据焓的定义和理想气体状态方程，容易推出：</p>
+<p>$$c_V=\frac{du}{dT}\qquad c_p=\frac{dh}{dT}\qquad c_p=c_v+R_g$$</p>
+<p>定义有比热容比$\gamma=c_p/c_v$，也称为定熵指数（绝热指数）$\kappa$</p>
+<p>在对于计算要求不需要特别精确时，可以使用定值摩尔热容</p>
+<table><thead><tr><th style="text-align: center">定值摩尔热容</th><th style="text-align: center">单原子气体</th><th style="text-align: center">双原子气体</th><th style="text-align: center">多原子气体</th></tr></thead><tbody>
+<tr><td style="text-align: center">$C_{V,m}$</td><td style="text-align: center">$\frac{3}{2}R$</td><td style="text-align: center">$\frac{5}{2}R$</td><td style="text-align: center">$\frac{7}{2}R$</td></tr>
+<tr><td style="text-align: center">$C_{p,m}$</td><td style="text-align: center">$\frac{5}{2}R$</td><td style="text-align: center">$\frac{7}{2}R$</td><td style="text-align: center">$\frac{9}{2}R$</td></tr>
+<tr><td style="text-align: center">$\gamma$</td><td style="text-align: center">1.67</td><td style="text-align: center">1.40</td><td style="text-align: center">1.29</td></tr>
+</tbody></table>
+<p>热力学能和焓：</p>
+<p>$$\Delta u=\int_{1}^{2}c_VdT\qquad \Delta h=\int_{1}^{2}c_pdT$$</p>
+<p>理想气体的熵：</p>
+<p>$$\begin{align}
+\Delta s &amp; =c_Vln\frac{T_2}{T_1}+R_gln\frac{v_2}{v_1} \\
+&amp; =c_pln\frac{T_2}{T_1}-R_gln\frac{p_2}{p_1} \\
+&amp; =c_Vln\frac{p_2}{p_1}+c_pln\frac{v_2}{v_1} \\
+\end{align}$$</p>
+<h3 id="li-xiang-qi-ti-de-re-li-guo-cheng">理想气体的热力过程</h3>
+<p>理想气体的基本热力过程有：定容过程、定压过程、定温过程和定熵过程。</p>
+<p>便于记忆直接讨论结合在一起的多变过程。</p>
+<p>对于许多过程，可以近似的使用$pv^n=;$常数来描述，式中的 $n$ 称为多变指数。</p>
+<table><thead><tr><th style="text-align: center">$n$</th><th style="text-align: center">过程类型</th></tr></thead><tbody>
+<tr><td style="text-align: center">0</td><td style="text-align: center">定压过程</td></tr>
+<tr><td style="text-align: center">1</td><td style="text-align: center">定温过程</td></tr>
+<tr><td style="text-align: center">$\kappa$</td><td style="text-align: center">定熵指数</td></tr>
+<tr><td style="text-align: center">$\pm\infty$</td><td style="text-align: center">定容过程</td></tr>
+</tbody></table>
+<p>过程方程式：$pv^n=x$</p>
+<p>初终态参数关系：$\frac{p_2}{p_1}=\left( \frac{v_1}{v_2} \right)^n\qquad \frac{T_2}{T_1}=\left( \frac{v_1}{v_2} \right)^{n-1}\qquad \frac{T_2}{T_1}=\left( \frac{p_2}{p_1} \right)^{\frac{n-1}{n}}$</p>
+<p>膨胀功：$w=\frac{p_1v_1-p_2v_2}{n-1}=\frac{R_g}{n-1}(T_1-T_2)$</p>
+<p>交换的功量（不含动能变化）：$w_t=nw$</p>
+<p>交换的热量：$c_n(T_2-T_1)\qquad c_n=\frac{n-\kappa }{n-1}c_V$</p>
+<h2 id="re-li-xue-di-er-ding-lu">热力学第二定律</h2>
+<p>开尔文－普朗克表述：不可能从单一热源取热，并使之完全转变为有用功而不产生其它影响。</p>
+<p>克劳修斯表述：不可能将热从低温物体传至高温物体而不引起其它变化。</p>
+<p>热二律的实质：自发过程都是具有方向性的。</p>
+<h3 id="re-li-xun-huan">热力循环</h3>
+<p>循环根据效果不同可以分为正向循环和逆向循环。</p>
+<p>正向循环在示意图上表示为顺时针方向，吸热，对外做功。热力循环的效率为热效率，用净功和吸热的比值定义：$\eta_t=\frac{W_{net}}{Q_1}=\frac{Q_1-Q_2}{Q_1}=1-\frac{Q_2}{Q_1}$</p>
+<p>反向循环在示意图上表示为逆时针方向，分为制冷系数：$\varepsilon =\frac{Q_2}{W_{net}}$和制热系数：$\varepsilon '=\frac{Q_1}{W_{net}}$</p>
+<h3 id="qia-nuo-xun-huan">卡诺循环</h3>
+<p>卡诺循环由两个可逆定温过程和两个可逆绝热过程组成。先定温吸热，然后绝热膨胀，再定温放热，最后绝热压缩。易推出，卡诺循环的热效率：$\eta_C=1-\frac{T_2}{T_1}\qquad \varepsilon_C =\frac{T_2}{T_1-T_2}\qquad \varepsilon_C '=\frac{T_1}{T_1-T_2}$</p>
+<p>热力循环可实现的要求是循环的热效率（制冷或制热系数）必须小于其卡诺循环的热效率（制冷或制热系数）。</p>
+<p>由卡诺在热机效率的基础上得出了卡诺定理：</p>
+<ul>
+<li>定理一：在相同的高温热源和低温热源间工作的一切可逆热机具有相同的热效率，与工质的性质无关。</li>
+<li>定理二：在相同高温热源和低温热源间工作的任何不可逆热机的热效率都小于可逆热机的热效率。</li>
+</ul>
+<h3 id="shang">熵</h3>
+<p><em>coming soon</em></p>
+<h2 id="re-liang-chuan-di-de-ji-ben-fang-shi">热量传递的基本方式</h2>
+<p>热量传递有三种基本方式：热传导、热对流和热辐射。</p>
+<h3 id="re-chuan-dao">热传导</h3>
+<p>实验证明：平面一维稳态导热的热流量与平壁的表面面积 $A$ 两侧表面的温差成正比，与平壁的厚度 $\delta$ 成反比：$\phi =\lambda A\frac{t_{w1}-t_{w2}}{\delta}$</p>
+<p>由此还定义出导热电阻 $R_{\lambda}=\frac{\delta}{A\lambda};$以及热流密度$q = \frac{\phi}{A}$</p>
+<h3 id="re-dui-liu">热对流</h3>
+<p>热对流是指由于流体的宏观运动使温度不同的流体相对位移而产生的热量传递现象。</p>
+<p>牛顿冷却公式：</p>
+<p>$$\phi =Ah(t_w-t_f)=Ah\Delta t=\frac{\Delta t}{R_h}$$</p>
+<h3 id="re-fu-she">热辐射</h3>
+<p><em>coming soon</em></p>
+<h2 id="dao-re">导热</h2>
+<h3 id="dao-re-li-lun-ji-chu">导热理论基础</h3>
+<p>温度场：某一时刻空间所有各点的温度分布，即$t=f(x,y,z,\tau )$</p>
+<p>不随时间按变化的温度场是稳态温度场，反之则是非稳态温度场。</p>
+<p>等温线（面）：在同一时刻，温度场中温度相同的点所连成的线或面。</p>
+<p>温度梯度：等温面（线）法线方向的温度变化率矢量。</p>
+<p>$$grad;t=\frac{\delta t}{\delta x}\overrightarrow{n}$$</p>
+<h3 id="fu-li-xie-ding-lu">傅立叶定律</h3>
+<p>傅立叶定律：$\overrightarrow{q}=-\lambda grad;t=-\lambda \frac{\delta t}{\delta n}\overrightarrow{n}$</p>
+<p>傅立叶定律表明：导热热流密度的大小与温度梯度的绝对值成正比，其方向与温度梯度相反。</p>
+<p>热导率是物质的重要热物性参数，根据傅立叶定律，有：$\lambda = \frac{q}{\left | grad; t \right |}$</p>
+<h2 id="dui-liu-huan-re">对流换热</h2>
+<blockquote>
+<p>奴赛尔数$Nu$、雷诺数$Re$、普朗特数$Pr$你好。
+奴赛尔数$Nu$、雷诺数$Re$、普朗特数$Pr$再见！</p>
+</blockquote>
+
+    </div>
+
+    
+    <div class="article-info">
+        
+        <div class="article-date"> 1 November 2016</div>
+        
+        <div class="article-taxonomies">
+            
+            
+                <ul class="article-tags">
+                    
+                    <li><a href="https://abrahum.link/tags/ji-jie/">#机械</a></li>
+                    
+                </ul>
+            
+        </div>
+    </div>
+
+</article>
+
+<script src="https://utteranc.es/client.js"
+    repo="abrahum/abrahum.github.io"
+    issue-term="pathname"
+    theme="github-light"
+    crossorigin="anonymous"
+    async>
+</script>
+
+        </main>
+        <footer>
+            <p>
+                © Abrahum Link 2024<br>
+                Powered by <a target="_blank" href="https://getzola.org/">Zola</a>, Theme Link.
+            </p>
+            <p>
+                
+                
+            </p>
+        </footer>
+    </div>
+</body>
+</html>

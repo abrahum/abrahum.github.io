@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+
+    <title>沸腾炉理论</title>
+    <meta name="description" content="">
+
+    <link rel="stylesheet" href="https://abrahum.link/main.css">
+
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.15.1/katex.min.css" integrity="sha384-R4558gYOUz8mP9YWpZJjofhk+zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs" crossorigin="anonymous">
+    <script defer src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.15.1/katex.min.js" integrity="sha384-z1fJDqw8ZApjGO3/unPWUPsIymfsJmyrDVWC8Tv/a1HeOtGmkwNd/7xUS0Xcnvsx" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.15.1/contrib/auto-render.min.js" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+              // customised options
+              // • auto-render specific keys, e.g.:
+              delimiters: [
+                  {left: '$$', right: '$$', display: true},
+                  {left: '$', right: '$', display: false},
+                  {left: '\\(', right: '\\)', display: false},
+                  {left: '\\[', right: '\\]', display: true}
+              ],
+              // • rendering keys, e.g.:
+              throwOnError : false
+            });
+        });
+    </script>
+
+    
+
+    
+    
+</head>
+<body>
+    <a class="skip-main" href="#main">Skip to content</a>
+    <div class="container">
+        <header> 
+            <h1 class="site-header">
+                <a href="https:&#x2F;&#x2F;abrahum.link">Abrahum Link</a>
+            </h1> 
+            <nav>
+                
+                    
+                        
+                        <a  href="https:&#x2F;&#x2F;abrahum.link&#x2F;tags">Tags</a>
+                    
+                        
+                        <a  href="https:&#x2F;&#x2F;abrahum.link&#x2F;about">About</a>
+                    
+                        
+                        <a  href="https:&#x2F;&#x2F;github.com&#x2F;abrahum">GitHub</a>
+                    
+                
+            </nav>
+        </header>
+        <main id="main" tabindex="-1">
+            
+
+<article class="post">
+    <header>
+        <h1>沸腾炉理论</h1>
+    </header>
+    <div class="content">
+        <p>记录沸腾炉相关理论计算，相关术语解释。</p>
+<span id="continue-reading"></span><h2 id="gong-shi">公式</h2>
+<h3 id="ji-suan-a-ji-mi-de-shu">计算阿基米德数</h3>
+<p>$$Ar = { d^3(\rho_m-\rho_g)g\over v^2\rho_g }\approx{d^3\rho_mg\over v^2\rho_g}$$</p>
+<h3 id="ji-suan-lin-jie-su-du">计算临界速度</h3>
+<p>托杰斯关系式：</p>
+<p>$$Re_{lj}={Ar\over1400+5.22\sqrt{Ar}}$$</p>
+<p>普拉诺夫斯基通用式：</p>
+<p>$$Re_{lj}={{\sqrt{367+k_3Ar\varepsilon^{4.75}}-19.15}\over{0.588k_3}}$$</p>
+<p>临界速度:</p>
+<p>$$u_{lj}={Re_{lj}v\over d}$$</p>
+<h3 id="ji-suan-dai-chu-su-du">计算带出速度</h3>
+<p>托杰斯关系式：</p>
+<p>$$Re_{dc}={Ar\over18+0.61\sqrt{Ar}}$$</p>
+<p>普拉诺夫斯基修正式：</p>
+<p>$$Re_{dc}={{\sqrt{367+Ar}-19.15}\over 0.588}$$</p>
+<p>带出速度:</p>
+<p>$$u_{dc}={Re_{dc}v\over d}$$</p>
+<h3 id="ji-suan-cao-zuo-su-du">计算操作速度</h3>
+<p>托杰斯关系式：</p>
+<p>$$Re_{cz}={Ar\varepsilon^{4.75}\over18+0.61\sqrt{Ar\varepsilon^{4.75}}}$$</p>
+<p>普拉诺夫斯基通用式：</p>
+<p>$$Re_{cz}={{\sqrt{367+Ar\varepsilon^{4.75}}-19.15}\over0.588}$$</p>
+<p>操作速度:</p>
+<p>$$u_{cz}={Re_{cz}v\over d}$$</p>
+<h2 id="can-shu-ding-yi">参数定义</h2>
+<ul>
+<li>$Ar$: 阿基米德准数</li>
+<li>$d$: 固体粒子颗粒平均直径，单位：（$m$）</li>
+<li>$\rho_m$: 固体粒子密度，单位（$kg/m^3$）</li>
+<li>$\rho_g$: 气体在实际温度下密度，单位（$kg/m^3$）</li>
+<li>$v$: 气体在实际温度下的运动粘度，单位（$m^2/s$）</li>
+<li>$Re$: 雷诺准数</li>
+<li>$\varepsilon$: 床层空隙率 todo</li>
+<li>$k_3$: 粒子形状修正系数 todo</li>
+<li>$u$: 速度，单位（$m/s$）todo</li>
+</ul>
+<h2 id="shu-yu-ding-yi">术语定义</h2>
+<ul>
+<li>临界速度 $u_{lj}$：物料从固定床向流化床过渡开始的起始速度，即床层孔隙率 $\varepsilon$ 从 0.4 向大于 0.4 过渡时的速度。</li>
+<li>带出速度 $u_{dc}$: 或者可称为沉降速度，此时床层孔隙率 $\varepsilon$ 约等于 1，此时物料颗粒将被气流带出沸腾层。</li>
+<li>操作速度 $u_{cz}$: 沸腾层正常运行时床层内的气流直线速度（表观速度）。</li>
+<li>床层孔隙率 $\varepsilon$: 床层中颗粒之间的空隙体积与整体体积之比，通常非规则颗粒密布固定床可取 0.4。</li>
+</ul>
+<h2 id="cao-zuo-qi-liu-su-du-de-que-ding">操作气流速度的确定</h2>
+<p>流化指数: $k_{lh}={u_{cz}\over u_{dc}}$</p>
+<ul>
+<li>强化生产，尽可能采用较大的流化指数</li>
+<li>工艺允许有较大烟尘率时，可采用较大流化指数</li>
+<li>对操作温度下易粘结物料，应采用较大的流化指数</li>
+<li>沸腾层化学反应较慢，流化介质较贵重时，选用较小流化指数</li>
+<li>通常流化指数范围在 0.25~0.6 之间</li>
+</ul>
+<h2 id="qi-liu-fen-bu-ban-she-ji">气流分布板设计</h2>
+<p>理论沸腾层压力降</p>
+<p>气流分布板主要起以下几大作用: $\Delta P_c=H_c(\rho_m-\rho_g)(1-\varepsilon)g$</p>
+<ul>
+<li>保证进入沸腾层的气流应分布均匀</li>
+<li>具有一定的孔眼喷出速度使颗粒湍流</li>
+<li>具有一定的阻力，可平衡沸腾层各处料层阻力的波动</li>
+</ul>
+<p>分布板孔眼率 $b_k$ : 分布板风帽孔眼总面积与炉床面积之比，需要取以下两种算法之中的较小值为设计值。</p>
+<ul>
+<li>孔眼喷出速度计算：孔眼喷出速度 $u_k$ 必须大于或等于入炉物料粗颗粒的带出速度，此时孔眼率计算公式 $b_k={u_{cz}(1+\beta t_k)\over u_k(1+\beta t_c)}$
+<blockquote>
+<p>$\beta$: 气体膨胀系数，数值为：$1/273.25$</p>
+<p>$t_k$: 气体离开分布板时的温度，单位（℃）</p>
+<p>$t_c$: 沸腾层的温度，单位（℃）</p>
+</blockquote>
+</li>
+<li>气流分布版最小阻力计算：风帽与分布板结构型式与操作气流确定后，分布板的阻力直接取决于孔眼率，计算公式 $b_k=u_{cz}{(1+\beta t_k)\over (1+\beta t_c)}\sqrt {\xi \rho_g \over 2 \Delta P_b}$
+<blockquote>
+<p>$\xi$: 气流分布板阻力系数，取决于风帽及分布板结构型式，侧流型风帽取值 1.5~3.0 ，内部设有阻力版的侧流型风帽取值 10~15</p>
+<p>$\Delta P_b$: 保证稳定沸腾的最低分布板阻力（压降），单位（$Pa$），可以使用沸腾层阻力近似取值 $\Delta P_b=0.1\Delta P_c$ F</p>
+<p>$H_c$: 沸腾层高度，单位（$m$）</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="lu-tang-xiang-guan-shu-yu-ding-yi">炉膛相关术语定义</h2>
+<p>炉膛容积热负载 ($kW/m^3$): $q_v={BQ_{ar.net}\over V_1}$</p>
+<blockquote>
+<ul>
+<li>
+<p>$B$: 锅炉的燃料消耗量 ($kg/s$ or $m^3/s$)</p>
+</li>
+<li>
+<p>$Q_{ar.net}$: 燃料的收到基低位发热量 ($kJ/kg$ or $kJ/m^3$)</p>
+</li>
+<li>
+<p>$V_1$: 炉膛容积 ($m^3$)</p>
+</li>
+</ul>
+</blockquote>
+<p>炉膛截面热负载 ($kW/m^2$): $q_r={BQ_{ar.net}\over F}$</p>
+<blockquote>
+<ul>
+<li>$F$: 炉膛横截面积或炉排的有效面积</li>
+</ul>
+</blockquote>
+<h2 id="he-mei-xiang-guan">褐煤相关</h2>
+<p>褐煤高水分、高挥发分、高灰分、低灰熔点、低发热量</p>
+<p>褐煤灰熔点约 1100℃，容易结渣，要求炉膛容积热负荷要低，炉膛温度不宜过高。</p>
+<p>褐煤挥发分析出温度约在 300℃，320 ~ 400℃ 既开始着火燃烧，500℃ 以上基本燃尽。</p>
+
+    </div>
+
+    
+    <div class="article-info">
+        
+        <div class="article-date"> 4 August 2022</div>
+        
+        <div class="article-taxonomies">
+            
+            
+                <ul class="article-tags">
+                    
+                    <li><a href="https://abrahum.link/tags/ji-jie/">#机械</a></li>
+                    
+                </ul>
+            
+        </div>
+    </div>
+
+</article>
+
+<script src="https://utteranc.es/client.js"
+    repo="abrahum/abrahum.github.io"
+    issue-term="pathname"
+    theme="github-light"
+    crossorigin="anonymous"
+    async>
+</script>
+
+        </main>
+        <footer>
+            <p>
+                © Abrahum Link 2024<br>
+                Powered by <a target="_blank" href="https://getzola.org/">Zola</a>, Theme Link.
+            </p>
+            <p>
+                
+                
+            </p>
+        </footer>
+    </div>
+</body>
+</html>

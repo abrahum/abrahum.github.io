@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+
+    <title>ffmpeg</title>
+    <meta name="description" content="">
+
+    <link rel="stylesheet" href="https://abrahum.link/main.css">
+
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.15.1/katex.min.css" integrity="sha384-R4558gYOUz8mP9YWpZJjofhk+zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs" crossorigin="anonymous">
+    <script defer src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.15.1/katex.min.js" integrity="sha384-z1fJDqw8ZApjGO3/unPWUPsIymfsJmyrDVWC8Tv/a1HeOtGmkwNd/7xUS0Xcnvsx" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.15.1/contrib/auto-render.min.js" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+              // customised options
+              // • auto-render specific keys, e.g.:
+              delimiters: [
+                  {left: '$$', right: '$$', display: true},
+                  {left: '$', right: '$', display: false},
+                  {left: '\\(', right: '\\)', display: false},
+                  {left: '\\[', right: '\\]', display: true}
+              ],
+              // • rendering keys, e.g.:
+              throwOnError : false
+            });
+        });
+    </script>
+
+    
+
+    
+    
+</head>
+<body>
+    <a class="skip-main" href="#main">Skip to content</a>
+    <div class="container">
+        <header> 
+            <h1 class="site-header">
+                <a href="https:&#x2F;&#x2F;abrahum.link">Abrahum Link</a>
+            </h1> 
+            <nav>
+                
+                    
+                        
+                        <a  href="https:&#x2F;&#x2F;abrahum.link&#x2F;tags">Tags</a>
+                    
+                        
+                        <a  href="https:&#x2F;&#x2F;abrahum.link&#x2F;about">About</a>
+                    
+                        
+                        <a  href="https:&#x2F;&#x2F;github.com&#x2F;abrahum">GitHub</a>
+                    
+                
+            </nav>
+        </header>
+        <main id="main" tabindex="-1">
+            
+<h1>Tag: #ffmpeg</h1>
+<div class="article-info">
+    <a href="https://abrahum.link/tags">To all tags</a>
+</div>
+
+
+
+    <article class="post-list">
+        <header> 
+            <h1>
+                <a href="https:&#x2F;&#x2F;abrahum.link&#x2F;16-10-07ffmpeg&#x2F;">ffmpeg使用笔记</a>
+            </h1>
+        </header>
+
+        
+        <div class="content post-summary">
+            <h2 id="ji-ben-ming-ling-mo-shi">基本命令模式</h2>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>ffmpeg [options] [[infile options] -i infile]... {[outfile options] outfile}
+</span></code></pre>
+<h2 id="options">options</h2>
+<table><thead><tr><th>options</th><th style="text-align: left">功能说明</th><th style="text-align: left">可选参数</th></tr></thead><tbody>
+<tr><td><code>-preset</code></td><td style="text-align: left">h264 自带的模式选择，仅影响转码速度，不影响质量，会影响码率。</td><td style="text-align: left">ultrafast，superfast，veryfast，faster，fast，medium，slow，slower，veryslow和placebo。<strong>默认处在medium模式</strong> 例子：<code>-preset fast</code></td></tr>
+<tr><td><code>-crf</code></td><td style="text-align: left">h264 影响最终视频的质量</td><td style="text-align: left">0-51的数值 我貌似见到过低于51的质量 默认是23。例子：<code>-crf 20</code><strong>指定该参数后码率参数将会失效</strong></td></tr>
+<tr><td><code>-b</code></td><td style="text-align: left">码率</td><td style="text-align: left">例如：<code>-b:a 132k</code>即音频132kbps <code>-b:v 1800k</code>即视频1800kbps</td></tr>
+<tr><td><code>-vf</code></td><td style="text-align: left">编辑视频分辨率</td><td style="text-align: left"><code>-vf scale=1920:1080</code>即缩放为1080p <code>-vf crop=1280:720:0:0</code>即剪辑为720p，后面是剪辑区域左上角坐标</td></tr>
+<tr><td><code>-strict -2</code></td><td style="text-align: left"><code>encoder 'acc'</code></td><td style="text-align: left">音频参数，不明，貌似是因为我使用的版本acc编码还在试验阶段</td></tr>
+<tr><td><code>-threads</code></td><td style="text-align: left">多线程运算</td><td style="text-align: left">例子：<code>-threads 2</code>双线程。</td></tr>
+<tr><td><code>-ss</code>和<code>-t</code></td><td style="text-align: left">视频剪辑</td><td style="text-align: left">例子：<code>-ss 00:00:00.00 -t 00:00:10.00</code>剪辑为前十秒钟的视频输出。</td></tr>
+<tr><td><code>-y</code></td><td style="text-align: left">自动覆盖文件</td><td style="text-align: left">略。</td></tr>
+</tbody></table>
+
+        </div>
+        
+        
+        
+    <div class="article-info">
+        
+        <div class="article-date"> 7 October 2016</div>
+        
+        <div class="article-taxonomies">
+            
+            
+                <ul class="article-tags">
+                    
+                    <li><a href="https://abrahum.link/tags/linux/">#Linux</a></li>
+                    
+                    <li><a href="https://abrahum.link/tags/ffmpeg/">#ffmpeg</a></li>
+                    
+                </ul>
+            
+        </div>
+    </div>
+
+    </article>
+
+
+
+
+        </main>
+        <footer>
+            <p>
+                © Abrahum Link 2024<br>
+                Powered by <a target="_blank" href="https://getzola.org/">Zola</a>, Theme Link.
+            </p>
+            <p>
+                
+                
+            </p>
+        </footer>
+    </div>
+</body>
+</html>

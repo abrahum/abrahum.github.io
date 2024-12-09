@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+
+    <title>Hello Zola and 2022</title>
+    <meta name="description" content="">
+
+    <link rel="stylesheet" href="https://abrahum.link/main.css">
+
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.15.1/katex.min.css" integrity="sha384-R4558gYOUz8mP9YWpZJjofhk+zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs" crossorigin="anonymous">
+    <script defer src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.15.1/katex.min.js" integrity="sha384-z1fJDqw8ZApjGO3/unPWUPsIymfsJmyrDVWC8Tv/a1HeOtGmkwNd/7xUS0Xcnvsx" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.15.1/contrib/auto-render.min.js" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+              // customised options
+              // • auto-render specific keys, e.g.:
+              delimiters: [
+                  {left: '$$', right: '$$', display: true},
+                  {left: '$', right: '$', display: false},
+                  {left: '\\(', right: '\\)', display: false},
+                  {left: '\\[', right: '\\]', display: true}
+              ],
+              // • rendering keys, e.g.:
+              throwOnError : false
+            });
+        });
+    </script>
+
+    
+
+    
+    
+</head>
+<body>
+    <a class="skip-main" href="#main">Skip to content</a>
+    <div class="container">
+        <header> 
+            <h1 class="site-header">
+                <a href="https:&#x2F;&#x2F;abrahum.link">Abrahum Link</a>
+            </h1> 
+            <nav>
+                
+                    
+                        
+                        <a  href="https:&#x2F;&#x2F;abrahum.link&#x2F;tags">Tags</a>
+                    
+                        
+                        <a  href="https:&#x2F;&#x2F;abrahum.link&#x2F;about">About</a>
+                    
+                        
+                        <a  href="https:&#x2F;&#x2F;github.com&#x2F;abrahum">GitHub</a>
+                    
+                
+            </nav>
+        </header>
+        <main id="main" tabindex="-1">
+            
+
+<article class="post">
+    <header>
+        <h1>Hello Zola and 2022</h1>
+    </header>
+    <div class="content">
+        <p>将博客迁移到 Zola，顺便聊一下以后的规划。</p>
+<span id="continue-reading"></span>
+<p>迁移非常简单，主题是基于 Anpu 简单改的，越来越喜欢这种简洁的风格了，Gitalk 还没有加，可能就不加了，也没什么用。</p>
+<p>在我没有更新我博客的这一段时间里，我其实并未放弃我的这一爱好（指写代码），而且可以说在这一段时间里我算是真正的登堂入室（自认为）。</p>
+<p>在此之前，其实我就是一个知道一点编程的普通人，相比门外汉我确实会写一些简单的 Python 代码（调用一些库、写一些不涉及 Python 高阶写法的脚本），我了解计算机的基本原理、逻辑（感谢大学开设的单片机、PLC 等相关专业）。但我其实并未真正地具备程序员（即使是业余）的必备知识与技能，我只是在拾人牙慧的用着别人的东西，不求甚解。</p>
+<p>是什么促使了我的改变？</p>
+<p>首先要感谢的是 Nonebot 项目与其社区，我在这里真正接触到了一个项目的开发、运维，并首次尝试为社区作出一些微小贡献，并获得了不错的反馈。</p>
+<blockquote>
+<p>如果你对聊天机器人感兴趣的话，你不应该错过 <a href="http://v2.nonebot.dev">Nonebot2</a> ，这是一个 user-friendly 的机器人开发框架。 ❛˓◞˂̵✧</p>
+</blockquote>
+<p>然后我就在想，我能否在次基础上更进一步呢？我要尝试自己开发一个我的 "Nonebot"，一个我的机器人框架！</p>
+<p>当时的 OneBot 生态中开发 SDK 已经有了 Python（<a href="http://v2.nonebot.dev">Nonebot2</a>）、Node.js（<a href="https://koishi.js.org/">Koishi</a>）、PHP（<a href="https://framework.zhamao.xin">炸毛</a>）、Golang（<a href="https://github.com/wdvxdr1123/ZeroBot">ZeorBot</a>）等珠玉在前，我并不觉得我的框架能超越前人，也应该不会有用户使用我这个半吊子写的垃圾框架（事实确如我所料2333）。所以我决定选择一个现有生态中没有的语言来写，这就促使我需要去学习一门新的语言（其实另一方面还有个原因就是我当时刚刚换了工作，实习期比较清闲）。</p>
+<p>当时我已经开始学习 Golang，不断有人将 Golang 与 Rust 进行比较。而 Rust 据称是一门学习曲线非常陡峭的语言（事实上现在我并不这么觉得），同时又多年蝉联最受开发者欢迎语言，那么就决定是你了， Rust！ <del>（抖 M 啊你）</del></p>
+<h2 id="rust">Rust</h2>
+<p>Rust 无疑是一门非常优秀的语言，已经有很多业内大佬对这门语言作出了各种角度的剖析与介绍，我在这里就不多做赘述，这里我想谈一下从我一个没有深入接触其他语言、没有先入为主的门外汉的视角来看，学习、使用 Rust 是一种什么体验。</p>
+<p>首先说一下我的结论，Rust 是一门非常适合有志于编程的门外汉学习的语言，至少相比于我了解的其他语言。</p>
+<p>首先就是它的工具链，相比余其他语言的工具链</p>
+<ul>
+<li>Python: 不用担心包版本冲突，也不用为每个项目手动配置虚拟环境（Poetry、Conda）</li>
+<li>Go: 不用忍受 GitHub 不稳定的访问体验</li>
+<li>Node.js: 非常强大，但是并不完全通用，很多时候需要查询具体项目的额外配置</li>
+<li>Cpp 等其他一众语言: 不具备现代化的工具链</li>
+</ul>
+<p>你只需要学会 Cargo 你就基本上学会了 Rust 依赖相关的所有，你只需要配置好一个文件Cargo.toml（但是 Rust 这个庞大的 target 文件夹和差强人意的 debug 编译速度还是需要重点吐槽一下）</p>
+<p>Rust 语言本身综合了很多的编程范式、语言特性，其中我尤为喜欢 <code>Result&lt;T&gt;</code> 这种处理异常的形式，这确保了所有已知可能的异常都被我完全知晓，并且它强制我必须全部处理，这给我一种非常安心的感觉，尤其是之前使用的是 Python 这么一门完全动态的语言，这让我有了我也能写出非常强壮的程序的信心。</p>
+<blockquote>
+<p><code>unwrap()</code> 坏文明， Rust Analyzer 应该推出一个高亮所有 <code>unwrap()</code> 的选项 2333</p>
+</blockquote>
+<p>Rust 的编译器检查非常严格，配合上 Rust Analyzer，能够在学习过程中发现很多问题，并用不难理解的语句，准确的指出你的问题，而且提供可能的修复建议（会说人话）。这其实非常有利于学习，如果你使用的 Python 这种你不运行一下，解释器都不明白你到底想干啥的语言（用上 <code>typing</code> 之后好很多了），一段程序你可能需要多次运行、更换可能的输入、查看长长的调用栈才能发现一个非常浅显的 Bug。</p>
+<p>最后，关于陡峭的学习曲线，其实如果你是像我这样的门外汉，我觉得这反而是你的优势，学习其他语言的时候，什么类型？什么接口？什么虚方法？blablabla...其实与所有权、生命周期是一样的，当你完全没有学过（或者说深入使用）其他语言，你就不会觉得这些程序员觉得不适应的东西是难以接受的，它们和其他概念对你来说都是一样陌生的。</p>
+<p>这里给想要学习或了解 Rust 的推荐几个网站:</p>
+<ul>
+<li><a href="https://kaisery.github.io/trpl-zh-cn/">Rust 程序设计语言</a>: trpl 可以说是 Rust 入门的不二选择，你需要了解的所有里面几乎都有提及</li>
+<li><a href="https://rustwiki.org/zh-CN/cargo/">Cargo 手册</a>: 正如前文所述，掌握了 Cargo，你就掌握了 Rust 工具链</li>
+<li><a href="https://rust-lang.github.io/async-book/index.html">Rust 异步编程</a>: 很可惜这本书还没有很好的中文翻译，Rust 的异步相对比较复杂，因为要考虑到所有权、Sync、Send 等，尤其是涉及到泛型之后，声明往往变得越来越繁琐，这本书是进阶的不二选择</li>
+<li><a href="https://nomicon.purewhite.io/">Rust 秘典（死灵书）</a>: 走向大佬的指路书</li>
+<li><a href="https://doc.rust-lang.org/std/index.html">Rust 标准库</a>: Rust 的标准库文档</li>
+</ul>
+<h2 id="2022">2022</h2>
+<p>哈哈，主题莫名其妙变成聊 Rust 了，说回主题，在学习了一段时间的 Rust 后我写了一个 Onebot SDK 项目 <a href="https://github.com/abrahum/nonebot-rs">Nonebot-rs</a>。（但是现在看来这个项目非常的不成熟，不打算再进行维护，不建议使用）</p>
+<p>恰逢 <a href="https://12.onebot.dev">OneBot v12</a> 标准发布，我为 v12 标准写了一个 lib-Onebot <a href="https://github.com/abrahum/Walle-core">Walle-core</a>，目前项目处于初步可用状态，后续也将积极维护该项目，并以此为基础构建应用端开发 SDK（是的这个 libob 项目是双端可用的）。</p>
+<p>2022 年我计划中的 Rust 项目主要有以下几个:</p>
+<ul>
+<li><del>Walle-Hub</del>(暂缓): 一个 Onebot 协议的中间件，考虑到 Rust 语言用户并不多，确实客观存在上手难度，作为中间件就可以避免，Hub 主要提供多实现端到多应用端的多种逻辑转发、均衡负载、预过滤、限速等简单逻辑</li>
+<li><a href="https://github.com/lz1998/rs-qq">rs-qq</a>: 一个 MiraiGo 的 Rust 移植，主要是给 lz1998 打打下手</li>
+<li><a href="https://github.com/abrahum/walle-q">Walle-Q</a>: 使用 Walle-core 和 rs-qq 的协议端实现</li>
+<li><a href="https://github.com/abrahum/diro">Diro</a>: 桌游骰子表达式的解析执行器，可能附属一些简单的骰娘功能，目前还不明确，计划包装成 FFI 和 pyo3 包装的 Pymodule</li>
+</ul>
+<p>其他学习计划：</p>
+<ul>
+<li>Haskell: 作为一个非职业程序员，我可以完全凭自己的爱好选择想学的语言 2333，主要是想要了解一下函数式编程思想</li>
+<li>.Net(C#) | Flutter(Dart) | Node.js(TypeScript)： 学习一门适合用来写 UI 相关的语言，应该不会深入，最好能和 Rust 便利地结合起来。</li>
+</ul>
+<h2 id="others">Others</h2>
+<p>有时候扪心自问，我也不知道我为什么要学习编程，我不打算跳槽成为程序员，而我的日常工作，也不是自动化相关，根本用不上编程相关知识。</p>
+<p>但是编程时我很快乐，写了一些有趣的代码，有人可能用上了我这些不算很糟糕的代码，这就够了不是吗 ^∀^</p>
+
+    </div>
+
+    
+    <div class="article-info">
+        
+        <div class="article-date">12 December 2021</div>
+        
+        <div class="article-taxonomies">
+            
+            
+                <ul class="article-tags">
+                    
+                    <li><a href="https://abrahum.link/tags/zola/">#Zola</a></li>
+                    
+                </ul>
+            
+        </div>
+    </div>
+
+</article>
+
+<script src="https://utteranc.es/client.js"
+    repo="abrahum/abrahum.github.io"
+    issue-term="pathname"
+    theme="github-light"
+    crossorigin="anonymous"
+    async>
+</script>
+
+        </main>
+        <footer>
+            <p>
+                © Abrahum Link 2024<br>
+                Powered by <a target="_blank" href="https://getzola.org/">Zola</a>, Theme Link.
+            </p>
+            <p>
+                
+                
+            </p>
+        </footer>
+    </div>
+</body>
+</html>

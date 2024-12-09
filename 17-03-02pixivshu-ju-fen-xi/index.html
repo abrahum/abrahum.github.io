@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+
+    <title>Pixiv数据分析</title>
+    <meta name="description" content="">
+
+    <link rel="stylesheet" href="https://abrahum.link/main.css">
+
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.15.1/katex.min.css" integrity="sha384-R4558gYOUz8mP9YWpZJjofhk+zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs" crossorigin="anonymous">
+    <script defer src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.15.1/katex.min.js" integrity="sha384-z1fJDqw8ZApjGO3/unPWUPsIymfsJmyrDVWC8Tv/a1HeOtGmkwNd/7xUS0Xcnvsx" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.15.1/contrib/auto-render.min.js" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+              // customised options
+              // • auto-render specific keys, e.g.:
+              delimiters: [
+                  {left: '$$', right: '$$', display: true},
+                  {left: '$', right: '$', display: false},
+                  {left: '\\(', right: '\\)', display: false},
+                  {left: '\\[', right: '\\]', display: true}
+              ],
+              // • rendering keys, e.g.:
+              throwOnError : false
+            });
+        });
+    </script>
+
+    
+
+    
+    
+</head>
+<body>
+    <a class="skip-main" href="#main">Skip to content</a>
+    <div class="container">
+        <header> 
+            <h1 class="site-header">
+                <a href="https:&#x2F;&#x2F;abrahum.link">Abrahum Link</a>
+            </h1> 
+            <nav>
+                
+                    
+                        
+                        <a  href="https:&#x2F;&#x2F;abrahum.link&#x2F;tags">Tags</a>
+                    
+                        
+                        <a  href="https:&#x2F;&#x2F;abrahum.link&#x2F;about">About</a>
+                    
+                        
+                        <a  href="https:&#x2F;&#x2F;github.com&#x2F;abrahum">GitHub</a>
+                    
+                
+            </nav>
+        </header>
+        <main id="main" tabindex="-1">
+            
+
+<article class="post">
+    <header>
+        <h1>Pixiv数据分析</h1>
+    </header>
+    <div class="content">
+        <p>寒假的时候利用家里不计费的网爬取了600w+P站的图片数据。一开始的目的是解决：由于P站本身的搜索页面1000页限制，而导致的无法通过搜索爬取较早图片信息，这一问题。所以在爬取的一开始，我的目标是获取高收藏的高质量作品。我采取的爬取策略是通过第一个画师的收藏夹开始，获取他收藏夹内的图片信息，接着将这些图片的画师id加入画师数据库。当当前画师的收藏夹爬取完毕后，就从画师数据库中随机抽取一个新的画师重复之前的步骤。这样的策略可以从点到面的快速、无休止地多线程爬取高质量的画作。</p>
+<span id="continue-reading"></span><script crossorigin="anonymous" integrity="sha512-ZRdjJAYP8Kij8Lkln9uiGj0jIrMDLAALm1ZB2b3VfV9XJ0nR4zbJmHKB42/A4tgMlZS4DTPnSAmcYRoS0dginA==" src="https://lib.baomitu.com/echarts/5.0.0/echarts.min.js"></script>
+<p>从春节过后的初三开始，我断断续续爬了有近百小时（拜坑爹移动所赐，常常一百个链接404回来99个），一共爬了555781位画师的收藏夹，考虑到我的爬取策略会使得画作质量整体偏高，同时P站一共有六千万左右的画作，两千万左右的用户（前段时间还首页公告这个消息来着），我认为数据库对于收藏数一千以上的作品，收录基本完全。</p>
+<p>基于此数据库，我做了以下数据分析：</p>
+<div id="1wlike" style="height:400px;"></div>
+<p>首先说明下，为了避免一些标签的重复霸榜，我把所有xxxusers入り的标签都剔除了。</p>
+<p>那么在一万收藏的12058作中，第一位的是原创。嘛，在p站，这很政治正确。第二位ふつくしい是什麽鬼，是个梗吗······漫画这种标签竟然第三也是醉了。</p>
+<div id="1klike" style="height:400px;"></div>
+<p>价格来到千元机的档次（好像有什么不对······），一共363575作，R-18火箭上升至第一名···第二名，就是腐向···</p>
+<p>好孩子不要逛p站！好孩子不要逛p站！好孩子不要逛p站！</p>
+<p>关于R18的问题，我还有个有趣的发现：</p>
+<div id="10w18" style="height:400px;"></div>
+<p>十万以上的八位大佬均非R18作品。</p>
+<div id="1w18" style="height:400px;"></div>
+<p>在一万的档次，邪恶势力开始崭露头角。</p>
+<div id="1k18" style="height:400px;"></div>
+<p>千元机，R18怒占15%。</p>
+<div id="1h18" style="height:400px;"></div>
+<p>百元机虽然覆盖所有，但是也可以做个参考，那么就是说p站的R18大概占比15%～20%咯？</p>
+<p>为大家送上十万赞八位大佬的链接(数据截止2017.02)：</p>
+<ul>
+<li><a href="http://www.pixiv.net/member_illust.php?mode=medium&amp;illust_id=54704433">ID：54704433 收藏数：108960 标题：構図メイキングみたいな</a></li>
+<li><a href="http://www.pixiv.net/member_illust.php?mode=medium&amp;illust_id=29528285">ID：29528285 收藏数：122654 标题：人物の描き方</a></li>
+<li><a href="http://www.pixiv.net/member_illust.php?mode=medium&amp;illust_id=24780663">ID：24780663 收藏数：127154 标题：色気のある足・脚の描き方</a></li>
+<li><a href="http://www.pixiv.net/member_illust.php?mode=medium&amp;illust_id=12752243">ID：12752243 收藏数：147624 标题：手の苦手な人の為に</a></li>
+<li><a href="http://www.pixiv.net/member_illust.php?mode=medium&amp;illust_id=42934122">ID：42934122 收藏数：150944 标题：ヲタクに恋は難しい</a></li>
+<li><a href="http://www.pixiv.net/member_illust.php?mode=medium&amp;illust_id=31906341">ID：31906341 收藏数：162762 标题：スーツの描き方の基本</a></li>
+<li><a href="http://www.pixiv.net/member_illust.php?mode=medium&amp;illust_id=24643629">ID：24643629 收藏数：173698 标题：色気のある手の描き方</a></li>
+<li><a href="http://www.pixiv.net/member_illust.php?mode=medium&amp;illust_id=12192382">ID：12192382 收藏数：211231 标题：動きのあるポーズを描く時に）ry</a></li>
+</ul>
+<script>
+var myChart = echarts.init(document.getElementById('1wlike'));
+var option = {
+    title: {
+        text: "1w收藏以上的标签分布",
+        subtext: "Pixiv数据截至17年2月"
+    },
+    tooltip: {
+        trigger: "axis"
+    },
+    legend: {
+        data: ["作品数量"]
+    },
+    xAxis: [
+        {
+            type: "value",
+            boundaryGap: [0, 0.02],
+            axisTick: {
+                show: false
+            },
+            axisLabel: {
+                show: true
+            },
+            axisLine: {
+                show: true
+            },
+            position: "bottom",
+            nameLocation: "end",
+        }
+    ],
+    yAxis: [
+        {
+            type: "category",
+            data: ['R-18', '女の子', '10点じゃ足りない', 'なにこれ素敵', 'クリック推奨', "おそ松さん", "ハイセンス", "BL松", "なにこれかわいい", "刀剣乱舞", "腐向け", "漫画", "ふつくしい", "オリジナル"],
+            left: "40%"
+        }
+    ],
+    series: [
+        {
+            name: "作品数量",
+            type: "bar",
+            data: [584, 651, 657, 695, 724, 740, 749, 811, 827, 939, 1076, 1140, 1180, 1812]
+        }
+    ],
+    animation: true,
+    animationDuration: 1786,
+    animationEasing: "Linear",
+    left: "40%"
+};
+myChart.setOption(option);
+var myChart = echarts.init(document.getElementById('1klike'));
+var option = {
+    title: {
+        text: "1k收藏以上的标签分布",
+        subtext: "Pixiv数据截至17年2月"
+    },
+    tooltip: {
+        trigger: "axis"
+    },
+    legend: {
+        data: ["作品数量"]
+    },
+    toolbox: {
+        feature: {
+            mark: {
+                show: true
+            },
+            dataView: {
+                show: true,
+                readOnly: true
+            },
+            magicType: {
+                show: false,
+                type: ["line", "bar"]
+            },
+            restore: {
+                show: true
+            },
+            saveAsImage: {
+                show: true
+            }
+        },
+        show: true
+    },
+    xAxis: [
+        {
+            type: "value",
+            boundaryGap: [0, 0.01],
+            axisTick: {
+                show: false
+            },
+            axisLabel: {
+                show: true
+            },
+            axisLine: {
+                show: true
+            },
+            position: "bottom",
+            nameLocation: "end"
+        }
+    ],
+    yAxis: [
+        {
+            type: "category",
+            data: ['なにこれ素敵', '黒子のバスケ', '刀剣乱舞', '女の子', '東方', '尻神様', "BL松", "ふつくしい", "艦隊これくしょん", "艦これ", "なにこれかわいい", "オリジナル", "漫画", "腐向け", "R-18"]
+        }
+    ],
+    series: [
+        {
+            name: "作品数量",
+            type: "bar",
+            data: [9084, 9110, 9678, 9909, 11775, 12151, 13707, 15621, 17741, 19995, 21129, 30410, 32280, 38244, 56897]
+        }
+    ],
+    animation: true,
+    animationDuration: 1786,
+    animationEasing: "Linear"
+}
+myChart.setOption(option);
+var myChart = echarts.init(document.getElementById('10w18'));
+var option = {
+    title: {
+        text: "十万以上的R-18占比",
+        subtext: "Pixiv数据截止17年2月",
+        x: "center"
+    },
+    tooltip: {
+        trigger: "item",
+        formatter: "{a} <br/>{b} : {c} ({d}%)"
+    },
+    legend: {
+        orient: "vertical",
+        x: "left",
+        data: ["非R18"]
+    },
+    toolbox: {
+        show: true,
+        feature: {
+            mark: {
+                show: true
+            },
+            dataView: {
+                show: true,
+                readOnly: true
+            },
+            restore: {
+                show: true
+            },
+            saveAsImage: {
+                show: true
+            }
+        }
+    },
+    calculable: true,
+    series: [
+        {
+            name: "作品数",
+            type: "pie",
+            radius: "55%",
+            center: ["50%", "60%"],
+            data: [
+                {
+                    value: 8,
+                    name: "非R18"
+                }
+            ]
+        }
+    ]
+}
+myChart.setOption(option);
+var myChart = echarts.init(document.getElementById('1w18'));
+var option = {
+    title: {
+        text: "一万以上的R-18占比",
+        subtext: "Pixiv数据截止17年2月",
+        x: "center"
+    },
+    tooltip: {
+        trigger: "item",
+        formatter: "{a} <br/>{b} : {c} ({d}%)"
+    },
+    legend: {
+        orient: "vertical",
+        x: "left",
+        data: ["非R18", "R18"]
+    },
+    toolbox: {
+        show: true,
+        feature: {
+            mark: {
+                show: true
+            },
+            dataView: {
+                show: true,
+                readOnly: true
+            },
+            restore: {
+                show: true
+            },
+            saveAsImage: {
+                show: true
+            }
+        }
+    },
+    calculable: true,
+    series: [
+        {
+            name: "作品数",
+            type: "pie",
+            radius: "55%",
+            center: ["50%", "60%"],
+            data: [
+                {
+                    value: 11467,
+                    name: "非R18"
+                },
+                {
+                    value: 591,
+                    name: "R18"
+                }
+            ]
+        }
+    ]
+}
+myChart.setOption(option);
+var myChart = echarts.init(document.getElementById('1k18'));
+var option = {
+    title: {
+        text: "一千以上的R-18占比",
+        subtext: "Pixiv数据截止17年2月",
+        x: "center"
+    },
+    tooltip: {
+        trigger: "item",
+        formatter: "{a} <br/>{b} : {c} ({d}%)"
+    },
+    legend: {
+        orient: "vertical",
+        x: "left",
+        data: ["非R18", "R18"]
+    },
+    toolbox: {
+        show: true,
+        feature: {
+            mark: {
+                show: true
+            },
+            dataView: {
+                show: true,
+                readOnly: true
+            },
+            restore: {
+                show: true
+            },
+            saveAsImage: {
+                show: true
+            }
+        }
+    },
+    calculable: true,
+    series: [
+        {
+            name: "作品数",
+            type: "pie",
+            radius: "55%",
+            center: ["50%", "60%"],
+            data: [
+                {
+                    value: 306678,
+                    name: "非R18"
+                },
+                {
+                    value: 56897,
+                    name: "R18"
+                }
+            ]
+        }
+    ]
+}
+myChart.setOption(option);
+var myChart = echarts.init(document.getElementById('1h18'));
+var option = {
+    title: {
+        text: "现有一百以上数据中R-18占比",
+        subtext: "Pixiv数据截止17年2月",
+        x: "center"
+    },
+    tooltip: {
+        trigger: "item",
+        formatter: "{a} <br/>{b} : {c} ({d}%)"
+    },
+    legend: {
+        orient: "vertical",
+        x: "left",
+        data: ["非R18", "R18"]
+    },
+    toolbox: {
+        show: true,
+        feature: {
+            mark: {
+                show: true
+            },
+            dataView: {
+                show: true,
+                readOnly: true
+            },
+            restore: {
+                show: true
+            },
+            saveAsImage: {
+                show: true
+            }
+        }
+    },
+    calculable: true,
+    series: [
+        {
+            name: "作品数",
+            type: "pie",
+            radius: "55%",
+            center: ["50%", "60%"],
+            data: [
+                {
+                    value: 1887878,
+                    name: "非R18"
+                },
+                {
+                    value: 362191,
+                    name: "R18"
+                }
+            ]
+        }
+    ]
+}
+myChart.setOption(option);
+</script>
+
+    </div>
+
+    
+    <div class="article-info">
+        
+        <div class="article-date"> 2 March 2017</div>
+        
+        <div class="article-taxonomies">
+            
+            
+                <ul class="article-tags">
+                    
+                    <li><a href="https://abrahum.link/tags/pixiv/">#Pixiv</a></li>
+                    
+                    <li><a href="https://abrahum.link/tags/python/">#Python</a></li>
+                    
+                </ul>
+            
+        </div>
+    </div>
+
+</article>
+
+<script src="https://utteranc.es/client.js"
+    repo="abrahum/abrahum.github.io"
+    issue-term="pathname"
+    theme="github-light"
+    crossorigin="anonymous"
+    async>
+</script>
+
+        </main>
+        <footer>
+            <p>
+                © Abrahum Link 2024<br>
+                Powered by <a target="_blank" href="https://getzola.org/">Zola</a>, Theme Link.
+            </p>
+            <p>
+                
+                
+            </p>
+        </footer>
+    </div>
+</body>
+</html>

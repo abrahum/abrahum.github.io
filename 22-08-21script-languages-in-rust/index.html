@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+
+    <title>Script languages in Rust</title>
+    <meta name="description" content="">
+
+    <link rel="stylesheet" href="https://abrahum.link/main.css">
+
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.15.1/katex.min.css" integrity="sha384-R4558gYOUz8mP9YWpZJjofhk+zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs" crossorigin="anonymous">
+    <script defer src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.15.1/katex.min.js" integrity="sha384-z1fJDqw8ZApjGO3/unPWUPsIymfsJmyrDVWC8Tv/a1HeOtGmkwNd/7xUS0Xcnvsx" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.15.1/contrib/auto-render.min.js" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+              // customised options
+              // • auto-render specific keys, e.g.:
+              delimiters: [
+                  {left: '$$', right: '$$', display: true},
+                  {left: '$', right: '$', display: false},
+                  {left: '\\(', right: '\\)', display: false},
+                  {left: '\\[', right: '\\]', display: true}
+              ],
+              // • rendering keys, e.g.:
+              throwOnError : false
+            });
+        });
+    </script>
+
+    
+
+    
+    
+</head>
+<body>
+    <a class="skip-main" href="#main">Skip to content</a>
+    <div class="container">
+        <header> 
+            <h1 class="site-header">
+                <a href="https:&#x2F;&#x2F;abrahum.link">Abrahum Link</a>
+            </h1> 
+            <nav>
+                
+                    
+                        
+                        <a  href="https:&#x2F;&#x2F;abrahum.link&#x2F;tags">Tags</a>
+                    
+                        
+                        <a  href="https:&#x2F;&#x2F;abrahum.link&#x2F;about">About</a>
+                    
+                        
+                        <a  href="https:&#x2F;&#x2F;github.com&#x2F;abrahum">GitHub</a>
+                    
+                
+            </nav>
+        </header>
+        <main id="main" tabindex="-1">
+            
+
+<article class="post">
+    <header>
+        <h1>Script languages in Rust</h1>
+    </header>
+    <div class="content">
+        <p>调查对比目前 Rust 实现的几种脚本语言，比较的标准并不统一，纯个人向，方向大概会包含脚本语言本身是否<strong>美观</strong>易用、与 Rust 的<strong>互操作</strong>是否方便、目前解释器的<strong>实现进度</strong>等。</p>
+<span id="continue-reading"></span>
+<p>入选的语言：</p>
+<ul>
+<li><a href="https://github.com/sagiegurari/duckscript">duckscript</a></li>
+<li><a href="https://github.com/gluon-lang/gluon">gluon</a></li>
+<li><a href="https://github.com/mun-lang/mun">Mun</a></li>
+<li><a href="https://github.com/PistonDevelopers/dyon">dyon</a></li>
+<li><a href="https://github.com/rhaiscript/rhai">rhai</a></li>
+<li><a href="https://github.com/rune-rs/rune">rune</a></li>
+</ul>
+<p>其他落选语言：</p>
+<ul>
+<li><a href="https://github.com/fleabitdev/glsp">GameLisp</a>: 2022.3 起不再维护</li>
+<li><a href="https://github.com/murarth/ketos">ketos</a>: Last update at 2020.1</li>
+</ul>
+<h2 id="duckscript">duckscript</h2>
+<p>duckscript 的目标是简单、可扩展的可嵌入脚本语言。</p>
+<p>Example:</p>
+<pre data-linenos data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><table><tbody><tr><td>1</td><td><span style="color:#65737e;"># print the text &quot;Hello World&quot;
+</span></td></tr><tr><td>2</td><td><span style="color:#96b5b4;">echo</span><span> Hello World 
+</span></td></tr><tr><td>3</td><td><span style="color:#65737e;"># print the text &quot;Hello World&quot;
+</span></td></tr><tr><td>4</td><td><span style="color:#96b5b4;">echo </span><span>&quot;</span><span style="color:#a3be8c;">Hello World</span><span>&quot;
+</span></td></tr><tr><td>5</td><td><span style="color:#65737e;"># print the text &#39;hello &quot;world&quot;&#39;
+</span></td></tr><tr><td>6</td><td><span style="color:#96b5b4;">echo </span><span>&quot;</span><span style="color:#a3be8c;">hello </span><span style="color:#96b5b4;">\&quot;</span><span style="color:#a3be8c;">world</span><span style="color:#96b5b4;">\&quot;</span><span>&quot;
+</span></td></tr><tr><td>7</td><td><span>
+</span></td></tr><tr><td>8</td><td><span style="color:#bf616a;">out</span><span> = set &quot;</span><span style="color:#a3be8c;">Hello World</span><span>&quot;
+</span></td></tr><tr><td>9</td><td><span style="color:#65737e;"># This will print: &quot;The out variable holds the value: Hello World&quot;
+</span></td></tr><tr><td>10</td><td><span style="color:#96b5b4;">echo</span><span> The out variable holds the value: ${</span><span style="color:#bf616a;">out</span><span>}
+</span></td></tr><tr><td>11</td><td><span style="color:#65737e;"># This will print: &quot;To use the out variable just write: ${out}&quot;
+</span></td></tr><tr><td>12</td><td><span style="color:#96b5b4;">echo</span><span> To use the out variable just write: </span><span style="color:#96b5b4;">\$</span><span>{out}
+</span></td></tr><tr><td>13</td><td><span>
+</span></td></tr><tr><td>14</td><td><span style="color:#65737e;"># Labels
+</span></td></tr><tr><td>15</td><td><span style="color:#bf616a;">goto</span><span> :good
+</span></td></tr><tr><td>16</td><td><span style="color:#96b5b4;">echo</span><span> error!!!!
+</span></td></tr><tr><td>17</td><td><span style="color:#bf616a;">:good</span><span> echo yay!!!!
+</span></td></tr><tr><td>18</td><td><span>
+</span></td></tr><tr><td>19</td><td><span style="color:#65737e;"># Function
+</span></td></tr><tr><td>20</td><td><span style="color:#bf616a;">fn</span><span> print_first_and_second_argument
+</span></td></tr><tr><td>21</td><td><span>    </span><span style="color:#96b5b4;">echo </span><span>${</span><span style="color:#bf616a;">1</span><span>} ${</span><span style="color:#bf616a;">2</span><span>}
+</span></td></tr><tr><td>22</td><td><span>    </span><span style="color:#b48ead;">return</span><span> printed
+</span></td></tr><tr><td>23</td><td><span style="color:#bf616a;">end
+</span></td></tr><tr><td>24</td><td><span>
+</span></td></tr><tr><td>25</td><td><span style="color:#bf616a;">values</span><span> = range 1 10
+</span></td></tr><tr><td>26</td><td><span style="color:#b48ead;">for</span><span> i </span><span style="color:#b48ead;">in </span><span>${</span><span style="color:#bf616a;">values</span><span>}
+</span></td></tr><tr><td>27</td><td><span>    </span><span style="color:#b48ead;">for</span><span> j </span><span style="color:#b48ead;">in </span><span>${</span><span style="color:#bf616a;">values</span><span>}
+</span></td></tr><tr><td>28</td><td><span>        </span><span style="color:#96b5b4;">echo</span><span> i: ${</span><span style="color:#bf616a;">i</span><span>} j: ${</span><span style="color:#bf616a;">j</span><span>}
+</span></td></tr><tr><td>29</td><td><span>    </span><span style="color:#bf616a;">end
+</span></td></tr><tr><td>30</td><td><span style="color:#bf616a;">end
+</span></td></tr></tbody></table></code></pre>
+<p>语言观感上非常像 Haskell，基本没有多少小括号，语言非常精简，通过 Command 扩展整个语言体系。</p>
+<p>一个 Command 扩展的例子：</p>
+<pre data-linenos data-lang="Rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-Rust "><code class="language-Rust" data-lang="Rust"><table><tbody><tr><td>1</td><td><span style="color:#b48ead;">struct </span><span>SetCommand {}
+</span></td></tr><tr><td>2</td><td><span>
+</span></td></tr><tr><td>3</td><td><span style="color:#b48ead;">impl </span><span>Command </span><span style="color:#b48ead;">for </span><span>SetCommand {
+</span></td></tr><tr><td>4</td><td><span>    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">name</span><span>(&amp;</span><span style="color:#bf616a;">self</span><span>) -&gt; String {
+</span></td></tr><tr><td>5</td><td><span>        &quot;</span><span style="color:#a3be8c;">set</span><span>&quot;.</span><span style="color:#96b5b4;">to_string</span><span>()
+</span></td></tr><tr><td>6</td><td><span>    }
+</span></td></tr><tr><td>7</td><td><span>
+</span></td></tr><tr><td>8</td><td><span>    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">run</span><span>(&amp;</span><span style="color:#bf616a;">self</span><span>, </span><span style="color:#bf616a;">arguments</span><span>: Vec&lt;String&gt;) -&gt; CommandResult {
+</span></td></tr><tr><td>9</td><td><span>        </span><span style="color:#b48ead;">let</span><span> output = </span><span style="color:#b48ead;">if</span><span> arguments.</span><span style="color:#96b5b4;">is_empty</span><span>() {
+</span></td></tr><tr><td>10</td><td><span>            None
+</span></td></tr><tr><td>11</td><td><span>        } </span><span style="color:#b48ead;">else </span><span>{
+</span></td></tr><tr><td>12</td><td><span>            Some(arguments[</span><span style="color:#d08770;">0</span><span>].</span><span style="color:#96b5b4;">clone</span><span>())
+</span></td></tr><tr><td>13</td><td><span>        };
+</span></td></tr><tr><td>14</td><td><span>        CommandResult::Continue(output)
+</span></td></tr><tr><td>15</td><td><span>    }
+</span></td></tr><tr><td>16</td><td><span>}
+</span></td></tr></tbody></table></code></pre>
+<p>嵌入运行：</p>
+<pre data-lang="Rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-Rust "><code class="language-Rust" data-lang="Rust"><span style="color:#b48ead;">let mut</span><span> context = Context::new();
+</span><span>duckscriptsdk::load(&amp;</span><span style="color:#b48ead;">mut</span><span> context.commands)?;
+</span><span>runner::run_script_file(file, context)?;
+</span></code></pre>
+<p>总体来说 duckscript 似乎太过简易了一些，缺少 oop 的设计，对于一些简单的嵌入脚本可以胜任，但是语言本身并不能胜任复杂的需求。</p>
+<h2 id="gulon">gulon</h2>
+<p>静态类型（static type）、类型推断（type inference）、易于嵌入（simple embedding）、UTF-8、GC 小堆设计、线程安全</p>
+<p>Example:</p>
+<pre data-linenos data-lang="Rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-Rust "><code class="language-Rust" data-lang="Rust"><table><tbody><tr><td>1</td><td><span style="color:#b48ead;">let</span><span> io = import! std.io
+</span></td></tr><tr><td>2</td><td><span>io.print &quot;</span><span style="color:#a3be8c;">Hello world!</span><span>&quot;
+</span></td></tr><tr><td>3</td><td><span>
+</span></td></tr><tr><td>4</td><td><span style="color:#65737e;">// An identifier
+</span></td></tr><tr><td>5</td><td><span>abc123_
+</span></td></tr><tr><td>6</td><td><span style="color:#65737e;">// An integer literal
+</span></td></tr><tr><td>7</td><td><span style="color:#d08770;">42
+</span></td></tr><tr><td>8</td><td><span style="color:#65737e;">// A float literal
+</span></td></tr><tr><td>9</td><td><span style="color:#d08770;">3.14
+</span></td></tr><tr><td>10</td><td><span style="color:#65737e;">// A string literal
+</span></td></tr><tr><td>11</td><td><span>&quot;</span><span style="color:#a3be8c;">Hello world</span><span>&quot;
+</span></td></tr><tr><td>12</td><td><span style="color:#65737e;">// A raw string literal
+</span></td></tr><tr><td>13</td><td><span style="color:#b48ead;">r</span><span>&quot;</span><span style="color:#a3be8c;">Can contain newlines
+</span></td></tr><tr><td>14</td><td><span style="color:#a3be8c;">world</span><span>&quot;
+</span></td></tr><tr><td>15</td><td><span style="color:#b48ead;">r</span><span>#&quot;</span><span style="color:#a3be8c;">With # as delimiters raw strings can also contain quotes without escaping `&quot;` </span><span>&quot;#
+</span></td></tr><tr><td>16</td><td><span style="color:#b48ead;">r</span><span>###&quot;</span><span style="color:#a3be8c;"> &quot;## </span><span>&quot;###
+</span></td></tr><tr><td>17</td><td><span style="color:#65737e;">// A character literal
+</span></td></tr><tr><td>18</td><td><span>&#39;</span><span style="color:#a3be8c;">e</span><span>&#39;
+</span></td></tr><tr><td>19</td><td><span>
+</span></td></tr><tr><td>20</td><td><span style="color:#65737e;">// Function
+</span></td></tr><tr><td>21</td><td><span style="color:#b48ead;">let</span><span> factorial n : Int -&gt; Int =
+</span></td></tr><tr><td>22</td><td><span>    </span><span style="color:#b48ead;">if</span><span> n &lt; </span><span style="color:#d08770;">2
+</span></td></tr><tr><td>23</td><td><span>    then </span><span style="color:#d08770;">1
+</span></td></tr><tr><td>24</td><td><span>    </span><span style="color:#b48ead;">else</span><span> n * factorial (n - </span><span style="color:#d08770;">1</span><span>)
+</span></td></tr><tr><td>25</td><td><span>
+</span></td></tr><tr><td>26</td><td><span style="color:#65737e;">// Type
+</span></td></tr><tr><td>27</td><td><span style="color:#b48ead;">type </span><span>Op = | </span><span style="color:#bf616a;">Add </span><span>| Sub | Div | Mul
+</span></td></tr><tr><td>28</td><td><span style="color:#b48ead;">type </span><span>Expr = | Int </span><span style="color:#bf616a;">Int </span><span>| Binop Expr Op Expr
+</span></td></tr><tr><td>29</td><td><span>
+</span></td></tr><tr><td>30</td><td><span style="color:#b48ead;">let</span><span> x = </span><span style="color:#d08770;">1 </span><span>+ </span><span style="color:#d08770;">2 </span><span>in x </span><span style="color:#65737e;">// Returns 3
+</span></td></tr></tbody></table></code></pre>
+<p>看语法基本就是跑在 Rust 构建的 Vm 上的 Haskell，模式匹配、函数式</p>
+<blockquote>
+<p>todo</p>
+</blockquote>
+
+    </div>
+
+    
+    <div class="article-info">
+        
+        <div class="article-date">21 August 2022</div>
+        
+        <div class="article-taxonomies">
+            
+            
+                <ul class="article-tags">
+                    
+                    <li><a href="https://abrahum.link/tags/code/">#Code</a></li>
+                    
+                    <li><a href="https://abrahum.link/tags/rust/">#Rust</a></li>
+                    
+                </ul>
+            
+        </div>
+    </div>
+
+</article>
+
+<script src="https://utteranc.es/client.js"
+    repo="abrahum/abrahum.github.io"
+    issue-term="pathname"
+    theme="github-light"
+    crossorigin="anonymous"
+    async>
+</script>
+
+        </main>
+        <footer>
+            <p>
+                © Abrahum Link 2024<br>
+                Powered by <a target="_blank" href="https://getzola.org/">Zola</a>, Theme Link.
+            </p>
+            <p>
+                
+                
+            </p>
+        </footer>
+    </div>
+</body>
+</html>
