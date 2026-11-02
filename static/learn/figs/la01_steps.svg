@@ -1,0 +1,83 @@
+<svg viewBox="0 0 720 420" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<text x="232.00" y="96.00" text-anchor="middle" font-size="15" fill="var(--ink)">原来</text>
+<rect x="40.00" y="120.00" width="88.00" height="38.00" fill="none" stroke="none" stroke-width="0"/>
+<text x="84.00" y="150.00" text-anchor="middle" font-size="19" fill="var(--ink)">1</text>
+<rect x="136.00" y="120.00" width="88.00" height="38.00" fill="none" stroke="none" stroke-width="0"/>
+<text x="180.00" y="150.00" text-anchor="middle" font-size="19" fill="var(--ink)">2</text>
+<rect x="232.00" y="120.00" width="88.00" height="38.00" fill="none" stroke="none" stroke-width="0"/>
+<text x="276.00" y="150.00" text-anchor="middle" font-size="19" fill="var(--ink)">3</text>
+<rect x="346.00" y="120.00" width="88.00" height="38.00" fill="none" stroke="none" stroke-width="0"/>
+<text x="390.00" y="150.00" text-anchor="middle" font-size="19" fill="var(--ink)">26</text>
+<rect x="40.00" y="166.00" width="88.00" height="38.00" fill="none" stroke="none" stroke-width="0"/>
+<text x="84.00" y="196.00" text-anchor="middle" font-size="19" fill="var(--ink)">2</text>
+<rect x="136.00" y="166.00" width="88.00" height="38.00" fill="none" stroke="none" stroke-width="0"/>
+<text x="180.00" y="196.00" text-anchor="middle" font-size="19" fill="var(--ink)">3</text>
+<rect x="232.00" y="166.00" width="88.00" height="38.00" fill="none" stroke="none" stroke-width="0"/>
+<text x="276.00" y="196.00" text-anchor="middle" font-size="19" fill="var(--ink)">1</text>
+<rect x="346.00" y="166.00" width="88.00" height="38.00" fill="none" stroke="none" stroke-width="0"/>
+<text x="390.00" y="196.00" text-anchor="middle" font-size="19" fill="var(--ink)">34</text>
+<rect x="40.00" y="212.00" width="88.00" height="38.00" fill="none" stroke="none" stroke-width="0"/>
+<text x="84.00" y="242.00" text-anchor="middle" font-size="19" fill="var(--ink)">3</text>
+<rect x="136.00" y="212.00" width="88.00" height="38.00" fill="none" stroke="none" stroke-width="0"/>
+<text x="180.00" y="242.00" text-anchor="middle" font-size="19" fill="var(--ink)">2</text>
+<rect x="232.00" y="212.00" width="88.00" height="38.00" fill="none" stroke="none" stroke-width="0"/>
+<text x="276.00" y="242.00" text-anchor="middle" font-size="19" fill="var(--ink)">1</text>
+<rect x="346.00" y="212.00" width="88.00" height="38.00" fill="none" stroke="none" stroke-width="0"/>
+<text x="390.00" y="242.00" text-anchor="middle" font-size="19" fill="var(--ink)">39</text>
+<text x="232.00" y="300.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">三行就是一个增广矩阵</text>
+<text x="446.00" y="189.00" text-anchor="middle" font-size="22" fill="var(--ink-3)">→</text>
+<text x="464.00" y="96.00" text-anchor="middle" font-size="15" fill="var(--ink)">消去第一列</text>
+<rect x="272.00" y="120.00" width="88.00" height="38.00" fill="none" stroke="none" stroke-width="0"/>
+<text x="316.00" y="150.00" text-anchor="middle" font-size="19" fill="var(--ink)">1</text>
+<rect x="368.00" y="120.00" width="88.00" height="38.00" fill="none" stroke="none" stroke-width="0"/>
+<text x="412.00" y="150.00" text-anchor="middle" font-size="19" fill="var(--ink)">2</text>
+<rect x="464.00" y="120.00" width="88.00" height="38.00" fill="none" stroke="none" stroke-width="0"/>
+<text x="508.00" y="150.00" text-anchor="middle" font-size="19" fill="var(--ink)">3</text>
+<rect x="578.00" y="120.00" width="88.00" height="38.00" fill="none" stroke="none" stroke-width="0"/>
+<text x="622.00" y="150.00" text-anchor="middle" font-size="19" fill="var(--ink)">26</text>
+<rect x="272.00" y="166.00" width="88.00" height="38.00" fill="none" stroke="none" stroke-width="0"/>
+<text x="316.00" y="196.00" text-anchor="middle" font-size="19" fill="var(--ink-3)">0</text>
+<rect x="368.00" y="166.00" width="88.00" height="38.00" fill="none" stroke="none" stroke-width="0"/>
+<text x="412.00" y="196.00" text-anchor="middle" font-size="19" fill="var(--ink)">-1</text>
+<rect x="464.00" y="166.00" width="88.00" height="38.00" fill="none" stroke="none" stroke-width="0"/>
+<text x="508.00" y="196.00" text-anchor="middle" font-size="19" fill="var(--ink)">-5</text>
+<rect x="578.00" y="166.00" width="88.00" height="38.00" fill="none" stroke="none" stroke-width="0"/>
+<text x="622.00" y="196.00" text-anchor="middle" font-size="19" fill="var(--ink)">-18</text>
+<rect x="272.00" y="212.00" width="88.00" height="38.00" fill="none" stroke="none" stroke-width="0"/>
+<text x="316.00" y="242.00" text-anchor="middle" font-size="19" fill="var(--ink-3)">0</text>
+<rect x="368.00" y="212.00" width="88.00" height="38.00" fill="none" stroke="none" stroke-width="0"/>
+<text x="412.00" y="242.00" text-anchor="middle" font-size="19" fill="var(--ink)">-4</text>
+<rect x="464.00" y="212.00" width="88.00" height="38.00" fill="none" stroke="none" stroke-width="0"/>
+<text x="508.00" y="242.00" text-anchor="middle" font-size="19" fill="var(--ink)">-8</text>
+<rect x="578.00" y="212.00" width="88.00" height="38.00" fill="none" stroke="none" stroke-width="0"/>
+<text x="622.00" y="242.00" text-anchor="middle" font-size="19" fill="var(--ink)">-39</text>
+<text x="464.00" y="300.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">第一行乘 -2、-3 加到后两行</text>
+<text x="678.00" y="189.00" text-anchor="middle" font-size="22" fill="var(--ink-3)">→</text>
+<text x="696.00" y="96.00" text-anchor="middle" font-size="15" fill="var(--ink)">化成阶梯</text>
+<rect x="504.00" y="120.00" width="88.00" height="38.00" fill="var(--fig-fill-2)" stroke="none" stroke-width="0"/>
+<text x="548.00" y="150.00" text-anchor="middle" font-size="19" fill="var(--ink)">1</text>
+<rect x="600.00" y="120.00" width="88.00" height="38.00" fill="var(--fig-fill-2)" stroke="none" stroke-width="0"/>
+<text x="644.00" y="150.00" text-anchor="middle" font-size="19" fill="var(--ink)">2</text>
+<rect x="696.00" y="120.00" width="88.00" height="38.00" fill="var(--fig-fill-2)" stroke="none" stroke-width="0"/>
+<text x="740.00" y="150.00" text-anchor="middle" font-size="19" fill="var(--ink)">3</text>
+<rect x="810.00" y="120.00" width="88.00" height="38.00" fill="var(--fig-fill-2)" stroke="none" stroke-width="0"/>
+<text x="854.00" y="150.00" text-anchor="middle" font-size="19" fill="var(--ink)">26</text>
+<rect x="504.00" y="166.00" width="88.00" height="38.00" fill="none" stroke="none" stroke-width="0"/>
+<text x="548.00" y="196.00" text-anchor="middle" font-size="19" fill="var(--ink-3)">0</text>
+<rect x="600.00" y="166.00" width="88.00" height="38.00" fill="var(--fig-fill-2)" stroke="none" stroke-width="0"/>
+<text x="644.00" y="196.00" text-anchor="middle" font-size="19" fill="var(--ink)">1</text>
+<rect x="696.00" y="166.00" width="88.00" height="38.00" fill="var(--fig-fill-2)" stroke="none" stroke-width="0"/>
+<text x="740.00" y="196.00" text-anchor="middle" font-size="19" fill="var(--ink)">5</text>
+<rect x="810.00" y="166.00" width="88.00" height="38.00" fill="var(--fig-fill-2)" stroke="none" stroke-width="0"/>
+<text x="854.00" y="196.00" text-anchor="middle" font-size="19" fill="var(--ink)">18</text>
+<rect x="504.00" y="212.00" width="88.00" height="38.00" fill="none" stroke="none" stroke-width="0"/>
+<text x="548.00" y="242.00" text-anchor="middle" font-size="19" fill="var(--ink-3)">0</text>
+<rect x="600.00" y="212.00" width="88.00" height="38.00" fill="none" stroke="none" stroke-width="0"/>
+<text x="644.00" y="242.00" text-anchor="middle" font-size="19" fill="var(--ink-3)">0</text>
+<rect x="696.00" y="212.00" width="88.00" height="38.00" fill="var(--fig-fill-2)" stroke="none" stroke-width="0"/>
+<text x="740.00" y="242.00" text-anchor="middle" font-size="19" fill="var(--ink)">12</text>
+<rect x="810.00" y="212.00" width="88.00" height="38.00" fill="var(--fig-fill-2)" stroke="none" stroke-width="0"/>
+<text x="854.00" y="242.00" text-anchor="middle" font-size="19" fill="var(--ink)">33</text>
+<text x="696.00" y="300.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">第二行乘 4 加到第三行</text>
+<text x="40.00" y="368.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">竖线右边是常数列。阴影里的三个数就是主元，回到原方程逐个回代，解就出来了。</text>
+</svg>

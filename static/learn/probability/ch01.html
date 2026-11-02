@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>第一章 1654：一场通信与一个赌注 · 概率论与数理统计</title>
+<meta name="description" content="点数问题、样本空间、事件运算、古典概型与排列组合，以及概率的加法公式与对立公式。">
+<link rel="stylesheet" href="../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="nav-brand" href="../index.html">数学基础课<span> 三门课，一套读法</span></a>
+    <nav class="nav-links" aria-label="主导航">
+      <a href="index.html#map">本课目录</a>
+      <a class="xl" href="../calculus/index.html">微积分</a>
+      <a class="xl" href="../linear-algebra/index.html">线性代数</a>
+      <a class="xl" href="../complex/index.html">复变函数</a>
+      <a class="opt" href="ch02.html">下一章</a>
+    </nav>
+  </div>
+  <div class="nav-progress" aria-hidden="true"></div>
+</header>
+
+<main>
+
+  <section class="chapter">
+    <div class="wrap">
+      <div class="ch-hero-band">
+        <div>
+          <p class="ch-label reveal"><span>第一章</span><span class="ch-era">1654 年至 1812 年</span></p>
+          <h1 class="ch-title reveal reveal-2">1654：一场通信与一个赌注</h1>
+          <p class="ch-deck reveal reveal-3">赌局打到一半被迫停手，赌金该怎么分。1654 年帕斯卡与费马为这道题通了几个月信，办法是数清所有可能，再看某个事件占几份。惠更斯 1657 年把它写成第一部概率论著作，拉普拉斯 1812 年给出正式的定义。</p>
+          <div class="ch-meta reveal reveal-3">
+            <div><strong>本章知识点</strong>样本空间与事件、事件的运算、古典概型、排列与组合、概率的基本性质</div>
+            <div><strong>历史坐标</strong>帕斯卡与费马 1654 年，惠更斯 1657 年，拉普拉斯 1812 年</div>
+            <div><strong>对应教材</strong>浙大《概率论与数理统计》第四版 第一章</div>
+            <div><strong>前置</strong>会数格子、会算乘除法；排列组合本章重讲一遍</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap ch-body">
+    <aside class="rail">
+      <p class="rail-title">本章提纲</p>
+      <ol>
+        <li><a href="#s-1">一次试验的全部可能</a></li>
+        <li><a href="#s-2">事件之间怎么算</a></li>
+        <li><a href="#s-3">古典概型：拆开「等可能」</a></li>
+        <li><a href="#s-4">数情形：排列与组合</a></li>
+        <li><a href="#s-5">概率的三条基本性质</a></li>
+        <li><a href="#s-6">一局值多少钱</a></li>
+        <li><a href="#s-manual">怎么算</a></li>
+        <li><a href="#s-examples">例题</a></li>
+        <li><a href="#s-exercises">习题</a></li>
+      </ol>
+      <p class="rail-title">历史坐标</p>
+      <p class="rail-who">德梅雷的提问 1654 年前后<br>帕斯卡与费马 1654 年<br>惠更斯《论赌博中的计算》1657 年<br>拉普拉斯《概率的分析理论》1812 年</p>
+    </aside>
+
+    <article class="prose">
+
+      <p class="lead reveal">1654 年夏天，一个常出入赌场的法国人德梅雷给帕斯卡寄去两个问题，其中一个是：甲乙两人约定先赢若干局者拿走全部赌金，赌到一半因为有事必须停手，这笔钱该怎么分。帕斯卡把问题转给费马，两人来回通信几个月把答案算了出来，用的那套数法后来成了课本第一章的古典概型。</p>
+
+      <h2 id="s-1" class="reveal">一、一次试验的全部可能</h2>
+
+      <p>掷一枚骰子、从袋里摸一个球、等下一班车到站，这些事有一个共同点：同样的条件可以重复做，结果不止一个，动手之前说不出会是哪一个，可是所有可能的结果事先都列得出来。这样的过程叫随机试验，把它的全部可能结果收在一起组成的集合叫样本空间，记作 \(S\)，其中每一个结果叫样本点，用 \(\omega\) 表示。</p>
+
+      <p>赌桌上那道题也可以用这套话来说：甲再赢 1 局就拿走全部赌金，乙还差 2 局，所以最多再打两局就见分晓。可能的走法只有 3 种，第一局甲胜就当场结束；第一局乙胜、第二局甲胜，还是甲赢；乙连赢两局，才轮到乙赢。</p>
+
+      <div class="figure">
+        <!--FIG pb01_tree--><svg viewBox="0 0 720 460" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<text x="28.00" y="40.00" text-anchor="start" font-size="14.5" fill="var(--ink)">甲再赢 1 局，乙再赢 2 局：停手之后的全部走法</text>
+<line x1="360.00" y1="84.00" x2="188.49" y2="190.72" stroke="var(--ink-2)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M 194.42 182.66 L 188.49 190.72 L 198.34 188.96" fill="var(--ink-2)" stroke="var(--ink-2)" stroke-width="1" stroke-linejoin="round"/>
+<line x1="360.00" y1="84.00" x2="531.51" y2="190.72" stroke="var(--ink-2)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M 521.66 188.96 L 531.51 190.72 L 525.58 182.66" fill="var(--ink-2)" stroke="var(--ink-2)" stroke-width="1" stroke-linejoin="round"/>
+<line x1="540.00" y1="196.00" x2="436.88" y2="304.74" stroke="var(--ink-2)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M 440.58 295.45 L 436.88 304.74 L 445.96 300.56" fill="var(--ink-2)" stroke="var(--ink-2)" stroke-width="1" stroke-linejoin="round"/>
+<line x1="540.00" y1="196.00" x2="643.12" y2="304.74" stroke="var(--ink-2)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M 634.04 300.56 L 643.12 304.74 L 639.42 295.45" fill="var(--ink-2)" stroke="var(--ink-2)" stroke-width="1" stroke-linejoin="round"/>
+<text x="294.00" y="132.00" text-anchor="start" font-size="13.5" fill="var(--ink-3)">甲胜 1/2</text>
+<text x="448.00" y="130.00" text-anchor="start" font-size="13.5" fill="var(--ink-3)">乙胜 1/2</text>
+<text x="472.00" y="246.00" text-anchor="end" font-size="13.5" fill="var(--ink-3)">甲胜 1/2</text>
+<text x="600.00" y="246.00" text-anchor="start" font-size="13.5" fill="var(--ink-3)">乙胜 1/2</text>
+<circle cx="360.00" cy="84.00" r="6.00" fill="var(--paper)" stroke="var(--ink-2)" stroke-width="1.4"/>
+<circle cx="540.00" cy="196.00" r="6.00" fill="var(--paper)" stroke="var(--ink-2)" stroke-width="1.4"/>
+<circle cx="180.00" cy="196.00" r="6.00" fill="var(--accent-line)" stroke="var(--ink-2)" stroke-width="1.4"/>
+<circle cx="430.00" cy="312.00" r="6.00" fill="var(--accent-line)" stroke="var(--ink-2)" stroke-width="1.4"/>
+<circle cx="650.00" cy="312.00" r="6.00" fill="var(--accent-line)" stroke="var(--ink-2)" stroke-width="1.4"/>
+<text x="346.00" y="89.00" text-anchor="end" font-size="14.5" fill="var(--ink)">停手</text>
+<text x="180.00" y="226.00" text-anchor="middle" font-size="14" fill="var(--accent-line)">甲赢　1/2</text>
+<text x="430.00" y="342.00" text-anchor="middle" font-size="14" fill="var(--accent-line)">甲赢　1/4</text>
+<text x="650.00" y="342.00" text-anchor="middle" font-size="14" fill="var(--ink-2)">乙赢　1/4</text>
+<text x="28.00" y="408.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">甲赢的概率 = 1/2 + 1/4 = 3/4。三条路径并不等可能，所以走法不能直接当样本点来数。</text>
+<text x="28.00" y="432.00" text-anchor="start" font-size="13.5" fill="var(--ink-3)">要数格子，得先把它补成 4 条一样长的路径，见本章第三节。</text>
+</svg>
+<!--/FIG pb01_tree-->
+        <figcaption class="figcaption"><b>停手之后最多还打两局。</b>每个分叉标着一局之内的胜率，叶子上写着谁拿走赌金。三条路径的概率并不相等，这一点第三节要用。</figcaption>
+      </div>
+
+      <p>样本空间是全集，它的任意一个子集叫随机事件，简称事件；试验结果 \(\omega\) 落在 \(A\) 里，就说事件 \(A\) 发生了，只含一个点的事件叫基本事件，\(S\) 本身叫必然事件，空集 \(\varnothing\) 叫不可能事件。把事件当成集合有直接的好处，集合的整套运算可以原样搬过来，判断两个事件的关系就是看两个集合的位置关系，算一个事件的概率就是数它里面有几个点。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定义（随机试验与样本空间）</p>
+        <p>满足下面三条的试验叫随机试验：可以在相同条件下重复进行；每次的结果不止一个，而且事先能列出全部可能结果；进行一次试验之前不能确定哪一个结果会出现。随机试验的全部可能结果组成的集合叫样本空间，记作 \(S\)。</p>
+      </div>
+
+      <details class="fold">
+        <summary>同一个试验，样本空间能不能有几种写法</summary>
+        <p>能。掷两枚骰子，可以按两枚各自的点数记成 \((i,j)\) 得 36 个点，也可以只记点数之和得 11 个点，两种写法都对，只是写粗了以后各点的份量不一样，后面的计算难度差很多。选哪种，看你要算的事件用哪种说法顺手。</p>
+      </details>
+
+      <h2 id="s-2" class="reveal">二、事件之间怎么算</h2>
+
+      <p>两个事件之间可以比较大小：若 \(A\) 的每个样本点都在 \(B\) 里，就说 \(A\) 包含于 \(B\)，记作 \(A\subset B\)，意思是 \(A\) 发生则 \(B\) 一定发生。把两个集合拼起来、叠起来、减掉，对应三种运算，\(A\cup B\) 叫 \(A\) 与 \(B\) 的和，表示至少有一个发生；\(AB\) 叫积，表示两个都发生；\(A-B\) 叫差，表示 \(A\) 发生而 \(B\) 不发生。</p>
+
+      <p>还有两个词要分清：互不相容说的是 \(AB=\varnothing\)，两个事件不可能同时发生；对立说得更重，要求互不相容并且合起来正好铺满 \(S\)，记作 \(B=\bar A\)。所以对立一定互不相容，互不相容却未必对立，差额就在那些既不在 \(A\) 里也不在 \(B\) 里的样本点上。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定义（事件的包含、和、积、差、互不相容、对立）</p>
+        <p>若 \(A\) 的每个样本点都在 \(B\) 里，称 \(B\) 包含 \(A\)，记作 \(A\subset B\)；\(A\cup B\) 称为和事件，\(AB\) 称为积事件，\(A-B\) 称为差事件。若 \(AB=\varnothing\)，称 \(A\) 与 \(B\) 互不相容，也称互斥；若再加上 \(A\cup B=S\)，称 \(A\) 与 \(B\) 互为对立事件，\(A\) 的对立记作 \(\bar A\)。</p>
+      </div>
+
+      <p>用一枚骰子举例：设 \(A\) 是「点数为偶数」，\(B\) 是「点数大于 4」，那么 \(A\cup B=\{2,4,5,6\}\)，\(AB=\{6\}\)，\(A-B=\{2,4\}\)，而 \(\bar A=\{1,3,5\}\)。</p>
+
+      <p>事件运算满足交换律、结合律与分配律，只有一处与数不同：\(A\) 与 \(A\) 相加还是 \(A\)。两条德摩根律把「至少一个」换成「都不」：\(\overline{A\cup B}=\bar A\bar B\)，\(\overline{AB}=\bar A\cup\bar B\)。</p>
+
+      <details class="fold">
+        <summary>为什么「至少一个发生」的反面是「两个都不发生」</summary>
+        <p>逐个点检查就行：样本点不在 \(A\cup B\) 里，意味着它既不在 \(A\) 里也不在 \(B\) 里，所以落在 \(\bar A\) 与 \(\bar B\) 的公共部分；反过来，落在 \(\bar A\bar B\) 里的点显然不在 \(A\cup B\) 里。两个方向都成立，两个集合才相等。</p>
+      </details>
+
+      <h2 id="s-3" class="reveal">三、古典概型：拆开「等可能」</h2>
+
+      <p>样本空间数得清，而且每个样本点出现的可能性一样大，两个条件凑在一起叫古典概型。这时不必做试验，直接数个数就能算概率：\(A\) 的概率等于 \(A\) 里的点数除以 \(S\) 里的点数。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定义（古典概型与古典概率）</p>
+        <p>若试验的样本空间只含有限个样本点，且每个样本点出现的可能性相同，称这种概型为古典概型。此时事件 \(A\) 的概率为</p>
+        \[ P(A)=\frac{k}{n}=\frac{|A|}{|S|}, \]
+        <p>其中 \(n\) 是 \(S\) 中样本点的总数，\(k\) 是 \(A\) 所含样本点的个数。</p>
+      </div>
+
+      <p>「等可能」这三个字值得拆成三件事来看：第一是有限，样本点要数得清，赌局打到第几局算得清，等公交车等到几点几分就不算。第二是地位相同，任何一个点都不比别的更容易出现，需要骰子均匀、球除了颜色没有差别、两人棋力相当；第三是不重不漏，样本点彼此互不相容并且合起来恰好铺满 \(S\)，这样分母既不会把同一件事数两遍，也不会漏掉一段。</p>
+
+      <p>最容易出错的地方是选错样本点。掷两枚骰子，点数之和有 11 种可能，若把这 11 种当成等可能的样本点，算出的概率是 \(1/11\)，错在起点上：和为 7 有 6 种走法，和为 2 只有 1 种，合并之后各和分到的份量已经不一样了。按 \((i,j)\) 记，样本空间里就有 36 个等可能的点，和为 7 的正好是一条斜线上的 6 格，概率 \(6/36=1/6\)。</p>
+
+      <div class="figure">
+        <!--FIG pb01_grid--><svg viewBox="0 0 720 430" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<text x="28.00" y="34.00" text-anchor="start" font-size="14.5" fill="var(--ink)">两枚骰子：36 个样本点，和为 7 的那条斜线占 6 格</text>
+<text x="199.00" y="82.00" text-anchor="middle" font-size="13.5" fill="var(--ink-3)">1</text>
+<text x="245.00" y="82.00" text-anchor="middle" font-size="13.5" fill="var(--ink-3)">2</text>
+<text x="291.00" y="82.00" text-anchor="middle" font-size="13.5" fill="var(--ink-3)">3</text>
+<text x="337.00" y="82.00" text-anchor="middle" font-size="13.5" fill="var(--ink-3)">4</text>
+<text x="383.00" y="82.00" text-anchor="middle" font-size="13.5" fill="var(--ink-3)">5</text>
+<text x="429.00" y="82.00" text-anchor="middle" font-size="13.5" fill="var(--ink-3)">6</text>
+<text x="162.00" y="124.00" text-anchor="end" font-size="13.5" fill="var(--ink-3)">1</text>
+<text x="162.00" y="170.00" text-anchor="end" font-size="13.5" fill="var(--ink-3)">2</text>
+<text x="162.00" y="216.00" text-anchor="end" font-size="13.5" fill="var(--ink-3)">3</text>
+<text x="162.00" y="262.00" text-anchor="end" font-size="13.5" fill="var(--ink-3)">4</text>
+<text x="162.00" y="308.00" text-anchor="end" font-size="13.5" fill="var(--ink-3)">5</text>
+<text x="162.00" y="354.00" text-anchor="end" font-size="13.5" fill="var(--ink-3)">6</text>
+<rect x="176.00" y="96.00" width="46.00" height="46.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1"/>
+<rect x="176.00" y="142.00" width="46.00" height="46.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1"/>
+<rect x="176.00" y="188.00" width="46.00" height="46.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1"/>
+<rect x="176.00" y="234.00" width="46.00" height="46.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1"/>
+<rect x="176.00" y="280.00" width="46.00" height="46.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1"/>
+<rect x="176.00" y="326.00" width="46.00" height="46.00" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.1"/>
+<rect x="222.00" y="96.00" width="46.00" height="46.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1"/>
+<rect x="222.00" y="142.00" width="46.00" height="46.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1"/>
+<rect x="222.00" y="188.00" width="46.00" height="46.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1"/>
+<rect x="222.00" y="234.00" width="46.00" height="46.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1"/>
+<rect x="222.00" y="280.00" width="46.00" height="46.00" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.1"/>
+<rect x="222.00" y="326.00" width="46.00" height="46.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1"/>
+<rect x="268.00" y="96.00" width="46.00" height="46.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1"/>
+<rect x="268.00" y="142.00" width="46.00" height="46.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1"/>
+<rect x="268.00" y="188.00" width="46.00" height="46.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1"/>
+<rect x="268.00" y="234.00" width="46.00" height="46.00" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.1"/>
+<rect x="268.00" y="280.00" width="46.00" height="46.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1"/>
+<rect x="268.00" y="326.00" width="46.00" height="46.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1"/>
+<rect x="314.00" y="96.00" width="46.00" height="46.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1"/>
+<rect x="314.00" y="142.00" width="46.00" height="46.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1"/>
+<rect x="314.00" y="188.00" width="46.00" height="46.00" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.1"/>
+<rect x="314.00" y="234.00" width="46.00" height="46.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1"/>
+<rect x="314.00" y="280.00" width="46.00" height="46.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1"/>
+<rect x="314.00" y="326.00" width="46.00" height="46.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1"/>
+<rect x="360.00" y="96.00" width="46.00" height="46.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1"/>
+<rect x="360.00" y="142.00" width="46.00" height="46.00" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.1"/>
+<rect x="360.00" y="188.00" width="46.00" height="46.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1"/>
+<rect x="360.00" y="234.00" width="46.00" height="46.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1"/>
+<rect x="360.00" y="280.00" width="46.00" height="46.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1"/>
+<rect x="360.00" y="326.00" width="46.00" height="46.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1"/>
+<rect x="406.00" y="96.00" width="46.00" height="46.00" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.1"/>
+<rect x="406.00" y="142.00" width="46.00" height="46.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1"/>
+<rect x="406.00" y="188.00" width="46.00" height="46.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1"/>
+<rect x="406.00" y="234.00" width="46.00" height="46.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1"/>
+<rect x="406.00" y="280.00" width="46.00" height="46.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1"/>
+<rect x="406.00" y="326.00" width="46.00" height="46.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="314.00" y="398.00" text-anchor="middle" font-size="13.5" fill="var(--ink-2)">6 × 6 = 36 个格子，一格就是一种走法</text>
+<text x="314.00" y="64.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">第一枚点数</text>
+<text x="108" y="234" text-anchor="middle" font-size="12.5" fill="var(--ink-3)" transform="rotate(-90 108 234)">第二枚点数</text>
+<line x1="429.00" y1="119.00" x2="472.00" y2="146.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="472.00" y="146.00" text-anchor="start" font-size="13.5" fill="var(--ink)">和为 7：6 格</text>
+<text x="470.00" y="170.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">6 / 36 = 1 / 6</text>
+<text x="470.00" y="226.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">和为 2：1 格</text>
+<text x="470.00" y="252.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">和为 8：5 格</text>
+<text x="470.00" y="300.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">把「点数和」当样本点，</text>
+<text x="470.00" y="322.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">就等于默认 11 种和等可能。</text>
+</svg>
+<!--/FIG pb01_grid-->
+        <figcaption class="figcaption"><b>36 个格子，每格一样重。</b>斜线上的 6 格对应和为 7。同一张图上，和为 2 只占 1 格，和为 8 占 5 格，11 种和并不等可能。</figcaption>
+      </div>
+
+      <p>现在回到赌桌：三条走法的概率分别是 \(1/2\)、\(1/4\)、\(1/4\)，并不相等，所以那 3 种走法不能直接当等可能的样本点去数。补一步就好，假想把第二局也打完，哪怕胜负已经定了，于是有 4 条一样长的路径，甲甲、甲乙、乙甲、乙乙，各占 \(1/4\)，甲在其中 3 条里赢，概率 \(3/4\)，赌金按 3 比 1 分。</p>
+
+      <div class="archive reveal">
+        <p class="archive-when">1812 年，巴黎</p>
+        <h3>拉普拉斯把数格子的办法写成定义</h3>
+        <p class="archive-quote">「概率是有利用情形数与全部可能情形数之比，前提是这些情形同样可能。」</p>
+        <p class="archive-source">拉普拉斯《概率的分析理论》导论，1812 年</p>
+        <p>帕斯卡与费马算点数问题时并没有「概率」这个词，他们说的是甲方有几分希望。一百五十八年之后，拉普拉斯把这份希望写成一条公式，并把「同样可能」这个前提单独摆出来，课本里 \(P(A)=k/n\) 的写法就从这句话来。</p>
+      </div>
+
+      <p>样本空间不再是一张格子而是一块面积的时候，数个数就换成算面积，概率等于两块面积之比，这种叫几何概型，具体的积分放到第六章再做。古典概型之所以叫古典，因为它是这套想法最早的样子，19 世纪以前的概率论几乎只在等可能的场合里打转。</p>
+
+      <h2 id="s-4" class="reveal">四、数情形：排列与组合</h2>
+
+      <p>古典概型的计算最后全落在数个数上：总数多少个，事件里多少个。两个工具就够用，排列管有顺序的取法，组合管没有顺序的取法。</p>
+
+      <p>从 \(n\) 个不同元素里取 \(k\) 个排成一列，第一个位置有 \(n\) 种选法，第二个剩下 \(n-1\) 种，一路乘下去得 \(n(n-1)\cdots(n-k+1)\)，叫排列数；若每次取完放回去再取，每个位置都有 \(n\) 种选法，总数 \(n^k\)，叫重复排列。若取出来的 \(k\) 个不排顺序，比如一次摸 3 个球，谁先谁后没有区别，就把排列数再除以 \(k!\)，因为同一组球在排列里被数了 \(k!\) 遍。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定理（三个计数公式）</p>
+        <p>从 \(n\) 个不同元素中取 \(k\) 个（\(k\le n\)）排成一列，排法总数为</p>
+        \[ P(n,k)=n(n-1)\cdots(n-k+1)=\frac{n!}{(n-k)!}; \]
+        <p>每次取后放回、共取 \(k\) 次，排法总数为 \(n^k\)；不计顺序地取出 \(k\) 个，取法总数为</p>
+        \[ \binom{n}{k}=\frac{P(n,k)}{k!}=\frac{n!}{k!\,(n-k)!}. \]
+      </div>
+
+      <p>做题时先问一句：换个顺序算不算另一种情形，排队、编号、密码、抽签先后都算，一次摸出几个球、把一队人分成几堆都不算。摸球还得分清放回与不放回，放回时每次都是从 \(n\) 个里挑一个，不放回时剩下的球越来越少，分母跟着变。</p>
+
+      <p>10 个球里 3 红 7 白，一次摸 3 个，总的取法是 \(\binom{10}{3}=120\) 种，恰有 2 红 1 白的取法是 \(\binom{3}{2}\binom{7}{1}=21\) 种，概率 \(21/120=7/40\)。分子用乘法，先定哪两个红球，再定哪个白球，两步合起来才是一次完整的取法。</p>
+
+      <details class="fold">
+        <summary>组合数为什么要除以 k!</summary>
+        <p>先用排列去数同一件事：从 10 个球里挑 3 个并排个次序，得 \(P(10,3)=720\) 种，一次摸 3 个只有 120 种。差别在于每一组 3 个球在排列里被数了 \(3!=6\) 遍，想从排列数回到组合数，把重复的份数除掉就行。</p>
+      </details>
+
+      <h2 id="s-5" class="reveal">五、概率的三条基本性质</h2>
+
+      <p>从 \(k/n\) 这个式子可以直接读出三条性质。概率不会是负数，因为分子分母都是个数；必然事件的概率是 1；若干个互不相容的事件合起来，概率等于各自概率相加，理由很朴素，数格子时互不重叠的几块拼起来，格数相加。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定理（概率的基本性质：非负、归一、有限可加）</p>
+        <p>对任意事件 \(A\) 有 \(P(A)\ge 0\)；\(P(S)=1\)，\(P(\varnothing)=0\)。若 \(A_1,A_2,\dots,A_m\) 两两互不相容，则</p>
+        \[ P(A_1\cup A_2\cup\cdots\cup A_m)=P(A_1)+P(A_2)+\cdots+P(A_m). \]
+      </div>
+
+      <p>减法公式也来自数格子：\(A\) 的格子里有一部分同时在 \(B\) 里，减掉这一部分，剩下的才是 \(A-B\)。加法公式要当心，\(A\cup B\) 的格子等于 \(A\) 的格子加 \(B\) 的格子再减掉 \(AB\) 的格子，因为 \(AB\) 被数了两遍，\(AB\) 为空时第三项是零，就退化成有限可加性。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定理（减法公式与加法公式）</p>
+        <p>对任意事件 \(A\) 与 \(B\)，</p>
+        \[ P(A-B)=P(A)-P(AB),\qquad P(A\cup B)=P(A)+P(B)-P(AB). \]
+      </div>
+
+      <p>三个事件照推，加三个概率，减三对两两交集的概率，再加回三交的概率，因为三交在三对里各被减了一次。</p>
+
+      <p>对立事件公式 \(P(\bar A)=1-P(A)\) 是加法公式最常用的特例，因为 \(A\) 与 \(\bar A\) 合起来正好是 \(S\)，又不重叠。题目里出现「至少一个」「至少一次」的时候，先想反面「一个都没有」，通常一步就能算完。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定理（对立事件公式）</p>
+        <p>对任意事件 \(A\)，\(P(\bar A)=1-P(A)\)，等价地 \(P(A)=1-P(\bar A)\)。</p>
+      </div>
+
+      <details class="fold">
+        <summary>有限可加性为什么要求两两互不相容</summary>
+        <p>不互不相容就会重复计数。掷一枚骰子，设 \(A=\{1,2,3\}\)，\(B=\{3,4\}\)，直接相加得 \(3/6+2/6=5/6\)，而 \(A\cup B=\{1,2,3,4\}\) 的真实概率是 \(4/6\)，多出来的 \(1/6\) 正是公共点 3 被数了两遍，加法公式里那一步减法处理的就是这件事。</p>
+      </details>
+
+      <h2 id="s-6" class="reveal">六、一局值多少钱</h2>
+
+      <p>惠更斯 1657 年把赌局的价码写成了一个定义：若我以相等的希望得到 \(a\) 或 \(b\)，这份希望值等于 \(\frac{a+b}{2}\)；推广开来，以概率 \(p\) 得 \(a\)、以概率 \(1-p\) 得 \(b\)，希望值就是 \(pa+(1-p)b\)。权是概率，而不是结果的个数。</p>
+
+      <p>这个数叫期望，可以看成一份重量：把每个可能的结果摆在数轴上，把它的概率当作压在那里的重量，整条轴的支点就落在期望处。三个结果分别得 1、2、4 元，概率是 0.5、0.3、0.2，支点在 \(0.5\times 1+0.3\times 2+0.2\times 4=1.9\) 元。</p>
+
+      <div class="figure">
+        <!--FIG pb01_mass--><svg viewBox="0 0 720 400" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<text x="28.00" y="38.00" text-anchor="start" font-size="14.5" fill="var(--ink)">把概率当重量压在数轴上，重心落在 1.9</text>
+<line x1="66.00" y1="268.00" x2="684.00" y2="268.00" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+<line x1="664.00" y1="268.00" x2="690.00" y2="268.00" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M 681.64 271.34 L 690.00 268.00 L 681.64 264.66" fill="var(--ink-2)" stroke="var(--ink-2)" stroke-width="1" stroke-linejoin="round"/>
+<rect x="138.99" y="103.00" width="34.72" height="165.00" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.6"/>
+<rect x="281.99" y="169.00" width="34.72" height="99.00" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.6"/>
+<rect x="567.99" y="202.00" width="34.72" height="66.00" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.6"/>
+<text x="156.35" y="91.00" text-anchor="middle" font-size="13.5" fill="var(--ink)">0.5</text>
+<text x="156.35" y="292.00" text-anchor="middle" font-size="13.5" fill="var(--ink-2)">1</text>
+<text x="299.35" y="157.00" text-anchor="middle" font-size="13.5" fill="var(--ink)">0.3</text>
+<text x="299.35" y="292.00" text-anchor="middle" font-size="13.5" fill="var(--ink-2)">2</text>
+<text x="585.35" y="190.00" text-anchor="middle" font-size="13.5" fill="var(--ink)">0.2</text>
+<text x="585.35" y="292.00" text-anchor="middle" font-size="13.5" fill="var(--ink-2)">4</text>
+<polygon points="272.05,308.00 298.05,308.00 285.05,272.00" fill="var(--fig-fill)" stroke="var(--accent-line)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="285.05" y="330.00" text-anchor="middle" font-size="13.5" fill="var(--ink)">重心 1.9</text>
+<text x="62.00" y="356.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">0.5 × 1 + 0.3 × 2 + 0.2 × 4 = 1.9，这就是期望。</text>
+<text x="62.00" y="380.00" text-anchor="start" font-size="13.5" fill="var(--ink-3)">离得远的 4 只分到 0.2 的权重，压不动多少，所以重心落在中间偏左。</text>
+</svg>
+<!--/FIG pb01_mass-->
+        <figcaption class="figcaption"><b>概率当重量，期望是重心。</b>远处那个 4 元只分到 0.2 的权，压不动多少。支点落在 1.9，比 1、2、4 的算术平均 2.33 更靠左。</figcaption>
+      </div>
+
+      <p>拿它来分赌金：赌金 100 枚金币，甲赢的概率 \(3/4\)，甲应得 75 枚；若甲每局胜率是 \(p\)，两局之内甲赢的概率是 \(p+(1-p)p\)，甲应得 \(100[p+(1-p)p]\)，代 \(p=1/2\) 恰好是 75。帕斯卡和费马当年分的就是这个数，两人走的路子不一样，答案一致。</p>
+
+      <div class="archive reveal">
+        <p class="archive-when">1654 年，巴黎与图卢兹之间</p>
+        <h3>一个夏天的通信</h3>
+        <p class="archive-quote">「赌金应当按双方各有几分赢的希望来分，而希望的大小，取决于各自还差几局。」</p>
+        <p class="archive-source">帕斯卡致费马，1654 年 7 月 29 日</p>
+        <p>帕斯卡起初只会用递推算，费马走另一条路，把还没打的局补满，再数等可能的走法，两套办法在点数问题上给出同一个答案。这是概率论第一次用数等可能情形的方式处理问题，课本里的古典概型就从这里开始。</p>
+      </div>
+
+      <p>期望不是一定能拿到手的钱，它是一句平均的话：同一个赌局打很多次，平均每次拿到的数额会靠近这个值；证明要等 1713 年伯努利的大数律，那是第二章的内容。</p>
+
+      <h2 id="s-manual" class="reveal">怎么算</h2>
+
+      <ul>
+        <li><strong>先写样本空间。</strong>把一次试验的全部结果列清楚，数出 \(n\)。这一步写错，后面全错，宁可慢一点。</li>
+        <li><strong>再查等可能。</strong>每个点地位是否相同？不对称就补成对称的等长路径，点数问题是典型例子。</li>
+        <li><strong>把事件写成子集。</strong>逐个数 \(k\)，注意「恰有」「至少」「至多」三种说法的边界。</li>
+        <li><strong>「至少」先想反面。</strong>用 \(1-P(\bar A)\)，通常比正面分类快得多。</li>
+        <li><strong>两个事件并起来，先看是否互不相容。</strong>不互不相容就用 \(P(A)+P(B)-P(AB)\)，别漏掉减号。</li>
+        <li><strong>答完检查。</strong>概率必须落在 0 与 1 之间，分母是总数，分子不该比它大。</li>
+      </ul>
+
+      <h2 id="s-examples" class="reveal">例题</h2>
+
+      <div class="example">
+        <p class="example-head">例 <span>1</span>　掷两枚均匀骰子，求点数之和为 7 的概率，以及至少出现一个 6 的概率。</p>
+        <p class="solution">样本空间按 \((i,j)\) 记，共 36 个等可能的点。和为 7 的有 \((1,6)\) 到 \((6,1)\) 共 6 个，概率 \(6/36=1/6\)。至少一个 6 的反面是两个都不是 6，共 25 个，概率 \(1-25/36=11/36\)。</p>
+      </div>
+
+      <div class="example">
+        <p class="example-head">例 <span>2</span>　袋中 5 红 3 白，一次摸 3 个，求恰有 2 个红球的概率，以及至少 1 个红球的概率。</p>
+        <p class="solution">总数 \(\binom{8}{3}=56\)。恰有 2 红是 \(\binom{5}{2}\binom{3}{1}=30\)，概率 \(30/56=15/28\)。至少 1 红用反面，3 个全白只有 1 种，概率 \(1-1/56=55/56\)。</p>
+      </div>
+
+      <div class="example">
+        <p class="example-head">例 <span>3</span>　点数问题：赌金 100 枚，甲再赢 1 局、乙再赢 2 局，每局甲胜的概率 \(1/2\)，赌金怎么分。</p>
+        <p class="solution">补满两局，得 4 条等长路径，各占 \(1/4\)。甲在甲甲、甲乙、乙甲 3 条里赢，概率 \(3/4\)，应得 75 枚，乙得 25 枚。若甲每局胜率是 \(p\)，甲应得 \(100[p+(1-p)p]\)。</p>
+      </div>
+
+      <h2 id="s-exercises" class="reveal">习题</h2>
+
+      <div class="exercises">
+
+        <div class="ex-group">
+          <p class="ex-group-head">A 档 <span>巩固定义与基本计算，每题五分钟内</span></p>
+
+          <p class="ex"><span class="ex-num">1.</span> 掷一枚硬币两次，写出样本空间，并写出事件「至少出现一次正面」所含的样本点。</p>
+          <div class="answer"><details><summary>看答案</summary><p>\(S\) 里四个点是正正、正反、反正、反反，彼此等可能。「至少一次正面」是前三个点，\(k=3\)，\(P=3/4\)。</p></details></div>
+
+          <p class="ex"><span class="ex-num">2.</span> 掷一枚骰子，\(A=\{2,4,6\}\)，\(B=\{5,6\}\)，求 \(A\cup B\)、\(AB\)、\(A-B\)、\(\bar A\)。</p>
+          <div class="answer"><details><summary>看答案</summary><p>\(A\cup B=\{2,4,5,6\}\)，\(AB=\{6\}\)，\(A-B=\{2,4\}\)，\(\bar A=\{1,3,5\}\)。注意 \(B\) 与 \(\bar A\) 有公共点 5，两者不对立。</p></details></div>
+
+          <p class="ex"><span class="ex-num">3.</span> 从 1 到 10 这 10 个整数中任取一个，求取到质数的概率。</p>
+          <div class="answer"><details><summary>看答案</summary><p>质数是 2、3、5、7 共 4 个，10 个点等可能，概率 \(4/10=2/5\)。1 既不是质数也不是合数，别数进去。</p></details></div>
+
+          <p class="ex"><span class="ex-num">4.</span> 计算 \(P(5,2)\) 与 \(\binom{6}{3}\)，再算三位数字（每位 0 至 9，可重复）的密码总数。</p>
+          <div class="answer"><details><summary>看答案</summary><p>\(P(5,2)=5\times 4=20\)，\(\binom{6}{3}=20\)，密码是 \(10^3=1000\) 个。前两个数相等是巧合，别当成规律。</p></details></div>
+
+          <p class="ex"><span class="ex-num">5.</span> 袋中 4 白 6 黑共 10 个球，任取 2 个，求两个同色的概率。</p>
+          <div class="answer"><details><summary>看答案</summary><p>总数 \(\binom{10}{2}=45\)，同色是两白或两黑，\(\binom{4}{2}+\binom{6}{2}=6+15=21\)，概率 \(21/45=7/15\)。</p></details></div>
+
+          <p class="ex"><span class="ex-num">6.</span> 已知 \(P(A)=0.4\)，\(P(B)=0.3\)，\(P(AB)=0.1\)，求 \(P(A\cup B)\)、\(P(\bar A\bar B)\)、\(P(A-B)\)。</p>
+          <div class="answer"><details><summary>看答案</summary><p>\(P(A\cup B)=0.4+0.3-0.1=0.6\)；\(\bar A\bar B\) 是 \(A\cup B\) 的对立，得 \(1-0.6=0.4\)；\(P(A-B)=0.4-0.1=0.3\)。</p></details></div>
+        </div>
+
+        <div class="ex-group">
+          <p class="ex-group-head">B 档 <span>综合题，接近期末难度</span></p>
+
+          <p class="ex"><span class="ex-num">1.</span> 一副扑克 52 张里有 4 张 A，任取 5 张，求恰有 2 张 A 的概率。</p>
+          <div class="answer"><details><summary>看答案</summary><p>总数 \(\binom{52}{5}=2598960\)，恰 2 张 A 是 \(\binom{4}{2}\binom{48}{3}=6\times 17296=103776\)，概率约 0.0399。</p></details></div>
+
+          <p class="ex"><span class="ex-num">2.</span> \(n\) 个人中至少两人生日相同的概率是多少（一年按 365 天，各人生日等可能且互不影响）？说明为什么 \(n=23\) 时这个概率已经过半。</p>
+          <div class="answer"><details><summary>看答案</summary><p>反面是 \(n\) 人生日全不同，有 \(365\times 364\times\cdots\times(365-n+1)\) 种，概率 \(1-\frac{365\times 364\times\cdots\times(365-n+1)}{365^n}\)。\(n=23\) 时全不同的概率约 0.4927，所以至少两人相同的概率约 0.5073。</p></details></div>
+
+          <p class="ex"><span class="ex-num">3.</span> 袋中 3 红 7 白，不放回逐个摸，求第 3 次才摸到红球的概率。</p>
+          <div class="answer"><details><summary>看答案</summary><p>前两次都是白、第三次是红：\(\frac{7}{10}\times\frac{6}{9}\times\frac{3}{8}=\frac{126}{720}=\frac{7}{40}\)。用组合算也一样，\(\frac{\binom{7}{2}\times 3}{\binom{10}{2}\times 8}\) 化简后同为 \(7/40\)。</p></details></div>
+
+          <p class="ex"><span class="ex-num">4.</span> 甲乙各掷一枚均匀骰子，求甲的点数大于乙的点数的概率。</p>
+          <div class="answer"><details><summary>看答案</summary><p>36 个等可能结果，平局 6 个，剩下 30 个里甲大于乙与乙大于甲各占一半，即 15 个，概率 \(15/36=5/12\)。</p></details></div>
+        </div>
+
+        <div class="ex-group">
+          <p class="ex-group-head">C 档 <span>拓展与历史原题</span></p>
+
+          <p class="ex"><span class="ex-num">1.</span>（帕斯卡与费马，1654）点数问题：甲再赢 1 局、乙再赢 3 局时停手，赌金 64 枚金币怎么分？</p>
+          <div class="answer"><details><summary>看答案</summary><p>补满 3 局，共 8 条等长路径。只有乙连赢 3 局那 1 条轮到乙，所以甲得 \(64\times\frac{7}{8}=56\) 枚，乙得 8 枚。</p></details></div>
+
+          <p class="ex"><span class="ex-num">2.</span>（惠更斯，1657）某赌局以 \(1/3\) 的概率得 9 元、以 \(2/3\) 的概率得 3 元。按惠更斯的定义求期望，并说明它为什么可以当作公平的入场费。</p>
+          <div class="answer"><details><summary>看答案</summary><p>期望 \(\frac{1}{3}\times 9+\frac{2}{3}\times 3=5\) 元。入场费收 5 元时，反复玩下去双方的平均得失都为零。这就是惠更斯命题一的算法。</p></details></div>
+
+          <p class="ex"><span class="ex-num">3.</span> 公平分赌金的一般公式：甲再赢 \(a\) 局、乙再赢 \(b\) 局，每局甲胜概率 \(p\)，写出甲应得的份额。</p>
+          <div class="answer"><details><summary>看答案</summary><p>甲得 \(\sum_{k=0}^{b-1}\binom{a+k-1}{k}p^{a}(1-p)^{k}\)，也就是补满 \(a+b-1\) 局后乙赢不到 \(b\) 局的那部分概率。\(a=b=1\) 时退化成 \(p\)。</p></details></div>
+        </div>
+
+        <div class="ex-group">
+          <p class="ex-group-head">思考题 <span>不设标准答案，只给提示</span></p>
+
+          <p class="ex"><span class="ex-num">1.</span> 把「点数和」当成样本点，错在哪一步？如果 11 种和真的等可能，算出来的答案会变成什么？</p>
+          <div class="answer"><details><summary>看提示</summary><p>错在默认每种和只有一种走法。和为 7 有 6 条路径，和为 2 只有 1 条，合并之后各和分到的份量已经不同。若真的等可能，和为 7 的概率会是 \(1/11\)，比 \(1/6\) 小，与大量掷骰的经验对不上。</p></details></div>
+
+          <p class="ex"><span class="ex-num">2.</span> 互不相容与对立的差别在哪里？举一对互不相容但不对立的事件。</p>
+          <div class="answer"><details><summary>看提示</summary><p>互不相容只要求不能同时发生，没要求合起来铺满 \(S\)。掷一枚骰子，\(A=\{1\}\)、\(B=\{2\}\) 互不相容，可 \(\bar A=\{2,3,4,5,6\}\ne B\)，所以不对立。对立还要加一条 \(A\cup B=S\)。</p></details></div>
+
+          <p class="ex"><span class="ex-num">3.</span> 「等可能」是骰子本身的属性，还是我们对试验的假设？骰子灌了铅以后，古典公式还能用吗？</p>
+          <div class="answer"><details><summary>看提示</summary><p>是假设，靠对称性或经验来支撑。灌铅之后各面不再等可能，\(k/n\) 立刻失效，得改用频率或其他模型。课本先假设等可能，因为这是唯一能靠数数算出概率的场合。</p></details></div>
+        </div>
+
+      </div>
+
+      <h2 class="reveal">延伸阅读</h2>
+      <ul class="refs">
+        <li>浙江大学 盛骤、谢式千、潘承毅《概率论与数理统计》第四版，第一章 §1 至 §5。本章的记号与例题口径以这本为准。</li>
+        <li>帕斯卡与费马 1654 年 7 月至 10 月的通信，收于《帕斯卡全集》第二卷；英译文见 F. N. David, <em>Games, Gods and Gambling</em>, 1962。</li>
+        <li>惠更斯《论赌博中的计算》（1657），期望定义的出处；英译收于 D. E. Smith, <em>A Source Book in Mathematics</em>, 1929。</li>
+        <li>拉普拉斯《概率的分析理论》（1812），导论部分给出古典概型的正式定义，并讨论了等可能前提的困难。</li>
+      </ul>
+
+    </article>
+  </div>
+
+  <div class="wrap">
+    <nav class="pager" aria-label="翻页">
+      <a class="pager-link prev" href="index.html"><span class="pager-dir">上一页</span><span class="pager-title">概率论与数理统计目录</span></a>
+      <a class="pager-link next" href="ch02.html"><span class="pager-dir">下一章</span><span class="pager-title">1713：伯努利的《推测术》</span></a>
+    </nav>
+  </div>
+
+</main>
+
+<footer class="footer field-dark">
+  <div class="wrap">
+    <p class="footer-mark">数学基础课</p>
+    <div class="footer-cols">
+      <div><p>三门课按同一套读法写：先看问题，再给定义与判别，最后落到计算与习题。</p></div>
+      <div><p><a href="index.html">概率论目录</a></p><p><a href="../index.html">返回主页</a></p></div>
+      <div><p>图示用脚本按真实数值画，公式由 KaTeX 排版。</p></div>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/katex/katex.min.js"></script>
+<script src="../assets/katex/auto-render.min.js"></script>
+<script src="../assets/site.js"></script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<svg viewBox="0 0 720 340" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<text x="150.00" y="44.00" text-anchor="middle" font-size="15" fill="var(--ink)">一个独立方向：张成一条直线</text>
+<line x1="29.10" y1="268.76" x2="274.00" y2="146.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 6" opacity="0.8"/>
+<line x1="150.00" y1="208.00" x2="246.10" y2="159.64" stroke="var(--accent-line)" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round"/><path d="M 238.81 167.88 L 246.10 159.64 L 235.14 160.59" fill="var(--accent-line)" stroke="var(--accent-line)" stroke-width="1" stroke-linejoin="round"/>
+<text x="280.82" y="150.96" text-anchor="start" font-size="14" fill="var(--ink)">a1</text>
+<line x1="150.00" y1="208.00" x2="203.32" y2="181.34" stroke="var(--ink-2)" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round"/><path d="M 196.01 189.56 L 203.32 181.34 L 192.36 182.26" fill="var(--ink-2)" stroke="var(--ink-2)" stroke-width="1" stroke-linejoin="round"/>
+<text x="202.08" y="168.94" text-anchor="start" font-size="14" fill="var(--ink)">a2</text>
+<line x1="150.00" y1="208.00" x2="60.10" y2="253.26" stroke="var(--ink-2)" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round"/><path d="M 67.39 245.02 L 60.10 253.26 L 71.06 252.31" fill="var(--ink-2)" stroke="var(--ink-2)" stroke-width="1" stroke-linejoin="round"/>
+<text x="41.50" y="268.14" text-anchor="start" font-size="14" fill="var(--ink)">a3</text>
+<circle cx="150.00" cy="208.00" r="3.4" fill="var(--prussian)"/>
+<text x="150.00" y="300.00" text-anchor="middle" font-size="13" fill="var(--ink-3)">a2、a3 都能用 a1 表示</text>
+<text x="150.00" y="322.00" text-anchor="middle" font-size="13" fill="var(--ink-3)">极大无关组只有 1 个向量，秩为 1</text>
+<text x="528.00" y="44.00" text-anchor="middle" font-size="15" fill="var(--ink)">两个独立方向：张成整张平面</text>
+<polygon points="474.28,250.33 652.06,237.16 685.91,122.07 508.14,135.24" fill="var(--fig-fill)" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<line x1="474.28" y1="250.33" x2="508.14" y2="135.24" stroke="var(--ink-3)" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round" opacity="0.35"/>
+<line x1="503.91" y1="248.14" x2="537.76" y2="133.04" stroke="var(--ink-3)" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round" opacity="0.35"/>
+<line x1="533.54" y1="245.94" x2="567.39" y2="130.85" stroke="var(--ink-3)" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round" opacity="0.35"/>
+<line x1="563.17" y1="243.75" x2="597.02" y2="128.65" stroke="var(--ink-3)" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round" opacity="0.35"/>
+<line x1="592.80" y1="241.55" x2="626.65" y2="126.46" stroke="var(--ink-3)" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round" opacity="0.35"/>
+<line x1="622.43" y1="239.36" x2="656.28" y2="124.26" stroke="var(--ink-3)" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round" opacity="0.35"/>
+<line x1="652.06" y1="237.16" x2="685.91" y2="122.07" stroke="var(--ink-3)" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round" opacity="0.35"/>
+<line x1="474.28" y1="250.33" x2="652.06" y2="237.16" stroke="var(--ink-3)" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round" opacity="0.35"/>
+<line x1="479.93" y1="231.15" x2="657.70" y2="217.98" stroke="var(--ink-3)" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round" opacity="0.35"/>
+<line x1="485.57" y1="211.97" x2="663.35" y2="198.80" stroke="var(--ink-3)" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round" opacity="0.35"/>
+<line x1="491.21" y1="192.79" x2="668.99" y2="179.62" stroke="var(--ink-3)" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round" opacity="0.35"/>
+<line x1="496.85" y1="173.60" x2="674.63" y2="160.43" stroke="var(--ink-3)" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round" opacity="0.35"/>
+<line x1="502.49" y1="154.42" x2="680.27" y2="141.25" stroke="var(--ink-3)" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round" opacity="0.35"/>
+<line x1="508.14" y1="135.24" x2="685.91" y2="122.07" stroke="var(--ink-3)" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round" opacity="0.35"/>
+<line x1="528.00" y1="208.00" x2="628.44" y2="200.56" stroke="var(--accent-line)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M 618.55 205.38 L 628.44 200.56 L 617.95 197.25" fill="var(--accent-line)" stroke="var(--accent-line)" stroke-width="1" stroke-linejoin="round"/>
+<line x1="528.00" y1="208.00" x2="546.60" y2="144.76" stroke="var(--ink-2)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M 547.63 155.71 L 546.60 144.76 L 539.80 153.41" fill="var(--ink-2)" stroke="var(--ink-2)" stroke-width="1" stroke-linejoin="round"/>
+<line x1="528.00" y1="208.00" x2="604.04" y2="156.59" stroke="var(--prussian)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="5 5"/><path d="M 597.86 165.69 L 604.04 156.59 L 593.29 158.93" fill="var(--prussian)" stroke="var(--prussian)" stroke-width="1" stroke-linejoin="round"/>
+<text x="630.92" y="210.48" text-anchor="start" font-size="14" fill="var(--ink)">a1</text>
+<text x="528.00" y="141.04" text-anchor="end" font-size="14" fill="var(--ink)">a2</text>
+<text x="625.12" y="140.47" text-anchor="start" font-size="14" fill="var(--ink)">a3</text>
+<circle cx="528.00" cy="208.00" r="3.4" fill="var(--prussian)"/>
+<text x="528.00" y="300.00" text-anchor="middle" font-size="13" fill="var(--ink-3)">a3 落在平面里，加进去不添新方向</text>
+<text x="528.00" y="322.00" text-anchor="middle" font-size="13" fill="var(--ink-3)">极大无关组可取 a1、a2，秩为 2</text>
+</svg>

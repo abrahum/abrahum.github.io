@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>第一章 从「不可能的数」到复平面 · 复变函数</title>
+<meta name="description" content="复数怎么被三次方程逼出来，复平面怎么在 1799 到 1831 年间成形，以及模、辐角、欧拉公式与复球面。">
+<link rel="stylesheet" href="../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="nav-brand" href="../index.html">数学基础课<span> 四门课，一套读法</span></a>
+    <nav class="nav-links" aria-label="主导航">
+      <a href="index.html#map">本课目录</a>
+      <a class="xl" href="../calculus/index.html">微积分</a>
+      <a class="xl" href="../linear-algebra/index.html">线性代数</a>
+      <a class="xl" href="../probability/index.html">概率论</a>
+      <a class="opt" href="ch02.html">下一章</a>
+    </nav>
+  </div>
+  <div class="nav-progress" aria-hidden="true"></div>
+</header>
+
+<main>
+
+  <section class="chapter">
+    <div class="wrap">
+      <div class="ch-hero-band">
+        <div>
+          <p class="ch-label reveal"><span>第一章</span><span class="ch-era">1545 年至 1831 年</span></p>
+          <h1 class="ch-title reveal reveal-2">从「不可能的数」到复平面</h1>
+          <p class="ch-deck reveal reveal-3">1545 年卡丹在解三次方程时算出了 \(\sqrt{-15}\)，他说这是「诡辩式地」得出的数，算完还是得到了正确答案。此后三百年，虚数一直是个好用的工具，却没人说得清它到底是什么。直到复平面出现，它才变成一个点。</p>
+          <div class="ch-meta reveal reveal-3">
+            <div><strong>本章知识点</strong>复数与四则运算、复平面、模与辐角、欧拉公式、复球面</div>
+            <div><strong>历史坐标</strong>卡丹 1545 年，高斯 1831 年</div>
+            <div><strong>对应教材</strong>钟玉泉《复变函数论》第一章</div>
+            <div><strong>前置</strong>三角函数的和角公式、极坐标</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap ch-body">
+    <aside class="rail">
+      <p class="rail-title">本章提纲</p>
+      <ol>
+        <li><a href="#s-1">三次方程逼出来的数</a></li>
+        <li><a href="#s-2">从符号到点</a></li>
+        <li><a href="#s-3">运算与它的几何意思</a></li>
+        <li><a href="#s-4">欧拉公式</a></li>
+        <li><a href="#s-5">复球面</a></li>
+        <li><a href="#s-manual">怎么算</a></li>
+        <li><a href="#s-examples">例题</a></li>
+        <li><a href="#s-exercises">习题</a></li>
+      </ol>
+      <p class="rail-title">历史坐标</p>
+      <p class="rail-who">卡丹 1545 年<br>邦贝利 1572 年<br>韦塞尔 1799 年<br>高斯 1831 年<br>黎曼 1857 年</p>
+    </aside>
+
+    <article class="prose">
+
+      <p class="lead reveal">十六世纪的意大利，解三次方程是数学家吃饭的本事。卡丹在《大术》里公布了一个公式，任何形如 \(x^3=px+q\) 的方程都能套进去。他自己试了一道题：\(x^3=15x+4\)，代进公式，中间步骤里冒出 \(\sqrt{-121}\)。按当时的规矩，负数不能开平方，这道题就卡在这里了。可他硬着头皮把 \(\sqrt{-121}\) 当成数往下算，最后得出了正确答案 \(x=4\)。</p>
+
+      <h2 id="s-1" class="reveal">一、三次方程逼出来的数</h2>
+
+      <p>卡丹在书里写下了这道题，说这种数是「诡辩式地」算出来的，因为负数没有平方根；这句话把接下来三百年的处境说清楚了：虚数是解方程时绕不过去的副产品，你能用它算出正确结果，却说不清它是什么。</p>
+
+      <p>邦贝利 1572 年在《代数》里往前走了一步。他把这种数当成正常的对象，定出加减乘除的规则，还发现 \(\sqrt{-121}\) 那样的式子算到最后会自己消掉，留下一个实数。这一步的意义在于：只要运算规则自洽，中间出现什么都不要紧。</p>
+
+      <div class="archive reveal">
+        <p class="archive-when">1545 年，米兰</p>
+        <h3>卡丹写下「诡辩式地」</h3>
+        <p class="archive-quote">「既然负数没有平方根，就应该把这项设为不可能，可是……我们却诡辩式地求得了答案。」</p>
+        <p class="archive-source">卡丹《大术》，第 37 章</p>
+        <p>这句话后来被当成虚数诞生的标志。笛卡尔 1637 年才在《几何学》里造出 imaginary 这个词，语气并不友善：「想象中的根」。符号 \(i\) 则要等到欧拉 1777 年才出现，他一直用得很犹豫。</p>
+      </div>
+
+      <p>真正的疑问在于，\(i^2=-1\) 并没有违反什么逻辑。实数里之所以说负数不能开平方，是因为实数的平方永远非负，这是实数轴的性质，不是逻辑的禁令；换一个更大的数系，这条性质自然就不必保留。复数就是这样一种数系：加减乘除与三条运算律全部照旧，被拿掉的只有平方非负这一条。</p>
+
+      <details class="fold">
+        <summary>为什么不矛盾反而是实数轴太窄</summary>
+        <p>把数系从实数扩到复数，加法乘法、交换律结合律分配律、除法（分母非零）全部保留，只有「大小」没了。复数不能比大小，因为它不在一条直线上，没法给一个相协调的排序。丢掉比较大小的能力，换来了平方根随便开，这笔交易很划算。</p>
+      </details>
+
+      <h2 id="s-2" class="reveal">二、从符号到点</h2>
+
+      <p>转折发生在 1799 年前后，几乎同时出现在三个人身上：丹麦测量员韦塞尔用平面上的向量表示复数、把乘法解释成旋转；巴黎的簿记员阿尔冈画出了后来以他命名的阿尔冈图；高斯则把这件事确立为标准说法。</p>
+
+      <p>高斯的贡献在于记法和信任：1831 年他正式使用 \(a+bi\) 的写法，把这个平面称为复数平面，以他的声望，复数从此不再是需要辩护的东西。</p>
+
+      <div class="figure">
+        <!--FIG cx01_plane--><svg viewBox="0 0 720 460" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<line x1="64.00" y1="249.30" x2="656.00" y2="249.30" stroke="var(--ink-2)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="360.00" y1="396.00" x2="360.00" y2="64.00" stroke="var(--ink-2)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="646.89" y="271.30" text-anchor="end" font-size="14" fill="var(--ink-3)">实轴</text>
+<text x="370.00" y="68.63" text-anchor="start" font-size="14" fill="var(--ink-3)">虚轴</text>
+<line x1="360.00" y1="249.30" x2="542.15" y2="156.65" stroke="var(--accent-line)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M 534.90 164.92 L 542.15 156.65 L 531.20 157.65" fill="var(--accent-line)" stroke="var(--accent-line)" stroke-width="1" stroke-linejoin="round"/>
+<circle cx="542.15" cy="156.65" r="5.2" fill="var(--prussian)"/>
+<text x="554.15" y="144.65" text-anchor="start" font-size="15" fill="var(--ink)">z = 1.6 + 1.2i</text>
+<line x1="360.00" y1="249.30" x2="542.15" y2="249.30" stroke="var(--ink-3)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="5 5"/>
+<line x1="542.15" y1="156.65" x2="542.15" y2="249.30" stroke="var(--ink-3)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="5 5"/>
+<text x="451.08" y="237.30" text-anchor="middle" font-size="13.5" fill="var(--ink-3)">实部 a</text>
+<text x="552.15" y="202.98" text-anchor="start" font-size="13.5" fill="var(--ink-3)">虚部 b</text>
+<path d="M 422.00 249.30 L 421.98 247.64 L 421.91 245.98 L 421.80 244.32 L 421.64 242.67 L 421.44 241.02 L 421.20 239.37 L 420.91 237.73 L 420.58 236.11 L 420.20 234.49 L 419.78 232.88 L 419.32 231.28 L 418.82 229.70 L 418.27 228.13 L 417.68 226.57 L 417.05 225.03 L 416.38 223.51 L 415.67 222.01 L 414.92 220.53 L 414.13 219.07 L 413.30 217.63 L 412.43 216.21 L 411.52 214.81 L 410.58 213.45 L 409.60 212.10" fill="none" stroke="var(--prussian)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="438.00" y="227.30" text-anchor="start" font-size="15" fill="var(--prussian)" font-style="italic">θ</text>
+<text x="422.62" y="175.95" text-anchor="start" font-size="14" fill="var(--prussian)">r = |z|</text>
+<circle cx="542.15" cy="341.95" r="4.40" fill="var(--paper)" stroke="var(--ink-3)" stroke-width="1.6"/>
+<text x="554.15" y="361.95" text-anchor="start" font-size="13.5" fill="var(--ink-3)">共轭 z̄ = 1.6 − 1.2i</text>
+<text x="75.38" y="42.00" text-anchor="start" font-size="14.5" fill="var(--ink-2)">一个复数由两个实数决定，所以它同时是数、是点、也是向量。</text>
+</svg>
+<!--/FIG cx01_plane-->
+        <figcaption class="figcaption"><b>一个复数对应一个点，也对应一根从原点出发的向量。</b>实部是水平方向，虚部是竖直方向。由这个点还能读出一对数：模 r 与辐角 θ，就是极坐标的写法。</figcaption>
+      </div>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定义（复数、实部与虚部）</p>
+        <p>形如 \(z=a+bi\) 的数称复数，其中 \(a,b\) 是实数，\(i^2=-1\)。\(a\) 叫实部，记作 \(\operatorname{Re}z\)；\(b\) 叫虚部，记作 \(\operatorname{Im}z\)。两个复数相等当且仅当实部与虚部分别相等。</p>
+      </div>
+
+      <p>复数集合记作 \(\mathbb{C}\)，作为集合它与实平面 \(\mathbb{R}^2\) 一一对应，但多了一套乘法，所以它不只是平面上的点，而是一个可以算的数系。</p>
+
+      <h2 id="s-3" class="reveal">三、运算与它的几何意思</h2>
+
+      <p>加减法跟向量一样，对应坐标分别相加；乘法不一样，\((a+bi)(c+di)=ac+bd\,i^2+(ad+bc)i\)，把 \(i^2\) 换成 \(-1\)，得 \((ac-bd)+(ad+bc)i\)。这条公式看着繁琐，配上极坐标就变得极为简洁。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定理（乘法的几何意义）</p>
+        <p>设 \(z_1=r_1(\cos\theta_1+i\sin\theta_1)\)，\(z_2=r_2(\cos\theta_2+i\sin\theta_2)\)，则 \(z_1z_2=r_1r_2\left[\cos(\theta_1+\theta_2)+i\sin(\theta_1+\theta_2)\right]\)。也就是说，两个复数相乘，模相乘、辐角相加。</p>
+      </div>
+
+      <p>由此可以推出一条几乎全部的几何直觉：乘一个模为 1 的复数，就是把平面上的图形整体旋转。乘 \(i\) 是最简单的情形，相当于逆时针转 90 度，因为 \(i\) 的模是 1，辐角是 \(\pi/2\)。转两次就是 \(i^2=-1\)，把点送到关于原点的对称位置。</p>
+
+      <div class="figure">
+        <!--FIG cx01_rotate--><svg viewBox="0 0 720 360" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<circle cx="190.00" cy="186.00" r="108.00" fill="none" stroke="var(--ink-3)" stroke-width="1.4"/>
+<line x1="52.00" y1="186.00" x2="328.00" y2="186.00" stroke="var(--ink-3)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+<line x1="190.00" y1="48.00" x2="190.00" y2="324.00" stroke="var(--ink-3)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+<circle cx="298.00" cy="186.00" r="5" fill="var(--prussian)"/>
+<text x="310.00" y="191.00" text-anchor="middle" font-size="15" fill="var(--ink)">1</text>
+<circle cx="190.00" cy="78.00" r="5" fill="var(--prussian)"/>
+<text x="190.00" y="71.00" text-anchor="middle" font-size="15" fill="var(--ink)">i</text>
+<circle cx="82.00" cy="186.00" r="5" fill="var(--prussian)"/>
+<text x="70.00" y="191.00" text-anchor="middle" font-size="15" fill="var(--ink)">−1</text>
+<circle cx="190.00" cy="294.00" r="5" fill="var(--prussian)"/>
+<text x="190.00" y="311.00" text-anchor="middle" font-size="15" fill="var(--ink)">−i</text>
+<path d="M 317.44 144.59 L 315.10 137.98 L 312.42 131.50 L 309.39 125.17 L 306.05 119.00 L 302.38 113.02 L 298.41 107.24 L 294.14 101.67 L 289.58 96.34 L 284.75 91.25 L 279.66 86.42 L 274.33 81.86 L 268.76 77.59 L 262.98 73.62 L 257.00 69.95 L 250.83 66.61 L 244.50 63.58 L 238.02 60.90 L 231.41 58.56 L 224.68 56.57 L 217.86 54.93 L 210.96 53.65 L 204.01 52.73 L 197.01 52.18 L 190.00 52.00 L 182.99 52.18 L 175.99 52.73 L 169.04 53.65 L 162.14 54.93 L 155.32 56.57 L 148.59 58.56" fill="none" stroke="var(--accent-line)" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="286.00" y="90.00" text-anchor="start" font-size="14" fill="var(--accent-line)">乘 i：逆时针转 90°</text>
+<text x="470.00" y="92.00" text-anchor="start" font-size="15" fill="var(--ink)">z = a + bi</text>
+<text x="470.00" y="120.00" text-anchor="start" font-size="15" fill="var(--ink)">iz = −b + ai</text>
+<text x="470.00" y="168.00" text-anchor="start" font-size="14" fill="var(--ink-2)">模不变，辐角加 90°。</text>
+<text x="470.00" y="194.00" text-anchor="start" font-size="14" fill="var(--ink-2)">这条性质是复数的乘法，</text>
+<text x="470.00" y="220.00" text-anchor="start" font-size="14" fill="var(--ink-2)">也是复平面上旋转的算法。</text>
+<text x="470.00" y="268.00" text-anchor="start" font-size="14" fill="var(--ink-3)">i² = −1 只是它转两次的结果。</text>
+</svg>
+<!--/FIG cx01_rotate-->
+        <figcaption class="figcaption"><b>乘 i 就是把整个平面逆时针转 90 度。</b>单位圆上的四个点各转一次，1 转到 i，i 转到 −1。所谓 i² = −1，不过是转两次的结果。</figcaption>
+      </div>
+
+      <p>除法是乘法的逆运算，模相除、辐角相减。要注意辐角不唯一：同一个点可以写成 \(\theta+2k\pi\)，这是复变函数里许多麻烦的源头。</p>
+
+      <p>模有一个常用性质值得单独记下来：\(|z_1+z_2| \le |z_1|+|z_2|\)，等号只在两个向量同向时成立。几何上就是三角形两边之和不小于第三边，所以叫三角不等式。它被用来估计复变函数的大小，第四章判断级数收敛、第五章估计积分，用的都是这一条。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定义（模、辐角、共轭）</p>
+        <p>设 \(z=a+bi\)。模 \(|z|=\sqrt{a^2+b^2}\)；辐角 \(\theta\) 满足 \(a=|z|\cos\theta\)，\(b=|z|\sin\theta\)，它的主值记作 \(\arg z\)，通常取 \((-\pi,\pi]\)；共轭 \(\bar z=a-bi\)。</p>
+      </div>
+
+      <details class="fold">
+        <summary>辐角的多值到底麻烦在哪</summary>
+        <p>点 z 在平面上只有一个，可它的辐角有无限多个，彼此差 \(2\pi\) 的整数倍。写成 \(\theta+2k\pi\) 时一切安全，可一旦开方或者取对数，不同的 k 会给出不同的结果，而且都是对的。第五章讲多值函数时会再回到这一点。</p>
+      </details>
+
+      <h2 id="s-4" class="reveal">四、欧拉公式</h2>
+
+      <p>把指数函数、正弦余弦和复数连成一体的，是欧拉 1748 年给出的一个等式。它的证明有几条路，最直接的一条是把 \(e^{i\theta}\) 按泰勒级数展开，再把实部和虚部分开。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定理（欧拉公式）</p>
+        <p>对任意实数 \(\theta\)，有 \(e^{i\theta}=\cos\theta+i\sin\theta\)。由此复数可以写成指数式 \(z=re^{i\theta}\)，乘法就是 \(r_1e^{i\theta_1}\cdot r_2e^{i\theta_2}=r_1r_2e^{i(\theta_1+\theta_2)}\)。</p>
+      </div>
+
+      <div class="figure">
+        <!--FIG cx01_euler--><svg viewBox="0 0 720 430" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<line x1="56.00" y1="215.00" x2="664.00" y2="215.00" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="152.82" y1="374.00" x2="152.82" y2="56.00" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="656.25" y="235.00" text-anchor="end" font-size="14" fill="var(--ink-3)" font-style="italic">θ</text>
+<path d="M 152.82 97.22 L 154.36 97.25 L 155.91 97.32 L 157.46 97.43 L 159.01 97.60 L 160.56 97.81 L 162.11 98.07 L 163.66 98.37 L 165.21 98.73 L 166.76 99.13 L 168.31 99.57 L 169.85 100.06 L 171.40 100.60 L 172.95 101.18 L 174.50 101.81 L 176.05 102.48 L 177.60 103.20 L 179.15 103.96 L 180.70 104.77 L 182.25 105.62 L 183.80 106.52 L 185.35 107.46 L 186.89 108.44 L 188.44 109.46 L 189.99 110.53 L 191.54 111.64 L 193.09 112.79 L 194.64 113.98 L 196.19 115.21 L 197.74 116.48 L 199.29 117.79 L 200.84 119.14 L 202.38 120.53 L 203.93 121.96 L 205.48 123.42 L 207.03 124.92 L 208.58 126.45 L 210.13 128.02 L 211.68 129.63 L 213.23 131.27 L 214.78 132.94 L 216.33 134.65 L 217.88 136.39 L 219.42 138.16 L 220.97 139.96 L 222.52 141.79 L 224.07 143.65 L 225.62 145.54 L 227.17 147.45 L 228.72 149.40 L 230.27 151.36 L 231.82 153.36 L 233.37 155.38 L 234.91 157.42 L 236.46 159.49 L 238.01 161.58 L 239.56 163.69 L 241.11 165.82 L 242.66 167.97 L 244.21 170.14 L 245.76 172.32 L 247.31 174.53 L 248.86 176.75 L 250.41 178.98 L 251.95 181.23 L 253.50 183.49 L 255.05 185.77 L 256.60 188.06 L 258.15 190.36 L 259.70 192.66 L 261.25 194.98 L 262.80 197.31 L 264.35 199.64 L 265.90 201.98 L 267.44 204.32 L 268.99 206.67 L 270.54 209.02 L 272.09 211.37 L 273.64 213.73 L 275.19 216.08 L 276.74 218.44 L 278.29 220.79 L 279.84 223.14 L 281.39 225.49 L 282.94 227.84 L 284.48 230.18 L 286.03 232.51 L 287.58 234.83 L 289.13 237.15 L 290.68 239.46 L 292.23 241.76 L 293.78 244.05 L 295.33 246.32 L 296.88 248.59 L 298.43 250.84 L 299.97 253.08 L 301.52 255.30 L 303.07 257.50 L 304.62 259.69 L 306.17 261.86 L 307.72 264.01 L 309.27 266.14 L 310.82 268.26 L 312.37 270.35 L 313.92 272.41 L 315.46 274.46 L 317.01 276.48 L 318.56 278.48 L 320.11 280.45 L 321.66 282.39 L 323.21 284.31 L 324.76 286.20 L 326.31 288.06 L 327.86 289.90 L 329.41 291.70 L 330.96 293.47 L 332.50 295.21 L 334.05 296.92 L 335.60 298.60 L 337.15 300.24 L 338.70 301.85 L 340.25 303.42 L 341.80 304.96 L 343.35 306.46 L 344.90 307.93 L 346.45 309.36 L 347.99 310.75 L 349.54 312.10 L 351.09 313.41 L 352.64 314.69 L 354.19 315.92 L 355.74 317.12 L 357.29 318.27 L 358.84 319.38 L 360.39 320.45 L 361.94 321.48 L 363.49 322.46 L 365.03 323.41 L 366.58 324.31 L 368.13 325.16 L 369.68 325.97 L 371.23 326.74 L 372.78 327.46 L 374.33 328.14 L 375.88 328.77 L 377.43 329.36 L 378.98 329.90 L 380.52 330.39 L 382.07 330.84 L 383.62 331.24 L 385.17 331.60 L 386.72 331.91 L 388.27 332.17 L 389.82 332.39 L 391.37 332.55 L 392.92 332.68 L 394.47 332.75 L 396.02 332.78 L 397.56 332.76 L 399.11 332.69 L 400.66 332.58 L 402.21 332.42 L 403.76 332.21 L 405.31 331.95 L 406.86 331.65 L 408.41 331.30 L 409.96 330.91 L 411.51 330.47 L 413.05 329.98 L 414.60 329.45 L 416.15 328.87 L 417.70 328.24 L 419.25 327.57 L 420.80 326.86 L 422.35 326.10 L 423.90 325.29 L 425.45 324.45 L 427.00 323.55 L 428.55 322.62 L 430.09 321.64 L 431.64 320.62 L 433.19 319.55 L 434.74 318.45 L 436.29 317.30 L 437.84 316.12 L 439.39 314.89 L 440.94 313.62 L 442.49 312.31 L 444.04 310.97 L 445.58 309.58 L 447.13 308.16 L 448.68 306.70 L 450.23 305.20 L 451.78 303.67 L 453.33 302.10 L 454.88 300.50 L 456.43 298.86 L 457.98 297.19 L 459.53 295.49 L 461.08 293.75 L 462.62 291.98 L 464.17 290.19 L 465.72 288.36 L 467.27 286.50 L 468.82 284.62 L 470.37 282.70 L 471.92 280.76 L 473.47 278.79 L 475.02 276.80 L 476.57 274.78 L 478.11 272.74 L 479.66 270.68 L 481.21 268.59 L 482.76 266.48 L 484.31 264.35 L 485.86 262.21 L 487.41 260.04 L 488.96 257.85 L 490.51 255.65 L 492.06 253.43 L 493.61 251.20 L 495.15 248.95 L 496.70 246.69 L 498.25 244.41 L 499.80 242.12 L 501.35 239.83 L 502.90 237.52 L 504.45 235.20 L 506.00 232.88 L 507.55 230.55 L 509.10 228.21 L 510.64 225.87 L 512.19 223.52 L 513.74 221.17 L 515.29 218.81 L 516.84 216.46 L 518.39 214.10 L 519.94 211.75 L 521.49 209.39 L 523.04 207.04 L 524.59 204.69 L 526.14 202.35 L 527.68 200.01 L 529.23 197.68 L 530.78 195.35 L 532.33 193.03 L 533.88 190.72 L 535.43 188.42 L 536.98 186.13 L 538.53 183.86 L 540.08 181.59 L 541.63 179.34 L 543.17 177.10 L 544.72 174.88 L 546.27 172.67 L 547.82 170.48 L 549.37 168.31 L 550.92 166.16 L 552.47 164.02 L 554.02 161.91 L 555.57 159.82 L 557.12 157.75 L 558.66 155.70 L 560.21 153.68 L 561.76 151.68 L 563.31 149.71 L 564.86 147.76 L 566.41 145.84 L 567.96 143.95 L 569.51 142.08 L 571.06 140.25 L 572.61 138.44 L 574.16 136.67 L 575.70 134.92 L 577.25 133.21 L 578.80 131.53 L 580.35 129.89 L 581.90 128.28 L 583.45 126.70 L 585.00 125.16 L 586.55 123.66 L 588.10 122.19 L 589.65 120.76 L 591.19 119.36 L 592.74 118.01 L 594.29 116.69 L 595.84 115.41 L 597.39 114.17 L 598.94 112.98 L 600.49 111.82 L 602.04 110.71 L 603.59 109.63 L 605.14 108.60 L 606.69 107.61 L 608.23 106.67 L 609.78 105.76 L 611.33 104.90 L 612.88 104.09 L 614.43 103.32 L 615.98 102.59 L 617.53 101.91 L 619.08 101.28 L 620.63 100.69 L 622.18 100.14 L 623.72 99.65 L 625.27 99.19 L 626.82 98.79 L 628.37 98.43 L 629.92 98.11 L 631.47 97.85 L 633.02 97.63 L 634.57 97.46 L 636.12 97.33 L 637.67 97.25 L 639.22 97.22 L 640.76 97.24 L 642.31 97.30 L 643.86 97.41 L 645.41 97.57 L 646.96 97.77 L 648.51 98.02" fill="none" stroke="var(--accent-line)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 152.82 215.00 L 154.36 212.64 L 155.91 210.29 L 157.46 207.94 L 159.01 205.59 L 160.56 203.24 L 162.11 200.90 L 163.66 198.56 L 165.21 196.24 L 166.76 193.91 L 168.31 191.60 L 169.85 189.30 L 171.40 187.00 L 172.95 184.72 L 174.50 182.45 L 176.05 180.19 L 177.60 177.95 L 179.15 175.72 L 180.70 173.51 L 182.25 171.31 L 183.80 169.14 L 185.35 166.97 L 186.89 164.83 L 188.44 162.71 L 189.99 160.61 L 191.54 158.53 L 193.09 156.48 L 194.64 154.45 L 196.19 152.44 L 197.74 150.45 L 199.29 148.50 L 200.84 146.57 L 202.38 144.66 L 203.93 142.79 L 205.48 140.94 L 207.03 139.13 L 208.58 137.34 L 210.13 135.58 L 211.68 133.86 L 213.23 132.17 L 214.78 130.51 L 216.33 128.89 L 217.88 127.30 L 219.42 125.74 L 220.97 124.22 L 222.52 122.74 L 224.07 121.30 L 225.62 119.89 L 227.17 118.52 L 228.72 117.19 L 230.27 115.89 L 231.82 114.64 L 233.37 113.43 L 234.91 112.26 L 236.46 111.12 L 238.01 110.04 L 239.56 108.99 L 241.11 107.98 L 242.66 107.02 L 244.21 106.10 L 245.76 105.23 L 247.31 104.39 L 248.86 103.61 L 250.41 102.86 L 251.95 102.17 L 253.50 101.51 L 255.05 100.91 L 256.60 100.35 L 258.15 99.83 L 259.70 99.36 L 261.25 98.94 L 262.80 98.56 L 264.35 98.23 L 265.90 97.94 L 267.44 97.71 L 268.99 97.52 L 270.54 97.37 L 272.09 97.28 L 273.64 97.23 L 275.19 97.23 L 276.74 97.27 L 278.29 97.36 L 279.84 97.50 L 281.39 97.69 L 282.94 97.92 L 284.48 98.20 L 286.03 98.53 L 287.58 98.90 L 289.13 99.32 L 290.68 99.79 L 292.23 100.30 L 293.78 100.86 L 295.33 101.46 L 296.88 102.11 L 298.43 102.81 L 299.97 103.55 L 301.52 104.33 L 303.07 105.16 L 304.62 106.03 L 306.17 106.95 L 307.72 107.90 L 309.27 108.91 L 310.82 109.95 L 312.37 111.04 L 313.92 112.16 L 315.46 113.33 L 317.01 114.54 L 318.56 115.79 L 320.11 117.08 L 321.66 118.41 L 323.21 119.78 L 324.76 121.18 L 326.31 122.63 L 327.86 124.10 L 329.41 125.62 L 330.96 127.17 L 332.50 128.76 L 334.05 130.38 L 335.60 132.04 L 337.15 133.72 L 338.70 135.45 L 340.25 137.20 L 341.80 138.98 L 343.35 140.80 L 344.90 142.64 L 346.45 144.51 L 347.99 146.41 L 349.54 148.34 L 351.09 150.30 L 352.64 152.28 L 354.19 154.29 L 355.74 156.32 L 357.29 158.37 L 358.84 160.45 L 360.39 162.54 L 361.94 164.66 L 363.49 166.80 L 365.03 168.96 L 366.58 171.14 L 368.13 173.33 L 369.68 175.55 L 371.23 177.77 L 372.78 180.02 L 374.33 182.27 L 375.88 184.54 L 377.43 186.82 L 378.98 189.11 L 380.52 191.42 L 382.07 193.73 L 383.62 196.05 L 385.17 198.38 L 386.72 200.71 L 388.27 203.06 L 389.82 205.40 L 391.37 207.75 L 392.92 210.10 L 394.47 212.46 L 396.02 214.81 L 397.56 217.17 L 399.11 219.52 L 400.66 221.88 L 402.21 224.23 L 403.76 226.57 L 405.31 228.91 L 406.86 231.25 L 408.41 233.58 L 409.96 235.90 L 411.51 238.21 L 413.05 240.52 L 414.60 242.81 L 416.15 245.10 L 417.70 247.37 L 419.25 249.63 L 420.80 251.87 L 422.35 254.10 L 423.90 256.31 L 425.45 258.51 L 427.00 260.69 L 428.55 262.85 L 430.09 265.00 L 431.64 267.12 L 433.19 269.22 L 434.74 271.30 L 436.29 273.36 L 437.84 275.39 L 439.39 277.40 L 440.94 279.39 L 442.49 281.35 L 444.04 283.28 L 445.58 285.19 L 447.13 287.06 L 448.68 288.91 L 450.23 290.73 L 451.78 292.52 L 453.33 294.28 L 454.88 296.00 L 456.43 297.70 L 457.98 299.36 L 459.53 300.98 L 461.08 302.58 L 462.62 304.13 L 464.17 305.66 L 465.72 307.14 L 467.27 308.59 L 468.82 310.00 L 470.37 311.37 L 471.92 312.71 L 473.47 314.01 L 475.02 315.26 L 476.57 316.48 L 478.11 317.65 L 479.66 318.79 L 481.21 319.88 L 482.76 320.93 L 484.31 321.94 L 485.86 322.90 L 487.41 323.83 L 488.96 324.71 L 490.51 325.54 L 492.06 326.33 L 493.61 327.08 L 495.15 327.78 L 496.70 328.44 L 498.25 329.05 L 499.80 329.61 L 501.35 330.13 L 502.90 330.60 L 504.45 331.03 L 506.00 331.41 L 507.55 331.75 L 509.10 332.03 L 510.64 332.28 L 512.19 332.47 L 513.74 332.62 L 515.29 332.72 L 516.84 332.77 L 518.39 332.77 L 519.94 332.73 L 521.49 332.64 L 523.04 332.51 L 524.59 332.33 L 526.14 332.10 L 527.68 331.82 L 529.23 331.50 L 530.78 331.13 L 532.33 330.71 L 533.88 330.25 L 535.43 329.74 L 536.98 329.19 L 538.53 328.59 L 540.08 327.94 L 541.63 327.25 L 543.17 326.51 L 544.72 325.73 L 546.27 324.91 L 547.82 324.04 L 549.37 323.13 L 550.92 322.17 L 552.47 321.17 L 554.02 320.13 L 555.57 319.05 L 557.12 317.93 L 558.66 316.76 L 560.21 315.56 L 561.76 314.31 L 563.31 313.02 L 564.86 311.70 L 566.41 310.33 L 567.96 308.93 L 569.51 307.49 L 571.06 306.01 L 572.61 304.50 L 574.16 302.95 L 575.70 301.37 L 577.25 299.75 L 578.80 298.10 L 580.35 296.41 L 581.90 294.69 L 583.45 292.94 L 585.00 291.16 L 586.55 289.35 L 588.10 287.51 L 589.65 285.64 L 591.19 283.74 L 592.74 281.81 L 594.29 279.86 L 595.84 277.88 L 597.39 275.88 L 598.94 273.85 L 600.49 271.79 L 602.04 269.72 L 603.59 267.62 L 605.14 265.51 L 606.69 263.37 L 608.23 261.21 L 609.78 259.03 L 611.33 256.84 L 612.88 254.63 L 614.43 252.40 L 615.98 250.16 L 617.53 247.91 L 619.08 245.64 L 620.63 243.36 L 622.18 241.07 L 623.72 238.77 L 625.27 236.45 L 626.82 234.13 L 628.37 231.81 L 629.92 229.47 L 631.47 227.13 L 633.02 224.79 L 634.57 222.44 L 636.12 220.08 L 637.67 217.73 L 639.22 215.38 L 640.76 213.02 L 642.31 210.67 L 643.86 208.31 L 645.41 205.96 L 646.96 203.62 L 648.51 201.27" fill="none" stroke="var(--ink-2)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="7 5"/>
+<line x1="233.92" y1="215.00" x2="233.92" y2="113.00" stroke="var(--prussian)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4 4"/>
+<circle cx="233.92" cy="156.11" r="4.6" fill="var(--accent-line)"/>
+<circle cx="233.92" cy="113.00" r="4.6" fill="var(--ink-2)"/>
+<text x="241.92" y="76.02" text-anchor="start" font-size="14" fill="var(--accent-line)">cos θ</text>
+<text x="241.92" y="182.02" text-anchor="start" font-size="14" fill="var(--ink-2)">sin θ</text>
+<text x="227.92" y="201.00" text-anchor="end" font-size="14" fill="var(--prussian)" font-style="italic">θ</text>
+<text x="431.64" y="299.80" text-anchor="start" font-size="15" fill="var(--ink)">e^(iθ) = cos θ + i sin θ</text>
+<text x="431.64" y="330.42" text-anchor="start" font-size="14" fill="var(--ink-2)">一条曲线同时装着两条实曲线</text>
+<text x="431.64" y="78.38" text-anchor="start" font-size="14" fill="var(--ink-3)">θ = π 时得到 e^(iπ) + 1 = 0</text>
+</svg>
+<!--/FIG cx01_euler-->
+        <figcaption class="figcaption"><b>e^{iθ} 是一条绕单位圆走的曲线，实部与虚部各是一条余弦与正弦。</b>两条实曲线被装进同一个复值函数里，这是复变函数最省事的地方：一个函数同时管两件事。</figcaption>
+      </div>
+
+      <p>欧拉公式有几个常用推论：取 \(\theta=\pi\) 得 \(e^{i\pi}+1=0\)，五个常数挤在一个式子里；把 \(\theta\) 换成 \(n\theta\) 得到棣莫弗公式 \((\cos\theta+i\sin\theta)^n=\cos n\theta+i\sin n\theta\)，开方、求根都靠它。指数式还有一个好处：乘除加减指数的运算变成加减，算 \(z^{100}\) 时尤其明显。</p>
+
+      <p>指数式真正的好处是把复数的运算全部归到指数的运算上：乘法是模相乘、角相加，除法是模相除、角相减，乘方是模的幂、角乘 n，开方是模开 n 次、角除以 n 再配上 \(n\) 个不同的起点。四条规则其实是同一条，它们都在说模与辐角各管各的。后面讲复变函数时，凡是能写成指数式的量，先写指数式。</p>
+
+      <details class="fold">
+        <summary>欧拉公式怎么从级数得到</summary>
+        <p>把 \(e^{x}\)、\(\cos x\)、\(\sin x\) 各展成麦克劳林级数，代入 \(x=i\theta\)，利用 \(i^2=-1\)、\(i^3=-i\)、\(i^4=1\) 循环，实部正好是余弦的级数，虚部正好是正弦的级数。这一步在十九世纪才被认为严格，欧拉当年是靠形式演算得到的。</p>
+      </details>
+
+      <h2 id="s-5" class="reveal">五、复球面</h2>
+
+      <p>复平面缺一个「无穷远」。放大到很大时，平面上的点向四个方向散开，没有一个统一的地方可去。黎曼 1857 年给出的办法是把平面卷成一个球：在原点放一个球，从北极向南极投影，平面上的每个点都落在球面上一点，而球面比平面多出的那个点，就是北极。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定义（扩充复平面）</p>
+        <p>把复平面加上一个无穷远点 \(\infty\)，得到扩充复平面 \(\mathbb{C}\cup\{\infty\}\)。它与复球面一一对应，球极投影把平面上的点映到球面上除北极外的点。</p>
+      </div>
+
+      <p>这件事的作用不止是让函数在无穷远处也有定义：分式线性变换、留数在无穷远点的行为、整函数的分类，都要在复球面上才说得干净。第六章讲分式线性变换时，你会看到它正好是复球面上的旋转。</p>
+
+      <p>具体做法是：把球放在平面上，南极与原点重合，从北极往球面上的点引一条直线，延长后与平面相交于一点，这个交点就是该点的像。原点映到南极，离原点越远的点映到越靠近北极的位置，所以平面上向任何方向走到很远，在球面上都挤向同一个北极。用这套对应，「趋于无穷」就不再是分别讨论四个方向，而是与讨论普通点一样，只看它是否靠近北极。</p>
+
+      <p>复平面还有一个实数域没有的好处：方程一定有解。高斯 1799 年的博士论文证明了代数基本定理，任何一个 \(n\) 次多项式方程在复数里恰好有 \(n\) 个根（重根按重数算）。实数域里 \(x^2+1=0\) 就没有根，复数域里不但有，而且个数刚好。这也是「复数」这个名字的讽刺之处：它并不比实数更虚，只是更大。</p>
+
+      <h2 id="s-manual" class="reveal">怎么算</h2>
+
+      <ul>
+        <li><strong>加减用直角式，乘除用指数式。</strong>这是全章最实用的一条经验。</li>
+        <li><strong>先看辐角落在哪一象限。</strong>由 \(\tan\theta=b/a\) 求辐角时，一定要回到点所在的位置判断，不然会差 \(\pi\)。</li>
+        <li><strong>共轭是常用工具。</strong>求模、把分母实数化、验证一个数是不是实数，都靠乘共轭。</li>
+        <li><strong>高次幂先化成指数式。</strong>直接用棣莫弗公式，比连乘省事得多。</li>
+        <li><strong>开方要写全。</strong>\(n\) 次方根有 \(n\) 个，均匀分布在以原点为圆心的圆上，间隔 \(2\pi/n\)。</li>
+      </ul>
+
+      <details class="fold">
+        <summary>分母实数化的标准做法</summary>
+        <p>算 \(\dfrac{a+bi}{c+di}\) 时，上下同乘 \(c-di\)，分母变成 \(c^2+d^2\)，分子乘开即可。这与微积分里给根式分母有理化是同一招，都是把不好处理的部分乘成实数。</p>
+      </details>
+
+      <h2 id="s-examples" class="reveal">例题</h2>
+
+      <div class="example">
+        <p class="example-head">例 <span>1</span>　计算 \((3+2i)(1-4i)\)，并求它的模。</p>
+        <p class="solution">乘开得 \(3-12i+2i-8i^2=3-10i+8=11-10i\)。模为 \(\sqrt{121+100}=\sqrt{221}\)。用模相乘验证：\(|3+2i|=\sqrt{13}\)，\(|1-4i|=\sqrt{17}\)，乘积的模是 \(\sqrt{221}\)，一致。</p>
+      </div>
+
+      <div class="example">
+        <p class="example-head">例 <span>2</span>　求 \((1+i)^{10}\)。</p>
+        <p class="solution">写成指数式：\(1+i=\sqrt2\,e^{i\pi/4}\)，于是 \((1+i)^{10}=(\sqrt2)^{10}e^{i10\pi/4}=32e^{i5\pi/2}=32e^{i\pi/2}=32i\)。若硬乘十次，麻烦不止十倍。</p>
+      </div>
+
+      <div class="example">
+        <p class="example-head">例 <span>3</span>　解方程 \(z^3=1\)，并在复平面上说明三个根的位置。</p>
+        <p class="solution">\(1=e^{i2k\pi}\)，取三次方根得 \(z=e^{i2k\pi/3}\)，\(k=0,1,2\)，即 \(1\)、\(-\tfrac12+\tfrac{\sqrt3}{2}i\)、\(-\tfrac12-\tfrac{\sqrt3}{2}i\)。三点在单位圆上均匀分布，相邻两点与原点成的角都是 \(120\) 度。</p>
+      </div>
+
+      <h2 id="s-exercises" class="reveal">习题</h2>
+
+      <div class="exercises">
+
+        <div class="ex-group">
+          <p class="ex-group-head">A 档 <span>巩固定义与基本计算，每题五分钟内</span></p>
+
+          <p class="ex"><span class="ex-num">1.</span> 计算 \((2-i)(3+2i)\)。</p>
+          <div class="answer"><details><summary>看答案</summary><p>乘开得 \(6+4i-3i-2i^2=6+i+2=8+i\)。</p></details></div>
+
+          <p class="ex"><span class="ex-num">2.</span> 求 \(z=-1+\sqrt3 i\) 的模与主辐角。</p>
+          <div class="answer"><details><summary>看答案</summary><p>模为 \(\sqrt{1+3}=2\)。点在第二象限，\(\tan\theta=-\sqrt3\)，故主辐角 \(\theta=2\pi/3\)。</p></details></div>
+
+          <p class="ex"><span class="ex-num">3.</span> 把 \(\dfrac{1}{1+i}\) 写成 \(a+bi\)。</p>
+          <div class="answer"><details><summary>看答案</summary><p>上下同乘 \(1-i\)，得 \(\dfrac{1-i}{2}=\dfrac12-\dfrac12 i\)。</p></details></div>
+
+          <p class="ex"><span class="ex-num">4.</span> 计算 \(|3+4i|^2\) 与 \((3+4i)(3-4i)\)。</p>
+          <div class="answer"><details><summary>看答案</summary><p>模为 5，平方 25；共轭相乘得 \(9+16=25\)。两者相等，这正是 \(z\bar z=|z|^2\)。</p></details></div>
+
+          <p class="ex"><span class="ex-num">5.</span> 求 \(z^2=-4\) 的全部根。</p>
+          <div class="answer"><details><summary>看答案</summary><p>\(-4=4e^{i\pi}\)，开方得 \(2e^{i\pi/2}=2i\) 与 \(2e^{i3\pi/2}=-2i\)。</p></details></div>
+
+          <p class="ex"><span class="ex-num">6.</span> 说明 \(\overline{z_1z_2}=\bar z_1\bar z_2\) 为什么成立。</p>
+          <div class="answer"><details><summary>看答案</summary><p>用指数式看最清楚：乘法让模相乘、辐角相加，共轭把辐角变号。两边都等于「模相乘、辐角和的相反数」，所以相等。</p></details></div>
+        </div>
+
+        <div class="ex-group">
+          <p class="ex-group-head">B 档 <span>综合题，接近期末与考研难度</span></p>
+
+          <p class="ex"><span class="ex-num">1.</span> 证明 \(|z_1+z_2|^2+|z_1-z_2|^2=2(|z_1|^2+|z_2|^2)\)，并说明它的几何意义。</p>
+          <div class="answer"><details><summary>看答案</summary><p>把左边看成 \((z_1+z_2)(\bar z_1+\bar z_2)+(z_1-z_2)(\bar z_1-\bar z_2)\)，展开后交叉项抵消，剩下 \(2|z_1|^2+2|z_2|^2\)。几何上是平行四边形两条对角线平方和等于四条边平方和。</p></details></div>
+
+          <p class="ex"><span class="ex-num">2.</span> 求 \((\sqrt3 i-1)^{6}\)。</p>
+          <div class="answer"><details><summary>看答案</summary><p>\(-1+\sqrt3 i=2e^{i2\pi/3}\)，六次方得 \(2^6e^{i4\pi}=64\)。</p></details></div>
+
+          <p class="ex"><span class="ex-num">3.</span> 求 \(z^4+16=0\) 的四个根，并说明它们的几何位置。</p>
+          <div class="answer"><details><summary>看答案</summary><p>\(z^4=-16=16e^{i(\pi+2k\pi)}\)，四根为 \(2e^{i(\pi+2k\pi)/4}\)，模都是 2，辐角为 \(\pi/4,3\pi/4,5\pi/4,7\pi/4\)。落在半径 2 的圆上，构成一个正方形。</p></details></div>
+
+          <p class="ex"><span class="ex-num">4.</span> 用棣莫弗公式把 \(\cos 3\theta\) 展开成 \(\cos\theta\) 的多项式。</p>
+          <div class="answer"><details><summary>看答案</summary><p>由 \((\cos\theta+i\sin\theta)^3\) 展开取实部：\(\cos^3\theta-3\cos\theta\sin^2\theta\)，再用 \(\sin^2=1-\cos^2\) 得 \(4\cos^3\theta-3\cos\theta\)。</p></details></div>
+        </div>
+
+        <div class="ex-group">
+          <p class="ex-group-head">C 档 <span>拓展与历史原题</span></p>
+
+          <p class="ex"><span class="ex-num">1.</span>（卡丹，1545）用公式解 \(x^3=15x+4\)，说明中间出现的 \(\sqrt{-121}\) 最后如何消掉。</p>
+          <div class="answer"><details><summary>看答案</summary><p>套公式得 \(x=\sqrt[3]{2+11i}+\sqrt[3]{2-11i}\)。注意 \(2+11i=(2+i)^3\)，所以两项分别是 \(2+i\) 与 \(2-i\)，相加得 4。虚部正好抵消，留下一根实根。</p></details></div>
+
+          <p class="ex"><span class="ex-num">2.</span> 证明复数不能像实数那样定义全序：不存在一个排序，使任意两数可比，且加法乘法都保序。</p>
+          <div class="answer"><details><summary>看答案</summary><p>设 \(i>0\)，两边乘 \(i\) 得 \(-1>0\)，与 \(1>0\) 矛盾（两者相加应为正）；设 \(i \lt 0\)，乘 \(i\) 不等号反向得 \(-1>0\)，同样矛盾。所以复数只有模，没有大小。</p></details></div>
+
+          <p class="ex"><span class="ex-num">3.</span>（欧拉，1748）用泰勒级数推出 \(e^{i\theta}=\cos\theta+i\sin\theta\)。</p>
+          <div class="answer"><details><summary>看答案</summary><p>把三个函数的级数写出来，代入 \(i\theta\) 后按 \(i\) 的幂次分组，偶数项凑成余弦的级数、奇数项凑成 \(i\) 乘正弦的级数。要说明重排是合法的，需要级数绝对收敛，这一步在十九世纪才补上。</p></details></div>
+        </div>
+
+        <div class="ex-group">
+          <p class="ex-group-head">思考题 <span>不设标准答案，只给提示</span></p>
+
+          <p class="ex"><span class="ex-num">1.</span> 为什么「乘 i 是旋转」这件事，用坐标公式很难看出来，用极坐标一眼就能看出。</p>
+          <div class="answer"><details><summary>看提示</summary><p>坐标式 \((a+bi)(0+1i)=-b+ai\) 只是把两个坐标换了个位置再变号，看不出几何。极坐标把点拆成「离原点多远」和「朝哪个方向」两件事，乘法恰好一件管缩放一件管转，各管各的。</p></details></div>
+
+          <p class="ex"><span class="ex-num">2.</span> 复球面上，北极对应平面上什么？平面上的直线在球面上是什么？</p>
+          <div class="answer"><details><summary>看提示</summary><p>北极对应无穷远点。平面上每个方向都通向同一个北极，所以平面上的「方向」在球面上全部挤在一点附近。平面上的直线投影到球面是一族过北极的圆，这也解释了为什么分式线性变换把直线与圆当成同一类东西。</p></details></div>
+
+          <p class="ex"><span class="ex-num">3.</span> 虚数被接受了三百年才获得几何解释，为什么数学可以先有算法后有对象？</p>
+          <div class="answer"><details><summary>看提示</summary><p>因为算法只需要自洽，不需要解释。只要规则不导出矛盾，中间对象就可以当符号用，邦贝利就是这样干的。几何解释来得晚，作用不是让计算成立，而是让它变得可以想象，从而能推广。</p></details></div>
+        </div>
+
+      </div>
+
+      <h2 class="reveal">延伸阅读</h2>
+      <ul class="refs">
+        <li>钟玉泉《复变函数论》第四版，第一章。本章记号与例题口径以这本为准。</li>
+        <li>卡丹《大术》第 37 章，英译本可查，看他自己怎么写那道三次方程。</li>
+        <li>莫里斯·克莱因《古今数学思想》，第一册关于复数与代数方程的部分。</li>
+        <li>Tristan Needham, <em>Visual Complex Analysis</em>, 第一章。把复数运算当几何变换讲，图比本书还多。</li>
+      </ul>
+
+    </article>
+  </div>
+
+  <div class="wrap">
+    <nav class="pager" aria-label="翻页">
+      <a class="pager-link prev" href="index.html"><span class="pager-dir">上一页</span><span class="pager-title">复变函数目录</span></a>
+      <a class="pager-link next" href="ch02.html"><span class="pager-dir">下一章</span><span class="pager-title">解析函数：加一条条件就够了</span></a>
+    </nav>
+  </div>
+
+</main>
+
+<footer class="footer field-dark">
+  <div class="wrap">
+    <p class="footer-mark">数学基础课</p>
+    <div class="footer-cols">
+      <div><p>四门课按同一套读法写：先看问题，再给定义与判别，最后落到计算与习题。</p></div>
+      <div><p><a href="index.html">复变函数目录</a></p><p><a href="../index.html">返回主页</a></p></div>
+      <div><p>图示用脚本按真实数值画，公式由 KaTeX 排版。</p></div>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/katex/katex.min.js"></script>
+<script src="../assets/katex/auto-render.min.js"></script>
+<script src="../assets/site.js"></script>
+</body>
+</html>

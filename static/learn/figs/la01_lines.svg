@@ -1,0 +1,19 @@
+<svg viewBox="0 0 720 300" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<text x="120.00" y="44.00" text-anchor="middle" font-size="15" fill="var(--ink)">一个交点：唯一解</text>
+<line x1="34.00" y1="168.00" x2="206.00" y2="168.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+<line x1="120.00" y1="74.00" x2="120.00" y2="258.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+<line x1="44.00" y1="122.40" x2="196.00" y2="213.60" stroke="var(--accent-line)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="44.00" y1="213.60" x2="196.00" y2="122.40" stroke="var(--ink-2)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="120.00" cy="168.00" r="5" fill="var(--prussian)"/>
+<text x="360.00" y="44.00" text-anchor="middle" font-size="15" fill="var(--ink)">两条平行线：无解</text>
+<line x1="274.00" y1="168.00" x2="446.00" y2="168.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+<line x1="360.00" y1="74.00" x2="360.00" y2="258.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+<line x1="284.00" y1="134.00" x2="436.00" y2="172.00" stroke="var(--accent-line)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="284.00" y1="194.00" x2="436.00" y2="232.00" stroke="var(--ink-2)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="600.00" y="44.00" text-anchor="middle" font-size="15" fill="var(--ink)">两条线重合：无穷多解</text>
+<line x1="514.00" y1="168.00" x2="686.00" y2="168.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+<line x1="600.00" y1="74.00" x2="600.00" y2="258.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+<line x1="524.00" y1="138.00" x2="676.00" y2="179.80" stroke="var(--accent-line)" stroke-width="5.2" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="524.00" y1="138.00" x2="676.00" y2="179.80" stroke="var(--ink-2)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="7 7"/>
+<text x="634.00" y="214.00" text-anchor="middle" font-size="13" fill="var(--ink-3)">同一条直线</text>
+</svg>

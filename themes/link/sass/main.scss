@@ -455,3 +455,47 @@ ul.language-select>li {
         border-radius: 0;
     }
 }
+
+/* 首页独立入口（数学基础课） */
+.home-section-content {
+    margin: 0 0 2em;
+}
+
+.home-entry {
+    display: block;
+    border: 1px solid #e5e5e5;
+    border-left: 3px solid #333;
+    border-radius: 2px;
+    padding: 1em 1.2em;
+    text-decoration: none;
+    color: #333;
+    transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.home-entry:hover {
+    background: #fafafa;
+    border-color: #bbb;
+    border-left-color: #000;
+}
+
+.home-entry .home-entry-title {
+    display: block;
+    font-size: 1.1em;
+    font-weight: 600;
+    line-height: 1.6;
+}
+
+.home-entry .home-entry-desc {
+    display: block;
+    color: #666;
+    font-size: 0.9em;
+    line-height: 1.7;
+    margin-top: 0.2em;
+}
+
+.home-entry .home-entry-more {
+    display: block;
+    font-size: 0.85em;
+    color: #888;
+    margin-top: 0.4em;
+}

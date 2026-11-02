@@ -1,0 +1,22 @@
+<svg viewBox="0 0 720 460" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<text x="28.00" y="40.00" text-anchor="start" font-size="14.5" fill="var(--ink)">甲再赢 1 局，乙再赢 2 局：停手之后的全部走法</text>
+<line x1="360.00" y1="84.00" x2="188.49" y2="190.72" stroke="var(--ink-2)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M 194.42 182.66 L 188.49 190.72 L 198.34 188.96" fill="var(--ink-2)" stroke="var(--ink-2)" stroke-width="1" stroke-linejoin="round"/>
+<line x1="360.00" y1="84.00" x2="531.51" y2="190.72" stroke="var(--ink-2)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M 521.66 188.96 L 531.51 190.72 L 525.58 182.66" fill="var(--ink-2)" stroke="var(--ink-2)" stroke-width="1" stroke-linejoin="round"/>
+<line x1="540.00" y1="196.00" x2="436.88" y2="304.74" stroke="var(--ink-2)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M 440.58 295.45 L 436.88 304.74 L 445.96 300.56" fill="var(--ink-2)" stroke="var(--ink-2)" stroke-width="1" stroke-linejoin="round"/>
+<line x1="540.00" y1="196.00" x2="643.12" y2="304.74" stroke="var(--ink-2)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M 634.04 300.56 L 643.12 304.74 L 639.42 295.45" fill="var(--ink-2)" stroke="var(--ink-2)" stroke-width="1" stroke-linejoin="round"/>
+<text x="294.00" y="132.00" text-anchor="start" font-size="13.5" fill="var(--ink-3)">甲胜 1/2</text>
+<text x="448.00" y="130.00" text-anchor="start" font-size="13.5" fill="var(--ink-3)">乙胜 1/2</text>
+<text x="472.00" y="246.00" text-anchor="end" font-size="13.5" fill="var(--ink-3)">甲胜 1/2</text>
+<text x="600.00" y="246.00" text-anchor="start" font-size="13.5" fill="var(--ink-3)">乙胜 1/2</text>
+<circle cx="360.00" cy="84.00" r="6.00" fill="var(--paper)" stroke="var(--ink-2)" stroke-width="1.4"/>
+<circle cx="540.00" cy="196.00" r="6.00" fill="var(--paper)" stroke="var(--ink-2)" stroke-width="1.4"/>
+<circle cx="180.00" cy="196.00" r="6.00" fill="var(--accent-line)" stroke="var(--ink-2)" stroke-width="1.4"/>
+<circle cx="430.00" cy="312.00" r="6.00" fill="var(--accent-line)" stroke="var(--ink-2)" stroke-width="1.4"/>
+<circle cx="650.00" cy="312.00" r="6.00" fill="var(--accent-line)" stroke="var(--ink-2)" stroke-width="1.4"/>
+<text x="346.00" y="89.00" text-anchor="end" font-size="14.5" fill="var(--ink)">停手</text>
+<text x="180.00" y="226.00" text-anchor="middle" font-size="14" fill="var(--accent-line)">甲赢　1/2</text>
+<text x="430.00" y="342.00" text-anchor="middle" font-size="14" fill="var(--accent-line)">甲赢　1/4</text>
+<text x="650.00" y="342.00" text-anchor="middle" font-size="14" fill="var(--ink-2)">乙赢　1/4</text>
+<text x="28.00" y="408.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">甲赢的概率 = 1/2 + 1/4 = 3/4。三条路径并不等可能，所以走法不能直接当样本点来数。</text>
+<text x="28.00" y="432.00" text-anchor="start" font-size="13.5" fill="var(--ink-3)">要数格子，得先把它补成 4 条一样长的路径，见本章第三节。</text>
+</svg>

@@ -1,0 +1,19 @@
+<svg viewBox="0 0 720 430" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<line x1="94.17" y1="349.32" x2="662.50" y2="349.32" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="94.17" y1="349.32" x2="94.17" y2="40.14" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="671.67" y="373.32" text-anchor="end" font-size="16" fill="var(--ink-2)" font-style="italic">t</text>
+<text x="80.17" y="36.14" text-anchor="end" font-size="16" fill="var(--ink-2)" font-style="italic">v</text>
+<polygon points="94.17,349.32 552.50,349.32 552.50,95.89" fill="rgba(23, 57, 92, 0.08)" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="94.17" y1="349.32" x2="552.50" y2="95.89" stroke="var(--accent-line)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="94.17" y1="222.60" x2="552.50" y2="222.60" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 6"/>
+<circle cx="94.17" cy="222.60" r="3.4" fill="var(--ink)"/>
+<text x="84.17" y="227.60" text-anchor="end" font-size="14.5" fill="var(--ink)" font-style="italic">v/2</text>
+<polygon points="94.17,349.32 323.33,222.60 94.17,222.60" fill="rgba(23, 57, 92, 0.32)" stroke="var(--prussian)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="323.33,222.60 552.50,222.60 552.50,95.89" fill="rgba(23, 57, 92, 0.32)" stroke="var(--prussian)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="94.17,349.32 552.50,349.32 552.50,222.60 94.17,222.60" fill="none" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="295.83" y="156.71" text-anchor="start" font-size="15" fill="var(--accent-line)">v = a t</text>
+<text x="213.33" y="283.42" text-anchor="middle" font-size="15" fill="var(--ink)" font-weight="600">A</text>
+<text x="460.83" y="189.66" text-anchor="middle" font-size="15" fill="var(--ink)" font-weight="600">B</text>
+<text x="323.33" y="374.66" text-anchor="middle" font-size="14.5" fill="var(--ink-3)">两块阴影三角形全等，因此三角形面积等于矩形面积</text>
+<text x="323.33" y="392.40" text-anchor="middle" font-size="15" fill="var(--prussian)" font-weight="600">s = v t / 2：匀加速运动等价于以平均速度 v/2 匀速运动</text>
+</svg>

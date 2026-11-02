@@ -1,0 +1,25 @@
+<svg viewBox="0 0 720 448" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<rect x="476.92" y="56.00" width="187.08" height="336.00" fill="var(--fig-fill)" stroke="none" stroke-width="1.4"/>
+<rect x="243.08" y="56.00" width="233.85" height="336.00" fill="var(--fig-fill-2)" stroke="none" stroke-width="1.4" opacity="0.85"/>
+<line x1="56.00" y1="224.00" x2="664.00" y2="224.00" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+<line x1="321.03" y1="392.00" x2="321.03" y2="56.00" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+<text x="660.00" y="248.00" text-anchor="end" font-size="15" fill="var(--ink-3)" font-style="italic">σ = Re p</text>
+<text x="309.03" y="72.00" text-anchor="end" font-size="15" fill="var(--ink-3)" font-style="italic">iω</text>
+<line x1="243.08" y1="56.00" x2="243.08" y2="392.00" stroke="var(--ink-2)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 6"/>
+<line x1="476.92" y1="56.00" x2="476.92" y2="392.00" stroke="var(--ink-2)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 6"/>
+<line x1="236.08" y1="217.00" x2="250.08" y2="231.00" stroke="var(--accent-line)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="236.08" y1="231.00" x2="250.08" y2="217.00" stroke="var(--accent-line)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="231.08" y="210.00" text-anchor="end" font-size="14.5" fill="var(--ink)">p = −1</text>
+<line x1="469.92" y1="217.00" x2="483.92" y2="231.00" stroke="var(--accent-line)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="469.92" y1="231.00" x2="483.92" y2="217.00" stroke="var(--accent-line)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="488.92" y="210.00" text-anchor="start" font-size="14.5" fill="var(--ink)">p = 2</text>
+<text x="566.56" y="94.40" text-anchor="middle" font-size="15" fill="var(--ink)">收敛域</text>
+<text x="566.56" y="118.40" text-anchor="middle" font-size="14.5" fill="var(--ink-2)">Re p &gt; 2</text>
+<text x="360.00" y="361.60" text-anchor="middle" font-size="15" fill="var(--ink)">收敛域</text>
+<text x="360.00" y="382.40" text-anchor="middle" font-size="14" fill="var(--ink-2)">−1 &lt; Re p &lt; 2</text>
+<line x1="87.18" y1="321.60" x2="586.05" y2="321.60" stroke="var(--ink-3)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M 576.76 325.31 L 586.05 321.60 L 576.76 317.89" fill="var(--ink-3)" stroke="var(--ink-3)" stroke-width="1" stroke-linejoin="round"/>
+<text x="94.97" y="332.80" text-anchor="start" font-size="13.5" fill="var(--ink-3)">实部越大，衰减因子 e^(−σt) 越强</text>
+<text x="58.00" y="40.00" text-anchor="start" font-size="14.5" fill="var(--ink-2)">收敛域的边界是过极点的竖线，收敛域内部不能有极点</text>
+<text x="58.00" y="404.00" text-anchor="start" font-size="14.5" fill="var(--ink)">同一个像函数配不同的收敛域，还原出来的是不同的原函数</text>
+<text x="58.00" y="428.00" text-anchor="start" font-size="13.5" fill="var(--ink-3)">所以写拉普拉斯变换，像函数和收敛域要一起写</text>
+</svg>

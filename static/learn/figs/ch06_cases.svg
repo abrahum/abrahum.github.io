@@ -1,0 +1,31 @@
+<svg viewBox="0 0 720 340" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<text x="140.00" y="42.00" text-anchor="middle" font-size="15" fill="var(--ink)">两个不同实根</text>
+<line x1="7.20" y1="246.00" x2="197.60" y2="246.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+<line x1="66.00" y1="296.40" x2="66.00" y2="148.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+<polygon points="66.00,246.00 122.00,246.00 122.00,190.00 66.00,190.00" fill="var(--fig-fill)" stroke="var(--ink-3)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+<polygon points="66.00,246.00 172.40,246.00 172.40,215.20 66.00,215.20" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.85"/>
+<line x1="10.00" y1="246.00" x2="194.80" y2="246.00" stroke="var(--prussian)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 5"/>
+<text x="194.80" y="268.00" text-anchor="end" font-size="13" fill="var(--prussian)">方向不变</text>
+<line x1="66.00" y1="293.60" x2="66.00" y2="150.80" stroke="var(--prussian)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 5"/>
+<text x="74.00" y="162.80" text-anchor="start" font-size="13" fill="var(--prussian)">方向不变</text>
+<text x="140.00" y="300.00" text-anchor="middle" font-size="13" fill="var(--ink-3)">两个方向各自伸缩</text>
+<text x="140.00" y="322.00" text-anchor="middle" font-size="13" fill="var(--ink-3)">λ = 1.9 与 0.55</text>
+<text x="380.00" y="42.00" text-anchor="middle" font-size="15" fill="var(--ink)">重根</text>
+<line x1="247.20" y1="246.00" x2="437.60" y2="246.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+<line x1="306.00" y1="296.40" x2="306.00" y2="148.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+<polygon points="306.00,246.00 362.00,246.00 362.00,190.00 306.00,190.00" fill="var(--fig-fill)" stroke="var(--ink-3)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+<polygon points="306.00,246.00 362.00,246.00 418.00,190.00 362.00,190.00" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.85"/>
+<line x1="250.00" y1="246.00" x2="434.80" y2="246.00" stroke="var(--prussian)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 5"/>
+<text x="434.80" y="268.00" text-anchor="end" font-size="13" fill="var(--prussian)">方向不变</text>
+<text x="380.00" y="300.00" text-anchor="middle" font-size="13" fill="var(--ink-3)">只留住一个方向</text>
+<text x="380.00" y="322.00" text-anchor="middle" font-size="13" fill="var(--ink-3)">λ = 1 与 1，面积不变</text>
+<text x="620.00" y="42.00" text-anchor="middle" font-size="15" fill="var(--ink)">共轭复根</text>
+<line x1="487.20" y1="246.00" x2="677.60" y2="246.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+<line x1="546.00" y1="296.40" x2="546.00" y2="148.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+<polygon points="546.00,246.00 602.00,246.00 602.00,190.00 546.00,190.00" fill="var(--fig-fill)" stroke="var(--ink-3)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+<polygon points="546.00,246.00 595.33,204.60 553.94,155.27 504.60,196.67" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.85"/>
+<line x1="602.00" y1="246.00" x2="595.33" y2="204.60" stroke="var(--ink-3)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4 4"/>
+<text x="581.84" y="221.36" text-anchor="middle" font-size="13" fill="var(--ink-3)">40°</text>
+<text x="620.00" y="300.00" text-anchor="middle" font-size="13" fill="var(--ink-3)">没有方向被留住</text>
+<text x="620.00" y="322.00" text-anchor="middle" font-size="13" fill="var(--ink-3)">λ 是一对共轭复数</text>
+</svg>

@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>第一章 函数与极限 · 微积分：一部由问题写成的历史</title>
+<meta name="description" content="从芝诺的二分法讲到魏尔斯特拉斯的 ε-δ：极限怎么定义、两个重要极限从哪来、连续与间断怎么看，配手绘图解和三档习题。">
+<link rel="stylesheet" href="../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="nav-brand" href="../index.html">微积分<span> 一部由问题写成的历史</span></a>
+    <nav class="nav-links" aria-label="主导航">
+      <a href="index.html#map">本课目录</a>
+      <a class="xl" href="../linear-algebra/index.html">线性代数</a>
+      <a class="xl" href="../probability/index.html">概率论</a>
+      <a class="xl" href="../complex/index.html">复变函数</a>
+      <a class="opt" href="ch02.html">下一章</a>
+    </nav>
+  </div>
+  <div class="nav-progress" aria-hidden="true"></div>
+</header>
+
+<main>
+
+  <section class="chapter">
+    <div class="wrap">
+      <div class="ch-hero-band">
+        <div>
+          <p class="ch-label reveal"><span>第一章</span><span class="ch-era">公元前 450 年至 1872 年</span></p>
+          <h1 class="ch-title reveal reveal-2">函数与极限</h1>
+          <p class="ch-deck reveal reveal-3">芝诺问过一个问题：一段路分下去有无限多小段，你怎么可能走完。这个问题让数学家头疼了两千多年，因为要回答它，得先有一个当时还没发明的概念。这一章从这个难处讲起，一路说到课本里那串 ε 和 δ，最后落在两个重要极限、连续间断，以及怎么算极限上。</p>
+          <div class="ch-meta reveal reveal-3">
+            <div><strong>入口人物</strong>芝诺、达朗贝尔、柯西、魏尔斯特拉斯</div>
+            <div><strong>核心问题</strong>「无限接近」怎么写成一串能核对真假的不等式</div>
+            <div><strong>对应教材</strong>§1.1 至 §1.11</div>
+            <div><strong>前置</strong>高中函数与三角函数、绝对值不等式</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap ch-body">
+    <aside class="rail">
+      <p class="rail-title">本章提纲</p>
+      <ol>
+        <li><a href="#s-origin">源头：一段走不完的路</a></li>
+        <li><a href="#s-form">牛顿的麻烦</a></li>
+        <li><a href="#s-strict">把话说成不等式</a></li>
+        <li><a href="#s-extra">两个重要极限</a></li>
+        <li><a href="#s-cont">连续与间断</a></li>
+        <li><a href="#s-manual">怎么算</a></li>
+        <li><a href="#s-examples">例题</a></li>
+        <li><a href="#s-exercises">习题</a></li>
+      </ol>
+      <p class="rail-title">本章人物</p>
+      <p class="rail-who">芝诺 约前 490 至前 430<br>庄子 约前 369 至前 286<br>达朗贝尔 1717 至 1783<br>柯西 1789 至 1857<br>魏尔斯特拉斯 1815 至 1897</p>
+    </aside>
+
+    <article class="prose">
+
+      <p class="lead reveal">公元前 5 世纪，埃利亚的芝诺提出一个问题：你要走完一段路，先得走完它的一半；要走完剩下那一半，又得先走完这一半的一半。这样分下去，路上有无限多个小段，你怎么可能走完。这个论证让希腊人头疼了很久，一直到 19 世纪才被彻底说清楚。</p>
+
+      <h2 id="s-origin" class="reveal">一、源头：一段走不完的路</h2>
+
+      <p>芝诺是巴门尼德的学生，他提这些论证，是为了替老师的一个结论辩护：真实的世界只有一个，它不动、不变、也不可分，我们看见的运动只是感官在骗人。亚里士多德在《物理学》第六卷里记下了这些论证并表示反对，理由是「不能把无限当成已经完成了的东西」，这句话定下了后面两千年的调子，也就是无限只能是一个过程，不能是一个现成的对象。</p>
+
+      <p>中国人对同一件事的反应很不一样。庄子在《天下》篇里写「一尺之棰，日取其半，万世不竭」，说的是每天取走剩下的一半，永远取不完。他把这件事当成明摆着的道理，没有为难自己；希腊人问的是你怎么可能走完，庄子问的是你要取到什么时候，两边的焦虑不在一个地方。</p>
+
+      <p>现在的人是这样处理它的。设每天取走的长度依次是 1/2、1/4、1/8 等等，第 \(n\) 天取走的总长是</p>
+
+      \[ s_n=\frac12+\frac14+\cdots+\frac1{2^{n}}=1-\frac1{2^{n}}. \]
+
+      <p>没有一个 \(s_n\) 等于 1，但它们和 1 的差是 \(1/2^n\)，\(n\) 越大差越小，要多小有多小。所以我们不再说「无限加下去等于 1」，改说「这些部分和最后落在 1 附近」，这样就用不着真的加完，只要盯住这个数列往哪跑即可。</p>
+
+      <div class="keyidea reveal">
+        <p>芝诺的难题之所以难，是因为他把「无限多个步骤」当成了「必须一个一个走完的步骤」。把和换成部分和的去向，这个要求就撤掉了。</p>
+      </div>
+
+      <div class="figure">
+        <!--FIG ch01_zeno--><svg viewBox="0 0 720 420" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<line x1="85.54" y1="360.00" x2="634.46" y2="360.00" stroke="var(--ink-2)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="638.46" y="366.00" text-anchor="start" font-size="16" fill="var(--ink-2)">1</text>
+<text x="77.54" y="366.00" text-anchor="end" font-size="16" fill="var(--ink-2)">0</text>
+<line x1="603.39" y1="354.00" x2="603.39" y2="366.00" stroke="var(--ink-2)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="85.54" y="326.00" width="258.93" height="20.00" fill="var(--fig-fill)" stroke="var(--accent-line)" stroke-width="1.2"/>
+<line x1="85.54" y1="346.00" x2="85.54" y2="360.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4 5" opacity="0.7"/>
+<text x="215.00" y="341.00" text-anchor="middle" font-size="14" fill="var(--accent-line)">1/2</text>
+<rect x="344.46" y="292.00" width="129.46" height="20.00" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.2"/>
+<line x1="344.46" y1="312.00" x2="344.46" y2="326.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4 5" opacity="0.7"/>
+<text x="409.20" y="307.00" text-anchor="middle" font-size="14" fill="var(--accent-line)">1/4</text>
+<rect x="473.93" y="258.00" width="64.73" height="20.00" fill="var(--fig-fill)" stroke="var(--accent-line)" stroke-width="1.2"/>
+<line x1="473.93" y1="278.00" x2="473.93" y2="292.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4 5" opacity="0.7"/>
+<rect x="538.66" y="224.00" width="32.37" height="20.00" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.2"/>
+<line x1="538.66" y1="244.00" x2="538.66" y2="258.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4 5" opacity="0.7"/>
+<rect x="571.03" y="190.00" width="16.18" height="20.00" fill="var(--fig-fill)" stroke="var(--accent-line)" stroke-width="1.2"/>
+<line x1="571.03" y1="210.00" x2="571.03" y2="224.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4 5" opacity="0.7"/>
+<rect x="587.21" y="156.00" width="8.09" height="20.00" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.2"/>
+<line x1="587.21" y1="176.00" x2="587.21" y2="190.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4 5" opacity="0.7"/>
+<rect x="595.30" y="122.00" width="4.05" height="20.00" fill="var(--fig-fill)" stroke="var(--accent-line)" stroke-width="1.2"/>
+<line x1="595.30" y1="142.00" x2="595.30" y2="156.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4 5" opacity="0.7"/>
+<line x1="599.35" y1="122.00" x2="603.39" y2="122.00" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4 5"/>
+<text x="601.37" y="112.00" text-anchor="middle" font-size="14" fill="var(--ink-2)">还剩 1/128</text>
+<line x1="603.39" y1="102.00" x2="603.39" y2="360.00" stroke="var(--ink-3)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 6"/>
+<text x="95.89" y="34.00" text-anchor="start" font-size="16" fill="var(--ink)">每一步走完剩下的那一半，步数越多，离终点越近</text>
+<text x="95.89" y="58.00" text-anchor="start" font-size="14.5" fill="var(--ink-2)">但任何一步都没有走到。庄子说“万世不竭”，芝诺说这就是走不动的证明</text>
+<text x="85.54" y="390.00" text-anchor="start" font-size="14" fill="var(--ink-3)">累计走过的路程</text>
+</svg>
+<!--/FIG ch01_zeno-->
+        <figcaption class="figcaption"><b>每一步只走剩下的一半，步数越多离终点越近，却永远差一点。</b>把走过的路按顺序叠起来，累计长度的阶梯挤向 1，缺口每层减半。极限要管的是这个缺口，不是有没有到达终点。</figcaption>
+      </div>
+
+      <h2 id="s-form" class="reveal">二、牛顿的麻烦</h2>
+
+      <p>17 世纪的人等不及 19 世纪的定义，他们要算东西。牛顿 1665 年前后为了求瞬时速度，让时间增加一个很小的量 \(o\)，算出位移的增量，除以 \(o\)，最后把含 \(o\) 的项全部扔掉。拿 \(y=x^2\) 试一下就明白他在做什么。</p>
+
+      \[ \frac{(x+o)^2-x^2}{o}=\frac{2xo+o^2}{o}=2x+o\ \longrightarrow\ 2x. \]
+
+      <p>结果是对的，过程说不通：\(o\) 不是零，所以能除掉，\(o\) 又得是零，所以能扔掉，同一个量不能两头都占。牛顿把最后那个比值叫「最终比」，说它发生在量正在消失的瞬间，既不在消失之前，也不在消失之后。这只能算比喻，还够不上定义。</p>
+
+      <div class="archive reveal">
+        <p class="archive-when">1734 年，都柏林</p>
+        <h3>贝克莱主教的讽刺</h3>
+        <p class="archive-quote">「这些消失的增量究竟是什么？它们既不是有限量，也不是无穷小，也不是零。难道我们不可以说，它们是消失量的鬼魂吗？」</p>
+        <p class="archive-source">贝克莱《分析家：致一位不信神的数学家》，1734 年</p>
+        <p>贝克莱的用意是说数学的地基不如神学牢靠，不过技术上的批评没人能反驳：一个量要么不为零，那就不该扔掉；要么为零，那就不该当除数。两头都不占，只能叫鬼魂。这个矛盾又悬了 150 年。</p>
+      </div>
+
+      <p>中间有人试过别的路。欧拉 1748 年在《无穷分析引论》里把无穷小当成一种特殊的零，认为 \(0/0\) 可以是任何数，这套算法又快又准，他却说不清为什么同一个零这一回等于 2、下一回等于 3。拉格朗日 1797 年在《解析函数论》里想干脆绕开极限，把导数直接定义成泰勒展开里一次项的系数，可展开本身成不成立还得靠极限来说明，于是绕了一圈又回来了。</p>
+
+      <details class="fold">
+        <summary>欧拉那套算法到底怎么用</summary>
+        <p>他把不同阶的无穷小当成不同等级的零，同阶的约掉，高阶的直接丢。算 \(\frac{(x+\mathrm{d}x)^n-x^n}{\mathrm{d}x}\) 时展开后只留一次项，其余全扔，结果都对。缺的那一环是为什么可以扔，这一条要到柯西手里才有答案。</p>
+      </details>
+
+      <p>真正管用的第一步是达朗贝尔走的。1754 年他为《百科全书》写「极限」这一条目，第一次把极限摆在地基的位置上，而不再拿它当辅助说法。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">达朗贝尔的定义（1754）</p>
+        <p>一个量是另一个量的极限，如果后者能够比任何给定的量更接近前者，虽然它永远不能超过前者。</p>
+      </div>
+
+      <h2 id="s-strict" class="reveal">三、把话说成不等式</h2>
+
+      <p>柯西 1821 年在《分析教程》的前言里把话说得更清楚：一个变量数列无限趋近一个固定值，最终与它之差要多小就多小，这个固定值就叫这些值的极限。他拿这条定义证了中值定理、连续函数的性质、级数的收敛判别，微积分第一次有了地基，只是「要多小就多小」还含糊，谁在控制谁没说清楚。</p>
+
+      <p>补上这一刀的是魏尔斯特拉斯。1870 年代他在柏林讲课，把动态的趋近换成两串可以核对真假的量词：</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定义（数列的极限）</p>
+        <p>设 \(\{a_n\}\) 是一数列，\(A\) 是常数。若对任意给定的 \(\varepsilon&gt;0\)，总存在正整数 \(N\)，使得当 \(n&gt;N\) 时恒有 \(|a_n-A|&lt;\varepsilon\)，则称 \(\{a_n\}\) 收敛于 \(A\)，记作 \(\lim\limits_{n\to\infty}a_n=A\)。</p>
+      </div>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定义（函数在一点的极限）</p>
+        <p>设 \(f(x)\) 在 \(x_0\) 的某个去心邻域内有定义。若对任意给定的 \(\varepsilon&gt;0\)，总存在 \(\delta&gt;0\)，使得当 \(0&lt;|x-x_0|&lt;\delta\) 时恒有 \(|f(x)-A|&lt;\varepsilon\)，则称 \(A\) 是 \(f(x)\) 当 \(x\to x_0\) 时的极限，记作 \(\lim\limits_{x\to x_0}f(x)=A\)。</p>
+      </div>
+
+      <p>这两段话的全部内容就是量词的次序，把它当成一场讨价还价来读最省力：对方每给一个允许的误差 \(\varepsilon\)，你都得交出一个范围 \(\delta\)，保证落进范围的函数值全部合格。对方可以一直把 \(\varepsilon\) 压小，你每次都得重新交一个 \(\delta\)，只要每次能交出来，极限就成立，这也说明 \(\delta\) 一般要写成 \(\varepsilon\) 的函数，因为范围是从误差倒着算出来的。</p>
+
+      <div class="figure">
+        <!--FIG ch01_epsilon--><svg viewBox="0 0 720 430" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<rect x="298.05" y="216.78" width="165.21" height="106.59" fill="rgba(23,57,92,0.06)" stroke="none" stroke-width="1.4"/>
+<line x1="64.00" y1="216.78" x2="656.00" y2="216.78" stroke="var(--ink-2)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 6"/>
+<line x1="64.00" y1="323.36" x2="656.00" y2="323.36" stroke="var(--ink-2)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 6"/>
+<line x1="64.00" y1="270.07" x2="656.00" y2="270.07" stroke="var(--ink-3)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="3 6"/>
+<line x1="298.05" y1="366.00" x2="298.05" y2="64.00" stroke="var(--ink-2)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 6"/>
+<line x1="463.26" y1="366.00" x2="463.26" y2="64.00" stroke="var(--ink-2)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 6"/>
+<line x1="64.00" y1="341.13" x2="656.00" y2="341.13" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<line x1="105.30" y1="366.00" x2="105.30" y2="64.00" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<text x="650.00" y="361.13" text-anchor="end" font-size="15" fill="var(--ink-3)" font-style="italic">x</text>
+<text x="93.30" y="78.00" text-anchor="end" font-size="15" fill="var(--ink-3)" font-style="italic">y</text>
+<path d="M 105.30 341.13 L 107.02 341.13 L 108.74 341.12 L 110.47 341.10 L 112.19 341.08 L 113.91 341.06 L 115.63 341.03 L 117.35 340.99 L 119.07 340.95 L 120.79 340.90 L 122.51 340.85 L 124.23 340.79 L 125.95 340.73 L 127.67 340.66 L 129.40 340.59 L 131.12 340.50 L 132.84 340.42 L 134.56 340.33 L 136.28 340.23 L 138.00 340.13 L 139.72 340.02 L 141.44 339.91 L 143.16 339.79 L 144.88 339.66 L 146.60 339.53 L 148.33 339.39 L 150.05 339.25 L 151.77 339.11 L 153.49 338.95 L 155.21 338.80 L 156.93 338.63 L 158.65 338.46 L 160.37 338.29 L 162.09 338.11 L 163.81 337.92 L 165.53 337.73 L 167.26 337.53 L 168.98 337.33 L 170.70 337.12 L 172.42 336.91 L 174.14 336.69 L 175.86 336.46 L 177.58 336.23 L 179.30 336.00 L 181.02 335.76 L 182.74 335.51 L 184.47 335.26 L 186.19 335.00 L 187.91 334.73 L 189.63 334.46 L 191.35 334.19 L 193.07 333.91 L 194.79 333.62 L 196.51 333.33 L 198.23 333.04 L 199.95 332.73 L 201.67 332.42 L 203.40 332.11 L 205.12 331.79 L 206.84 331.47 L 208.56 331.14 L 210.28 330.80 L 212.00 330.46 L 213.72 330.11 L 215.44 329.76 L 217.16 329.40 L 218.88 329.04 L 220.60 328.67 L 222.33 328.29 L 224.05 327.91 L 225.77 327.53 L 227.49 327.14 L 229.21 326.74 L 230.93 326.34 L 232.65 325.93 L 234.37 325.52 L 236.09 325.10 L 237.81 324.67 L 239.53 324.24 L 241.26 323.81 L 242.98 323.36 L 244.70 322.92 L 246.42 322.47 L 248.14 322.01 L 249.86 321.54 L 251.58 321.07 L 253.30 320.60 L 255.02 320.12 L 256.74 319.63 L 258.47 319.14 L 260.19 318.65 L 261.91 318.14 L 263.63 317.64 L 265.35 317.12 L 267.07 316.60 L 268.79 316.08 L 270.51 315.55 L 272.23 315.01 L 273.95 314.47 L 275.67 313.92 L 277.40 313.37 L 279.12 312.81 L 280.84 312.25 L 282.56 311.68 L 284.28 311.11 L 286.00 310.53 L 287.72 309.94 L 289.44 309.35 L 291.16 308.75 L 292.88 308.15 L 294.60 307.54 L 296.33 306.93 L 298.05 306.31 L 299.77 305.69 L 301.49 305.06 L 303.21 304.42 L 304.93 303.78 L 306.65 303.13 L 308.37 302.48 L 310.09 301.82 L 311.81 301.16 L 313.53 300.49 L 315.26 299.82 L 316.98 299.14 L 318.70 298.45 L 320.42 297.76 L 322.14 297.06 L 323.86 296.36 L 325.58 295.65 L 327.30 294.94 L 329.02 294.22 L 330.74 293.50 L 332.47 292.76 L 334.19 292.03 L 335.91 291.29 L 337.63 290.54 L 339.35 289.79 L 341.07 289.03 L 342.79 288.27 L 344.51 287.50 L 346.23 286.73 L 347.95 285.95 L 349.67 285.16 L 351.40 284.37 L 353.12 283.57 L 354.84 282.77 L 356.56 281.96 L 358.28 281.15 L 360.00 280.33 L 361.72 279.51 L 363.44 278.68 L 365.16 277.84 L 366.88 277.00 L 368.60 276.15 L 370.33 275.30 L 372.05 274.44 L 373.77 273.58 L 375.49 272.71 L 377.21 271.84 L 378.93 270.96 L 380.65 270.07 L 382.37 269.18 L 384.09 268.28 L 385.81 267.38 L 387.53 266.47 L 389.26 265.56 L 390.98 264.64 L 392.70 263.72 L 394.42 262.79 L 396.14 261.85 L 397.86 260.91 L 399.58 259.96 L 401.30 259.01 L 403.02 258.05 L 404.74 257.09 L 406.47 256.12 L 408.19 255.15 L 409.91 254.17 L 411.63 253.18 L 413.35 252.19 L 415.07 251.20 L 416.79 250.19 L 418.51 249.19 L 420.23 248.17 L 421.95 247.15 L 423.67 246.13 L 425.40 245.10 L 427.12 244.06 L 428.84 243.02 L 430.56 241.98 L 432.28 240.93 L 434.00 239.87 L 435.72 238.80 L 437.44 237.74 L 439.16 236.66 L 440.88 235.58 L 442.60 234.50 L 444.33 233.41 L 446.05 232.31 L 447.77 231.21 L 449.49 230.10 L 451.21 228.99 L 452.93 227.87 L 454.65 226.74 L 456.37 225.61 L 458.09 224.48 L 459.81 223.34 L 461.53 222.19 L 463.26 221.04 L 464.98 219.88 L 466.70 218.72 L 468.42 217.55 L 470.14 216.38 L 471.86 215.20 L 473.58 214.01 L 475.30 212.82 L 477.02 211.62 L 478.74 210.42 L 480.47 209.22 L 482.19 208.00 L 483.91 206.78 L 485.63 205.56 L 487.35 204.33 L 489.07 203.09 L 490.79 201.85 L 492.51 200.61 L 494.23 199.36 L 495.95 198.10 L 497.67 196.84 L 499.40 195.57 L 501.12 194.29 L 502.84 193.01 L 504.56 191.73 L 506.28 190.44 L 508.00 189.14 L 509.72 187.84 L 511.44 186.53 L 513.16 185.22 L 514.88 183.90 L 516.60 182.58 L 518.33 181.25 L 520.05 179.91 L 521.77 178.57 L 523.49 177.23 L 525.21 175.87 L 526.93 174.52 L 528.65 173.15 L 530.37 171.78 L 532.09 170.41 L 533.81 169.03 L 535.53 167.65 L 537.26 166.26 L 538.98 164.86 L 540.70 163.46 L 542.42 162.05 L 544.14 160.64 L 545.86 159.22 L 547.58 157.79 L 549.30 156.37 L 551.02 154.93 L 552.74 153.49 L 554.47 152.04 L 556.19 150.59 L 557.91 149.13 L 559.63 147.67 L 561.35 146.20 L 563.07 144.73 L 564.79 143.25 L 566.51 141.76 L 568.23 140.27 L 569.95 138.78 L 571.67 137.28 L 573.40 135.77 L 575.12 134.26 L 576.84 132.74 L 578.56 131.21 L 580.28 129.68 L 582.00 128.15 L 583.72 126.61 L 585.44 125.06 L 587.16 123.51 L 588.88 121.95 L 590.60 120.39 L 592.33 118.82 L 594.05 117.25 L 595.77 115.67 L 597.49 114.09 L 599.21 112.49 L 600.93 110.90 L 602.65 109.30 L 604.37 107.69 L 606.09 106.08 L 607.81 104.46 L 609.53 102.84 L 611.26 101.21 L 612.98 99.57 L 614.70 97.93 L 616.42 96.28 L 618.14 94.63 L 619.86 92.98 L 621.58 91.31 L 623.30 89.65 L 625.02 87.97 L 626.74 86.29 L 628.47 84.61 L 630.19 82.92 L 631.91 81.22 L 633.63 79.52 L 635.35 77.81 L 637.07 76.10 L 638.79 74.38 L 640.51 72.66 L 642.23 70.93 L 643.95 69.19 L 645.67 67.45 L 647.40 65.71 L 649.12 63.96 L 650.84 62.20 L 652.56 60.44 L 654.28 58.67 L 656.00 56.89" fill="none" stroke="var(--accent-line)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="380.65" cy="270.07" r="5" fill="var(--prussian)"/>
+<text x="392.65" y="258.07" text-anchor="start" font-size="15" fill="var(--ink)">(x₀, L)</text>
+<line x1="587.16" y1="270.07" x2="587.16" y2="216.78" stroke="var(--ink-2)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="582.16" y1="270.07" x2="592.16" y2="270.07" stroke="var(--ink-2)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="582.16" y1="216.78" x2="592.16" y2="216.78" stroke="var(--ink-2)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="597.16" y="248.42" text-anchor="start" font-size="17" fill="var(--ink)" font-style="italic">ε</text>
+<line x1="565.16" y1="270.07" x2="565.16" y2="323.36" stroke="var(--ink-2)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="560.16" y1="323.36" x2="570.16" y2="323.36" stroke="var(--ink-2)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="597.16" y="301.72" text-anchor="start" font-size="17" fill="var(--ink)" font-style="italic">ε</text>
+<line x1="298.05" y1="352.50" x2="380.65" y2="352.50" stroke="var(--ink-2)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="298.05" y1="347.50" x2="298.05" y2="357.50" stroke="var(--ink-2)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="339.35" y="343.50" text-anchor="middle" font-size="17" fill="var(--ink)" font-style="italic">δ</text>
+<line x1="380.65" y1="352.50" x2="463.26" y2="352.50" stroke="var(--ink-2)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="463.26" y1="347.50" x2="463.26" y2="357.50" stroke="var(--ink-2)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="421.95" y="343.50" text-anchor="middle" font-size="17" fill="var(--ink)" font-style="italic">δ</text>
+<text x="121.82" y="40.00" text-anchor="start" font-size="16" fill="var(--ink)">先由对手给出 ε，再由你交出 δ</text>
+<text x="121.82" y="64.00" text-anchor="start" font-size="14.5" fill="var(--ink-2)">只要 x 落在宽度为 2δ 的窗口里，曲线就一定落在宽度为 2ε 的水平带里</text>
+</svg>
+<!--/FIG ch01_epsilon-->
+        <figcaption class="figcaption"><b>先有水平带，再找竖直窗口。</b>带子越窄，窗口通常也跟着变窄，但只要总能找到，极限就成立。图中窗口两侧各留出 δ，带子上下的余量是 ε。</figcaption>
+      </div>
+
+      <details class="fold">
+        <summary>把量词的次序调一下会怎样</summary>
+        <p>若改成「存在 \(\delta&gt;0\)，对任意 \(\varepsilon&gt;0\)」，意思是有一段固定的邻域，其中函数值与 \(A\) 差得比任何正数都小，那就只能要求这段邻域上函数恒等于 \(A\)。同一条语句换个次序就成了另一件事，微积分要讨论的变化全没了。</p>
+      </details>
+
+      <p>数列那边同理，只是把窗口宽度换成从第几项开始。下面这个数列在 0 和 2 之间来回摆，摆幅越来越小，照样收敛：\(a_n=1+\frac{(-1)^n}{n}\)。取 \(\varepsilon=0.3\)，只要 \(n&gt;3\)，就有 \(|a_n-1|&lt;\varepsilon\)。</p>
+
+      <div class="figure">
+        <!--FIG ch01_seq--><svg viewBox="0 0 720 400" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<rect x="64.00" y="155.31" width="592.00" height="108.80" fill="rgba(23,57,92,0.07)" stroke="none" stroke-width="1.4"/>
+<line x1="64.00" y1="155.31" x2="656.00" y2="155.31" stroke="var(--ink-2)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 6"/>
+<line x1="64.00" y1="264.11" x2="656.00" y2="264.11" stroke="var(--ink-2)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 6"/>
+<line x1="64.00" y1="209.71" x2="656.00" y2="209.71" stroke="var(--ink-3)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="3 6"/>
+<line x1="64.00" y1="404.00" x2="656.00" y2="404.00" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<line x1="103.47" y1="336.00" x2="103.47" y2="64.00" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<text x="650.00" y="424.00" text-anchor="end" font-size="15" fill="var(--ink-3)" font-style="italic">n</text>
+<text x="91.47" y="78.00" text-anchor="end" font-size="15" fill="var(--ink-3)" font-style="italic">aₙ</text>
+<line x1="195.56" y1="336.00" x2="195.56" y2="64.00" stroke="var(--ink)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="7 5"/>
+<text x="203.56" y="58.00" text-anchor="start" font-size="15" fill="var(--ink)">N = 3</text>
+<circle cx="129.78" cy="404.00" r="4.6" fill="var(--ink-3)"/>
+<circle cx="156.09" cy="112.57" r="4.6" fill="var(--ink-3)"/>
+<circle cx="182.40" cy="274.48" r="4.6" fill="var(--ink-3)"/>
+<circle cx="208.71" cy="161.14" r="4.6" fill="var(--accent-line)"/>
+<circle cx="235.02" cy="248.57" r="4.6" fill="var(--accent-line)"/>
+<circle cx="261.33" cy="177.33" r="4.6" fill="var(--accent-line)"/>
+<circle cx="287.64" cy="237.47" r="4.6" fill="var(--accent-line)"/>
+<circle cx="313.96" cy="185.43" r="4.6" fill="var(--accent-line)"/>
+<circle cx="340.27" cy="231.30" r="4.6" fill="var(--accent-line)"/>
+<circle cx="366.58" cy="190.29" r="4.6" fill="var(--accent-line)"/>
+<circle cx="392.89" cy="227.38" r="4.6" fill="var(--accent-line)"/>
+<circle cx="419.20" cy="193.52" r="4.6" fill="var(--accent-line)"/>
+<circle cx="445.51" cy="224.66" r="4.6" fill="var(--accent-line)"/>
+<circle cx="471.82" cy="195.84" r="4.6" fill="var(--accent-line)"/>
+<circle cx="498.13" cy="222.67" r="4.6" fill="var(--accent-line)"/>
+<circle cx="524.44" cy="197.57" r="4.6" fill="var(--accent-line)"/>
+<circle cx="550.76" cy="221.14" r="4.6" fill="var(--accent-line)"/>
+<circle cx="577.07" cy="198.92" r="4.6" fill="var(--accent-line)"/>
+<circle cx="603.38" cy="219.94" r="4.6" fill="var(--accent-line)"/>
+<circle cx="629.69" cy="200.00" r="4.6" fill="var(--accent-line)"/>
+<text x="71.89" y="147.31" text-anchor="start" font-size="14" fill="var(--ink-2)">L + ε</text>
+<text x="71.89" y="282.11" text-anchor="start" font-size="14" fill="var(--ink-2)">L − ε</text>
+<text x="71.89" y="201.71" text-anchor="start" font-size="14" fill="var(--ink-2)">L</text>
+<text x="261.33" y="46.00" text-anchor="start" font-size="16" fill="var(--ink)">n 大于 N 之后，所有的点都被关进这条带子里，一个也跑不掉</text>
+<text x="261.33" y="70.00" text-anchor="start" font-size="14.5" fill="var(--ink-2)">带子可以再窄，只要把 N 换大一点就行</text>
+</svg>
+<!--/FIG ch01_seq-->
+        <figcaption class="figcaption"><b>N 之后一律合格，N 之前不管。</b>前面有限多个例外不影响极限，定义只要求最终落进带子，不要求一开始就在带子里。</figcaption>
+      </div>
+
+      <p>有了定义，课本里那几条性质就不用背成条文，它们都是从定义直接推出来的：极限若存在则唯一，函数在去心邻域内有界，极限为正则附近为正，四则运算可以通行（分母不为零），还有夹逼准则。</p>
+
+      <details class="fold">
+        <summary>唯一性怎么证</summary>
+        <p>设极限同时是 \(A\) 和 \(B\) 且 \(A&lt;B\)，取 \(\varepsilon=\frac{B-A}{2}\)，则邻域内的点既要满足 \(|f(x)-A|&lt;\varepsilon\) 又要满足 \(|f(x)-B|&lt;\varepsilon\)，两式相加得 \(B-A&lt;2\varepsilon=B-A\)，矛盾。保号性取 \(\varepsilon=\frac{A}{2}\) 就出来了。</p>
+      </details>
+
+      <p>1872 年魏尔斯特拉斯还扔出过一个反例：一条处处连续、却处处没有切线的曲线。在这之前所有人都默认连续曲线除了个别点总有切线，柯西也这么以为，这个例子说明几何图形上看出来的东西不能当证明，能当证明的只有定义，下一章还会遇到它。</p>
+
+      <h2 id="s-extra" class="reveal">四、两个重要极限</h2>
+
+      <p>课本要求背下来的这两个极限，各自对着一个真实的问题，不是凭空冒出来的。</p>
+
+      <p>一个是复利。1683 年雅各布·伯努利问：本金 1，年利率 100%，一年结息 \(n\) 次，年末本利和是 \(\left(1+\frac1n\right)^n\)。结得越勤这个数越大，那么它有没有上限。他证明这列数单调递增且有上界，所以收敛，只是没算出极限是多少。欧拉 1731 年用字母 \(e\) 记它，1748 年给出 18 位小数，还证明它是无理数。</p>
+
+      \[ \lim_{n\to\infty}\left(1+\frac1n\right)^{n}=e=2.718281828459045\cdots \]
+
+      <p>另一个来自圆。要算 \(\sin x\) 的导数，先得知道 \(\frac{\sin x}{x}\) 在 \(x\to 0\) 时趋于什么。欧拉在《无穷分析引论》里用面积夹了一下：当 \(0&lt;x&lt;\frac{\pi}{2}\) 时，单位圆里的三角形、扇形、外切三角形的面积分别是 \(\frac12\sin x\)、\(\frac12x\)、\(\frac12\tan x\)，于是 \(\cos x&lt;\frac{\sin x}{x}&lt;1\)，两头都趋于 1，中间那个也只能趋于 1。</p>
+
+      <div class="figure">
+        <!--FIG ch01_limits--><svg viewBox="0 0 720 400" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<line x1="44.00" y1="270.91" x2="316.00" y2="270.91" stroke="var(--ink-2)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+<line x1="180.00" y1="356.00" x2="180.00" y2="44.00" stroke="var(--ink-2)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+<line x1="44.00" y1="68.31" x2="316.00" y2="68.31" stroke="var(--ink-2)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 6"/>
+<text x="314.16" y="58.31" text-anchor="end" font-size="14" fill="var(--ink-2)">y = 1</text>
+<text x="312.32" y="290.91" text-anchor="end" font-size="14" fill="var(--ink-3)" font-style="italic">x</text>
+<path d="M 44.00 246.30 L 44.85 246.73 L 45.70 247.22 L 46.55 247.77 L 47.40 248.37 L 48.25 249.03 L 49.10 249.74 L 49.95 250.51 L 50.80 251.33 L 51.65 252.21 L 52.50 253.14 L 53.35 254.11 L 54.20 255.14 L 55.05 256.22 L 55.90 257.34 L 56.75 258.51 L 57.60 259.72 L 58.45 260.97 L 59.30 262.26 L 60.15 263.58 L 61.00 264.94 L 61.85 266.34 L 62.70 267.76 L 63.55 269.21 L 64.40 270.69 L 65.25 272.19 L 66.10 273.71 L 66.95 275.24 L 67.80 276.79 L 68.65 278.35 L 69.50 279.92 L 70.35 281.49 L 71.20 283.07 L 72.05 284.64 L 72.90 286.21 L 73.75 287.77 L 74.60 289.32 L 75.45 290.85 L 76.30 292.37 L 77.15 293.87 L 78.00 295.34 L 78.85 296.78 L 79.70 298.19 L 80.55 299.57 L 81.40 300.91 L 82.25 302.21 L 83.10 303.46 L 83.95 304.67 L 84.80 305.82 L 85.65 306.92 L 86.50 307.96 L 87.35 308.94 L 88.20 309.86 L 89.05 310.71 L 89.90 311.49 L 90.75 312.20 L 91.60 312.83 L 92.45 313.38 L 93.30 313.85 L 94.15 314.24 L 95.00 314.55 L 95.85 314.76 L 96.70 314.89 L 97.55 314.92 L 98.40 314.86 L 99.25 314.70 L 100.10 314.44 L 100.95 314.09 L 101.80 313.63 L 102.65 313.07 L 103.50 312.41 L 104.35 311.64 L 105.20 310.76 L 106.05 309.79 L 106.90 308.70 L 107.75 307.50 L 108.60 306.20 L 109.45 304.79 L 110.30 303.28 L 111.15 301.65 L 112.00 299.92 L 112.85 298.08 L 113.70 296.14 L 114.55 294.09 L 115.40 291.93 L 116.25 289.68 L 117.10 287.32 L 117.95 284.86 L 118.80 282.30 L 119.65 279.65 L 120.50 276.90 L 121.35 274.06 L 122.20 271.13 L 123.05 268.11 L 123.90 265.00 L 124.75 261.82 L 125.60 258.55 L 126.45 255.20 L 127.30 251.79 L 128.15 248.30 L 129.00 244.74 L 129.85 241.12 L 130.70 237.44 L 131.55 233.71 L 132.40 229.92 L 133.25 226.08 L 134.10 222.20 L 134.95 218.28 L 135.80 214.32 L 136.65 210.33 L 137.50 206.31 L 138.35 202.27 L 139.20 198.21 L 140.05 194.14 L 140.90 190.06 L 141.75 185.97 L 142.60 181.89 L 143.45 177.81 L 144.30 173.73 L 145.15 169.68 L 146.00 165.64 L 146.85 161.62 L 147.70 157.64 L 148.55 153.68 L 149.40 149.77 L 150.25 145.90 L 151.10 142.07 L 151.95 138.30 L 152.80 134.58 L 153.65 130.93 L 154.50 127.34 L 155.35 123.82 L 156.20 120.38 L 157.05 117.01 L 157.90 113.73 L 158.75 110.53 L 159.60 107.43 L 160.45 104.42 L 161.30 101.50 L 162.15 98.70 L 163.00 95.99 L 163.85 93.40 L 164.70 90.92 L 165.55 88.55 L 166.40 86.30 L 167.25 84.18 L 168.10 82.17 L 168.95 80.30 L 169.80 78.55 L 170.65 76.94 L 171.50 75.46 L 172.35 74.11 L 173.20 72.90 L 174.05 71.83 L 174.90 70.90 L 175.75 70.11 L 176.60 69.47 L 177.45 68.96 L 178.30 68.60 L 179.15 68.38 L 180.00 68.31 L 180.85 68.38 L 181.70 68.60 L 182.55 68.96 L 183.40 69.47 L 184.25 70.11 L 185.10 70.90 L 185.95 71.83 L 186.80 72.90 L 187.65 74.11 L 188.50 75.46 L 189.35 76.94 L 190.20 78.55 L 191.05 80.30 L 191.90 82.17 L 192.75 84.18 L 193.60 86.30 L 194.45 88.55 L 195.30 90.92 L 196.15 93.40 L 197.00 95.99 L 197.85 98.70 L 198.70 101.50 L 199.55 104.42 L 200.40 107.43 L 201.25 110.53 L 202.10 113.73 L 202.95 117.01 L 203.80 120.38 L 204.65 123.82 L 205.50 127.34 L 206.35 130.93 L 207.20 134.58 L 208.05 138.30 L 208.90 142.07 L 209.75 145.90 L 210.60 149.77 L 211.45 153.68 L 212.30 157.64 L 213.15 161.62 L 214.00 165.64 L 214.85 169.68 L 215.70 173.73 L 216.55 177.81 L 217.40 181.89 L 218.25 185.97 L 219.10 190.06 L 219.95 194.14 L 220.80 198.21 L 221.65 202.27 L 222.50 206.31 L 223.35 210.33 L 224.20 214.32 L 225.05 218.28 L 225.90 222.20 L 226.75 226.08 L 227.60 229.92 L 228.45 233.71 L 229.30 237.44 L 230.15 241.12 L 231.00 244.74 L 231.85 248.30 L 232.70 251.79 L 233.55 255.20 L 234.40 258.55 L 235.25 261.82 L 236.10 265.00 L 236.95 268.11 L 237.80 271.13 L 238.65 274.06 L 239.50 276.90 L 240.35 279.65 L 241.20 282.30 L 242.05 284.86 L 242.90 287.32 L 243.75 289.68 L 244.60 291.93 L 245.45 294.09 L 246.30 296.14 L 247.15 298.08 L 248.00 299.92 L 248.85 301.65 L 249.70 303.28 L 250.55 304.79 L 251.40 306.20 L 252.25 307.50 L 253.10 308.70 L 253.95 309.79 L 254.80 310.76 L 255.65 311.64 L 256.50 312.41 L 257.35 313.07 L 258.20 313.63 L 259.05 314.09 L 259.90 314.44 L 260.75 314.70 L 261.60 314.86 L 262.45 314.92 L 263.30 314.89 L 264.15 314.76 L 265.00 314.55 L 265.85 314.24 L 266.70 313.85 L 267.55 313.38 L 268.40 312.83 L 269.25 312.20 L 270.10 311.49 L 270.95 310.71 L 271.80 309.86 L 272.65 308.94 L 273.50 307.96 L 274.35 306.92 L 275.20 305.82 L 276.05 304.67 L 276.90 303.46 L 277.75 302.21 L 278.60 300.91 L 279.45 299.57 L 280.30 298.19 L 281.15 296.78 L 282.00 295.34 L 282.85 293.87 L 283.70 292.37 L 284.55 290.85 L 285.40 289.32 L 286.25 287.77 L 287.10 286.21 L 287.95 284.64 L 288.80 283.07 L 289.65 281.49 L 290.50 279.92 L 291.35 278.35 L 292.20 276.79 L 293.05 275.24 L 293.90 273.71 L 294.75 272.19 L 295.60 270.69 L 296.45 269.21 L 297.30 267.76 L 298.15 266.34 L 299.00 264.94 L 299.85 263.58 L 300.70 262.26 L 301.55 260.97 L 302.40 259.72 L 303.25 258.51 L 304.10 257.34 L 304.95 256.22 L 305.80 255.14 L 306.65 254.11 L 307.50 253.14 L 308.35 252.21 L 309.20 251.33 L 310.05 250.51 L 310.90 249.74 L 311.75 249.03 L 312.60 248.37 L 313.45 247.77 L 314.30 247.22 L 315.15 246.73 L 316.00 246.30" fill="none" stroke="var(--accent-line)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="180.00" cy="68.31" r="4.6" fill="var(--prussian)"/>
+<text x="236.97" y="331.69" text-anchor="start" font-size="14" fill="var(--ink)">y = sin x / x</text>
+<text x="210.00" y="102.31" text-anchor="start" font-size="14" fill="var(--ink-2)">极限是 1</text>
+<line x1="416.00" y1="356.00" x2="676.00" y2="356.00" stroke="var(--ink-2)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+<line x1="428.76" y1="356.00" x2="428.76" y2="44.00" stroke="var(--ink-2)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+<line x1="416.00" y1="83.08" x2="676.00" y2="83.08" stroke="var(--ink-2)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 6"/>
+<text x="676.00" y="73.08" text-anchor="end" font-size="14" fill="var(--ink-2)">y = e</text>
+<text x="672.01" y="376.00" text-anchor="end" font-size="14" fill="var(--ink-3)" font-style="italic">n</text>
+<circle cx="436.74" cy="204.22" r="3.8" fill="var(--prussian)"/>
+<circle cx="444.71" cy="162.05" r="3.8" fill="var(--prussian)"/>
+<circle cx="452.69" cy="141.75" r="3.8" fill="var(--prussian)"/>
+<circle cx="460.66" cy="129.77" r="3.8" fill="var(--prussian)"/>
+<circle cx="468.64" cy="121.86" r="3.8" fill="var(--prussian)"/>
+<circle cx="476.61" cy="116.24" r="3.8" fill="var(--prussian)"/>
+<circle cx="484.59" cy="112.05" r="3.8" fill="var(--prussian)"/>
+<circle cx="492.56" cy="108.80" r="3.8" fill="var(--prussian)"/>
+<circle cx="500.54" cy="106.20" r="3.8" fill="var(--prussian)"/>
+<circle cx="508.52" cy="104.08" r="3.8" fill="var(--prussian)"/>
+<circle cx="516.49" cy="102.32" r="3.8" fill="var(--prussian)"/>
+<circle cx="524.47" cy="100.83" r="3.8" fill="var(--prussian)"/>
+<circle cx="532.44" cy="99.55" r="3.8" fill="var(--prussian)"/>
+<circle cx="540.42" cy="98.45" r="3.8" fill="var(--prussian)"/>
+<circle cx="548.39" cy="97.48" r="3.8" fill="var(--prussian)"/>
+<circle cx="556.37" cy="96.63" r="3.8" fill="var(--prussian)"/>
+<circle cx="564.34" cy="95.87" r="3.8" fill="var(--prussian)"/>
+<circle cx="572.32" cy="95.20" r="3.8" fill="var(--prussian)"/>
+<circle cx="580.29" cy="94.59" r="3.8" fill="var(--prussian)"/>
+<circle cx="588.27" cy="94.04" r="3.8" fill="var(--prussian)"/>
+<circle cx="596.25" cy="93.54" r="3.8" fill="var(--prussian)"/>
+<circle cx="604.22" cy="93.08" r="3.8" fill="var(--prussian)"/>
+<circle cx="612.20" cy="92.66" r="3.8" fill="var(--prussian)"/>
+<circle cx="620.17" cy="92.28" r="3.8" fill="var(--prussian)"/>
+<circle cx="628.15" cy="91.92" r="3.8" fill="var(--prussian)"/>
+<circle cx="636.12" cy="91.60" r="3.8" fill="var(--prussian)"/>
+<circle cx="644.10" cy="91.29" r="3.8" fill="var(--prussian)"/>
+<circle cx="652.07" cy="91.01" r="3.8" fill="var(--prussian)"/>
+<circle cx="660.05" cy="90.74" r="3.8" fill="var(--prussian)"/>
+<circle cx="668.02" cy="90.49" r="3.8" fill="var(--prussian)"/>
+<circle cx="676.00" cy="90.26" r="3.8" fill="var(--prussian)"/>
+<path d="M 436.74 204.22 L 444.71 162.05 L 452.69 141.75 L 460.66 129.77 L 468.64 121.86 L 476.61 116.24 L 484.59 112.05 L 492.56 108.80 L 500.54 106.20 L 508.52 104.08 L 516.49 102.32 L 524.47 100.83 L 532.44 99.55 L 540.42 98.45 L 548.39 97.48 L 556.37 96.63 L 564.34 95.87 L 572.32 95.20 L 580.29 94.59 L 588.27 94.04 L 596.25 93.54 L 604.22 93.08 L 612.20 92.66 L 620.17 92.28 L 628.15 91.92 L 636.12 91.60 L 644.10 91.29 L 652.07 91.01 L 660.05 90.74 L 668.02 90.49 L 676.00 90.26" fill="none" stroke="var(--accent-line)" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<text x="500.54" y="195.78" text-anchor="start" font-size="14" fill="var(--ink-2)">n 越大，点越靠 e</text>
+</svg>
+<!--/FIG ch01_limits-->
+        <figcaption class="figcaption"><b>左边趋于 1，右边趋于 e，两个都只逼近不抵达。</b>左图在 0 处是个可去间断，函数值本来能补成 1；右图的点永远在 e 下方，因为对每个有限的 n，复利都还没结完。</figcaption>
+      </div>
+
+      <details class="fold">
+        <summary>为什么这里的 x 必须是弧度</summary>
+        <p>扇形面积等于 \(\frac12 x\) 只在弧度制下成立。若 x 用角度，扇形面积变成 \(\frac{\pi}{360}x\)，夹逼的两头就变了，极限值会变成 \(\frac{\pi}{180}\)。微积分里所有三角公式都默认弧度，原因就在这一步。</p>
+      </details>
+
+      <p>极限算多了，需要一套比较快慢的说法。若 \(\frac{\beta}{\alpha}\to 0\)，说 \(\beta\) 是比 \(\alpha\) 高阶的无穷小，记作 \(\beta=o(\alpha)\)；比值趋于非零常数叫同阶；比值趋于 1 叫等价，记作 \(\alpha\sim\beta\)。\(x\to 0\) 时常用的是 \(\sin x\sim x\)、\(\tan x\sim x\)、\(1-\cos x\sim\frac{x^2}{2}\)、\(\ln(1+x)\sim x\)，以及 \(e^x-1\sim x\) 和 \((1+x)^\alpha-1\sim\alpha x\) 这两个。把这几个记熟，第一章的计算题基本够用。</p>
+
+      <p>替换有一条硬规矩，乘除里能换，加减里不能换。原因很直白：等价只保证比值趋于 1，两个等价量相减时主要部分互相抵消，剩下的是被忽略掉的高阶项，而结果就是由那一项决定的，下面例 3 就是这个坑。</p>
+
+      <h2 id="s-cont" class="reveal">五、连续与间断</h2>
+
+      <p>连续的定义只有一句话：极限等于函数值。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定义（连续）</p>
+        <p>设 \(f\) 在 \(x_0\) 的某邻域内有定义。若 \(\lim\limits_{x\to x_0}f(x)=f(x_0)\)，则称 \(f\) 在 \(x_0\) 处连续。等价地，记 \(\Delta y=f(x_0+\Delta x)-f(x_0)\)，条件就是 \(\lim\limits_{\Delta x\to 0}\Delta y=0\)。</p>
+      </div>
+
+      <p>这里有两个条件同时在起作用，极限得存在，还得等于那一点的值，缺哪一个都叫间断。按缺法分成四类：可去，只差补一个值；跳跃，两侧各走各的；无穷，附近无界；振荡，连趋近的方向都没有。前两类合称第一类间断点。</p>
+
+      <div class="figure">
+        <!--FIG ch01_discont--><svg viewBox="0 0 720 480" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<text x="180.00" y="28.00" text-anchor="middle" font-size="16" fill="var(--ink)">可去间断</text>
+<line x1="75.68" y1="46.00" x2="75.68" y2="220.00" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+<text x="83.68" y="56.00" text-anchor="start" font-size="14" fill="var(--ink-3)" font-style="italic">y</text>
+<path d="M 26.00 187.89 L 26.44 187.66 L 26.89 187.42 L 27.33 187.19 L 27.78 186.96 L 28.22 186.72 L 28.66 186.49 L 29.11 186.26 L 29.55 186.02 L 30.00 185.79 L 30.44 185.56 L 30.88 185.32 L 31.33 185.09 L 31.77 184.86 L 32.22 184.62 L 32.66 184.39 L 33.10 184.16 L 33.55 183.92 L 33.99 183.69 L 34.44 183.45 L 34.88 183.22 L 35.32 182.99 L 35.77 182.75 L 36.21 182.52 L 36.66 182.29 L 37.10 182.05 L 37.54 181.82 L 37.99 181.59 L 38.43 181.35 L 38.88 181.12 L 39.32 180.89 L 39.76 180.65 L 40.21 180.42 L 40.65 180.19 L 41.10 179.95 L 41.54 179.72 L 41.98 179.49 L 42.43 179.25 L 42.87 179.02 L 43.32 178.79 L 43.76 178.55 L 44.20 178.32 L 44.65 178.09 L 45.09 177.85 L 45.54 177.62 L 45.98 177.39 L 46.42 177.15 L 46.87 176.92 L 47.31 176.69 L 47.76 176.45 L 48.20 176.22 L 48.64 175.99 L 49.09 175.75 L 49.53 175.52 L 49.98 175.29 L 50.42 175.05 L 50.86 174.82 L 51.31 174.59 L 51.75 174.35 L 52.20 174.12 L 52.64 173.89 L 53.08 173.65 L 53.53 173.42 L 53.97 173.19 L 54.42 172.95 L 54.86 172.72 L 55.30 172.49 L 55.75 172.25 L 56.19 172.02 L 56.64 171.79 L 57.08 171.55 L 57.52 171.32 L 57.97 171.09 L 58.41 170.85 L 58.86 170.62 L 59.30 170.39 L 59.74 170.15 L 60.19 169.92 L 60.63 169.69 L 61.08 169.45 L 61.52 169.22 L 61.96 168.99 L 62.41 168.75 L 62.85 168.52 L 63.30 168.29 L 63.74 168.05 L 64.18 167.82 L 64.63 167.59 L 65.07 167.35 L 65.52 167.12 L 65.96 166.89 L 66.40 166.65 L 66.85 166.42 L 67.29 166.19 L 67.74 165.95 L 68.18 165.72 L 68.62 165.49 L 69.07 165.25 L 69.51 165.02 L 69.96 164.79 L 70.40 164.55 L 70.84 164.32 L 71.29 164.09 L 71.73 163.85 L 72.18 163.62 L 72.62 163.39 L 73.06 163.15 L 73.51 162.92 L 73.95 162.69 L 74.40 162.45 L 74.84 162.22 L 75.28 161.99 L 75.73 161.75 L 76.17 161.52 L 76.62 161.28 L 77.06 161.05 L 77.50 160.82 L 77.95 160.58 L 78.39 160.35 L 78.84 160.12 L 79.28 159.88 L 79.72 159.65 L 80.17 159.42 L 80.61 159.18 L 81.06 158.95 L 81.50 158.72 L 81.94 158.48 L 82.39 158.25 L 82.83 158.02 L 83.27 157.78 L 83.72 157.55 L 84.16 157.32 L 84.61 157.08 L 85.05 156.85 L 85.49 156.62 L 85.94 156.38 L 86.38 156.15 L 86.83 155.92 L 87.27 155.68 L 87.71 155.45 L 88.16 155.22 L 88.60 154.98 L 89.05 154.75 L 89.49 154.52 L 89.93 154.28 L 90.38 154.05 L 90.82 153.82 L 91.27 153.58 L 91.71 153.35 L 92.15 153.12 L 92.60 152.88 L 93.04 152.65 L 93.49 152.42 L 93.93 152.18 L 94.37 151.95 L 94.82 151.72 L 95.26 151.48 L 95.71 151.25 L 96.15 151.02 L 96.59 150.78 L 97.04 150.55 L 97.48 150.32 L 97.93 150.08 L 98.37 149.85 L 98.81 149.62 L 99.26 149.38 L 99.70 149.15 L 100.15 148.92 L 100.59 148.68 L 101.03 148.45 L 101.48 148.22 L 101.92 147.98 L 102.37 147.75 L 102.81 147.52 L 103.25 147.28 L 103.70 147.05 L 104.14 146.82 L 104.59 146.58 L 105.03 146.35 L 105.47 146.12 L 105.92 145.88 L 106.36 145.65 L 106.81 145.42 L 107.25 145.18 L 107.69 144.95 L 108.14 144.72 L 108.58 144.48 L 109.03 144.25 L 109.47 144.02 L 109.91 143.78 L 110.36 143.55 L 110.80 143.32 L 111.25 143.08 L 111.69 142.85 L 112.13 142.62 L 112.58 142.38 L 113.02 142.15 L 113.47 141.92 L 113.91 141.68 L 114.35 141.45 L 114.80 141.22 L 115.24 140.98 L 115.69 140.75 L 116.13 140.52 L 116.57 140.28 L 117.02 140.05 L 117.46 139.82 L 117.91 139.58 L 118.35 139.35 L 118.79 139.11 L 119.24 138.88 L 119.68 138.65 L 120.13 138.41 L 120.57 138.18 L 121.01 137.95 L 121.46 137.71 L 121.90 137.48 L 122.35 137.25 L 122.79 137.01 L 123.23 136.78 L 123.68 136.55 L 124.12 136.31 L 124.57 136.08 L 125.01 135.85 L 125.45 135.61 L 125.90 135.38 L 126.34 135.15 L 126.79 134.91 L 127.23 134.68 L 127.67 134.45 L 128.12 134.21 L 128.56 133.98 L 129.01 133.75 L 129.45 133.51 L 129.89 133.28 L 130.34 133.05 L 130.78 132.81 L 131.23 132.58 L 131.67 132.35 L 132.11 132.11 L 132.56 131.88 L 133.00 131.65 L 133.45 131.41 L 133.89 131.18 L 134.33 130.95 L 134.78 130.71 L 135.22 130.48 L 135.67 130.25 L 136.11 130.01 L 136.55 129.78 L 137.00 129.55 L 137.44 129.31 L 137.89 129.08 L 138.33 128.85 L 138.77 128.61 L 139.22 128.38 L 139.66 128.15 L 140.11 127.91 L 140.55 127.68 L 140.99 127.45 L 141.44 127.21 L 141.88 126.98 L 142.33 126.75 L 142.77 126.51 L 143.21 126.28 L 143.66 126.05 L 144.10 125.81 L 144.55 125.58 L 144.99 125.35 L 145.43 125.11 L 145.88 124.88 L 146.32 124.65 L 146.77 124.41 L 147.21 124.18 L 147.65 123.95 L 148.10 123.71 L 148.54 123.48 L 148.99 123.25 L 149.43 123.01 L 149.87 122.78 L 150.32 122.55 L 150.76 122.31 L 151.21 122.08 L 151.65 121.85 L 152.09 121.61 L 152.54 121.38 L 152.98 121.15 L 153.43 120.91 L 153.87 120.68 L 154.31 120.45 L 154.76 120.21 L 155.20 119.98 L 155.65 119.75 L 156.09 119.51 L 156.53 119.28 L 156.98 119.05 L 157.42 118.81 L 157.87 118.58 L 158.31 118.35 L 158.75 118.11 L 159.20 117.88 L 159.64 117.65 L 160.09 117.41 L 160.53 117.18 L 160.97 116.95 L 161.42 116.71 L 161.86 116.48 L 162.31 116.24 L 162.75 116.01 L 163.19 115.78 L 163.64 115.54 L 164.08 115.31 L 164.53 115.08 L 164.97 114.84 L 165.41 114.61 L 165.86 114.38 L 166.30 114.14 L 166.75 113.91 L 167.19 113.68 L 167.63 113.44 L 168.08 113.21" fill="none" stroke="var(--accent-line)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 181.99 105.90 L 182.46 105.65 L 182.94 105.40 L 183.41 105.15 L 183.89 104.90 L 184.36 104.65 L 184.84 104.40 L 185.31 104.15 L 185.79 103.90 L 186.26 103.65 L 186.74 103.40 L 187.21 103.15 L 187.69 102.90 L 188.16 102.65 L 188.64 102.40 L 189.11 102.15 L 189.59 101.90 L 190.06 101.66 L 190.54 101.41 L 191.01 101.16 L 191.49 100.91 L 191.96 100.66 L 192.44 100.41 L 192.91 100.16 L 193.39 99.91 L 193.86 99.66 L 194.34 99.41 L 194.81 99.16 L 195.29 98.91 L 195.76 98.66 L 196.24 98.41 L 196.71 98.16 L 197.19 97.91 L 197.66 97.66 L 198.14 97.41 L 198.61 97.16 L 199.09 96.91 L 199.56 96.66 L 200.04 96.41 L 200.51 96.16 L 200.99 95.91 L 201.46 95.66 L 201.94 95.41 L 202.41 95.16 L 202.89 94.91 L 203.36 94.66 L 203.84 94.41 L 204.31 94.16 L 204.79 93.91 L 205.26 93.67 L 205.74 93.42 L 206.21 93.17 L 206.69 92.92 L 207.16 92.67 L 207.64 92.42 L 208.11 92.17 L 208.59 91.92 L 209.06 91.67 L 209.54 91.42 L 210.01 91.17 L 210.49 90.92 L 210.96 90.67 L 211.44 90.42 L 211.91 90.17 L 212.39 89.92 L 212.86 89.67 L 213.34 89.42 L 213.81 89.17 L 214.29 88.92 L 214.76 88.67 L 215.24 88.42 L 215.71 88.17 L 216.19 87.92 L 216.67 87.67 L 217.14 87.42 L 217.62 87.17 L 218.09 86.92 L 218.57 86.67 L 219.04 86.42 L 219.52 86.17 L 219.99 85.93 L 220.47 85.68 L 220.94 85.43 L 221.42 85.18 L 221.89 84.93 L 222.37 84.68 L 222.84 84.43 L 223.32 84.18 L 223.79 83.93 L 224.27 83.68 L 224.74 83.43 L 225.22 83.18 L 225.69 82.93 L 226.17 82.68 L 226.64 82.43 L 227.12 82.18 L 227.59 81.93 L 228.07 81.68 L 228.54 81.43 L 229.02 81.18 L 229.49 80.93 L 229.97 80.68 L 230.44 80.43 L 230.92 80.18 L 231.39 79.93 L 231.87 79.68 L 232.34 79.43 L 232.82 79.18 L 233.29 78.93 L 233.77 78.68 L 234.24 78.43 L 234.72 78.18 L 235.19 77.94 L 235.67 77.69 L 236.14 77.44 L 236.62 77.19 L 237.09 76.94 L 237.57 76.69 L 238.04 76.44 L 238.52 76.19 L 238.99 75.94 L 239.47 75.69 L 239.94 75.44 L 240.42 75.19 L 240.89 74.94 L 241.37 74.69 L 241.84 74.44 L 242.32 74.19 L 242.79 73.94 L 243.27 73.69 L 243.74 73.44 L 244.22 73.19 L 244.69 72.94 L 245.17 72.69 L 245.64 72.44 L 246.12 72.19 L 246.59 71.94 L 247.07 71.69 L 247.54 71.44 L 248.02 71.19 L 248.49 70.94 L 248.97 70.69 L 249.44 70.44 L 249.92 70.19 L 250.39 69.94 L 250.87 69.70 L 251.34 69.45 L 251.82 69.20 L 252.29 68.95 L 252.77 68.70 L 253.24 68.45 L 253.72 68.20 L 254.19 67.95 L 254.67 67.70 L 255.14 67.45 L 255.62 67.20 L 256.09 66.95 L 256.57 66.70 L 257.04 66.45 L 257.52 66.20 L 257.99 65.95 L 258.47 65.70 L 258.94 65.45 L 259.42 65.20 L 259.89 64.95 L 260.37 64.70 L 260.84 64.45 L 261.32 64.20 L 261.79 63.95 L 262.27 63.70 L 262.74 63.45 L 263.22 63.20 L 263.69 62.95 L 264.17 62.70 L 264.64 62.45 L 265.12 62.20 L 265.59 61.95 L 266.07 61.71 L 266.54 61.46 L 267.02 61.21 L 267.49 60.96 L 267.97 60.71 L 268.44 60.46 L 268.92 60.21 L 269.39 59.96 L 269.87 59.71 L 270.34 59.46 L 270.82 59.21 L 271.29 58.96 L 271.77 58.71 L 272.24 58.46 L 272.72 58.21 L 273.19 57.96 L 273.67 57.71 L 274.14 57.46 L 274.62 57.21 L 275.10 56.96 L 275.57 56.71 L 276.05 56.46 L 276.52 56.21 L 277.00 55.96 L 277.47 55.71 L 277.95 55.46 L 278.42 55.21 L 278.90 54.96 L 279.37 54.71 L 279.85 54.46 L 280.32 54.21 L 280.80 53.96 L 281.27 53.72 L 281.75 53.47 L 282.22 53.22 L 282.70 52.97 L 283.17 52.72 L 283.65 52.47 L 284.12 52.22 L 284.60 51.97 L 285.07 51.72 L 285.55 51.47 L 286.02 51.22 L 286.50 50.97 L 286.97 50.72 L 287.45 50.47 L 287.92 50.22 L 288.40 49.97 L 288.87 49.72 L 289.35 49.47 L 289.82 49.22 L 290.30 48.97 L 290.77 48.72 L 291.25 48.47 L 291.72 48.22 L 292.20 47.97 L 292.67 47.72 L 293.15 47.47 L 293.62 47.22 L 294.10 46.97 L 294.57 46.72 L 295.05 46.47 L 295.52 46.22 L 296.00 45.97 L 296.47 45.73 L 296.95 45.48 L 297.42 45.23 L 297.90 44.98 L 298.37 44.73 L 298.85 44.48 L 299.32 44.23 L 299.80 43.98 L 300.27 43.73 L 300.75 43.48 L 301.22 43.23 L 301.70 42.98 L 302.17 42.73 L 302.65 42.48 L 303.12 42.23 L 303.60 41.98 L 304.07 41.73 L 304.55 41.48 L 305.02 41.23 L 305.50 40.98 L 305.97 40.73 L 306.45 40.48 L 306.92 40.23 L 307.40 39.98 L 307.87 39.73 L 308.35 39.48 L 308.82 39.23 L 309.30 38.98 L 309.77 38.73 L 310.25 38.48 L 310.72 38.23 L 311.20 37.98 L 311.67 37.74 L 312.15 37.49 L 312.62 37.24 L 313.10 36.99 L 313.57 36.74 L 314.05 36.49 L 314.52 36.24 L 315.00 35.99 L 315.47 35.74 L 315.95 35.49 L 316.42 35.24 L 316.90 34.99 L 317.37 34.74 L 317.85 34.49 L 318.32 34.24 L 318.80 33.99 L 319.27 33.74 L 319.75 33.49 L 320.22 33.24 L 320.70 32.99 L 321.17 32.74 L 321.65 32.49 L 322.12 32.24 L 322.60 31.99 L 323.07 31.74 L 323.55 31.49 L 324.02 31.24 L 324.50 30.99 L 324.97 30.74 L 325.45 30.49 L 325.92 30.24 L 326.40 30.00 L 326.87 29.75 L 327.35 29.50 L 327.82 29.25 L 328.30 29.00 L 328.77 28.75 L 329.25 28.50 L 329.72 28.25 L 330.20 28.00 L 330.67 27.75 L 331.15 27.50 L 331.62 27.25 L 332.10 27.00 L 332.57 26.75 L 333.05 26.50 L 333.52 26.25 L 334.00 26.00" fill="none" stroke="var(--accent-line)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="175.03" cy="109.56" r="5.00" fill="var(--paper)" stroke="var(--paper)" stroke-width="2.2"/>
+<circle cx="175.03" cy="109.56" r="5.00" fill="none" stroke="var(--accent-line)" stroke-width="2.0"/>
+<line x1="175.03" y1="109.56" x2="175.03" y2="214.00" stroke="var(--ink-3)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4 5"/>
+<text x="191.03" y="131.56" text-anchor="start" font-size="14" fill="var(--ink-2)">空洞</text>
+<text x="540.00" y="28.00" text-anchor="middle" font-size="16" fill="var(--ink)">跳跃间断</text>
+<line x1="386.00" y1="120.00" x2="700.00" y2="120.00" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+<text x="698.00" y="112.00" text-anchor="end" font-size="14" fill="var(--ink-3)" font-style="italic">x</text>
+<line x1="540.00" y1="46.00" x2="540.00" y2="220.00" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+<text x="548.00" y="56.00" text-anchor="start" font-size="14" fill="var(--ink-3)" font-style="italic">y</text>
+<line x1="390.53" y1="175.29" x2="540.00" y2="175.29" stroke="var(--accent-line)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="540.00" y1="64.71" x2="689.47" y2="64.71" stroke="var(--accent-line)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="540.00" cy="64.71" r="4.80" fill="var(--paper)" stroke="var(--paper)" stroke-width="2.2"/>
+<circle cx="540.00" cy="64.71" r="4.80" fill="none" stroke="var(--accent-line)" stroke-width="2.0"/>
+<circle cx="540.00" cy="175.29" r="4.8" fill="var(--prussian)"/>
+<line x1="540.00" y1="202.94" x2="540.00" y2="37.06" stroke="var(--ink-3)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4 5"/>
+<text x="530.94" y="161.29" text-anchor="end" font-size="14" fill="var(--ink-2)">左极限 −1</text>
+<text x="549.06" y="90.71" text-anchor="start" font-size="14" fill="var(--ink-2)">右极限 +1</text>
+<text x="180.00" y="268.00" text-anchor="middle" font-size="16" fill="var(--ink)">无穷间断</text>
+<line x1="26.00" y1="360.00" x2="340.00" y2="360.00" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+<text x="338.00" y="352.00" text-anchor="end" font-size="14" fill="var(--ink-3)" font-style="italic">x</text>
+<line x1="180.00" y1="286.00" x2="180.00" y2="460.00" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+<text x="188.00" y="296.00" text-anchor="start" font-size="14" fill="var(--ink-3)" font-style="italic">y</text>
+<path d="M 26.00 369.29 L 26.43 369.31 L 26.85 369.34 L 27.28 369.37 L 27.71 369.39 L 28.13 369.42 L 28.56 369.45 L 28.99 369.47 L 29.41 369.50 L 29.84 369.53 L 30.27 369.55 L 30.70 369.58 L 31.12 369.61 L 31.55 369.64 L 31.98 369.66 L 32.40 369.69 L 32.83 369.72 L 33.26 369.75 L 33.68 369.78 L 34.11 369.80 L 34.54 369.83 L 34.96 369.86 L 35.39 369.89 L 35.82 369.92 L 36.24 369.95 L 36.67 369.98 L 37.10 370.01 L 37.52 370.04 L 37.95 370.07 L 38.38 370.10 L 38.81 370.13 L 39.23 370.16 L 39.66 370.19 L 40.09 370.22 L 40.51 370.25 L 40.94 370.29 L 41.37 370.32 L 41.79 370.35 L 42.22 370.38 L 42.65 370.41 L 43.07 370.45 L 43.50 370.48 L 43.93 370.51 L 44.35 370.55 L 44.78 370.58 L 45.21 370.61 L 45.64 370.65 L 46.06 370.68 L 46.49 370.71 L 46.92 370.75 L 47.34 370.78 L 47.77 370.82 L 48.20 370.85 L 48.62 370.89 L 49.05 370.92 L 49.48 370.96 L 49.90 371.00 L 50.33 371.03 L 50.76 371.07 L 51.18 371.10 L 51.61 371.14 L 52.04 371.18 L 52.46 371.22 L 52.89 371.25 L 53.32 371.29 L 53.75 371.33 L 54.17 371.37 L 54.60 371.41 L 55.03 371.45 L 55.45 371.49 L 55.88 371.52 L 56.31 371.56 L 56.73 371.60 L 57.16 371.64 L 57.59 371.69 L 58.01 371.73 L 58.44 371.77 L 58.87 371.81 L 59.29 371.85 L 59.72 371.89 L 60.15 371.93 L 60.57 371.98 L 61.00 372.02 L 61.43 372.06 L 61.86 372.11 L 62.28 372.15 L 62.71 372.20 L 63.14 372.24 L 63.56 372.29 L 63.99 372.33 L 64.42 372.38 L 64.84 372.42 L 65.27 372.47 L 65.70 372.51 L 66.12 372.56 L 66.55 372.61 L 66.98 372.66 L 67.40 372.70 L 67.83 372.75 L 68.26 372.80 L 68.68 372.85 L 69.11 372.90 L 69.54 372.95 L 69.97 373.00 L 70.39 373.05 L 70.82 373.10 L 71.25 373.15 L 71.67 373.20 L 72.10 373.26 L 72.53 373.31 L 72.95 373.36 L 73.38 373.42 L 73.81 373.47 L 74.23 373.52 L 74.66 373.58 L 75.09 373.63 L 75.51 373.69 L 75.94 373.75 L 76.37 373.80 L 76.79 373.86 L 77.22 373.92 L 77.65 373.98 L 78.08 374.03 L 78.50 374.09 L 78.93 374.15 L 79.36 374.21 L 79.78 374.27 L 80.21 374.33 L 80.64 374.40 L 81.06 374.46 L 81.49 374.52 L 81.92 374.58 L 82.34 374.65 L 82.77 374.71 L 83.20 374.78 L 83.62 374.84 L 84.05 374.91 L 84.48 374.97 L 84.91 375.04 L 85.33 375.11 L 85.76 375.18 L 86.19 375.25 L 86.61 375.32 L 87.04 375.39 L 87.47 375.46 L 87.89 375.53 L 88.32 375.60 L 88.75 375.68 L 89.17 375.75 L 89.60 375.82 L 90.03 375.90 L 90.45 375.97 L 90.88 376.05 L 91.31 376.13 L 91.73 376.21 L 92.16 376.28 L 92.59 376.36 L 93.02 376.44 L 93.44 376.53 L 93.87 376.61 L 94.30 376.69 L 94.72 376.77 L 95.15 376.86 L 95.58 376.94 L 96.00 377.03 L 96.43 377.12 L 96.86 377.20 L 97.28 377.29 L 97.71 377.38 L 98.14 377.47 L 98.56 377.57 L 98.99 377.66 L 99.42 377.75 L 99.84 377.85 L 100.27 377.94 L 100.70 378.04 L 101.13 378.14 L 101.55 378.23 L 101.98 378.33 L 102.41 378.43 L 102.83 378.54 L 103.26 378.64 L 103.69 378.74 L 104.11 378.85 L 104.54 378.96 L 104.97 379.06 L 105.39 379.17 L 105.82 379.28 L 106.25 379.40 L 106.67 379.51 L 107.10 379.62 L 107.53 379.74 L 107.95 379.85 L 108.38 379.97 L 108.81 380.09 L 109.24 380.21 L 109.66 380.34 L 110.09 380.46 L 110.52 380.59 L 110.94 380.71 L 111.37 380.84 L 111.80 380.97 L 112.22 381.11 L 112.65 381.24 L 113.08 381.37 L 113.50 381.51 L 113.93 381.65 L 114.36 381.79 L 114.78 381.93 L 115.21 382.08 L 115.64 382.22 L 116.06 382.37 L 116.49 382.52 L 116.92 382.68 L 117.35 382.83 L 117.77 382.99 L 118.20 383.15 L 118.63 383.31 L 119.05 383.47 L 119.48 383.64 L 119.91 383.80 L 120.33 383.97 L 120.76 384.15 L 121.19 384.32 L 121.61 384.50 L 122.04 384.68 L 122.47 384.86 L 122.89 385.05 L 123.32 385.24 L 123.75 385.43 L 124.18 385.62 L 124.60 385.82 L 125.03 386.02 L 125.46 386.23 L 125.88 386.43 L 126.31 386.64 L 126.74 386.86 L 127.16 387.07 L 127.59 387.29 L 128.02 387.52 L 128.44 387.74 L 128.87 387.98 L 129.30 388.21 L 129.72 388.45 L 130.15 388.70 L 130.58 388.94 L 131.00 389.20 L 131.43 389.45 L 131.86 389.71 L 132.29 389.98 L 132.71 390.25 L 133.14 390.52 L 133.57 390.81 L 133.99 391.09 L 134.42 391.38 L 134.85 391.68 L 135.27 391.98 L 135.70 392.29 L 136.13 392.60 L 136.55 392.92 L 136.98 393.25 L 137.41 393.58 L 137.83 393.92 L 138.26 394.27 L 138.69 394.63 L 139.11 394.99 L 139.54 395.36 L 139.97 395.73 L 140.40 396.12 L 140.82 396.51 L 141.25 396.91 L 141.68 397.32 L 142.10 397.74 L 142.53 398.17 L 142.96 398.61 L 143.38 399.06 L 143.81 399.53 L 144.24 400.00 L 144.66 400.48 L 145.09 400.98 L 145.52 401.48 L 145.94 402.00 L 146.37 402.54 L 146.80 403.08 L 147.22 403.64 L 147.65 404.22 L 148.08 404.81 L 148.51 405.42 L 148.93 406.04 L 149.36 406.68 L 149.79 407.34 L 150.21 408.02 L 150.64 408.72 L 151.07 409.44 L 151.49 410.18 L 151.92 410.94 L 152.35 411.73 L 152.77 412.54 L 153.20 413.38 L 153.63 414.24 L 154.05 415.13 L 154.48 416.05 L 154.91 417.01 L 155.33 417.99 L 155.76 419.02 L 156.19 420.07 L 156.62 421.17 L 157.04 422.31 L 157.47 423.49 L 157.90 424.71 L 158.32 425.99 L 158.75 427.31 L 159.18 428.69 L 159.60 430.13 L 160.03 431.63 L 160.46 433.19 L 160.88 434.83 L 161.31 436.54 L 161.74 438.33 L 162.16 440.20 L 162.59 442.17" fill="none" stroke="var(--accent-line)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 197.41 277.83 L 197.84 279.80 L 198.26 281.67 L 198.69 283.46 L 199.12 285.17 L 199.54 286.81 L 199.97 288.37 L 200.40 289.87 L 200.82 291.31 L 201.25 292.69 L 201.68 294.01 L 202.10 295.29 L 202.53 296.51 L 202.96 297.69 L 203.38 298.83 L 203.81 299.93 L 204.24 300.98 L 204.67 302.01 L 205.09 302.99 L 205.52 303.95 L 205.95 304.87 L 206.37 305.76 L 206.80 306.62 L 207.23 307.46 L 207.65 308.27 L 208.08 309.06 L 208.51 309.82 L 208.93 310.56 L 209.36 311.28 L 209.79 311.98 L 210.21 312.66 L 210.64 313.32 L 211.07 313.96 L 211.49 314.58 L 211.92 315.19 L 212.35 315.78 L 212.78 316.36 L 213.20 316.92 L 213.63 317.46 L 214.06 318.00 L 214.48 318.52 L 214.91 319.02 L 215.34 319.52 L 215.76 320.00 L 216.19 320.47 L 216.62 320.94 L 217.04 321.39 L 217.47 321.83 L 217.90 322.26 L 218.32 322.68 L 218.75 323.09 L 219.18 323.49 L 219.60 323.88 L 220.03 324.27 L 220.46 324.64 L 220.89 325.01 L 221.31 325.37 L 221.74 325.73 L 222.17 326.08 L 222.59 326.42 L 223.02 326.75 L 223.45 327.08 L 223.87 327.40 L 224.30 327.71 L 224.73 328.02 L 225.15 328.32 L 225.58 328.62 L 226.01 328.91 L 226.43 329.19 L 226.86 329.48 L 227.29 329.75 L 227.71 330.02 L 228.14 330.29 L 228.57 330.55 L 229.00 330.80 L 229.42 331.06 L 229.85 331.30 L 230.28 331.55 L 230.70 331.79 L 231.13 332.02 L 231.56 332.26 L 231.98 332.48 L 232.41 332.71 L 232.84 332.93 L 233.26 333.14 L 233.69 333.36 L 234.12 333.57 L 234.54 333.77 L 234.97 333.98 L 235.40 334.18 L 235.83 334.38 L 236.25 334.57 L 236.68 334.76 L 237.11 334.95 L 237.53 335.14 L 237.96 335.32 L 238.39 335.50 L 238.81 335.68 L 239.24 335.85 L 239.67 336.03 L 240.09 336.20 L 240.52 336.36 L 240.95 336.53 L 241.37 336.69 L 241.80 336.85 L 242.23 337.01 L 242.65 337.17 L 243.08 337.32 L 243.51 337.48 L 243.94 337.63 L 244.36 337.78 L 244.79 337.92 L 245.22 338.07 L 245.64 338.21 L 246.07 338.35 L 246.50 338.49 L 246.92 338.63 L 247.35 338.76 L 247.78 338.89 L 248.20 339.03 L 248.63 339.16 L 249.06 339.29 L 249.48 339.41 L 249.91 339.54 L 250.34 339.66 L 250.76 339.79 L 251.19 339.91 L 251.62 340.03 L 252.05 340.15 L 252.47 340.26 L 252.90 340.38 L 253.33 340.49 L 253.75 340.60 L 254.18 340.72 L 254.61 340.83 L 255.03 340.94 L 255.46 341.04 L 255.89 341.15 L 256.31 341.26 L 256.74 341.36 L 257.17 341.46 L 257.59 341.57 L 258.02 341.67 L 258.45 341.77 L 258.87 341.86 L 259.30 341.96 L 259.73 342.06 L 260.16 342.15 L 260.58 342.25 L 261.01 342.34 L 261.44 342.43 L 261.86 342.53 L 262.29 342.62 L 262.72 342.71 L 263.14 342.80 L 263.57 342.88 L 264.00 342.97 L 264.42 343.06 L 264.85 343.14 L 265.28 343.23 L 265.70 343.31 L 266.13 343.39 L 266.56 343.47 L 266.98 343.56 L 267.41 343.64 L 267.84 343.72 L 268.27 343.79 L 268.69 343.87 L 269.12 343.95 L 269.55 344.03 L 269.97 344.10 L 270.40 344.18 L 270.83 344.25 L 271.25 344.32 L 271.68 344.40 L 272.11 344.47 L 272.53 344.54 L 272.96 344.61 L 273.39 344.68 L 273.81 344.75 L 274.24 344.82 L 274.67 344.89 L 275.10 344.96 L 275.52 345.03 L 275.95 345.09 L 276.38 345.16 L 276.80 345.22 L 277.23 345.29 L 277.66 345.35 L 278.08 345.42 L 278.51 345.48 L 278.94 345.54 L 279.36 345.60 L 279.79 345.67 L 280.22 345.73 L 280.64 345.79 L 281.07 345.85 L 281.50 345.91 L 281.92 345.97 L 282.35 346.02 L 282.78 346.08 L 283.21 346.14 L 283.63 346.20 L 284.06 346.25 L 284.49 346.31 L 284.91 346.37 L 285.34 346.42 L 285.77 346.48 L 286.19 346.53 L 286.62 346.58 L 287.05 346.64 L 287.47 346.69 L 287.90 346.74 L 288.33 346.80 L 288.75 346.85 L 289.18 346.90 L 289.61 346.95 L 290.03 347.00 L 290.46 347.05 L 290.89 347.10 L 291.32 347.15 L 291.74 347.20 L 292.17 347.25 L 292.60 347.30 L 293.02 347.34 L 293.45 347.39 L 293.88 347.44 L 294.30 347.49 L 294.73 347.53 L 295.16 347.58 L 295.58 347.62 L 296.01 347.67 L 296.44 347.71 L 296.86 347.76 L 297.29 347.80 L 297.72 347.85 L 298.14 347.89 L 298.57 347.94 L 299.00 347.98 L 299.43 348.02 L 299.85 348.07 L 300.28 348.11 L 300.71 348.15 L 301.13 348.19 L 301.56 348.23 L 301.99 348.27 L 302.41 348.31 L 302.84 348.36 L 303.27 348.40 L 303.69 348.44 L 304.12 348.48 L 304.55 348.51 L 304.97 348.55 L 305.40 348.59 L 305.83 348.63 L 306.25 348.67 L 306.68 348.71 L 307.11 348.75 L 307.54 348.78 L 307.96 348.82 L 308.39 348.86 L 308.82 348.90 L 309.24 348.93 L 309.67 348.97 L 310.10 349.00 L 310.52 349.04 L 310.95 349.08 L 311.38 349.11 L 311.80 349.15 L 312.23 349.18 L 312.66 349.22 L 313.08 349.25 L 313.51 349.29 L 313.94 349.32 L 314.37 349.35 L 314.79 349.39 L 315.22 349.42 L 315.65 349.45 L 316.07 349.49 L 316.50 349.52 L 316.93 349.55 L 317.35 349.59 L 317.78 349.62 L 318.21 349.65 L 318.63 349.68 L 319.06 349.71 L 319.49 349.75 L 319.91 349.78 L 320.34 349.81 L 320.77 349.84 L 321.19 349.87 L 321.62 349.90 L 322.05 349.93 L 322.48 349.96 L 322.90 349.99 L 323.33 350.02 L 323.76 350.05 L 324.18 350.08 L 324.61 350.11 L 325.04 350.14 L 325.46 350.17 L 325.89 350.20 L 326.32 350.22 L 326.74 350.25 L 327.17 350.28 L 327.60 350.31 L 328.02 350.34 L 328.45 350.36 L 328.88 350.39 L 329.30 350.42 L 329.73 350.45 L 330.16 350.47 L 330.59 350.50 L 331.01 350.53 L 331.44 350.55 L 331.87 350.58 L 332.29 350.61 L 332.72 350.63 L 333.15 350.66 L 333.57 350.69 L 334.00 350.71" fill="none" stroke="var(--accent-line)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="180.00" y1="449.73" x2="180.00" y2="270.27" stroke="var(--ink-3)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4 5"/>
+<text x="32.70" y="304.45" text-anchor="start" font-size="14" fill="var(--ink-2)">x → 0 时无界</text>
+<text x="540.00" y="268.00" text-anchor="middle" font-size="16" fill="var(--ink)">振荡间断</text>
+<line x1="386.00" y1="360.00" x2="700.00" y2="360.00" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+<text x="698.00" y="352.00" text-anchor="end" font-size="14" fill="var(--ink-3)" font-style="italic">x</text>
+<line x1="540.00" y1="286.00" x2="540.00" y2="460.00" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+<text x="548.00" y="296.00" text-anchor="start" font-size="14" fill="var(--ink-3)" font-style="italic">y</text>
+<path d="M 541.03 417.02 L 541.15 323.70 L 541.28 401.94 L 541.41 363.70 L 541.54 389.87 L 541.66 377.56 L 541.79 415.69 L 541.92 302.82 L 542.05 374.29 L 542.17 416.86 L 542.30 418.75 L 542.43 413.46 L 542.56 367.58 L 542.68 302.26 L 542.81 371.11 L 542.94 394.53 L 543.07 307.18 L 543.19 416.87 L 543.32 304.06 L 543.45 408.63 L 543.58 332.54 L 543.70 349.19 L 543.83 410.08 L 543.96 306.70 L 544.09 361.04 L 544.21 415.24 L 544.34 328.53 L 544.47 314.36 L 544.60 398.01 L 544.72 407.13 L 544.85 331.99 L 544.98 303.55 L 545.11 359.85 L 545.23 415.21 L 545.36 400.20 L 545.49 339.39 L 545.62 301.92 L 545.74 321.83 L 545.87 375.29 L 546.00 414.59 L 546.13 411.21 L 546.25 371.94 L 546.38 326.08 L 546.51 302.07 L 546.64 311.19 L 546.76 345.38 L 546.89 385.58 L 547.02 413.06 L 547.15 417.47 L 547.27 399.29 L 547.40 367.30 L 547.53 333.77 L 547.66 309.62 L 547.78 301.25 L 547.91 309.62 L 548.04 331.01 L 548.17 358.98 L 548.29 386.38 L 548.42 407.25 L 548.55 417.78 L 548.68 416.79 L 548.80 405.39 L 548.93 386.44 L 549.06 363.66 L 549.19 340.91 L 549.31 321.55 L 549.44 308.03 L 549.57 301.69 L 549.70 302.79 L 549.82 310.65 L 549.95 323.86 L 550.08 340.61 L 550.21 358.93 L 550.33 376.92 L 550.46 392.92 L 550.59 405.66 L 550.71 414.29 L 550.84 418.39 L 550.97 417.96 L 551.10 413.32 L 551.22 405.08 L 551.35 394.04 L 551.48 381.07 L 551.61 367.11 L 551.73 353.03 L 551.86 339.64 L 551.99 327.61 L 552.12 317.48 L 552.24 309.64 L 552.37 304.33 L 552.50 301.63 L 552.63 301.51 L 552.75 303.82 L 552.88 308.33 L 553.01 314.74 L 553.14 322.69 L 553.26 331.82 L 553.39 341.74 L 553.52 352.07 L 553.65 362.46 L 553.77 372.59 L 553.90 382.17 L 554.03 390.94 L 554.16 398.71 L 554.28 405.33 L 554.41 410.67 L 554.54 414.68 L 554.67 417.32 L 554.79 418.60 L 554.92 418.57 L 555.05 417.29 L 555.18 414.84 L 555.30 411.34 L 555.43 406.90 L 555.56 401.66 L 555.69 395.75 L 555.81 389.31 L 555.94 382.47 L 556.07 375.37 L 556.20 368.14 L 556.32 360.90 L 556.45 353.75 L 556.58 346.81 L 556.71 340.15 L 556.83 333.87 L 556.96 328.02 L 557.09 322.67 L 557.22 317.87 L 557.34 313.64 L 557.47 310.02 L 557.60 307.03 L 557.73 304.66 L 557.85 302.92 L 557.98 301.80 L 558.11 301.29 L 558.24 301.36 L 558.36 302.00 L 558.49 303.17 L 558.62 304.85 L 558.75 306.98 L 558.87 309.55 L 559.00 312.50 L 559.13 315.80 L 559.26 319.41 L 559.38 323.28 L 559.51 327.38 L 559.64 331.67 L 559.77 336.10 L 559.89 340.64 L 560.02 345.26 L 560.15 349.92 L 560.28 354.58 L 560.40 359.22 L 560.53 363.80 L 560.66 368.31 L 560.79 372.71 L 560.91 376.99 L 561.04 381.12 L 561.17 385.09 L 561.30 388.88 L 561.42 392.47 L 561.55 395.85 L 561.68 399.02 L 561.81 401.97 L 561.93 404.68 L 562.06 407.15 L 562.19 409.39 L 562.32 411.38 L 562.44 413.13 L 562.57 414.64 L 562.70 415.91 L 562.83 416.93 L 562.95 417.73 L 563.08 418.29 L 563.21 418.63 L 563.34 418.75 L 563.46 418.66 L 563.59 418.36 L 563.72 417.86 L 563.85 417.18 L 563.97 416.31 L 564.10 415.28 L 564.23 414.08 L 564.36 412.72 L 564.48 411.22 L 564.61 409.58 L 564.74 407.82 L 564.87 405.93 L 564.99 403.94 L 565.12 401.85 L 565.25 399.67 L 565.37 397.41 L 565.50 395.07 L 565.63 392.67 L 565.76 390.21 L 565.88 387.70 L 566.01 385.15 L 566.14 382.57 L 566.27 379.96 L 566.39 377.33 L 566.52 374.69 L 566.65 372.04 L 566.78 369.39 L 566.90 366.75 L 567.03 364.11 L 567.16 361.50 L 567.29 358.91 L 567.41 356.34 L 567.54 353.80 L 567.67 351.30 L 567.80 348.84 L 567.92 346.42 L 568.05 344.04 L 568.18 341.72 L 568.31 339.44 L 568.43 337.22 L 568.56 335.06 L 568.69 332.96 L 568.82 330.91 L 568.94 328.93 L 569.07 327.02 L 569.20 325.17 L 569.33 323.39 L 569.45 321.67 L 569.58 320.03 L 569.71 318.45 L 569.84 316.95 L 569.96 315.52 L 570.09 314.15 L 570.22 312.86 L 570.35 311.64 L 570.47 310.49 L 570.60 309.41 L 570.73 308.40 L 570.86 307.46 L 570.98 306.60 L 571.11 305.80 L 571.24 305.06 L 571.37 304.40 L 571.49 303.80 L 571.62 303.27 L 571.75 302.80 L 571.88 302.40 L 572.00 302.06 L 572.13 301.78 L 572.26 301.56 L 572.39 301.40 L 572.51 301.30 L 572.64 301.25 L 572.77 301.26 L 572.90 301.33 L 573.02 301.45 L 573.15 301.62 L 573.28 301.84 L 573.41 302.10 L 573.53 302.42 L 573.66 302.78 L 573.79 303.19 L 573.92 303.64 L 574.04 304.13 L 574.17 304.67 L 574.30 305.24 L 574.43 305.85 L 574.55 306.50 L 574.68 307.18 L 574.81 307.90 L 574.94 308.65 L 575.06 309.43 L 575.19 310.24 L 575.32 311.08 L 575.45 311.94 L 575.57 312.83 L 575.70 313.75 L 575.83 314.69 L 575.96 315.66 L 576.08 316.65 L 576.21 317.65 L 576.34 318.68 L 576.47 319.72 L 576.59 320.78 L 576.72 321.86 L 576.85 322.95 L 576.98 324.06 L 577.10 325.17 L 577.23 326.30 L 577.36 327.45 L 577.49 328.60 L 577.61 329.76 L 577.74 330.93 L 577.87 332.10 L 578.00 333.29 L 578.12 334.47 L 578.25 335.67 L 578.38 336.87 L 578.51 338.07 L 578.63 339.27 L 578.76 340.48 L 578.89 341.68 L 579.02 342.89 L 579.14 344.10 L 579.27 345.31 L 579.40 346.51 L 579.52 347.72 L 579.65 348.92 L 579.78 350.12 L 579.91 351.32 L 580.03 352.51 L 580.16 353.69 L 580.29 354.88 L 580.42 356.05 L 580.54 357.22 L 580.67 358.39 L 580.80 359.55 L 580.93 360.70 L 581.05 361.84 L 581.18 362.98 L 581.31 364.11 L 581.44 365.23 L 581.56 366.34 L 581.69 367.44 L 581.82 368.53 L 581.95 369.61 L 582.07 370.69 L 582.20 371.75 L 582.33 372.80 L 582.46 373.84 L 582.58 374.87 L 582.71 375.89 L 582.84 376.90 L 582.97 377.90 L 583.09 378.89 L 583.22 379.86 L 583.35 380.82 L 583.48 381.77 L 583.60 382.71 L 583.73 383.64 L 583.86 384.55 L 583.99 385.45 L 584.11 386.34 L 584.24 387.22 L 584.37 388.08 L 584.50 388.93 L 584.62 389.77 L 584.75 390.60 L 584.88 391.41 L 585.01 392.21 L 585.13 393.00 L 585.26 393.77 L 585.39 394.53 L 585.52 395.28 L 585.64 396.02 L 585.77 396.74 L 585.90 397.45 L 586.03 398.15 L 586.15 398.83 L 586.28 399.50 L 586.41 400.16 L 586.54 400.80 L 586.66 401.44 L 586.79 402.06 L 586.92 402.66 L 587.05 403.26 L 587.17 403.84 L 587.30 404.41 L 587.43 404.96 L 587.56 405.51 L 587.68 406.04 L 587.81 406.56 L 587.94 407.06 L 588.07 407.56 L 588.19 408.04 L 588.32 408.51 L 588.45 408.97 L 588.58 409.42 L 588.70 409.85 L 588.83 410.27 L 588.96 410.68 L 589.09 411.08 L 589.21 411.47 L 589.34 411.85 L 589.47 412.22 L 589.60 412.57 L 589.72 412.91 L 589.85 413.25 L 589.98 413.57 L 590.11 413.88 L 590.23 414.18 L 590.36 414.47 L 590.49 414.75 L 590.62 415.01 L 590.74 415.27 L 590.87 415.52 L 591.00 415.76 L 591.13 415.99 L 591.25 416.20 L 591.38 416.41 L 591.51 416.61 L 591.64 416.80 L 591.76 416.98 L 591.89 417.15 L 592.02 417.31 L 592.15 417.46 L 592.27 417.60 L 592.40 417.74 L 592.53 417.86 L 592.66 417.98 L 592.78 418.09 L 592.91 418.19 L 593.04 418.28 L 593.17 418.36 L 593.29 418.43 L 593.42 418.50 L 593.55 418.56 L 593.67 418.61 L 593.80 418.65 L 593.93 418.69 L 594.06 418.71 L 594.18 418.73 L 594.31 418.74 L 594.44 418.75 L 594.57 418.75 L 594.69 418.74 L 594.82 418.72 L 594.95 418.70 L 595.08 418.67 L 595.20 418.63 L 595.33 418.59 L 595.46 418.54 L 595.59 418.49 L 595.71 418.42 L 595.84 418.35 L 595.97 418.28 L 596.10 418.20 L 596.22 418.11 L 596.35 418.02 L 596.48 417.92 L 596.61 417.82 L 596.73 417.71 L 596.86 417.60 L 596.99 417.48 L 597.12 417.35 L 597.24 417.22 L 597.37 417.08 L 597.50 416.94 L 597.63 416.80 L 597.75 416.65 L 597.88 416.49 L 598.01 416.33 L 598.14 416.17 L 598.26 416.00 L 598.39 415.83 L 598.52 415.65 L 598.65 415.47 L 598.77 415.28 L 598.90 415.09 L 599.03 414.90 L 599.16 414.70 L 599.28 414.49 L 599.41 414.29 L 599.54 414.08 L 599.67 413.86 L 599.79 413.65 L 599.92 413.43 L 600.05 413.20 L 600.18 412.97 L 600.30 412.74 L 600.43 412.51 L 600.56 412.27 L 600.69 412.03 L 600.81 411.79 L 600.94 411.54 L 601.07 411.29 L 601.20 411.04 L 601.32 410.78 L 601.45 410.52 L 601.58 410.26 L 601.71 410.00 L 601.83 409.73 L 601.96 409.46 L 602.09 409.19 L 602.22 408.92 L 602.34 408.64 L 602.47 408.36 L 602.60 408.08 L 602.73 407.80 L 602.85 407.51 L 602.98 407.23 L 603.11 406.94 L 603.24 406.64 L 603.36 406.35 L 603.49 406.06 L 603.62 405.76 L 603.75 405.46 L 603.87 405.16 L 604.00 404.86 L 604.13 404.55 L 604.26 404.25 L 604.38 403.94 L 604.51 403.63 L 604.64 403.32 L 604.77 403.01 L 604.89 402.70 L 605.02 402.38 L 605.15 402.07 L 605.28 401.75 L 605.40 401.43 L 605.53 401.12 L 605.66 400.79 L 605.79 400.47 L 605.91 400.15 L 606.04 399.83 L 606.17 399.50 L 606.30 399.18 L 606.42 398.85 L 606.55 398.52 L 606.68 398.20 L 606.81 397.87 L 606.93 397.54 L 607.06 397.21 L 607.19 396.88 L 607.32 396.54 L 607.44 396.21 L 607.57 395.88 L 607.70 395.54 L 607.83 395.21 L 607.95 394.88 L 608.08 394.54 L 608.21 394.20 L 608.33 393.87 L 608.46 393.53 L 608.59 393.19 L 608.72 392.86 L 608.84 392.52 L 608.97 392.18 L 609.10 391.84 L 609.23 391.51 L 609.35 391.17 L 609.48 390.83 L 609.61 390.49 L 609.74 390.15 L 609.86 389.81 L 609.99 389.47 L 610.12 389.13 L 610.25 388.79 L 610.37 388.45 L 610.50 388.11 L 610.63 387.77 L 610.76 387.43 L 610.88 387.09 L 611.01 386.75 L 611.14 386.42 L 611.27 386.08 L 611.39 385.74 L 611.52 385.40 L 611.65 385.06 L 611.78 384.72 L 611.90 384.38 L 612.03 384.04 L 612.16 383.71 L 612.29 383.37 L 612.41 383.03 L 612.54 382.69 L 612.67 382.36 L 612.80 382.02 L 612.92 381.68 L 613.05 381.35 L 613.18 381.01 L 613.31 380.68 L 613.43 380.34 L 613.56 380.01 L 613.69 379.68 L 613.82 379.34 L 613.94 379.01 L 614.07 378.68 L 614.20 378.35 L 614.33 378.01 L 614.45 377.68 L 614.58 377.35 L 614.71 377.02 L 614.84 376.69 L 614.96 376.36 L 615.09 376.04 L 615.22 375.71 L 615.35 375.38 L 615.47 375.06 L 615.60 374.73 L 615.73 374.40 L 615.86 374.08 L 615.98 373.76 L 616.11 373.43 L 616.24 373.11 L 616.37 372.79 L 616.49 372.47 L 616.62 372.15 L 616.75 371.83 L 616.88 371.51 L 617.00 371.19 L 617.13 370.87 L 617.26 370.55 L 617.39 370.24 L 617.51 369.92 L 617.64 369.61 L 617.77 369.29 L 617.90 368.98 L 618.02 368.66 L 618.15 368.35 L 618.28 368.04 L 618.41 367.73 L 618.53 367.42 L 618.66 367.11 L 618.79 366.80 L 618.92 366.50 L 619.04 366.19 L 619.17 365.89 L 619.30 365.58 L 619.43 365.28 L 619.55 364.97 L 619.68 364.67 L 619.81 364.37 L 619.94 364.07 L 620.06 363.77 L 620.19 363.47 L 620.32 363.17 L 620.45 362.88 L 620.57 362.58 L 620.70 362.28 L 620.83 361.99 L 620.96 361.70 L 621.08 361.40 L 621.21 361.11 L 621.34 360.82 L 621.47 360.53 L 621.59 360.24 L 621.72 359.95 L 621.85 359.67 L 621.98 359.38 L 622.10 359.09 L 622.23 358.81 L 622.36 358.53 L 622.48 358.24 L 622.61 357.96 L 622.74 357.68 L 622.87 357.40 L 622.99 357.12 L 623.12 356.84 L 623.25 356.56 L 623.38 356.29 L 623.50 356.01 L 623.63 355.74 L 623.76 355.46 L 623.89 355.19 L 624.01 354.92 L 624.14 354.65 L 624.27 354.38 L 624.40 354.11 L 624.52 353.84 L 624.65 353.58 L 624.78 353.31 L 624.91 353.04 L 625.03 352.78 L 625.16 352.52 L 625.29 352.25 L 625.42 351.99 L 625.54 351.73 L 625.67 351.47 L 625.80 351.21 L 625.93 350.96 L 626.05 350.70 L 626.18 350.44 L 626.31 350.19 L 626.44 349.93 L 626.56 349.68 L 626.69 349.43 L 626.82 349.18 L 626.95 348.93 L 627.07 348.68 L 627.20 348.43 L 627.33 348.18 L 627.46 347.94 L 627.58 347.69 L 627.71 347.45 L 627.84 347.20 L 627.97 346.96 L 628.09 346.72 L 628.22 346.48 L 628.35 346.24 L 628.48 346.00 L 628.60 345.76 L 628.73 345.52 L 628.86 345.29 L 628.99 345.05 L 629.11 344.82 L 629.24 344.58 L 629.37 344.35 L 629.50 344.12 L 629.62 343.89 L 629.75 343.66 L 629.88 343.43 L 630.01 343.20 L 630.13 342.98 L 630.26 342.75 L 630.39 342.53 L 630.52 342.30 L 630.64 342.08 L 630.77 341.86 L 630.90 341.63 L 631.03 341.41 L 631.15 341.19 L 631.28 340.98 L 631.41 340.76 L 631.54 340.54 L 631.66 340.33 L 631.79 340.11 L 631.92 339.90 L 632.05 339.68 L 632.17 339.47 L 632.30 339.26 L 632.43 339.05 L 632.56 338.84 L 632.68 338.63 L 632.81 338.42 L 632.94 338.21 L 633.07 338.01 L 633.19 337.80 L 633.32 337.60 L 633.45 337.39 L 633.58 337.19 L 633.70 336.99 L 633.83 336.79 L 633.96 336.59 L 634.09 336.39 L 634.21 336.19 L 634.34 335.99 L 634.47 335.80 L 634.60 335.60 L 634.72 335.41 L 634.85 335.21 L 634.98 335.02 L 635.11 334.83 L 635.23 334.63 L 635.36 334.44 L 635.49 334.25 L 635.62 334.06 L 635.74 333.88 L 635.87 333.69 L 636.00 333.50 L 636.13 333.32 L 636.25 333.13 L 636.38 332.95 L 636.51 332.76 L 636.63 332.58 L 636.76 332.40 L 636.89 332.22 L 637.02 332.04 L 637.14 331.86 L 637.27 331.68 L 637.40 331.50 L 637.53 331.33 L 637.65 331.15 L 637.78 330.98 L 637.91 330.80 L 638.04 330.63 L 638.16 330.46 L 638.29 330.28 L 638.42 330.11 L 638.55 329.94 L 638.67 329.77 L 638.80 329.60 L 638.93 329.43 L 639.06 329.27 L 639.18 329.10 L 639.31 328.94 L 639.44 328.77 L 639.57 328.61 L 639.69 328.44 L 639.82 328.28 L 639.95 328.12 L 640.08 327.96 L 640.20 327.80 L 640.33 327.64 L 640.46 327.48 L 640.59 327.32 L 640.71 327.16 L 640.84 327.00 L 640.97 326.85 L 641.10 326.69 L 641.22 326.54 L 641.35 326.38 L 641.48 326.23 L 641.61 326.08 L 641.73 325.93 L 641.86 325.78 L 641.99 325.63 L 642.12 325.48 L 642.24 325.33 L 642.37 325.18 L 642.50 325.03 L 642.63 324.89 L 642.75 324.74 L 642.88 324.59 L 643.01 324.45 L 643.14 324.31 L 643.26 324.16 L 643.39 324.02 L 643.52 323.88 L 643.65 323.74 L 643.77 323.60 L 643.90 323.46 L 644.03 323.32 L 644.16 323.18 L 644.28 323.04 L 644.41 322.91 L 644.54 322.77 L 644.67 322.63 L 644.79 322.50 L 644.92 322.36 L 645.05 322.23 L 645.18 322.10 L 645.30 321.96 L 645.43 321.83 L 645.56 321.70 L 645.69 321.57 L 645.81 321.44 L 645.94 321.31 L 646.07 321.18 L 646.20 321.06 L 646.32 320.93 L 646.45 320.80 L 646.58 320.68 L 646.71 320.55 L 646.83 320.42 L 646.96 320.30 L 647.09 320.18 L 647.22 320.05 L 647.34 319.93 L 647.47 319.81 L 647.60 319.69 L 647.73 319.57 L 647.85 319.45 L 647.98 319.33 L 648.11 319.21 L 648.24 319.09 L 648.36 318.98 L 648.49 318.86 L 648.62 318.74 L 648.75 318.63 L 648.87 318.51 L 649.00 318.40 L 649.13 318.28 L 649.26 318.17 L 649.38 318.06 L 649.51 317.94 L 649.64 317.83 L 649.77 317.72 L 649.89 317.61 L 650.02 317.50 L 650.15 317.39 L 650.28 317.28 L 650.40 317.17 L 650.53 317.07 L 650.66 316.96 L 650.79 316.85 L 650.91 316.75 L 651.04 316.64 L 651.17 316.54 L 651.29 316.43 L 651.42 316.33 L 651.55 316.23 L 651.68 316.12 L 651.80 316.02 L 651.93 315.92 L 652.06 315.82 L 652.19 315.72 L 652.31 315.62 L 652.44 315.52 L 652.57 315.42 L 652.70 315.32 L 652.82 315.22 L 652.95 315.12 L 653.08 315.03 L 653.21 314.93 L 653.33 314.83 L 653.46 314.74 L 653.59 314.64 L 653.72 314.55 L 653.84 314.46 L 653.97 314.36 L 654.10 314.27 L 654.23 314.18 L 654.35 314.09 L 654.48 313.99 L 654.61 313.90 L 654.74 313.81 L 654.86 313.72 L 654.99 313.63 L 655.12 313.54 L 655.25 313.46 L 655.37 313.37 L 655.50 313.28 L 655.63 313.19 L 655.76 313.11 L 655.88 313.02 L 656.01 312.93 L 656.14 312.85 L 656.27 312.76 L 656.39 312.68 L 656.52 312.60 L 656.65 312.51 L 656.78 312.43 L 656.90 312.35 L 657.03 312.26 L 657.16 312.18 L 657.29 312.10 L 657.41 312.02 L 657.54 311.94 L 657.67 311.86 L 657.80 311.78 L 657.92 311.70 L 658.05 311.62 L 658.18 311.55 L 658.31 311.47 L 658.43 311.39 L 658.56 311.31 L 658.69 311.24 L 658.82 311.16 L 658.94 311.09 L 659.07 311.01 L 659.20 310.94 L 659.33 310.86 L 659.45 310.79 L 659.58 310.72 L 659.71 310.64 L 659.84 310.57 L 659.96 310.50 L 660.09 310.43 L 660.22 310.36 L 660.35 310.28 L 660.47 310.21 L 660.60 310.14 L 660.73 310.07 L 660.86 310.00 L 660.98 309.94 L 661.11 309.87 L 661.24 309.80 L 661.37 309.73 L 661.49 309.66 L 661.62 309.60 L 661.75 309.53 L 661.88 309.46 L 662.00 309.40 L 662.13 309.33 L 662.26 309.27 L 662.39 309.20 L 662.51 309.14 L 662.64 309.08 L 662.77 309.01 L 662.90 308.95 L 663.02 308.89 L 663.15 308.82 L 663.28 308.76 L 663.41 308.70 L 663.53 308.64 L 663.66 308.58 L 663.79 308.52 L 663.92 308.46 L 664.04 308.40 L 664.17 308.34 L 664.30 308.28 L 664.43 308.22 L 664.55 308.16 L 664.68 308.10 L 664.81 308.04 L 664.94 307.99 L 665.06 307.93 L 665.19 307.87 L 665.32 307.82 L 665.44 307.76 L 665.57 307.71 L 665.70 307.65 L 665.83 307.59 L 665.95 307.54 L 666.08 307.49 L 666.21 307.43 L 666.34 307.38 L 666.46 307.32 L 666.59 307.27 L 666.72 307.22 L 666.85 307.17 L 666.97 307.11 L 667.10 307.06 L 667.23 307.01 L 667.36 306.96 L 667.48 306.91 L 667.61 306.86 L 667.74 306.81 L 667.87 306.76 L 667.99 306.71 L 668.12 306.66 L 668.25 306.61 L 668.38 306.56 L 668.50 306.51 L 668.63 306.47 L 668.76 306.42 L 668.89 306.37 L 669.01 306.32 L 669.14 306.28 L 669.27 306.23 L 669.40 306.18 L 669.52 306.14 L 669.65 306.09 L 669.78 306.05 L 669.91 306.00 L 670.03 305.96 L 670.16 305.91 L 670.29 305.87 L 670.42 305.83 L 670.54 305.78 L 670.67 305.74 L 670.80 305.70 L 670.93 305.65 L 671.05 305.61 L 671.18 305.57 L 671.31 305.53 L 671.44 305.48 L 671.56 305.44 L 671.69 305.40 L 671.82 305.36 L 671.95 305.32 L 672.07 305.28 L 672.20 305.24 L 672.33 305.20 L 672.46 305.16 L 672.58 305.12 L 672.71 305.08 L 672.84 305.04 L 672.97 305.01 L 673.09 304.97 L 673.22 304.93 L 673.35 304.89 L 673.48 304.86 L 673.60 304.82 L 673.73 304.78 L 673.86 304.74 L 673.99 304.71 L 674.11 304.67 L 674.24 304.64 L 674.37 304.60 L 674.50 304.57 L 674.62 304.53 L 674.75 304.50 L 674.88 304.46 L 675.01 304.43 L 675.13 304.39 L 675.26 304.36 L 675.39 304.33 L 675.52 304.29 L 675.64 304.26 L 675.77 304.23 L 675.90 304.19 L 676.03 304.16 L 676.15 304.13 L 676.28 304.10 L 676.41 304.06 L 676.54 304.03 L 676.66 304.00 L 676.79 303.97 L 676.92 303.94 L 677.05 303.91 L 677.17 303.88 L 677.30 303.85 L 677.43 303.82 L 677.56 303.79 L 677.68 303.76 L 677.81 303.73 L 677.94 303.70 L 678.07 303.67 L 678.19 303.64 L 678.32 303.62 L 678.45 303.59 L 678.58 303.56 L 678.70 303.53 L 678.83 303.51 L 678.96 303.48 L 679.09 303.45 L 679.21 303.42 L 679.34 303.40 L 679.47 303.37 L 679.60 303.34 L 679.72 303.32 L 679.85 303.29 L 679.98 303.27 L 680.10 303.24 L 680.23 303.22 L 680.36 303.19 L 680.49 303.17 L 680.61 303.14 L 680.74 303.12 L 680.87 303.09 L 681.00 303.07 L 681.12 303.05 L 681.25 303.02 L 681.38 303.00 L 681.51 302.98 L 681.63 302.95 L 681.76 302.93 L 681.89 302.91 L 682.02 302.89 L 682.14 302.86 L 682.27 302.84 L 682.40 302.82 L 682.53 302.80 L 682.65 302.78 L 682.78 302.75 L 682.91 302.73 L 683.04 302.71 L 683.16 302.69 L 683.29 302.67 L 683.42 302.65 L 683.55 302.63 L 683.67 302.61 L 683.80 302.59 L 683.93 302.57 L 684.06 302.55 L 684.18 302.53 L 684.31 302.51 L 684.44 302.49 L 684.57 302.48 L 684.69 302.46 L 684.82 302.44 L 684.95 302.42 L 685.08 302.40 L 685.20 302.38 L 685.33 302.37 L 685.46 302.35 L 685.59 302.33 L 685.71 302.31 L 685.84 302.30 L 685.97 302.28 L 686.10 302.26 L 686.22 302.25 L 686.35 302.23 L 686.48 302.21 L 686.61 302.20 L 686.73 302.18 L 686.86 302.17 L 686.99 302.15 L 687.12 302.14 L 687.24 302.12 L 687.37 302.11 L 687.50 302.09 L 687.63 302.08 L 687.75 302.06 L 687.88 302.05 L 688.01 302.03 L 688.14 302.02 L 688.26 302.00 L 688.39 301.99 L 688.52 301.98 L 688.65 301.96 L 688.77 301.95 L 688.90 301.94 L 689.03 301.92 L 689.16 301.91 L 689.28 301.90 L 689.41 301.88 L 689.54 301.87 L 689.67 301.86 L 689.79 301.85 L 689.92 301.83 L 690.05 301.82 L 690.18 301.81 L 690.30 301.80 L 690.43 301.79 L 690.56 301.78 L 690.69 301.77 L 690.81 301.75 L 690.94 301.74 L 691.07 301.73 L 691.20 301.72 L 691.32 301.71 L 691.45 301.70 L 691.58 301.69 L 691.71 301.68 L 691.83 301.67 L 691.96 301.66 L 692.09 301.65 L 692.22 301.64 L 692.34 301.63 L 692.47 301.62 L 692.60 301.61 L 692.73 301.60 L 692.85 301.59 L 692.98 301.59 L 693.11 301.58 L 693.24 301.57 L 693.36 301.56 L 693.49 301.55 L 693.62 301.54 L 693.75 301.54 L 693.87 301.53 L 694.00 301.52" fill="none" stroke="var(--accent-line)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 386.00 418.48 L 386.13 418.47 L 386.25 418.46 L 386.38 418.46 L 386.51 418.45 L 386.64 418.44 L 386.76 418.43 L 386.89 418.42 L 387.02 418.41 L 387.15 418.41 L 387.27 418.40 L 387.40 418.39 L 387.53 418.38 L 387.66 418.37 L 387.78 418.36 L 387.91 418.35 L 388.04 418.34 L 388.17 418.33 L 388.29 418.32 L 388.42 418.31 L 388.55 418.30 L 388.68 418.29 L 388.80 418.28 L 388.93 418.27 L 389.06 418.26 L 389.19 418.25 L 389.31 418.23 L 389.44 418.22 L 389.57 418.21 L 389.70 418.20 L 389.82 418.19 L 389.95 418.18 L 390.08 418.17 L 390.21 418.15 L 390.33 418.14 L 390.46 418.13 L 390.59 418.12 L 390.72 418.10 L 390.84 418.09 L 390.97 418.08 L 391.10 418.06 L 391.23 418.05 L 391.35 418.04 L 391.48 418.02 L 391.61 418.01 L 391.74 418.00 L 391.86 417.98 L 391.99 417.97 L 392.12 417.95 L 392.25 417.94 L 392.37 417.92 L 392.50 417.91 L 392.63 417.89 L 392.76 417.88 L 392.88 417.86 L 393.01 417.85 L 393.14 417.83 L 393.27 417.82 L 393.39 417.80 L 393.52 417.79 L 393.65 417.77 L 393.78 417.75 L 393.90 417.74 L 394.03 417.72 L 394.16 417.70 L 394.29 417.69 L 394.41 417.67 L 394.54 417.65 L 394.67 417.63 L 394.80 417.62 L 394.92 417.60 L 395.05 417.58 L 395.18 417.56 L 395.31 417.54 L 395.43 417.52 L 395.56 417.51 L 395.69 417.49 L 395.82 417.47 L 395.94 417.45 L 396.07 417.43 L 396.20 417.41 L 396.33 417.39 L 396.45 417.37 L 396.58 417.35 L 396.71 417.33 L 396.84 417.31 L 396.96 417.29 L 397.09 417.27 L 397.22 417.25 L 397.35 417.22 L 397.47 417.20 L 397.60 417.18 L 397.73 417.16 L 397.86 417.14 L 397.98 417.11 L 398.11 417.09 L 398.24 417.07 L 398.37 417.05 L 398.49 417.02 L 398.62 417.00 L 398.75 416.98 L 398.88 416.95 L 399.00 416.93 L 399.13 416.91 L 399.26 416.88 L 399.39 416.86 L 399.51 416.83 L 399.64 416.81 L 399.77 416.78 L 399.90 416.76 L 400.02 416.73 L 400.15 416.71 L 400.28 416.68 L 400.40 416.66 L 400.53 416.63 L 400.66 416.60 L 400.79 416.58 L 400.91 416.55 L 401.04 416.52 L 401.17 416.49 L 401.30 416.47 L 401.42 416.44 L 401.55 416.41 L 401.68 416.38 L 401.81 416.36 L 401.93 416.33 L 402.06 416.30 L 402.19 416.27 L 402.32 416.24 L 402.44 416.21 L 402.57 416.18 L 402.70 416.15 L 402.83 416.12 L 402.95 416.09 L 403.08 416.06 L 403.21 416.03 L 403.34 416.00 L 403.46 415.97 L 403.59 415.94 L 403.72 415.90 L 403.85 415.87 L 403.97 415.84 L 404.10 415.81 L 404.23 415.77 L 404.36 415.74 L 404.48 415.71 L 404.61 415.67 L 404.74 415.64 L 404.87 415.61 L 404.99 415.57 L 405.12 415.54 L 405.25 415.50 L 405.38 415.47 L 405.50 415.43 L 405.63 415.40 L 405.76 415.36 L 405.89 415.33 L 406.01 415.29 L 406.14 415.26 L 406.27 415.22 L 406.40 415.18 L 406.52 415.14 L 406.65 415.11 L 406.78 415.07 L 406.91 415.03 L 407.03 414.99 L 407.16 414.96 L 407.29 414.92 L 407.42 414.88 L 407.54 414.84 L 407.67 414.80 L 407.80 414.76 L 407.93 414.72 L 408.05 414.68 L 408.18 414.64 L 408.31 414.60 L 408.44 414.56 L 408.56 414.52 L 408.69 414.47 L 408.82 414.43 L 408.95 414.39 L 409.07 414.35 L 409.20 414.30 L 409.33 414.26 L 409.46 414.22 L 409.58 414.17 L 409.71 414.13 L 409.84 414.09 L 409.97 414.04 L 410.09 414.00 L 410.22 413.95 L 410.35 413.91 L 410.48 413.86 L 410.60 413.82 L 410.73 413.77 L 410.86 413.72 L 410.99 413.68 L 411.11 413.63 L 411.24 413.58 L 411.37 413.53 L 411.50 413.49 L 411.62 413.44 L 411.75 413.39 L 411.88 413.34 L 412.01 413.29 L 412.13 413.24 L 412.26 413.19 L 412.39 413.14 L 412.52 413.09 L 412.64 413.04 L 412.77 412.99 L 412.90 412.94 L 413.03 412.89 L 413.15 412.83 L 413.28 412.78 L 413.41 412.73 L 413.54 412.68 L 413.66 412.62 L 413.79 412.57 L 413.92 412.51 L 414.05 412.46 L 414.17 412.41 L 414.30 412.35 L 414.43 412.29 L 414.56 412.24 L 414.68 412.18 L 414.81 412.13 L 414.94 412.07 L 415.06 412.01 L 415.19 411.96 L 415.32 411.90 L 415.45 411.84 L 415.57 411.78 L 415.70 411.72 L 415.83 411.66 L 415.96 411.60 L 416.08 411.54 L 416.21 411.48 L 416.34 411.42 L 416.47 411.36 L 416.59 411.30 L 416.72 411.24 L 416.85 411.18 L 416.98 411.11 L 417.10 411.05 L 417.23 410.99 L 417.36 410.92 L 417.49 410.86 L 417.61 410.80 L 417.74 410.73 L 417.87 410.67 L 418.00 410.60 L 418.12 410.54 L 418.25 410.47 L 418.38 410.40 L 418.51 410.34 L 418.63 410.27 L 418.76 410.20 L 418.89 410.13 L 419.02 410.06 L 419.14 410.00 L 419.27 409.93 L 419.40 409.86 L 419.53 409.79 L 419.65 409.72 L 419.78 409.64 L 419.91 409.57 L 420.04 409.50 L 420.16 409.43 L 420.29 409.36 L 420.42 409.28 L 420.55 409.21 L 420.67 409.14 L 420.80 409.06 L 420.93 408.99 L 421.06 408.91 L 421.18 408.84 L 421.31 408.76 L 421.44 408.69 L 421.57 408.61 L 421.69 408.53 L 421.82 408.45 L 421.95 408.38 L 422.08 408.30 L 422.20 408.22 L 422.33 408.14 L 422.46 408.06 L 422.59 407.98 L 422.71 407.90 L 422.84 407.82 L 422.97 407.74 L 423.10 407.65 L 423.22 407.57 L 423.35 407.49 L 423.48 407.40 L 423.61 407.32 L 423.73 407.24 L 423.86 407.15 L 423.99 407.07 L 424.12 406.98 L 424.24 406.89 L 424.37 406.81 L 424.50 406.72 L 424.63 406.63 L 424.75 406.54 L 424.88 406.46 L 425.01 406.37 L 425.14 406.28 L 425.26 406.19 L 425.39 406.10 L 425.52 406.01 L 425.65 405.91 L 425.77 405.82 L 425.90 405.73 L 426.03 405.64 L 426.16 405.54 L 426.28 405.45 L 426.41 405.36 L 426.54 405.26 L 426.67 405.17 L 426.79 405.07 L 426.92 404.97 L 427.05 404.88 L 427.18 404.78 L 427.30 404.68 L 427.43 404.58 L 427.56 404.48 L 427.69 404.38 L 427.81 404.28 L 427.94 404.18 L 428.07 404.08 L 428.20 403.98 L 428.32 403.88 L 428.45 403.77 L 428.58 403.67 L 428.71 403.57 L 428.83 403.46 L 428.96 403.36 L 429.09 403.25 L 429.21 403.15 L 429.34 403.04 L 429.47 402.93 L 429.60 402.83 L 429.72 402.72 L 429.85 402.61 L 429.98 402.50 L 430.11 402.39 L 430.23 402.28 L 430.36 402.17 L 430.49 402.06 L 430.62 401.94 L 430.74 401.83 L 430.87 401.72 L 431.00 401.60 L 431.13 401.49 L 431.25 401.37 L 431.38 401.26 L 431.51 401.14 L 431.64 401.02 L 431.76 400.91 L 431.89 400.79 L 432.02 400.67 L 432.15 400.55 L 432.27 400.43 L 432.40 400.31 L 432.53 400.19 L 432.66 400.07 L 432.78 399.95 L 432.91 399.82 L 433.04 399.70 L 433.17 399.58 L 433.29 399.45 L 433.42 399.32 L 433.55 399.20 L 433.68 399.07 L 433.80 398.94 L 433.93 398.82 L 434.06 398.69 L 434.19 398.56 L 434.31 398.43 L 434.44 398.30 L 434.57 398.17 L 434.70 398.04 L 434.82 397.90 L 434.95 397.77 L 435.08 397.64 L 435.21 397.50 L 435.33 397.37 L 435.46 397.23 L 435.59 397.09 L 435.72 396.96 L 435.84 396.82 L 435.97 396.68 L 436.10 396.54 L 436.23 396.40 L 436.35 396.26 L 436.48 396.12 L 436.61 395.98 L 436.74 395.84 L 436.86 395.69 L 436.99 395.55 L 437.12 395.41 L 437.25 395.26 L 437.37 395.11 L 437.50 394.97 L 437.63 394.82 L 437.76 394.67 L 437.88 394.52 L 438.01 394.37 L 438.14 394.22 L 438.27 394.07 L 438.39 393.92 L 438.52 393.77 L 438.65 393.62 L 438.78 393.46 L 438.90 393.31 L 439.03 393.15 L 439.16 393.00 L 439.29 392.84 L 439.41 392.68 L 439.54 392.52 L 439.67 392.36 L 439.80 392.20 L 439.92 392.04 L 440.05 391.88 L 440.18 391.72 L 440.31 391.56 L 440.43 391.39 L 440.56 391.23 L 440.69 391.06 L 440.82 390.90 L 440.94 390.73 L 441.07 390.57 L 441.20 390.40 L 441.33 390.23 L 441.45 390.06 L 441.58 389.89 L 441.71 389.72 L 441.84 389.54 L 441.96 389.37 L 442.09 389.20 L 442.22 389.02 L 442.35 388.85 L 442.47 388.67 L 442.60 388.50 L 442.73 388.32 L 442.86 388.14 L 442.98 387.96 L 443.11 387.78 L 443.24 387.60 L 443.37 387.42 L 443.49 387.24 L 443.62 387.05 L 443.75 386.87 L 443.87 386.68 L 444.00 386.50 L 444.13 386.31 L 444.26 386.12 L 444.38 385.94 L 444.51 385.75 L 444.64 385.56 L 444.77 385.37 L 444.89 385.17 L 445.02 384.98 L 445.15 384.79 L 445.28 384.59 L 445.40 384.40 L 445.53 384.20 L 445.66 384.01 L 445.79 383.81 L 445.91 383.61 L 446.04 383.41 L 446.17 383.21 L 446.30 383.01 L 446.42 382.81 L 446.55 382.61 L 446.68 382.40 L 446.81 382.20 L 446.93 381.99 L 447.06 381.79 L 447.19 381.58 L 447.32 381.37 L 447.44 381.16 L 447.57 380.95 L 447.70 380.74 L 447.83 380.53 L 447.95 380.32 L 448.08 380.10 L 448.21 379.89 L 448.34 379.67 L 448.46 379.46 L 448.59 379.24 L 448.72 379.02 L 448.85 378.81 L 448.97 378.59 L 449.10 378.37 L 449.23 378.14 L 449.36 377.92 L 449.48 377.70 L 449.61 377.47 L 449.74 377.25 L 449.87 377.02 L 449.99 376.80 L 450.12 376.57 L 450.25 376.34 L 450.38 376.11 L 450.50 375.88 L 450.63 375.65 L 450.76 375.42 L 450.89 375.18 L 451.01 374.95 L 451.14 374.71 L 451.27 374.48 L 451.40 374.24 L 451.52 374.00 L 451.65 373.76 L 451.78 373.52 L 451.91 373.28 L 452.03 373.04 L 452.16 372.80 L 452.29 372.55 L 452.42 372.31 L 452.54 372.06 L 452.67 371.82 L 452.80 371.57 L 452.93 371.32 L 453.05 371.07 L 453.18 370.82 L 453.31 370.57 L 453.44 370.32 L 453.56 370.07 L 453.69 369.81 L 453.82 369.56 L 453.95 369.30 L 454.07 369.04 L 454.20 368.79 L 454.33 368.53 L 454.46 368.27 L 454.58 368.01 L 454.71 367.75 L 454.84 367.48 L 454.97 367.22 L 455.09 366.96 L 455.22 366.69 L 455.35 366.42 L 455.48 366.16 L 455.60 365.89 L 455.73 365.62 L 455.86 365.35 L 455.99 365.08 L 456.11 364.81 L 456.24 364.54 L 456.37 364.26 L 456.50 363.99 L 456.62 363.71 L 456.75 363.44 L 456.88 363.16 L 457.01 362.88 L 457.13 362.60 L 457.26 362.32 L 457.39 362.04 L 457.52 361.76 L 457.64 361.47 L 457.77 361.19 L 457.90 360.91 L 458.02 360.62 L 458.15 360.33 L 458.28 360.05 L 458.41 359.76 L 458.53 359.47 L 458.66 359.18 L 458.79 358.89 L 458.92 358.60 L 459.04 358.30 L 459.17 358.01 L 459.30 357.72 L 459.43 357.42 L 459.55 357.12 L 459.68 356.83 L 459.81 356.53 L 459.94 356.23 L 460.06 355.93 L 460.19 355.63 L 460.32 355.33 L 460.45 355.03 L 460.57 354.72 L 460.70 354.42 L 460.83 354.11 L 460.96 353.81 L 461.08 353.50 L 461.21 353.20 L 461.34 352.89 L 461.47 352.58 L 461.59 352.27 L 461.72 351.96 L 461.85 351.65 L 461.98 351.34 L 462.10 351.02 L 462.23 350.71 L 462.36 350.39 L 462.49 350.08 L 462.61 349.76 L 462.74 349.45 L 462.87 349.13 L 463.00 348.81 L 463.12 348.49 L 463.25 348.17 L 463.38 347.85 L 463.51 347.53 L 463.63 347.21 L 463.76 346.89 L 463.89 346.57 L 464.02 346.24 L 464.14 345.92 L 464.27 345.60 L 464.40 345.27 L 464.53 344.94 L 464.65 344.62 L 464.78 344.29 L 464.91 343.96 L 465.04 343.64 L 465.16 343.31 L 465.29 342.98 L 465.42 342.65 L 465.55 342.32 L 465.67 341.99 L 465.80 341.65 L 465.93 341.32 L 466.06 340.99 L 466.18 340.66 L 466.31 340.32 L 466.44 339.99 L 466.57 339.66 L 466.69 339.32 L 466.82 338.99 L 466.95 338.65 L 467.08 338.32 L 467.20 337.98 L 467.33 337.64 L 467.46 337.31 L 467.59 336.97 L 467.71 336.63 L 467.84 336.29 L 467.97 335.96 L 468.10 335.62 L 468.22 335.28 L 468.35 334.94 L 468.48 334.60 L 468.61 334.26 L 468.73 333.92 L 468.86 333.58 L 468.99 333.25 L 469.12 332.91 L 469.24 332.57 L 469.37 332.23 L 469.50 331.89 L 469.63 331.55 L 469.75 331.21 L 469.88 330.87 L 470.01 330.53 L 470.14 330.19 L 470.26 329.85 L 470.39 329.51 L 470.52 329.17 L 470.65 328.83 L 470.77 328.49 L 470.90 328.16 L 471.03 327.82 L 471.16 327.48 L 471.28 327.14 L 471.41 326.81 L 471.54 326.47 L 471.67 326.13 L 471.79 325.80 L 471.92 325.46 L 472.05 325.12 L 472.17 324.79 L 472.30 324.46 L 472.43 324.12 L 472.56 323.79 L 472.68 323.46 L 472.81 323.12 L 472.94 322.79 L 473.07 322.46 L 473.19 322.13 L 473.32 321.80 L 473.45 321.48 L 473.58 321.15 L 473.70 320.82 L 473.83 320.50 L 473.96 320.17 L 474.09 319.85 L 474.21 319.53 L 474.34 319.21 L 474.47 318.88 L 474.60 318.57 L 474.72 318.25 L 474.85 317.93 L 474.98 317.62 L 475.11 317.30 L 475.23 316.99 L 475.36 316.68 L 475.49 316.37 L 475.62 316.06 L 475.74 315.75 L 475.87 315.45 L 476.00 315.14 L 476.13 314.84 L 476.25 314.54 L 476.38 314.24 L 476.51 313.94 L 476.64 313.65 L 476.76 313.36 L 476.89 313.06 L 477.02 312.77 L 477.15 312.49 L 477.27 312.20 L 477.40 311.92 L 477.53 311.64 L 477.66 311.36 L 477.78 311.08 L 477.91 310.81 L 478.04 310.54 L 478.17 310.27 L 478.29 310.00 L 478.42 309.74 L 478.55 309.48 L 478.68 309.22 L 478.80 308.96 L 478.93 308.71 L 479.06 308.46 L 479.19 308.21 L 479.31 307.97 L 479.44 307.73 L 479.57 307.49 L 479.70 307.26 L 479.82 307.03 L 479.95 306.80 L 480.08 306.57 L 480.21 306.35 L 480.33 306.14 L 480.46 305.92 L 480.59 305.71 L 480.72 305.51 L 480.84 305.30 L 480.97 305.10 L 481.10 304.91 L 481.23 304.72 L 481.35 304.53 L 481.48 304.35 L 481.61 304.17 L 481.74 304.00 L 481.86 303.83 L 481.99 303.67 L 482.12 303.51 L 482.25 303.35 L 482.37 303.20 L 482.50 303.06 L 482.63 302.92 L 482.76 302.78 L 482.88 302.65 L 483.01 302.52 L 483.14 302.40 L 483.27 302.29 L 483.39 302.18 L 483.52 302.08 L 483.65 301.98 L 483.78 301.89 L 483.90 301.80 L 484.03 301.72 L 484.16 301.65 L 484.29 301.58 L 484.41 301.51 L 484.54 301.46 L 484.67 301.41 L 484.80 301.37 L 484.92 301.33 L 485.05 301.30 L 485.18 301.28 L 485.31 301.26 L 485.43 301.25 L 485.56 301.25 L 485.69 301.26 L 485.82 301.27 L 485.94 301.29 L 486.07 301.31 L 486.20 301.35 L 486.33 301.39 L 486.45 301.44 L 486.58 301.50 L 486.71 301.57 L 486.83 301.64 L 486.96 301.72 L 487.09 301.81 L 487.22 301.91 L 487.34 302.02 L 487.47 302.14 L 487.60 302.26 L 487.73 302.40 L 487.85 302.54 L 487.98 302.69 L 488.11 302.85 L 488.24 303.02 L 488.36 303.20 L 488.49 303.39 L 488.62 303.59 L 488.75 303.80 L 488.87 304.01 L 489.00 304.24 L 489.13 304.48 L 489.26 304.73 L 489.38 304.99 L 489.51 305.25 L 489.64 305.53 L 489.77 305.82 L 489.89 306.12 L 490.02 306.43 L 490.15 306.75 L 490.28 307.09 L 490.40 307.43 L 490.53 307.78 L 490.66 308.15 L 490.79 308.53 L 490.91 308.92 L 491.04 309.32 L 491.17 309.73 L 491.30 310.15 L 491.42 310.58 L 491.55 311.03 L 491.68 311.49 L 491.81 311.96 L 491.93 312.44 L 492.06 312.94 L 492.19 313.44 L 492.32 313.96 L 492.44 314.49 L 492.57 315.04 L 492.70 315.59 L 492.83 316.16 L 492.95 316.74 L 493.08 317.34 L 493.21 317.94 L 493.34 318.56 L 493.46 319.20 L 493.59 319.84 L 493.72 320.50 L 493.85 321.17 L 493.97 321.85 L 494.10 322.55 L 494.23 323.26 L 494.36 323.98 L 494.48 324.72 L 494.61 325.47 L 494.74 326.23 L 494.87 327.00 L 494.99 327.79 L 495.12 328.59 L 495.25 329.40 L 495.38 330.23 L 495.50 331.07 L 495.63 331.92 L 495.76 332.78 L 495.89 333.66 L 496.01 334.55 L 496.14 335.45 L 496.27 336.36 L 496.40 337.29 L 496.52 338.23 L 496.65 339.18 L 496.78 340.14 L 496.91 341.11 L 497.03 342.10 L 497.16 343.10 L 497.29 344.11 L 497.42 345.13 L 497.54 346.16 L 497.67 347.20 L 497.80 348.25 L 497.93 349.31 L 498.05 350.39 L 498.18 351.47 L 498.31 352.56 L 498.44 353.66 L 498.56 354.77 L 498.69 355.89 L 498.82 357.02 L 498.95 358.16 L 499.07 359.30 L 499.20 360.45 L 499.33 361.61 L 499.46 362.78 L 499.58 363.95 L 499.71 365.12 L 499.84 366.31 L 499.97 367.49 L 500.09 368.68 L 500.22 369.88 L 500.35 371.08 L 500.48 372.28 L 500.60 373.49 L 500.73 374.69 L 500.86 375.90 L 500.98 377.11 L 501.11 378.32 L 501.24 379.52 L 501.37 380.73 L 501.49 381.93 L 501.62 383.13 L 501.75 384.33 L 501.88 385.53 L 502.00 386.71 L 502.13 387.90 L 502.26 389.07 L 502.39 390.24 L 502.51 391.40 L 502.64 392.55 L 502.77 393.70 L 502.90 394.83 L 503.02 395.94 L 503.15 397.05 L 503.28 398.14 L 503.41 399.22 L 503.53 400.28 L 503.66 401.32 L 503.79 402.35 L 503.92 403.35 L 504.04 404.34 L 504.17 405.31 L 504.30 406.25 L 504.43 407.17 L 504.55 408.06 L 504.68 408.92 L 504.81 409.76 L 504.94 410.57 L 505.06 411.35 L 505.19 412.10 L 505.32 412.82 L 505.45 413.50 L 505.57 414.15 L 505.70 414.76 L 505.83 415.33 L 505.96 415.87 L 506.08 416.36 L 506.21 416.81 L 506.34 417.22 L 506.47 417.58 L 506.59 417.90 L 506.72 418.16 L 506.85 418.38 L 506.98 418.55 L 507.10 418.67 L 507.23 418.74 L 507.36 418.75 L 507.49 418.70 L 507.61 418.60 L 507.74 418.44 L 507.87 418.22 L 508.00 417.94 L 508.12 417.60 L 508.25 417.20 L 508.38 416.73 L 508.51 416.20 L 508.63 415.60 L 508.76 414.94 L 508.89 414.20 L 509.02 413.40 L 509.14 412.54 L 509.27 411.60 L 509.40 410.59 L 509.53 409.51 L 509.65 408.36 L 509.78 407.14 L 509.91 405.85 L 510.04 404.48 L 510.16 403.05 L 510.29 401.55 L 510.42 399.97 L 510.55 398.33 L 510.67 396.61 L 510.80 394.83 L 510.93 392.98 L 511.06 391.07 L 511.18 389.09 L 511.31 387.04 L 511.44 384.94 L 511.57 382.78 L 511.69 380.56 L 511.82 378.28 L 511.95 375.96 L 512.08 373.58 L 512.20 371.16 L 512.33 368.70 L 512.46 366.20 L 512.59 363.66 L 512.71 361.09 L 512.84 358.50 L 512.97 355.89 L 513.10 353.25 L 513.22 350.61 L 513.35 347.96 L 513.48 345.31 L 513.61 342.67 L 513.73 340.04 L 513.86 337.43 L 513.99 334.85 L 514.12 332.30 L 514.24 329.79 L 514.37 327.33 L 514.50 324.93 L 514.63 322.59 L 514.75 320.33 L 514.88 318.15 L 515.01 316.06 L 515.13 314.07 L 515.26 312.18 L 515.39 310.42 L 515.52 308.78 L 515.64 307.28 L 515.77 305.92 L 515.90 304.72 L 516.03 303.69 L 516.15 302.82 L 516.28 302.14 L 516.41 301.64 L 516.54 301.34 L 516.66 301.25 L 516.79 301.37 L 516.92 301.71 L 517.05 302.27 L 517.17 303.07 L 517.30 304.09 L 517.43 305.36 L 517.56 306.87 L 517.68 308.62 L 517.81 310.61 L 517.94 312.85 L 518.07 315.32 L 518.19 318.03 L 518.32 320.98 L 518.45 324.15 L 518.58 327.53 L 518.70 331.12 L 518.83 334.91 L 518.96 338.88 L 519.09 343.01 L 519.21 347.29 L 519.34 351.69 L 519.47 356.20 L 519.60 360.78 L 519.72 365.42 L 519.85 370.08 L 519.98 374.74 L 520.11 379.36 L 520.23 383.90 L 520.36 388.33 L 520.49 392.62 L 520.62 396.72 L 520.74 400.59 L 520.87 404.20 L 521.00 407.50 L 521.13 410.45 L 521.25 413.02 L 521.38 415.15 L 521.51 416.83 L 521.64 418.00 L 521.76 418.64 L 521.89 418.71 L 522.02 418.20 L 522.15 417.08 L 522.27 415.34 L 522.40 412.97 L 522.53 409.98 L 522.66 406.36 L 522.78 402.13 L 522.91 397.33 L 523.04 391.98 L 523.17 386.13 L 523.29 379.85 L 523.42 373.19 L 523.55 366.25 L 523.68 359.10 L 523.80 351.86 L 523.93 344.63 L 524.06 337.53 L 524.19 330.69 L 524.31 324.25 L 524.44 318.34 L 524.57 313.10 L 524.70 308.66 L 524.82 305.16 L 524.95 302.71 L 525.08 301.43 L 525.21 301.40 L 525.33 302.68 L 525.46 305.32 L 525.59 309.33 L 525.72 314.67 L 525.84 321.29 L 525.97 329.06 L 526.10 337.83 L 526.23 347.41 L 526.35 357.54 L 526.48 367.93 L 526.61 378.26 L 526.74 388.18 L 526.86 397.31 L 526.99 405.26 L 527.12 411.67 L 527.25 416.18 L 527.37 418.49 L 527.50 418.37 L 527.63 415.67 L 527.76 410.36 L 527.88 402.52 L 528.01 392.39 L 528.14 380.36 L 528.27 366.97 L 528.39 352.89 L 528.52 338.93 L 528.65 325.96 L 528.78 314.92 L 528.90 306.68 L 529.03 302.04 L 529.16 301.61 L 529.29 305.71 L 529.41 314.34 L 529.54 327.08 L 529.67 343.08 L 529.79 361.07 L 529.92 379.39 L 530.05 396.14 L 530.18 409.35 L 530.30 417.21 L 530.43 418.31 L 530.56 411.97 L 530.69 398.45 L 530.81 379.09 L 530.94 356.34 L 531.07 333.56 L 531.20 314.61 L 531.32 303.21 L 531.45 302.22 L 531.58 312.75 L 531.71 333.62 L 531.83 361.02 L 531.96 388.99 L 532.09 410.38 L 532.22 418.75 L 532.34 410.38 L 532.47 386.23 L 532.60 352.70 L 532.73 320.71 L 532.85 302.53 L 532.98 306.94 L 533.11 334.42 L 533.24 374.62 L 533.36 408.81 L 533.49 417.93 L 533.62 393.92 L 533.75 348.06 L 533.87 308.79 L 534.00 305.41 L 534.13 344.71 L 534.26 398.17 L 534.38 418.08 L 534.51 380.61 L 534.64 319.80 L 534.77 304.79 L 534.89 360.15 L 535.02 416.45 L 535.15 388.01 L 535.28 312.87 L 535.40 321.99 L 535.53 405.64 L 535.66 391.47 L 535.79 304.76 L 535.91 358.96 L 536.04 413.30 L 536.17 309.92 L 536.30 370.81 L 536.42 387.46 L 536.55 311.37 L 536.68 415.94 L 536.81 303.13 L 536.93 412.82 L 537.06 325.47 L 537.19 348.89 L 537.32 417.74 L 537.44 352.42 L 537.57 306.54 L 537.70 301.25 L 537.83 303.14 L 537.95 345.71 L 538.08 417.18 L 538.21 304.31 L 538.34 342.44 L 538.46 330.13 L 538.59 356.30 L 538.72 318.06 L 538.85 396.30 L 538.97 302.98" fill="none" stroke="var(--accent-line)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="393.70" y="443.42" text-anchor="start" font-size="14" fill="var(--ink-2)">x → 0 时来回无穷多次</text>
+<text x="391.13" y="274.81" text-anchor="start" font-size="13.5" fill="var(--ink-3)">|sin(1/x)| ≤ 1</text>
+</svg>
+<!--/FIG ch01_discont-->
+        <figcaption class="figcaption"><b>四种缺口，四种补不上的方式。</b>可去间断补一个定义就连续；跳跃间断两侧各有极限但不相等；无穷间断附近没界；振荡间断连极限都不存在。</figcaption>
+      </div>
+
+      <p>闭区间上的连续函数有四条性质：有界、取到最大值和最小值、介值（零点定理的推广）、一致连续。它们看着都像废话，其实每条都要用到实数系的完备性，条件一条也省不掉。</p>
+
+      <details class="fold">
+        <summary>条件省掉会出什么事</summary>
+        <p>\(f(x)=\frac1x\) 在 \((0,1]\) 上连续但无界，说明闭区间不能换成开区间；\(f(x)=x\) 在 \((0,1)\) 上连续却取不到最大值，同样卡在端点。一致连续也一样，\(\frac1x\) 在 \((0,1]\) 上越靠近 0 越需要更小的 \(\delta\)，整段上找不到统一的那个。</p>
+      </details>
+
+      <p>这四条性质里，有界性和最值定理的严格证明是魏尔斯特拉斯在 1860 年代给出的，此前柯西证过，但漏了一步：他默认了有界数列必有收敛子列，而那正是需要证明的东西。介值定理的雏形出现在波尔查诺 1817 年的论文里，一致连续是海涅和康托尔 1872 年提出来的，专门用来区分每一点都连续和整段上能用同一个 \(\delta\)。</p>
+
+      <h2 id="s-manual" class="reveal">六、怎么算</h2>
+
+      <p>第一章的计算题基本都能归到下面五种办法，按顺序试，一般三步之内能定下方向。</p>
+
+      <ul>
+        <li><strong>直接代入。</strong>初等函数在它的定义区间内都连续，先试这一步，能省掉一半功夫。</li>
+        <li><strong>因式分解与有理化。</strong>\(\frac00\) 型的式子先约公因子，遇到根号差就上下乘共轭，这招最笨也最靠得住。</li>
+        <li><strong>等价无穷小替换。</strong>只用在乘除里，把 \(\sin x\)、\(\ln(1+x)\)、\(1-\cos x\) 换掉之后，题目往往就降成代数题。</li>
+        <li><strong>夹逼准则。</strong>看到有界量乘一个趋于零的量（比如 \(x\sin\frac1x\)），或者看到 \(n\) 项和，就用这一招。</li>
+        <li><strong>单调有界准则。</strong>递推定义的数列 \(a_{n+1}=f(a_n)\) 几乎只能这么办，先证有界，再证单调，最后对递推式两边取极限解出 \(A\)。</li>
+      </ul>
+
+      <p>洛必达法则和泰勒展开属于第三章，这里先不碰，遇到硬骨头再回头看那两件工具。</p>
+
+      <details class="fold">
+        <summary>五个最常见的错法</summary>
+        <ul>
+          <li>在加减里做等价替换。\(\tan x-\sin x\) 换成 \(x-x=0\) 就错了，正确答案在 \(\frac{x^3}{2}\) 那个量级。</li>
+          <li>把商的法则用在分母极限为零的场合，这条法则要求分母极限不为零。</li>
+          <li>把无穷大当数做加减，\(\infty-\infty\) 和 \(\frac{\infty}{\infty}\) 都是未定式，得先变形。</li>
+          <li>求 \(x\to\infty\) 的极限忘了分 \(+\infty\) 和 \(-\infty\)，\(\arctan x\) 和 \(e^x\) 都栽在这里。</li>
+          <li>用洛必达之前不检查是不是未定式，把 \(\frac{2}{0}\) 当成 \(\frac00\) 去求导。</li>
+        </ul>
+      </details>
+
+      <h2 id="s-examples" class="reveal">七、例题</h2>
+
+      <div class="example">
+        <p class="example-head">例 <span>1</span>　求 \(\lim\limits_{x\to 0}\dfrac{\sqrt{1+x}-1}{x}\)。</p>
+        <p class="solution">上下同乘 \(\sqrt{1+x}+1\)，分子变成 \(x\)，约掉后剩 \(\dfrac{1}{\sqrt{1+x}+1}\)，代入 \(x=0\) 得 \(\dfrac12\)。用等价无穷小 \((1+x)^{1/2}-1\sim\frac12x\) 一步也能到，两条路都对，因为这里是乘除结构。</p>
+      </div>
+
+      <div class="example">
+        <p class="example-head">例 <span>2</span>　求 \(\lim\limits_{x\to\infty}\left(1+\dfrac2x\right)^{3x}\)。</p>
+        <p class="solution">令 \(t=\frac{x}{2}\)，则指数 \(3x=6t\)，原式变成 \(\left[\left(1+\frac1t\right)^{t}\right]^{6}\)。\(x\to\infty\) 时 \(t\to\infty\)，括号里趋于 \(e\)，结果为 \(e^6\)。要点是让指数和括号里的倒数配上对，多出来的部分留在外头当乘方。</p>
+      </div>
+
+      <div class="example">
+        <p class="example-head">例 <span>3</span>　求 \(\lim\limits_{x\to 0}\dfrac{\tan x-\sin x}{x^{3}}\)，并说明为什么不能把两项都换成 \(x\)。</p>
+        <p class="solution">先通分，\(\tan x-\sin x=\sin x\left(\frac{1}{\cos x}-1\right)=\sin x\cdot\frac{1-\cos x}{\cos x}\)。现在是纯乘除，逐项换：\(\sin x\sim x\)，\(1-\cos x\sim\frac{x^2}{2}\)，\(\cos x\to1\)，原式趋于 \(\frac{x\cdot x^2/2}{x^3}=\frac12\)。一上来就把两项都换成 \(x\) 会相减得零，被扔掉的正是决定结果的三阶项。</p>
+      </div>
+
+      <h2 id="s-exercises" class="reveal">八、习题</h2>
+
+      <div class="exercises">
+
+        <div class="ex-group">
+          <p class="ex-group-head">A 档 <span>巩固定义与基本计算，每题五分钟内</span></p>
+
+          <p class="ex"><span class="ex-num">1.</span> 求 \(\lim\limits_{x\to 2}\dfrac{x^{2}-4}{x-2}\)。</p>
+          <div class="answer"><details><summary>看答案</summary><p>分子分解成 \((x-2)(x+2)\)，约去 \(x-2\) 后得 \(x+2\)，代入得 4。</p></details></div>
+
+          <p class="ex"><span class="ex-num">2.</span> 求 \(\lim\limits_{x\to 0}\dfrac{\sin 3x}{x}\)。</p>
+          <div class="answer"><details><summary>看答案</summary><p>写成 \(3\cdot\dfrac{\sin 3x}{3x}\)，括号里趋于 1，结果为 3。</p></details></div>
+
+          <p class="ex"><span class="ex-num">3.</span> 求 \(\lim\limits_{x\to\infty}\dfrac{3x^{2}-x+1}{2x^{2}+5}\)。</p>
+          <div class="answer"><details><summary>看答案</summary><p>上下同除 \(x^2\)，得 \(\dfrac{3-\frac1x+\frac1{x^2}}{2+\frac5{x^2}}\)，趋于 \(\dfrac32\)。</p></details></div>
+
+          <p class="ex"><span class="ex-num">4.</span> 求 \(\lim\limits_{x\to 0}\dfrac{1-\cos 2x}{x^{2}}\)。</p>
+          <div class="answer"><details><summary>看答案</summary><p>用 \(1-\cos 2x=2\sin^2x\)，原式为 \(2\left(\frac{\sin x}{x}\right)^2\)，趋于 2，用 \(1-\cos 2x\sim\frac{(2x)^2}{2}\) 也一样。</p></details></div>
+
+          <p class="ex"><span class="ex-num">5.</span> 指出 \(f(x)=\dfrac{x^{2}-1}{x-1}\) 在 \(x=1\) 处的间断类型，并说明怎么补定义能让它连续</p>
+          <div class="answer"><details><summary>看答案</summary><p>\(x\ne1\) 时 \(f(x)=x+1\)，极限是 2，而 \(f(1)\) 没有定义，属可去间断点。补上 \(f(1)=2\) 就连续了。</p></details></div>
+
+          <p class="ex"><span class="ex-num">6.</span> 求 \(\lim\limits_{n\to\infty}\left(1-\dfrac1n\right)^{n}\)。</p>
+          <div class="answer"><details><summary>看答案</summary><p>写成 \(\left[\left(1+\frac{1}{-n}\right)^{-n}\right]^{-1}\)，方括号里趋于 \(e\)，结果为 \(\dfrac1e\)。</p></details></div>
+        </div>
+
+        <div class="ex-group">
+          <p class="ex-group-head">B 档 <span>综合题，接近期末考试与考研难度</span></p>
+
+          <p class="ex"><span class="ex-num">1.</span> 求 \(\lim\limits_{x\to 0}\dfrac{\sqrt{1+x\sin x}-1}{1-\cos x}\)。</p>
+          <div class="answer"><details><summary>看答案</summary><p>分子用 \(\sqrt{1+u}-1\sim\frac u2\)，而 \(u=x\sin x\sim x^2\)，故分子等价于 \(\frac{x^2}{2}\)，分母也等价于 \(\frac{x^2}{2}\)，原式趋于 1。</p></details></div>
+
+          <p class="ex"><span class="ex-num">2.</span> 设 \(\lim\limits_{x\to 0}\dfrac{f(x)}{x}=2\)，求 \(\lim\limits_{x\to 0}\dfrac{f(3x)}{x}\)。</p>
+          <div class="answer"><details><summary>看答案</summary><p>写成 \(3\cdot\dfrac{f(3x)}{3x}\)。\(x\to0\) 时 \(3x\to0\)，后一个因子趋于 2，结果为 6。</p></details></div>
+
+          <p class="ex"><span class="ex-num">3.</span> 求 \(\lim\limits_{x\to+\infty}x\left[\ln(x+1)-\ln x\right]\)。</p>
+          <div class="answer"><details><summary>看答案</summary><p>原式等于 \(\ln\left(1+\frac1x\right)^{x}\)，括号里趋于 \(e\)，取对数得 1。用 \(\ln(1+t)\sim t\) 一步也能到。</p></details></div>
+
+          <p class="ex"><span class="ex-num">4.</span> 设 \(f(x)=x\sin\dfrac1x\ (x\ne0)\)，\(f(0)=0\)，讨论它在 \(x=0\) 处是否连续；若换成 \(g(x)=\sin\dfrac1x\ (x\ne0)\)，\(g(0)=0\) 呢。</p>
+          <div class="answer"><details><summary>看答案</summary><p>对 \(f\)，\(|x\sin\frac1x|\le|x|\to0\)，极限等于函数值 0，所以连续；对 \(g\)，取 \(x_n=\frac{2}{(2n+1)\pi}\)，函数值在 \(\pm1\) 之间来回，没有极限，属振荡间断。区别只在那一个趋于零的因子。</p></details></div>
+        </div>
+
+        <div class="ex-group">
+          <p class="ex-group-head">C 档 <span>拓展与历史原题</span></p>
+
+          <p class="ex"><span class="ex-num">1.</span>（伯努利，1683）证明数列 \(a_n=\left(1+\dfrac1n\right)^{n}\) 单调递增且有上界 3，从而收敛。</p>
+          <div class="answer"><details><summary>看答案</summary><p>拿 \(n+1\) 个数，其中 \(n\) 个取 \(1+\frac1n\)，最后一个取 1，由均值不等式几何平均小于算术平均，得 \(a_n^{\frac{1}{n+1}}&lt;1+\frac{1}{n+1}\)，两边取 \(n+1\) 次方即得单调。有界性用二项式展开估出 \(a_n&lt;1+1+\frac12+\cdots+\frac1{2^{n-1}}&lt;3\)，极限就是 \(e\)。</p></details></div>
+
+          <p class="ex"><span class="ex-num">2.</span>（柯西第一极限定理，1821）设 \(\lim\limits_{n\to\infty}a_n=A\)，证明 \(\lim\limits_{n\to\infty}\dfrac{a_1+a_2+\cdots+a_n}{n}=A\)。</p>
+          <div class="answer"><details><summary>看答案</summary><p>给定 \(\varepsilon\)，先取 \(N_1\) 让后面的项离 \(A\) 都小于 \(\frac\varepsilon2\)，这时前 \(N_1\) 项的和是固定数，再取足够大的 \(n\) 让这固定部分对平均值的贡献也小于 \(\frac\varepsilon2\)。合起来偏差小于 \(\varepsilon\)，关键就是开头那有限多项会被平均掉。</p></details></div>
+
+          <p class="ex"><span class="ex-num">3.</span> 用定义证明狄利克雷函数 \(D(x)\)（有理点取 1，无理点取 0）处处不连续，并说明它为什么有界。</p>
+          <div class="answer"><details><summary>看答案</summary><p>取 \(\varepsilon=\frac12\)。任何邻域里都有有理点和无理点，函数值有 1 也有 0，不可能全挤进宽为 1 的带子，连续性被否掉。有界是显然的，因为函数值只在 0 和 1 之间。</p></details></div>
+        </div>
+
+        <div class="ex-group">
+          <p class="ex-group-head">思考题 <span>不设标准答案，只给提示</span></p>
+
+          <p class="ex"><span class="ex-num">1.</span> 定义里为什么写 \(0&lt;|x-x_0|&lt;\delta\)，把 \(x=x_0\) 排除在外？如果允许 \(x=x_0\) 会失去什么。</p>
+          <div class="answer"><details><summary>看提示</summary><p>想想 \(\frac{x^2-1}{x-1}\) 在 \(x=1\) 的情形，函数在那儿根本没定义，极限却好端端存在。极限问的是靠近时怎么样，不是那一点是什么。硬要包含 \(x=x_0\)，可去间断的极限就没了，第二章的导数定义也会跟着塌。</p></details></div>
+
+          <p class="ex"><span class="ex-num">2.</span> 牛顿说最终比发生在量正在消失的瞬间，柯西说极限是一个变量无限趋近的定值。这两句话的差别只是措辞吗。</p>
+          <div class="answer"><details><summary>看提示</summary><p>牛顿的话里有一个正在消失的对象，它得先存在才能消失；柯西的话里只有一个变量和一个定值，那个中间状态根本不需要存在。这个差别决定了一句话能不能被核对，前者看你信不信那种想象，后者可以逐条用不等式验。</p></details></div>
+
+          <p class="ex"><span class="ex-num">3.</span> 如果极限定义里只要求离得够近，不要求任意近，微积分会失去哪些结论。</p>
+          <div class="answer"><details><summary>看提示</summary><p>从夹逼准则下手试，两边都只保证够近，就挤不出唯一的结果。再想想单调有界准则，上界如果不是任意的，就推不出确界那个数。任意性是取极限的唯一凭据。</p></details></div>
+        </div>
+
+      </div>
+
+      <h2 class="reveal">延伸阅读</h2>
+      <ul class="refs">
+        <li>同济大学数学系《高等数学》第七版上册，第一章。定理次序与记号以这本为准。</li>
+        <li>波耶《微积分概念史》，古希腊与 17 世纪两章，芝诺和贝克莱的原始语境在这里最完整。</li>
+        <li>Judith V. Grabiner, <em>The Origins of Cauchy's Rigorous Calculus</em>, MIT Press, 1981。柯西怎么把几何直觉换成不等式，讲得最细。</li>
+        <li>菲赫金哥尔茨《微积分学教程》第一卷前两章，例题比教材密，适合配合本章练手。</li>
+      </ul>
+
+    </article>
+  </div>
+
+  <div class="wrap">
+    <nav class="pager" aria-label="翻页">
+      <a class="pager-link prev" href="ch00.html"><span class="pager-dir">上一章</span><span class="pager-title">序章：穷竭法</span></a>
+      <a class="pager-link next" href="ch02.html"><span class="pager-dir">下一章</span><span class="pager-title">导数与微分</span></a>
+    </nav>
+  </div>
+
+</main>
+
+<footer class="footer field-dark">
+  <div class="wrap">
+    <p class="footer-mark">微积分</p>
+    <div class="footer-cols">
+      <div><p>一部由问题写成的历史。以数学家最初遇到的难题为线索，重讲同济《高等数学》第七版的章节范围。</p></div>
+      <div><p><a href="index.html#map">章节地图</a></p><p><a href="ch00.html">从序章开始</a></p></div>
+      <div><p>图示用脚本按真实函数值画出，公式由 KaTeX 排版。</p></div>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/katex/katex.min.js"></script>
+<script src="../assets/katex/auto-render.min.js"></script>
+<script src="../assets/site.js"></script>
+</body>
+</html>

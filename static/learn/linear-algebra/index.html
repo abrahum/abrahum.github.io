@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>线性代数 · 数学基础课</title>
+<meta name="description" content="从《九章算术》里的一道三元方程组，讲到 1888 年的向量空间公理。八章走完同济《线性代数》的全部范围：行列式、矩阵、方程组、线性相关性、特">
+<link rel="stylesheet" href="../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="nav-brand" href="../index.html">数学基础课<span> 三门课，一套读法</span></a>
+        <nav class="nav-links" aria-label="主导航">
+      <a href="#map">章节地图</a>
+      <a class="xl" href="../calculus/index.html">微积分</a>
+      <a class="xl" href="../probability/index.html">概率论</a>
+      <a class="xl" href="../complex/index.html">复变函数</a>
+    </nav>
+  </div>
+  <div class="nav-progress" aria-hidden="true"></div>
+</header>
+
+<main>
+
+  <section class="hero">
+    <div class="wrap">
+      <p class="hero-line reveal">按历史顺序讲，以知识点为骨架</p>
+      <h1 class="reveal reveal-2">线性代数</h1>
+      <p class="hero-sub reveal reveal-3">从《九章算术》里的一道三元方程组，讲到 1888 年的向量空间公理。八章走完同济《线性代数》的全部范围：行列式、矩阵、方程组、线性相关性、特征值与二次型。</p>
+      <div class="ch-meta reveal reveal-3" style="max-width:54rem">
+        <div><strong>章数</strong>8 章</div><div><strong>年代</strong>公元前 1 世纪至 1888 年</div><div><strong>对应教材</strong>同济《线性代数》第六版</div><div><strong>前置</strong>高中代数，会解二元一次方程组</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section field-tone">
+    <div class="wrap">
+      <h2 class="section-head reveal">这门课怎么读</h2>
+      <div class="method-body reveal reveal-2" style="max-width:44rem">
+        <p>这门课的历史顺序和课本顺序并不一致。行列式 1693 年就有了名字，矩阵要等到 1858 年才被凯莱当成一个东西来运算，而「向量空间」这个说法 1888 年才由皮亚诺公理化。课本先讲行列式、后讲矩阵，正好顺着历史。</p><p>特征值是个例外：欧拉 1743 年就在算刚体的主轴，比矩阵早一百多年。它在课本里排到后面，因为要先有矩阵才好写下 \(Ax=\lambda x\) 这句话。所以这本书跟课本走，年份放在每章开头当注，不强行按时间排。</p><p>每章的主干是知识点：定义、判别、算法。历史只出现在两个地方，章首那一句和每章一个的档案块。你要复习的时候，跳过档案块不影响读下去。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="map">
+    <div class="wrap">
+      <h2 class="section-head reveal">章节目录</h2>
+      <p class="section-intro reveal reveal-2">每一行写清这一章讲什么、历史上谁先碰上它。顺序跟课本一致。</p>
+      <ul class="chapter-map reveal reveal-3">
+        <li><a class="chapter-row" href="ch01.html">
+          <span class="row-num">第一章</span>
+          <span class="row-title">从《九章》的「方程」到消元法</span>
+          <span class="row-question">一遍遍做同解变形，把方程组化成阶梯形</span>
+          <span class="row-who">《九章算术》、高斯</span>
+        </a></li>
+        <li><a class="chapter-row" href="ch02.html">
+          <span class="row-num">第二章</span>
+          <span class="row-title">行列式：一个数决定解的存在</span>
+          <span class="row-question">用行列式判断唯一解，写出克拉默法则</span>
+          <span class="row-who">莱布尼茨、克拉默、范德蒙</span>
+        </a></li>
+        <li><a class="chapter-row" href="ch03.html">
+          <span class="row-num">第三章</span>
+          <span class="row-title">矩阵：把线性运算当成对象</span>
+          <span class="row-question">矩阵的乘法、逆、初等变换与分块</span>
+          <span class="row-who">凯莱、西尔维斯特</span>
+        </a></li>
+        <li><a class="chapter-row" href="ch04.html">
+          <span class="row-num">第四章</span>
+          <span class="row-title">秩与解的结构</span>
+          <span class="row-question">用秩说清唯一解、无穷多解、无解</span>
+          <span class="row-who">弗罗贝尼乌斯、克罗内克</span>
+        </a></li>
+        <li><a class="chapter-row" href="ch05.html">
+          <span class="row-num">第五章</span>
+          <span class="row-title">向量空间：把几何抽象出来</span>
+          <span class="row-question">线性相关、基与维数、内积与正交化</span>
+          <span class="row-who">皮亚诺、格拉姆、施密特</span>
+        </a></li>
+        <li><a class="chapter-row" href="ch06.html">
+          <span class="row-num">第六章</span>
+          <span class="row-title">特征值与特征向量</span>
+          <span class="row-question">方向不变的向量，特征多项式</span>
+          <span class="row-who">欧拉、拉格朗日、柯西</span>
+        </a></li>
+        <li><a class="chapter-row" href="ch07.html">
+          <span class="row-num">第七章</span>
+          <span class="row-title">相似与对角化</span>
+          <span class="row-question">换基、相似不变量、约当标准型</span>
+          <span class="row-who">凯莱、哈密顿、若尔当</span>
+        </a></li>
+        <li><a class="chapter-row" href="ch08.html">
+          <span class="row-num">第八章</span>
+          <span class="row-title">二次型与正定</span>
+          <span class="row-question">配方法、惯性律、正定的判别</span>
+          <span class="row-who">西尔维斯特、雅可比</span>
+        </a></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section-tight section field-tone">
+    <div class="wrap footer-cols">
+      <p><a href="../calculus/ch09.html">与微积分的接口：二次型与 Hessian 判别</a></p><p><a href="../probability/ch07.html">与概率论的接口：协方差矩阵与相关</a></p><p><a href="../index.html">回到主页看三门课</a></p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer field-dark">
+  <div class="wrap">
+    <p class="footer-mark">数学基础课</p>
+    <div class="footer-cols">
+      <div><p>线性代数。四门课用的是同一套版式与同一套练习体例。</p></div>
+      <div><p><a href="../index.html">返回主页</a></p><p><a href="index.html#map">章节目录</a></p></div>
+      <div><p>图示用脚本按真实数值画，公式由 KaTeX 排版。</p></div>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/katex/katex.min.js"></script>
+<script src="../assets/katex/auto-render.min.js"></script>
+<script src="../assets/site.js"></script>
+</body>
+</html>

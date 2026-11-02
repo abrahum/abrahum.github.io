@@ -1,0 +1,33 @@
+<svg viewBox="0 0 720 440" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<text x="58.00" y="66.00" text-anchor="start" font-size="15.5" fill="var(--ink)">|z| &lt; 1</text>
+<circle cx="196.00" cy="232.00" r="57.00" fill="var(--fig-fill)" stroke="none" stroke-width="0"/>
+<line x1="44.00" y1="232.00" x2="348.00" y2="232.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.45"/>
+<line x1="196.00" y1="82.00" x2="196.00" y2="382.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.45"/>
+<circle cx="196.00" cy="232.00" r="60.00" fill="none" stroke="var(--accent-line)" stroke-width="2.0"/>
+<circle cx="196.00" cy="232.00" r="120.00" fill="none" stroke="var(--ink-3)" stroke-width="1.6" stroke-dasharray="7 6"/>
+<circle cx="256.00" cy="232.00" r="5.40" fill="var(--paper)" stroke="var(--ink-2)" stroke-width="1.8"/>
+<text x="258.00" y="218.00" text-anchor="middle" font-size="12.5" fill="var(--ink-2)">极点 1</text>
+<circle cx="316.00" cy="232.00" r="5.40" fill="var(--paper)" stroke="var(--ink-2)" stroke-width="1.8"/>
+<text x="312.00" y="256.00" text-anchor="middle" font-size="12.5" fill="var(--ink-2)">极点 2</text>
+<text x="188.00" y="220.00" text-anchor="end" font-size="13" fill="var(--ink-3)">0</text>
+<line x1="212.00" y1="278.00" x2="308.00" y2="278.00" stroke="var(--prussian)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M 297.78 282.08 L 308.00 278.00 L 297.78 273.92" fill="var(--prussian)" stroke="var(--prussian)" stroke-width="1" stroke-linejoin="round"/>
+<text x="260.00" y="264.00" text-anchor="middle" font-size="12" fill="var(--prussian)">z 的幂</text>
+<text x="66.00" y="384.00" text-anchor="start" font-size="13.5" fill="var(--ink)">f = 1/2 + 3z/4 + 7z²/8 + ⋯</text>
+<text x="66.00" y="408.00" text-anchor="start" font-size="13" fill="var(--ink-2)">只有正的幂：这一块是泰勒级数</text>
+<text x="386.00" y="66.00" text-anchor="start" font-size="15.5" fill="var(--ink)">1 &lt; |z| &lt; 2</text>
+<circle cx="524.00" cy="232.00" r="90.00" fill="none" stroke="var(--fig-fill)" stroke-width="60.0"/>
+<line x1="372.00" y1="232.00" x2="676.00" y2="232.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.45"/>
+<line x1="524.00" y1="82.00" x2="524.00" y2="382.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.45"/>
+<circle cx="524.00" cy="232.00" r="60.00" fill="none" stroke="var(--accent-line)" stroke-width="2.0"/>
+<circle cx="524.00" cy="232.00" r="120.00" fill="none" stroke="var(--ink-3)" stroke-width="1.6" stroke-dasharray="7 6"/>
+<circle cx="584.00" cy="232.00" r="5.40" fill="var(--paper)" stroke="var(--ink-2)" stroke-width="1.8"/>
+<text x="586.00" y="218.00" text-anchor="middle" font-size="12.5" fill="var(--ink-2)">极点 1</text>
+<circle cx="644.00" cy="232.00" r="5.40" fill="var(--paper)" stroke="var(--ink-2)" stroke-width="1.8"/>
+<text x="640.00" y="256.00" text-anchor="middle" font-size="12.5" fill="var(--ink-2)">极点 2</text>
+<text x="516.00" y="220.00" text-anchor="end" font-size="13" fill="var(--ink-3)">0</text>
+<line x1="412.00" y1="278.00" x2="462.00" y2="278.00" stroke="var(--prussian)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M 451.78 282.08 L 462.00 278.00 L 451.78 273.92" fill="var(--prussian)" stroke="var(--prussian)" stroke-width="1" stroke-linejoin="round"/>
+<text x="436.00" y="264.00" text-anchor="middle" font-size="12" fill="var(--prussian)">1/z 的幂</text>
+<text x="394.00" y="384.00" text-anchor="start" font-size="13.5" fill="var(--ink)">f = ⋯ − 1/z² − 1/z − 1/2 − z/4 − ⋯</text>
+<text x="394.00" y="408.00" text-anchor="start" font-size="13" fill="var(--ink-2)">负的幂也进来了：这一块是洛朗级数</text>
+<text x="60.00" y="52.00" text-anchor="start" font-size="14" fill="var(--ink-3)">同一个函数，环域换一个，展开就换一套。</text>
+</svg>

@@ -1,0 +1,32 @@
+<svg viewBox="0 0 720 450" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<g><polygon points="86.30,322.55 262.68,322.55 262.68,210.42" fill="var(--fig-fill)" stroke="var(--accent-line)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 247.24 322.55 L 247.24 306.85 L 262.68 306.85" fill="none" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 114.96 322.55 L 114.96 322.00 L 114.94 321.46 L 114.92 320.92 L 114.88 320.38 L 114.84 319.84 L 114.78 319.30 L 114.72 318.76 L 114.64 318.22 L 114.56 317.68 L 114.47 317.15 L 114.36 316.62 L 114.25 316.09 L 114.13 315.56 L 113.99 315.03 L 113.85 314.51 L 113.70 313.99 L 113.54 313.47 L 113.37 312.96 L 113.19 312.45 L 113.00 311.94 L 112.80 311.43 L 112.59 310.94 L 112.37 310.44 L 112.15 309.95 L 111.91 309.46 L 111.67 308.98 L 111.41 308.50 L 111.15 308.03 L 110.88 307.56 L 110.60 307.10" fill="none" stroke="var(--ink-2)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="125.98" y="300.12" text-anchor="middle" font-size="15" fill="var(--ink-2)" font-style="italic">θ</text>
+<text x="174.49" y="348.55" text-anchor="middle" font-size="15" fill="var(--ink)" font-style="italic">a</text>
+<text x="274.68" y="272.48" text-anchor="start" font-size="15" fill="var(--ink)" font-style="italic">x</text>
+<text x="141.42" y="253.03" text-anchor="middle" font-size="14" fill="var(--ink-2)">√(x²+a²)</text>
+<text x="82.30" y="344.55" text-anchor="end" font-size="13.5" fill="var(--ink-3)">A</text>
+<text x="264.68" y="346.55" text-anchor="middle" font-size="13.5" fill="var(--ink-3)">B</text>
+<text x="274.68" y="202.42" text-anchor="start" font-size="13.5" fill="var(--ink-3)">C</text>
+<text x="180.00" y="30.00" text-anchor="middle" font-size="15" fill="var(--ink)" font-weight="600">把 x 看成对边，根式就是斜边</text></g>
+<g transform="translate(360,0)"><text x="22.00" y="90.00" text-anchor="start" font-size="13.5" fill="var(--ink-3)">代换</text>
+<text x="78.00" y="90.00" text-anchor="start" font-size="14.5" fill="var(--ink-2)">x = a tan θ</text>
+<text x="22.00" y="123.00" text-anchor="start" font-size="13.5" fill="var(--ink-3)">根式</text>
+<text x="78.00" y="123.00" text-anchor="start" font-size="14.5" fill="var(--ink-2)">√(x²+a²) = a sec θ</text>
+<text x="22.00" y="156.00" text-anchor="start" font-size="13.5" fill="var(--ink-3)">微分</text>
+<text x="78.00" y="156.00" text-anchor="start" font-size="14.5" fill="var(--ink-2)">dx = a sec²θ dθ</text>
+<text x="22.00" y="189.00" text-anchor="start" font-size="13.5" fill="var(--ink-3)">回代</text>
+<text x="78.00" y="189.00" text-anchor="start" font-size="14.5" fill="var(--ink-2)">θ = arctan(x/a)</text>
+<text x="22.00" y="222.00" text-anchor="start" font-size="13.5" fill="var(--ink-3)">对边</text>
+<text x="78.00" y="222.00" text-anchor="start" font-size="14.5" fill="var(--ink-2)">x = 1.0</text>
+<text x="22.00" y="255.00" text-anchor="start" font-size="13.5" fill="var(--ink-3)">邻边</text>
+<text x="78.00" y="255.00" text-anchor="start" font-size="14.5" fill="var(--ink-2)">a = 1.6</text>
+<text x="22.00" y="288.00" text-anchor="start" font-size="13.5" fill="var(--ink-3)">斜边</text>
+<text x="78.00" y="288.00" text-anchor="start" font-size="14.5" fill="var(--ink-2)">√(x²+a²) = 1.887</text>
+<text x="22.00" y="321.00" text-anchor="start" font-size="13.5" fill="var(--ink-3)">sin θ</text>
+<text x="78.00" y="321.00" text-anchor="start" font-size="14.5" fill="var(--ink-2)">x / √(x²+a²) = 0.530</text>
+<text x="22.00" y="354.00" text-anchor="start" font-size="13.5" fill="var(--ink-3)">cos θ</text>
+<text x="78.00" y="354.00" text-anchor="start" font-size="14.5" fill="var(--ink-2)">a / √(x²+a²) = 0.848</text></g>
+<line x1="360.00" y1="56.00" x2="360.00" y2="390.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4 8" opacity="0.6"/>
+</svg>

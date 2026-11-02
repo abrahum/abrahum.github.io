@@ -57,6 +57,11 @@
         </header>
         <main id="main" tabindex="-1">
             {% block content %}
+                {% if section and section.content %}
+                    <div class="home-section-content">
+                        {{ section.content | safe }}
+                    </div>
+                {% endif %}
                 {% if paginator.pages %}
                     {% for page in paginator.pages %}
                         {{ page_macros::page_listing(page=page) }}

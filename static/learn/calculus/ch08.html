@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>第八章 向量代数与空间解析几何 · 微积分：一部由问题写成的历史</title>
+<meta name="description" content="从笛卡尔 1637 年的坐标到吉布斯 1901 年的向量分析，讲清数量积、向量积、混合积、平面与直线、二次曲面与截痕法。">
+<link rel="stylesheet" href="../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="nav-brand" href="../index.html">微积分<span> 一部由问题写成的历史</span></a>
+    <nav class="nav-links" aria-label="主导航">
+      <a href="index.html#map">本课目录</a>
+      <a class="xl" href="../linear-algebra/index.html">线性代数</a>
+      <a class="xl" href="../probability/index.html">概率论</a>
+      <a class="xl" href="../complex/index.html">复变函数</a>
+      <a class="opt" href="ch09.html">下一章</a>
+    </nav>
+  </div>
+  <div class="nav-progress" aria-hidden="true"></div>
+</header>
+
+<main>
+
+  <!-- ===== 章首 ===== -->
+  <section class="chapter">
+    <div class="wrap">
+      <div class="ch-hero-band">
+        <div>
+          <p class="ch-label reveal"><span>第八章</span><span class="ch-era">1637 年至 1901 年</span></p>
+          <h1 class="ch-title reveal reveal-2">向量代数与空间解析几何</h1>
+          <p class="ch-deck reveal reveal-3">纸是平的，空间不是。要把三维的直线、平面与曲面写下来而不靠作图，先得让「方向」也成为一种可以相加、相乘的东西。这一步花了两个半世纪，中间还吵过一场二十年的架。</p>
+          <div class="ch-meta reveal reveal-3">
+            <div><strong>入口人物</strong>笛卡尔、蒙日、哈密顿、吉布斯</div>
+            <div><strong>核心问题</strong>三维的图形能不能全部用方程与向量表示，而不依赖作图</div>
+            <div><strong>对应教材</strong>§8.1 至 §8.6（下册第八章）</div>
+            <div><strong>前置</strong>平面解析几何、三角函数、二阶与三阶行列式</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 正文 ===== -->
+  <div class="wrap ch-body">
+    <aside class="rail">
+      <p class="rail-title">本章提纲</p>
+      <ol>
+        <li><a href="#s-origin">源头：一对数与两张图</a></li>
+        <li><a href="#s-form">成形：三种乘法</a></li>
+        <li><a href="#s-extra">图形：面、线、曲面</a></li>
+        <li><a href="#s-strict">严格化：乘法之争</a></li>
+        <li><a href="#s-manual">方法手册</a></li>
+        <li><a href="#s-examples">例题</a></li>
+        <li><a href="#s-exercises">习题</a></li>
+      </ol>
+      <p class="rail-title">本章人物</p>
+      <p class="rail-who">笛卡尔 1596 至 1650<br>费马 1601 至 1665<br>蒙日 1746 至 1818<br>哈密顿 1805 至 1865<br>吉布斯 1839 至 1903<br>海维赛德 1850 至 1925</p>
+    </aside>
+
+    <article class="prose">
+
+      <p class="lead reveal">1637 年，莱顿的书店里出现一本薄书，笛卡尔在《几何学》里把平面上的点写成一对数，曲线就变成方程；1795 年蒙日在巴黎把立体压到两张纸上。可要往下算，还需要一种能相加相乘的方向，这件东西拖到 19 世纪末才被吵清楚。</p>
+
+      <h2 id="s-origin" class="reveal">一、源头：笛卡尔的一对数，蒙日的两张图</h2>
+
+      <p>笛卡尔 1637 年的《几何学》是三篇附录中的最后一篇，书里的坐标也不是今天这两条垂直的轴：他只画一条基线，在上面量一个长度，再斜着量另一个。几乎同时，费马在图卢兹把轨迹翻译成含两个未知数的方程，1636 年前后成稿，1679 年才收进《杂著》出版。</p>
+
+      <p>从两个数到三个数，看着只多一个字母，实际卡了很久，因为纸只有两个方向，第三个坐标没有地方放。</p>
+
+      <p>把这件事办成的是蒙日：1771 年他讲空间曲线曲率的论文在巴黎科学院宣读，「双曲率曲线」不落在任何平面上，1795 年他在新办的巴黎高等师范开讲画法几何，讲稿 1799 年成书。画法几何把空间的点垂直投到两张互相垂直的平面上，再把其中一张摊平，两个投影合起来就把点定死了。</p>
+
+      <p>蒙日 1802 年的《分析在几何中的应用》已经在把曲面当方程处理，切平面、法线、直纹面全写成了分析式，他缺的只是一套能加减乘除的向量。</p>
+
+      <h2 id="s-form" class="reveal">二、成形：把角、面积、体积翻译成数</h2>
+
+      <h3>从坐标到向量</h3>
+
+      <p>空间直角坐标系由三条互相垂直的数轴组成，交点是原点，三个坐标面把空间分成八个卦限，设两点 \(M_1(x_1,y_1,z_1)\)、\(M_2(x_2,y_2,z_2)\)，勾股定理用两次就得到距离</p>
+
+      \[ |M_1M_2|=\sqrt{(x_2-x_1)^2+(y_2-y_1)^2+(z_2-z_1)^2}. \]
+
+      <p>向量是既有大小又有方向的量，大小叫模 \(|\vec a|\)，不关心起点的叫自由向量、可以平移，加法用三角形法则，数乘只改长度、乘负数就反向，两条运算都在坐标下逐分量进行。三个方向余弦满足 \(\cos^2\alpha+\cos^2\beta+\cos^2\gamma=1\)，这只是单位向量长度为 1 的写法。</p>
+
+      <h3>数量积：把角变成数</h3>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定义（数量积，又称点积、内积）</p>
+        <p>设 \(\vec a\)、\(\vec b\) 是两向量，夹角为 \(\theta\in[0,\pi]\)，称数</p>
+        <p>\[ \vec a\cdot\vec b=|\vec a||\vec b|\cos\theta \]</p>
+        <p>为 \(\vec a\) 与 \(\vec b\) 的数量积。设 \(\vec a=(a_x,a_y,a_z)\)，\(\vec b=(b_x,b_y,b_z)\)，则</p>
+        <p>\[ \vec a\cdot\vec b=a_xb_x+a_yb_y+a_zb_z,\qquad \cos\theta=\frac{a_xb_x+a_yb_y+a_zb_z}{|\vec a||\vec b|}. \]</p>
+      </div>
+
+      <p>数量积最实在的用处是投影：向量 \(\vec b\) 在 \(\vec a\) 上的投影 \(\mathrm{Prj}_{\vec a}\vec b=|\vec b|\cos\theta\)，于是 \(\vec a\cdot\vec b\) 就是 \(|\vec a|\) 乘这个投影，点到平面、点到直线的距离公式都从这里来。要夹角就把坐标代进余弦那一式，点积为零则两向量垂直。</p>
+
+      <h3>向量积：把面积变成向量</h3>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定义（向量积，又称叉积、外积）</p>
+        <p>设 \(\vec a\)、\(\vec b\) 不平行，规定 \(\vec a\times\vec b\) 是一个向量：模为 \(|\vec a||\vec b|\sin\theta\)，方向垂直于 \(\vec a\) 与 \(\vec b\) 所定的平面，且 \(\vec a,\vec b,\vec a\times\vec b\) 依次构成右手系。坐标式为</p>
+        <p>\[ \vec a\times\vec b=\begin{vmatrix}\boldsymbol i&amp;\boldsymbol j&amp;\boldsymbol k\\ a_x&amp;a_y&amp;a_z\\ b_x&amp;b_y&amp;b_z\end{vmatrix}. \]</p>
+      </div>
+
+      <p>模的几何意义是面积：把 \(\vec b\) 分解成沿 \(\vec a\) 与垂直于 \(\vec a\) 的两部分，后者的长是 \(|\vec b|\sin\theta\)，正好是以 \(|\vec a|\) 为底时的高，所以 \(|\vec a\times\vec b|\) 就是底乘高，三角形的面积取它的一半。交换次序箭头掉头，反交换律考试里最容易漏。</p>
+
+      <div class="figure">
+        <!--FIG ch08_cross--><svg viewBox="0 0 720 420" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<text x="24.00" y="32.00" text-anchor="start" font-size="15.5" fill="var(--ink)" font-weight="600">向量积的模是平行四边形的面积</text>
+<text x="24.00" y="62.00" text-anchor="start" font-size="13" fill="var(--ink-2)">|a| = 2.19，|b| = 2.98</text>
+<text x="24.00" y="84.00" text-anchor="start" font-size="13" fill="var(--ink-2)">θ = 60.5°，底乘高 = 5.67</text>
+<text x="24.00" y="106.00" text-anchor="start" font-size="13" fill="var(--ink-2)">a, b, a × b 依次成右手系</text>
+<polygon points="28.00,324.19 186.04,369.35 324.00,259.81 165.96,214.65" fill="var(--fig-fill)" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 67.73 335.54 L 67.99 334.23 L 68.17 332.89 L 68.28 331.54 L 68.30 330.17 L 68.25 328.80 L 68.12 327.41 L 67.91 326.02 L 67.63 324.62 L 67.27 323.22 L 66.83 321.83 L 66.32 320.44 L 65.74 319.05 L 65.08 317.68 L 64.35 316.32 L 63.55 314.97 L 62.68 313.64 L 61.74 312.34 L 60.74 311.05 L 59.67 309.79 L 58.55 308.56 L 57.36 307.36 L 56.12 306.19 L 54.82 305.06 L 53.47 303.96" fill="none" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="73.14" y="322.09" text-anchor="end" font-size="14" fill="var(--ink-2)" font-style="italic">θ</text>
+<line x1="165.96" y1="214.65" x2="134.03" y2="354.49" stroke="var(--ink-2)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 6"/>
+<circle cx="165.96" cy="214.65" r="3.4" fill="var(--ink-2)"/>
+<circle cx="134.03" cy="354.49" r="3.0" fill="var(--ink-2)"/>
+<text x="128.03" y="376.49" text-anchor="middle" font-size="12.5" fill="var(--ink-2)">|b| sin θ = 2.59</text>
+<line x1="28.00" y1="324.19" x2="186.04" y2="369.35" stroke="var(--accent-line)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 176.14 370.77 L 186.04 369.35 L 178.38 362.92" fill="none" stroke="var(--accent-line)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="188.04" y="391.35" text-anchor="middle" font-size="15" fill="var(--accent-line)" font-weight="600" font-style="italic">a</text>
+<line x1="28.00" y1="324.19" x2="165.96" y2="214.65" stroke="var(--accent-line)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 161.34 223.52 L 165.96 214.65 L 156.27 217.13" fill="none" stroke="var(--accent-line)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="181.96" y="212.65" text-anchor="middle" font-size="15" fill="var(--accent-line)" font-weight="600" font-style="italic">b</text>
+<line x1="28.00" y1="324.19" x2="51.14" y2="259.07" stroke="var(--ink-2)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 51.92 269.04 L 51.14 259.07 L 44.24 266.31" fill="none" stroke="var(--ink-2)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="57.14" y="253.07" text-anchor="start" font-size="14" fill="var(--ink-2)" font-weight="600" font-style="italic">a × b</text>
+<circle cx="28.00" cy="324.19" r="3.4" fill="var(--ink-2)"/>
+<text x="167.12" y="302.25" text-anchor="middle" font-size="13.5" fill="var(--ink)">面积 5.67</text>
+<text x="386.00" y="32.00" text-anchor="start" font-size="15.5" fill="var(--ink)" font-weight="600">混合积的绝对值是平行六面体的体积</text>
+<text x="386.00" y="62.00" text-anchor="start" font-size="13" fill="var(--ink-2)">底面积 |a × b| = 2.08</text>
+<text x="386.00" y="84.00" text-anchor="start" font-size="13" fill="var(--ink-2)">高 h = 1.90</text>
+<text x="386.00" y="106.00" text-anchor="start" font-size="13" fill="var(--ink-2)">体积 |(a × b) · c| = 3.96</text>
+<polygon points="445.22,325.31 589.99,354.98 556.91,396.00 412.14,366.33" fill="var(--fig-fill)" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="511.09,188.00 655.86,217.67 622.78,258.69 478.01,229.02" fill="none" stroke="var(--ink-2)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="445.22" y1="325.31" x2="511.09" y2="188.00" stroke="var(--ink-2)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" opacity="0.85"/>
+<line x1="589.99" y1="354.98" x2="655.86" y2="217.67" stroke="var(--ink-2)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" opacity="0.85"/>
+<line x1="556.91" y1="396.00" x2="622.78" y2="258.69" stroke="var(--ink-2)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" opacity="0.85"/>
+<line x1="412.14" y1="366.33" x2="478.01" y2="229.02" stroke="var(--ink-2)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" opacity="0.85"/>
+<line x1="445.22" y1="325.31" x2="589.99" y2="354.98" stroke="var(--accent-line)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 580.22 357.14 L 589.99 354.98 L 581.86 349.15" fill="none" stroke="var(--accent-line)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="591.99" y="374.98" text-anchor="middle" font-size="15" fill="var(--accent-line)" font-weight="600" font-style="italic">a</text>
+<line x1="445.22" y1="325.31" x2="412.14" y2="366.33" stroke="var(--accent-line)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 414.70 356.67 L 412.14 366.33 L 421.05 361.79" fill="none" stroke="var(--accent-line)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="398.14" y="370.33" text-anchor="middle" font-size="15" fill="var(--accent-line)" font-weight="600" font-style="italic">b</text>
+<line x1="445.22" y1="325.31" x2="511.09" y2="188.00" stroke="var(--accent-line)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 510.82 198.00 L 511.09 188.00 L 503.47 194.47" fill="none" stroke="var(--accent-line)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="525.09" y="190.00" text-anchor="middle" font-size="15" fill="var(--accent-line)" font-weight="600" font-style="italic">c</text>
+<line x1="511.09" y1="188.00" x2="489.27" y2="343.90" stroke="var(--ink-2)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 6"/>
+<circle cx="489.27" cy="343.90" r="3.0" fill="var(--ink-2)"/>
+<path d="M 495.76 346.64 L 496.80 339.26 L 490.31 336.52" fill="none" stroke="var(--ink-2)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="523.09" y="269.95" text-anchor="start" font-size="14" fill="var(--ink-2)" font-style="italic">h</text>
+</svg>
+<!--/FIG ch08_cross-->
+        <figcaption class="figcaption"><b>面积与体积都出自同一个行列式。</b>左：底乘高给出 |a × b|；右：再乘 c 在法向的投影即体积。</figcaption>
+      </div>
+
+      <p>叉积最常用的地方是造法向量，两条不共线的向量叉一下，就得到一个同时垂直于它们的向量，写平面方程、找公垂线都靠它；力矩 \(\vec M=\vec r\times\vec F\) 也是叉积，因为它既要大小又要转轴方向。</p>
+
+      <h3>混合积：把体积变成一个数</h3>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定义（混合积）</p>
+        <p>三向量 \(\vec a\)、\(\vec b\)、\(\vec c\) 的混合积记作 \([\vec a\,\vec b\,\vec c]\)，定义为</p>
+        <p>\[ [\vec a\,\vec b\,\vec c]=(\vec a\times\vec b)\cdot\vec c=\begin{vmatrix}a_x&amp;a_y&amp;a_z\\b_x&amp;b_y&amp;b_z\\c_x&amp;c_y&amp;c_z\end{vmatrix}, \]</p>
+        <p>它是一个数，绝对值等于以三者为棱的平行六面体的体积。</p>
+      </div>
+
+      <p>体积是底乘高：底面积是 \(|\vec a\times\vec b|\)，高是 \(\vec c\) 在法向上的投影，两者相乘，叉积的模正好约掉。于是三向量共面当且仅当混合积为零，换两个向量的位置则变号。</p>
+
+      <div class="keyidea reveal">
+        <p>三种乘法各管一件具体的事：点积出夹角和投影，叉积出面积和法向，混合积出体积和共面。看题目问的是角、面积还是体积，用哪个就定了。</p>
+      </div>
+
+      <h2 id="s-extra" class="reveal">三、图形：一点加一个方向</h2>
+
+      <h3>平面</h3>
+
+      <p>确定一张平面只需要一个点和一个垂直于它的方向：设平面过 \(M_0(x_0,y_0,z_0)\)，法向量 \(\vec n=(A,B,C)\)，动点 \(M(x,y,z)\) 在平面上的条件就是 \(\vec n\cdot\overrightarrow{M_0M}=0\)，写开得点法式</p>
+
+      \[ A(x-x_0)+B(y-y_0)+C(z-z_0)=0. \]
+
+      <p>展开就是一般式 \(Ax+By+Cz+D=0\)，法向量直接从系数读出；平面与三轴都相交时还能写成截距式 \(x/a+y/b+z/c=1\)，过原点的平面没有截距式。</p>
+
+      <p>两平面的夹角就是两法向量的夹角，取锐角，所以 \(\cos\theta=|A_1A_2+B_1B_2+C_1C_2|/(|\vec n_1||\vec n_2|)\)；法向量平行则两面平行，垂直则两面垂直。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定理（点到平面的距离）</p>
+        <p>点 \(M_0(x_0,y_0,z_0)\) 到平面 \(Ax+By+Cz+D=0\) 的距离为</p>
+        <p>\[ d=\frac{|Ax_0+By_0+Cz_0+D|}{\sqrt{A^2+B^2+C^2}}. \]</p>
+      </div>
+
+      <details class="fold">
+        <summary>公式里的绝对值和分母上那个根号是怎么来的</summary>
+        <p>在平面上任取一点 \(M_1\)，所求距离就是 \(\overrightarrow{M_1M_0}\) 在法向量上的投影长度，等于 \(|\vec n\cdot\overrightarrow{M_1M_0}|/|\vec n|\)。把坐标代进去，差式正好凑成 \(Ax_0+By_0+Cz_0+D\)；点在平面哪一侧，投影就带哪个符号，距离要非负，所以套绝对值。</p>
+      </details>
+
+      <div class="figure">
+        <!--FIG ch08_plane--><svg viewBox="0 0 720 420" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<text x="24.00" y="32.00" text-anchor="start" font-size="15.5" fill="var(--ink)" font-weight="600">平面由一点和一个法向量定死</text>
+<text x="24.00" y="62.00" text-anchor="start" font-size="13" fill="var(--ink-2)">点法式：A(x − x₀) + B(y − y₀) + C(z − z₀) = 0</text>
+<text x="24.00" y="84.00" text-anchor="start" font-size="13" fill="var(--ink-2)">法向量 n = (A, B, C) 垂直于平面内每个向量</text>
+<polygon points="70.60,275.68 214.04,208.30 318.74,318.62 175.31,386.00" fill="var(--fig-fill)" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="76.60" y="299.68" text-anchor="start" font-size="13.5" fill="var(--ink-2)">平面 π</text>
+<line x1="194.67" y1="297.15" x2="243.27" y2="190.38" stroke="var(--ink-2)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 243.20 200.37 L 243.27 190.38 L 235.78 197.00" fill="none" stroke="var(--ink-2)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="251.27" y="188.38" text-anchor="start" font-size="15" fill="var(--ink-2)" font-weight="600" font-style="italic">n</text>
+<line x1="321.40" y1="150.00" x2="255.89" y2="293.91" stroke="var(--accent-line)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 6"/>
+<circle cx="321.40" cy="150.00" r="3.6" fill="var(--prussian)"/>
+<circle cx="255.89" cy="293.91" r="3.2" fill="var(--ink-2)"/>
+<text x="329.40" y="142.00" text-anchor="start" font-size="14.5" fill="var(--accent-line)" font-weight="600" font-style="italic">P</text>
+<text x="245.89" y="311.91" text-anchor="end" font-size="13.5" fill="var(--ink-2)" font-style="italic">Q</text>
+<text x="276.64" y="225.96" text-anchor="end" font-size="14.5" fill="var(--accent-line)" font-weight="600" font-style="italic">d</text>
+<circle cx="194.67" cy="297.15" r="3.2" fill="var(--ink-2)"/>
+<text x="184.67" y="313.15" text-anchor="end" font-size="13.5" fill="var(--ink-2)" font-style="italic">P₀</text>
+<text x="412.00" y="32.00" text-anchor="start" font-size="15.5" fill="var(--ink)" font-weight="600">压成剖面：距离是投影的长度</text>
+<line x1="430.59" y1="234.14" x2="669.41" y2="234.14" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="668.81" y="252.14" text-anchor="start" font-size="14" fill="var(--ink-2)" font-style="italic">π</text>
+<text x="430.59" y="254.14" text-anchor="middle" font-size="13" fill="var(--ink-2)" font-style="italic">Q₀</text>
+<line x1="458.15" y1="234.14" x2="458.15" y2="104.70" stroke="var(--ink-2)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 462.23 113.83 L 458.15 104.70 L 454.07 113.83" fill="none" stroke="var(--ink-2)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="466.15" y="116.70" text-anchor="start" font-size="15" fill="var(--ink-2)" font-weight="600" font-style="italic">n</text>
+<line x1="458.15" y1="234.14" x2="536.22" y2="138.11" stroke="var(--accent-line)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="536.22" cy="138.11" r="3.6" fill="var(--prussian)"/>
+<text x="544.22" y="142.11" text-anchor="start" font-size="14.5" fill="var(--accent-line)" font-weight="600" font-style="italic">P</text>
+<line x1="536.22" y1="138.11" x2="536.22" y2="234.14" stroke="var(--accent-line)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 6"/>
+<circle cx="536.22" cy="234.14" r="3.2" fill="var(--ink-2)"/>
+<text x="536.22" y="254.14" text-anchor="middle" font-size="13.5" fill="var(--ink-2)" font-style="italic">Q</text>
+<text x="550.22" y="190.12" text-anchor="start" font-size="12.5" fill="var(--ink-2)">d = |P₀P| cos φ</text>
+<path d="M 458.15 182.36 L 460.81 182.42 L 463.46 182.59 L 466.10 182.87 L 468.73 183.27 L 471.33 183.77 L 473.90 184.39 L 476.44 185.11 L 478.94 185.94 L 481.39 186.87 L 483.79 187.91 L 486.14 189.05 L 488.43 190.29 L 490.65 191.62 L 492.79 193.05 L 494.87 194.56 L 496.86 196.17 L 498.77 197.85 L 500.59 199.62 L 502.31 201.45 L 503.94 203.37" fill="none" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="476.84" y="174.01" text-anchor="start" font-size="14" fill="var(--ink-2)" font-style="italic">φ</text>
+<line x1="458.15" y1="234.14" x2="600.52" y2="305.12" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="600.52" cy="305.12" r="3.4" fill="var(--ink-2)"/>
+<text x="608.52" y="321.12" text-anchor="start" font-size="13.5" fill="var(--ink-2)" font-style="italic">P′</text>
+<line x1="600.52" y1="305.12" x2="600.52" y2="234.14" stroke="var(--ink-3)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4 5"/>
+<text x="430.59" y="294.27" text-anchor="start" font-size="12.5" fill="var(--ink-2)">P′ 在同一侧之下，投影为负，取绝对值</text>
+<text x="430.59" y="315.14" text-anchor="start" font-size="12.5" fill="var(--ink-2)">d = |Ax₀ + By₀ + Cz₀ + D| / √(A² + B² + C²)</text>
+</svg>
+<!--/FIG ch08_plane-->
+        <figcaption class="figcaption"><b>距离就是投影的长度。</b>平面外一点沿 n 落到垂足，投影取绝对值才是距离。</figcaption>
+      </div>
+
+      <h3>直线与异面直线</h3>
+
+      <p>直线由一个点和一个方向向量定死，过 \(M_0\)、方向为 \(\vec s=(m,n,p)\) 的直线写成对称式</p>
+
+      \[ \frac{x-x_0}{m}=\frac{y-y_0}{n}=\frac{z-z_0}{p}, \]
+
+      <p>让它等于 \(t\) 得参数式 \(x=x_0+mt\)，\(y=y_0+nt\)，\(z=z_0+pt\)；某个方向余弦为零时，那一项改写成「该坐标等于常数」；直线也能写成两张平面的交，方向向量取两法向量的叉积。</p>
+
+      <p>直线与平面的夹角 \(\varphi\) 与方向、法向的夹角互余，所以 \(\sin\varphi=|Am+Bn+Cp|/(|\vec s||\vec n|)\)，套成余弦就全错。求交点换成参数式，代进平面方程解出 \(t\) 再回代；线面平行时，距离就是线上任一点到平面的距离。</p>
+
+      <p>两条不平行也不相交的直线叫异面直线，判定只看混合积，不为零就是异面，等于零则共面；距离是那条连线和两个方向张出的平行六面体的高，体积除以底面积就得到。</p>
+
+      <details class="fold">
+        <summary>异面直线的距离怎么算，公垂线又怎么求</summary>
+        <p>距离 \(d=\left|\overrightarrow{M_1M_2}\cdot(\vec s_1\times\vec s_2)\right|/|\vec s_1\times\vec s_2|\)，分子是混合积给出的有向体积，取绝对值，分母是叉积的模，也是底面积。公垂线取 \(\vec s_1\times\vec s_2\) 作方向，再过第一条直线上任一点即可。</p>
+      </details>
+
+      <h3>曲面与二次曲面</h3>
+
+      <p>曲面写成 \(F(x,y,z)=0\) 或参数式，常用的两类由「生成」定义：曲线绕定直线转一圈得旋转曲面，\(yOz\) 平面上的 \(f(y,z)=0\) 绕 \(z\) 轴转，\(y\) 换成点到轴的距离，得 \(f(\pm\sqrt{x^2+y^2},\,z)=0\)；柱面是曲线沿一个方向平移扫出的面，缺哪个字母母线就平行于哪条轴。</p>
+
+      <div class="figure">
+        <!--FIG ch08_surface--><svg viewBox="0 0 720 430" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<text x="24.00" y="32.00" text-anchor="start" font-size="15.5" fill="var(--ink)" font-weight="600">旋转曲面：一条曲线绕轴转出来</text>
+<text x="24.00" y="62.00" text-anchor="start" font-size="13" fill="var(--ink-2)">母线 z = 1.4y² 绕 z 轴转一圈</text>
+<text x="24.00" y="84.00" text-anchor="start" font-size="13" fill="var(--ink-2)">得到 z = 1.4(x² + y²)，纬圈都是圆</text>
+<line x1="180.05" y1="360.70" x2="180.05" y2="161.25" stroke="var(--ink-3)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="5 5"/>
+<text x="170.05" y="155.25" text-anchor="end" font-size="14" fill="var(--ink-3)" font-style="italic">z</text>
+<path d="M 259.80 323.59 L 104.63 277.45 L 109.78 273.18 L 115.70 269.24 L 122.32 265.66 L 129.58 262.49 L 137.39 259.76 L 145.67 257.50 L 154.32 255.74 L 163.26 254.49 L 172.38 253.78 L 181.59 253.60 L 190.78 253.96 L 199.85 254.85 L 208.70 256.27 L 217.24 258.20 L 225.37 260.62 L 233.01 263.50 L 240.06 266.81 L 246.46 270.51 L 252.13 274.57 L 257.01 278.94 L 261.05 283.57 L 264.20 288.41 L 266.43 293.41 L 267.71 298.51 L 268.03 303.65 L 267.39 308.79 L 265.79 313.86 L 263.25 318.82 L 259.80 323.59" fill="none" stroke="var(--ink-2)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.4"/>
+<path d="M 259.80 323.59 L 255.48 328.14 L 250.33 332.41 L 244.41 336.35 L 237.78 339.93 L 230.52 343.10 L 222.71 345.83 L 214.43 348.09 L 205.78 349.85 L 196.84 351.10 L 187.72 351.81 L 178.52 351.99 L 169.33 351.63 L 160.26 350.74 L 151.40 349.32 L 142.86 347.39 L 134.73 344.97 L 127.10 342.09 L 120.04 338.78 L 113.64 335.08 L 107.97 331.02 L 103.09 326.65 L 99.05 322.02 L 95.90 317.18 L 93.67 312.18 L 92.39 307.08 L 92.07 301.94 L 92.71 296.80 L 94.31 291.73 L 96.85 286.78 L 100.30 282.00" fill="none" stroke="var(--ink-2)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 295.93 268.67 L 70.46 201.64 L 77.94 195.43 L 86.55 189.70 L 96.17 184.50 L 106.72 179.89 L 118.07 175.93 L 130.10 172.65 L 142.67 170.09 L 155.66 168.28 L 168.91 167.23 L 182.28 166.97 L 195.63 167.50 L 208.81 168.80 L 221.68 170.86 L 234.09 173.66 L 245.90 177.17 L 257.00 181.36 L 267.25 186.17 L 276.55 191.55 L 284.78 197.45 L 291.88 203.80 L 297.74 210.52 L 302.32 217.55 L 305.56 224.82 L 307.42 232.23 L 307.89 239.71 L 306.95 247.17 L 304.63 254.54 L 300.94 261.73 L 295.93 268.67" fill="none" stroke="var(--ink-2)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.4"/>
+<path d="M 295.93 268.67 L 289.64 275.28 L 282.16 281.49 L 273.56 287.22 L 263.93 292.42 L 253.39 297.02 L 242.04 300.99 L 230.01 304.27 L 217.43 306.83 L 204.45 308.64 L 191.20 309.68 L 177.82 309.94 L 164.47 309.42 L 151.29 308.12 L 138.43 306.06 L 126.02 303.25 L 114.20 299.74 L 103.11 295.56 L 92.86 290.75 L 83.56 285.36 L 75.32 279.47 L 68.23 273.12 L 62.36 266.39 L 57.78 259.36 L 54.55 252.10 L 52.68 244.69 L 52.22 237.21 L 53.15 229.74 L 55.47 222.38 L 59.16 215.18 L 64.18 208.24" fill="none" stroke="var(--ink-2)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 320.72 217.23 L 47.01 135.85 L 56.10 128.32 L 66.54 121.36 L 78.23 115.05 L 91.03 109.46 L 104.81 104.64 L 119.41 100.66 L 134.67 97.55 L 150.44 95.36 L 166.52 94.09 L 182.76 93.78 L 198.97 94.41 L 214.97 95.99 L 230.58 98.49 L 245.65 101.89 L 259.99 106.16 L 273.46 111.24 L 285.90 117.08 L 297.19 123.61 L 307.19 130.77 L 315.80 138.48 L 322.92 146.64 L 328.48 155.18 L 332.41 163.99 L 334.67 172.99 L 335.24 182.07 L 334.10 191.13 L 331.28 200.08 L 326.81 208.81 L 320.72 217.23" fill="none" stroke="var(--ink-2)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.4"/>
+<path d="M 320.72 217.23 L 313.09 225.26 L 304.01 232.79 L 293.57 239.75 L 281.88 246.06 L 269.08 251.65 L 255.30 256.46 L 240.70 260.45 L 225.43 263.55 L 209.67 265.75 L 193.58 267.02 L 177.34 267.33 L 161.14 266.70 L 145.14 265.12 L 129.52 262.62 L 114.46 259.21 L 100.11 254.95 L 86.64 249.87 L 74.20 244.03 L 62.91 237.50 L 52.91 230.34 L 44.30 222.63 L 37.18 214.47 L 31.62 205.93 L 27.69 197.12 L 25.43 188.12 L 24.87 179.04 L 26.00 169.98 L 28.82 161.03 L 33.30 152.30 L 39.38 143.87" fill="none" stroke="var(--ink-2)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 180.05 360.70 L 182.26 363.78 L 184.48 366.24 L 186.69 368.08 L 188.90 369.29 L 191.11 369.87 L 193.32 369.83 L 195.54 369.16 L 197.75 367.87 L 199.96 365.95 L 202.17 363.41 L 204.38 360.24 L 206.59 356.44 L 208.81 352.02 L 211.02 346.98 L 213.23 341.30 L 215.44 335.01 L 217.65 328.08 L 219.87 320.54 L 222.08 312.36 L 224.29 303.56 L 226.50 294.14 L 228.71 284.09 L 230.93 273.41 L 233.14 262.11" fill="none" stroke="var(--ink-2)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.84"/>
+<path d="M 180.05 360.70 L 177.32 363.66 L 174.59 366.00 L 171.85 367.72 L 169.12 368.80 L 166.39 369.27 L 163.65 369.10 L 160.92 368.32 L 158.19 366.90 L 155.45 364.86 L 152.72 362.20 L 149.99 358.91 L 147.25 354.99 L 144.52 350.45 L 141.79 345.28 L 139.06 339.49 L 136.32 333.07 L 133.59 326.03 L 130.86 318.36 L 128.12 310.07 L 125.39 301.15 L 122.66 291.60 L 119.92 281.43 L 117.19 270.64 L 114.46 259.21" fill="none" stroke="var(--ink-2)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.84"/>
+<path d="M 180.05 360.70 L 173.98 361.62 L 167.90 361.92 L 161.82 361.59 L 155.74 360.64 L 149.67 359.06 L 143.59 356.86 L 137.51 354.03 L 131.44 350.58 L 125.36 346.50 L 119.28 341.79 L 113.20 336.46 L 107.13 330.51 L 101.05 323.92 L 94.97 316.72 L 88.90 308.88 L 82.82 300.42 L 76.74 291.34 L 70.67 281.63 L 64.59 271.30 L 58.51 260.34 L 52.43 248.75 L 46.36 236.54 L 40.28 223.70 L 34.20 210.24" fill="none" stroke="var(--ink-2)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.78"/>
+<path d="M 180.05 360.70 L 174.19 358.86 L 168.33 356.39 L 162.47 353.30 L 156.61 349.58 L 150.75 345.24 L 144.89 340.27 L 139.02 334.68 L 133.16 328.46 L 127.30 321.61 L 121.44 314.14 L 115.58 306.04 L 109.72 297.32 L 103.86 287.98 L 98.00 278.00 L 92.13 267.41 L 86.27 256.18 L 80.41 244.33 L 74.55 231.86 L 68.69 218.76 L 62.83 205.03 L 56.97 190.68 L 51.11 175.70 L 45.25 160.10 L 39.38 143.87" fill="none" stroke="var(--ink-2)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.69"/>
+<path d="M 180.05 360.70 L 177.84 356.99 L 175.63 352.65 L 173.42 347.69 L 171.20 342.10 L 168.99 335.89 L 166.78 329.05 L 164.57 321.59 L 162.36 313.50 L 160.15 304.78 L 157.93 295.44 L 155.72 285.48 L 153.51 274.88 L 151.30 263.67 L 149.09 251.82 L 146.87 239.36 L 144.66 226.26 L 142.45 212.54 L 140.24 198.20 L 138.03 183.23 L 135.81 167.63 L 133.60 151.41 L 131.39 134.57 L 129.18 117.09 L 126.97 99.00" fill="none" stroke="var(--ink-2)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.64"/>
+<path d="M 180.05 360.70 L 182.79 357.11 L 185.52 352.89 L 188.25 348.05 L 190.98 342.58 L 193.72 336.49 L 196.45 329.77 L 199.18 322.43 L 201.92 314.46 L 204.65 305.87 L 207.38 296.65 L 210.12 286.80 L 212.85 276.33 L 215.58 265.24 L 218.32 253.51 L 221.05 241.17 L 223.78 228.19 L 226.51 214.60 L 229.25 200.37 L 231.98 185.52 L 234.71 170.05 L 237.45 153.95 L 240.18 137.22 L 242.91 119.87 L 245.65 101.89" fill="none" stroke="var(--ink-2)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.64"/>
+<path d="M 180.05 360.70 L 186.13 359.15 L 192.21 356.97 L 198.28 354.17 L 204.36 350.75 L 210.44 346.70 L 216.51 342.02 L 222.59 336.72 L 228.67 330.79 L 234.75 324.23 L 240.82 317.06 L 246.90 309.25 L 252.98 300.82 L 259.05 291.76 L 265.13 282.08 L 271.21 271.78 L 277.28 260.84 L 283.36 249.29 L 289.44 237.10 L 295.52 224.30 L 301.59 210.86 L 307.67 196.80 L 313.75 182.12 L 319.82 166.81 L 325.90 150.87" fill="none" stroke="var(--ink-2)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.70"/>
+<path d="M 180.05 360.70 L 178.41 362.55 L 176.77 364.18 L 175.13 365.59 L 173.49 366.76 L 171.85 367.72 L 170.21 368.44 L 168.57 368.95 L 166.93 369.23 L 165.29 369.28 L 163.65 369.10 L 162.01 368.71 L 160.37 368.08 L 158.73 367.24 L 157.09 366.16 L 155.45 364.86 L 153.81 363.34 L 152.17 361.59 L 150.53 359.62 L 148.89 357.42 L 147.25 354.99 L 145.62 352.34 L 143.98 349.47 L 142.34 346.37 L 140.70 343.04 L 139.06 339.49 L 137.42 335.72 L 135.78 331.72 L 134.14 327.49 L 132.50 323.04 L 130.86 318.36 L 129.22 313.46 L 127.58 308.33 L 125.94 302.98 L 124.30 297.41 L 122.66 291.60 L 121.02 285.58 L 119.38 279.32 L 117.74 272.85 L 116.10 266.14 L 114.46 259.21" fill="none" stroke="var(--accent-line)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="135.26" y="298.07" text-anchor="start" font-size="13" fill="var(--accent-line)">母线</text>
+<text x="304.94" y="255.02" text-anchor="start" font-size="13" fill="var(--ink-2)">纬圈</text>
+<path d="M 298.94 263.02 L 292.93 269.39 L 285.84 275.40 L 277.73 280.99 L 268.67 286.11 L 258.77 290.70 L 248.10 294.73 L 236.78 298.16 L 224.92 300.95 L 212.62 303.08 L 200.01 304.52 L 187.20 305.27 L 174.33 305.31 L 161.51 304.64 L 148.87 303.27 L 136.53 301.22 L 124.61 298.50" fill="none" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 134.36 296.27 L 124.61 298.50 L 132.79 304.27" fill="none" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="220.92" y="288.95" text-anchor="middle" font-size="12.5" fill="var(--ink-2)">转一圈</text>
+<text x="386.00" y="32.00" text-anchor="start" font-size="15.5" fill="var(--ink)" font-weight="600">柱面：一条曲线沿一个方向平移</text>
+<text x="386.00" y="62.00" text-anchor="start" font-size="13" fill="var(--ink-2)">准线 y = 0.45x² − 0.72 在 xOy 平面内</text>
+<text x="386.00" y="84.00" text-anchor="start" font-size="13" fill="var(--ink-2)">沿 z 方向平移得到 y = 0.45x² − 0.72</text>
+<text x="386.00" y="106.00" text-anchor="start" font-size="13" fill="var(--ink-2)">方程里没有 z，母线都平行于 z 轴</text>
+<line x1="377.47" y1="305.67" x2="377.47" y2="144.00" stroke="var(--ink-2)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.75"/>
+<line x1="443.18" y1="293.46" x2="443.18" y2="131.79" stroke="var(--ink-2)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.75"/>
+<line x1="501.23" y1="290.43" x2="501.23" y2="128.76" stroke="var(--ink-2)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.75"/>
+<line x1="557.39" y1="298.00" x2="557.39" y2="136.33" stroke="var(--ink-2)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.75"/>
+<line x1="603.85" y1="317.19" x2="603.85" y2="155.52" stroke="var(--ink-2)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.75"/>
+<line x1="637.02" y1="344.01" x2="637.02" y2="182.34" stroke="var(--ink-2)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.75"/>
+<line x1="662.53" y1="380.00" x2="662.53" y2="218.33" stroke="var(--ink-2)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.75"/>
+<path d="M 377.47 144.00 L 388.24 141.49 L 398.83 139.20 L 409.22 137.13 L 419.43 135.29 L 429.46 133.68 L 439.30 132.29 L 448.95 131.12 L 458.41 130.17 L 467.68 129.45 L 476.77 128.96 L 485.68 128.69 L 494.39 128.64 L 502.92 128.82 L 511.26 129.22 L 519.42 129.84 L 527.38 130.69 L 535.16 131.77 L 542.76 133.07 L 550.17 134.59 L 557.39 136.33 L 564.42 138.30 L 571.26 140.50 L 577.92 142.92 L 584.40 145.56 L 590.68 148.43 L 596.78 151.52 L 602.69 154.83 L 608.42 158.37 L 613.95 162.14 L 619.30 166.12 L 624.47 170.34 L 629.44 174.77 L 634.23 179.43 L 638.84 184.32 L 643.25 189.43 L 647.48 194.76 L 651.52 200.32 L 655.38 206.10 L 659.05 212.10 L 662.53 218.33" fill="none" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 377.47 305.67 L 388.24 303.16 L 398.83 300.87 L 409.22 298.80 L 419.43 296.96 L 429.46 295.35 L 439.30 293.95 L 448.95 292.79 L 458.41 291.84 L 467.68 291.12 L 476.77 290.63 L 485.68 290.36 L 494.39 290.31 L 502.92 290.49 L 511.26 290.89 L 519.42 291.51 L 527.38 292.36 L 535.16 293.44 L 542.76 294.73 L 550.17 296.26 L 557.39 298.00 L 564.42 299.97 L 571.26 302.17 L 577.92 304.59 L 584.40 307.23 L 590.68 310.10 L 596.78 313.19 L 602.69 316.50 L 608.42 320.04 L 613.95 323.81 L 619.30 327.79 L 624.47 332.01 L 629.44 336.44 L 634.23 341.10 L 638.84 345.99 L 643.25 351.09 L 647.48 356.43 L 651.52 361.98 L 655.38 367.77 L 659.05 373.77 L 662.53 380.00" fill="none" stroke="var(--accent-line)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="481.43" y="310.33" text-anchor="middle" font-size="13" fill="var(--accent-line)">准线</text>
+<text x="645.02" y="265.78" text-anchor="start" font-size="13" fill="var(--ink-2)">母线</text>
+<line x1="519.10" y1="343.91" x2="519.10" y2="182.24" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="5 5"/>
+<text x="511.10" y="174.24" text-anchor="end" font-size="14" fill="var(--ink-3)" font-style="italic">z</text>
+</svg>
+<!--/FIG ch08_surface-->
+        <figcaption class="figcaption"><b>缺哪个字母就沿哪个方向伸直。</b>旋转曲面的纬圈是圆，柱面的母线彼此平行。</figcaption>
+      </div>
+
+      <details class="fold">
+        <summary>换成绕别的轴转，或者母线不平行于坐标轴，方程怎么写</summary>
+        <p>绕哪条轴转，就把另一个坐标换成剩下两个的平方和开根：绕 \(z\) 轴换 \(y\)，绕 \(y\) 轴换 \(z\)，绕 \(x\) 轴也换 \(z\)。柱面 \(F(x,y)=0\) 里没有 \(z\)，母线就平行于 \(z\) 轴，缺哪个字母看哪个方向。</p>
+      </details>
+
+      <p>二次曲面是三元二次方程表示的曲面，判别用截痕法：拿平行于坐标面的平面去截，看截线是什么曲线，再看它随参数怎么变。椭球面 \(\frac{x^2}{a^2}+\frac{y^2}{b^2}+\frac{z^2}{c^2}=1\) 用 \(z=k\) 去截得椭圆，随 \(|k|\) 增大一直缩，到 \(|k|=c\) 缩成一点；马鞍面 \(z=\frac{x^2}{2p}-\frac{y^2}{2q}\) 用 \(z=k\) 去截得双曲线，换成 \(x=k\) 去截得抛物线。</p>
+
+      <div class="figure">
+        <!--FIG ch08_quadric--><svg viewBox="0 0 720 430" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<text x="26.00" y="32.00" text-anchor="start" font-size="15.5" fill="var(--ink)" font-weight="600">椭球面</text>
+<text x="26.00" y="56.00" text-anchor="start" font-size="12.5" fill="var(--ink-2)">x² + y²/0.52 + z²/0.40 = 1</text>
+<path d="M 128.03 189.51 L 136.57 191.95 L 145.04 194.80 L 153.38 198.04 L 161.54 201.65 L 169.43 205.59 L 177.01 209.85 L 184.22 214.37 L 191.00 219.14 L 197.30 224.11 L 203.08 229.25 L 208.28 234.51 L 212.87 239.86 L 216.82 245.26 L 220.09 250.66 L 222.66 256.03 L 224.51 261.32 L 225.63 266.50 L 226.00 271.52 L 225.63 276.34 L 224.51 280.93 L 222.66 285.26 L 220.09 289.29 L 216.82 292.98 L 212.87 296.32 L 208.28 299.28 L 203.08 301.83 L 197.30 303.96 L 191.00 305.64 L 184.22 306.87 L 177.01 307.64 L 169.43 307.94 L 161.54 307.76 L 153.38 307.12 L 145.04 306.01 L 136.57 304.44 L 128.03 302.43" fill="none" stroke="var(--ink-2)" stroke-width="1.05" stroke-linecap="round" stroke-linejoin="round" opacity="0.74"/>
+<path d="M 128.03 189.51 L 132.04 193.73 L 136.02 198.35 L 139.94 203.33 L 143.77 208.63 L 147.47 214.22 L 151.04 220.05 L 154.42 226.08 L 157.61 232.26 L 160.57 238.54 L 163.28 244.88 L 165.72 251.23 L 167.88 257.54 L 169.73 263.76 L 171.27 269.84 L 172.48 275.75 L 173.35 281.42 L 173.87 286.83 L 174.04 291.93 L 173.87 296.67 L 173.35 301.03 L 172.48 304.97 L 171.27 308.47 L 169.73 311.48 L 167.88 314.00 L 165.72 316.00 L 163.28 317.47 L 160.57 318.39 L 157.61 318.76 L 154.42 318.58 L 151.04 317.84 L 147.47 316.56 L 143.77 314.74 L 139.94 312.40 L 136.02 309.55 L 132.04 306.22 L 128.03 302.43" fill="none" stroke="var(--ink-2)" stroke-width="1.05" stroke-linecap="round" stroke-linejoin="round" opacity="0.79"/>
+<path d="M 128.03 189.51 L 125.16 193.16 L 122.31 197.22 L 119.51 201.64 L 116.78 206.40 L 114.12 211.47 L 111.58 216.79 L 109.16 222.34 L 106.88 228.07 L 104.77 233.94 L 102.83 239.89 L 101.08 245.90 L 99.54 251.90 L 98.21 257.86 L 97.12 263.73 L 96.25 269.46 L 95.63 275.01 L 95.26 280.34 L 95.13 285.41 L 95.26 290.19 L 95.63 294.62 L 96.25 298.68 L 97.12 302.35 L 98.21 305.58 L 99.54 308.36 L 101.08 310.67 L 102.83 312.48 L 104.77 313.79 L 106.88 314.58 L 109.16 314.84 L 111.58 314.59 L 114.12 313.81 L 116.78 312.52 L 119.51 310.72 L 122.31 308.42 L 125.16 305.65 L 128.03 302.43" fill="none" stroke="var(--ink-2)" stroke-width="1.05" stroke-linecap="round" stroke-linejoin="round" opacity="0.77"/>
+<path d="M 128.03 189.51 L 119.96 190.58 L 111.96 192.07 L 104.08 193.98 L 96.38 196.27 L 88.92 198.95 L 81.76 201.99 L 74.95 205.36 L 68.54 209.03 L 62.59 212.99 L 57.14 217.20 L 52.22 221.63 L 47.89 226.25 L 44.16 231.01 L 41.07 235.89 L 38.64 240.85 L 36.89 245.84 L 35.84 250.84 L 35.49 255.80 L 35.84 260.68 L 36.89 265.45 L 38.64 270.07 L 41.07 274.51 L 44.16 278.74 L 47.89 282.71 L 52.22 286.40 L 57.14 289.79 L 62.59 292.84 L 68.54 295.54 L 74.95 297.86 L 81.76 299.78 L 88.92 301.29 L 96.38 302.39 L 104.08 303.05 L 111.96 303.28 L 119.96 303.07 L 128.03 302.43" fill="none" stroke="var(--ink-2)" stroke-width="1.05" stroke-linecap="round" stroke-linejoin="round" opacity="0.70"/>
+<path d="M 128.03 189.51 L 119.49 187.50 L 111.01 185.93 L 102.67 184.82 L 94.52 184.17 L 86.62 184.00 L 79.04 184.30 L 71.83 185.07 L 65.05 186.30 L 58.75 187.98 L 52.97 190.11 L 47.77 192.66 L 43.18 195.61 L 39.23 198.95 L 35.96 202.65 L 33.39 206.68 L 31.54 211.01 L 30.43 215.60 L 30.05 220.42 L 30.43 225.44 L 31.54 230.61 L 33.39 235.91 L 35.96 241.27 L 39.23 246.68 L 43.18 252.07 L 47.77 257.43 L 52.97 262.69 L 58.75 267.83 L 65.05 272.80 L 71.83 277.57 L 79.04 282.09 L 86.62 286.34 L 94.52 290.29 L 102.67 293.89 L 111.01 297.14 L 119.49 299.99 L 128.03 302.43" fill="none" stroke="var(--ink-2)" stroke-width="1.05" stroke-linecap="round" stroke-linejoin="round" opacity="0.60"/>
+<path d="M 128.03 189.51 L 124.02 185.72 L 120.04 182.38 L 116.12 179.54 L 112.29 177.19 L 108.58 175.38 L 105.02 174.09 L 101.63 173.36 L 98.45 173.18 L 95.49 173.55 L 92.77 174.47 L 90.33 175.94 L 88.17 177.94 L 86.32 180.46 L 84.78 183.47 L 83.58 186.96 L 82.71 190.91 L 82.18 195.27 L 82.01 200.01 L 82.18 205.11 L 82.71 210.51 L 83.58 216.19 L 84.78 222.09 L 86.32 228.18 L 88.17 234.40 L 90.33 240.71 L 92.77 247.06 L 95.49 253.40 L 98.45 259.68 L 101.63 265.86 L 105.02 271.89 L 108.58 277.72 L 112.29 283.31 L 116.12 288.61 L 120.04 293.59 L 124.02 298.21 L 128.03 302.43" fill="none" stroke="var(--ink-2)" stroke-width="1.05" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<path d="M 128.03 189.51 L 130.89 186.28 L 133.74 183.52 L 136.54 181.22 L 139.28 179.42 L 141.93 178.13 L 144.47 177.35 L 146.89 177.09 L 149.17 177.36 L 151.29 178.15 L 153.22 179.46 L 154.97 181.27 L 156.51 183.58 L 157.84 186.36 L 158.94 189.59 L 159.80 193.25 L 160.42 197.32 L 160.79 201.75 L 160.92 206.52 L 160.79 211.59 L 160.42 216.93 L 159.80 222.48 L 158.94 228.21 L 157.84 234.08 L 156.51 240.04 L 154.97 246.04 L 153.22 252.04 L 151.29 258.00 L 149.17 263.86 L 146.89 269.59 L 144.47 275.14 L 141.93 280.47 L 139.28 285.53 L 136.54 290.30 L 133.74 294.72 L 130.89 298.78 L 128.03 302.43" fill="none" stroke="var(--ink-2)" stroke-width="1.05" stroke-linecap="round" stroke-linejoin="round" opacity="0.57"/>
+<path d="M 128.03 189.51 L 136.09 188.87 L 144.10 188.66 L 151.98 188.89 L 159.68 189.55 L 167.13 190.64 L 174.29 192.16 L 181.10 194.08 L 187.51 196.40 L 193.46 199.10 L 198.91 202.15 L 203.83 205.53 L 208.17 209.23 L 211.89 213.20 L 214.98 217.42 L 217.41 221.86 L 219.16 226.49 L 220.21 231.26 L 220.56 236.14 L 220.21 241.10 L 219.16 246.09 L 217.41 251.09 L 214.98 256.04 L 211.89 260.92 L 208.17 265.69 L 203.83 270.30 L 198.91 274.73 L 193.46 278.94 L 187.51 282.90 L 181.10 286.58 L 174.29 289.95 L 167.13 292.99 L 159.68 295.66 L 151.98 297.96 L 144.10 299.87 L 136.09 301.36 L 128.03 302.43" fill="none" stroke="var(--ink-2)" stroke-width="1.05" stroke-linecap="round" stroke-linejoin="round" opacity="0.64"/>
+<path d="M 175.00 208.67 L 172.54 211.03 L 169.32 213.14 L 165.39 214.97 L 160.82 216.48 L 155.69 217.65 L 150.09 218.45 L 144.11 218.88 L 137.85 218.92 L 131.43 218.58 L 124.95 217.86 L 118.52 216.77 L 112.26 215.33 L 106.26 213.57 L 100.64 211.52 L 95.48 209.20 L 90.88 206.67 L 86.92 203.97 L 83.66 201.13 L 81.16 198.21 L 79.46 195.27 L 78.60 192.34 L 78.57 189.48 L 79.40 186.74 L 81.05 184.17 L 83.52 181.81 L 86.74 179.69 L 90.67 177.87 L 95.23 176.36 L 100.36 175.19 L 105.96 174.39 L 111.94 173.96 L 118.20 173.92 L 124.62 174.26 L 131.10 174.98 L 137.53 176.07 L 143.80 177.51 L 149.79 179.27 L 155.42 181.32 L 160.57 183.63 L 165.17 186.17 L 169.13 188.87 L 172.39 191.71 L 174.89 194.62 L 176.59 197.57 L 177.46 200.50 L 177.48 203.36 L 176.65 206.09 L 175.00 208.67" fill="none" stroke="var(--ink-2)" stroke-width="1.05" stroke-linecap="round" stroke-linejoin="round" opacity="0.76"/>
+<path d="M 210.47 236.96 L 206.15 241.11 L 200.50 244.82 L 193.60 248.03 L 185.58 250.68 L 176.58 252.72 L 166.75 254.13 L 156.25 254.88 L 145.28 254.96 L 134.00 254.36 L 122.63 253.09 L 111.34 251.18 L 100.35 248.66 L 89.82 245.57 L 79.95 241.96 L 70.90 237.90 L 62.83 233.46 L 55.88 228.71 L 50.16 223.73 L 45.77 218.61 L 42.79 213.44 L 41.27 208.30 L 41.23 203.29 L 42.68 198.48 L 45.58 193.97 L 49.90 189.82 L 55.56 186.11 L 62.45 182.90 L 70.47 180.25 L 79.47 178.20 L 89.30 176.79 L 99.80 176.04 L 110.78 175.97 L 122.05 176.57 L 133.42 177.84 L 144.71 179.75 L 155.71 182.27 L 166.23 185.36 L 176.10 188.96 L 185.15 193.02 L 193.22 197.47 L 200.17 202.22 L 205.89 207.19 L 210.28 212.31 L 213.26 217.48 L 214.79 222.62 L 214.82 227.64 L 213.38 232.44 L 210.47 236.96" fill="none" stroke="var(--ink-2)" stroke-width="1.05" stroke-linecap="round" stroke-linejoin="round" opacity="0.73"/>
+<path d="M 226.00 271.47 L 220.87 276.40 L 214.15 280.81 L 205.95 284.62 L 196.43 287.77 L 185.73 290.20 L 174.04 291.88 L 161.57 292.77 L 148.53 292.86 L 135.13 292.14 L 121.61 290.64 L 108.20 288.37 L 95.13 285.37 L 82.63 281.70 L 70.90 277.41 L 60.14 272.59 L 50.55 267.31 L 42.29 261.67 L 35.49 255.75 L 30.27 249.67 L 26.73 243.52 L 24.92 237.42 L 24.88 231.46 L 26.60 225.74 L 30.05 220.38 L 35.18 215.45 L 41.90 211.04 L 50.10 207.23 L 59.63 204.08 L 70.32 201.64 L 82.01 199.97 L 94.48 199.08 L 107.53 198.99 L 120.92 199.70 L 134.44 201.21 L 147.85 203.48 L 160.92 206.48 L 173.43 210.15 L 185.16 214.43 L 195.91 219.26 L 205.50 224.54 L 213.77 230.18 L 220.56 236.10 L 225.78 242.18 L 229.32 248.33 L 231.13 254.43 L 231.18 260.39 L 229.46 266.10 L 226.00 271.47" fill="none" stroke="var(--ink-2)" stroke-width="1.05" stroke-linecap="round" stroke-linejoin="round" opacity="0.67"/>
+<path d="M 210.55 297.92 L 206.23 302.07 L 200.57 305.78 L 193.67 309.00 L 185.64 311.65 L 176.63 313.70 L 166.79 315.11 L 156.28 315.86 L 145.29 315.93 L 134.01 315.33 L 122.62 314.06 L 111.33 312.15 L 100.32 309.63 L 89.78 306.53 L 79.90 302.92 L 70.85 298.86 L 62.77 294.41 L 55.81 289.66 L 50.08 284.68 L 45.69 279.55 L 42.70 274.38 L 41.18 269.23 L 41.14 264.21 L 42.59 259.40 L 45.50 254.88 L 49.82 250.73 L 55.48 247.01 L 62.38 243.80 L 70.41 241.15 L 79.42 239.10 L 89.26 237.69 L 99.77 236.94 L 110.76 236.86 L 122.04 237.47 L 133.43 238.73 L 144.72 240.65 L 155.73 243.17 L 166.27 246.27 L 176.15 249.87 L 185.21 253.94 L 193.28 258.38 L 200.25 263.14 L 205.97 268.12 L 210.37 273.24 L 213.35 278.42 L 214.87 283.56 L 214.91 288.59 L 213.46 293.40 L 210.55 297.92" fill="none" stroke="var(--ink-2)" stroke-width="1.05" stroke-linecap="round" stroke-linejoin="round" opacity="0.61"/>
+<path d="M 175.13 307.76 L 172.67 310.13 L 169.44 312.25 L 165.50 314.08 L 160.91 315.60 L 155.77 316.77 L 150.15 317.57 L 144.16 318.00 L 137.88 318.04 L 131.44 317.70 L 124.94 316.97 L 118.49 315.88 L 112.21 314.44 L 106.20 312.68 L 100.56 310.62 L 95.39 308.30 L 90.77 305.76 L 86.80 303.04 L 83.53 300.20 L 81.02 297.28 L 79.32 294.32 L 78.45 291.38 L 78.43 288.52 L 79.26 285.77 L 80.92 283.19 L 83.39 280.82 L 86.62 278.70 L 90.56 276.87 L 95.14 275.35 L 100.28 274.18 L 105.90 273.38 L 111.90 272.95 L 118.17 272.91 L 124.61 273.25 L 131.11 273.98 L 137.56 275.07 L 143.84 276.51 L 149.86 278.27 L 155.50 280.33 L 160.67 282.65 L 165.28 285.19 L 169.25 287.91 L 172.52 290.75 L 175.03 293.67 L 176.73 296.63 L 177.60 299.57 L 177.62 302.43 L 176.80 305.18 L 175.13 307.76" fill="none" stroke="var(--ink-2)" stroke-width="1.05" stroke-linecap="round" stroke-linejoin="round" opacity="0.58"/>
+<text x="250.00" y="32.00" text-anchor="start" font-size="15.5" fill="var(--ink)" font-weight="600">单叶双曲面</text>
+<text x="250.00" y="56.00" text-anchor="start" font-size="12.5" fill="var(--ink-2)">x² + y²/0.56 − z²/0.25 = 1</text>
+<path d="M 450.00 308.21 L 444.69 313.36 L 437.79 317.97 L 429.43 321.99 L 419.74 325.33 L 408.90 327.95 L 397.08 329.78 L 384.49 330.81 L 371.34 331.02 L 357.86 330.40 L 344.29 328.96 L 330.84 326.74 L 317.76 323.75 L 305.27 320.07 L 293.57 315.74 L 282.88 310.85 L 273.37 305.47 L 265.20 299.71 L 258.52 293.65 L 253.44 287.41 L 250.05 281.08 L 248.40 274.79 L 248.52 268.62 L 250.42 262.70 L 254.05 257.12 L 259.36 251.97 L 266.26 247.35 L 274.62 243.34 L 284.31 239.99 L 295.16 237.38 L 306.98 235.54 L 319.57 234.51 L 332.71 234.31 L 346.19 234.93 L 359.77 236.36 L 373.21 238.59 L 386.29 241.57 L 398.79 245.26 L 410.48 249.59 L 421.18 254.48 L 430.69 259.85 L 438.85 265.62 L 445.53 271.67 L 450.61 277.92 L 454.01 284.24 L 455.65 290.54 L 455.53 296.71 L 453.63 302.63 L 450.00 308.21" fill="none" stroke="var(--ink-2)" stroke-width="1.05" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<path d="M 418.17 279.08 L 414.59 282.55 L 409.93 285.67 L 404.28 288.38 L 397.74 290.64 L 390.42 292.40 L 382.44 293.64 L 373.94 294.34 L 365.07 294.48 L 355.97 294.06 L 346.80 293.09 L 337.73 291.59 L 328.89 289.57 L 320.46 287.08 L 312.56 284.16 L 305.34 280.86 L 298.92 277.23 L 293.41 273.34 L 288.90 269.25 L 285.47 265.04 L 283.18 260.77 L 282.07 256.51 L 282.15 252.35 L 283.43 248.35 L 285.88 244.58 L 289.47 241.11 L 294.12 237.99 L 299.77 235.28 L 306.31 233.03 L 313.63 231.26 L 321.61 230.02 L 330.11 229.32 L 338.99 229.18 L 348.09 229.60 L 357.25 230.57 L 366.33 232.08 L 375.16 234.09 L 383.60 236.58 L 391.49 239.50 L 398.71 242.80 L 405.13 246.43 L 410.65 250.32 L 415.15 254.41 L 418.58 258.63 L 420.88 262.90 L 421.99 267.15 L 421.90 271.31 L 420.62 275.31 L 418.17 279.08" fill="none" stroke="var(--ink-2)" stroke-width="1.05" stroke-linecap="round" stroke-linejoin="round" opacity="0.62"/>
+<path d="M 408.42 260.72 L 405.36 263.69 L 401.39 266.34 L 396.58 268.66 L 391.00 270.58 L 384.76 272.08 L 377.96 273.14 L 370.71 273.73 L 363.14 273.85 L 355.39 273.50 L 347.57 272.67 L 339.84 271.39 L 332.31 269.67 L 325.11 267.55 L 318.38 265.06 L 312.23 262.24 L 306.75 259.15 L 302.05 255.83 L 298.21 252.35 L 295.28 248.75 L 293.33 245.11 L 292.38 241.49 L 292.45 237.94 L 293.55 234.53 L 295.64 231.32 L 298.69 228.36 L 302.66 225.70 L 307.48 223.39 L 313.05 221.46 L 319.30 219.96 L 326.10 218.90 L 333.35 218.31 L 340.91 218.19 L 348.67 218.54 L 356.48 219.37 L 364.22 220.65 L 371.75 222.37 L 378.94 224.49 L 385.67 226.98 L 391.83 229.80 L 397.30 232.89 L 402.00 236.21 L 405.85 239.69 L 408.77 243.29 L 410.72 246.93 L 411.67 250.55 L 411.60 254.10 L 410.51 257.51 L 408.42 260.72" fill="none" stroke="var(--ink-2)" stroke-width="1.05" stroke-linecap="round" stroke-linejoin="round" opacity="0.67"/>
+<path d="M 418.17 247.46 L 414.59 250.93 L 409.93 254.05 L 404.28 256.76 L 397.74 259.02 L 390.42 260.78 L 382.44 262.02 L 373.94 262.72 L 365.07 262.86 L 355.97 262.44 L 346.80 261.47 L 337.73 259.96 L 328.89 257.95 L 320.46 255.46 L 312.56 252.54 L 305.34 249.24 L 298.92 245.61 L 293.41 241.72 L 288.90 237.63 L 285.47 233.41 L 283.18 229.14 L 282.07 224.89 L 282.15 220.73 L 283.43 216.73 L 285.88 212.96 L 289.47 209.49 L 294.12 206.37 L 299.77 203.66 L 306.31 201.40 L 313.63 199.64 L 321.61 198.40 L 330.11 197.70 L 338.99 197.56 L 348.09 197.98 L 357.25 198.95 L 366.33 200.45 L 375.16 202.47 L 383.60 204.96 L 391.49 207.88 L 398.71 211.18 L 405.13 214.81 L 410.65 218.70 L 415.15 222.79 L 418.58 227.00 L 420.88 231.28 L 421.99 235.53 L 421.90 239.69 L 420.62 243.69 L 418.17 247.46" fill="none" stroke="var(--ink-2)" stroke-width="1.05" stroke-linecap="round" stroke-linejoin="round" opacity="0.72"/>
+<path d="M 450.00 234.92 L 444.69 240.07 L 437.79 244.69 L 429.43 248.70 L 419.74 252.05 L 408.90 254.66 L 397.08 256.50 L 384.49 257.53 L 371.34 257.73 L 357.86 257.11 L 344.29 255.68 L 330.84 253.45 L 317.76 250.47 L 305.27 246.78 L 293.57 242.45 L 282.88 237.56 L 273.37 232.19 L 265.20 226.42 L 258.52 220.37 L 253.44 214.12 L 250.05 207.80 L 248.40 201.50 L 248.52 195.34 L 250.42 189.41 L 254.05 183.83 L 259.36 178.69 L 266.26 174.07 L 274.62 170.05 L 284.31 166.71 L 295.16 164.10 L 306.98 162.26 L 319.57 161.23 L 332.71 161.02 L 346.19 161.64 L 359.77 163.08 L 373.21 165.30 L 386.29 168.29 L 398.79 171.97 L 410.48 176.30 L 421.18 181.19 L 430.69 186.57 L 438.85 192.33 L 445.53 198.39 L 450.61 204.63 L 454.01 210.96 L 455.65 217.25 L 455.53 223.42 L 453.63 229.34 L 450.00 234.92" fill="none" stroke="var(--ink-2)" stroke-width="1.05" stroke-linecap="round" stroke-linejoin="round" opacity="0.79"/>
+<path d="M 450.00 308.21 L 442.76 302.19 L 436.36 296.69 L 430.72 291.65 L 425.82 287.03 L 421.59 282.79 L 418.00 278.88 L 415.02 275.28 L 412.61 271.95 L 410.76 268.85 L 409.46 265.97 L 408.68 263.27 L 408.42 260.72 L 408.68 258.32 L 409.46 256.02 L 410.76 253.82 L 412.61 251.69 L 415.02 249.61 L 418.00 247.56 L 421.59 245.53 L 425.82 243.49 L 430.72 241.43 L 436.36 239.33 L 442.76 237.17 L 450.00 234.92" fill="none" stroke="var(--ink-2)" stroke-width="1.05" stroke-linecap="round" stroke-linejoin="round" opacity="0.80"/>
+<path d="M 397.08 329.78 L 393.75 322.17 L 390.80 315.25 L 388.21 308.98 L 385.96 303.28 L 384.01 298.10 L 382.36 293.41 L 380.99 289.15 L 379.88 285.29 L 379.03 281.79 L 378.43 278.61 L 378.08 275.74 L 377.96 273.14 L 378.08 270.79 L 378.43 268.67 L 379.03 266.75 L 379.88 265.03 L 380.99 263.48 L 382.36 262.09 L 384.01 260.85 L 385.96 259.74 L 388.21 258.76 L 390.80 257.90 L 393.75 257.15 L 397.08 256.50" fill="none" stroke="var(--ink-2)" stroke-width="1.05" stroke-linecap="round" stroke-linejoin="round" opacity="0.91"/>
+<path d="M 317.76 323.75 L 320.29 316.58 L 322.54 310.06 L 324.50 304.13 L 326.22 298.74 L 327.70 293.82 L 328.95 289.35 L 330.00 285.27 L 330.84 281.56 L 331.49 278.17 L 331.94 275.08 L 332.22 272.25 L 332.31 269.67 L 332.22 267.30 L 331.94 265.13 L 331.49 263.14 L 330.84 261.30 L 330.00 259.60 L 328.95 258.03 L 327.70 256.57 L 326.22 255.20 L 324.50 253.92 L 322.54 252.71 L 320.29 251.56 L 317.76 250.47" fill="none" stroke="var(--ink-2)" stroke-width="1.05" stroke-linecap="round" stroke-linejoin="round" opacity="0.88"/>
+<path d="M 258.52 293.65 L 265.43 288.71 L 271.54 284.16 L 276.92 279.96 L 281.60 276.07 L 285.64 272.45 L 289.06 269.08 L 291.91 265.92 L 294.21 262.95 L 295.97 260.13 L 297.22 257.44 L 297.96 254.85 L 298.21 252.35 L 297.96 249.90 L 297.22 247.49 L 295.97 245.09 L 294.21 242.69 L 291.91 240.25 L 289.06 237.76 L 285.64 235.19 L 281.60 232.53 L 276.92 229.74 L 271.54 226.80 L 265.43 223.69 L 258.52 220.37" fill="none" stroke="var(--ink-2)" stroke-width="1.05" stroke-linecap="round" stroke-linejoin="round" opacity="0.73"/>
+<path d="M 254.05 257.12 L 261.29 254.87 L 267.70 252.71 L 273.33 250.61 L 278.24 248.55 L 282.47 246.51 L 286.06 244.48 L 289.04 242.43 L 291.44 240.35 L 293.29 238.22 L 294.60 236.02 L 295.38 233.72 L 295.64 231.32 L 295.38 228.77 L 294.60 226.07 L 293.29 223.19 L 291.44 220.09 L 289.04 216.76 L 286.06 213.16 L 282.47 209.25 L 278.24 205.01 L 273.33 200.39 L 267.70 195.35 L 261.29 189.85 L 254.05 183.83" fill="none" stroke="var(--ink-2)" stroke-width="1.05" stroke-linecap="round" stroke-linejoin="round" opacity="0.54"/>
+<path d="M 306.98 235.54 L 310.31 234.89 L 313.25 234.14 L 315.84 233.28 L 318.10 232.30 L 320.04 231.19 L 321.69 229.95 L 323.06 228.56 L 324.17 227.01 L 325.02 225.29 L 325.62 223.37 L 325.98 221.25 L 326.10 218.90 L 325.98 216.30 L 325.62 213.43 L 325.02 210.25 L 324.17 206.75 L 323.06 202.89 L 321.69 198.63 L 320.04 193.94 L 318.10 188.76 L 315.84 183.06 L 313.25 176.79 L 310.31 169.87 L 306.98 162.26" fill="none" stroke="var(--ink-2)" stroke-width="1.05" stroke-linecap="round" stroke-linejoin="round" opacity="0.43"/>
+<path d="M 386.29 241.57 L 383.76 240.48 L 381.52 239.33 L 379.55 238.12 L 377.83 236.84 L 376.35 235.48 L 375.10 234.01 L 374.06 232.44 L 373.22 230.74 L 372.57 228.90 L 372.11 226.91 L 371.84 224.74 L 371.75 222.37 L 371.84 219.79 L 372.11 216.96 L 372.57 213.87 L 373.22 210.48 L 374.06 206.77 L 375.10 202.69 L 376.35 198.22 L 377.83 193.31 L 379.55 187.91 L 381.52 181.98 L 383.76 175.46 L 386.29 168.29" fill="none" stroke="var(--ink-2)" stroke-width="1.05" stroke-linecap="round" stroke-linejoin="round" opacity="0.46"/>
+<path d="M 445.53 271.67 L 438.62 268.35 L 432.51 265.24 L 427.14 262.30 L 422.45 259.51 L 418.42 256.85 L 414.99 254.28 L 412.14 251.79 L 409.85 249.35 L 408.09 246.95 L 406.84 244.55 L 406.09 242.14 L 405.85 239.69 L 406.09 237.19 L 406.84 234.60 L 408.09 231.91 L 409.85 229.09 L 412.14 226.12 L 414.99 222.96 L 418.42 219.59 L 422.45 215.97 L 427.14 212.09 L 432.51 207.88 L 438.62 203.33 L 445.53 198.39" fill="none" stroke="var(--ink-2)" stroke-width="1.05" stroke-linecap="round" stroke-linejoin="round" opacity="0.61"/>
+<text x="474.00" y="32.00" text-anchor="start" font-size="15.5" fill="var(--ink)" font-weight="600">双曲抛物面（马鞍面）</text>
+<text x="474.00" y="56.00" text-anchor="start" font-size="12.5" fill="var(--ink-2)">z = 0.55(x² − y²)</text>
+<path d="M 540.33 183.10 L 538.25 181.26 L 536.18 179.71 L 534.10 178.47 L 532.02 177.52 L 529.94 176.88 L 527.86 176.53 L 525.79 176.48 L 523.71 176.73 L 521.63 177.28 L 519.55 178.13 L 517.48 179.27 L 515.40 180.72 L 513.32 182.46 L 511.24 184.51 L 509.17 186.85 L 507.09 189.49 L 505.01 192.43 L 502.93 195.67 L 500.85 199.21 L 498.78 203.04 L 496.70 207.18 L 494.62 211.61 L 492.54 216.35 L 490.47 221.38 L 488.39 226.71 L 486.31 232.34 L 484.23 238.27 L 482.16 244.50 L 480.08 251.02 L 478.00 257.85" fill="none" stroke="var(--ink-2)" stroke-width="1.05" stroke-linecap="round" stroke-linejoin="round" opacity="0.61"/>
+<path d="M 557.04 202.17 L 554.96 200.33 L 552.88 198.78 L 550.81 197.54 L 548.73 196.59 L 546.65 195.95 L 544.57 195.60 L 542.50 195.55 L 540.42 195.80 L 538.34 196.35 L 536.26 197.19 L 534.18 198.34 L 532.11 199.79 L 530.03 201.53 L 527.95 203.57 L 525.87 205.92 L 523.80 208.56 L 521.72 211.50 L 519.64 214.74 L 517.56 218.27 L 515.49 222.11 L 513.41 226.25 L 511.33 230.68 L 509.25 235.41 L 507.17 240.45 L 505.10 245.78 L 503.02 251.41 L 500.94 257.34 L 498.86 263.56 L 496.79 270.09 L 494.71 276.91" fill="none" stroke="var(--ink-2)" stroke-width="1.05" stroke-linecap="round" stroke-linejoin="round" opacity="0.60"/>
+<path d="M 573.75 217.03 L 571.67 215.19 L 569.59 213.65 L 567.52 212.40 L 565.44 211.46 L 563.36 210.81 L 561.28 210.46 L 559.20 210.41 L 557.13 210.66 L 555.05 211.21 L 552.97 212.06 L 550.89 213.21 L 548.82 214.65 L 546.74 216.40 L 544.66 218.44 L 542.58 220.78 L 540.51 223.42 L 538.43 226.36 L 536.35 229.60 L 534.27 233.14 L 532.19 236.98 L 530.12 241.11 L 528.04 245.54 L 525.96 250.28 L 523.88 255.31 L 521.81 260.64 L 519.73 266.27 L 517.65 272.20 L 515.57 278.43 L 513.49 284.95 L 511.42 291.78" fill="none" stroke="var(--ink-2)" stroke-width="1.05" stroke-linecap="round" stroke-linejoin="round" opacity="0.60"/>
+<path d="M 590.46 227.69 L 588.38 225.85 L 586.30 224.31 L 584.22 223.06 L 582.15 222.12 L 580.07 221.47 L 577.99 221.12 L 575.91 221.07 L 573.84 221.32 L 571.76 221.87 L 569.68 222.72 L 567.60 223.87 L 565.52 225.31 L 563.45 227.06 L 561.37 229.10 L 559.29 231.44 L 557.21 234.08 L 555.14 237.02 L 553.06 240.26 L 550.98 243.80 L 548.90 247.64 L 546.83 251.77 L 544.75 256.21 L 542.67 260.94 L 540.59 265.97 L 538.51 271.30 L 536.44 276.93 L 534.36 282.86 L 532.28 289.09 L 530.20 295.62 L 528.13 302.44" fill="none" stroke="var(--ink-2)" stroke-width="1.05" stroke-linecap="round" stroke-linejoin="round" opacity="0.61"/>
+<path d="M 607.17 234.15 L 605.09 232.31 L 603.01 230.77 L 600.93 229.52 L 598.85 228.58 L 596.78 227.93 L 594.70 227.58 L 592.62 227.53 L 590.54 227.78 L 588.47 228.33 L 586.39 229.18 L 584.31 230.33 L 582.23 231.77 L 580.16 233.52 L 578.08 235.56 L 576.00 237.90 L 573.92 240.54 L 571.84 243.48 L 569.77 246.72 L 567.69 250.26 L 565.61 254.10 L 563.53 258.23 L 561.46 262.66 L 559.38 267.40 L 557.30 272.43 L 555.22 277.76 L 553.15 283.39 L 551.07 289.32 L 548.99 295.55 L 546.91 302.07 L 544.83 308.90" fill="none" stroke="var(--ink-2)" stroke-width="1.05" stroke-linecap="round" stroke-linejoin="round" opacity="0.63"/>
+<path d="M 623.87 236.41 L 621.80 234.57 L 619.72 233.02 L 617.64 231.78 L 615.56 230.83 L 613.49 230.19 L 611.41 229.84 L 609.33 229.79 L 607.25 230.04 L 605.17 230.59 L 603.10 231.43 L 601.02 232.58 L 598.94 234.03 L 596.86 235.77 L 594.79 237.81 L 592.71 240.16 L 590.63 242.80 L 588.55 245.74 L 586.48 248.98 L 584.40 252.51 L 582.32 256.35 L 580.24 260.49 L 578.16 264.92 L 576.09 269.65 L 574.01 274.69 L 571.93 280.02 L 569.85 285.65 L 567.78 291.58 L 565.70 297.80 L 563.62 304.33 L 561.54 311.15" fill="none" stroke="var(--ink-2)" stroke-width="1.05" stroke-linecap="round" stroke-linejoin="round" opacity="0.66"/>
+<path d="M 640.58 234.46 L 638.51 232.62 L 636.43 231.07 L 634.35 229.83 L 632.27 228.88 L 630.19 228.24 L 628.12 227.89 L 626.04 227.84 L 623.96 228.09 L 621.88 228.64 L 619.81 229.49 L 617.73 230.63 L 615.65 232.08 L 613.57 233.82 L 611.49 235.87 L 609.42 238.21 L 607.34 240.85 L 605.26 243.79 L 603.18 247.03 L 601.11 250.57 L 599.03 254.40 L 596.95 258.54 L 594.87 262.97 L 592.80 267.71 L 590.72 272.74 L 588.64 278.07 L 586.56 283.70 L 584.48 289.63 L 582.41 295.86 L 580.33 302.38 L 578.25 309.21" fill="none" stroke="var(--ink-2)" stroke-width="1.05" stroke-linecap="round" stroke-linejoin="round" opacity="0.70"/>
+<path d="M 657.29 228.31 L 655.21 226.47 L 653.14 224.92 L 651.06 223.68 L 648.98 222.73 L 646.90 222.09 L 644.83 221.74 L 642.75 221.69 L 640.67 221.94 L 638.59 222.49 L 636.51 223.34 L 634.44 224.48 L 632.36 225.93 L 630.28 227.67 L 628.20 229.72 L 626.13 232.06 L 624.05 234.70 L 621.97 237.64 L 619.89 240.88 L 617.82 244.42 L 615.74 248.25 L 613.66 252.39 L 611.58 256.82 L 609.50 261.55 L 607.43 266.59 L 605.35 271.92 L 603.27 277.55 L 601.19 283.48 L 599.12 289.70 L 597.04 296.23 L 594.96 303.06" fill="none" stroke="var(--ink-2)" stroke-width="1.05" stroke-linecap="round" stroke-linejoin="round" opacity="0.76"/>
+<path d="M 674.00 217.96 L 671.92 216.11 L 669.84 214.57 L 667.77 213.33 L 665.69 212.38 L 663.61 211.73 L 661.53 211.38 L 659.46 211.34 L 657.38 211.59 L 655.30 212.13 L 653.22 212.98 L 651.15 214.13 L 649.07 215.57 L 646.99 217.32 L 644.91 219.36 L 642.83 221.70 L 640.76 224.34 L 638.68 227.28 L 636.60 230.52 L 634.52 234.06 L 632.45 237.90 L 630.37 242.03 L 628.29 246.47 L 626.21 251.20 L 624.14 256.23 L 622.06 261.56 L 619.98 267.19 L 617.90 273.12 L 615.82 279.35 L 613.75 285.88 L 611.67 292.70" fill="none" stroke="var(--ink-2)" stroke-width="1.05" stroke-linecap="round" stroke-linejoin="round" opacity="0.83"/>
+<path d="M 540.33 183.10 L 544.79 188.60 L 549.24 193.79 L 553.70 198.69 L 558.15 203.29 L 562.61 207.59 L 567.06 211.59 L 571.52 215.29 L 575.98 218.70 L 580.43 221.80 L 584.89 224.61 L 589.34 227.11 L 593.80 229.32 L 598.25 231.23 L 602.71 232.84 L 607.17 234.15 L 611.62 235.17 L 616.08 235.88 L 620.53 236.29 L 624.99 236.41 L 629.44 236.23 L 633.90 235.74 L 638.35 234.96 L 642.81 233.88 L 647.27 232.50 L 651.72 230.83 L 656.18 228.85 L 660.63 226.57 L 665.09 224.00 L 669.54 221.13 L 674.00 217.96" fill="none" stroke="var(--ink-2)" stroke-width="1.05" stroke-linecap="round" stroke-linejoin="round" opacity="0.37"/>
+<path d="M 532.54 177.73 L 537.00 183.23 L 541.45 188.43 L 545.91 193.32 L 550.36 197.92 L 554.82 202.22 L 559.27 206.22 L 563.73 209.93 L 568.18 213.33 L 572.64 216.43 L 577.10 219.24 L 581.55 221.75 L 586.01 223.95 L 590.46 225.86 L 594.92 227.47 L 599.37 228.79 L 603.83 229.80 L 608.29 230.51 L 612.74 230.93 L 617.20 231.04 L 621.65 230.86 L 626.11 230.38 L 630.56 229.60 L 635.02 228.52 L 639.47 227.14 L 643.93 225.46 L 648.39 223.48 L 652.84 221.21 L 657.30 218.63 L 661.75 215.76 L 666.21 212.59" fill="none" stroke="var(--ink-2)" stroke-width="1.05" stroke-linecap="round" stroke-linejoin="round" opacity="0.47"/>
+<path d="M 524.75 176.57 L 529.20 182.06 L 533.66 187.26 L 538.12 192.16 L 542.57 196.76 L 547.03 201.06 L 551.48 205.06 L 555.94 208.76 L 560.39 212.17 L 564.85 215.27 L 569.30 218.08 L 573.76 220.58 L 578.22 222.79 L 582.67 224.70 L 587.13 226.31 L 591.58 227.62 L 596.04 228.63 L 600.49 229.35 L 604.95 229.76 L 609.41 229.88 L 613.86 229.69 L 618.32 229.21 L 622.77 228.43 L 627.23 227.35 L 631.68 225.97 L 636.14 224.29 L 640.59 222.32 L 645.05 220.04 L 649.51 217.47 L 653.96 214.60 L 658.42 211.42" fill="none" stroke="var(--ink-2)" stroke-width="1.05" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<path d="M 516.96 179.61 L 521.41 185.10 L 525.87 190.30 L 530.32 195.20 L 534.78 199.80 L 539.24 204.10 L 543.69 208.10 L 548.15 211.80 L 552.60 215.20 L 557.06 218.31 L 561.51 221.11 L 565.97 223.62 L 570.42 225.83 L 574.88 227.74 L 579.34 229.35 L 583.79 230.66 L 588.25 231.67 L 592.70 232.39 L 597.16 232.80 L 601.61 232.92 L 606.07 232.73 L 610.53 232.25 L 614.98 231.47 L 619.44 230.39 L 623.89 229.01 L 628.35 227.33 L 632.80 225.36 L 637.26 223.08 L 641.71 220.51 L 646.17 217.63 L 650.63 214.46" fill="none" stroke="var(--ink-2)" stroke-width="1.05" stroke-linecap="round" stroke-linejoin="round" opacity="0.63"/>
+<path d="M 509.17 186.85 L 513.62 192.34 L 518.08 197.54 L 522.53 202.44 L 526.99 207.04 L 531.44 211.34 L 535.90 215.34 L 540.35 219.04 L 544.81 222.45 L 549.27 225.55 L 553.72 228.36 L 558.18 230.86 L 562.63 233.07 L 567.09 234.98 L 571.54 236.59 L 576.00 237.90 L 580.46 238.91 L 584.91 239.63 L 589.37 240.04 L 593.82 240.16 L 598.28 239.97 L 602.73 239.49 L 607.19 238.71 L 611.65 237.63 L 616.10 236.25 L 620.56 234.58 L 625.01 232.60 L 629.47 230.32 L 633.92 227.75 L 638.38 224.88 L 642.83 221.70" fill="none" stroke="var(--ink-2)" stroke-width="1.05" stroke-linecap="round" stroke-linejoin="round" opacity="0.69"/>
+<path d="M 501.37 198.29 L 505.83 203.79 L 510.29 208.99 L 514.74 213.88 L 519.20 218.48 L 523.65 222.78 L 528.11 226.78 L 532.56 230.49 L 537.02 233.89 L 541.47 237.00 L 545.93 239.80 L 550.39 242.31 L 554.84 244.52 L 559.30 246.42 L 563.75 248.03 L 568.21 249.35 L 572.66 250.36 L 577.12 251.07 L 581.58 251.49 L 586.03 251.60 L 590.49 251.42 L 594.94 250.94 L 599.40 250.16 L 603.85 249.08 L 608.31 247.70 L 612.76 246.02 L 617.22 244.04 L 621.68 241.77 L 626.13 239.19 L 630.59 236.32 L 635.04 233.15" fill="none" stroke="var(--ink-2)" stroke-width="1.05" stroke-linecap="round" stroke-linejoin="round" opacity="0.75"/>
+<path d="M 493.58 213.94 L 498.04 219.44 L 502.49 224.63 L 506.95 229.53 L 511.41 234.13 L 515.86 238.43 L 520.32 242.43 L 524.77 246.14 L 529.23 249.54 L 533.68 252.64 L 538.14 255.45 L 542.59 257.96 L 547.05 260.16 L 551.51 262.07 L 555.96 263.68 L 560.42 264.99 L 564.87 266.01 L 569.33 266.72 L 573.78 267.13 L 578.24 267.25 L 582.70 267.07 L 587.15 266.59 L 591.61 265.80 L 596.06 264.72 L 600.52 263.35 L 604.97 261.67 L 609.43 259.69 L 613.88 257.42 L 618.34 254.84 L 622.80 251.97 L 627.25 248.80" fill="none" stroke="var(--ink-2)" stroke-width="1.05" stroke-linecap="round" stroke-linejoin="round" opacity="0.79"/>
+<path d="M 485.79 233.79 L 490.25 239.29 L 494.70 244.49 L 499.16 249.38 L 503.61 253.98 L 508.07 258.28 L 512.53 262.28 L 516.98 265.99 L 521.44 269.39 L 525.89 272.49 L 530.35 275.30 L 534.80 277.81 L 539.26 280.01 L 543.71 281.92 L 548.17 283.53 L 552.63 284.85 L 557.08 285.86 L 561.54 286.57 L 565.99 286.99 L 570.45 287.10 L 574.90 286.92 L 579.36 286.44 L 583.82 285.66 L 588.27 284.58 L 592.73 283.20 L 597.18 281.52 L 601.64 279.54 L 606.09 277.27 L 610.55 274.69 L 615.00 271.82 L 619.46 268.65" fill="none" stroke="var(--ink-2)" stroke-width="1.05" stroke-linecap="round" stroke-linejoin="round" opacity="0.81"/>
+<path d="M 478.00 257.85 L 482.46 263.34 L 486.91 268.54 L 491.37 273.44 L 495.82 278.04 L 500.28 282.34 L 504.73 286.34 L 509.19 290.04 L 513.65 293.44 L 518.10 296.55 L 522.56 299.35 L 527.01 301.86 L 531.47 304.07 L 535.92 305.98 L 540.38 307.59 L 544.83 308.90 L 549.29 309.91 L 553.75 310.63 L 558.20 311.04 L 562.66 311.16 L 567.11 310.97 L 571.57 310.49 L 576.02 309.71 L 580.48 308.63 L 584.94 307.25 L 589.39 305.57 L 593.85 303.60 L 598.30 301.32 L 602.76 298.75 L 607.21 295.87 L 611.67 292.70" fill="none" stroke="var(--ink-2)" stroke-width="1.05" stroke-linecap="round" stroke-linejoin="round" opacity="0.83"/>
+<path d="M 527.99 176.68 L 528.38 179.06 L 528.66 181.41 L 528.81 183.72 L 528.82 186.00 L 528.69 188.24 L 528.39 190.44 L 527.92 192.59 L 527.27 194.70 L 526.42 196.75 L 525.38 198.76 L 524.14 200.71 L 522.68 202.60 L 521.02 204.44 L 519.15 206.23 L 517.08 207.96 L 514.80 209.65 L 512.34 211.28 L 509.69 212.86 L 506.87 214.40 L 503.89 215.90 L 500.76 217.36 L 497.49 218.78 L 494.10 220.17 L 490.59 221.53" fill="none" stroke="var(--accent-line)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.75"/>
+<path d="M 661.41 211.48 L 657.90 212.83 L 654.51 214.22 L 651.24 215.65 L 648.11 217.11 L 645.13 218.60 L 642.31 220.14 L 639.66 221.73 L 637.20 223.36 L 634.92 225.04 L 632.85 226.78 L 630.98 228.56 L 629.32 230.41 L 627.86 232.30 L 626.62 234.25 L 625.58 236.26 L 624.73 238.31 L 624.08 240.42 L 623.61 242.57 L 623.31 244.77 L 623.18 247.01 L 623.19 249.28 L 623.34 251.60 L 623.62 253.95 L 624.01 256.32" fill="none" stroke="var(--accent-line)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.88"/>
+<path d="M 566.86 211.42 L 571.13 214.80 L 576.20 218.40 L 582.88 222.42 L 596.90 228.35 L 547.04 288.15 L 529.89 285.95 L 520.10 285.67 L 511.91 285.81 L 504.53 286.16" fill="none" stroke="var(--accent-line)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.71"/>
+<path d="M 647.47 232.43 L 640.09 232.78 L 631.90 232.92 L 622.11 232.65 L 604.96 230.45 L 555.10 290.25 L 569.12 296.18 L 575.80 300.20 L 580.87 303.79 L 585.14 307.18" fill="none" stroke="var(--accent-line)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.76"/>
+<text x="480.00" y="372.00" text-anchor="start" font-size="12.5" fill="var(--ink-2)">用 z = ±0.35 去截，得到两支双曲线</text>
+<text x="480.00" y="394.00" text-anchor="start" font-size="12.5" fill="var(--ink-2)">用 x = c 去截，得到抛物线</text>
+<text x="26.00" y="372.00" text-anchor="start" font-size="12.5" fill="var(--ink-2)">纬线（水平截面）都是椭圆，越靠极点越小</text>
+<text x="26.00" y="394.00" text-anchor="start" font-size="12.5" fill="var(--ink-2)">腰部是双曲线，上下两片永不相交</text>
+<text x="250.00" y="372.00" text-anchor="start" font-size="12.5" fill="var(--ink-2)">经线是双曲线，纬线是椭圆</text>
+<text x="250.00" y="394.00" text-anchor="start" font-size="12.5" fill="var(--ink-2)">腰上的截痕是一个点（腰椭圆退化为圆）</text>
+</svg>
+<!--/FIG ch08_quadric-->
+        <figcaption class="figcaption"><b>截痕法：用平面去切，看截线。</b>椭球面截出缩小的椭圆，马鞍面截出双曲线。</figcaption>
+      </div>
+
+      <div class="keyidea reveal">
+        <p>每一刀只切出一张平面上的曲线，所以判断曲面只要认得椭圆、双曲线、抛物线。先固定 \(z\) 看形状，再固定 \(x\) 看变化。</p>
+      </div>
+
+      <h3>空间曲线</h3>
+
+      <p>空间曲线常写成参数式 \(x=x(t)\)，\(y=y(t)\)，\(z=z(t)\)，螺旋线就是这样，另一种写法是两张曲面的交线。要想看它在 \(xOy\) 面上的影子，就消去 \(z\)，得到投影柱面，再与 \(z=0\) 联立。</p>
+
+      <details class="fold">
+        <summary>参数式和一般式能不能互相换过来</summary>
+        <p>换得过来，只是两边不对称：参数式消参就得到一般式，例如球面的参数式消掉两个角，得 \(x^2+y^2+z^2=R^2\)。反过来，一般式里能解出某一个坐标时，把另外两个当参数即可，\(z=f(x,y)\) 就写成 \(x=u\)、\(y=v\)、\(z=f(u,v)\)。</p>
+      </details>
+
+      <h2 id="s-strict" class="reveal">四、严格化：向量该怎样相乘</h2>
+
+      <p>1843 年 10 月 16 日，哈密顿与妻子沿都柏林皇家运河散步，走到布卢姆桥时他想到：要一种能表示方向的数，就得承认 \(i^2=j^2=k^2=ijk=-1\)，据说他当场把这行式子刻在桥边石头上。这个对象叫四元数，形如 \(a+bi+cj+dk\)，加减乘除都能做，只有一条让人不舒服，乘法不交换。</p>
+
+      <div class="archive reveal">
+        <p class="archive-when"><!-- taste-skill-ignore -->1843 年 10 月 17 日，都柏林</p>
+        <h3>哈密顿给朋友的信</h3>
+        <p class="archive-quote">“就在这里，一个念头浮现出来：为了计算三元组，我们总得在某种意义上承认空间的第四维。”</p>
+        <p class="archive-source">哈密顿致格拉夫斯的信，1843 年 10 月 17 日，次日于爱尔兰皇家科学院宣读。</p>
+        <p>为了乘得动三维的向量，他被迫多带一个实数维度，代价是一套难上手的规则。</p>
+      </div>
+
+      <p>四元数没有被冷落，泰特 1867 年的《四元数初论》把它推进英国课堂，麦克斯韦还用它算过电磁场；可物理要的乘法有两种，一种得出功那样的数，一种得出力矩那样的向量，捆在一起的乘积用起来总得先拆。1881 年耶鲁的吉布斯把标量部分与矢量部分拆开，各给一个符号，前者叫点积，后者叫叉积，海维赛德在电报计算里差不多同时做出同一件事。</p>
+
+      <p>争论在 1890 年代的《自然》上打了好几年，四元数一派说把乘积拆成两半是破坏结构，泰特讥笑吉布斯的记号是「雌雄同体的怪物」；判胜负的是教材，1901 年《向量分析》出版后课堂改用点与叉，因为学生一天就学会，学四元数要一学期。</p>
+
+      <p>记号定下来还有两件事得说清。叉积不满足结合律，两种括法一般不等，取 \(\boldsymbol i,\boldsymbol j,\boldsymbol k\) 都得 \(\boldsymbol 0\) 看不出差别，换成 \(\boldsymbol i,\boldsymbol i,\boldsymbol j\) 一个得 \(\boldsymbol 0\) 一个得 \(-\boldsymbol j\)，所以夹在中间的乘号必须加括号。</p>
+
+      <p>叉积也只存在于三维（与七维），四维里同时垂直于两个向量的方向有无穷多条，公式没法唯一，1898 年胡尔维茨证明赋范可除代数只有实数、复数、四元数和八元数四个。四元数今天也没死，单位四元数表示旋转比矩阵省三个数，也不会出现万向节死锁。</p>
+
+      <h2 id="s-manual" class="reveal">五、方法手册</h2>
+
+      <h3>三个距离，三种算法</h3>
+
+      <p>点到平面直接代公式；点到直线的距离是 \(d=|\vec s\times\overrightarrow{M_0M}|/|\vec s|\)，分子是平行四边形面积，除以底就是高；异面直线的分子是平行六面体体积，分母是底面积。公式不必硬背，先想那张平行四边形。</p>
+
+      <h3>定平面与定直线</h3>
+
+      <p>给三点，取两条边叉一下得法向量；给一点和一条直线，取方向与连线叉一下；求过两平面交线的平面，用平面束 \(A_1x+B_1y+C_1z+D_1+\lambda(A_2x+B_2y+C_2z+D_2)=0\)，再代一个条件定 \(\lambda\)。定直线只要一点和一个方向，方向取自两法向量的叉积或两点的差，写对称式之前先看分母会不会为零，为零的那项单独写成等式。</p>
+
+      <h3>截痕法四步</h3>
+
+      <p>第一步取 \(z=k\) 代进方程，第二步整理出 \(xOy\) 面上的截线方程，认出它是椭圆、双曲线、抛物线还是一对直线，第三步看截线随 \(k\) 怎么变，第四步换 \(x=k\)、\(y=k\) 再各切一遍。</p>
+
+      <h2 id="s-examples" class="reveal">六、例题</h2>
+
+      <div class="example">
+        <p class="example-head">例 <span>1</span>　求过点 \(M_0(1,2,3)\) 且垂直于两平面 \(x+y-z=1\) 与 \(2x-y+z=2\) 的平面方程。</p>
+        <p class="solution">所求平面的法向量同时垂直于两个法向量 \(\vec n_1=(1,1,-1)\)、\(\vec n_2=(2,-1,1)\)，取叉积得 \((0,-3,-3)\)，约去公因子用 \((0,1,1)\)。过 \(M_0\) 的点法式为 \((y-2)+(z-3)=0\)，即 \(y+z-5=0\)。</p>
+      </div>
+
+      <div class="example">
+        <p class="example-head">例 <span>2</span>　求点 \(P(1,1,1)\) 到平面 \(\pi:\,2x-y+2z-5=0\) 的距离，并求 \(P\) 在平面上的投影点。</p>
+        <p class="solution">代公式得 \(d=|2-1+2-5|/\sqrt{4+1+4}=2/3\)。过 \(P\) 以 \(\vec n=(2,-1,2)\) 为方向的直线代入平面方程，得 \(9t-2=0\)，即 \(t=2/9\)，投影点为 \((13/9,\,7/9,\,13/9)\)。</p>
+      </div>
+
+      <div class="example">
+        <p class="example-head">例 <span>3</span>　把 \(yOz\) 平面上的抛物线 \(z=\tfrac12 y^2\) 绕 \(z\) 轴旋转，求曲面方程，并用截痕法说明它是什么曲面。</p>
+        <p class="solution">绕 \(z\) 轴旋转，原来的 \(y\) 换成点到轴的距离 \(\sqrt{x^2+y^2}\)，得 \(z=\tfrac12(x^2+y^2)\)。用 \(z=k\) 去截：\(k\lt 0\) 没有截痕，\(k=0\) 只有原点，\(k\gt 0\) 是半径不断变大的圆，截线全是圆且只有一个顶点，这就是旋转抛物面。</p>
+      </div>
+
+      <h2 id="s-exercises" class="reveal">七、习题</h2>
+
+      <div class="exercises">
+        <div class="ex-group">
+          <p class="ex-group-head">A 档 <span>巩固定义与基本计算，每题 5 分钟内</span></p>
+          <p class="ex"><span class="ex-num">1.</span> 求点 \(A(1,2,3)\) 与 \(B(-1,0,5)\) 之间的距离，并写出向量 \(\overrightarrow{AB}\) 的单位向量。</p>
+          <div class="answer"><details><summary>看答案</summary><p>距离为 \(\sqrt{4+4+4}=2\sqrt3\)。\(\overrightarrow{AB}=(-2,-2,2)\)，模为 \(2\sqrt3\)，单位向量为 \(\frac{1}{\sqrt3}(-1,-1,1)\)。单位向量的三个分量就是方向余弦。</p></details></div>
+          <p class="ex"><span class="ex-num">2.</span> 设 \(\vec a=(1,-2,2)\)，\(\vec b=(2,1,-1)\)，求 \(\vec a\cdot\vec b\)、两向量夹角余弦与 \(\vec a\times\vec b\)。</p>
+          <div class="answer"><details><summary>看答案</summary><p>\(\vec a\cdot\vec b=2-2-2=-2\)，\(|\vec a|=3\)，\(|\vec b|=\sqrt6\)，故 \(\cos\theta=-2/(3\sqrt6)\)，夹角约为 \(105.8^\circ\)。叉积 \(\vec a\times\vec b=((-2)(-1)-2\cdot1,\ 2\cdot2-1\cdot(-1),\ 1\cdot1-(-2)\cdot2)=(0,5,5)\)，模为 \(5\sqrt2\)，与 \(|\vec a||\vec b|\sin\theta=3\sqrt6\cdot0.962\) 相符。</p></details></div>
+          <p class="ex"><span class="ex-num">3.</span> 求以 \(\vec a=(1,1,0)\) 与 \(\vec b=(0,1,1)\) 为邻边的平行四边形的面积。</p>
+          <div class="answer"><details><summary>看答案</summary><p>面积等于 \(|\vec a\times\vec b|\)。叉积为 \((1\cdot1-0\cdot1,\ 0\cdot0-1\cdot1,\ 1\cdot1-1\cdot0)=(1,-1,1)\)，模为 \(\sqrt3\)，故面积为 \(\sqrt3\)。用 \(|\vec a||\vec b|\sin\theta\) 验算：两模都是 \(\sqrt2\)，夹角余弦为 \(1/2\)，正弦为 \(\sqrt3/2\)，乘积仍是 \(\sqrt3\)。</p></details></div>
+          <p class="ex"><span class="ex-num">4.</span> 求过点 \((1,2,-1)\) 且与平面 \(2x-3y+z=5\) 平行的平面方程。</p>
+          <div class="answer"><details><summary>看答案</summary><p>平行则法向量相同，取 \((2,-3,1)\)，点法式 \(2(x-1)-3(y-2)+(z+1)=0\)，整理得 \(2x-3y+z+5=0\)。与已知平面只差常数项，这一项正是两面之间距离的来源。</p></details></div>
+          <p class="ex"><span class="ex-num">5.</span> 求点 \((1,1,1)\) 到平面 \(x+2y+2z-3=0\) 的距离。</p>
+          <div class="answer"><details><summary>看答案</summary><p>\(d=|1+2+2-3|/\sqrt{1+4+4}=2/3\)。分母是法向量的模 3，分子是把点代进左边得到的数，取绝对值。</p></details></div>
+          <p class="ex"><span class="ex-num">6.</span> 写出过点 \((2,-1,3)\)、方向向量为 \((1,2,-2)\) 的直线的对称式与参数式，并求它与平面 \(x+y+z=6\) 的交点。</p>
+          <div class="answer"><details><summary>看答案</summary><p>对称式 \(\frac{x-2}{1}=\frac{y+1}{2}=\frac{z-3}{-2}\)，参数式 \(x=2+t\)，\(y=-1+2t\)，\(z=3-2t\)。三式相加得 \(4+t\)，令其等于 6 得 \(t=2\)，交点为 \((4,3,-1)\)。</p></details></div>
+        </div>
+
+        <div class="ex-group">
+          <p class="ex-group-head">B 档 <span>综合题，接近考试难度</span></p>
+          <p class="ex"><span class="ex-num">1.</span> 判断直线 \(L_1:\dfrac{x-1}{1}=\dfrac{y-2}{1}=\dfrac{z}{1}\) 与 \(L_2:\dfrac{x+1}{2}=\dfrac{y-1}{1}=\dfrac{z-3}{1}\) 是否异面，若是，求它们的距离。</p>
+          <div class="answer"><details><summary>看答案</summary><p>\(\vec s_1=(1,1,1)\)，\(\vec s_2=(2,1,1)\)，叉积为 \((0,1,-1)\)，模为 \(\sqrt2\)。\(M_1=(1,2,0)\)，\(M_2=(-1,1,3)\)，\(\overrightarrow{M_1M_2}=(-2,-1,3)\)，与叉积的点积为 \(-1-3=-4\)，不为零，故异面。距离 \(d=|-4|/\sqrt2=2\sqrt2\)。若混合积恰为零，两条直线就共面，此时要么相交要么平行，距离公式给出零或失去意义。</p></details></div>
+          <p class="ex"><span class="ex-num">2.</span> 求点 \(A(1,0,0)\) 在平面 \(\pi:\,x+y+z=0\) 上的投影点，以及 \(A\) 关于该平面的对称点。</p>
+          <div class="answer"><details><summary>看答案</summary><p>过 \(A\) 以 \(\vec n=(1,1,1)\) 为方向作直线 \((1+t,\,t,\,t)\)，代入平面得 \(1+3t=0\)，\(t=-1/3\)，投影点为 \((2/3,\,-1/3,\,-1/3)\)。对称点把这条垂线延长一倍：\(A'=2Q-A=(4/3-1,\,-2/3,\,-2/3)=(1/3,\,-2/3,\,-2/3)\)。两个答案都能用距离检验：\(A\) 与 \(A'\) 到平面的距离相等而方向相反。</p></details></div>
+          <p class="ex"><span class="ex-num">3.</span> 把 \(xOy\) 平面上的椭圆 \(\frac{x^2}{9}+\frac{y^2}{4}=1\) 绕 x 轴旋转，求所得曲面的方程，并指出它是什么曲面。</p>
+          <div class="answer"><details><summary>看答案</summary><p>绕 x 轴旋转时 \(y\) 换成 \(\pm\sqrt{y^2+z^2}\)，方程为 \(\frac{x^2}{9}+\frac{y^2+z^2}{4}=1\)，即 \(\frac{x^2}{9}+\frac{y^2}{4}+\frac{z^2}{4}=1\)。这是旋转椭球面，两条半轴相等，用 \(x=k\) 去截得圆，用 \(z=k\) 去截得椭圆。若绕 y 轴旋转，换的是 \(x\)，得到的是另一张长短轴互换的旋转椭球面。</p></details></div>
+          <p class="ex"><span class="ex-num">4.</span> 用截痕法判断 \(4x^2+9y^2-z^2=36\) 是什么曲面，并写出它在 \(z=0\) 与 \(x=0\) 两张平面上的截痕。</p>
+          <div class="answer"><details><summary>看答案</summary><p>两边除以 36 得 \(\frac{x^2}{9}+\frac{y^2}{4}-\frac{z^2}{36}=1\)，是单叶双曲面。\(z=0\) 时截痕为椭圆 \(\frac{x^2}{9}+\frac{y^2}{4}=1\)，这是腰椭圆，也是曲面最细的一圈；\(x=0\) 时截痕为 \(\frac{y^2}{4}-\frac{z^2}{36}=1\)，是 yOz 平面上的双曲线，两支分别向上下张开。用 \(z=k\) 一般地截，得 \(\frac{x^2}{9}+\frac{y^2}{4}=1+\frac{k^2}{36}\)，椭圆随 \(|k|\) 增大而放大，永不为零，所以曲面是连成一片的。</p></details></div>
+        </div>
+
+        <div class="ex-group">
+          <p class="ex-group-head">C 档 <span>拓展与历史原题</span></p>
+          <p class="ex"><span class="ex-num">1.</span> 用混合积证明四点 \(A(1,2,-1)\)、\(B(-1,1,2)\)、\(C(2,1,1)\)、\(D(-2,2,0)\) 共面。混合积的行列式写法出自 19 世纪行列式与格拉斯曼《线性扩张论》（1844 年）的传统，这里只用今天的记号重做一遍。</p>
+          <div class="answer"><details><summary>看答案</summary><p>取 \(\overrightarrow{AB}=(-2,-1,3)\)、\(\overrightarrow{AC}=(1,-1,2)\)、\(\overrightarrow{AD}=(-3,0,1)\)，混合积的行列式按第一行展开得 \(2+7-9=0\)，体积为零，四点共面。起点要先统一，行列式才算得稳。</p></details></div>
+          <p class="ex"><span class="ex-num">2.</span> 求异面直线 \(L_1:\dfrac{x-1}{1}=\dfrac{y-2}{1}=\dfrac{z}{1}\) 与 \(L_2:\dfrac{x+1}{2}=\dfrac{y-1}{1}=\dfrac{z-3}{1}\) 的公垂线方程。求异面直线的公垂线是蒙日在《分析在几何中的应用》（1802 年）里处理过的经典问题。</p>
+          <div class="answer"><details><summary>看答案</summary><p>公垂线方向为 \(\vec s_1\times\vec s_2=(0,1,-1)\)，设垂足 \(P=(1+u,\,2+u,\,u)\)、\(Q=(-1+2v,\,1+v,\,3+v)\)，令 \(\overrightarrow{PQ}\) 与两条方向都点乘为零，得 \(4v-3u=0\)、\(6v-4u-2=0\)，解出 \(u=4\)、\(v=3\)，于是 \(P=(5,6,4)\)、\(Q=(5,4,6)\)，长度 \(2\sqrt2\)。公垂线过 \(P\)、方向 \((0,1,-1)\)，写成 \(x=5\) 与 \(\frac{y-6}{1}=\frac{z-4}{-1}\)，即 \(x=5\)、\(y+z=10\)。</p></details></div>
+          <p class="ex"><span class="ex-num">3.</span> 对双曲抛物面 \(z=xy\) 做截痕分析：分别用 \(z=k\)、\(x=c\)、\(y=c\) 去截，说明每种截线是什么，并解释为什么它被称为直纹面。马鞍面的直纹性在蒙日学派的画法几何教材里是标准例子。</p>
+          <div class="answer"><details><summary>看答案</summary><p>用 \(z=k\) 截得 \(xy=k\)，\(k\neq 0\) 时是双曲线，\(k=0\) 时退化成两条直线 \(x=0\) 与 \(y=0\)；用 \(x=c\) 或 \(y=c\) 截都得到直线，说明曲面上铺满了两族直线，这就是直纹面。两支双曲线的开口方向随 \(k\) 的正负对调，马鞍的样子就是这么来的。</p></details></div>
+        </div>
+
+        <div class="ex-group">
+          <p class="ex-group-head">思考题 <span>不设标准答案，只给提示</span></p>
+          <p class="ex"><span class="ex-num">1.</span> 为什么叉积只在三维「好用」？如果要求在四维里也造一个乘法，模等于平行四边形面积、方向垂直于两张量，会遇到什么困难？提示：三维里同时垂直于两张量的方向只有一条，四维里有几条？</p>
+          <div class="answer"><details><summary>看提示</summary><p>四维里与两张量都垂直的方向构成一个平面，选哪一条都需要额外的规则，而任何额外规则都会破坏「只由两个向量决定」这一条。维数越高，可选的垂直方向越多，公式也就越没有唯一性。</p></details></div>
+          <p class="ex"><span class="ex-num">2.</span> 四元数既能加又能乘还能除，看起来比向量完整得多。如果今天的教材改用四元数，学微积分的学生会失去什么、得到什么？提示：想想「功」与「力矩」在四元数里是怎样表示的。</p>
+          <div class="answer"><details><summary>看提示</summary><p>得到的是统一的乘法与可除性，失去的是直观：一个乘积里同时含有数和一个向量，读式子时得不停地拆。功是标量，力矩是向量，物理里本来就是两件事，捆在一起反而要多写解释。</p></details></div>
+          <p class="ex"><span class="ex-num">3.</span> 点法式与一般式是同一张平面的两种写法，为什么教材两个都保留？如果只保留一般式，哪些问题会变得难说？提示：从一般式能不能一眼看出平面过哪个点、法向量是什么、平行于哪张坐标面？</p>
+          <div class="answer"><details><summary>看提示</summary><p>一般式的系数直接给出法向量，却把「过哪一点」藏进了常数项；点法式相反。做题时先找点再找法向，或者先找法向再找点，两种顺序对应两种写法，缺一个就要多算一步。</p></details></div>
+        </div>
+      </div>
+
+      <h2 class="reveal">延伸阅读</h2>
+
+      <ul class="refs">
+        <li>同济大学数学系《高等数学》第七版下册，第八章第一至第六节。</li>
+        <li>笛卡尔《几何学》，莱顿，1637 年；中译见《笛卡尔几何》，武汉出版社。</li>
+        <li>蒙日《画法几何》，巴黎，1799 年；《分析在几何中的应用》，巴黎，1802 年。</li>
+        <li>哈密顿《四元数讲义》，都柏林，1853 年。</li>
+        <li>吉布斯与威尔逊《向量分析》，纽约，1901 年。</li>
+        <li>M. J. Crowe, A History of Vector Analysis, University of Notre Dame Press, 1967，四元数与向量记号的争论。</li>
+      </ul>
+
+    </article>
+  </div>
+
+  <div class="wrap">
+    <nav class="pager" aria-label="翻页">
+      <a class="pager-link prev" href="ch07.html"><span class="pager-dir">上一章</span><span class="pager-title">微分方程</span></a>
+      <a class="pager-link next" href="ch09.html"><span class="pager-dir">下一章</span><span class="pager-title">多元函数微分法及其应用</span></a>
+    </nav>
+  </div>
+
+</main>
+
+<footer class="footer field-dark">
+  <div class="wrap">
+    <p class="footer-mark">微积分</p>
+    <div class="footer-cols">
+      <div><p>一部由问题写成的历史。以数学家最初面对的难题为索引，重讲同济《高等数学》第七版的全部章节范围。</p></div>
+      <div><p><a href="index.html#map">章节地图</a></p><p><a href="ch00.html">从序章开始</a></p></div>
+      <div><p>图示为本页脚本绘制，公式由 KaTeX 排版。</p></div>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/katex/katex.min.js"></script>
+<script src="../assets/katex/auto-render.min.js"></script>
+<script src="../assets/site.js"></script>
+</body>
+</html>

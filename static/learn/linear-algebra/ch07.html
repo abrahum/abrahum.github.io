@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>第七章 相似与对角化 · 线性代数</title>
+<meta name="description" content="相似矩阵、相似不变量、可对角化的充要条件、代数重数与几何重数、实对称矩阵的正交对角化、若尔当标准型。">
+<link rel="stylesheet" href="../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="nav-brand" href="../index.html">数学基础课<span> 三门课，一套读法</span></a>
+    <nav class="nav-links" aria-label="主导航">
+      <a href="index.html#map">本课目录</a>
+      <a class="xl" href="../calculus/index.html">微积分</a>
+      <a class="xl" href="../probability/index.html">概率论</a>
+      <a class="xl" href="../complex/index.html">复变函数</a>
+      <a class="opt" href="ch08.html">下一章</a>
+    </nav>
+  </div>
+  <div class="nav-progress" aria-hidden="true"></div>
+</header>
+
+<main>
+
+  <section class="chapter">
+    <div class="wrap">
+      <div class="ch-hero-band">
+        <div>
+          <p class="ch-label reveal"><span>第七章</span><span class="ch-era">1858 年至 1870 年</span></p>
+          <h1 class="ch-title reveal reveal-2">相似与对角化</h1>
+          <p class="ch-deck reveal reveal-3">特征值给了我们一组方向，矩阵作用在上头只改长度。既然这样的方向存在，下一步就想把它们扶正，当新坐标轴来用。换基会改掉矩阵的样子，改不掉它的特征值，于是问题变成：一个矩阵能不能换到一组基下，恰好变成对角阵。</p>
+          <div class="ch-meta reveal reveal-3">
+            <div><strong>本章知识点</strong>相似矩阵、相似不变量、对角化的充要条件、重数关系、实对称矩阵的正交对角化、若尔当标准型</div>
+            <div><strong>历史坐标</strong>凯莱 1858，若尔当 1870，西尔维斯特与雅可比 1850 年代</div>
+            <div><strong>对应教材</strong>同济《线性代数》第六版第五章第一至四节</div>
+            <div><strong>前置</strong>特征值与特征向量、过渡矩阵、内积与施密特正交化</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap ch-body">
+    <aside class="rail">
+      <p class="rail-title">本章提纲</p>
+      <ol>
+        <li><a href="#s-1">换一组基，矩阵跟着变</a></li>
+        <li><a href="#s-2">相似能保住什么</a></li>
+        <li><a href="#s-3">什么时候能对角化</a></li>
+        <li><a href="#s-4">实对称矩阵：一定能对角化</a></li>
+        <li><a href="#s-5">若尔当标准型</a></li>
+        <li><a href="#s-manual">怎么算</a></li>
+        <li><a href="#s-examples">例题</a></li>
+        <li><a href="#s-exercises">习题</a></li>
+      </ol>
+      <p class="rail-title">历史坐标</p>
+      <p class="rail-who">凯莱 1858<br>若尔当 1870<br>西尔维斯特 1852<br>雅可比 1850 年代</p>
+    </aside>
+
+    <article class="prose">
+
+      <p class="lead reveal">第六章算出了特征值与特征向量，那是「找方向」的工作：矩阵沿某些方向作用，只把向量拉长或压短，方向原地不动。接下来的问题很直接：能不能把这几个方向当成新坐标轴，让矩阵在新坐标里就剩对角线上的几个数。1858 年凯莱先把这件事写成了矩阵之间的等价关系，12 年后若尔当补上了对不了角的那一批，再往后西尔维斯特与雅可比用它把二次型化成了平方和。</p>
+
+      <h2 id="s-1" class="reveal">一、换一组基，矩阵跟着变</h2>
+
+      <p>第五章算过坐标：同一支箭头，换一组基去量，得到的读数整列都换。矩阵是给线性变换配的记录，也躲不开这件事。变换本身不动，它把一支箭头送到另一处，这跟你怎么量没有关系，可一旦挑定基，前后的坐标都得用这组基来写，写出来的数字表就跟着变了。</p>
+
+      <p>设变换在旧基下的矩阵是 \(A\)，在新基下的矩阵是 \(B\)，\(P\) 是从新基到旧基的过渡矩阵，那么 \(B=P^{-1}AP\)。这个式子第五章推过一次，这里只要记住它描述的动作：先用 \(P\) 把新坐标翻译成旧坐标，让 \(A\) 干活，再用 \(P^{-1}\) 把结果翻译回去。三步连起来，效果等于在新基下直接用 \(B\)。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定义（相似矩阵）</p>
+        <p>设 \(A,B\) 都是 \(n\) 阶矩阵。若存在可逆矩阵 \(P\)，使 \(P^{-1}AP=B\)，则称 \(A\) 与 \(B\) <strong>相似</strong>，记作 \(A\sim B\)，\(P\) 叫相似变换矩阵。</p>
+      </div>
+
+      <p>相似是一个等价关系。\(A\) 与自己相似，取 \(P=E\) 即可；\(A\) 与 \(B\) 相似，把式子反过来写就得到 \(B\) 与 \(A\) 相似，那个矩阵是 \(P^{-1}\)；至于传递性，两个相似变换矩阵乘起来还是可逆矩阵。所以相似类里的矩阵地位完全平等，挑哪一个当代表都行。</p>
+
+      <div class="figure">
+        <!--FIG ch07_similar--><svg viewBox="0 0 720 380" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<text x="170.00" y="44.00" text-anchor="middle" font-size="15" fill="var(--ink)">基 e1、e2</text>
+<line x1="36.00" y1="268.00" x2="332.00" y2="268.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.45"/>
+<line x1="108.00" y1="78.00" x2="108.00" y2="344.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.45"/>
+<line x1="108.00" y1="268.00" x2="140.00" y2="268.00" stroke="var(--ink-3)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/><path d="M 132.57 270.97 L 140.00 268.00 L 132.57 265.03" fill="var(--ink-3)" stroke="var(--ink-3)" stroke-width="1" stroke-linejoin="round"/>
+<line x1="108.00" y1="268.00" x2="108.00" y2="236.00" stroke="var(--ink-3)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/><path d="M 110.97 243.43 L 108.00 236.00 L 105.03 243.43" fill="var(--ink-3)" stroke="var(--ink-3)" stroke-width="1" stroke-linejoin="round"/>
+<text x="144.00" y="284.00" text-anchor="start" font-size="13" fill="var(--ink-3)">e1</text>
+<text x="98.00" y="232.00" text-anchor="end" font-size="13" fill="var(--ink-3)">e2</text>
+<line x1="108.00" y1="268.00" x2="172.00" y2="236.00" stroke="var(--ink-2)" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round"/><path d="M 164.69 244.22 L 172.00 236.00 L 161.04 236.92" fill="var(--ink-2)" stroke="var(--ink-2)" stroke-width="1" stroke-linejoin="round"/>
+<line x1="108.00" y1="268.00" x2="268.00" y2="140.00" stroke="var(--accent-line)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M 262.57 149.57 L 268.00 140.00 L 257.47 143.20" fill="var(--accent-line)" stroke="var(--accent-line)" stroke-width="1" stroke-linejoin="round"/>
+<circle cx="108.00" cy="268.00" r="3.4" fill="var(--prussian)"/>
+<text x="180.00" y="242.00" text-anchor="start" font-size="15" fill="var(--ink)">v</text>
+<text x="262.00" y="130.00" text-anchor="end" font-size="15" fill="var(--ink)">Av</text>
+<text x="170.00" y="356.00" text-anchor="middle" font-size="13" fill="var(--ink-3)">坐标 (2, 1) 与 (5, 4)</text>
+<text x="530.00" y="44.00" text-anchor="middle" font-size="15" fill="var(--ink)">基 b1、b2</text>
+<line x1="400.00" y1="268.00" x2="700.00" y2="268.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.45"/>
+<line x1="468.00" y1="78.00" x2="468.00" y2="344.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.45"/>
+<line x1="468.00" y1="268.00" x2="500.00" y2="236.00" stroke="var(--ink-3)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/><path d="M 496.84 243.35 L 500.00 236.00 L 492.65 239.16" fill="var(--ink-3)" stroke="var(--ink-3)" stroke-width="1" stroke-linejoin="round"/>
+<line x1="468.00" y1="268.00" x2="500.00" y2="300.00" stroke="var(--ink-3)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/><path d="M 492.65 296.84 L 500.00 300.00 L 496.84 292.65" fill="var(--ink-3)" stroke="var(--ink-3)" stroke-width="1" stroke-linejoin="round"/>
+<text x="504.00" y="234.00" text-anchor="start" font-size="13" fill="var(--ink-3)">b1</text>
+<text x="504.00" y="314.00" text-anchor="start" font-size="13" fill="var(--ink-3)">b2</text>
+<line x1="468.00" y1="268.00" x2="516.00" y2="220.00" stroke="var(--ink-3)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="5 5"/>
+<line x1="516.00" y1="220.00" x2="532.00" y2="236.00" stroke="var(--ink-3)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="5 5"/>
+<circle cx="516.00" cy="220.00" r="2.6" fill="var(--ink-3)"/>
+<line x1="468.00" y1="268.00" x2="612.00" y2="124.00" stroke="var(--ink-3)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="5 5"/>
+<line x1="612.00" y1="124.00" x2="628.00" y2="140.00" stroke="var(--ink-3)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="5 5"/>
+<circle cx="612.00" cy="124.00" r="2.6" fill="var(--ink-3)"/>
+<line x1="468.00" y1="268.00" x2="532.00" y2="236.00" stroke="var(--ink-2)" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round"/><path d="M 524.69 244.22 L 532.00 236.00 L 521.04 236.92" fill="var(--ink-2)" stroke="var(--ink-2)" stroke-width="1" stroke-linejoin="round"/>
+<line x1="468.00" y1="268.00" x2="628.00" y2="140.00" stroke="var(--accent-line)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M 622.57 149.57 L 628.00 140.00 L 617.47 143.20" fill="var(--accent-line)" stroke="var(--accent-line)" stroke-width="1" stroke-linejoin="round"/>
+<circle cx="468.00" cy="268.00" r="3.4" fill="var(--prussian)"/>
+<text x="540.00" y="242.00" text-anchor="start" font-size="15" fill="var(--ink)">v</text>
+<text x="622.00" y="130.00" text-anchor="end" font-size="15" fill="var(--ink)">Av</text>
+<text x="530.00" y="356.00" text-anchor="middle" font-size="13" fill="var(--ink-3)">坐标 (1.5, 0.5) 与 (4.5, 0.5)</text>
+<text x="40.00" y="74.00" text-anchor="start" font-size="14" fill="var(--ink-2)">P = (b1 b2)</text>
+<text x="700.00" y="74.00" text-anchor="end" font-size="14" fill="var(--ink-2)">P⁻¹AP = diag(3, 1)</text>
+</svg>
+<!--/FIG ch07_similar-->
+        <figcaption class="figcaption"><b>同一个变换，两组基，两个矩阵。</b>箭头在图上没动，读数从 (2, 1) 变成 (1.5, 0.5)。右图那些虚线是沿 b1、b2 量出来的分量，两个矩阵由 P 连成相似。</figcaption>
+      </div>
+
+      <p>挑选代表的标准很好定：哪个好算就用哪个。对角阵在这一项上无人能敌，乘方只把对角线上的数各自乘方，求逆只把每个数取倒数，解方程组更是一眼到底。相似要回答的问题于是变得具体，这一个相似类里到底有没有对角阵，如果有，把它找出来。</p>
+
+      <div class="archive reveal">
+        <p class="archive-when">1858 年，剑桥</p>
+        <h3>凯莱把矩阵当成一个东西</h3>
+        <p class="archive-quote">「同一个线性变换，换一组坐标来写，得到的矩阵彼此只差一次相似变换。」（译文）</p>
+        <p class="archive-source">凯莱《矩阵论稿》，《纯粹与应用数学杂志》第 50 卷，1858 年</p>
+        <p>凯莱第一次把矩阵当成可以相加、相乘的对象，也注意到换基不改变它的特征方程。他的对角化只覆盖特征向量够用的那一批，西尔维斯特与雅可比后来把它铺到二次型上。</p>
+      </div>
+
+      <h2 id="s-2" class="reveal">二、相似能保住什么</h2>
+
+      <p>找代表之前，先弄清哪些东西换基也换不掉。特征多项式就换不掉：设 \(B=P^{-1}AP\)，则</p>
+
+      \[ |\lambda E-B|=|P^{-1}(\lambda E-A)P|=|P^{-1}|\cdot|\lambda E-A|\cdot|P|=|\lambda E-A|, \]
+
+      <p>两个行列式逐项相等，特征值连同各自的重数一起相同。这条计算只用了一个事实：行列式对乘法可分，而 \(|P^{-1}|\) 与 \(|P|\) 互为倒数，乘起来是 1。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定理（相似不变量）</p>
+        <p>相似矩阵有相同的特征多项式，因而特征值相同；它们的行列式、迹、秩也相同。反过来不成立。</p>
+      </div>
+
+      <p>行列式与迹跟着特征多项式走，因为 \(|A|\) 等于全部特征值之积，\(\operatorname{tr}(A)\) 等于全部特征值之和，这两个数由多项式直接读得。秩要走另一条路：\(P\) 可逆，乘一个可逆矩阵不改变秩，所以 \(r(B)=r(A)\)。四条不变量都是「否证工具」，算出来对不上，立刻可以断定两个矩阵不相似，省掉找 \(P\) 的工夫。</p>
+
+      <p>反过来那一句要靠例子撑住。单位阵 \(E\) 与剪切阵 \(\left(\begin{smallmatrix}1&amp;1\\0&amp;1\end{smallmatrix}\right)\) 的特征多项式都是 \((\lambda-1)^2\)，行列式都是 1，迹都是 2，秩都是 2，可它们并不相似：若 \(A\) 与 \(E\) 相似，则 \(P^{-1}EP=E\)，相似于 \(E\) 的矩阵只有 \(E\) 自己。要判相似，还得把特征子空间的维数搬出来，这件事留到下一节。</p>
+
+      <details class="fold">
+        <summary>特征值一样却不相似，差的那一点在哪里</summary>
+        <p>差在特征子空间的维数。剪切阵只有一条特征方向，解 \((\lambda E-A)x=0\) 得到的一维空间装不下两个线性无关的向量；单位阵的每个方向都是特征方向。下一节的两个重数正是给这个差别准备的刻度，可对角化的判据就写在它们身上。</p>
+      </details>
+
+      <h2 id="s-3" class="reveal">三、什么时候能对角化</h2>
+
+      <p>对角化的目标写出来很短：找一个可逆矩阵 \(P\)，使 \(P^{-1}AP=\Lambda\)，其中 \(\Lambda\) 是对角阵。两边左乘 \(P\)，得 \(AP=P\Lambda\)。设 \(P\) 的列是 \(p_1,\dots,p_n\)，\(\Lambda\) 的对角元是 \(\lambda_1,\dots,\lambda_n\)，那么 \(AP\) 的第 \(j\) 列是 \(Ap_j\)，\(P\Lambda\) 的第 \(j\) 列是 \(\lambda_jp_j\)，逐列比较就得到 \(Ap_j=\lambda_jp_j\)。</p>
+
+      <p>这说明 \(P\) 的每一列都得是 \(A\) 的特征向量，\(\lambda_j\) 是对应的特征值。\(P\) 还要求可逆，也就是这 \(n\) 列线性无关。反方向也通：手上凑够 \(n\) 个线性无关的特征向量，按列排成 \(P\)，上面那串等式倒着推一遍，\(P^{-1}AP=\Lambda\) 自动成立，连 \(P^{-1}\) 的形状都不必先知道。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定理（对角化的充要条件）</p>
+        <p>\(n\) 阶矩阵 \(A\) 与对角阵相似，当且仅当 \(A\) 有 \(n\) 个线性无关的特征向量。此时 \(\Lambda\) 的对角元是这些特征向量对应的特征值，\(P\) 的列按同样的次序排列。</p>
+      </div>
+
+      <p>问题由此推回到一句数数的话：特征向量够不够 \(n\) 个。特征向量总是成堆出现的，属于 \(\lambda_0\) 的全部特征向量添上零向量，组成齐次方程组 \((\lambda_0E-A)x=0\) 的解空间，这个解空间的维数 \(n-r(\lambda_0E-A)\) 叫 \(\lambda_0\) 的<strong>几何重数</strong>，它数的就是能挑出的线性无关特征向量的个数。</p>
+
+      <p>另一个重数从特征多项式上读。<strong>代数重数</strong>是 \(\lambda_0\) 作为 \(|\lambda E-A|\) 的根出现的次数，也就是因式 \((\lambda-\lambda_0)\) 的幂次。两个重数通常不相等，比较它们的大小就能判断对角化的成败。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定理（两个重数的关系）</p>
+        <p>设 \(\lambda_0\) 是 \(A\) 的 \(k\) 重特征值，它的几何重数为 \(m\)，则 \(1\le m\le k\)。\(A\) 可对角化的充要条件是每个特征值的几何重数都等于代数重数，也就是说，各特征值的几何重数加起来正好等于 \(n\)。</p>
+      </div>
+
+      <p>这两个数之间的差额是整件事的关键。差额全为零时，属于不同特征值的特征向量组之间自动线性无关，拼起来正好 \(n\) 个，按列排成 \(P\) 就完事。只要有一个特征值的几何重数小于代数重数，能挑出的向量就凑不满 \(n\) 个，对角化在那一步失败。\(n\) 个特征值互不相同时每个代数重数都是 1，几何重数只能是 1，差额自然为零，所以「特征值互不相同」是一条现成的充分条件。</p>
+
+      <div class="figure">
+        <!--FIG ch07_shear--><svg viewBox="0 0 720 352" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<text x="180.00" y="44.00" text-anchor="middle" font-size="15" fill="var(--ink)">两个特征方向</text>
+<line x1="24.00" y1="246.00" x2="330.00" y2="246.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.4"/>
+<line x1="96.00" y1="78.00" x2="96.00" y2="330.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.4"/>
+<line x1="96.00" y1="246.00" x2="174.20" y2="167.80" stroke="var(--ink-3)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 6"/>
+<line x1="96.00" y1="246.00" x2="174.20" y2="324.20" stroke="var(--ink-3)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 6"/>
+<line x1="96.00" y1="246.00" x2="17.80" y2="324.20" stroke="var(--ink-3)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 6"/>
+<line x1="96.00" y1="246.00" x2="17.80" y2="167.80" stroke="var(--ink-3)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 6"/>
+<line x1="96.00" y1="246.00" x2="155.80" y2="186.20" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="5 5"/>
+<line x1="96.00" y1="246.00" x2="128.20" y2="278.20" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="5 5"/>
+<line x1="96.00" y1="246.00" x2="188.00" y2="218.40" stroke="var(--accent-line)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M 179.39 225.24 L 188.00 218.40 L 177.04 217.43" fill="var(--accent-line)" stroke="var(--accent-line)" stroke-width="1" stroke-linejoin="round"/>
+<circle cx="96.00" cy="246.00" r="3.4" fill="var(--prussian)"/>
+<text x="196.00" y="222.40" text-anchor="start" font-size="15" fill="var(--ink)">v</text>
+<text x="151.80" y="176.20" text-anchor="end" font-size="14" fill="var(--ink-2)">λ1 = 3</text>
+<text x="134.20" y="296.20" text-anchor="start" font-size="14" fill="var(--ink-2)">λ2 = 1</text>
+<text x="180.00" y="342.00" text-anchor="middle" font-size="13" fill="var(--ink-3)">两条方向张满平面，v 拆成两段</text>
+<text x="545.00" y="44.00" text-anchor="middle" font-size="15" fill="var(--ink)">一条特征方向</text>
+<line x1="378.00" y1="246.00" x2="700.00" y2="246.00" stroke="var(--ink-3)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 6" opacity="0.8"/>
+<line x1="430.00" y1="74.00" x2="430.00" y2="330.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.4"/>
+<text x="696.00" y="236.00" text-anchor="end" font-size="13" fill="var(--ink-3)">不变方向</text>
+<line x1="430.00" y1="246.00" x2="430.00" y2="200.00" stroke="var(--ink-2)" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round"/><path d="M 433.34 208.36 L 430.00 200.00 L 426.66 208.36" fill="var(--ink-2)" stroke="var(--ink-2)" stroke-width="1" stroke-linejoin="round"/>
+<line x1="430.00" y1="246.00" x2="476.00" y2="200.00" stroke="var(--accent-line)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M 472.45 208.27 L 476.00 200.00 L 467.73 203.55" fill="var(--accent-line)" stroke="var(--accent-line)" stroke-width="1" stroke-linejoin="round"/>
+<circle cx="476.00" cy="200.00" r="3.0" fill="var(--accent-line)"/>
+<text x="476.00" y="190.00" text-anchor="middle" font-size="13" fill="var(--ink-2)">S w</text>
+<line x1="430.00" y1="246.00" x2="522.00" y2="200.00" stroke="var(--accent-line)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M 516.02 206.72 L 522.00 200.00 L 513.03 200.75" fill="var(--accent-line)" stroke="var(--accent-line)" stroke-width="1" stroke-linejoin="round"/>
+<circle cx="522.00" cy="200.00" r="3.0" fill="var(--accent-line)"/>
+<text x="522.00" y="190.00" text-anchor="middle" font-size="13" fill="var(--ink-2)">S²w</text>
+<line x1="430.00" y1="246.00" x2="568.00" y2="200.00" stroke="var(--accent-line)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M 561.13 205.81 L 568.00 200.00 L 559.02 199.48" fill="var(--accent-line)" stroke="var(--accent-line)" stroke-width="1" stroke-linejoin="round"/>
+<circle cx="568.00" cy="200.00" r="3.0" fill="var(--accent-line)"/>
+<text x="568.00" y="190.00" text-anchor="middle" font-size="13" fill="var(--ink-2)">S³w</text>
+<circle cx="430.00" cy="246.00" r="3.4" fill="var(--prussian)"/>
+<text x="418.00" y="204.00" text-anchor="end" font-size="15" fill="var(--ink)">w</text>
+<text x="545.00" y="342.00" text-anchor="middle" font-size="13" fill="var(--ink-3)">每作用一次，箭头向 x 轴贴一段</text>
+</svg>
+<!--/FIG ch07_shear-->
+        <figcaption class="figcaption"><b>左边能拆，右边拆不开。</b>左图的向量沿两条特征方向分成两段；右图的剪切只有一个不变方向，反复作用时箭头被推着向它贴近，始终凑不出第二条。</figcaption>
+      </div>
+
+      <details class="fold">
+        <summary>几何重数凭什么不会超过代数重数</summary>
+        <p>取 \(\lambda_0\) 的特征子空间的一组基 \(q_1,\dots,q_m\)，把它扩成整个空间的一组基，用这组基写出 \(A\) 的相似矩阵，形状是分块上三角：左上角是 \(\lambda_0E\)，右下角是一块 \((n-m)\) 阶矩阵。分块上三角的行列式等于对角两块之积，于是特征多项式里至少含有 \((\lambda-\lambda_0)^m\)。所以 \(m\le k\)。</p>
+      </details>
+
+      <h2 id="s-4" class="reveal">四、实对称矩阵：一定能对角化</h2>
+
+      <p>实对称矩阵指满足 \(A^{T}=A\) 的实矩阵。二次型、协方差阵、振动问题的刚度矩阵都长这个样子，它们不但是可对角化的，挑出来的那一组 \(P\) 还能挑成正交矩阵，用起来比一般情形省一道求逆的手续。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定理（实对称矩阵的两条性质）</p>
+        <p>实对称矩阵的特征值全是实数；属于不同特征值的特征向量互相正交。</p>
+      </div>
+
+      <p>第二条的证明只用对称性。设 \(A\alpha=\lambda\alpha\)，\(A\beta=\mu\beta\)，在第一式两边左乘 \(\beta^{T}\)，再用 \(A^{T}=A\) 把 \(A\) 从 \(\alpha\) 那一侧挪到 \(\beta\) 那一侧，得 \(\lambda\beta^{T}\alpha=\mu\beta^{T}\alpha\)。\(\lambda\ne\mu\) 时只剩 \(\beta^{T}\alpha=0\)，两个向量正交。第一条要把矩阵放到复数上算，用共轭转置做同样的挪动，会得到 \(\bar\lambda=\lambda\)。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定理（主轴定理）</p>
+        <p>设 \(A\) 是 \(n\) 阶实对称矩阵，则存在正交矩阵 \(Q\)，使 \(Q^{T}AQ=Q^{-1}AQ=\Lambda\) 为对角阵，对角元是 \(A\) 的全部特征值。</p>
+      </div>
+
+      <p>找 \(Q\) 的步骤是固定的：求全部特征值；对每个特征值解 \((\lambda E-A)x=0\) 取基础解系；同一个特征值里若有多个向量，先用施密特正交化把它们弄成两两正交；再逐个单位化；最后按列排成 \(Q\)。因为 \(Q\) 是正交矩阵，\(Q^{-1}\) 就是 \(Q^{T}\)，求逆这一步整个省掉，这也是实对称情形比一般情形好算的地方。</p>
+
+      <div class="figure">
+        <!--FIG ch07_spectral--><svg viewBox="0 0 720 440" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<polygon points="276.01,214.51 276.42,208.05 277.44,202.02 279.00,195.66 281.36,189.41 284.51,183.34 288.19,177.52 292.76,171.85 298.22,166.54 304.63,161.71 311.20,157.89 318.97,154.61 325.98,152.61 333.45,151.43 339.48,151.00 348.45,151.57 357.96,153.58 364.63,155.95 371.06,159.07 377.04,162.81 382.35,167.07 384.86,169.57 389.46,174.39 393.11,179.55 394.88,182.14 397.75,187.63 398.91,190.19 401.01,195.91 401.72,198.44 403.03,204.32 403.37,206.83 403.89,212.79 403.90,215.30 403.61,221.26 403.30,223.77 402.22,229.68 401.54,232.20 399.67,237.97 398.56,240.53 395.91,246.08 394.24,248.67 390.81,253.92 386.39,258.84 384.08,261.36 378.96,265.77 373.14,269.69 366.84,273.03 360.27,275.68 353.67,277.49 350.03,278.06 344.83,278.79 339.93,278.91 331.51,278.43 324.57,277.11 317.33,274.85 310.46,271.72 303.30,267.43 297.15,262.53 291.87,257.19 287.43,251.49 283.82,245.53 281.02,239.61 278.69,233.35 277.16,226.98 276.40,220.96" fill="none" stroke="var(--ink-3)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="199.09,265.77 199.59,261.31 200.54,256.51 201.88,251.84 203.85,246.77 206.03,241.87 209.00,236.55 212.05,231.43 216.03,225.88 220.04,220.50 225.04,214.75 230.15,209.07 236.22,203.14 242.69,197.09 249.92,190.98 258.20,184.46 266.82,178.16 276.48,171.75 288.40,164.38 300.36,157.68 313.93,150.86 325.31,145.72 329.94,143.82 341.55,139.22 349.67,136.41 353.28,135.22 360.33,132.92 367.98,130.86 377.80,128.32 390.11,125.86 401.34,124.27 411.92,123.36 413.21,123.31 421.75,123.05 430.55,123.32 438.04,124.22 443.19,125.01 449.40,126.54 453.14,127.68 458.22,129.74 461.13,131.06 467.50,135.01 472.45,139.45 476.11,144.32 478.54,149.58 479.32,151.28 480.66,156.86 480.93,162.76 480.10,170.81 478.46,177.25 475.80,183.95 474.92,186.02 471.42,192.93 466.91,200.10 459.67,209.82 453.13,217.45 445.47,225.30 442.46,228.07 436.67,233.37 433.43,236.23 423.00,244.65 410.99,253.36 397.05,262.39 387.62,267.86 380.45,271.86 369.98,277.26 358.56,282.60 346.46,287.73 333.81,292.48 321.07,296.65 311.13,299.34 304.26,301.19 297.24,302.64 294.47,303.17 286.32,304.70 275.69,306.06 272.12,306.33 261.89,306.97 250.69,306.75 241.19,305.78 233.11,304.20 226.36,302.08 219.78,299.45 214.90,296.62 210.61,293.39 207.13,290.04 204.44,286.39 202.18,282.61 200.74,278.65 199.59,274.49 199.18,270.26" fill="var(--fig-fill)" stroke="var(--accent-line)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+<line x1="202.17" y1="282.64" x2="340.00" y2="215.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="5 5"/>
+<line x1="340.00" y1="215.00" x2="477.83" y2="147.36" stroke="var(--ink-2)" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/><path d="M 471.12 154.78 L 477.83 147.36 L 467.86 148.12" fill="var(--ink-2)" stroke="var(--ink-2)" stroke-width="1" stroke-linejoin="round"/>
+<line x1="477.83" y1="147.36" x2="500.00" y2="143.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="500.00" y="143.00" text-anchor="start" font-size="14" fill="var(--ink)">u1　λ1 = 2.4</text>
+<line x1="366.91" y1="272.74" x2="340.00" y2="215.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="5 5"/>
+<line x1="340.00" y1="215.00" x2="313.09" y2="157.26" stroke="var(--ink-2)" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/><path d="M 320.38 164.11 L 313.09 157.26 L 313.65 167.25" fill="var(--ink-2)" stroke="var(--ink-2)" stroke-width="1" stroke-linejoin="round"/>
+<line x1="313.09" y1="157.26" x2="296.00" y2="130.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="296.00" y="130.00" text-anchor="end" font-size="14" fill="var(--ink)">u2　λ2 = 1.2</text>
+<line x1="327.11" y1="191.44" x2="340.00" y2="215.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="5 5"/>
+<line x1="340.00" y1="215.00" x2="352.89" y2="238.56" stroke="var(--ink-2)" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/><path d="M 345.18 232.19 L 352.89 238.56 L 351.68 228.63" fill="var(--ink-2)" stroke="var(--ink-2)" stroke-width="1" stroke-linejoin="round"/>
+<line x1="352.89" y1="238.56" x2="392.00" y2="312.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="392.00" y="312.00" text-anchor="start" font-size="14" fill="var(--ink)">u3　λ3 = 0.75</text>
+<circle cx="340.00" cy="215.00" r="3.4" fill="var(--prussian)"/>
+<text x="360.00" y="396.00" text-anchor="middle" font-size="13.5" fill="var(--ink-2)">单位球的像是一个椭球，三条半轴互相垂直</text>
+<text x="360.00" y="418.00" text-anchor="middle" font-size="13.5" fill="var(--ink-2)">半轴方向是特征向量，半轴长度是特征值</text>
+</svg>
+<!--/FIG ch07_spectral-->
+        <figcaption class="figcaption"><b>单位球被压成一个椭球。</b>三条半轴落在三个互相垂直的特征方向上，长度就是特征值。图中淡色的圆是原来的单位球，用来看清哪一头压得多。</figcaption>
+      </div>
+
+      <p>这条定理最常用的地方是把二次曲面摆正。曲面方程 \(x^{T}Ax=1\) 里的 \(A\) 是实对称矩阵，作正交变换 \(x=Qy\)，方程立刻变成 \(\lambda_1y_1^2+\lambda_2y_2^2+\lambda_3y_3^2=1\)，交叉项一个不剩，三条半轴的长度是 \(1/\sqrt{|\lambda_i|}\)。拿 \(5x_1^2+4x_1x_2+2x_2^2=1\) 试一遍：\(A=\left(\begin{smallmatrix}5&amp;2\\2&amp;2\end{smallmatrix}\right)\) 的特征值是 1 与 6，特征向量 \((1,-2)\) 与 \((2,1)\) 已经正交，转过去得 \(y_1^2+6y_2^2=1\)，一条半轴为 1 与 \(1/\sqrt{6}\) 的椭圆。</p>
+
+      <details class="fold">
+        <summary>同一个特征值里的那几个向量为什么要再做正交化</summary>
+        <p>因为定理只保证不同特征值的特征向量正交，同一个特征值的特征子空间里，随便取的基底一般并不垂直。比如 \(\lambda_0\) 是二重的，解出来的两个向量只是线性无关。对它们做一次施密特正交化，正交性就补齐了，\(Q\) 才成为正交矩阵。</p>
+      </details>
+
+      <h2 id="s-5" class="reveal">五、若尔当标准型</h2>
+
+      <p>对不了角的矩阵很多，它们也需要一个「最简代表」。办法是把单位阵换成 \(\lambda E\)，再在对角线上面留一排 1，得到 \(\left(\begin{smallmatrix}\lambda&amp;1\\0&amp;\lambda\end{smallmatrix}\right)\) 这样的块，再把块沿对角线拼起来。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定义（若尔当块与若尔当标准型）</p>
+        <p>主对角线上全是 \(\lambda\)、紧挨着的上一条对角线上全是 1、其余位置全是 0 的 \(k\) 阶矩阵叫 \(k\) 阶若尔当块，记作 \(J_k(\lambda)\)。由若干个若尔当块拼成的块对角矩阵叫若尔当标准型。</p>
+      </div>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定理（若尔当标准型的存在与唯一）</p>
+        <p>任一复方阵 \(A\) 都相似于一个若尔当标准型；除去各块的排列次序，这个标准型由 \(A\) 唯一决定。</p>
+      </div>
+
+      <p>若尔当块做的事很具体：沿一个方向伸缩 \(\lambda\) 倍，同时把另一个方向往它身上推。二阶块 \(J_2(1)\) 就是第二节那个剪切，它的特征子空间只有一维，代数重数 2，几何重数 1，差额 1 恰好对应一个 2 阶块。差额为零的地方，块退化成 1 阶，标准型就是对角阵，所以对角化只是若尔当标准型的一个特例。</p>
+
+      <p>实际判断时用不着把标准型算出来，两个重数就够了。差额全为零，标准型全由 1 阶块组成，就是对角阵；某处差额是 \(d\)，那个特征值的块总共比 1 阶多占了 \(d\) 个位置。考试问「能否对角化」，回答的落点永远在这组比较上。</p>
+
+      <div class="archive reveal">
+        <p class="archive-when">1870 年，巴黎</p>
+        <h3>若尔当补上剩下的那一批</h3>
+        <p class="archive-quote">「把一个置换拆成循环，把一个矩阵拆成块，剩下的问题都落在一块之内。」（译文）</p>
+        <p class="archive-source">若尔当《置换与可解方程论》，1870 年</p>
+        <p>若尔当研究置换群时得到这个标准型，用的是群论语言，后来才改写成矩阵的样子。它把「能不能对角化」换成了「块有多大」：对不了角的矩阵，标准型里就有 2 阶以上的块，块的大小由两个重数的差额定下来。</p>
+      </div>
+
+      <h2 id="s-manual" class="reveal">怎么算</h2>
+
+      <ul>
+        <li><strong>先算特征值。</strong>解 \(|\lambda E-A|=0\)。三阶矩阵先看行和是否相等，相等时 \(\lambda\) 等于行和是一个根，提走它剩下的就是二次式。</li>
+        <li><strong>再算每个特征值的特征向量。</strong>解 \((\lambda E-A)x=0\) 取基础解系，解里自由未知数的个数就是几何重数，顺手记下来。</li>
+        <li><strong>比两个重数。</strong>几何重数等于代数重数，能对角化；小一个，就不能。这一步比求 \(P\) 更要紧，判错了后面全白做。</li>
+        <li><strong>写 \(P\) 要对齐次序。</strong>第 \(j\) 列放 \(\lambda_j\) 的特征向量，\(\Lambda\) 的第 \(j\) 个对角元就得是 \(\lambda_j\)，顺序错了乘积就不是对角阵。</li>
+        <li><strong>实对称就多走两步。</strong>同一特征值内部先施密特正交化，再全部单位化，\(P\) 直接是正交矩阵，\(P^{-1}=P^{T}\)，不必求逆。</li>
+      </ul>
+
+      <details class="fold">
+        <summary>验算 \(P^{-1}AP\) 有没有算对</summary>
+        <p>不用真的乘三遍矩阵，检查两件事就够：\(\Lambda\) 对角线上第 \(j\) 个数应当等于 \(P\) 第 \(j\) 列对应的那个特征值；\(\operatorname{tr}(\Lambda)\) 应当等于 \(\operatorname{tr}(A)\)，\(|\Lambda|\) 应当等于 \(|A|\)。这两条对不上，一定是 \(P\) 的列排错了或者特征向量算错了。</p>
+      </details>
+
+      <h2 id="s-examples" class="reveal">例题</h2>
+
+      <div class="example">
+        <p class="example-head">例 <span>1</span>　把 \(A=\left(\begin{smallmatrix}2&amp;1\\1&amp;2\end{smallmatrix}\right)\) 对角化，写出 \(P\) 与 \(\Lambda\)。</p>
+        <p class="solution">\(|\lambda E-A|=(\lambda-2)^2-1=(\lambda-3)(\lambda-1)\)，特征值 3 与 1。解 \((3E-A)x=0\) 得 \(x_1=x_2\)，取 \((1,1)\)；解 \((E-A)x=0\) 得 \(x_1=-x_2\)，取 \((1,-1)\)。两者线性无关，\(P=\left(\begin{smallmatrix}1&amp;1\\1&amp;-1\end{smallmatrix}\right)\)，\(P^{-1}AP=\operatorname{diag}(3,1)\)。</p>
+      </div>
+
+      <div class="example">
+        <p class="example-head">例 <span>2</span>　判断 \(A=\left(\begin{smallmatrix}3&amp;1&amp;0\\0&amp;3&amp;0\\0&amp;0&amp;1\end{smallmatrix}\right)\) 能否对角化。</p>
+        <p class="solution">上三角矩阵的对角元就是特征值，3 是二重根，1 是一重根。\(3E-A\) 的第一行是 \((0,-1,0)\)、第三行是 \((0,0,2)\)，秩为 2，几何重数 \(3-2=1\)，小于代数重数 2，凑不出三个线性无关的特征向量，不能对角化。</p>
+      </div>
+
+      <div class="example">
+        <p class="example-head">例 <span>3</span>　求正交矩阵 \(Q\)，使 \(Q^{T}AQ\) 为对角阵，其中 \(A=\left(\begin{smallmatrix}0&amp;1&amp;1\\1&amp;0&amp;1\\1&amp;1&amp;0\end{smallmatrix}\right)\)。</p>
+        <p class="solution">\(|\lambda E-A|=(\lambda-2)(\lambda+1)^2\)，特征值 2 与 \(-1\)（二重）。\(\lambda=2\) 得 \((1,1,1)\)，单位化后是 \((1,1,1)/\sqrt{3}\)；\(\lambda=-1\) 时解 \(x_1+x_2+x_3=0\)，取 \((1,-1,0)/\sqrt{2}\) 与 \((1,1,-2)/\sqrt{6}\)，它们恰好已经正交。三列排成 \(Q\)，得 \(Q^{T}AQ=\operatorname{diag}(2,-1,-1)\)。</p>
+      </div>
+
+      <h2 id="s-exercises" class="reveal">习题</h2>
+
+      <div class="exercises">
+
+        <div class="ex-group">
+          <p class="ex-group-head">A 档 <span>巩固定义与基本计算，每题五分钟内</span></p>
+
+          <p class="ex"><span class="ex-num">1.</span> 写出相似矩阵的定义，并验证 \(\left(\begin{smallmatrix}2&amp;1\\1&amp;2\end{smallmatrix}\right)\) 与 \(\operatorname{diag}(3,1)\) 相似。</p>
+          <div class="answer"><details><summary>看答案</summary><p>存在可逆矩阵 \(P\) 使 \(P^{-1}AP=B\) 时称 \(A\) 与 \(B\) 相似。取 \(P=\left(\begin{smallmatrix}1&amp;1\\1&amp;-1\end{smallmatrix}\right)\)，它的两列分别是特征值 3 与 1 的特征向量，直接算出 \(P^{-1}AP=\operatorname{diag}(3,1)\)。</p></details></div>
+
+          <p class="ex"><span class="ex-num">2.</span> 求 \(A=\left(\begin{smallmatrix}3&amp;1\\0&amp;2\end{smallmatrix}\right)\) 的特征值、行列式与迹。</p>
+          <div class="answer"><details><summary>看答案</summary><p>上三角矩阵的对角元就是特征值，3 与 2，都是单根，所以可对角化。\(|A|=6\)，\(\operatorname{tr}(A)=5\)，正好等于两个特征值之积与之和。</p></details></div>
+
+          <p class="ex"><span class="ex-num">3.</span> 判断 \(\left(\begin{smallmatrix}1&amp;1\\0&amp;1\end{smallmatrix}\right)\) 能否对角化。</p>
+          <div class="answer"><details><summary>看答案</summary><p>特征值只有 1，代数重数 2。解 \((E-A)x=0\) 时第二个未知数必须为零，几何重数 1，小于 2，不能对角化。</p></details></div>
+
+          <p class="ex"><span class="ex-num">4.</span> 三阶矩阵 \(A\) 的特征值为 1、2、2，且 \(r(2E-A)=2\)，它能否对角化？</p>
+          <div class="answer"><details><summary>看答案</summary><p>\(\lambda=2\) 的几何重数是 \(3-2=1\)，代数重数 2，差额为 1，不能对角化。1 是一重根，几何重数必为 1，不参与判断。</p></details></div>
+
+          <p class="ex"><span class="ex-num">5.</span> 设 \(A=\operatorname{diag}(2,-1,3)\)，求 \(A^4\) 与 \(A^{-1}\)。</p>
+          <div class="answer"><details><summary>看答案</summary><p>对角阵逐元素运算：\(A^{4}=\operatorname{diag}(16,1,81)\)，\(A^{-1}=\operatorname{diag}(1/2,-1,1/3)\)。三个特征值互不相同，这个矩阵本来就已是对角阵。</p></details></div>
+
+          <p class="ex"><span class="ex-num">6.</span> 实对称矩阵 \(A\) 的特征值为 1、1、\(-2\)，求 \(|A|\) 与 \(\operatorname{tr}(A)\)。</p>
+          <div class="answer"><details><summary>看答案</summary><p>\(|A|=1\times1\times(-2)=-2\)，\(\operatorname{tr}(A)=1+1-2=0\)。这两个数由特征值完全定死，与特征向量的取法无关。</p></details></div>
+        </div>
+
+        <div class="ex-group">
+          <p class="ex-group-head">B 档 <span>综合题，接近期末与考研难度</span></p>
+
+          <p class="ex"><span class="ex-num">1.</span> 设 \(A=\left(\begin{smallmatrix}2&amp;1\\1&amp;2\end{smallmatrix}\right)\)，求 \(A^{n}\)。</p>
+          <div class="answer"><details><summary>看答案</summary><p>\(P^{-1}AP=\operatorname{diag}(3,1)\)，于是 \(A^{n}=P\operatorname{diag}(3^{n},1)P^{-1}=\frac{1}{2}\left(\begin{smallmatrix}3^{n}+1&amp;3^{n}-1\\3^{n}-1&amp;3^{n}+1\end{smallmatrix}\right)\)。乘方之所以好算，是因为 \(P\) 把矩阵搬到了对角形态下。</p></details></div>
+
+          <p class="ex"><span class="ex-num">2.</span> \(A=\left(\begin{smallmatrix}2&amp;0&amp;0\\0&amp;2&amp;0\\1&amp;0&amp;1\end{smallmatrix}\right)\) 能否对角化？可以就写出 \(P\)。</p>
+          <div class="answer"><details><summary>看答案</summary><p>\(|\lambda E-A|=(\lambda-2)^2(\lambda-1)\)。\(\lambda=2\) 时 \(2E-A\) 只有一行非零，秩为 1，几何重数 \(3-1=2\)，等于代数重数，可以对角化。取 \((1,0,1)\)、\((0,1,0)\) 与 \(\lambda=1\) 的 \((0,0,1)\) 排成 \(P\)，得 \(\Lambda=\operatorname{diag}(2,2,1)\)。</p></details></div>
+
+          <p class="ex"><span class="ex-num">3.</span> 设 \(A^{2}=A\) 且 \(r(A)=1\)，证明 \(A\) 可对角化，并写出与它相似的对角阵。</p>
+          <div class="answer"><details><summary>看答案</summary><p>由 \(A^{2}=A\) 得 \(\lambda^{2}=\lambda\)，特征值只能是 0 与 1。任一向量可写成 \(x=Ax+(x-Ax)\)，前一项满足 \(A(Ax)=Ax\)，是 \(\lambda=1\) 的特征向量，后一项落在 \(A\) 的零空间里。两个特征子空间张满整个空间，几何重数等于代数重数，因此可对角化。秩为 1 说明 \(\lambda=1\) 只占一维，\(A\sim\operatorname{diag}(1,0,\dots,0)\)。</p></details></div>
+
+          <p class="ex"><span class="ex-num">4.</span> 设 \(A\sim B\)，证明 \(A^{k}\sim B^{k}\)；若 \(A\) 可逆，再证 \(A^{-1}\sim B^{-1}\)。</p>
+          <div class="answer"><details><summary>看答案</summary><p>由 \(B=P^{-1}AP\) 反复代入得 \(B^{k}=P^{-1}A^{k}P\)。可逆时对 \(B=P^{-1}AP\) 两边取逆，得 \(B^{-1}=P^{-1}A^{-1}P\)，用的是 \((P^{-1}AP)^{-1}=P^{-1}A^{-1}P\) 这条顺序反转的规律。</p></details></div>
+        </div>
+
+        <div class="ex-group">
+          <p class="ex-group-head">C 档 <span>拓展与历史原题</span></p>
+
+          <p class="ex"><span class="ex-num">1.</span>（西尔维斯特、雅可比）用正交变换把 \(f=5x_1^2+4x_1x_2+2x_2^2\) 化成标准形，并说出 \(f=1\) 对应的曲线类型。</p>
+          <div class="answer"><details><summary>看答案</summary><p>系数矩阵的特征值是 1 与 6，特征向量 \((1,-2)\)、\((2,1)\) 正交，单位化后作 \(x=Qy\)，得 \(f=y_1^2+6y_2^2\)。方程 \(f=1\) 化成 \(y_1^2+6y_2^2=1\)，半轴是 1 与 \(1/\sqrt{6}\)，是一条椭圆。两个特征值都为正，正惯性指数为 2，所以不可能是双曲线。</p></details></div>
+
+          <p class="ex"><span class="ex-num">2.</span>（斐波那契）设 \(M=\left(\begin{smallmatrix}1&amp;1\\1&amp;0\end{smallmatrix}\right)\)，且 \(\left(\begin{smallmatrix}F_{n+1}\\F_n\end{smallmatrix}\right)=M^{n}\left(\begin{smallmatrix}1\\0\end{smallmatrix}\right)\)。用对角化求出 \(F_n\) 的公式。</p>
+          <div class="answer"><details><summary>看答案</summary><p>\(M\) 的特征值是 \(\varphi=\frac{1+\sqrt5}{2}\) 与 \(\psi=\frac{1-\sqrt5}{2}\)，特征向量是 \((\varphi,1)\) 与 \((\psi,1)\)。把初值沿这两支拆开，\(M^{n}\) 只把两支分别乘上 \(\varphi^{n}\) 与 \(\psi^{n}\)，合起来得 \(F_n=(\varphi^{n}-\psi^{n})/\sqrt5\)。\(|\psi| \lt 1\)，所以 \(\psi^{n}/\sqrt5\) 很快降到可以忽略。</p></details></div>
+
+          <p class="ex"><span class="ex-num">3.</span>（若尔当，1870）为什么 \(\left(\begin{smallmatrix}1&amp;1\\0&amp;1\end{smallmatrix}\right)\) 不能对角化？它在若尔当标准型里是什么样子？</p>
+          <div class="answer"><details><summary>看答案</summary><p>特征值只有 1，代数重数 2，解 \((E-A)x=0\) 只得到一维特征子空间，几何重数 1，凑不出两个线性无关的特征向量。这个矩阵本身就是 2 阶若尔当块 \(J_2(1)\)，不必再化简。代数重数减几何重数等于 1，正是这个块比对角阵多出来的那个 1。</p></details></div>
+        </div>
+
+        <div class="ex-group">
+          <p class="ex-group-head">思考题 <span>不设标准答案，只给提示</span></p>
+
+          <p class="ex"><span class="ex-num">1.</span> 特征多项式、行列式、迹三者全同的两个矩阵仍可能不相似，这些量漏掉了什么？</p>
+          <div class="answer"><details><summary>看提示</summary><p>漏掉的是特征值之外的结构：每个特征子空间有多大。剪切阵与单位阵的差别就在这儿，两个矩阵的特征值一样，能挑出的特征向量个数不一样，一边是一个方向，一边是整个平面。</p></details></div>
+
+          <p class="ex"><span class="ex-num">2.</span> 实对称矩阵属于不同特征值的特征向量为什么一定正交？</p>
+          <div class="answer"><details><summary>看提示</summary><p>把 \(\beta^{T}A\alpha\) 用两种方式算一遍：一次让 \(A\) 作用在 \(\alpha\) 上得 \(\lambda\beta^{T}\alpha\)，一次用 \(A^{T}=A\) 让 \(A\) 作用在 \(\beta\) 上得 \(\mu\beta^{T}\alpha\)。两式相等，而 \(\lambda\ne\mu\)，只能 \(\beta^{T}\alpha=0\)。</p></details></div>
+
+          <p class="ex"><span class="ex-num">3.</span> 对角化时 \(P\) 的列为什么必须是特征向量，随便挑一组线性无关的向量不行吗？</p>
+          <div class="answer"><details><summary>看提示</summary><p>把 \(AP=P\Lambda\) 的两边逐列比一比就清楚了：右边的第 \(j\) 列是 \(\lambda_j\) 乘上 \(P\) 的第 \(j\) 列，所以左边必须也等于它，也就是 \(Ap_j=\lambda_jp_j\)。换一组随便的向量，乘积里会出现别的东西。</p></details></div>
+        </div>
+
+      </div>
+
+      <h2 class="reveal">延伸阅读</h2>
+      <ul class="refs">
+        <li>同济大学数学系《线性代数》第六版，第五章第一至四节。本章的记号、例题口径与习题难度以这本为准。</li>
+        <li>Arthur Cayley, <em>A Memoir on the Theory of Matrices</em>, 1858。相似与特征方程的说法都从这里起步，篇幅不长，可以直接读。</li>
+        <li>Camille Jordan, <em>Traité des substitutions et des équations solvables</em>, 1870。标准型出现在置换群的分解里，用的是群论语言。</li>
+        <li>Gilbert Strang, <em>Introduction to Linear Algebra</em>, 第 6 章。对角化与谱分解讲得更依赖几何直观，配的例题多。</li>
+      </ul>
+
+    </article>
+  </div>
+
+  <div class="wrap">
+    <nav class="pager" aria-label="翻页">
+      <a class="pager-link prev" href="ch06.html"><span class="pager-dir">上一章</span><span class="pager-title">特征值与特征向量</span></a>
+      <a class="pager-link next" href="ch08.html"><span class="pager-dir">下一章</span><span class="pager-title">二次型与正定</span></a>
+    </nav>
+  </div>
+
+</main>
+
+<footer class="footer field-dark">
+  <div class="wrap">
+    <p class="footer-mark">数学基础课</p>
+    <div class="footer-cols">
+      <div><p>三门课按同一套读法写：先看问题，再给定义与判别，最后落到计算与习题。</p></div>
+      <div><p><a href="index.html">线性代数目录</a></p><p><a href="../index.html">返回主页</a></p></div>
+      <div><p>图示用脚本按真实数值画，公式由 KaTeX 排版。</p></div>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/katex/katex.min.js"></script>
+<script src="../assets/katex/auto-render.min.js"></script>
+<script src="../assets/site.js"></script>
+</body>
+</html>

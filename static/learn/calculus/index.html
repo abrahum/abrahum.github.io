@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>微积分：一部由问题写成的历史</title>
+<meta name="description" content="以数学家最初面对的问题为索引，系统重讲同济《高等数学》全部内容：极限、导数、中值定理、积分、微分方程、空间几何、多元微积分与级数，配手绘图解与分档习题。">
+<link rel="stylesheet" href="../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="nav-brand" href="../index.html">微积分<span> 一部由问题写成的历史</span></a>
+    <nav class="nav-links" aria-label="主导航">
+      <a href="#map">章节地图</a>
+      <a class="xl" href="../linear-algebra/index.html">线性代数</a>
+      <a class="xl" href="../probability/index.html">概率论</a>
+      <a class="xl" href="../complex/index.html">复变函数</a>
+    </nav>
+  </div>
+  <div class="nav-progress" aria-hidden="true"></div>
+</header>
+
+<main>
+
+  <!-- ========== 开篇 ========== -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="hero-line reveal">两千年里，一群人为了算面积和算速度发愁</p>
+        <h1 class="reveal reveal-2">从十三个难题<br>开始学微积分</h1>
+        <p class="hero-sub reveal reveal-3">每一章先讲一个人手上那道具体的题：他有什么工具，卡在哪一步，后来谁把坑填上。讲完再回到课本里的定义、定理，和要你动手做的习题。</p>
+        <div class="hero-actions reveal reveal-4">
+          <a class="btn" href="ch00.html">从序章开始读</a>
+          <a class="btn-quiet" href="#map">先看十三章的目录</a>
+        </div>
+      </div>
+      <figure class="hero-figure reveal reveal-2">
+        <div class="wide-only"><!--FIG hero--><svg viewBox="0 0 820 660" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<polygon points="286.00,112.00 466.13,216.00 466.13,424.00 286.00,528.00 105.87,424.00 105.87,216.00" fill="none" stroke="var(--ink-3)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="286.00,112.00 390.00,139.87 466.13,216.00 494.00,320.00 466.13,424.00 390.00,500.13 286.00,528.00 182.00,500.13 105.87,424.00 78.00,320.00 105.87,216.00 182.00,139.87" fill="none" stroke="var(--ink-2)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="286.00,112.00 339.83,119.09 390.00,139.87 433.08,172.92 466.13,216.00 486.91,266.17 494.00,320.00 486.91,373.83 466.13,424.00 433.08,467.08 390.00,500.13 339.83,520.91 286.00,528.00 232.17,520.91 182.00,500.13 138.92,467.08 105.87,424.00 85.09,373.83 78.00,320.00 85.09,266.17 105.87,216.00 138.92,172.92 182.00,139.87 232.17,119.09" fill="none" stroke="var(--accent-line)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="286.00" cy="320.00" r="208.00" fill="none" stroke="var(--accent-line)" stroke-width="2.6"/>
+<line x1="286.00" y1="320.00" x2="494.00" y2="320.00" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="5 6"/>
+<circle cx="286.00" cy="320.00" r="4.0" fill="var(--ink)"/>
+<text x="296.00" y="308.00" text-anchor="start" font-size="18" fill="var(--ink)" font-style="italic">r</text>
+<line x1="466.13" y1="424.00" x2="433.08" y2="467.08" stroke="var(--ink)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="449.61" y1="445.54" x2="451.02" y2="446.62" stroke="var(--ink)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4 5"/>
+<line x1="451.02" y1="446.62" x2="475.02" y2="464.62" stroke="var(--ink-3)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="481.02" y="476.62" text-anchor="start" font-size="18" fill="var(--ink)" font-style="italic">h</text>
+<text x="481.02" y="500.62" text-anchor="start" font-size="14" fill="var(--ink-2)">弓形高</text>
+<text x="256.00" y="582.00" text-anchor="middle" font-size="15.5" fill="var(--ink-2)">正六边形 → 正十二边形 → 正二十四边形</text>
+<text x="552.00" y="150.00" text-anchor="start" font-size="15" fill="var(--ink)">圆周长 ÷ 直径，</text>
+<text x="552.00" y="174.00" text-anchor="start" font-size="15" fill="var(--ink)">用内接正多边形算出的下界</text>
+<text x="552.00" y="226.00" text-anchor="start" font-size="14.5" fill="var(--ink-2)">正六边形</text>
+<text x="764.00" y="226.00" text-anchor="end" font-size="17" fill="var(--ink)" font-weight="600">3.0000</text>
+<text x="552.00" y="266.00" text-anchor="start" font-size="14.5" fill="var(--ink-2)">正十二边形</text>
+<text x="764.00" y="266.00" text-anchor="end" font-size="17" fill="var(--ink)" font-weight="600">3.1058</text>
+<text x="552.00" y="306.00" text-anchor="start" font-size="14.5" fill="var(--ink-2)">正二十四边形</text>
+<text x="764.00" y="306.00" text-anchor="end" font-size="17" fill="var(--ink)" font-weight="600">3.1326</text>
+<text x="552.00" y="346.00" text-anchor="start" font-size="14.5" fill="var(--ink-2)">正九十六边形</text>
+<text x="764.00" y="346.00" text-anchor="end" font-size="17" fill="var(--ink)" font-weight="600">3.1394</text>
+<text x="552.00" y="386.00" text-anchor="start" font-size="14.5" fill="var(--prussian)">圆</text>
+<text x="764.00" y="386.00" text-anchor="end" font-size="17" fill="var(--prussian)" font-weight="600">3.1416</text>
+</svg>
+<!--/FIG hero--></div>
+        <div class="narrow-only"><!--FIG hero_narrow--><svg viewBox="0 0 400 470" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<polygon points="200.00,40.00 329.90,115.00 329.90,265.00 200.00,340.00 70.10,265.00 70.10,115.00" fill="none" stroke="var(--ink-3)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="200.00,40.00 275.00,60.10 329.90,115.00 350.00,190.00 329.90,265.00 275.00,319.90 200.00,340.00 125.00,319.90 70.10,265.00 50.00,190.00 70.10,115.00 125.00,60.10" fill="none" stroke="var(--ink-2)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="200.00,40.00 238.82,45.11 275.00,60.10 306.07,83.93 329.90,115.00 344.89,151.18 350.00,190.00 344.89,228.82 329.90,265.00 306.07,296.07 275.00,319.90 238.82,334.89 200.00,340.00 161.18,334.89 125.00,319.90 93.93,296.07 70.10,265.00 55.11,228.82 50.00,190.00 55.11,151.18 70.10,115.00 93.93,83.93 125.00,60.10 161.18,45.11" fill="none" stroke="var(--accent-line)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="200.00" cy="190.00" r="150.00" fill="none" stroke="var(--accent-line)" stroke-width="2.8"/>
+<circle cx="200.00" cy="190.00" r="4.5" fill="var(--ink)"/>
+<line x1="200.00" y1="190.00" x2="350.00" y2="190.00" stroke="var(--ink-2)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="5 6"/>
+<text x="210.00" y="178.00" text-anchor="start" font-size="20" fill="var(--ink)" font-style="italic">r</text>
+<text x="200.00" y="392.00" text-anchor="middle" font-size="17" fill="var(--ink-2)">正六边形 → 正十二边形 → 正二十四边形</text>
+<text x="200.00" y="424.00" text-anchor="middle" font-size="16" fill="var(--ink-3)">边数倍增，周长逼近圆，却始终差一点</text>
+</svg>
+<!--/FIG hero_narrow--></div>
+        <figcaption class="hero-caption">刘徽用圆内接正多边形去逼近圆周长。边数越多，误差越小，可他始终没碰到圆。这种越来越近、永远差一点的处境，过了两千年才有个说法，叫极限。</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ========== 为什么以人物为索引 ========== -->
+  <section class="section field-tone" id="method">
+    <div class="wrap">
+      <h2 class="section-head reveal">课本从定义开始，<br>当年的人从难题开始</h2>
+      <div class="method-grid">
+        <div class="reveal reveal-2">
+          <p class="method-statement">极限的定义在课本第一章第一节，而柯西写下接近它的句子，是 1821 年。</p>
+          <p class="section-intro">在柯西之前的一个半世纪里，牛顿、欧拉、拉格朗日都在用微积分算东西，只是谁也说不清自己究竟在算什么。</p>
+        </div>
+        <div class="method-body reveal reveal-3">
+          <p>把这段历史倒过来读，公式会变得好懂。牛顿要的是瞬时速度，他手上没有极限；费马想知道曲线哪一点最高，也从没操心过连续性；傅里叶说任何曲线都能写成三角级数，拉格朗日当场就反对。</p>
+          <p><strong>这本书按问题重排同样的内容。</strong>先看一个人为什么非做这件事，再看他的办法被后人挑出什么毛病，最后才落到课本上那条定义。毛病被挑出来的地方，往往就是考试最容易错的地方。</p>
+          <p>章节顺序跟教材一致，从函数与极限一路排到无穷级数。你可以正着读，也可以在复习时直接翻到某一章，只读它的「源头」和「怎么算」两节。每章末尾的习题分三档，A 档练定义，B 档接近考试，C 档是从论文里找出来的原题。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 人物索引 ========== -->
+  <section class="section field-dark" id="people">
+    <div class="wrap">
+      <h2 class="section-head reveal">从谁的问题开始读</h2>
+      <p class="section-intro reveal reveal-2">点一个名字，看他要解决什么，以及这件事落在哪一章。</p>
+      <div class="index-figure" data-people-index>
+        <div class="reveal reveal-2">
+          <ul class="people-list">
+            <li class="era">公元前三世纪至十七世纪</li>
+            <li><button type="button" data-person data-year="约前 250" data-name="阿基米德" data-what="叙拉古 · 《抛物线求积》" data-question="一条曲线围出的面积，能不能用一族由直线围成的图形从里面把它“夹”住？" data-href="ch00.html" data-cta="进入序章：穷竭法" aria-pressed="false">阿基米德</button></li>
+            <li><button type="button" data-person data-year="263" data-name="刘徽" data-what="魏晋 · 《九章算术注》" data-question="圆周长与直径之比，究竟是不是一个确定的数？" data-href="ch00.html" data-cta="进入序章：割圆术" aria-pressed="false">刘徽</button></li>
+            <li><button type="button" data-person data-year="1615" data-name="开普勒" data-what="奥地利 · 《酒桶新立体几何》" data-question="一个木桶到底能装多少酒？葡萄丰收那年，他得把体积算准。" data-href="ch06.html" data-cta="进入第六章：定积分的应用" aria-pressed="false">开普勒</button></li>
+            <li><button type="button" data-person data-year="1636" data-name="费马" data-what="图卢兹 · 极大极小方法" data-question="曲线在哪一点最高？不画图，只靠方程能不能判断？" data-href="ch02.html" data-cta="进入第二章：导数与微分" aria-pressed="false">费马</button></li>
+            <li><button type="button" data-person data-year="1637" data-name="笛卡尔" data-what="荷兰 · 《几何学》" data-question="能不能用一对数代表平面上的点，从而用方程研究图形？" data-href="ch08.html" data-cta="进入第八章：空间解析几何" aria-pressed="false">笛卡尔</button></li>
+            <li><button type="button" data-person data-year="1635" data-name="卡瓦列里" data-what="博洛尼亚 · 《不可分连续量的几何学》" data-question="把一块面积看成无数条平行线段的堆积，这样想可以吗？" data-href="ch00.html" data-cta="进入序章：不可分原理" aria-pressed="false">卡瓦列里</button></li>
+
+            <li class="era">十七世纪下半叶</li>
+            <li><button type="button" data-person data-year="1665" data-name="牛顿" data-what="伍尔索普 · 流数法手稿" data-question="运动物体的瞬时速度是什么？一个正在消失的量之比，还有意义吗？" data-href="ch02.html" data-cta="进入第二章：流数" aria-pressed="false">牛顿</button></li>
+            <li><button type="button" data-person data-year="1675" data-name="莱布尼茨" data-what="汉诺威 · 微分符号" data-question="两个无穷小增量之比 dy/dx，能不能像普通数一样参与运算？" data-href="ch02.html" data-cta="进入第二章：微分" aria-pressed="false">莱布尼茨</button></li>
+            <li><button type="button" data-person data-year="1691" data-name="罗尔" data-what="巴黎 · 代数方程解法" data-question="方程的两个根之间，导数为什么必然为零？" data-href="ch03.html" data-cta="进入第三章：中值定理" aria-pressed="false">罗尔</button></li>
+            <li><button type="button" data-person data-year="1695" data-name="雅各布·伯努利" data-what="巴塞尔 · 等时曲线" data-question="只知道一个量的变化率，能不能反过来求出这个量本身？" data-href="ch07.html" data-cta="进入第七章：微分方程" aria-pressed="false">雅各布·伯努利</button></li>
+            <li><button type="button" data-person data-year="1696" data-name="洛必达" data-what="巴黎 · 《阐明曲线的无穷小分析》" data-question="两个都趋于零的量之比，凭什么由它们导数之比决定？" data-href="ch03.html" data-cta="进入第三章：洛必达法则" aria-pressed="false">洛必达</button></li>
+
+            <li class="era">十八世纪</li>
+            <li><button type="button" data-person data-year="1715" data-name="泰勒" data-what="伦敦 · 《正的和反的增量方法》" data-question="一个函数，能不能被它在一点处的各阶导数完全确定？" data-href="ch03.html" data-cta="进入第三章：泰勒公式" aria-pressed="false">泰勒</button></li>
+            <li><button type="button" data-person data-year="1735" data-name="欧拉" data-what="圣彼得堡 · 巴塞尔问题" data-question="1 + 1/4 + 1/9 + 1/16 + ⋯ 究竟等于多少？" data-href="ch12.html" data-cta="进入第十二章：级数" aria-pressed="false">欧拉</button></li>
+            <li><button type="button" data-person data-year="1754" data-name="达朗贝尔" data-what="巴黎 · 《百科全书》" data-question="“一个量无限接近另一个量”这句话，能不能作为数学定义的开头？" data-href="ch01.html" data-cta="进入第一章：极限" aria-pressed="false">达朗贝尔</button></li>
+            <li><button type="button" data-person data-year="1788" data-name="拉格朗日" data-what="巴黎 · 《分析力学》" data-question="在约束之下求极值，为什么可以引入一个新的乘数？" data-href="ch09.html" data-cta="进入第九章：条件极值" aria-pressed="false">拉格朗日</button></li>
+
+            <li class="era">十九世纪</li>
+            <li><button type="button" data-person data-year="1807" data-name="傅里叶" data-what="格勒诺布尔 · 热传导" data-question="任意一条曲线，能不能写成正弦与余弦的和？" data-href="ch12.html" data-cta="进入第十二章：傅里叶级数" aria-pressed="false">傅里叶</button></li>
+            <li><button type="button" data-person data-year="1821" data-name="柯西" data-what="巴黎 · 《分析教程》" data-question="怎样用不等式，而不是用图形，说清楚“无限接近”？" data-href="ch01.html" data-cta="进入第一章：严格化" aria-pressed="false">柯西</button></li>
+            <li><button type="button" data-person data-year="1828" data-name="格林" data-what="诺丁汉 · 电与磁" data-question="沿边界走一圈的累积，能不能换成内部的一个二重积分？" data-href="ch11.html" data-cta="进入第十一章：格林公式" aria-pressed="false">格林</button></li>
+            <li><button type="button" data-person data-year="1841" data-name="雅可比" data-what="柯尼斯堡 · 行列式" data-question="换一个坐标系，面积与体积的比例怎样变化？" data-href="ch10.html" data-cta="进入第十章：重积分" aria-pressed="false">雅可比</button></li>
+            <li><button type="button" data-person data-year="1854" data-name="黎曼" data-what="哥廷根 · 关于函数三角级数表示的可能性" data-question="什么样的函数，它的“无数个无穷小之和”才真的存在？" data-href="ch05.html" data-cta="进入第五章：定积分" aria-pressed="false">黎曼</button></li>
+            <li><button type="button" data-person data-year="1872" data-name="魏尔斯特拉斯" data-what="柏林 · 处处不可导的函数" data-question="连续的函数，是不是至少“几乎处处”有切线？" data-href="ch01.html" data-cta="进入第一章：反例的力量" aria-pressed="false">魏尔斯特拉斯</button></li>
+            <li><button type="button" data-person data-year="1907" data-name="富比尼" data-what="卡塔尼亚 · 二重积分与累次积分" data-question="先对 x 加还是先对 y 加，结果一定相同吗？" data-href="ch10.html" data-cta="进入第十章：累次积分" aria-pressed="false">富比尼</button></li>
+          </ul>
+        </div>
+        <div class="people-panel reveal reveal-3" aria-live="polite">
+          <p class="panel-year"></p>
+          <p class="panel-name"></p>
+          <p class="panel-what"></p>
+          <p class="panel-question"></p>
+          <a class="panel-link" href="ch00.html">进入序章</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 章节地图 ========== -->
+  <section class="section" id="map">
+    <div class="wrap">
+      <h2 class="section-head reveal">十三章，<br>从面积到场</h2>
+      <p class="section-intro reveal reveal-2">每一行写清这一章从谁开始、他手里是什么问题。顺序与教材相同。</p>
+      <ul class="chapter-map reveal reveal-3">
+        <li><a class="chapter-row" href="ch00.html">
+          <span class="row-num">序章</span>
+          <span class="row-title">穷竭法：微积分诞生之前</span>
+          <span class="row-question">曲线围成的面积，能不能用直线“算尽”？</span>
+          <span class="row-who">阿基米德 · 刘徽 · 卡瓦列里</span>
+        </a></li>
+        <li><a class="chapter-row" href="ch01.html">
+          <span class="row-num">第一章</span>
+          <span class="row-title">函数与极限</span>
+          <span class="row-question">“无限逼近”如何变成一行可以写下来的定义？</span>
+          <span class="row-who">芝诺 · 达朗贝尔 · 柯西 · 魏尔斯特拉斯</span>
+        </a></li>
+        <li><a class="chapter-row" href="ch02.html">
+          <span class="row-num">第二章</span>
+          <span class="row-title">导数与微分</span>
+          <span class="row-question">曲线在某一处的切线，究竟怎样才算确定？</span>
+          <span class="row-who">费马 · 巴罗 · 牛顿 · 莱布尼茨</span>
+        </a></li>
+        <li><a class="chapter-row" href="ch03.html">
+          <span class="row-num">第三章</span>
+          <span class="row-title">微分中值定理与导数的应用</span>
+          <span class="row-question">一个函数的整体，能否由它某一点的局部信息决定？</span>
+          <span class="row-who">罗尔 · 拉格朗日 · 柯西 · 洛必达 · 泰勒</span>
+        </a></li>
+        <li><a class="chapter-row" href="ch04.html">
+          <span class="row-num">第四章</span>
+          <span class="row-title">不定积分</span>
+          <span class="row-question">求导的反面，是不是总做得成？</span>
+          <span class="row-who">牛顿与莱布尼茨 · 欧拉 · 刘维尔</span>
+        </a></li>
+        <li><a class="chapter-row" href="ch05.html">
+          <span class="row-num">第五章</span>
+          <span class="row-title">定积分</span>
+          <span class="row-question">“无数个无穷小之和”怎样在数学上站得住？</span>
+          <span class="row-who">费马 · 柯西 · 黎曼 · 达布</span>
+        </a></li>
+        <li><a class="chapter-row" href="ch06.html">
+          <span class="row-num">第六章</span>
+          <span class="row-title">定积分的应用</span>
+          <span class="row-question">长度、面积、体积、做功，凭什么都能用积分算？</span>
+          <span class="row-who">开普勒 · 巴罗 · 伯努利兄弟</span>
+        </a></li>
+        <li><a class="chapter-row" href="ch07.html">
+          <span class="row-num">第七章</span>
+          <span class="row-title">微分方程</span>
+          <span class="row-question">只知道变化率，能不能还原出整个过程？</span>
+          <span class="row-who">牛顿 · 雅各布·伯努利 · 欧拉 · 拉格朗日</span>
+        </a></li>
+        <li><a class="chapter-row" href="ch08.html">
+          <span class="row-num">第八章</span>
+          <span class="row-title">向量代数与空间解析几何</span>
+          <span class="row-question">三维的曲线与曲面，如何用一个方程描述？</span>
+          <span class="row-who">笛卡尔 · 蒙日 · 哈密顿 · 吉布斯</span>
+        </a></li>
+        <li><a class="chapter-row" href="ch09.html">
+          <span class="row-num">第九章</span>
+          <span class="row-title">多元函数微分法及其应用</span>
+          <span class="row-question">变量不止一个时，“变化率”还剩下什么意义？</span>
+          <span class="row-who">欧拉 · 克莱罗 · 拉格朗日 · 雅可比</span>
+        </a></li>
+        <li><a class="chapter-row" href="ch10.html">
+          <span class="row-num">第十章</span>
+          <span class="row-title">重积分</span>
+          <span class="row-question">累加如何从一维走向多维？</span>
+          <span class="row-who">卡瓦列里 · 黎曼 · 富比尼 · 雅可比</span>
+        </a></li>
+        <li><a class="chapter-row" href="ch11.html">
+          <span class="row-num">第十一章</span>
+          <span class="row-title">曲线积分与曲面积分</span>
+          <span class="row-question">边界上的累积，怎样决定内部的整体？</span>
+          <span class="row-who">格林 · 高斯 · 斯托克斯 · 麦克斯韦</span>
+        </a></li>
+        <li><a class="chapter-row" href="ch12.html">
+          <span class="row-num">第十二章</span>
+          <span class="row-title">无穷级数</span>
+          <span class="row-question">无穷多项相加，什么时候还是一个确定的数？</span>
+          <span class="row-who">奥雷斯姆 · 欧拉 · 傅里叶 · 柯西</span>
+        </a></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ========== 学习路线 ========== -->
+  <section class="section field-dark" id="routes">
+    <div class="wrap">
+      <h2 class="section-head reveal">三条读法</h2>
+      <p class="section-intro reveal reveal-2">按自己现在的处境挑一条，不用从头读到尾。</p>
+      <div class="routes">
+        <div class="route reveal reveal-2">
+          <h3>第一次认真学习</h3>
+          <p>12 周，每周一章。先读「源头」弄清这一章为什么要出现，再看定理、例题，最后做 A 档题。</p>
+          <p class="route-chapters"><a href="ch00.html">序章</a> · <a href="ch01.html">第一章</a> · <a href="ch02.html">第二章</a> · <a href="ch03.html">第三章</a> · <a href="ch04.html">第四章</a> · <a href="ch05.html">第五章</a>，这六章读完，微积分的骨架就有了。</p>
+        </div>
+        <div class="route reveal reveal-3">
+          <h3>只补漏洞</h3>
+          <p>4 周。极限的定义、中值定理怎么用、积分的换元和分部，这三处是丢分的大头。</p>
+          <p class="route-chapters"><a href="ch01.html">第一章</a> 的第四节与第八节 · <a href="ch03.html">第三章</a> 的全部 · <a href="ch04.html">第四章</a> 的方法手册。每节只做 B 档题。</p>
+        </div>
+        <div class="route reveal reveal-4">
+          <h3>考前复习</h3>
+          <p>2 周。跳过历史部分，直接读每章的「怎么算」和「常见错法」，回头做 C 档题和思考题。</p>
+          <p class="route-chapters"><a href="ch05.html">第五章</a> · <a href="ch09.html">第九章</a> · <a href="ch10.html">第十章</a> · <a href="ch11.html">第十一章</a> · <a href="ch12.html">第十二章</a>，这五章是下册的重头。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 使用约定 ========== -->
+  <section class="section-tight section field-tone" id="conventions">
+    <div class="wrap">
+      <h2 class="section-head reveal">看之前先说三件事</h2>
+      <p class="section-intro reveal reveal-2">记号跟同济教材一致，习题分三档，每道题的答案都折叠着，先自己动手再点开。</p>
+      <div class="reveal reveal-3">
+        <details class="fold">
+          <summary>哪些记号跟教材一样</summary>
+          <p>ε 和 δ 的用法、\(\mathrm{d}x\) 与 \(\Delta x\) 的区别、\(f'(x)\) 与 \(\mathrm{d}f\) 什么时候用哪个，都照教材来。每章第一次出现新记号时会解释一句，不认识的符号可以在那一节里找。</p>
+        </details>
+        <details class="fold">
+          <summary>三档习题分别练什么</summary>
+          <p>A 档练定义和基本计算，一题五分钟能做完；B 档是综合题，难度接近期末考试和考研；C 档大多是从某位数学家的论文里找出来的原题，做不出来可以先看答案里的思路。最后还有几道思考题，只给提示，没有标准答案。</p>
+        </details>
+        <details class="fold">
+          <summary>图是怎么画出来的</summary>
+          <p>全站的图都是脚本按真实函数值算出来再画的，没有示意图。曲线是普鲁士蓝，辅助线和标注用墨灰，填充越深表示累积得越多。改了函数就能重画，脚本放在 tools 目录里。</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer field-dark">
+  <div class="wrap">
+    <p class="footer-mark">微积分</p>
+    <div class="footer-cols">
+      <div>
+        <p>一部由问题写成的历史。以数学家最初面对的难题为索引，重讲同济《高等数学》第七版的全部章节范围。</p>
+        <p>适合已经学完高中数学、或学过一遍微积分想要复习的人。</p>
+      </div>
+      <div>
+        <p><a href="#map">章节地图</a></p>
+        <p><a href="ch00.html">从序章开始</a></p>
+        <p><a href="#people">人物索引</a></p>
+      </div>
+      <div>
+        <p>图示为本页脚本绘制，公式由 KaTeX 排版。历史材料参考《数学史》与各家原始论文的通行译本，正文中的史实以脚注形式给出出处。</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/katex/katex.min.js"></script>
+<script src="../assets/katex/auto-render.min.js"></script>
+<script src="../assets/site.js"></script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+<svg viewBox="0 0 720 420" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<text x="28.00" y="38.00" text-anchor="start" font-size="14.5" fill="var(--ink)">S 是一整块矩形，A、B 是里面的区域，面积就是概率</text>
+<rect x="80.00" y="84.00" width="560.00" height="236.00" fill="var(--paper)" stroke="var(--ink-3)" stroke-width="1.4"/>
+<text x="94.00" y="74.00" text-anchor="start" font-size="16" fill="var(--ink)" font-style="italic">S</text>
+<text x="640.00" y="74.00" text-anchor="end" font-size="13.5" fill="var(--ink-2)">整块面积定为 1（归一性）</text>
+<circle cx="250.00" cy="202.00" r="80.00" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.8"/>
+<text x="250.00" y="198.00" text-anchor="middle" font-size="17" fill="var(--ink)" font-style="italic">A</text>
+<text x="250.00" y="220.00" text-anchor="middle" font-size="13" fill="var(--ink-2)">面积 = P(A)</text>
+<rect x="432.00" y="142.00" width="140.00" height="120.00" fill="var(--fig-fill)" stroke="var(--ink-3)" stroke-width="1.2"/>
+<text x="502.00" y="198.00" text-anchor="middle" font-size="17" fill="var(--ink)" font-style="italic">B</text>
+<text x="502.00" y="220.00" text-anchor="middle" font-size="13" fill="var(--ink-2)">面积 = P(B)</text>
+<line x1="220.00" y1="276.00" x2="150.00" y2="362.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="150.00" y="362.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">这块面积不会是负数（非负性）</text>
+<line x1="562.00" y1="262.00" x2="452.00" y2="362.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="452.00" y="362.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">A、B 不交，面积直接相加</text>
+<text x="28.00" y="394.00" text-anchor="start" font-size="13.5" fill="var(--ink-3)">空集没有面积，P(∅) = 0；S 的面积是 1，所以 P(S) = 1。</text>
+</svg>

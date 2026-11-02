@@ -1,0 +1,36 @@
+<svg viewBox="0 0 720 460" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<text x="24.00" y="44.00" text-anchor="start" font-size="14.5" fill="var(--ink-2)">把区域切成小方格：内部每条边被走两次，方向相反</text>
+<rect x="128.00" y="84.00" width="300.00" height="300.00" fill="var(--fig-fill)" stroke="none" stroke-width="1.4"/>
+<rect x="278.00" y="159.00" width="75.00" height="75.00" fill="var(--fig-fill-2)" stroke="none" stroke-width="1.4"/>
+<text x="315.50" y="202.50" text-anchor="middle" font-size="15" fill="var(--prussian)">Δ</text>
+<line x1="203.00" y1="84.00" x2="203.00" y2="384.00" stroke="var(--ink-2)" stroke-width="1.0" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<line x1="128.00" y1="159.00" x2="428.00" y2="159.00" stroke="var(--ink-2)" stroke-width="1.0" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<line x1="278.00" y1="84.00" x2="278.00" y2="384.00" stroke="var(--ink-2)" stroke-width="1.0" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<line x1="128.00" y1="234.00" x2="428.00" y2="234.00" stroke="var(--ink-2)" stroke-width="1.0" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<line x1="353.00" y1="84.00" x2="353.00" y2="384.00" stroke="var(--ink-2)" stroke-width="1.0" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<line x1="128.00" y1="309.00" x2="428.00" y2="309.00" stroke="var(--ink-2)" stroke-width="1.0" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<polygon points="128.00,84.00 428.00,84.00 428.00,384.00 128.00,384.00" fill="none" stroke="var(--accent-line)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 278.87 388.08 L 288.00 384.00 L 278.87 379.92" fill="none" stroke="var(--accent-line)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 432.08 213.13 L 428.00 204.00 L 423.92 213.13" fill="none" stroke="var(--accent-line)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 277.13 79.92 L 268.00 84.00 L 277.13 88.08" fill="none" stroke="var(--accent-line)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 132.08 193.13 L 128.00 184.00 L 123.92 193.13" fill="none" stroke="var(--accent-line)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="140.00" y="110.00" text-anchor="start" font-size="16" fill="var(--ink)" font-style="italic">D</text>
+<text x="140.00" y="370.00" text-anchor="start" font-size="15" fill="var(--accent-line)" font-style="italic">C</text>
+<line x1="198.00" y1="284.50" x2="198.00" y2="258.50" stroke="var(--prussian)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M 200.60 265.00 L 198.00 258.50 L 195.40 265.00" fill="var(--prussian)" stroke="var(--prussian)" stroke-width="1" stroke-linejoin="round"/>
+<line x1="208.00" y1="258.50" x2="208.00" y2="284.50" stroke="var(--prussian)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M 205.40 278.00 L 208.00 284.50 L 210.60 278.00" fill="var(--prussian)" stroke="var(--prussian)" stroke-width="1" stroke-linejoin="round"/>
+<line x1="340.00" y1="154.00" x2="366.00" y2="154.00" stroke="var(--prussian)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M 359.50 156.60 L 366.00 154.00 L 359.50 151.40" fill="var(--prussian)" stroke="var(--prussian)" stroke-width="1" stroke-linejoin="round"/>
+<line x1="366.00" y1="164.00" x2="340.00" y2="164.00" stroke="var(--prussian)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M 346.50 161.40 L 340.00 164.00 L 346.50 166.60" fill="var(--prussian)" stroke="var(--prussian)" stroke-width="1" stroke-linejoin="round"/>
+<line x1="273.00" y1="359.50" x2="273.00" y2="333.50" stroke="var(--prussian)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M 275.60 340.00 L 273.00 333.50 L 270.40 340.00" fill="var(--prussian)" stroke="var(--prussian)" stroke-width="1" stroke-linejoin="round"/>
+<line x1="283.00" y1="333.50" x2="283.00" y2="359.50" stroke="var(--prussian)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M 280.40 353.00 L 283.00 359.50 L 285.60 353.00" fill="var(--prussian)" stroke="var(--prussian)" stroke-width="1" stroke-linejoin="round"/>
+<line x1="369.00" y1="161.00" x2="470.00" y2="132.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="470.00" y="132.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">内部公共边：两个方向各走一次</text>
+<text x="470.00" y="156.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">两段的积分相加正好为零，</text>
+<text x="470.00" y="178.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">于是把所有小方格的边界加起来，</text>
+<text x="470.00" y="200.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">只剩最外面那一圈 C。</text>
+<text x="470.00" y="252.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">每个小方格上，可微性把被积</text>
+<text x="470.00" y="274.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">函数拆成三块：常数项与一次</text>
+<text x="470.00" y="296.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">项沿闭路积分都是零，只剩一</text>
+<text x="470.00" y="318.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">个比边长更高阶的小量。</text>
+<text x="470.00" y="372.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">格子切得越细，剩下的越少；</text>
+<text x="470.00" y="394.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">外圈积分与切法无关，只能是零。</text>
+</svg>
