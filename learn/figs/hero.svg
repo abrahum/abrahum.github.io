@@ -1,0 +1,27 @@
+<svg viewBox="0 0 820 660" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<polygon points="286.00,112.00 466.13,216.00 466.13,424.00 286.00,528.00 105.87,424.00 105.87,216.00" fill="none" stroke="var(--ink-3)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="286.00,112.00 390.00,139.87 466.13,216.00 494.00,320.00 466.13,424.00 390.00,500.13 286.00,528.00 182.00,500.13 105.87,424.00 78.00,320.00 105.87,216.00 182.00,139.87" fill="none" stroke="var(--ink-2)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="286.00,112.00 339.83,119.09 390.00,139.87 433.08,172.92 466.13,216.00 486.91,266.17 494.00,320.00 486.91,373.83 466.13,424.00 433.08,467.08 390.00,500.13 339.83,520.91 286.00,528.00 232.17,520.91 182.00,500.13 138.92,467.08 105.87,424.00 85.09,373.83 78.00,320.00 85.09,266.17 105.87,216.00 138.92,172.92 182.00,139.87 232.17,119.09" fill="none" stroke="var(--accent-line)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="286.00" cy="320.00" r="208.00" fill="none" stroke="var(--accent-line)" stroke-width="2.6"/>
+<line x1="286.00" y1="320.00" x2="494.00" y2="320.00" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="5 6"/>
+<circle cx="286.00" cy="320.00" r="4.0" fill="var(--ink)"/>
+<text x="296.00" y="308.00" text-anchor="start" font-size="18" fill="var(--ink)" font-style="italic">r</text>
+<line x1="466.13" y1="424.00" x2="433.08" y2="467.08" stroke="var(--ink)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="449.61" y1="445.54" x2="451.02" y2="446.62" stroke="var(--ink)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4 5"/>
+<line x1="451.02" y1="446.62" x2="475.02" y2="464.62" stroke="var(--ink-3)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="481.02" y="476.62" text-anchor="start" font-size="18" fill="var(--ink)" font-style="italic">h</text>
+<text x="481.02" y="500.62" text-anchor="start" font-size="14" fill="var(--ink-2)">弓形高</text>
+<text x="256.00" y="582.00" text-anchor="middle" font-size="15.5" fill="var(--ink-2)">正六边形 → 正十二边形 → 正二十四边形</text>
+<text x="552.00" y="150.00" text-anchor="start" font-size="15" fill="var(--ink)">圆周长 ÷ 直径，</text>
+<text x="552.00" y="174.00" text-anchor="start" font-size="15" fill="var(--ink)">用内接正多边形算出的下界</text>
+<text x="552.00" y="226.00" text-anchor="start" font-size="14.5" fill="var(--ink-2)">正六边形</text>
+<text x="764.00" y="226.00" text-anchor="end" font-size="17" fill="var(--ink)" font-weight="600">3.0000</text>
+<text x="552.00" y="266.00" text-anchor="start" font-size="14.5" fill="var(--ink-2)">正十二边形</text>
+<text x="764.00" y="266.00" text-anchor="end" font-size="17" fill="var(--ink)" font-weight="600">3.1058</text>
+<text x="552.00" y="306.00" text-anchor="start" font-size="14.5" fill="var(--ink-2)">正二十四边形</text>
+<text x="764.00" y="306.00" text-anchor="end" font-size="17" fill="var(--ink)" font-weight="600">3.1326</text>
+<text x="552.00" y="346.00" text-anchor="start" font-size="14.5" fill="var(--ink-2)">正九十六边形</text>
+<text x="764.00" y="346.00" text-anchor="end" font-size="17" fill="var(--ink)" font-weight="600">3.1394</text>
+<text x="552.00" y="386.00" text-anchor="start" font-size="14.5" fill="var(--prussian)">圆</text>
+<text x="764.00" y="386.00" text-anchor="end" font-size="17" fill="var(--prussian)" font-weight="600">3.1416</text>
+</svg>

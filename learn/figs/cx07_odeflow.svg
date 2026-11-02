@@ -1,0 +1,24 @@
+<svg viewBox="0 0 720 352" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<rect x="26.00" y="84.00" width="184.00" height="104.00" fill="var(--fig-fill)" stroke="var(--ink-3)" stroke-width="1.3"/>
+<text x="118.00" y="110.00" text-anchor="middle" font-size="14.5" fill="var(--ink-3)">时域</text>
+<text x="118.00" y="140.00" text-anchor="middle" font-size="14.5" fill="var(--ink)">y″ + 3y′ + 2y = f(t)</text>
+<text x="118.00" y="166.00" text-anchor="middle" font-size="14.5" fill="var(--ink)">y(0)、y′(0) 已知</text>
+<rect x="268.00" y="84.00" width="184.00" height="104.00" fill="var(--fig-fill)" stroke="var(--ink-3)" stroke-width="1.3"/>
+<text x="360.00" y="110.00" text-anchor="middle" font-size="14.5" fill="var(--ink-3)">s 域</text>
+<text x="360.00" y="140.00" text-anchor="middle" font-size="14.5" fill="var(--ink)">(p² + 3p + 2)Y = F(p) + 1</text>
+<text x="360.00" y="166.00" text-anchor="middle" font-size="14.5" fill="var(--ink)">解出 Y(p)</text>
+<rect x="510.00" y="84.00" width="184.00" height="104.00" fill="var(--fig-fill)" stroke="var(--ink-3)" stroke-width="1.3"/>
+<text x="602.00" y="110.00" text-anchor="middle" font-size="14.5" fill="var(--ink-3)">回时域</text>
+<text x="602.00" y="140.00" text-anchor="middle" font-size="14.5" fill="var(--ink)">y(t) = 𝓛⁻¹[Y(p)]</text>
+<text x="602.00" y="166.00" text-anchor="middle" font-size="14.5" fill="var(--ink)">部分分式 + 查表</text>
+<line x1="218.00" y1="136.00" x2="260.00" y2="136.00" stroke="var(--accent-line)" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round"/><path d="M 249.78 140.08 L 260.00 136.00 L 249.78 131.92" fill="var(--accent-line)" stroke="var(--accent-line)" stroke-width="1" stroke-linejoin="round"/>
+<text x="239.00" y="110.00" text-anchor="middle" font-size="13.5" fill="var(--accent-line)">取拉普拉斯变换</text>
+<text x="239.00" y="128.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">求导变成乘 p</text>
+<line x1="460.00" y1="136.00" x2="502.00" y2="136.00" stroke="var(--accent-line)" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round"/><path d="M 491.78 140.08 L 502.00 136.00 L 491.78 131.92" fill="var(--accent-line)" stroke="var(--accent-line)" stroke-width="1" stroke-linejoin="round"/>
+<text x="481.00" y="110.00" text-anchor="middle" font-size="13.5" fill="var(--accent-line)">取逆变换</text>
+<text x="481.00" y="128.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">围道积分或查表</text>
+<text x="44.00" y="42.00" text-anchor="start" font-size="14.5" fill="var(--ink-2)">微分方程在 s 域里只剩加减乘除，初值在变换那一步自动进方程</text>
+<text x="44.00" y="232.00" text-anchor="start" font-size="14" fill="var(--ink-3)">第二步除过去就行，不必先求齐次解再定常数</text>
+<text x="44.00" y="258.00" text-anchor="start" font-size="14" fill="var(--ink-3)">第三步的卷积定理把 F(p)·H(p) 还成时域的卷积，系统对任意输入的响应都能这样算</text>
+<text x="44.00" y="300.00" text-anchor="start" font-size="14" fill="var(--ink-2)">整个流程可以倒过来走：知道响应求系统，就是系统辨识</text>
+</svg>

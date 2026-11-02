@@ -1,0 +1,21 @@
+<svg viewBox="0 0 720 330" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<text x="120.00" y="44.00" text-anchor="middle" font-size="15" fill="var(--ink)">秩 2：一张平面</text>
+<text x="360.00" y="44.00" text-anchor="middle" font-size="15" fill="var(--ink)">秩 1：一条直线</text>
+<text x="600.00" y="44.00" text-anchor="middle" font-size="15" fill="var(--ink)">秩 0：一个点</text>
+<polygon points="62.00,236.00 140.00,186.00 178.00,106.00 100.00,156.00" fill="var(--fig-fill)" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="62.00" y1="236.00" x2="140.00" y2="186.00" stroke="var(--accent-line)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M 133.02 195.76 L 140.00 186.00 L 128.22 188.27" fill="var(--accent-line)" stroke="var(--accent-line)" stroke-width="1" stroke-linejoin="round"/>
+<line x1="62.00" y1="236.00" x2="100.00" y2="156.00" stroke="var(--ink-2)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M 99.24 167.98 L 100.00 156.00 L 91.20 164.16" fill="var(--ink-2)" stroke="var(--ink-2)" stroke-width="1" stroke-linejoin="round"/>
+<text x="146.00" y="202.00" text-anchor="start" font-size="15" fill="var(--ink)" font-style="italic">a</text>
+<text x="90.00" y="152.00" text-anchor="end" font-size="15" fill="var(--ink)" font-style="italic">b</text>
+<text x="170.00" y="276.00" text-anchor="middle" font-size="13.5" fill="var(--ink-3)">整张平面</text>
+<circle cx="62.00" cy="236.00" r="3.4" fill="var(--ink)"/>
+<line x1="254.70" y1="261.30" x2="435.30" y2="164.70" stroke="var(--ink-3)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 6"/>
+<line x1="302.00" y1="236.00" x2="345.00" y2="213.00" stroke="var(--ink-2)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M 337.27 222.18 L 345.00 213.00 L 333.07 214.33" fill="var(--ink-2)" stroke="var(--ink-2)" stroke-width="1" stroke-linejoin="round"/>
+<line x1="302.00" y1="236.00" x2="388.00" y2="190.00" stroke="var(--accent-line)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M 380.27 199.18 L 388.00 190.00 L 376.07 191.33" fill="var(--accent-line)" stroke="var(--accent-line)" stroke-width="1" stroke-linejoin="round"/>
+<text x="302.00" y="276.00" text-anchor="middle" font-size="13.5" fill="var(--ink-3)">只有这一条线</text>
+<circle cx="302.00" cy="236.00" r="3.4" fill="var(--ink)"/>
+<circle cx="542.00" cy="236.00" r="26.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1" stroke-dasharray="4 5"/>
+<circle cx="542.00" cy="236.00" r="5.5" fill="var(--accent-line)"/>
+<text x="542.00" y="276.00" text-anchor="middle" font-size="13.5" fill="var(--ink-3)">只有一个点</text>
+<text x="62.00" y="306.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">主元有几个，能分辨的方向就有几个；方向少了，解就多出来一批。</text>
+</svg>

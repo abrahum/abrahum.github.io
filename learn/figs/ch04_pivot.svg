@@ -1,0 +1,50 @@
+<svg viewBox="0 0 720 380" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<text x="193.00" y="92.00" text-anchor="middle" font-size="15" fill="var(--ink-2)">x₁</text>
+<text x="279.00" y="92.00" text-anchor="middle" font-size="15" fill="var(--ink-2)">x₂</text>
+<text x="365.00" y="92.00" text-anchor="middle" font-size="15" fill="var(--ink-2)">x₃</text>
+<text x="451.00" y="92.00" text-anchor="middle" font-size="15" fill="var(--ink-2)">x₄</text>
+<rect x="151.00" y="109.00" width="84.00" height="52.00" fill="var(--fig-fill-2)" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="193.00" y="142.00" text-anchor="middle" font-size="20" fill="var(--ink)">1</text>
+<rect x="237.00" y="109.00" width="84.00" height="52.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1" opacity="0.75"/>
+<text x="279.00" y="142.00" text-anchor="middle" font-size="20" fill="var(--ink)">2</text>
+<rect x="323.00" y="109.00" width="84.00" height="52.00" fill="var(--fig-fill-2)" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="365.00" y="142.00" text-anchor="middle" font-size="20" fill="var(--ink)">1</text>
+<rect x="409.00" y="109.00" width="84.00" height="52.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1" opacity="0.75"/>
+<text x="451.00" y="142.00" text-anchor="middle" font-size="20" fill="var(--ink-3)">0</text>
+<rect x="495.00" y="109.00" width="84.00" height="52.00" fill="none" stroke="none" stroke-width="0"/>
+<text x="537.00" y="142.00" text-anchor="middle" font-size="20" fill="var(--ink)">3</text>
+<rect x="151.00" y="163.00" width="84.00" height="52.00" fill="var(--fig-fill-2)" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="193.00" y="196.00" text-anchor="middle" font-size="20" fill="var(--ink-3)">0</text>
+<rect x="237.00" y="163.00" width="84.00" height="52.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1" opacity="0.75"/>
+<text x="279.00" y="196.00" text-anchor="middle" font-size="20" fill="var(--ink-3)">0</text>
+<rect x="323.00" y="163.00" width="84.00" height="52.00" fill="var(--fig-fill-2)" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="365.00" y="196.00" text-anchor="middle" font-size="20" fill="var(--ink)">1</text>
+<rect x="409.00" y="163.00" width="84.00" height="52.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1" opacity="0.75"/>
+<text x="451.00" y="196.00" text-anchor="middle" font-size="20" fill="var(--ink)">-1</text>
+<rect x="495.00" y="163.00" width="84.00" height="52.00" fill="none" stroke="none" stroke-width="0"/>
+<text x="537.00" y="196.00" text-anchor="middle" font-size="20" fill="var(--ink)">1</text>
+<rect x="151.00" y="217.00" width="84.00" height="52.00" fill="var(--fig-fill-2)" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="193.00" y="250.00" text-anchor="middle" font-size="20" fill="var(--ink-3)">0</text>
+<rect x="237.00" y="217.00" width="84.00" height="52.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1" opacity="0.75"/>
+<text x="279.00" y="250.00" text-anchor="middle" font-size="20" fill="var(--ink-3)">0</text>
+<rect x="323.00" y="217.00" width="84.00" height="52.00" fill="var(--fig-fill-2)" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="365.00" y="250.00" text-anchor="middle" font-size="20" fill="var(--ink-3)">0</text>
+<rect x="409.00" y="217.00" width="84.00" height="52.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1" opacity="0.75"/>
+<text x="451.00" y="250.00" text-anchor="middle" font-size="20" fill="var(--ink-3)">0</text>
+<rect x="495.00" y="217.00" width="84.00" height="52.00" fill="none" stroke="none" stroke-width="0"/>
+<text x="537.00" y="250.00" text-anchor="middle" font-size="20" fill="var(--ink-3)">0</text>
+<rect x="151.00" y="109.00" width="84.00" height="52.00" fill="none" stroke="var(--accent-line)" stroke-width="2.0"/>
+<rect x="323.00" y="163.00" width="84.00" height="52.00" fill="none" stroke="var(--accent-line)" stroke-width="2.0"/>
+<line x1="494.00" y1="100.00" x2="494.00" y2="278.00" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="193.00" y="304.00" text-anchor="middle" font-size="13.5" fill="var(--accent-line)">主元列</text>
+<text x="365.00" y="304.00" text-anchor="middle" font-size="13.5" fill="var(--accent-line)">主元列</text>
+<text x="279.00" y="304.00" text-anchor="middle" font-size="13.5" fill="var(--ink-2)">自由列</text>
+<text x="451.00" y="304.00" text-anchor="middle" font-size="13.5" fill="var(--ink-2)">自由列</text>
+<text x="537.00" y="304.00" text-anchor="middle" font-size="13.5" fill="var(--ink-3)">常数列</text>
+<line x1="610.00" y1="112.00" x2="610.00" y2="212.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="610.00" y1="112.00" x2="619.00" y2="112.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="610.00" y1="212.00" x2="619.00" y2="212.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="626.00" y="158.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">非零行</text>
+<text x="626.00" y="178.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">2 条</text>
+<text x="150.00" y="348.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">主元列 2 列，秩就是 2；自由列 2 列，4 − 2 = 2，基础解系里就有 2 个向量。</text>
+</svg>

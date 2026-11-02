@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>第二章 行列式：一个数决定解的存在 · 线性代数</title>
+<meta name="description" content="二阶与三阶的对角线法则、全排列与逆序数定义的 n 阶行列式、行列式六条性质、按行展开定理、范德蒙德行列式与克拉默法则。">
+<link rel="stylesheet" href="../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="nav-brand" href="../index.html">数学基础课<span> 三门课，一套读法</span></a>
+    <nav class="nav-links" aria-label="主导航">
+      <a href="index.html#map">本课目录</a>
+      <a class="xl" href="../calculus/index.html">微积分</a>
+      <a class="xl" href="../probability/index.html">概率论</a>
+      <a class="xl" href="../complex/index.html">复变函数</a>
+      <a class="opt" href="ch03.html">下一章</a>
+    </nav>
+  </div>
+  <div class="nav-progress" aria-hidden="true"></div>
+</header>
+
+<main>
+
+  <section class="chapter">
+    <div class="wrap">
+      <div class="ch-hero-band">
+        <div>
+          <p class="ch-label reveal"><span>第二章</span><span class="ch-era">1693 年至 1827 年</span></p>
+          <h1 class="ch-title reveal reveal-2">行列式：一个数决定解的存在</h1>
+          <p class="ch-deck reveal reveal-3">第一章把方程组化成阶梯形再回代，答案能算出来。可它回答不了另一个问题：这个方程组有没有唯一的解，除非你把整张表一路算到底。1693 年莱布尼茨在给洛必达的信里，把方程的系数按两个指标排开，写下消元之后剩下的那个式子，这一章把那个式子收成一个数。</p>
+          <div class="ch-meta reveal reveal-3">
+            <div><strong>本章知识点</strong>对角线法则、n 阶行列式的排列定义、六条性质、按行展开、范德蒙德行列式、克拉默法则</div>
+            <div><strong>历史坐标</strong>莱布尼茨 1693 年、克拉默 1750 年、柯西 1812 年</div>
+            <div><strong>对应教材</strong>同济《线性代数》第二章 §1 至 §7</div>
+            <div><strong>前置</strong>会解二元一次方程组，认得连乘号 \(\prod\) 与求和号 \(\sum\)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap ch-body">
+    <aside class="rail">
+      <p class="rail-title">本章提纲</p>
+      <ol>
+        <li><a href="#s-1">对角线法则</a></li>
+        <li><a href="#s-2">全排列与逆序数</a></li>
+        <li><a href="#s-3">六条性质</a></li>
+        <li><a href="#s-4">余子式与按行展开</a></li>
+        <li><a href="#s-5">范德蒙德行列式</a></li>
+        <li><a href="#s-6">克拉默法则</a></li>
+        <li><a href="#s-manual">怎么算</a></li>
+        <li><a href="#s-examples">例题</a></li>
+        <li><a href="#s-exercises">习题</a></li>
+      </ol>
+      <p class="rail-title">历史坐标</p>
+      <p class="rail-who">莱布尼茨 1693 年<br>麦克劳林 1748 年<br>克拉默 1750 年<br>范德蒙德 1771 年<br>柯西 1812 年</p>
+    </aside>
+
+    <article class="prose">
+
+      <p class="lead reveal">解二元一次方程组的时候，两个未知数的分母永远是同一个数，它出现得太多，古人只好给它一个名字，叫行列式。行列式把一个方方正正的数字表压成一个数，方程组的命运全在这一个数上：它不为零，解唯一；它是零，解要么没有，要么多到写不完。这一章从二阶算到 \(n\) 阶，最后用它写出一套解方程组的公式。</p>
+
+      <h2 id="s-1" class="reveal">一、从二阶到三阶：对角线法则</h2>
+
+      <p>设二元线性方程组 \(a_{11}x_1+a_{12}x_2=b_1,\ a_{21}x_1+a_{22}x_2=b_2\)，消元之后无论先解出哪个未知数，留下的分母都是 \(a_{11}a_{22}-a_{12}a_{21}\)。这个式子每解一次就得重抄一遍，课本给它一个专门的记号，叫<strong>二阶行列式</strong>：</p>
+
+      \[ D=\begin{vmatrix} a_{11} & a_{12}\\ a_{21} & a_{22} \end{vmatrix}=a_{11}a_{22}-a_{12}a_{21}, \]
+
+      <p>于是 \(x_1=\dfrac{D_1}{D}\)，\(x_2=\dfrac{D_2}{D}\)，\(D_j\) 是把常数列换到第 \(j\) 列上得到的行列式。表里横排叫行，竖排叫列，\(a_{ij}\) 先数行后数列，算法只有一句：左上乘右下，减去右上乘左下。</p>
+
+      <p>这个数有几何上的来处。把两列看成从原点出发的两支箭头，它们张成一个平行四边形，行列式的绝对值就是这块面积；两列的先后决定符号，逆时针方向上后到的那支排在前面取正，反过来取负。行列式因此是带正负号的定向面积，同一块地量两遍得同一个数，报出来的符号却可能相反。</p>
+
+      <div class="figure">
+        <!--FIG ch02_area--><svg viewBox="0 0 720 350" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<text x="175.00" y="36.00" text-anchor="middle" font-size="15" fill="var(--ink)">先取 (3,1)，再取 (1,2)</text>
+<line x1="40.00" y1="271.43" x2="310.00" y2="271.43" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+<line x1="72.40" y1="310.00" x2="72.40" y2="40.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+<polygon points="72.40,271.43 234.40,207.14 288.40,78.57 126.40,142.86" fill="var(--fig-fill)" stroke="var(--accent-line)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="72.40" y1="271.43" x2="234.40" y2="207.14" stroke="var(--accent-line)" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round"/><path d="M 225.68 215.39 L 234.40 207.14 L 222.40 207.12" fill="var(--accent-line)" stroke="var(--accent-line)" stroke-width="1" stroke-linejoin="round"/>
+<line x1="72.40" y1="271.43" x2="126.40" y2="142.86" stroke="var(--ink-2)" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round"/><path d="M 126.19 154.86 L 126.40 142.86 L 117.98 151.41" fill="var(--ink-2)" stroke="var(--ink-2)" stroke-width="1" stroke-linejoin="round"/>
+<text x="176.40" y="209.00" text-anchor="middle" font-size="13.5" fill="var(--ink-2)">面积 5</text>
+<text x="242.40" y="227.14" text-anchor="start" font-size="12.5" fill="var(--accent-line)">(3,1)</text>
+<text x="118.40" y="132.86" text-anchor="end" font-size="12.5" fill="var(--ink-2)">(1,2)</text>
+<text x="175.00" y="288.00" text-anchor="middle" font-size="14" fill="var(--ink)">det = 3·2 − 1·1 = 5</text>
+<text x="175.00" y="310.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">逆时针转过去，取正</text>
+<text x="545.00" y="36.00" text-anchor="middle" font-size="15" fill="var(--ink)">把这两列换个顺序</text>
+<line x1="410.00" y1="271.43" x2="680.00" y2="271.43" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+<line x1="442.40" y1="310.00" x2="442.40" y2="40.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+<polygon points="442.40,271.43 496.40,142.86 658.40,78.57 604.40,207.14" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="442.40" y1="271.43" x2="496.40" y2="142.86" stroke="var(--accent-line)" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round"/><path d="M 496.19 154.86 L 496.40 142.86 L 487.98 151.41" fill="var(--accent-line)" stroke="var(--accent-line)" stroke-width="1" stroke-linejoin="round"/>
+<line x1="442.40" y1="271.43" x2="604.40" y2="207.14" stroke="var(--ink-2)" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round"/><path d="M 595.68 215.39 L 604.40 207.14 L 592.40 207.12" fill="var(--ink-2)" stroke="var(--ink-2)" stroke-width="1" stroke-linejoin="round"/>
+<text x="546.40" y="209.00" text-anchor="middle" font-size="13.5" fill="var(--ink-2)">面积 5</text>
+<text x="504.40" y="162.86" text-anchor="start" font-size="12.5" fill="var(--accent-line)">(1,2)</text>
+<text x="596.40" y="197.14" text-anchor="end" font-size="12.5" fill="var(--ink-2)">(3,1)</text>
+<text x="545.00" y="288.00" text-anchor="middle" font-size="14" fill="var(--ink)">det = 1·1 − 3·2 = −5</text>
+<text x="545.00" y="310.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">顺时针转过去，取负</text>
+<text x="360.00" y="340.00" text-anchor="middle" font-size="13" fill="var(--ink-2)">同一块平行四边形，面积还是 5，行列式却从 5 变成了 −5。</text>
+</svg>
+<!--/FIG ch02_area-->
+        <figcaption class="figcaption"><b>绝对值是面积，符号是转向。</b>换两列的顺序，面积没变，行列式从 5 变成 −5。</figcaption>
+      </div>
+
+      <p>未知数加到三个，算法叫<strong>对角线法则</strong>，也译作萨吕斯法则：把表右面再抄上第一、二列，沿六条斜线各取三个数相乘，从左上往右下的三条取正，从右上往左下的三条取负。每项的三个数来自不同的行与不同的列，这条规矩是下一节定义里唯一要紧的东西。</p>
+
+      <div class="figure">
+        <!--FIG ch02_sarrus--><svg viewBox="0 0 720 430" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<text x="180.00" y="40.00" text-anchor="middle" font-size="15" fill="var(--ink)">三阶行列式：六条斜线各抓三个数</text>
+<rect x="56.00" y="78.00" width="62.00" height="62.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="87.00" y="118.00" text-anchor="middle" font-size="22" fill="var(--ink)">3</text>
+<rect x="118.00" y="78.00" width="62.00" height="62.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="149.00" y="118.00" text-anchor="middle" font-size="22" fill="var(--ink)">1</text>
+<rect x="180.00" y="78.00" width="62.00" height="62.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="211.00" y="118.00" text-anchor="middle" font-size="22" fill="var(--ink)">2</text>
+<rect x="242.00" y="78.00" width="62.00" height="62.00" fill="var(--fig-fill-2)" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="273.00" y="118.00" text-anchor="middle" font-size="22" fill="var(--ink-2)">3</text>
+<rect x="304.00" y="78.00" width="62.00" height="62.00" fill="var(--fig-fill-2)" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="335.00" y="118.00" text-anchor="middle" font-size="22" fill="var(--ink-2)">1</text>
+<rect x="56.00" y="140.00" width="62.00" height="62.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="87.00" y="180.00" text-anchor="middle" font-size="22" fill="var(--ink)">2</text>
+<rect x="118.00" y="140.00" width="62.00" height="62.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="149.00" y="180.00" text-anchor="middle" font-size="22" fill="var(--ink)">4</text>
+<rect x="180.00" y="140.00" width="62.00" height="62.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="211.00" y="180.00" text-anchor="middle" font-size="22" fill="var(--ink)">1</text>
+<rect x="242.00" y="140.00" width="62.00" height="62.00" fill="var(--fig-fill-2)" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="273.00" y="180.00" text-anchor="middle" font-size="22" fill="var(--ink-2)">2</text>
+<rect x="304.00" y="140.00" width="62.00" height="62.00" fill="var(--fig-fill-2)" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="335.00" y="180.00" text-anchor="middle" font-size="22" fill="var(--ink-2)">4</text>
+<rect x="56.00" y="202.00" width="62.00" height="62.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="87.00" y="242.00" text-anchor="middle" font-size="22" fill="var(--ink)">1</text>
+<rect x="118.00" y="202.00" width="62.00" height="62.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="149.00" y="242.00" text-anchor="middle" font-size="22" fill="var(--ink)">5</text>
+<rect x="180.00" y="202.00" width="62.00" height="62.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="211.00" y="242.00" text-anchor="middle" font-size="22" fill="var(--ink)">3</text>
+<rect x="242.00" y="202.00" width="62.00" height="62.00" fill="var(--fig-fill-2)" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="273.00" y="242.00" text-anchor="middle" font-size="22" fill="var(--ink-2)">1</text>
+<rect x="304.00" y="202.00" width="62.00" height="62.00" fill="var(--fig-fill-2)" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="335.00" y="242.00" text-anchor="middle" font-size="22" fill="var(--ink-2)">5</text>
+<text x="273.00" y="68.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">重抄前两列</text>
+<line x1="87.00" y1="109.00" x2="211.00" y2="233.00" stroke="var(--accent-line)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="87.00" y1="233.00" x2="211.00" y2="109.00" stroke="var(--ink-2)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="8 7"/>
+<line x1="149.00" y1="109.00" x2="273.00" y2="233.00" stroke="var(--accent-line)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="149.00" y1="233.00" x2="273.00" y2="109.00" stroke="var(--ink-2)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="8 7"/>
+<line x1="211.00" y1="109.00" x2="335.00" y2="233.00" stroke="var(--accent-line)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="211.00" y1="233.00" x2="335.00" y2="109.00" stroke="var(--ink-2)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="8 7"/>
+<text x="400.00" y="92.00" text-anchor="start" font-size="15" fill="var(--accent-line)">→ 三条右下斜线，取正</text>
+<text x="400.00" y="120.00" text-anchor="start" font-size="14" fill="var(--ink)">3·4·3 = 36</text>
+<text x="400.00" y="144.00" text-anchor="start" font-size="14" fill="var(--ink)">1·1·1 = 1</text>
+<text x="400.00" y="168.00" text-anchor="start" font-size="14" fill="var(--ink)">2·2·5 = 20</text>
+<text x="400.00" y="192.00" text-anchor="start" font-size="14" fill="var(--ink-2)">合计 57</text>
+<text x="400.00" y="240.00" text-anchor="start" font-size="15" fill="var(--ink-2)">↗ 三条右上斜线，取负</text>
+<text x="400.00" y="268.00" text-anchor="start" font-size="14" fill="var(--ink)">1·4·2 = 8</text>
+<text x="400.00" y="292.00" text-anchor="start" font-size="14" fill="var(--ink)">5·1·3 = 15</text>
+<text x="400.00" y="316.00" text-anchor="start" font-size="14" fill="var(--ink)">3·2·1 = 6</text>
+<text x="400.00" y="340.00" text-anchor="start" font-size="14" fill="var(--ink-2)">合计 29</text>
+<text x="400.00" y="388.00" text-anchor="start" font-size="16" fill="var(--ink)">行列式 = 28</text>
+<text x="56.00" y="414.00" text-anchor="start" font-size="13" fill="var(--ink-2)">六条斜线正好穷尽三个数不同行不同列六种取法，所以三阶只要画线就能算完。</text>
+</svg>
+<!--/FIG ch02_sarrus-->
+        <figcaption class="figcaption"><b>六条斜线正好抓完六个乘积。</b>右侧两列是重抄的副本，借它们把斜线拉直。</figcaption>
+      </div>
+
+      <p>图里那个矩阵手算一遍：正项 \(3\cdot4\cdot3+1\cdot1\cdot1+2\cdot2\cdot5=57\)，负项 \(2\cdot4\cdot1+3\cdot1\cdot5+1\cdot2\cdot3=29\)，相减得 28。写的时候正项一列、负项一列，不容易漏号。对角线法则只管二阶和三阶，四阶再这样画就会算错，原因要等 \(n\) 阶的通式写出来才看得清。</p>
+
+      <div class="archive reveal">
+        <p class="archive-when">1693 年，汉诺威</p>
+        <h3>两个下标，一张表</h3>
+        <p class="archive-quote">「每个系数属于第几个方程、第几个未知数，用两个下标标出来。」</p>
+        <p class="archive-source">莱布尼茨 1693 年致洛必达的信（意译）</p>
+        <p>他把方程组的系数编上双下标，又写下消元之后剩下的那个表达式，后人把这封信看作行列式的最早雏形。麦克劳林 1748 年在《代数论》里给出同样形状的法则，克拉默 1750 年在《代数曲线引论》的附录里用它解方程组。</p>
+      </div>
+
+      <h2 id="s-2" class="reveal">二、n 阶行列式：全排列与逆序数</h2>
+
+      <p>三阶的六项换个读法：每一项的三个数，行标总是 1、2、3 顺排，列标则是 1、2、3 的六种排法之一。把 1 到 \(n\) 各用一次排成一列，叫一个<strong>全排列</strong>，\(n\) 个数共有 \(n!\) 个：三阶 6 个，四阶 24 个，十阶 362 万个。行列式的定义，就是给每个全排列配一个正负号，再把对应的乘积加起来。</p>
+
+      <p>正负号看排列的奇偶。排列 \(p_1p_2\cdots p_n\) 里，较大的数排在较小的数前面就叫一个<strong>逆序</strong>，逆序的总数叫<strong>逆序数</strong>，记作 \(\tau\)；\(\tau\) 为偶取正，为奇取负。三阶六个排列算一遍：123 的 \(\tau=0\)，231 与 312 的 \(\tau=2\)，都取正；321 的 \(\tau=3\)，132 与 213 的 \(\tau=1\)，都取负，与对角线法则的三正三负一致。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定义（\(n\) 阶行列式）</p>
+        <p>设 \(A=(a_{ij})\) 是 \(n\) 阶方阵，则</p>
+        <p>\[ D=\begin{vmatrix} a_{11} & a_{12} & \cdots & a_{1n}\\ a_{21} & a_{22} & \cdots & a_{2n}\\ \vdots & \vdots & & \vdots\\ a_{n1} & a_{n2} & \cdots & a_{nn}\end{vmatrix}=\sum_{p_1p_2\cdots p_n}(-1)^{\tau(p_1p_2\cdots p_n)}a_{1p_1}a_{2p_2}\cdots a_{np_n}, \]</p>
+        <p>和式取遍 1 到 \(n\) 的全部 \(n!\) 个全排列，每一项是取自不同行、不同列的 \(n\) 个元素之积。</p>
+      </div>
+
+      <p>读定义抓住三条：每项的 \(n\) 个元素不同行不同列；项数正好 \(n!\)，不重不漏；\(n\ge2\) 时正负各半，随手凑的乘积常常互相抵消，行列式经常是零或者很小的数。性质的第一条，行列式与转置相等，从定义也看得出来：转置之后行标成了全排列、列标变成顺排，逆序数没变，和式还是原来的值，所以后面只讲行，列的情形一字不改。</p>
+
+      <details class="fold">
+        <summary>为什么正项和负项一定各占一半</summary>
+        <p>把排列里任意两个数对换，逆序数的奇偶必然翻转：这两个数之间与它们同时构成逆序的成对增减。于是所有排列可以两两配对，每对一奇一偶，\(n!\) 个排列正好分成 \(n!/2\) 对。</p>
+      </details>
+
+      <h2 id="s-3" class="reveal">三、六条性质：把行列式算小</h2>
+
+      <p>照定义算四阶要写 24 项，五阶 120 项，十阶 362 万项，谁也受不了。六条性质不产生新的值，它们只把行列式换成值相等、形状更好看的另一个，一直换到不必再算为止。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">性质（行列式的六条基本性质）</p>
+        <p>一、行列式与它的转置相等，\(D^{T}=D\)，行与列地位相同。</p>
+        <p>二、互换两行，行列式变号。</p>
+        <p>三、某一行乘 \(k\)，等于用 \(k\) 乘整个行列式；某一行全为零，行列式为零。</p>
+        <p>四、两行相同或成比例，行列式为零。</p>
+        <p>五、某一行是两组数之和，行列式可拆成两个行列式之和，其余各行不动。</p>
+        <p>六、把某一行的 \(k\) 倍加到另一行上，行列式不变。</p>
+      </div>
+
+      <p>天天用的是第六条，它就是第一章的消元法。把第一行的适当倍数加到下面各行，让第一列只剩一个非零数，再对第二列做同样的事，一路做下去，行列式变成了上三角。上三角行列式按定义只有 \(p=(1,2,\cdots,n)\) 这一个排列能取到非零乘积，所以它的值等于主对角线连乘，四阶的 24 项就此变成 4 次乘法和几行加法。</p>
+
+      <p>拿 \(D=\begin{vmatrix} 2 & 1 & 3\\ 4 & 3 & 8\\ 6 & 5 & 14\end{vmatrix}\) 试一遍：第二行减两倍第一行得 \((0,1,2)\)，第三行减三倍第一行得 \((0,2,5)\)，第三行再减两倍第二行得 \((0,0,1)\)，于是 \(D=2\cdot1\cdot1=2\)。</p>
+
+      <p>第三条管公因子，某行有公共的 \(k\) 可以挪到外面，数字因此变小；某行全零，整个行列式就是零。第四条管判零，两行相同或成比例，值直接写 0。像 \(\begin{vmatrix} 1 & 2 & 3\\ 2 & 5 & 7\\ 3 & 7 & 10\end{vmatrix}\)，拿第一行去减后两行，两行都变成了 \((0,1,1)\)，不必再算。</p>
+
+      <p>第二条管符号，每交换两行变一次号，化三角途中换过几次行，最后要补 \((-1)\) 的那么多次方。第五条主要用在证明，把一行拆成两行之和，行列式跟着分成两个。第一条则把行与列绑在一起，凡是对行成立的，对列照搬，下一节的按列展开就靠它。</p>
+
+      <div class="keyidea reveal">
+        <p>算行列式不用展开定义：用倍加把它化成上三角，再把对角线上那几个数乘起来，符号按换行的次数补。</p>
+      </div>
+
+      <details class="fold">
+        <summary>四阶为什么不能用对角线法则</summary>
+        <p>四阶有 \(4!=24\) 项，而一张表上两条对角线最多凑出 8 条斜线，剩下 16 项没地方画。三阶的 6 项恰好等于 6 条斜线，纯属巧合。</p>
+      </details>
+
+      <h2 id="s-4" class="reveal">四、余子式与按行展开</h2>
+
+      <p>性质把行列式化简，还有一条路是把阶数降下来，拆法就是划掉一行一列。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定义（余子式与代数余子式）</p>
+        <p>划去 \(a_{ij}\) 所在的第 \(i\) 行与第 \(j\) 列，剩下的 \(n-1\) 阶行列式叫 \(a_{ij}\) 的<strong>余子式</strong>，记作 \(M_{ij}\)；配上符号 \((-1)^{i+j}\) 得 \(A_{ij}=(-1)^{i+j}M_{ij}\)，叫<strong>代数余子式</strong>。</p>
+      </div>
+
+      <p>符号只看位置，与元素本身是几无关，像棋盘一样隔一格换一次：左上角是正，往右一格、往下一格各变一次负。</p>
+
+      <div class="figure">
+        <!--FIG ch02_minor--><svg viewBox="0 0 720 340" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<text x="156.00" y="42.00" text-anchor="middle" font-size="15" fill="var(--ink)">划掉第 2 行与第 3 列，剩下的叫余子式</text>
+<rect x="60.00" y="78.00" width="64.00" height="64.00" fill="var(--fig-fill)" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="92.00" y="119.00" text-anchor="middle" font-size="22" fill="var(--ink)">2</text>
+<rect x="124.00" y="78.00" width="64.00" height="64.00" fill="var(--fig-fill)" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="156.00" y="119.00" text-anchor="middle" font-size="22" fill="var(--ink)">3</text>
+<rect x="188.00" y="78.00" width="64.00" height="64.00" fill="var(--fig-fill-2)" stroke="var(--ink-3)" stroke-width="1.1" opacity="0.5"/>
+<text x="220.00" y="119.00" text-anchor="middle" font-size="22" fill="var(--ink-3)">1</text>
+<line x1="197.00" y1="133.00" x2="243.00" y2="87.00" stroke="var(--ink-3)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.85"/>
+<rect x="60.00" y="142.00" width="64.00" height="64.00" fill="var(--fig-fill-2)" stroke="var(--ink-3)" stroke-width="1.1" opacity="0.5"/>
+<text x="92.00" y="183.00" text-anchor="middle" font-size="22" fill="var(--ink-3)">5</text>
+<line x1="69.00" y1="197.00" x2="115.00" y2="151.00" stroke="var(--ink-3)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.85"/>
+<rect x="124.00" y="142.00" width="64.00" height="64.00" fill="var(--fig-fill-2)" stroke="var(--ink-3)" stroke-width="1.1" opacity="0.5"/>
+<text x="156.00" y="183.00" text-anchor="middle" font-size="22" fill="var(--ink-3)">4</text>
+<line x1="133.00" y1="197.00" x2="179.00" y2="151.00" stroke="var(--ink-3)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.85"/>
+<rect x="188.00" y="142.00" width="64.00" height="64.00" fill="var(--fig-fill-2)" stroke="var(--ink-3)" stroke-width="1.1" opacity="0.5"/>
+<text x="220.00" y="183.00" text-anchor="middle" font-size="22" fill="var(--ink-3)">6</text>
+<line x1="197.00" y1="197.00" x2="243.00" y2="151.00" stroke="var(--ink-3)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.85"/>
+<rect x="60.00" y="206.00" width="64.00" height="64.00" fill="var(--fig-fill)" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="92.00" y="247.00" text-anchor="middle" font-size="22" fill="var(--ink)">7</text>
+<rect x="124.00" y="206.00" width="64.00" height="64.00" fill="var(--fig-fill)" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="156.00" y="247.00" text-anchor="middle" font-size="22" fill="var(--ink)">8</text>
+<rect x="188.00" y="206.00" width="64.00" height="64.00" fill="var(--fig-fill-2)" stroke="var(--ink-3)" stroke-width="1.1" opacity="0.5"/>
+<text x="220.00" y="247.00" text-anchor="middle" font-size="22" fill="var(--ink-3)">9</text>
+<line x1="197.00" y1="261.00" x2="243.00" y2="215.00" stroke="var(--ink-3)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.85"/>
+<line x1="292.00" y1="124.00" x2="292.00" y2="232.00" stroke="var(--ink-2)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="400.00" y1="124.00" x2="400.00" y2="232.00" stroke="var(--ink-2)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="346.00" y="110.00" text-anchor="middle" font-size="13.5" fill="var(--ink-2)">2 阶行列式 M</text>
+<text x="323.00" y="163.00" text-anchor="middle" font-size="19" fill="var(--ink)">2</text>
+<text x="369.00" y="163.00" text-anchor="middle" font-size="19" fill="var(--ink)">3</text>
+<text x="323.00" y="209.00" text-anchor="middle" font-size="19" fill="var(--ink)">7</text>
+<text x="369.00" y="209.00" text-anchor="middle" font-size="19" fill="var(--ink)">8</text>
+<line x1="192.00" y1="199.60" x2="280.00" y2="178.00" stroke="var(--ink-3)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M 272.68 183.23 L 280.00 178.00 L 271.09 176.75" fill="var(--ink-3)" stroke="var(--ink-3)" stroke-width="1" stroke-linejoin="round"/>
+<text x="548.00" y="100.00" text-anchor="middle" font-size="14" fill="var(--ink)">符号只看位置</text>
+<rect x="470.00" y="118.00" width="52.00" height="52.00" fill="none" stroke="var(--ink-3)" stroke-width="1.0"/>
+<text x="496.00" y="152.00" text-anchor="middle" font-size="19" fill="var(--ink-2)">+</text>
+<rect x="522.00" y="118.00" width="52.00" height="52.00" fill="none" stroke="var(--ink-3)" stroke-width="1.0"/>
+<text x="548.00" y="152.00" text-anchor="middle" font-size="19" fill="var(--ink-3)">−</text>
+<rect x="574.00" y="118.00" width="52.00" height="52.00" fill="none" stroke="var(--ink-3)" stroke-width="1.0"/>
+<text x="600.00" y="152.00" text-anchor="middle" font-size="19" fill="var(--ink-2)">+</text>
+<rect x="470.00" y="170.00" width="52.00" height="52.00" fill="none" stroke="var(--ink-3)" stroke-width="1.0"/>
+<text x="496.00" y="204.00" text-anchor="middle" font-size="19" fill="var(--ink-3)">−</text>
+<rect x="522.00" y="170.00" width="52.00" height="52.00" fill="none" stroke="var(--ink-3)" stroke-width="1.0"/>
+<text x="548.00" y="204.00" text-anchor="middle" font-size="19" fill="var(--ink-2)">+</text>
+<rect x="574.00" y="170.00" width="52.00" height="52.00" fill="none" stroke="var(--ink-3)" stroke-width="1.0"/>
+<text x="600.00" y="204.00" text-anchor="middle" font-size="19" fill="var(--ink-3)">−</text>
+<rect x="470.00" y="222.00" width="52.00" height="52.00" fill="none" stroke="var(--ink-3)" stroke-width="1.0"/>
+<text x="496.00" y="256.00" text-anchor="middle" font-size="19" fill="var(--ink-2)">+</text>
+<rect x="522.00" y="222.00" width="52.00" height="52.00" fill="none" stroke="var(--ink-3)" stroke-width="1.0"/>
+<text x="548.00" y="256.00" text-anchor="middle" font-size="19" fill="var(--ink-3)">−</text>
+<rect x="574.00" y="222.00" width="52.00" height="52.00" fill="none" stroke="var(--ink-3)" stroke-width="1.0"/>
+<text x="600.00" y="256.00" text-anchor="middle" font-size="19" fill="var(--ink-2)">+</text>
+<text x="60.00" y="296.00" text-anchor="start" font-size="14" fill="var(--ink)">M = 2·8 − 3·7 = −5</text>
+<text x="60.00" y="320.00" text-anchor="start" font-size="13" fill="var(--ink-2)">这个位置落在「−」上，代数余子式 A = −M = 5；展开时再用它乘元素 6。</text>
+</svg>
+<!--/FIG ch02_minor-->
+        <figcaption class="figcaption"><b>划掉一行一列，剩下四格拼成二阶行列式。</b>余子式是 −5，位置在「−」上，代数余子式就是 5。</figcaption>
+      </div>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定理（按行展开）</p>
+        <p>行列式等于任意一行（或任意一列）的各元素与自己的代数余子式乘积之和：</p>
+        <p>\[ D=a_{i1}A_{i1}+a_{i2}A_{i2}+\cdots+a_{in}A_{in}, \]</p>
+        <p>而某一行元素与另一行对应元素的代数余子式乘积之和为零。</p>
+      </div>
+
+      <p>展开定理把 \(n\) 阶换成 \(n\) 个 \(n-1\) 阶。挑零最多的行或列展开，实际只算几项；动手前先用第六条性质造零，常常能把整行做到只剩一个非零数。像 \(\begin{vmatrix} 2 & 3 & 1\\ 5 & 4 & 6\\ 7 & 8 & 9\end{vmatrix}\) 按第二行展开，得 \(5\cdot(-19)+4\cdot11+6\cdot5=-21\)。</p>
+
+      <p>后半句是拿某一行的元素乘另一行的代数余子式，加起来为零。理由很实在：那个和等于把第二行换成第一行之后的行列式，两行相同，值是零。它保证按一行展开的结果唯一，也给第三章求逆矩阵的公式铺了路。</p>
+
+      <details class="fold">
+        <summary>展开定理凭什么成立</summary>
+        <p>按定义，每一项是 \(a_{1p_1}a_{2p_2}\cdots a_{np_n}\)。固定第 \(i\) 行用到的那个元素 \(a_{ij}\)，剩下的 \(n-1\) 个元素正好取遍除第 \(j\) 列外的所有列，拼起来就是 \(M_{ij}\)。把 \(n!\) 项按用到的 \(a_{ij}\) 归类，正好 \(n\) 组，每组提出 \(a_{ij}\)，剩下的和就是 \(A_{ij}\)。</p>
+      </details>
+
+      <h2 id="s-5" class="reveal">五、范德蒙德行列式</h2>
+
+      <p>有一类行列式有现成答案，阶数再高也不用算：第一行全是 1，第二行是 \(x_1,x_2,\cdots,x_n\)，第三行是它们的平方，一路排到 \(n-1\) 次方。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定理（范德蒙德行列式）</p>
+        <p>\[ V_n=\begin{vmatrix} 1 & 1 & \cdots & 1\\ x_1 & x_2 & \cdots & x_n\\ x_1^2 & x_2^2 & \cdots & x_n^2\\ \vdots & \vdots & & \vdots\\ x_1^{n-1} & x_2^{n-1} & \cdots & x_n^{n-1}\end{vmatrix}=\prod_{1\le i \lt j\le n}(x_j-x_i), \]</p>
+        <p>三阶时具体是 \((x_2-x_1)(x_3-x_1)(x_3-x_2)\)，四阶就是六个因子相乘。</p>
+      </div>
+
+      <p>这个乘积说清一件事：\(x_1,\cdots,x_n\) 里有两个相等，某个因子为零，行列式为零；两两不同，每个因子都不为零，行列式也不为零。插值问题正好用得上：过 \(n\) 个横坐标互不相同的点作一条 \(n-1\) 次多项式，系数矩阵就是范德蒙德矩阵，行列式不为零说明这样的多项式存在且只有一条。</p>
+
+      <p>推导靠降阶。把最后一行减去上一行的 \(x_1\) 倍，再把倒数第二行减去它上一行的 \(x_1\) 倍，一路做上去，第一列只剩最上面的 1；按第一列展开，每列提出一个 \((x_j-x_1)\)，剩下一个同形的 \(n-1\) 阶行列式，如此递归到底。</p>
+
+      <div class="archive reveal">
+        <p class="archive-when">1771 年，巴黎</p>
+        <h3>行列式成了独立的对象</h3>
+        <p class="archive-quote">「把这些由方程组系数排成的式子，本身拿来研究。」</p>
+        <p class="archive-source">范德蒙德《论线性方程组的解法》，1771 年（意译）</p>
+        <p>他不再把行列式当成解方程的中间步骤，而是当成一个可以研究的对象，给出了展开与因式分解的一批结果，上面那个乘积公式就挂着他的名字。高斯 1801 年在《算术研究》里第一次使用「行列式」这个词，柯西 1812 年给出乘法定理与现代记号，雅可比 1827 年把它写成今天课本里的竖线形状。</p>
+      </div>
+
+      <h2 id="s-6" class="reveal">六、克拉默法则</h2>
+
+      <p>定义和性质都齐了，回到开头那个问题：方程组什么时候有唯一的解。未知数与方程各 \(n\) 个时，答案写在一个数上。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定理（克拉默法则）</p>
+        <p>设 \(n\) 个未知数、\(n\) 个方程的线性方程组的系数行列式 \(D\ne0\)，则方程组有唯一解</p>
+        <p>\[ x_1=\frac{D_1}{D},\quad x_2=\frac{D_2}{D},\quad \cdots,\quad x_n=\frac{D_n}{D}, \]</p>
+        <p>其中 \(D_j\) 是把 \(D\) 的第 \(j\) 列换成常数列 \(b_1,b_2,\cdots,b_n\) 之后得到的行列式。</p>
+      </div>
+
+      <p>道理不长：\(D_j\) 按第 \(j\) 列展开，等于 \(\sum_i b_iA_{ij}\)。把它代进第 \(k\) 个方程，左边成了 \(\sum_i b_i\left(\sum_j a_{kj}A_{ij}\right)\)，括号里那个和式按上一节的定理在 \(i=k\) 时等于 \(D\)、其余为零，所以左边正好是 \(b_kD\)，除以 \(D\) 就还原了原方程。要记牢的是条件：只对方阵有效，\(D\) 必须不为零。</p>
+
+      <p>二元情形试一遍：\(2x_1+3x_2=8,\ x_1-x_2=-1\)。\(D=-5\)，\(D_1=-5\)，\(D_2=-10\)，所以 \(x_1=1\)，\(x_2=2\)。四个二阶行列式手算，速度与消元差不多。</p>
+
+      <p>局限有三条。方程个数必须等于未知数个数，三个未知数只给两个方程时它没法用。\(D=0\) 时它什么也不说，可能无解，也可能有无穷多解，要回去消元才分得清。计算量随阶数爆炸：解一个 \(n\) 元方程组要算 \(n+1\) 个 \(n\) 阶行列式，照定义是 \((n+1)\cdot n!\) 次乘法，\(n=10\) 时约 4 亿次，消元法只要 300 次左右。所以真解方程组还是用第一章的消元法，克拉默法则留给公式和证明：解被写成常数项的显式表达式，\(D\) 是不是零也顺便给出了唯一性的判别。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定理（齐次方程组有非零解的条件）</p>
+        <p>设齐次线性方程组有 \(n\) 个未知数、\(n\) 个方程，系数行列式为 \(D\)，则 \(D\ne0\) 时它只有零解；\(D=0\) 时它有非零解，且非零解有无穷多个。</p>
+      </div>
+
+      <p>这一条比非齐次的好用：齐次组永远有零解，只剩「有没有别的解」一个问题。比如 \(\lambda x+y+z=0,\ x+\lambda y+z=0,\ x+y+\lambda z=0\)，\(D=(\lambda+2)(\lambda-1)^2\)，令它为零得 \(\lambda=1\) 或 \(\lambda=-2\)。第一章用消元做过同一道题，那里看到主元变少，这里看到行列式变零。</p>
+
+      <details class="fold">
+        <summary>方程个数和未知数个数不等时，克拉默法则怎么办</summary>
+        <p>用不了，它只认方阵。\(m\ne n\) 时改走秩的路：把增广矩阵化成阶梯形，比较系数矩阵与增广矩阵的秩，第四章会正式定义秩。方阵而 \(D=0\) 时也是这条路。</p>
+      </details>
+
+      <h2 id="s-manual" class="reveal">怎么算</h2>
+
+      <ul>
+        <li><strong>二阶、三阶直接用对角线法则。</strong>别再绕定义，六条斜线写下来就完事，正项一列、负项一列。</li>
+        <li><strong>四阶往上先找零。</strong>挑零最多的行或列展开；没有零就先用倍加造零，把整行做到只剩一个非零数。</li>
+        <li><strong>化三角要记符号。</strong>每交换两行乘一次 \((-1)\)，只做倍加则不必补号。</li>
+        <li><strong>先提公因子。</strong>某行有公因子就提到外面，数字越小越不容易算错。</li>
+        <li><strong>三种情况直接写零。</strong>两行相同、两行成比例、有一行全零，看一眼就收工。</li>
+        <li><strong>用克拉默法则之前先算 \(D\)。</strong>\(D=0\) 就停手，改回去做消元，别硬往下算 \(D_1\)。</li>
+      </ul>
+
+      <details class="fold">
+        <summary>上三角行列式为什么等于对角元连乘</summary>
+        <p>按定义，每一项要在一行里取一个数且不同列。上三角的零都在对角线下方，第一个排列若取 \(p_1\ne1\)，第 1 行取到的就是零；于是 \(p_1=1\)，接着 \(p_2\) 只能是 2，一路推到底只剩 \(p=(1,2,\cdots,n)\) 一项。</p>
+      </details>
+
+      <h2 id="s-examples" class="reveal">例题</h2>
+
+      <div class="example">
+        <p class="example-head">例 <span>1</span>　计算 \(D=\begin{vmatrix} 1 & 2 & 3\\ 2 & 3 & 1\\ 3 & 1 & 2\end{vmatrix}\)。</p>
+        <p class="solution">第二行减两倍第一行得 \((0,-1,-5)\)，第三行减三倍第一行得 \((0,-5,-7)\)，第三行再减五倍第二行得 \((0,0,18)\)。全程只做倍加，不用补符号，上三角的对角元是 \(1,-1,18\)，所以 \(D=-18\)。</p>
+      </div>
+
+      <div class="example">
+        <p class="example-head">例 <span>2</span>　已知 \(\begin{vmatrix} a & b & c\\ d & e & f\\ g & h & i\end{vmatrix}=5\)，求 \(\begin{vmatrix} 2a & 2b & 2c\\ d & e & f\\ g & h & i\end{vmatrix}\) 与 \(\begin{vmatrix} a & b & c\\ d & e & f\\ g+2a & h+2b & i+2c\end{vmatrix}\) 的值。</p>
+        <p class="solution">第一个把第一行的公因子 2 提出来，得 \(2\cdot5=10\)。第二个把第三行看成 \((g,h,i)\) 与 \(2(a,b,c)\) 两组之和，拆成两个行列式，后一个里第一行与第三行的对应部分成比例，值为零，所以只剩 5。</p>
+      </div>
+
+      <div class="example">
+        <p class="example-head">例 <span>3</span>　用克拉默法则解 \(x_1+2x_2+3x_3=6,\ 2x_1-x_2+x_3=2,\ 3x_1+x_2-x_3=3\)。</p>
+        <p class="solution">按第一行展开得 \(D=\begin{vmatrix} 1 & 2 & 3\\ 2 & -1 & 1\\ 3 & 1 & -1\end{vmatrix}=0+10+15=25\)。把常数列依次换到三列上，三个 \(D_j\) 算出来也都是 25，所以 \(x_1=x_2=x_3=1\)，代回第一式正好是 6。</p>
+      </div>
+
+      <h2 id="s-exercises" class="reveal">习题</h2>
+
+
+      <div class="exercises">
+
+        <div class="ex-group">
+          <p class="ex-group-head">A 档 <span>巩固定义与基本计算，每题五分钟内</span></p>
+
+          <p class="ex"><span class="ex-num">1.</span> 计算二阶行列式 \(\begin{vmatrix} 3 & 2\\ -1 & 4\end{vmatrix}\)。</p>
+          <div class="answer"><details><summary>看答案</summary><p>\(3\cdot4-2\cdot(-1)=12+2=14\)。</p></details></div>
+
+          <p class="ex"><span class="ex-num">2.</span> 用对角线法则计算 \(\begin{vmatrix} 2 & 0 & -1\\ 1 & 3 & 2\\ 4 & 1 & 0\end{vmatrix}\)。</p>
+          <div class="answer"><details><summary>看答案</summary><p>正项 \(2\cdot3\cdot0+0\cdot2\cdot4+(-1)\cdot1\cdot1=-1\)，负项 \((-1)\cdot3\cdot4+2\cdot2\cdot1+0\cdot1\cdot0=-8\)，相减得 7。</p></details></div>
+
+          <p class="ex"><span class="ex-num">3.</span> 求排列 \(4\ 2\ 5\ 1\ 3\) 的逆序数，判断它是奇排列还是偶排列。</p>
+          <div class="answer"><details><summary>看答案</summary><p>4 后面有 3 个比它小，2 后面有 1 个，5 后面有 2 个，合计 \(\tau=6\)，偶排列，对应的项取正号。</p></details></div>
+
+          <p class="ex"><span class="ex-num">4.</span> 计算 \(\begin{vmatrix} 1 & 2 & 3 & 4\\ 0 & 2 & 3 & 4\\ 0 & 0 & 3 & 4\\ 0 & 0 & 0 & 4\end{vmatrix}\)。</p>
+          <div class="answer"><details><summary>看答案</summary><p>这是上三角行列式，值等于对角元连乘 \(1\cdot2\cdot3\cdot4=24\)。</p></details></div>
+
+          <p class="ex"><span class="ex-num">5.</span> 已知 \(\begin{vmatrix} a & b\\ c & d\end{vmatrix}=3\)，求 \(\begin{vmatrix} c & d\\ a & b\end{vmatrix}\) 与 \(\begin{vmatrix} 2a & 2b\\ 3c & 3d\end{vmatrix}\)。</p>
+          <div class="answer"><details><summary>看答案</summary><p>第一问互换了两行，得 \(-3\)。第二问两行分别提出 2 与 3，得 \(2\cdot3\cdot3=18\)。</p></details></div>
+
+          <p class="ex"><span class="ex-num">6.</span> 计算 \(\begin{vmatrix} 1 & 2 & 3\\ 2 & 4 & 6\\ 0 & 1 & 1\end{vmatrix}\)。</p>
+          <div class="answer"><details><summary>看答案</summary><p>第二行是第一行的 2 倍，两行成比例，行列式为 0。</p></details></div>
+        </div>
+
+        <div class="ex-group">
+          <p class="ex-group-head">B 档 <span>综合题，接近期末与考研难度</span></p>
+
+          <p class="ex"><span class="ex-num">1.</span> 计算 \(\begin{vmatrix} 1 & 1 & 1 & 1\\ 1 & 2 & 3 & 4\\ 1 & 4 & 9 & 16\\ 1 & 8 & 27 & 64\end{vmatrix}\)。</p>
+          <div class="answer"><details><summary>看答案</summary><p>这是 \(x_1,x_2,x_3,x_4\) 取 \(1,2,3,4\) 的范德蒙德行列式，等于六个因子连乘 \((2-1)(3-1)(4-1)(3-2)(4-2)(4-3)=12\)。</p></details></div>
+
+          <p class="ex"><span class="ex-num">2.</span> 解方程 \(\begin{vmatrix} 1 & 1 & x\\ 1 & x & 1\\ x & 1 & 1\end{vmatrix}=0\)。</p>
+          <div class="answer"><details><summary>看答案</summary><p>按对角线法则展开得 \(3x-x^3-2=-(x-1)^2(x+2)\)，所以 \(x=1\) 或 \(x=-2\)。\(x=1\) 时三行完全相同，\(x=-2\) 时三行之和为零行，两个值代回去行列式都是零。</p></details></div>
+
+          <p class="ex"><span class="ex-num">3.</span> 设 \(D=\begin{vmatrix} 1 & 1 & 1\\ 1 & 2 & 3\\ 1 & 4 & 9\end{vmatrix}=2\)，写出方程组 \(x+y+z=a,\ x+2y+3z=b,\ x+4y+9z=c\) 中 \(x\) 的克拉默表达式。</p>
+          <div class="answer"><details><summary>看答案</summary><p>系数行列式就是 \(D=2\)，把第一列换成 \((a,b,c)^{T}\) 得 \(D_1\)，所以 \(x=\dfrac{1}{2}\begin{vmatrix} a & 1 & 1\\ b & 2 & 3\\ c & 4 & 9\end{vmatrix}\)，不必展开。</p></details></div>
+
+          <p class="ex"><span class="ex-num">4.</span> 证明：奇数阶的反对称行列式（满足 \(a_{ij}=-a_{ji}\)，故对角元全为零）等于零。</p>
+          <div class="answer"><details><summary>看答案</summary><p>由 \(A^{T}=-A\) 得 \(D=|A^{T}|=|-A|=(-1)^{n}D\)。\(n\) 是奇数时 \(D=-D\)，所以 \(D=0\)。</p></details></div>
+        </div>
+
+        <div class="ex-group">
+          <p class="ex-group-head">C 档 <span>拓展与历史原题</span></p>
+
+          <p class="ex"><span class="ex-num">1.</span>（范德蒙德，1771）要过横坐标为 \(0,1,2\) 的三个点作一条二次多项式 \(y=a_0+a_1x+a_2x^2\)。写出关于三个系数的方程组，用范德蒙德行列式说明它有唯一解。</p>
+          <div class="answer"><details><summary>看答案</summary><p>系数矩阵是 \(x\) 取 \(0,1,2\) 的范德蒙德矩阵，其行列式 \(V=(1-0)(2-0)(2-1)=2\ne0\)，所以系数存在且唯一。</p></details></div>
+
+          <p class="ex"><span class="ex-num">2.</span>（克拉默，1750）用行列式解 \(x+y+z=6,\ 2x-y+z=3,\ x+2y-z=2\)。</p>
+          <div class="answer"><details><summary>看答案</summary><p>\(D=\begin{vmatrix}1&amp;1&amp;1\\2&amp;-1&amp;1\\1&amp;2&amp;-1\end{vmatrix}=7\ne0\)，把常数列依次换到三列上，得 \(D_1=7,\ D_2=14,\ D_3=21\)，所以 \(x=1,\ y=2,\ z=3\)。</p></details></div>
+
+          <p class="ex"><span class="ex-num">3.</span> 计算三对角行列式 \(D_n=\begin{vmatrix} 2 & 1 & & & \\ 1 & 2 & 1 & & \\ & 1 & 2 & \ddots & \\ & & \ddots & \ddots & 1\\ & & & 1 & 2\end{vmatrix}\)（空白处为零），用递推求出 \(D_n\)。</p>
+          <div class="answer"><details><summary>看答案</summary><p>按第一行展开得 \(D_n=2D_{n-1}-D_{n-2}\)，配上 \(D_1=2\)、\(D_2=3\)，得 \(D_n=n+1\)。</p></details></div>
+        </div>
+
+        <div class="ex-group">
+          <p class="ex-group-head">思考题 <span>不设标准答案，只给提示</span></p>
+
+          <p class="ex"><span class="ex-num">1.</span> 对角线法则为什么只对二阶、三阶成立？</p>
+          <div class="answer"><details><summary>看提示</summary><p>把项数数一遍就明白了：\(n\) 阶有 \(n!\) 项，而两条对角线最多给出 \(2n\) 条斜线，\(n=3\) 时 \(6=6\) 恰好够用，\(n=4\) 时 \(24\) 项只画得出 8 条。</p></details></div>
+
+          <p class="ex"><span class="ex-num">2.</span> 行列式等于零，方程组一定无解吗？</p>
+          <div class="answer"><details><summary>看提示</summary><p>不一定。\(D=0\) 只说明「不唯一」，无解与无穷多解都可能出现。要分开这两种情形，得看系数矩阵与增广矩阵的秩，或者干脆做一遍消元看有没有出现 \(0=d\) 的行。</p></details></div>
+
+          <p class="ex"><span class="ex-num">3.</span> 克拉默法则算得慢，课本为什么还留着它？</p>
+          <div class="answer"><details><summary>看提示</summary><p>它给的是公式而不是算法：解被写成常数项的显式表达式，用它可以看出解怎么随 \(b\) 连续地变化，也可以证明唯一性。判断齐次方程组有没有非零解时，看 \(D\) 是不是零，比消元更快。</p></details></div>
+        </div>
+
+      </div>
+
+      <h2 class="reveal">延伸阅读</h2>
+      <ul class="refs">
+        <li>同济大学数学系《线性代数》第六版，第二章。本章的定义、性质与例题口径以这本为准。</li>
+        <li>莫里斯·克莱因《古今数学思想》第二册，关于 18 世纪行列式理论的一节。</li>
+        <li>Cramer, <em>Introduction à l'analyse des lignes courbes algébriques</em>, 1750，附录。克拉默法则第一次成文的地方。</li>
+        <li>Gilbert Strang, <em>Introduction to Linear Algebra</em>，第五章。行列式从体积讲起，与本章的面积读法一路。</li>
+      </ul>
+
+      <h2 class="reveal">延伸阅读</h2>
+      <ul class="refs">
+        <li>同济大学数学系《线性代数》第六版，第二章。本章的定义、性质与例题口径以这本为准。</li>
+        <li>莫里斯·克莱因《古今数学思想》第二册，关于 18 世纪行列式理论的一节。</li>
+        <li>Cramer, <em>Introduction à l'analyse des lignes courbes algébriques</em>, 1750，附录。克拉默法则第一次成文的地方。</li>
+        <li>Gilbert Strang, <em>Introduction to Linear Algebra</em>，第五章。行列式从体积讲起，与本章的面积读法一路。</li>
+      </ul>
+
+    </article>
+  </div>
+
+  <div class="wrap">
+    <nav class="pager" aria-label="翻页">
+      <a class="pager-link prev" href="ch01.html"><span class="pager-dir">上一章</span><span class="pager-title">从《九章》的「方程」到消元法</span></a>
+      <a class="pager-link next" href="ch03.html"><span class="pager-dir">下一章</span><span class="pager-title">矩阵：把线性运算当成对象</span></a>
+    </nav>
+  </div>
+
+</main>
+
+<footer class="footer field-dark">
+  <div class="wrap">
+    <p class="footer-mark">数学基础课</p>
+    <div class="footer-cols">
+      <div><p>三门课按同一套读法写：先看问题，再给定义与判别，最后落到计算与习题。</p></div>
+      <div><p><a href="index.html">线性代数目录</a></p><p><a href="../index.html">返回主页</a></p></div>
+      <div><p>图示用脚本按真实数值画，公式由 KaTeX 排版。</p></div>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/katex/katex.min.js"></script>
+<script src="../assets/katex/auto-render.min.js"></script>
+<script src="../assets/site.js"></script>
+</body>
+</html>

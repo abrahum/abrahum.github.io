@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>第四章 1763：贝叶斯留下的论文 · 概率论与数理统计</title>
+<meta name="description" content="条件概率、乘法公式、全概率公式、贝叶斯公式，以及事件的独立性与两两独立、相互独立的区别。">
+<link rel="stylesheet" href="../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="nav-brand" href="../index.html">数学基础课<span> 三门课，一套读法</span></a>
+    <nav class="nav-links" aria-label="主导航">
+      <a href="index.html#map">本课目录</a>
+      <a class="xl" href="../calculus/index.html">微积分</a>
+      <a class="xl" href="../linear-algebra/index.html">线性代数</a>
+      <a class="xl" href="../complex/index.html">复变函数</a>
+      <a class="opt" href="ch05.html">下一章</a>
+    </nav>
+  </div>
+  <div class="nav-progress" aria-hidden="true"></div>
+</header>
+
+<main>
+
+  <section class="chapter">
+    <div class="wrap">
+      <div class="ch-hero-band">
+        <div>
+          <p class="ch-label reveal"><span>第四章</span><span class="ch-era">1763 年至 20 世纪</span></p>
+          <h1 class="ch-title reveal reveal-2">1763：贝叶斯留下的论文</h1>
+          <p class="ch-deck reveal reveal-3">一台准确率写着 95% 的检验仪报了阳性，医生不当场确诊，先让你复查。这个反应背后有一条公式，贝叶斯 1761 年去世时它还没发表，两年后由普莱斯整理出来念给了皇家学会。这一章讲条件概率、乘法公式、全概率公式、贝叶斯公式，以及事件的独立性。</p>
+          <div class="ch-meta reveal reveal-3">
+            <div><strong>本章知识点</strong>条件概率、乘法公式、全概率公式、贝叶斯公式、事件的独立性</div>
+            <div><strong>历史坐标</strong>贝叶斯 1763 年，拉普拉斯 1774 年</div>
+            <div><strong>对应教材</strong>浙大《概率论与数理统计》第四版 第一章 §4、§5</div>
+            <div><strong>前置</strong>古典概型、概率的加法公式</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap ch-body">
+    <aside class="rail">
+      <p class="rail-title">本章提纲</p>
+      <ol>
+        <li><a href="#s-1">条件概率</a></li>
+        <li><a href="#s-2">乘法公式</a></li>
+        <li><a href="#s-3">全概率公式</a></li>
+        <li><a href="#s-4">贝叶斯公式</a></li>
+        <li><a href="#s-5">事件的独立性</a></li>
+        <li><a href="#s-manual">怎么算</a></li>
+        <li><a href="#s-examples">例题</a></li>
+        <li><a href="#s-exercises">习题</a></li>
+      </ol>
+      <p class="rail-title">历史坐标</p>
+      <p class="rail-who">贝叶斯 1701 至 1761<br>论文 1763 年宣读<br>拉普拉斯 1774 年<br>20 世纪分成两派</p>
+    </aside>
+
+    <article class="prose">
+
+      <p class="lead reveal">前面几章算的都是没有情报时的概率，一枚硬币抛出去正面是 1/2，一副牌抽一张抽到黑桃是 1/4。现实里的问题常带着情报：这张牌已经看清是黑桃了，这个人已经进了初筛名单了。情报一进来，同一个事件的概率就得重算，这一章讲重算用的三条公式，以及什么时候根本不用重算。</p>
+
+      <h2 id="s-1" class="reveal">一、条件概率</h2>
+
+      <p>工厂里有 100 个人，40 个是女工，女工里 24 个戴眼镜，男工里还有 12 个戴眼镜。你在厂门口随手拦一个，他戴眼镜的概率是 \(36/100=0.36\)，这是无条件概率。要是先看清了这是个女工，问题就变成「女工里戴眼镜的占多少」，答案是 \(24/40=0.6\)。同一个事件，多了一句情报，数就从 0.36 变成 0.6。</p>
+
+      <p>这个新数在课本里写作 \(P(A\mid B)\)，读作在 \(B\) 发生的条件下 \(A\) 发生的概率。它和 \(P(AB)\) 只差一个分母：\(P(AB)\) 数的是在全体 100 人里既戴眼镜又是女工的比例，\(P(A\mid B)\) 数的是在 40 个女工里既戴眼镜又是女工的比例。所以把 \(P(AB)\) 除以 \(P(B)\)，分母恰好换成 \(B\) 那一块。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定义（条件概率）</p>
+        <p>设 \(A,B\) 是两个事件，且 \(P(B)&gt;0\)，称
+        \[ P(A\mid B)=\frac{P(AB)}{P(B)} \]
+        为在事件 \(B\) 发生的条件下事件 \(A\) 发生的条件概率。</p>
+      </div>
+
+      <p>这样定义的道理，是把样本空间从 \(\Omega\) 缩到 \(B\) 这一块：\(B\) 既然已经发生，落在 \(B\) 外面的样本点全部作废，谁也不会再从那里抽到结果。麻烦在于 \(B\) 里各点的权重还得重新分配，因为 \(P(B)\) 一般不等于 1，而概率的总和必须凑成 1。除以 \(P(B)\) 做的就是这样一次按比例放大，放大之后 \(B\) 自己的概率变成 1，\(B\) 里头各块之间的比例一点没动。</p>
+
+      <div class="figure">
+        <!--FIG pb04_area--><svg viewBox="0 0 720 400" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<text x="28.00" y="38.00" text-anchor="start" font-size="14.5" fill="var(--ink)">某厂 100 人：女工 40 人，其中 24 人戴眼镜，16 人不戴</text>
+<rect x="64.00" y="92.00" width="250.00" height="200.00" fill="var(--paper)" stroke="var(--ink-3)" stroke-width="1.3"/>
+<rect x="64.00" y="92.00" width="100.00" height="200.00" fill="var(--fig-fill)" stroke="var(--ink-3)" stroke-width="1.1"/>
+<rect x="64.00" y="92.00" width="100.00" height="120.00" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.8"/>
+<text x="114.00" y="158.00" text-anchor="middle" font-size="17" fill="var(--ink)">24</text>
+<text x="114.00" y="258.00" text-anchor="middle" font-size="15.5" fill="var(--ink-2)">16</text>
+<text x="239.00" y="188.00" text-anchor="middle" font-size="13.5" fill="var(--ink-2)">B 以外</text>
+<text x="239.00" y="208.00" text-anchor="middle" font-size="13.5" fill="var(--ink-2)">60 人</text>
+<text x="189.00" y="318.00" text-anchor="middle" font-size="13.5" fill="var(--ink-2)">Ω：100 人，分母是 100</text>
+<line x1="90.00" y1="104.00" x2="60.00" y2="122.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="52.00" y="124.00" text-anchor="end" font-size="13.5" fill="var(--accent-line)">A∩B</text>
+<line x1="90.00" y1="282.00" x2="60.00" y2="294.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="52.00" y="296.00" text-anchor="end" font-size="12.5" fill="var(--ink-3)">女工其余</text>
+<text x="64.00" y="80.00" text-anchor="start" font-size="13" fill="var(--ink-2)">B（女工）</text>
+<text x="356.00" y="200.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">只看 B</text>
+<line x1="330.00" y1="214.00" x2="392.00" y2="214.00" stroke="var(--ink-3)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M 383.64 217.34 L 392.00 214.00 L 383.64 210.66" fill="var(--ink-3)" stroke="var(--ink-3)" stroke-width="1" stroke-linejoin="round"/>
+<rect x="424.00" y="92.00" width="250.00" height="200.00" fill="var(--fig-fill)" stroke="var(--ink-3)" stroke-width="1.1"/>
+<rect x="424.00" y="92.00" width="250.00" height="120.00" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.8"/>
+<text x="549.00" y="148.00" text-anchor="middle" font-size="16" fill="var(--ink)">24 / 40 = 0.6</text>
+<text x="549.00" y="258.00" text-anchor="middle" font-size="14" fill="var(--ink-2)">16 / 40 = 0.4</text>
+<text x="549.00" y="318.00" text-anchor="middle" font-size="13.5" fill="var(--ink-2)">B：40 人，分母换成 40</text>
+<text x="28.00" y="350.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">阴影占 B 的比例一直是 60%，变的只有分母：全厂口径是 24/100，女工口径是 24/40。</text>
+<text x="28.00" y="374.00" text-anchor="start" font-size="13.5" fill="var(--ink-3)">条件概率 P(A|B) 记的就是右边这个数。</text>
+</svg>
+<!--/FIG pb04_area-->
+        <figcaption class="figcaption"><b>条件概率是把分母换掉，不是把分子换掉。</b>阴影那块在两张图里都是 24 人，变的只有分母：100 还是 40。</figcaption>
+      </div>
+
+      <p>条件概率满足概率的三条公理，因为它把同一套测度限制在 \(B\) 上接着用，非负、规范性、可加性原样继承下来。所以加法公式、减法公式、对立事件公式，在竖线右边加个 \(B\) 之后照样成立。</p>
+
+      <details class="fold">
+        <summary>定义里为什么要专门写明 P(B) 大于零</summary>
+        <p>分母是 \(P(B)\)，等于零就除不了。概率为零的事件在连续型场合并不罕见，一个点、一条线上的概率都可能是零，所以课本在定义里先把这种情况排除掉。真要用 \(P(A\mid B)\) 而 \(P(B)=0\) 时，只能另立定义或者绕开，常规题目里不会碰到。</p>
+      </details>
+
+      <h2 id="s-2" class="reveal">二、乘法公式</h2>
+
+      <p>把定义式两边同乘 \(P(B)\)，得到一个不用除法就能用的式子，课本把它叫乘法公式。它的用处是把分步进行的试验接成一条链：先发生什么、在这之后又发生什么，每一步的概率乘起来，就是整条路径的概率。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定理（乘法公式）</p>
+        <p>设 \(P(B)&gt;0\)，则 \(P(AB)=P(B)P(A\mid B)\)；对称地，当 \(P(A)&gt;0\) 时也有 \(P(AB)=P(A)P(B\mid A)\)。推广到 3 个事件，当 \(P(AB)&gt;0\) 时
+        \[ P(ABC)=P(A)P(B\mid A)P(C\mid AB). \]</p>
+      </div>
+
+      <p>三个事件的情形值得停一下：最后一项是 \(P(C\mid AB)\)，条件里挂着两个事件，意思是 \(A\) 和 \(B\) 都已经发生的前提下 \(C\) 的概率。写成 \(P(C\mid B)\) 就错了，因为 \(A\) 发生与否会改变剩下的样本空间。这条链可以一路延长，每加一个事件，条件里就多挂一个。</p>
+
+      <p>不放回抽样是乘法公式的主场。一批 10 件产品里有 3 件次品，不放回地连抽两件，两件都是次品的概率算起来是 \(\frac{3}{10}\times\frac{2}{9}=\frac{1}{15}\)：第一次抽到次品的概率是 \(3/10\)，抽走一件次品之后剩 9 件里还有 2 件次品，第二次的概率是 \(2/9\)。放回抽样的话第二次仍是 \(3/10\)，两个因子相同，那属于下一节要讲的独立。</p>
+
+      <div class="keyidea reveal">
+        <p>分步做的事，概率要乘；每一步用的分母，是走完前面所有步之后剩下那个样本空间的大小。</p>
+      </div>
+
+      <h2 id="s-3" class="reveal">三、全概率公式</h2>
+
+      <p>有一类问题，直接算 \(A\) 的概率算不出来，按原因分个类就都算得出来。拿供货说：要知道任取一件零件是次品的概率，先得看它出自哪个厂；两个厂的供货比例好查，各自的次品率也好查，把两种情况分别算完再加起来，答案就有了。全概率公式就是把这个动作写成式子。</p>
+
+      <p>写式子之前要先约定一件事：把样本空间切成若干块，任意两块不相交，合起来正好是全部，每一块的概率都大于零。这样的一组事件叫<strong>完备事件组</strong>，也叫样本空间的一个划分。分类要分得干净，不重不漏，公式才成立。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定理（全概率公式）</p>
+        <p>设 \(B_1,B_2,\dots,B_n\) 是样本空间的一个划分，且 \(P(B_i)&gt;0\)，则对任意事件 \(A\) 有
+        \[ P(A)=\sum_{i=1}^{n}P(B_i)P(A\mid B_i). \]</p>
+      </div>
+
+      <p>式子看着长，做过的动作只有两下：先用 \(B_i\) 把 \(A\) 切成互不相交的几块 \(AB_1,AB_2,\dots,AB_n\)，再用加法公式把各块加起来，每一块则用乘法公式换成分步的乘积。所以全概率公式是顺着走的，从原因推到结果，把「各种来路」的贡献汇总成一个数。</p>
+
+      <p>这个公式算出来的分母，下一节原封不动地还要用一遍。全概率公式把结果的总概率算成一个和，贝叶斯公式问的是这个和里各项各占多大份额，两处共用同一个分母，分开背就会背重。</p>
+
+      <details class="fold">
+        <summary>分类漏掉一块会怎样</summary>
+        <p>漏掉的那一块里的 \(A\) 就没有人算，和会偏小；两块相交则相交部分的 \(AB_i\) 被加了两次，和会偏大。两种情况都让等式不成立。判断有没有分干净的办法很简单：把各块的 \(P(B_i)\) 加起来，看是不是 1。</p>
+      </details>
+
+      <h2 id="s-4" class="reveal">四、贝叶斯公式</h2>
+
+      <p>全概率公式往下走一步，就撞上本章最有用的那个问题：结果已经看到了，它是哪一个原因造成的。医生拿到一张阳性化验单，想知道这个人到底有没有病；质检看到一件次品，想知道它出自哪个厂。这时候条件的方向要反过来，已知的是 \(A\)，要求的是 \(P(B_i\mid A)\)。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定理（贝叶斯公式）</p>
+        <p>设 \(B_1,B_2,\dots,B_n\) 是样本空间的一个划分，\(P(A)&gt;0\)，则
+        \[ P(B_i\mid A)=\frac{P(B_i)P(A\mid B_i)}{\sum_{j=1}^{n}P(B_j)P(A\mid B_j)},\quad i=1,2,\dots,n. \]</p>
+      </div>
+
+      <p>分子是刚刚那条加法公式里的第 \(i\) 项，分母是那条公式的整个和，也就是 \(P(A)\)。贝叶斯公式做的事就是把 \(A\) 的总概率按各原因的贡献拆成若干份，某一项占的份额就是那个原因的后验概率。\(P(B_i)\) 叫先验概率，是看结果之前对这个原因的判断；\(P(B_i\mid A)\) 叫后验概率，是看过结果之后修正过的判断；\(P(A\mid B_i)\) 是这个原因产生这个结果的本事，名字叫似然。</p>
+
+      <p>现在把开头那个检验算到底。某病的患病率是 0.5%，一种检验对病人有 95% 报阳性，对健康人有 96% 报阴性，也就是说健康人里有 4% 会被错报成阳性。某人做了一次，结果阳性，他真有病的概率是多少？</p>
+
+      <p>把 1000 个人摆出来数最清楚：1000 人里 5 个病人，这 5 个里有 \(5\times0.95=4.75\) 个报阳性；剩下 995 个健康人里有 \(995\times0.04=39.8\) 个被错报成阳性。阳性一共 \(4.75+39.8=44.55\) 人，其中真有病的只有 4.75 个，比例是 0.107。换成公式就是 \(\frac{0.005\times0.95}{0.005\times0.95+0.995\times0.04}=\frac{0.00475}{0.04455}=0.107\)，两个算法都是同一个分母。</p>
+
+      <div class="figure">
+        <!--FIG pb04_tree--><svg viewBox="0 0 720 430" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<text x="26.00" y="34.00" text-anchor="start" font-size="14.5" fill="var(--ink)">按 1000 人算：患病率 0.5%，灵敏度 0.95，特异度 0.96</text>
+<line x1="58.00" y1="208.00" x2="262.03" y2="112.66" stroke="var(--ink-2)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M 255.19 119.95 L 262.03 112.66 L 252.05 113.23" fill="var(--ink-2)" stroke="var(--ink-2)" stroke-width="1" stroke-linejoin="round"/>
+<line x1="58.00" y1="208.00" x2="262.00" y2="301.42" stroke="var(--ink-2)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M 252.01 300.93 L 262.00 301.42 L 255.10 294.18" fill="var(--ink-2)" stroke="var(--ink-2)" stroke-width="1" stroke-linejoin="round"/>
+<line x1="272.00" y1="108.00" x2="497.26" y2="58.37" stroke="var(--ink-2)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M 488.99 63.99 L 497.26 58.37 L 487.39 56.74" fill="var(--ink-2)" stroke="var(--ink-2)" stroke-width="1" stroke-linejoin="round"/>
+<line x1="272.00" y1="108.00" x2="497.24" y2="155.72" stroke="var(--ink-2)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M 487.39 157.42 L 497.24 155.72 L 488.92 150.17" fill="var(--ink-2)" stroke="var(--ink-2)" stroke-width="1" stroke-linejoin="round"/>
+<line x1="272.00" y1="306.00" x2="497.24" y2="258.28" stroke="var(--ink-2)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M 488.92 263.83 L 497.24 258.28 L 487.39 256.58" fill="var(--ink-2)" stroke="var(--ink-2)" stroke-width="1" stroke-linejoin="round"/>
+<line x1="272.00" y1="306.00" x2="497.20" y2="349.90" stroke="var(--ink-2)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M 487.38 351.76 L 497.20 349.90 L 488.80 344.48" fill="var(--ink-2)" stroke="var(--ink-2)" stroke-width="1" stroke-linejoin="round"/>
+<text x="118.00" y="140.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">0.005</text>
+<text x="118.00" y="274.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">0.995</text>
+<text x="332.00" y="74.00" text-anchor="start" font-size="13" fill="var(--ink-2)">0.95</text>
+<text x="332.00" y="148.00" text-anchor="start" font-size="13" fill="var(--ink-2)">0.05</text>
+<text x="348.00" y="274.00" text-anchor="start" font-size="13" fill="var(--ink-2)">0.04</text>
+<text x="348.00" y="346.00" text-anchor="start" font-size="13" fill="var(--ink-2)">0.96</text>
+<circle cx="58.00" cy="208.00" r="6.00" fill="var(--paper)" stroke="var(--ink-2)" stroke-width="1.4"/>
+<circle cx="272.00" cy="108.00" r="6.00" fill="var(--paper)" stroke="var(--ink-2)" stroke-width="1.4"/>
+<circle cx="272.00" cy="306.00" r="6.00" fill="var(--paper)" stroke="var(--ink-2)" stroke-width="1.4"/>
+<circle cx="508.00" cy="56.00" r="6.00" fill="var(--accent-line)" stroke="var(--ink-2)" stroke-width="1.4"/>
+<circle cx="508.00" cy="158.00" r="6.00" fill="var(--paper)" stroke="var(--ink-2)" stroke-width="1.4"/>
+<circle cx="508.00" cy="256.00" r="6.00" fill="var(--ink-3)" stroke="var(--ink-2)" stroke-width="1.4"/>
+<circle cx="508.00" cy="352.00" r="6.00" fill="var(--paper)" stroke="var(--ink-2)" stroke-width="1.4"/>
+<text x="46.00" y="213.00" text-anchor="end" font-size="14" fill="var(--ink)">受检</text>
+<text x="272.00" y="86.00" text-anchor="middle" font-size="13.5" fill="var(--ink)">真有病</text>
+<text x="272.00" y="340.00" text-anchor="middle" font-size="13.5" fill="var(--ink)">健康</text>
+<text x="526.00" y="57.00" text-anchor="start" font-size="13.5" fill="var(--ink)">阳性　0.00475</text>
+<text x="526.00" y="77.00" text-anchor="start" font-size="12.5" fill="var(--ink-3)">真阳性 ≈ 4.8 人</text>
+<text x="526.00" y="159.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">阴性　0.00025</text>
+<text x="526.00" y="179.00" text-anchor="start" font-size="12.5" fill="var(--ink-3)">漏诊 ≈ 0.3 人</text>
+<text x="526.00" y="257.00" text-anchor="start" font-size="13.5" fill="var(--ink)">阳性　0.0398</text>
+<text x="526.00" y="277.00" text-anchor="start" font-size="12.5" fill="var(--ink-3)">假阳性 ≈ 39.8 人</text>
+<text x="526.00" y="353.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">阴性　0.9552</text>
+<text x="526.00" y="373.00" text-anchor="start" font-size="12.5" fill="var(--ink-3)">真阴性 ≈ 955 人</text>
+<text x="26.00" y="400.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">四条路径的概率相加等于 1。阳性那两支加起来是 0.04455，来自真有病的只占 0.00475。</text>
+</svg>
+<!--/FIG pb04_tree-->
+        <figcaption class="figcaption"><b>同一棵树上，四条路径的概率加起来是 1。</b>两个阳性分支里，40 个左右的假阳性把 4.8 个真阳性淹掉了。</figcaption>
+      </div>
+
+      <p>结论是阳性的人里十个大约只有一个是真病人。这个数低得让人不舒服，原因却平淡：健康人的基数太大，4% 的错报率乘上 995 人，出来的数远大于病人那一小撮报出的 4.75 人。检验本身没错，出问题的是先验太小，0.005 这个起点把后验拖住了。</p>
+
+      <p>这也解释了复查的道理。第一次阳性的结果把先验从 0.005 抬到 0.107，第二张化验单就在这个新起点上再算一遍：\(\frac{0.107\times0.95}{0.107\times0.95+0.893\times0.04}\approx0.74\)。同一个检验，同一个结果，后验从一成跳到七成，换的只有先验。医生让你复查不是在拖时间，是在把先验换成后验再算一次。</p>
+
+      <div class="figure">
+        <!--FIG pb04_post--><svg viewBox="0 0 720 450" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<text x="26.00" y="34.00" text-anchor="start" font-size="14.5" fill="var(--ink)">灵敏度 0.95、特异度 0.96 的检验，一次阳性之后的后验</text>
+<line x1="64.00" y1="356.00" x2="656.00" y2="356.00" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+<line x1="64.00" y1="356.00" x2="64.00" y2="78.00" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+<line x1="171.64" y1="356.00" x2="171.64" y2="361.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+<text x="171.64" y="378.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">0.1</text>
+<line x1="279.27" y1="356.00" x2="279.27" y2="361.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+<text x="279.27" y="378.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">0.2</text>
+<line x1="386.91" y1="356.00" x2="386.91" y2="361.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+<text x="386.91" y="378.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">0.3</text>
+<line x1="494.55" y1="356.00" x2="494.55" y2="361.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+<text x="494.55" y="378.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">0.4</text>
+<line x1="602.18" y1="356.00" x2="602.18" y2="361.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+<text x="602.18" y="378.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">0.5</text>
+<line x1="59.00" y1="303.55" x2="64.00" y2="303.55" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+<text x="52.00" y="307.55" text-anchor="end" font-size="12.5" fill="var(--ink-3)">0.2</text>
+<line x1="59.00" y1="251.09" x2="64.00" y2="251.09" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+<text x="52.00" y="255.09" text-anchor="end" font-size="12.5" fill="var(--ink-3)">0.4</text>
+<line x1="59.00" y1="198.64" x2="64.00" y2="198.64" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+<text x="52.00" y="202.64" text-anchor="end" font-size="12.5" fill="var(--ink-3)">0.6</text>
+<line x1="59.00" y1="146.19" x2="64.00" y2="146.19" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+<text x="52.00" y="150.19" text-anchor="end" font-size="12.5" fill="var(--ink-3)">0.8</text>
+<line x1="59.00" y1="93.74" x2="64.00" y2="93.74" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+<text x="52.00" y="97.74" text-anchor="end" font-size="12.5" fill="var(--ink-3)">1.0</text>
+<text x="656.00" y="378.00" text-anchor="end" font-size="13.5" fill="var(--ink-2)">先验</text>
+<text x="52.00" y="70.00" text-anchor="end" font-size="13.5" fill="var(--ink-2)">后验</text>
+<line x1="64.00" y1="356.00" x2="656.00" y2="211.75" stroke="var(--ink-3)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 6" opacity="0.85"/>
+<text x="569.89" y="222.74" text-anchor="middle" font-size="12" fill="var(--ink-3)">后验 = 先验</text>
+<path d="M 66.15 344.08 L 67.63 336.50 L 69.10 329.35 L 70.58 322.59 L 72.05 316.18 L 73.53 310.11 L 75.00 304.35 L 76.48 298.87 L 77.95 293.66 L 79.42 288.69 L 80.90 283.94 L 82.37 279.42 L 83.85 275.09 L 85.32 270.94 L 86.80 266.97 L 88.27 263.17 L 89.75 259.51 L 91.22 256.01 L 92.70 252.63 L 94.17 249.39 L 95.65 246.27 L 97.12 243.26 L 98.59 240.36 L 100.07 237.56 L 101.54 234.86 L 103.02 232.26 L 104.49 229.74 L 105.97 227.30 L 107.44 224.94 L 108.92 222.66 L 110.39 220.45 L 111.87 218.31 L 113.34 216.23 L 114.82 214.22 L 116.29 212.26 L 117.76 210.37 L 119.24 208.52 L 120.71 206.73 L 122.19 204.99 L 123.66 203.30 L 125.14 201.65 L 126.61 200.05 L 128.09 198.49 L 129.56 196.97 L 131.04 195.49 L 132.51 194.05 L 133.99 192.64 L 135.46 191.27 L 136.93 189.93 L 138.41 188.63 L 139.88 187.36 L 141.36 186.11 L 142.83 184.90 L 144.31 183.71 L 145.78 182.55 L 147.26 181.42 L 148.73 180.31 L 150.21 179.23 L 151.68 178.17 L 153.16 177.13 L 154.63 176.12 L 156.10 175.12 L 157.58 174.15 L 159.05 173.20 L 160.53 172.26 L 162.00 171.35 L 163.48 170.46 L 164.95 169.58 L 166.43 168.72 L 167.90 167.87 L 169.38 167.05 L 170.85 166.23 L 172.33 165.44 L 173.80 164.66 L 175.27 163.89 L 176.75 163.14 L 178.22 162.40 L 179.70 161.67 L 181.17 160.96 L 182.65 160.26 L 184.12 159.57 L 185.60 158.90 L 187.07 158.24 L 188.55 157.58 L 190.02 156.94 L 191.50 156.31 L 192.97 155.69 L 194.44 155.08 L 195.92 154.48 L 197.39 153.89 L 198.87 153.31 L 200.34 152.74 L 201.82 152.18 L 203.29 151.63 L 204.77 151.08 L 206.24 150.55 L 207.72 150.02 L 209.19 149.50 L 210.67 148.99 L 212.14 148.48 L 213.61 147.99 L 215.09 147.50 L 216.56 147.02 L 218.04 146.54 L 219.51 146.07 L 220.99 145.61 L 222.46 145.16 L 223.94 144.71 L 225.41 144.27 L 226.89 143.83 L 228.36 143.41 L 229.84 142.98 L 231.31 142.56 L 232.78 142.15 L 234.26 141.75 L 235.73 141.35 L 237.21 140.95 L 238.68 140.56 L 240.16 140.17 L 241.63 139.79 L 243.11 139.42 L 244.58 139.05 L 246.06 138.68 L 247.53 138.32 L 249.01 137.97 L 250.48 137.62 L 251.95 137.27 L 253.43 136.92 L 254.90 136.59 L 256.38 136.25 L 257.85 135.92 L 259.33 135.59 L 260.80 135.27 L 262.28 134.95 L 263.75 134.64 L 265.23 134.33 L 266.70 134.02 L 268.18 133.72 L 269.65 133.42 L 271.12 133.12 L 272.60 132.83 L 274.07 132.54 L 275.55 132.25 L 277.02 131.97 L 278.50 131.69 L 279.97 131.41 L 281.45 131.13 L 282.92 130.86 L 284.40 130.60 L 285.87 130.33 L 287.35 130.07 L 288.82 129.81 L 290.29 129.55 L 291.77 129.30 L 293.24 129.05 L 294.72 128.80 L 296.19 128.55 L 297.67 128.31 L 299.14 128.07 L 300.62 127.83 L 302.09 127.60 L 303.57 127.36 L 305.04 127.13 L 306.52 126.90 L 307.99 126.68 L 309.46 126.45 L 310.94 126.23 L 312.41 126.01 L 313.89 125.79 L 315.36 125.58 L 316.84 125.37 L 318.31 125.15 L 319.79 124.95 L 321.26 124.74 L 322.74 124.53 L 324.21 124.33 L 325.69 124.13 L 327.16 123.93 L 328.63 123.73 L 330.11 123.54 L 331.58 123.34 L 333.06 123.15 L 334.53 122.96 L 336.01 122.77 L 337.48 122.59 L 338.96 122.40 L 340.43 122.22 L 341.91 122.04 L 343.38 121.86 L 344.86 121.68 L 346.33 121.50 L 347.80 121.33 L 349.28 121.16 L 350.75 120.98 L 352.23 120.81 L 353.70 120.64 L 355.18 120.48 L 356.65 120.31 L 358.13 120.15 L 359.60 119.98 L 361.08 119.82 L 362.55 119.66 L 364.03 119.50 L 365.50 119.34 L 366.97 119.19 L 368.45 119.03 L 369.92 118.88 L 371.40 118.73 L 372.87 118.58 L 374.35 118.43 L 375.82 118.28 L 377.30 118.13 L 378.77 117.98 L 380.25 117.84 L 381.72 117.69 L 383.20 117.55 L 384.67 117.41 L 386.14 117.27 L 387.62 117.13 L 389.09 116.99 L 390.57 116.85 L 392.04 116.72 L 393.52 116.58 L 394.99 116.45 L 396.47 116.32 L 397.94 116.18 L 399.42 116.05 L 400.89 115.92 L 402.37 115.79 L 403.84 115.67 L 405.31 115.54 L 406.79 115.41 L 408.26 115.29 L 409.74 115.16 L 411.21 115.04 L 412.69 114.92 L 414.16 114.80 L 415.64 114.68 L 417.11 114.56 L 418.59 114.44 L 420.06 114.32 L 421.54 114.20 L 423.01 114.09 L 424.48 113.97 L 425.96 113.86 L 427.43 113.75 L 428.91 113.63 L 430.38 113.52 L 431.86 113.41 L 433.33 113.30 L 434.81 113.19 L 436.28 113.08 L 437.76 112.97 L 439.23 112.86 L 440.71 112.76 L 442.18 112.65 L 443.65 112.55 L 445.13 112.44 L 446.60 112.34 L 448.08 112.24 L 449.55 112.13 L 451.03 112.03 L 452.50 111.93 L 453.98 111.83 L 455.45 111.73 L 456.93 111.63 L 458.40 111.53 L 459.88 111.44 L 461.35 111.34 L 462.83 111.24 L 464.30 111.15 L 465.77 111.05 L 467.25 110.96 L 468.72 110.86 L 470.20 110.77 L 471.67 110.68 L 473.15 110.59 L 474.62 110.50 L 476.10 110.40 L 477.57 110.31 L 479.05 110.22 L 480.52 110.14 L 482.00 110.05 L 483.47 109.96 L 484.94 109.87 L 486.42 109.78 L 487.89 109.70 L 489.37 109.61 L 490.84 109.53 L 492.32 109.44 L 493.79 109.36 L 495.27 109.28 L 496.74 109.19 L 498.22 109.11 L 499.69 109.03 L 501.17 108.95 L 502.64 108.86 L 504.11 108.78 L 505.59 108.70 L 507.06 108.62 L 508.54 108.54 L 510.01 108.47 L 511.49 108.39 L 512.96 108.31 L 514.44 108.23 L 515.91 108.16 L 517.39 108.08 L 518.86 108.00 L 520.34 107.93 L 521.81 107.85 L 523.28 107.78 L 524.76 107.70 L 526.23 107.63 L 527.71 107.56 L 529.18 107.48 L 530.66 107.41 L 532.13 107.34 L 533.61 107.27 L 535.08 107.20 L 536.56 107.13 L 538.03 107.05 L 539.51 106.98 L 540.98 106.92 L 542.45 106.85 L 543.93 106.78 L 545.40 106.71 L 546.88 106.64 L 548.35 106.57 L 549.83 106.51 L 551.30 106.44 L 552.78 106.37 L 554.25 106.31 L 555.73 106.24 L 557.20 106.17 L 558.68 106.11 L 560.15 106.04 L 561.62 105.98 L 563.10 105.91 L 564.57 105.85 L 566.05 105.79 L 567.52 105.72 L 569.00 105.66 L 570.47 105.60 L 571.95 105.54 L 573.42 105.48 L 574.90 105.41 L 576.37 105.35 L 577.85 105.29 L 579.32 105.23 L 580.79 105.17 L 582.27 105.11 L 583.74 105.05 L 585.22 104.99 L 586.69 104.93 L 588.17 104.87 L 589.64 104.82 L 591.12 104.76 L 592.59 104.70 L 594.07 104.64 L 595.54 104.59 L 597.02 104.53 L 598.49 104.47 L 599.96 104.42 L 601.44 104.36 L 602.91 104.30 L 604.39 104.25 L 605.86 104.19 L 607.34 104.14 L 608.81 104.08 L 610.29 104.03 L 611.76 103.98 L 613.24 103.92 L 614.71 103.87 L 616.19 103.82 L 617.66 103.76 L 619.13 103.71 L 620.61 103.66 L 622.08 103.61 L 623.56 103.55 L 625.03 103.50 L 626.51 103.45 L 627.98 103.40 L 629.46 103.35 L 630.93 103.30 L 632.41 103.25 L 633.88 103.20 L 635.36 103.15 L 636.83 103.10 L 638.30 103.05 L 639.78 103.00 L 641.25 102.95 L 642.73 102.90 L 644.20 102.85 L 645.68 102.80 L 647.15 102.75 L 648.63 102.71 L 650.10 102.66 L 651.58 102.61 L 653.05 102.56 L 654.53 102.52 L 656.00 102.47" fill="none" stroke="var(--accent-line)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="74.76" y1="356.00" x2="74.76" y2="305.26" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4 4"/>
+<line x1="602.18" y1="356.00" x2="602.18" y2="104.33" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4 4"/>
+<circle cx="74.76" cy="305.26" r="4.6" fill="var(--prussian)"/>
+<circle cx="602.18" cy="104.33" r="4.6" fill="var(--prussian)"/>
+<line x1="74.76" y1="305.26" x2="104.76" y2="259.26" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="106.76" y="263.26" text-anchor="start" font-size="12.5" fill="var(--ink)">0.01 得 0.19</text>
+<line x1="602.18" y1="104.33" x2="592.18" y2="82.33" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="590.18" y="78.33" text-anchor="end" font-size="12.5" fill="var(--ink)">0.5 得 0.96</text>
+<text x="26.00" y="408.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">一次阳性把先验放大成 24 倍左右，但在 0.01 那一端点仍只有 0.19：</text>
+<text x="26.00" y="432.00" text-anchor="start" font-size="13.5" fill="var(--ink-3)">先验太小的时候，检验结果救不回来。</text>
+</svg>
+<!--/FIG pb04_post-->
+        <figcaption class="figcaption"><b>同一个阳性结果，先验越大概率越高，但低端抬不起来。</b>曲线始终在虚线上方，说明检验是有信息量的；左端又贴着低处，说明先验太小的时候它也救不了。</figcaption>
+      </div>
+
+      <details class="fold">
+        <summary>P(A|B) 和 P(B|A) 为什么常常差得很远</summary>
+        <p>前者是「有病的人里有多少报阳性」，后者是「报阳性的人里有多少真有病」。前一个数由检验仪器的性能决定，后一个数还被患病率拉着走。常见的错法是把两者当成同一个数，于是把「95% 的病人能查出来」读成「阳性的 95% 是病人」，一步就把 0.107 错当成 0.95。</p>
+      </details>
+
+      <div class="archive reveal">
+        <p class="archive-when">1763 年，伦敦</p>
+        <h3>普莱斯整理出来的遗稿</h3>
+        <p class="archive-quote">「已知某未知事件在若干次试验中出现与不出现的次数，求它单次出现的概率落在任意两个给定界限之间的机会。」</p>
+        <p class="archive-source">贝叶斯《论机会学说中一个问题的求解》，1763 年由普莱斯代为宣读，此处为译述</p>
+        <p>贝叶斯 1761 年去世，手稿由普莱斯整理并补了引言，1763 年在皇家学会宣读。他假设未知概率在 \([0,1]\) 上均匀分布，用几何方法算出了后验的分布，那是本章公式最早的一次完整使用。</p>
+      </div>
+
+      <div class="archive reveal">
+        <p class="archive-when">1774 年，巴黎</p>
+        <h3>拉普拉斯把公式当成推断工具</h3>
+        <p class="archive-quote">「每个原因的概率，等于该原因之下观察到这件事的概率乘上它自身的先验概率，再除以全部原因下这些乘积之和。」</p>
+        <p class="archive-source">拉普拉斯《论事件原因的概率》，1774 年，此处为译述</p>
+        <p>拉普拉斯不知道贝叶斯那篇论文，独立得到了同一个式子，随后用它处理天文观测误差、人口统计和法庭证据。20 世纪以后，贝叶斯方法从长期被冷落变成与频率学派并列的一派，争论的焦点一直是先验从哪里来。</p>
+      </div>
+
+      <h2 id="s-5" class="reveal">五、事件的独立性</h2>
+
+      <p>条件概率里有种特殊情形：\(B\) 发生之后 \(A\) 的概率一点没变，情报等于白给。写成式子就是 \(P(A\mid B)=P(A)\)，把它代入条件概率的定义，得到 \(P(AB)=P(A)P(B)\)。这个式子左右对称，也不必要求 \(P(B)&gt;0\)，课本就拿它当独立的定义。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定义（相互独立）</p>
+        <p>设 \(A,B\) 是两个事件，若
+        \[ P(AB)=P(A)P(B), \]
+        则称事件 \(A\) 与 \(B\) 相互独立，简称 \(A,B\) 独立。</p>
+      </div>
+
+      <p>用乘法形式定义还有一层好处：\(P(B)=0\) 时条件概率没定义，独立性却照样说得清。判断两个事件独立多半不靠算，靠对机制的了解：两次抛掷互不相干，因为硬币没有记忆；两台机器的故障互不相干，因为零件不共用。</p>
+
+      <p>要注意独立和互不相容完全是两件事。互不相容说的是 \(AB\) 里一个样本点也没有，\(P(AB)=0\)；独立说的是 \(P(AB)\) 恰等于两个概率的乘积。两个概率都大于零的事件不可能既互不相容又相互独立，因为那时乘积大于零，而交的概率是零。</p>
+
+      <p>事件多了以后，独立要分层。3 个事件 \(A,B,C\) 相互独立，要求 4 个等式同时成立：两两的 3 个乘积式，加上 \(P(ABC)=P(A)P(B)P(C)\)。只满足前 3 个的叫两两独立。一般地，\(n\) 个事件相互独立要求任意 \(k\) 个（\(2\le k\le n\)）事件交的概率都等于各自概率的乘积，这样的等式一共有 \(2^{n}-n-1\) 个。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定义（n 个事件相互独立）</p>
+        <p>设 \(A_1,A_2,\dots,A_n\) 是 \(n\) 个事件，若对任意 \(k\)（\(2\le k\le n\)）和任意 \(k\) 个事件 \(A_{i_1},\dots,A_{i_k}\)，都有
+        \[ P(A_{i_1}A_{i_2}\cdots A_{i_k})=P(A_{i_1})P(A_{i_2})\cdots P(A_{i_k}), \]
+        则称这 \(n\) 个事件相互独立。若等式只对 \(k=2\) 成立，称它们两两独立。</p>
+      </div>
+
+      <p>相互独立一定两两独立，反过来不成立，这一点年年考。两两独立只查每一对之间的配合，管不到三个事件同时发生那一次。课本的反例是一颗四面体骰子，四个面分别涂红、白、黑和红白黑三色，记 \(A\) 为着地面带红，\(B\) 为带白，\(C\) 为带黑，三个事件的概率都是 \(1/2\)，两两交都是 \(1/4\)，三事件交只落在三色那一面，概率 \(1/4\)，而 \(1/2\times1/2\times1/2=1/8\)。</p>
+
+      <details class="fold">
+        <summary>两两独立为什么不够用</summary>
+        <p>两两独立能保证「任意两个事件同时发生」的概率算得对，三个一起发生却可能出错。用它去算「至少一个发生」时，三条边上的修正项都对，角落那一项会差。四面体那例子里，至少一个发生的概率是 1，套两两独立的式子只算出 \(1.5-0.75=0.75\)，缺的就是三面重叠那一块。</p>
+      </details>
+
+      <h2 id="s-manual" class="reveal">怎么算</h2>
+
+      <ul>
+        <li><strong>先问情报是什么。</strong>题目里出现「已知……」「在……条件下」，多半要用条件概率，条件就是竖线右边那个事件。</li>
+        <li><strong>写清分母。</strong>用条件概率之前，把 \(P(B)\) 先算出来写在纸上，分母错了整道题都错。</li>
+        <li><strong>分步就相乘。</strong>做一件事要分几步，用乘法公式顺着乘，每个因子配当时的样本空间。</li>
+        <li><strong>结果难算就分类。</strong>直接算 \(A\) 算不动，找一组不重不漏的划分，用全概率公式加总。</li>
+        <li><strong>反向就上贝叶斯。</strong>知道结果问原因，分子取加法里那一项，分母直接用全概率公式的和，不要重算。</li>
+        <li><strong>小概率先换人数。</strong>患病率、次品率低于 1% 时，把 1000 人或 10000 人摆出来数，比代公式不容易错。</li>
+        <li><strong>独立要验乘法。</strong>题目说独立是条件，可以直接乘；要你判断独立，就回头算 \(P(AB)\) 与 \(P(A)P(B)\) 是不是相等。</li>
+      </ul>
+
+      <p>写答案时把两件事写清楚：谁是条件，谁是被算的事件。贝叶斯公式的题建议按「先验、似然、分母、后验」四步列式，中间不跳步，跳步最容易把分子分母弄反。</p>
+
+      <h2 id="s-examples" class="reveal">例题</h2>
+
+      <div class="example">
+        <p class="example-head">例 <span>1</span>　10 件产品中有 3 件次品，不放回地依次取 2 件。求两件都是次品的概率。</p>
+        <p class="solution">设 \(A_i\) 为第 \(i\) 次取到次品。\(P(A_1)=3/10\)，第一次拿掉一件次品后剩 9 件、其中 2 件次品，故 \(P(A_2\mid A_1)=2/9\)。由乘法公式 \(P(A_1A_2)=\frac{3}{10}\times\frac{2}{9}=\frac{1}{15}\approx0.067\)。</p>
+      </div>
+
+      <div class="example">
+        <p class="example-head">例 <span>2</span>　甲乙两厂供应同一批零件，甲厂占 60%，次品率 1%；乙厂占 40%，次品率 2%。任取一件，求它是次品的概率；已知它是次品，求它来自甲厂的概率。</p>
+        <p class="solution">记 \(B_1,B_2\) 为来自甲乙两厂，\(A\) 为次品。\(P(A)=0.6\times0.01+0.4\times0.02=0.014\)。再由贝叶斯公式 \(P(B_1\mid A)=\frac{0.006}{0.014}=\frac{3}{7}\approx0.429\)。分母就是前一问算出的 0.014。</p>
+      </div>
+
+      <div class="example">
+        <p class="example-head">例 <span>3</span>　设 \(P(A)=P(B)=P(C)=\frac12\)，三者两两独立，且 \(P(ABC)=0\)。求 \(P(A\cup B\cup C)\)，并说明三者是否相互独立。</p>
+        <p class="solution">两两交的概率都是 \(1/4\)，代入加法公式 \(P(A\cup B\cup C)=\frac32-\frac34+0=\frac34\)。若三者相互独立，三交应为 \(1/8\)，和是 \(\frac78\)，与实际不符，故不相互独立。</p>
+      </div>
+
+      <h2 id="s-exercises" class="reveal">习题</h2>
+
+      <div class="exercises">
+
+        <div class="ex-group">
+          <p class="ex-group-head">A 档 <span>巩固定义与基本计算，每题五分钟内</span></p>
+
+          <p class="ex"><span class="ex-num">1.</span> 已知 \(P(A)=0.4\)，\(P(B)=0.5\)，\(P(AB)=0.2\)。求 \(P(A\mid B)\)、\(P(B\mid A)\)，并判断 \(A\) 与 \(B\) 是否独立。</p>
+          <div class="answer"><details><summary>看答案</summary><p>\(P(A\mid B)=0.2/0.5=0.4\)，\(P(B\mid A)=0.2/0.4=0.5\)。又 \(P(A)P(B)=0.2=P(AB)\)，故二者独立。</p></details></div>
+
+          <p class="ex"><span class="ex-num">2.</span> 10 件产品中 3 件次品，不放回取 2 件。求第二件是次品的概率（不管第一件是什么）。</p>
+          <div class="answer"><details><summary>看答案</summary><p>用全概率公式，按第一件分：\(\frac{3}{10}\times\frac{2}{9}+\frac{7}{10}\times\frac{3}{9}=\frac{1}{15}+\frac{7}{30}=\frac{3}{10}\)。和不放回无关，答案就是 0.3。</p></details></div>
+
+          <p class="ex"><span class="ex-num">3.</span> 甲乙两厂供货 60% 与 40%，次品率 1% 与 2%。任取一件是次品的概率是多少？</p>
+          <div class="answer"><details><summary>看答案</summary><p>\(0.6\times0.01+0.4\times0.02=0.006+0.008=0.014\)。</p></details></div>
+
+          <p class="ex"><span class="ex-num">4.</span> 条件同上，已知取到的是次品，求它来自乙厂的概率。</p>
+          <div class="answer"><details><summary>看答案</summary><p>\(\frac{0.008}{0.014}=\frac{4}{7}\approx0.571\)。乙厂货少，次品率高一倍，后验反而占了优势。</p></details></div>
+
+          <p class="ex"><span class="ex-num">5.</span> 三个事件相互独立，概率分别为 0.5、0.4、0.3。求至少有一个发生的概率。</p>
+          <div class="answer"><details><summary>看答案</summary><p>一个都不发生的概率是 \(0.5\times0.6\times0.7=0.21\)，所求为 \(1-0.21=0.79\)。</p></details></div>
+
+          <p class="ex"><span class="ex-num">6.</span> 某人射击命中率 0.8，各次相互独立。连射 3 次，求至少命中一次的概率。</p>
+          <div class="answer"><details><summary>看答案</summary><p>三次全不中的概率是 \(0.2^3=0.008\)，所求为 \(1-0.008=0.992\)。</p></details></div>
+        </div>
+
+        <div class="ex-group">
+          <p class="ex-group-head">B 档 <span>综合题，接近期末与考研难度</span></p>
+
+          <p class="ex"><span class="ex-num">1.</span> 已知 \(P(A\mid B)=0.6\)，\(P(B)=0.5\)，\(P(A)=0.4\)。求 \(P(B\mid A)\) 与 \(P(A\cup B)\)。</p>
+          <div class="answer"><details><summary>看答案</summary><p>\(P(AB)=0.5\times0.6=0.3\)，故 \(P(B\mid A)=0.3/0.4=0.75\)，\(P(A\cup B)=0.4+0.5-0.3=0.6\)。</p></details></div>
+
+          <p class="ex"><span class="ex-num">2.</span> 某系统由三个元件组成，1 号与 3 号并联后再与 2 号串联，各元件正常工作的概率都是 0.9 且相互独立。求系统正常工作的概率。</p>
+          <div class="answer"><details><summary>看答案</summary><p>并联部分正常工作概率为 \(1-0.1\times0.1=0.99\)，再与 2 号串联：\(0.99\times0.9=0.891\)。</p></details></div>
+
+          <p class="ex"><span class="ex-num">3.</span> 甲袋 2 白 3 黑，乙袋 1 白 3 黑。从甲袋任取一球放入乙袋，再从乙袋取一球。求取到白球的概率。</p>
+          <div class="answer"><details><summary>看答案</summary><p>按放入的是白是黑分类：\(\frac25\times\frac25+\frac35\times\frac15=\frac{4}{25}+\frac{3}{25}=\frac{7}{25}=0.28\)。</p></details></div>
+
+          <p class="ex"><span class="ex-num">4.</span> 设 \(P(A)=P(B)=P(C)=\frac12\)，三者两两独立。若 \(P(ABC)=0\)，求 \(P(A\cup B\cup C)\)；若三者相互独立，这个概率又是多少？</p>
+          <div class="answer"><details><summary>看答案</summary><p>前一种是 \(\frac32-\frac34+0=\frac34\)，后一种是 \(\frac32-\frac34+\frac18=\frac78\)。同一组两两独立的数据能给出两个不同的答案，可见两两独立不够。</p></details></div>
+        </div>
+
+        <div class="ex-group">
+          <p class="ex-group-head">C 档 <span>拓展与历史原题</span></p>
+
+          <p class="ex"><span class="ex-num">1.</span>（贝叶斯，1763）设未知概率 \(p\) 的先验在 \([0,1]\) 上均匀，做了 \(n\) 次独立试验成功 \(x\) 次。求 \(p\) 的后验密度与后验均值。</p>
+          <div class="answer"><details><summary>看答案</summary><p>后验密度正比于 \(p^{x}(1-p)^{n-x}\)，即 Beta\((x+1,n-x+1)\)。贝叶斯当年用几何方法算出的是 \(p\) 落在某区间内的概率，用的是同一个积分。</p></details></div>
+
+          <p class="ex"><span class="ex-num">2.</span> 某病患病率 0.1%，检验灵敏度 0.99，特异度 0.95。一次阳性之后真有病的概率是多少？同一人复查又阳性呢？</p>
+          <div class="answer"><details><summary>看答案</summary><p>第一次为 \(\frac{0.001\times0.99}{0.001\times0.99+0.999\times0.05}\approx0.28\)，第二次以 0.28 为先验，得约 0.89。两次之间要求两次结果在给定病情下独立，这个条件常被忽略。</p></details></div>
+
+          <p class="ex"><span class="ex-num">3.</span>（蒙提霍尔）三扇门后有一辆车两只羊。你选了 1 号，主持人知道车在哪，打开有羊的 3 号，问你换不换 2 号。</p>
+          <div class="answer"><details><summary>看答案</summary><p>不换中车的概率是 \(1/3\)，换门是 \(2/3\)。主持人开门这一步带进了信息，它把 2 号与 3 号合计的 \(2/3\) 全压到了没开的那扇门上。</p></details></div>
+        </div>
+
+        <div class="ex-group">
+          <p class="ex-group-head">思考题 <span>不设标准答案，只给提示</span></p>
+
+          <p class="ex"><span class="ex-num">1.</span> \(P(A\mid B)\) 与 \(P(B\mid A)\) 可以差多远？用你自己生活里的一个例子说明。</p>
+          <div class="answer"><details><summary>看提示</summary><p>想一个「条件很常见、结果却很少见」的场合，比如「带伞的人里下雨的比例」和「下雨时带伞的比例」。两个数由完全不同的东西决定。</p></details></div>
+
+          <p class="ex"><span class="ex-num">2.</span> 两两独立为什么不够用？一条只用两两独立的推理，可能在哪一步出错？</p>
+          <div class="answer"><details><summary>看提示</summary><p>检查这条推理有没有把三个事件同时发生当成乘积。三个事件一起出事的时候，两两之间的配合管不到那一块重叠。</p></details></div>
+
+          <p class="ex"><span class="ex-num">3.</span> 完全没有先验知识时，贝叶斯公式还能用吗？</p>
+          <div class="answer"><details><summary>看提示</summary><p>公式本身要求给先验，没有先验就没有输入。均匀先验是一种选择，可它也是一种主张。两个学派吵了一百年，吵的就是这一步。</p></details></div>
+        </div>
+
+      </div>
+
+      <h2 class="reveal">延伸阅读</h2>
+      <ul class="refs">
+        <li>浙江大学《概率论与数理统计》第四版，第一章 §4 与 §5。本章的记号、例题口径与习题难度以这本为准。</li>
+        <li>贝叶斯《论机会学说中一个问题的求解》（1763），重印于 <em>Biometrika</em> 第 45 卷（1958），附巴纳德写的导读，把普莱斯的引言与原文分开排了。</li>
+        <li>Stigler, <em>The History of Statistics</em>，第 3 章。讲清贝叶斯与拉普拉斯两人工作的关系，以及逆概率为什么在 19 世纪被冷落。</li>
+        <li>Rosenhouse, <em>The Monty Hall Problem</em>，第 1 至 3 章。三门问题的各种变体，以及为什么连数学家也会答错。</li>
+      </ul>
+
+    </article>
+  </div>
+
+  <div class="wrap">
+    <nav class="pager" aria-label="翻页">
+      <a class="pager-link prev" href="ch03.html"><span class="pager-dir">上一章</span><span class="pager-title">1733 至 1812：从二项到钟形曲线</span></a>
+      <a class="pager-link next" href="ch05.html"><span class="pager-dir">下一章</span><span class="pager-title">1933：柯尔莫哥洛夫的公理</span></a>
+    </nav>
+  </div>
+
+</main>
+
+<footer class="footer field-dark">
+  <div class="wrap">
+    <p class="footer-mark">数学基础课</p>
+    <div class="footer-cols">
+      <div><p>概率论与数理统计。三门课用的是同一套版式与同一套练习体例。</p></div>
+      <div><p><a href="index.html">概率论目录</a></p><p><a href="../index.html">返回主页</a></p></div>
+      <div><p>图示用脚本按真实数值画，公式由 KaTeX 排版。</p></div>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/katex/katex.min.js"></script>
+<script src="../assets/katex/auto-render.min.js"></script>
+<script src="../assets/site.js"></script>
+</body>
+</html>

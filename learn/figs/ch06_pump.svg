@@ -1,0 +1,44 @@
+<svg viewBox="0 0 720 460" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<text x="26.00" y="34.00" text-anchor="start" font-size="14.5" fill="var(--ink)" font-weight="600">抽水做功：每一片水都要升高 6−y</text>
+<rect x="88.86" y="190.78" width="174.29" height="170.43" fill="var(--fig-fill)" stroke="none" stroke-width="0"/>
+<line x1="88.86" y1="361.22" x2="88.86" y2="190.78" stroke="var(--ink-2)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="263.14" y1="361.22" x2="263.14" y2="190.78" stroke="var(--ink-2)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="88.86" y1="361.22" x2="263.14" y2="361.22" stroke="var(--ink-2)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="176.00" y="182.78" text-anchor="middle" font-size="12.5" fill="var(--ink-2)">池口即刻水面</text>
+<text x="176.00" y="276.00" text-anchor="middle" font-size="13" fill="var(--ink-2)">半径 2 m</text>
+<text x="176.00" y="256.00" text-anchor="middle" font-size="13" fill="var(--ink-2)">深 4 m</text>
+<rect x="88.86" y="303.70" width="174.29" height="14.91" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.2"/>
+<line x1="82.32" y1="310.94" x2="82.32" y2="105.57" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 6"/>
+<path d="M 86.40 108.30 L 82.32 99.17 L 78.24 108.30" fill="none" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="74.32" y="165.22" text-anchor="end" font-size="13.5" fill="var(--prussian)">6−y</text>
+<line x1="74.86" y1="361.22" x2="74.86" y2="318.61" stroke="var(--ink-2)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="70.86" y1="361.22" x2="78.86" y2="361.22" stroke="var(--ink-2)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="70.86" y1="318.61" x2="78.86" y2="318.61" stroke="var(--ink-2)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="66.86" y="343.91" text-anchor="end" font-size="13" fill="var(--ink-2)">y</text>
+<line x1="275.14" y1="318.61" x2="275.14" y2="303.70" stroke="var(--ink-2)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="271.14" y1="318.61" x2="279.14" y2="318.61" stroke="var(--ink-2)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="271.14" y1="303.70" x2="279.14" y2="303.70" stroke="var(--ink-2)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="281.14" y="315.15" text-anchor="start" font-size="13" fill="var(--ink-2)">dy</text>
+<text x="26.00" y="398.00" text-anchor="start" font-size="13" fill="var(--prussian)">dW = ρg·A(y)·(6−y)·dy，A(y) = 4π</text>
+<text x="26.00" y="422.00" text-anchor="start" font-size="13" fill="var(--ink-2)">W = ρg·4π∫(6−y)dy = 64πρg</text>
+<text x="400.00" y="34.00" text-anchor="start" font-size="14.5" fill="var(--ink)" font-weight="600">静水压力：越深，压得越狠</text>
+<rect x="473.75" y="141.53" width="152.50" height="205.12" fill="var(--fig-fill)" stroke="var(--ink-2)" stroke-width="1.5"/>
+<rect x="473.75" y="223.58" width="152.50" height="20.51" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.2"/>
+<line x1="430.00" y1="141.53" x2="662.00" y2="141.53" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 6"/>
+<text x="432.00" y="133.53" text-anchor="start" font-size="12.5" fill="var(--ink-2)">水面</text>
+<line x1="473.75" y1="115.53" x2="626.25" y2="115.53" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="473.75" y1="110.53" x2="473.75" y2="120.53" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="626.25" y1="110.53" x2="626.25" y2="120.53" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="550.00" y="107.53" text-anchor="middle" font-size="14" fill="var(--ink-2)">宽 2 m</text>
+<line x1="457.75" y1="141.53" x2="457.75" y2="223.58" stroke="var(--ink-2)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="453.75" y1="141.53" x2="461.75" y2="141.53" stroke="var(--ink-2)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="453.75" y1="223.58" x2="461.75" y2="223.58" stroke="var(--ink-2)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="449.75" y="186.56" text-anchor="end" font-size="13" fill="var(--ink-2)">y</text>
+<line x1="640.25" y1="223.58" x2="640.25" y2="244.09" stroke="var(--ink-2)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="636.25" y1="223.58" x2="644.25" y2="223.58" stroke="var(--ink-2)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="636.25" y1="244.09" x2="644.25" y2="244.09" stroke="var(--ink-2)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="646.25" y="237.84" text-anchor="start" font-size="13" fill="var(--ink-2)">dy</text>
+<text x="550.00" y="326.14" text-anchor="middle" font-size="12.5" fill="var(--ink-2)">闸门高 3 m</text>
+<text x="400.00" y="398.00" text-anchor="start" font-size="13" fill="var(--prussian)">dP = ρg·y·2·dy</text>
+<text x="400.00" y="422.00" text-anchor="start" font-size="13" fill="var(--ink-2)">深度加 1 m，压强就多 ρg</text>
+</svg>

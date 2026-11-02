@@ -1,0 +1,11 @@
+<svg viewBox="0 0 400 470" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<polygon points="200.00,40.00 329.90,115.00 329.90,265.00 200.00,340.00 70.10,265.00 70.10,115.00" fill="none" stroke="var(--ink-3)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="200.00,40.00 275.00,60.10 329.90,115.00 350.00,190.00 329.90,265.00 275.00,319.90 200.00,340.00 125.00,319.90 70.10,265.00 50.00,190.00 70.10,115.00 125.00,60.10" fill="none" stroke="var(--ink-2)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="200.00,40.00 238.82,45.11 275.00,60.10 306.07,83.93 329.90,115.00 344.89,151.18 350.00,190.00 344.89,228.82 329.90,265.00 306.07,296.07 275.00,319.90 238.82,334.89 200.00,340.00 161.18,334.89 125.00,319.90 93.93,296.07 70.10,265.00 55.11,228.82 50.00,190.00 55.11,151.18 70.10,115.00 93.93,83.93 125.00,60.10 161.18,45.11" fill="none" stroke="var(--accent-line)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="200.00" cy="190.00" r="150.00" fill="none" stroke="var(--accent-line)" stroke-width="2.8"/>
+<circle cx="200.00" cy="190.00" r="4.5" fill="var(--ink)"/>
+<line x1="200.00" y1="190.00" x2="350.00" y2="190.00" stroke="var(--ink-2)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="5 6"/>
+<text x="210.00" y="178.00" text-anchor="start" font-size="20" fill="var(--ink)" font-style="italic">r</text>
+<text x="200.00" y="392.00" text-anchor="middle" font-size="17" fill="var(--ink-2)">正六边形 → 正十二边形 → 正二十四边形</text>
+<text x="200.00" y="424.00" text-anchor="middle" font-size="16" fill="var(--ink-3)">边数倍增，周长逼近圆，却始终差一点</text>
+</svg>

@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>第五章 1933：柯尔莫哥洛夫的公理 · 概率论与数理统计</title>
+<meta name="description" content="样本空间与事件域、概率的三条公理、由公理推出的六条性质，以及几何概型的长度面积体积之比。">
+<link rel="stylesheet" href="../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="nav-brand" href="../index.html">数学基础课<span> 三门课，一套读法</span></a>
+    <nav class="nav-links" aria-label="主导航">
+      <a href="index.html#map">本课目录</a>
+      <a class="xl" href="../calculus/index.html">微积分</a>
+      <a class="xl" href="../linear-algebra/index.html">线性代数</a>
+      <a class="xl" href="../complex/index.html">复变函数</a>
+      <a class="opt" href="ch06.html">下一章</a>
+    </nav>
+  </div>
+  <div class="nav-progress" aria-hidden="true"></div>
+</header>
+
+<main>
+
+  <section class="chapter">
+    <div class="wrap">
+      <div class="ch-hero-band">
+        <div>
+          <p class="ch-label reveal"><span>第五章</span><span class="ch-era">1900 年至 1933 年</span></p>
+          <h1 class="ch-title reveal reveal-2">1933：柯尔莫哥洛夫的公理</h1>
+          <p class="ch-deck reveal reveal-3">「掷一枚硬币，正面朝上的概率是二分之一」，这句话在课本第一页就出现了，可它凭什么成立，三百多年里没有一套统一的交代。古典定义要先数得清、再假定各结果同等可能，统计定义要把试验重复很多次还说不清重复多少才算够。这一章讲柯尔莫哥洛夫换的那条路，以及样本空间、事件域、三条公理、六条性质和几何概型。</p>
+          <div class="ch-meta reveal reveal-3">
+            <div><strong>本章知识点</strong>样本空间与事件域、概率的三条公理、由公理推出的六条性质、几何概型</div>
+            <div><strong>历史坐标</strong>希尔伯特 1900 年，博雷尔 1909 年，柯尔莫哥洛夫 1933 年</div>
+            <div><strong>对应教材</strong>浙大《概率论与数理统计》第四版 第一章 §1 至 §4</div>
+            <div><strong>前置</strong>集合的运算、古典概型、定积分求面积</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap ch-body">
+    <aside class="rail">
+      <p class="rail-title">本章提纲</p>
+      <ol>
+        <li><a href="#s-1">为什么还需要一套公理</a></li>
+        <li><a href="#s-2">样本空间与事件域</a></li>
+        <li><a href="#s-3">三条公理</a></li>
+        <li><a href="#s-4">从公理推出的六条性质</a></li>
+        <li><a href="#s-5">几何概型</a></li>
+        <li><a href="#s-manual">怎么算</a></li>
+        <li><a href="#s-examples">例题</a></li>
+        <li><a href="#s-exercises">习题</a></li>
+      </ol>
+      <p class="rail-title">历史坐标</p>
+      <p class="rail-who">希尔伯特 1900 年<br>博雷尔 1909 年<br>柯尔莫哥洛夫 1933 年<br>公理化前后三十年</p>
+    </aside>
+
+    <article class="prose">
+
+      <p class="lead reveal">「掷一枚硬币，正面朝上的概率是二分之一」这句话在课本第一页就出现了，可它凭什么成立，三百多年里没有统一的交代。古典定义要数得清、还要各结果同等可能，统计定义要把试验重复很多次，也说不清重复多少才算够。1933 年柯尔莫哥洛夫换了一条路：先规定概率必须满足哪几条，别的全靠推。</p>
+
+      <h2 id="s-1" class="reveal">一、为什么还需要一套公理</h2>
+
+      <p>17 世纪的人算概率只有一招：数数。把试验的全部结果列出来，有利结果的个数除以结果总数，比值就是概率，袋里 5 个红球 3 个白球，摸到红球的概率是 \(5/8\)。这条公式好用在两处：结果个数有限，各个结果又被默认机会相同。麻烦也长在这两处，骰子是否匀称要靠经验保证，结果一旦多到数不清，这套数法连分母都写不出来。</p>
+
+      <p>另一条路是不数结果，改成反复做。同一试验做 \(n\) 次，记事件 \(A\) 出现 \(n_A\) 次，比值 \(f_n(A)=n_A/n\) 叫频率；经验上 \(n\) 越大这个比值越稳，于是有人主张把稳定下来的那个数直接当作概率。射击命中率、新生儿性别比这类场合，它确实给出了能用的数。可是「\(n\) 足够大」是多大、稳到哪个值都没标准，频率趋于极限这件事当时也没人证明，它本身就是后来大数定律要说的结论。</p>
+
+      <p>第三类题目两边都进不去。往长度是 1 的线段上随便投一个点，落在左半段的概率是 \(1/2\)，理由只有一条：左半段占整条线段的二分之一。这里的结果不可数，数不出个数，答案却显然存在，而且是量长度量出来的。</p>
+
+      <p>三套说法各能算一批题，凑在一起却拼不出同一个对象：一个说概率是比值，一个说概率是极限，一个说概率是长度之比。数学家后来换了个要求，先把概率当成一个函数定下来，输入是事件，输出是 0 与 1 之间的实数，再规定它必须满足几条规则，然后证明老公式都能从这几条推出来。</p>
+
+      <div class="keyidea reveal">
+        <p>概率是这样一个函数：进去一个事件，出来一个 0 到 1 之间的数；互不相交的事件，函数值可以相加。</p>
+      </div>
+
+      <h2 id="s-2" class="reveal">二、样本空间与事件域</h2>
+
+      <p>掷一颗骰子，全部可能结果是 1 到 6 这六个数，把它们收成一个集合 \(S=\{1,2,3,4,5,6\}\)，这个集合叫样本空间，其中每个结果叫样本点，记作 \(\omega\)。样本空间的子集叫事件，「点数是偶数」就是子集 \(\{2,4,6\}\)，结果落进某个子集，就说相应的事件发生了。</p>
+
+      <p>把事件当集合看，事件之间的关系直接翻译成集合的关系：\(A\subset B\) 说明 \(A\) 发生则 \(B\) 一定发生，\(A\cup B\) 表示至少一个发生，\(AB\) 表示两个都发生，\(\overline{A}\) 表示 \(A\) 不发生。集合的运算律因此可以整段搬过来，德摩根律在概率里照样能用。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定义（样本空间与事件）</p>
+        <p>随机试验的全部可能结果组成的集合叫样本空间，记作 \(S\)；\(S\) 的元素叫样本点；\(S\) 的子集叫随机事件，简称事件。只含一个样本点的事件叫基本事件，\(S\) 叫必然事件，空集 \(\varnothing\) 叫不可能事件。</p>
+      </div>
+
+      <p>接下来要处理一个容易被跳过的问题：是不是每个子集都能配上概率。有限样本空间里当然可以，\(S\) 有几个子集就配几个数。样本空间一旦变成不可数集就麻烦了，线段上有些子集没法在保持「不交的两块长度相加」的同时被赋予长度，维塔利在 20 世纪初给出了例子。</p>
+
+      <p>课本的办法是退半步，只挑一部分子集组成一个族 \(\mathcal{F}\)，事先规定 \(\mathcal{F}\) 对取补和可列并封闭。这样挑出来的 \(\mathcal{F}\) 叫事件域，只有里面的集合才叫事件，概率只对这些事件有定义。挑选的规矩写成三条：</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定义（事件域）</p>
+        <p>设 \(S\) 是样本空间，\(\mathcal{F}\) 是由 \(S\) 的一些子集组成的族。若 \(\mathcal{F}\) 满足：一、\(S\in\mathcal{F}\)；二、若 \(A\in\mathcal{F}\)，则 \(\overline{A}\in\mathcal{F}\)；三、若 \(A_1,A_2,\dots\in\mathcal{F}\)，则 \(\bigcup_{i=1}^{\infty}A_i\in\mathcal{F}\)，则称 \(\mathcal{F}\) 为事件域，\(\mathcal{F}\) 中的集合称为事件。</p>
+      </div>
+
+      <p>三条合起来保证 \(\mathcal{F}\) 是个封闭的运算系统：\(S\) 在里面，\(\varnothing\) 就在里面；\(A\)、\(B\) 在里面，\(AB\) 也在里面，各自取补、并起来、再取补；差集同理。不论怎么并、怎么交、怎么减，结果都留在 \(\mathcal{F}\) 内，可以接着谈概率。</p>
+
+      <h2 id="s-3" class="reveal">三、三条公理</h2>
+
+      <p>事件域准备好之后，概率就是 \(\mathcal{F}\) 上的一个函数 \(P\)：给每个集合 \(A\) 配一个实数 \(P(A)\)。函数可以随便配，要挑出合乎常理的，得先规定条件。柯尔莫哥洛夫只留了三条。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定义（概率的公理化定义）</p>
+        <p>设 \(\mathcal{F}\) 是样本空间 \(S\) 的事件域，若对每个 \(A\in\mathcal{F}\) 指定一个实数 \(P(A)\)，且满足：一、非负性 \(P(A)\ge0\)；二、归一性 \(P(S)=1\)；三、可数可加性，即对两两互不相容的事件 \(A_1,A_2,\dots\)（\(i\ne j\) 时 \(A_iA_j=\varnothing\)）有
+        \[ P\left(\bigcup_{i=1}^{\infty}A_i\right)=\sum_{i=1}^{\infty}P(A_i), \]
+        则称 \(P(A)\) 为事件 \(A\) 的概率，称 \((S,\mathcal{F},P)\) 为概率空间。</p>
+      </div>
+
+      <p>三条各管一件事。非负性定下方向，概率不会是负数；归一性给整块样本空间选了个单位，面积本可以是 100，说成 1 之后别的数都跟着定；可数可加性管拆分，互不相交的几块合起来，概率等于各块相加。前两条是标尺，干活的是第三条，它把有限次加法与无穷次求和接上。</p>
+
+      <p>三条公理在图上都好认。把 \(S\) 画成矩形，事件画成里面的区域，概率就是面积：不为负是第一条，整块算 1 是第二条，\(A\) 与 \(B\) 不重叠时两块相加是第三条。</p>
+
+      <div class="figure">
+        <!--FIG pb05_space--><svg viewBox="0 0 720 420" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<text x="28.00" y="38.00" text-anchor="start" font-size="14.5" fill="var(--ink)">S 是一整块矩形，A、B 是里面的区域，面积就是概率</text>
+<rect x="80.00" y="84.00" width="560.00" height="236.00" fill="var(--paper)" stroke="var(--ink-3)" stroke-width="1.4"/>
+<text x="94.00" y="74.00" text-anchor="start" font-size="16" fill="var(--ink)" font-style="italic">S</text>
+<text x="640.00" y="74.00" text-anchor="end" font-size="13.5" fill="var(--ink-2)">整块面积定为 1（归一性）</text>
+<circle cx="250.00" cy="202.00" r="80.00" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.8"/>
+<text x="250.00" y="198.00" text-anchor="middle" font-size="17" fill="var(--ink)" font-style="italic">A</text>
+<text x="250.00" y="220.00" text-anchor="middle" font-size="13" fill="var(--ink-2)">面积 = P(A)</text>
+<rect x="432.00" y="142.00" width="140.00" height="120.00" fill="var(--fig-fill)" stroke="var(--ink-3)" stroke-width="1.2"/>
+<text x="502.00" y="198.00" text-anchor="middle" font-size="17" fill="var(--ink)" font-style="italic">B</text>
+<text x="502.00" y="220.00" text-anchor="middle" font-size="13" fill="var(--ink-2)">面积 = P(B)</text>
+<line x1="220.00" y1="276.00" x2="150.00" y2="362.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="150.00" y="362.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">这块面积不会是负数（非负性）</text>
+<line x1="562.00" y1="262.00" x2="452.00" y2="362.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="452.00" y="362.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">A、B 不交，面积直接相加</text>
+<text x="28.00" y="394.00" text-anchor="start" font-size="13.5" fill="var(--ink-3)">空集没有面积，P(∅) = 0；S 的面积是 1，所以 P(S) = 1。</text>
+</svg>
+<!--/FIG pb05_space-->
+        <figcaption class="figcaption"><b>概率就是面积。</b>三条公理在这张图上各自对应一句话：不为负、整块算 1、不交的块相加。后面所有性质都从这三句推。</figcaption>
+      </div>
+
+      <p>第三条里的「可数」两个字是划出来的界限。只要求有限多块能相加，可列无穷多块就没了规矩；要求任意多块都能相加，连均匀分布都会被逼出矛盾。1909 年博雷尔讨论可列个事件时把这条单独提出来，此后它一直是三条里最有用也最难的一条。</p>
+
+      <details class="fold">
+        <summary>可数可加和有限可加差在哪里</summary>
+        <p>有限可加只管任意有限多块，取极限这一步是空的。可数可加多出来的正是极限：把 \(A_1\cup\dots\cup A_n\) 看成一串逼近 \(\bigcup A_i\) 的事件，可数可加性保证两边的概率也这样逼近。概率的连续性、分布函数的右连续、大数定律的证明，都要在这一步上过桥。</p>
+      </details>
+
+      <div class="archive reveal">
+        <p class="archive-when">1900 年，巴黎</p>
+        <h3>希尔伯特把这件事写进了问题清单</h3>
+        <p class="archive-quote">「用公理方法处理那些至今仍以物理为主体的理论，首先是概率论与力学。」</p>
+        <p class="archive-source">希尔伯特《数学问题》第六问题，1900 年巴黎国际数学家大会讲演，此处为译述</p>
+        <p>清单上只写了要求，没给做法。此后博雷尔把测度搬进概率，芬尼蒂在 1930 年前后从有限可加另立一套，路走得并不统一，谁先给出完整体系一直悬着。</p>
+      </div>
+
+      <h2 id="s-4" class="reveal">四、从公理推出的六条性质</h2>
+
+      <p>公理只有三条，课本的公式却有一串。这些公式都能推出来，推法通常只有一招：把要算的事件拆成互不相交的几块，用可数可加性合起来，再用归一性收尾。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定理（由公理推出的六条性质）</p>
+        <p>设 \(P\) 是概率空间 \((S,\mathcal{F},P)\) 上的概率，则：一、\(P(\varnothing)=0\)；二、有限可加性，\(A_1,\dots,A_n\) 两两互不相容时 \(P(A_1\cup\dots\cup A_n)=\sum_{i=1}^{n}P(A_i)\)；三、减法公式 \(P(A-B)=P(A)-P(AB)\)；四、单调性，若 \(A\subset B\) 则 \(P(B-A)=P(B)-P(A)\)，且 \(P(A)\le P(B)\)；五、加法公式 \(P(A\cup B)=P(A)+P(B)-P(AB)\)；六、\(P(\overline{A})=1-P(A)\)。</p>
+      </div>
+
+      <p>第一条用可数可加性硬推。把 \(\varnothing\) 写成 \(\varnothing\cup\varnothing\cup\cdots\)，这些块两两不交，于是 \(P(\varnothing)=P(\varnothing)+P(\varnothing)+\cdots\)，一个非负数等于自己的无穷倍，只能取 0。第二条在 \(A_1\cup\dots\cup A_n\) 后面补无穷多个 \(\varnothing\) 化成可列并，再用第一条把补出来的消掉。</p>
+
+      <p>减法公式与单调性来自同一个拆分。\(A\) 分成 \(A-B\) 与 \(AB\) 两块，两块不交，所以 \(P(A)=P(A-B)+P(AB)\)；若 \(A\subset B\)，\(B\) 也能拆成 \(A\) 与 \(B-A\)，得 \(P(B)=P(A)+P(B-A)\)。非负性顺手给出 \(P(A)\le P(B)\)，事件越大，概率不会变小。</p>
+
+      <p>加法公式修的是重复计数。\(A\cup B\) 拆成 \(A-B\) 与 \(B\)，于是 \(P(A\cup B)=P(A)+P(B)-P(AB)\)，被算了两次的 \(AB\) 减掉一次。三个事件的情形要多减两两相交、再加回三者都发生的部分。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定理（加法公式的三事件形式）</p>
+        <p>\[ P(A\cup B\cup C)=P(A)+P(B)+P(C)-P(AB)-P(AC)-P(BC)+P(ABC). \]</p>
+      </div>
+
+      <p>第六条最常用。\(A\) 与 \(\overline{A}\) 不交，合起来正好是 \(S\)，所以 \(1=P(S)=P(A)+P(\overline{A})\)，移项得 \(P(\overline{A})=1-P(A)\)。</p>
+
+      <div class="archive reveal">
+        <p class="archive-when">1933 年，柏林</p>
+        <h3>一本六十多页的小册子</h3>
+        <p class="archive-quote">「本书的目的是为概率论建立一个公理基础。」</p>
+        <p class="archive-source">柯尔莫哥洛夫《概率论基本概念》序言，1933 年，施普林格，此处为译述</p>
+        <p>书里把样本空间、事件域、三条公理摆在一页，随后条件概率、独立性、大数定律依次推出，测度论第一次被完整搬进概率。「概率空间」从此成了标准写法，本章往后所有公式都从这三条出发。</p>
+      </div>
+
+      <h2 id="s-5" class="reveal">五、几何概型</h2>
+
+      <p>公理只管形状，不管内容。样本空间取成区间、区域或立体，事件取成能求长度、面积、体积的子集，三条公理照样成立，只是「等可能」要换一种说法：机会只与这块地方的度量有关，与位置和形状无关。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定义（几何概型）</p>
+        <p>设样本空间是区域 \(G\)（区间、平面区域或空间立体），\(m(G)\) 是它的度量（长度、面积或体积），\(0 \lt m(G) \lt \infty\)。若随机点落在 \(G\) 内任一可度量子区域的机会只与该子区域的度量成正比，则称为几何概型，事件 \(A\)（对应子区域 \(G_A\)）的概率为
+        \[ P(A)=\frac{m(G_A)}{m(G)}. \]</p>
+      </div>
+
+      <p>公式不是凭空给的。既然机会只与度量成正比，先写 \(P(A)=k\,m(G_A)\)；归一性要求 \(P(G)=k\,m(G)=1\)，于是 \(k=1/m(G)\)。三条公理在这里自动成立：度量不为负，整块化成 1，不交的块相加。几何概型省掉的是数个数，留下的是量长度。</p>
+
+      <div class="figure">
+        <!--FIG pb05_buffon--><svg viewBox="0 0 720 490" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<text x="28.00" y="38.00" text-anchor="start" font-size="14.5" fill="var(--ink)">布丰投针：投一次针 = 矩形里的一个点 (θ, x)</text>
+<rect x="92.00" y="138.68" width="536.00" height="259.32" fill="var(--paper)" stroke="var(--ink-3)" stroke-width="1.4"/>
+<polygon points="92.00,398.00 92.00,398.00 95.35,395.45 98.70,392.91 102.05,390.37 105.40,387.83 108.75,385.29 112.10,382.76 115.45,380.23 118.80,377.72 122.15,375.21 125.50,372.70 128.85,370.21 132.20,367.73 135.55,365.26 138.90,362.80 142.25,360.36 145.60,357.93 148.95,355.52 152.30,353.12 155.65,350.74 159.00,348.38 162.35,346.04 165.70,343.72 169.05,341.41 172.40,339.14 175.75,336.88 179.10,334.64 182.45,332.44 185.80,330.25 189.15,328.09 192.50,325.96 195.85,323.86 199.20,321.79 202.55,319.74 205.90,317.73 209.25,315.74 212.60,313.79 215.95,311.87 219.30,309.99 222.65,308.13 226.00,306.32 229.35,304.53 232.70,302.79 236.05,301.08 239.40,299.40 242.75,297.77 246.10,296.18 249.45,294.62 252.80,293.10 256.15,291.63 259.50,290.19 262.85,288.80 266.20,287.45 269.55,286.14 272.90,284.87 276.25,283.65 279.60,282.47 282.95,281.34 286.30,280.25 289.65,279.21 293.00,278.21 296.35,277.26 299.70,276.35 303.05,275.50 306.40,274.69 309.75,273.92 313.10,273.21 316.45,272.54 319.80,271.92 323.15,271.35 326.50,270.83 329.85,270.36 333.20,269.94 336.55,269.56 339.90,269.24 343.25,268.96 346.60,268.74 349.95,268.56 353.30,268.44 356.65,268.36 360.00,268.34 363.35,268.36 366.70,268.44 370.05,268.56 373.40,268.74 376.75,268.96 380.10,269.24 383.45,269.56 386.80,269.94 390.15,270.36 393.50,270.83 396.85,271.35 400.20,271.92 403.55,272.54 406.90,273.21 410.25,273.92 413.60,274.69 416.95,275.50 420.30,276.35 423.65,277.26 427.00,278.21 430.35,279.21 433.70,280.25 437.05,281.34 440.40,282.47 443.75,283.65 447.10,284.87 450.45,286.14 453.80,287.45 457.15,288.80 460.50,290.19 463.85,291.63 467.20,293.10 470.55,294.62 473.90,296.18 477.25,297.77 480.60,299.40 483.95,301.08 487.30,302.79 490.65,304.53 494.00,306.32 497.35,308.13 500.70,309.99 504.05,311.87 507.40,313.79 510.75,315.74 514.10,317.73 517.45,319.74 520.80,321.79 524.15,323.86 527.50,325.96 530.85,328.09 534.20,330.25 537.55,332.44 540.90,334.64 544.25,336.88 547.60,339.14 550.95,341.41 554.30,343.72 557.65,346.04 561.00,348.38 564.35,350.74 567.70,353.12 571.05,355.52 574.40,357.93 577.75,360.36 581.10,362.80 584.45,365.26 587.80,367.73 591.15,370.21 594.50,372.70 597.85,375.21 601.20,377.72 604.55,380.23 607.90,382.76 611.25,385.29 614.60,387.83 617.95,390.37 621.30,392.91 624.65,395.45 628.00,398.00 628.00,398.00" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 92.00 398.00 L 93.67 396.73 L 95.35 395.45 L 97.03 394.18 L 98.70 392.91 L 100.38 391.64 L 102.05 390.37 L 103.72 389.10 L 105.40 387.83 L 107.08 386.56 L 108.75 385.29 L 110.42 384.02 L 112.10 382.76 L 113.78 381.50 L 115.45 380.23 L 117.12 378.97 L 118.80 377.72 L 120.47 376.46 L 122.15 375.21 L 123.83 373.95 L 125.50 372.70 L 127.18 371.46 L 128.85 370.21 L 130.53 368.97 L 132.20 367.73 L 133.88 366.49 L 135.55 365.26 L 137.22 364.03 L 138.90 362.80 L 140.57 361.58 L 142.25 360.36 L 143.93 359.15 L 145.60 357.93 L 147.28 356.72 L 148.95 355.52 L 150.62 354.32 L 152.30 353.12 L 153.97 351.93 L 155.65 350.74 L 157.32 349.56 L 159.00 348.38 L 160.68 347.21 L 162.35 346.04 L 164.02 344.87 L 165.70 343.72 L 167.38 342.56 L 169.05 341.41 L 170.73 340.27 L 172.40 339.14 L 174.07 338.00 L 175.75 336.88 L 177.43 335.76 L 179.10 334.64 L 180.78 333.54 L 182.45 332.44 L 184.12 331.34 L 185.80 330.25 L 187.47 329.17 L 189.15 328.09 L 190.82 327.03 L 192.50 325.96 L 194.18 324.91 L 195.85 323.86 L 197.53 322.82 L 199.20 321.79 L 200.88 320.76 L 202.55 319.74 L 204.22 318.73 L 205.90 317.73 L 207.57 316.73 L 209.25 315.74 L 210.93 314.76 L 212.60 313.79 L 214.27 312.83 L 215.95 311.87 L 217.62 310.92 L 219.30 309.99 L 220.97 309.06 L 222.65 308.13 L 224.33 307.22 L 226.00 306.32 L 227.67 305.42 L 229.35 304.53 L 231.03 303.66 L 232.70 302.79 L 234.38 301.93 L 236.05 301.08 L 237.72 300.24 L 239.40 299.40 L 241.08 298.58 L 242.75 297.77 L 244.42 296.97 L 246.10 296.18 L 247.77 295.39 L 249.45 294.62 L 251.12 293.86 L 252.80 293.10 L 254.47 292.36 L 256.15 291.63 L 257.83 290.90 L 259.50 290.19 L 261.18 289.49 L 262.85 288.80 L 264.52 288.12 L 266.20 287.45 L 267.88 286.79 L 269.55 286.14 L 271.23 285.50 L 272.90 284.87 L 274.57 284.25 L 276.25 283.65 L 277.92 283.05 L 279.60 282.47 L 281.27 281.90 L 282.95 281.34 L 284.62 280.79 L 286.30 280.25 L 287.98 279.72 L 289.65 279.21 L 291.32 278.70 L 293.00 278.21 L 294.68 277.73 L 296.35 277.26 L 298.02 276.80 L 299.70 276.35 L 301.38 275.92 L 303.05 275.50 L 304.73 275.08 L 306.40 274.69 L 308.08 274.30 L 309.75 273.92 L 311.43 273.56 L 313.10 273.21 L 314.77 272.87 L 316.45 272.54 L 318.12 272.22 L 319.80 271.92 L 321.48 271.63 L 323.15 271.35 L 324.82 271.08 L 326.50 270.83 L 328.17 270.59 L 329.85 270.36 L 331.52 270.14 L 333.20 269.94 L 334.88 269.74 L 336.55 269.56 L 338.23 269.39 L 339.90 269.24 L 341.58 269.09 L 343.25 268.96 L 344.92 268.84 L 346.60 268.74 L 348.28 268.65 L 349.95 268.56 L 351.62 268.50 L 353.30 268.44 L 354.97 268.40 L 356.65 268.36 L 358.32 268.35 L 360.00 268.34 L 361.68 268.35 L 363.35 268.36 L 365.03 268.40 L 366.70 268.44 L 368.38 268.50 L 370.05 268.56 L 371.73 268.65 L 373.40 268.74 L 375.08 268.84 L 376.75 268.96 L 378.42 269.09 L 380.10 269.24 L 381.77 269.39 L 383.45 269.56 L 385.12 269.74 L 386.80 269.94 L 388.47 270.14 L 390.15 270.36 L 391.83 270.59 L 393.50 270.83 L 395.18 271.08 L 396.85 271.35 L 398.53 271.63 L 400.20 271.92 L 401.88 272.22 L 403.55 272.54 L 405.23 272.87 L 406.90 273.21 L 408.58 273.56 L 410.25 273.92 L 411.92 274.30 L 413.60 274.69 L 415.28 275.08 L 416.95 275.50 L 418.62 275.92 L 420.30 276.35 L 421.97 276.80 L 423.65 277.26 L 425.33 277.73 L 427.00 278.21 L 428.68 278.70 L 430.35 279.21 L 432.03 279.72 L 433.70 280.25 L 435.38 280.79 L 437.05 281.34 L 438.72 281.90 L 440.40 282.47 L 442.08 283.05 L 443.75 283.65 L 445.43 284.25 L 447.10 284.87 L 448.77 285.50 L 450.45 286.14 L 452.12 286.79 L 453.80 287.45 L 455.47 288.12 L 457.15 288.80 L 458.83 289.49 L 460.50 290.19 L 462.18 290.90 L 463.85 291.63 L 465.53 292.36 L 467.20 293.10 L 468.88 293.86 L 470.55 294.62 L 472.22 295.39 L 473.90 296.18 L 475.57 296.97 L 477.25 297.77 L 478.92 298.58 L 480.60 299.40 L 482.28 300.24 L 483.95 301.08 L 485.62 301.93 L 487.30 302.79 L 488.97 303.66 L 490.65 304.53 L 492.32 305.42 L 494.00 306.32 L 495.68 307.22 L 497.35 308.13 L 499.03 309.06 L 500.70 309.99 L 502.38 310.92 L 504.05 311.87 L 505.72 312.83 L 507.40 313.79 L 509.08 314.76 L 510.75 315.74 L 512.42 316.73 L 514.10 317.73 L 515.78 318.73 L 517.45 319.74 L 519.12 320.76 L 520.80 321.79 L 522.47 322.82 L 524.15 323.86 L 525.83 324.91 L 527.50 325.96 L 529.17 327.03 L 530.85 328.09 L 532.53 329.17 L 534.20 330.25 L 535.88 331.34 L 537.55 332.44 L 539.23 333.54 L 540.90 334.64 L 542.58 335.76 L 544.25 336.88 L 545.92 338.00 L 547.60 339.14 L 549.28 340.27 L 550.95 341.41 L 552.62 342.56 L 554.30 343.72 L 555.97 344.87 L 557.65 346.04 L 559.33 347.21 L 561.00 348.38 L 562.67 349.56 L 564.35 350.74 L 566.03 351.93 L 567.70 353.12 L 569.38 354.32 L 571.05 355.52 L 572.72 356.72 L 574.40 357.93 L 576.08 359.15 L 577.75 360.36 L 579.42 361.58 L 581.10 362.80 L 582.77 364.03 L 584.45 365.26 L 586.12 366.49 L 587.80 367.73 L 589.47 368.97 L 591.15 370.21 L 592.83 371.46 L 594.50 372.70 L 596.17 373.95 L 597.85 375.21 L 599.53 376.46 L 601.20 377.72 L 602.88 378.97 L 604.55 380.23 L 606.23 381.50 L 607.90 382.76 L 609.57 384.02 L 611.25 385.29 L 612.92 386.56 L 614.60 387.83 L 616.27 389.10 L 617.95 390.37 L 619.62 391.64 L 621.30 392.91 L 622.98 394.18 L 624.65 395.45 L 626.32 396.73 L 628.00 398.00" fill="none" stroke="var(--accent-line)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="92.00" y1="268.34" x2="628.00" y2="268.34" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 6"/>
+<text x="620.00" y="258.34" text-anchor="end" font-size="12.5" fill="var(--ink-3)">x = l/2</text>
+<line x1="66.00" y1="398.00" x2="650.00" y2="398.00" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M 640.71 401.71 L 650.00 398.00 L 640.71 394.29" fill="var(--ink-2)" stroke="var(--ink-2)" stroke-width="1" stroke-linejoin="round"/>
+<line x1="92.00" y1="398.00" x2="92.00" y2="102.37" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M 95.71 111.66 L 92.00 102.37 L 88.29 111.66" fill="var(--ink-2)" stroke="var(--ink-2)" stroke-width="1" stroke-linejoin="round"/>
+<line x1="92.00" y1="398.00" x2="92.00" y2="406.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="92.00" y="420.00" text-anchor="middle" font-size="13" fill="var(--ink-2)">0</text>
+<line x1="360.00" y1="398.00" x2="360.00" y2="406.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="360.00" y="420.00" text-anchor="middle" font-size="13" fill="var(--ink-2)">π/2</text>
+<line x1="628.00" y1="398.00" x2="628.00" y2="406.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="628.00" y="420.00" text-anchor="middle" font-size="13" fill="var(--ink-2)">π</text>
+<line x1="84.00" y1="398.00" x2="92.00" y2="398.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="78.00" y="403.00" text-anchor="end" font-size="13" fill="var(--ink-2)">0</text>
+<line x1="84.00" y1="268.34" x2="92.00" y2="268.34" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="78.00" y="273.34" text-anchor="end" font-size="13" fill="var(--ink-2)">0.5</text>
+<line x1="84.00" y1="138.68" x2="92.00" y2="138.68" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="78.00" y="143.68" text-anchor="end" font-size="13" fill="var(--ink-2)">1</text>
+<text x="652.00" y="406.00" text-anchor="start" font-size="15" fill="var(--ink-2)" font-style="italic">θ</text>
+<text x="46.00" y="133.49" text-anchor="middle" font-size="15" fill="var(--ink-2)" font-style="italic">x</text>
+<text x="106.00" y="156.83" text-anchor="start" font-size="13.5" fill="var(--ink-2)">曲线以上：不相交</text>
+<text x="368.39" y="372.07" text-anchor="start" font-size="13.5" fill="var(--ink)">曲线以下：相交</text>
+<text x="28.00" y="440.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">横轴 θ 是针与平行线的夹角，纵轴 x 是针心到最近一条线的距离。矩形面积 π × 1 = π。</text>
+<text x="28.00" y="466.00" text-anchor="start" font-size="13.5" fill="var(--ink-3)">曲线以下的面积是 ∫₀^π 0.5 sinθ dθ = 1，两者相除得 P = 1/π ≈ 0.318。</text>
+</svg>
+<!--/FIG pb05_buffon-->
+        <figcaption class="figcaption"><b>一次投针就是矩形里的一个点。</b>横轴是夹角，纵轴是针心到线的距离，曲线以下才相交。面积之比 \(1/\pi\) 就是答案。</figcaption>
+      </div>
+
+      <p>1777 年布丰提出的投针题把这套做法演了一遍。平面上画一排间距为 \(a\) 的平行线，投一根长 \(l \lt a\) 的针，问它与线相交的概率。一次投掷由两个数决定：针心到最近一条线的距离 \(x\in[0,a/2]\)，与平行线的夹角 \(\theta\in[0,\pi]\)。每个结果就是 \((\theta,x)\) 矩形里的一个点，面积 \(\pi a/2\)。</p>
+
+      <p>相交的条件是 \(x\le\frac{l}{2}\sin\theta\)，在图上就是曲线以下那块，面积是 \(\int_0^{\pi}\frac{l}{2}\sin\theta\,\mathrm{d}\theta=l\)，两者相除得
+      \[ P=\frac{l}{\pi a/2}=\frac{2l}{\pi a}. \]
+      取 \(l=1\)、\(a=2\) 得 \(1/\pi\approx0.318\)。</p>
+
+      <div class="figure">
+        <!--FIG pb05_meet--><svg viewBox="0 0 720 590" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<text x="28.00" y="36.00" text-anchor="start" font-size="14.5" fill="var(--ink)">甲、乙各在 60 分钟内到达，谁先到就等对方 15 分钟</text>
+<text x="360.00" y="62.00" text-anchor="middle" font-size="13.5" fill="var(--ink-2)">阴影：|x − y| ≤ 15 时，两人碰得上</text>
+<rect x="150.00" y="78.00" width="420.00" height="420.00" fill="var(--paper)" stroke="var(--ink-3)" stroke-width="1.4"/>
+<polygon points="150.00,498.00 255.00,498.00 570.00,183.00 570.00,78.00 465.00,78.00 150.00,393.00" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="150.00" y1="393.00" x2="465.00" y2="78.00" stroke="var(--accent-line)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="7 6"/>
+<line x1="255.00" y1="498.00" x2="570.00" y2="183.00" stroke="var(--accent-line)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="7 6"/>
+<line x1="120.00" y1="498.00" x2="596.00" y2="498.00" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M 586.71 501.71 L 596.00 498.00 L 586.71 494.29" fill="var(--ink-2)" stroke="var(--ink-2)" stroke-width="1" stroke-linejoin="round"/>
+<line x1="150.00" y1="528.00" x2="150.00" y2="70.00" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M 153.71 79.29 L 150.00 70.00 L 146.29 79.29" fill="var(--ink-2)" stroke="var(--ink-2)" stroke-width="1" stroke-linejoin="round"/>
+<text x="700.00" y="520.00" text-anchor="end" font-size="13.5" fill="var(--ink-2)">甲到</text>
+<text x="134.00" y="66.00" text-anchor="end" font-size="13.5" fill="var(--ink-2)">乙到</text>
+<text x="150.00" y="520.00" text-anchor="middle" font-size="13" fill="var(--ink-3)">0</text>
+<text x="138.00" y="503.00" text-anchor="end" font-size="13" fill="var(--ink-3)">0</text>
+<text x="255.00" y="520.00" text-anchor="middle" font-size="13" fill="var(--ink-3)">15</text>
+<text x="138.00" y="398.00" text-anchor="end" font-size="13" fill="var(--ink-3)">15</text>
+<text x="570.00" y="520.00" text-anchor="middle" font-size="13" fill="var(--ink-3)">60</text>
+<text x="138.00" y="83.00" text-anchor="end" font-size="13" fill="var(--ink-3)">60</text>
+<text x="465.00" y="393.00" text-anchor="middle" font-size="13.5" fill="var(--ink-2)">等太久</text>
+<text x="255.00" y="183.00" text-anchor="middle" font-size="13.5" fill="var(--ink-2)">等太久</text>
+<text x="28.00" y="542.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">正方形 60 × 60 = 3600；两块空白各是边长 45 的直角三角形。</text>
+<text x="28.00" y="568.00" text-anchor="start" font-size="13.5" fill="var(--ink-3)">阴影 = 3600 − 2 × 1012.5 = 1575，P = 7/16 ≈ 0.438。</text>
+</svg>
+<!--/FIG pb05_meet-->
+        <figcaption class="figcaption"><b>能见面的一块是条对角带。</b>正方形的边长是 60 分钟，带的宽度是 15 分钟，两块空白三角形就是等太久的情形。面积比 \(7/16\) 落到概率上。</figcaption>
+      </div>
+
+      <p>会面问题是同一个套路。两人约定在 0 到 60 分钟内到某地，谁先到就等对方 15 分钟，等不到就走。把到达时刻记成 \((x,y)\)，样本空间是边长 60 的正方形，能碰面的条件 \(|x-y|\le15\) 是一条宽度 15 的对角带。正方形面积 3600，两个空白三角形各占 \(45\times45/2\)，带子 1575，概率 \(7/16\)。</p>
+
+      <p>几何概型里有一个容易犯的错。结果有不可数无穷多个，每个单点概率都是 0，可这不等于它不可能发生：针心恰好落在某条给定直线上的概率是 0，它照样可能发生。古典概型里这两件事是一回事，连续情形下就分开了。</p>
+
+      <details class="fold">
+        <summary>几何概型里的「等可能」指的是什么</summary>
+        <p>指度量相等的地方机会相同，不是每个点等可能。线段上每个点长度都是 0，按「点等可能」理解，任何区间都该得 0，与整段概率为 1 相矛盾。正确的说法是区间越长，点落进去的机会越大，比例就是长度之比。</p>
+      </details>
+
+      <details class="fold">
+        <summary>同一个「随机」，为什么能算出三个答案</summary>
+        <p>在圆内随机取一条弦，问弦长超过内接正三角形边长的概率，三种取法分别得 \(1/3\)、\(1/2\)、\(1/4\)，都讲得通，这就是贝特朗悖论。分歧出在没说清哪个量均匀：中点、方向、端点，三种均匀是三个样本空间。用几何概型之前必须指定样本空间与度量。</p>
+      </details>
+
+      <h2 id="s-manual" class="reveal">怎么算</h2>
+
+      <ul>
+        <li><strong>先认模型。</strong>结果数得清且等可能，走古典概型数个数；样本空间是区间或区域，走几何概型量长度面积；两者都不像，回到三条公理硬推。</li>
+        <li><strong>拆开再相加。</strong>算不出来的事件，拆成互不相交的几块分别算，这是公理唯一提供的加法工具。</li>
+        <li><strong>反过来算。</strong>见到「至少有一个」，先算它的对立事件，再用 1 去减。</li>
+        <li><strong>加法公式要减重。</strong>两个事件相加减掉交集，三个事件减两两交集再加回三重交集。</li>
+        <li><strong>几何概型先画图。</strong>把两个变量摆成平面坐标，事件画成区域，最后算面积之比，别去数点。</li>
+      </ul>
+
+      <h2 id="s-examples" class="reveal">例题</h2>
+
+      <div class="example">
+        <p class="example-head">例 <span>1</span>　设 \(P(A)=0.5\)，\(P(B)=0.4\)，\(P(A\cup B)=0.7\)，求 \(P(AB)\)、\(P(A-B)\)、\(P(\overline{A}\,\overline{B})\)。</p>
+        <p class="solution">由加法公式 \(P(AB)=0.5+0.4-0.7=0.2\)；由减法公式 \(P(A-B)=P(A)-P(AB)=0.3\)；\(\overline{A}\,\overline{B}\) 是 \(A\cup B\) 的对立事件，故 \(P(\overline{A}\,\overline{B})=1-0.7=0.3\)。</p>
+      </div>
+
+      <div class="example">
+        <p class="example-head">例 <span>2</span>　甲、乙两人在 8:00 至 9:00 之间各自随机到达某地，先到者等 20 分钟，等不到就走。求两人见面的概率。</p>
+        <p class="solution">样本空间是边长 60 的正方形，见面条件是 \(|x-y|\le20\)。扣除两个边长 40 的直角三角形，面积 \(3600-2\times\frac{40\times40}{2}=2000\)，概率 \(2000/3600=5/9\approx0.556\)。</p>
+      </div>
+
+      <div class="example">
+        <p class="example-head">例 <span>3</span>　平面上每隔 1 画一条平行线，投一根长 1 的针。求针与线相交的概率，并估计投 3000 次大约相交多少次。</p>
+        <p class="solution">这是 \(l=1\)、\(a=1\) 的布丰投针，\(P=\dfrac{2l}{\pi a}=\dfrac{2}{\pi}\approx0.637\)。相交次数约为 \(3000\times0.637\approx1910\) 次，反过来用这个频率可以估出 \(\pi\approx2/0.637\approx3.14\)。</p>
+      </div>
+
+      <h2 id="s-exercises" class="reveal">习题</h2>
+
+      <div class="exercises">
+
+        <div class="ex-group">
+          <p class="ex-group-head">A 档 <span>巩固定义与基本计算，每题五分钟内</span></p>
+
+          <p class="ex"><span class="ex-num">1.</span> 写出掷两枚硬币的样本空间，并用集合写出事件「至少出现一次正面」。</p>
+          <div class="answer"><details><summary>看答案</summary><p>\(S=\{\text{正正},\text{正反},\text{反正},\text{反反}\}\)，所求事件是 \(\{\text{正正},\text{正反},\text{反正}\}\)。</p></details></div>
+
+          <p class="ex"><span class="ex-num">2.</span> 设 \(P(A)=0.4\)，\(P(B)=0.3\)，\(A\) 与 \(B\) 互不相容，求 \(P(A\cup B)\)、\(P(\overline{A})\)、\(P(\overline{A}\,\overline{B})\)。</p>
+          <div class="answer"><details><summary>看答案</summary><p>互不相容时 \(P(A\cup B)=0.7\)；\(P(\overline{A})=1-0.4=0.6\)；\(\overline{A}\,\overline{B}\) 是 \(A\cup B\) 的对立事件，得 \(1-0.7=0.3\)。</p></details></div>
+
+          <p class="ex"><span class="ex-num">3.</span> 设 \(P(A)=P(B)=P(C)=1/4\)，\(P(AB)=0\)，\(P(AC)=P(BC)=1/8\)，求 \(P(A\cup B\cup C)\)。</p>
+          <div class="answer"><details><summary>看答案</summary><p>用三事件加法公式：\(3/4-(0+1/8+1/8)+P(ABC)\)，而 \(ABC\subset AB\) 且 \(P(AB)=0\)，所以 \(P(ABC)=0\)，答案为 \(1/2\)。</p></details></div>
+
+          <p class="ex"><span class="ex-num">4.</span> 用三条公理证明 \(P(A\cup B)\le P(A)+P(B)\)。</p>
+          <div class="answer"><details><summary>看答案</summary><p>由加法公式 \(P(A\cup B)=P(A)+P(B)-P(AB)\)，非负性给出 \(P(AB)\ge0\)，移项即得。等号成立当且仅当 \(P(AB)=0\)。</p></details></div>
+
+          <p class="ex"><span class="ex-num">5.</span> 一条线段长 3，随机投一点，求它落在距左端 1 到 2 之间的概率。</p>
+          <div class="answer"><details><summary>看答案</summary><p>这一段长 1，样本空间长 3，由长度之比得 \(1/3\)。</p></details></div>
+
+          <p class="ex"><span class="ex-num">6.</span> 在区间 \([0,1]\) 上随机取一点，求它落在 \([0.2,0.7]\) 内的概率。</p>
+          <div class="answer"><details><summary>看答案</summary><p>区间长 \(0.5\)，样本空间长 1，概率 \(0.5\)。落在端点的情形长度为零，不影响答案。</p></details></div>
+        </div>
+
+        <div class="ex-group">
+          <p class="ex-group-head">B 档 <span>综合题，接近期末与考研难度</span></p>
+
+          <p class="ex"><span class="ex-num">1.</span> 设 \(P(A)=P(B)=1\)，证明 \(P(AB)=1\)。</p>
+          <div class="answer"><details><summary>看答案</summary><p>由加法公式 \(P(A\cup B)=1+1-P(AB)\le1\)，得 \(P(AB)\ge1\)；概率不会超过 1，故 \(P(AB)=1\)。</p></details></div>
+
+          <p class="ex"><span class="ex-num">2.</span> 甲、乙在 0 到 60 分钟内各自随机到达，先到者等 15 分钟。求甲比乙晚到且两人见面的概率。</p>
+          <div class="answer"><details><summary>看答案</summary><p>见面带面积 1575，其中 \(x \gt y\) 的一半是 787.5，概率 \(787.5/3600=7/32\)。对角带被对角线平分成两半。</p></details></div>
+
+          <p class="ex"><span class="ex-num">3.</span> 在半径 \(R\) 的圆内随机取一点，求它到圆心距离小于 \(R/2\) 的概率；距离恰好等于 \(R/2\) 的概率是多少。</p>
+          <div class="answer"><details><summary>看答案</summary><p>小圆面积 \(\pi R^2/4\)，与大圆 \(\pi R^2\) 之比为 \(1/4\)。圆周面积为 0，所以距离恰为 \(R/2\) 的概率是 0。</p></details></div>
+
+          <p class="ex"><span class="ex-num">4.</span> 布丰投针中取 \(l=2\)、\(a=4\)，求相交概率；若希望概率等于 \(1/2\)，针长应取多少。</p>
+          <div class="answer"><details><summary>看答案</summary><p>\(P=\dfrac{2l}{\pi a}=\dfrac{4}{4\pi}=\dfrac{1}{\pi}\approx0.318\)。令 \(\dfrac{2l}{4\pi}=\dfrac12\) 得 \(l=\pi\approx3.14\)，小于间距 4，可行。</p></details></div>
+        </div>
+
+        <div class="ex-group">
+          <p class="ex-group-head">C 档 <span>拓展与历史原题</span></p>
+
+          <p class="ex"><span class="ex-num">1.</span>（柯尔莫哥洛夫，1933）他的体系把概率定义成事件域上的非负集函数，并要求 \(P(S)=1\)。为什么可加性只要求对可列多个事件成立，不要求对任意多个成立？</p>
+          <div class="answer"><details><summary>看答案</summary><p>任意多个的和没有定义，取极限也无从谈起，可列个已经够推连续性、分布函数和大数定律。若真对任意多个都要求相加，均匀分布这类最基本的概率会立刻出矛盾，界限只能划在可数。</p></details></div>
+
+          <p class="ex"><span class="ex-num">2.</span>（博雷尔，1909）设样本空间是全体正整数，规定有限集的概率为 0、余有限集的概率为 1。说明它有限可加，却不满足可数可加。</p>
+          <div class="answer"><details><summary>看答案</summary><p>有限可加成立，因为有限个有限集的并仍是有限集。但全体正整数是可列个单点之并，每个单点概率为 0，可数可加会给出总和 0，与 \(P(S)=1\) 矛盾。</p></details></div>
+
+          <p class="ex"><span class="ex-num">3.</span>（几何概型）会面问题里把 60 分钟改成 90 分钟、等待时间仍是 15 分钟，概率变成多少？再用投针估计 \(\pi\)：投 5000 次相交 1592 次，\(l=1\)、\(a=2\)，\(\pi\) 的估计值是多少？</p>
+          <div class="answer"><details><summary>看答案</summary><p>概率为 \(1-(75/90)^2=1-25/36=11/36\approx0.306\)。由 \(P=1/\pi\) 得 \(\pi\approx5000/1592\approx3.141\)。</p></details></div>
+        </div>
+
+        <div class="ex-group">
+          <p class="ex-group-head">思考题 <span>不设标准答案，只给提示</span></p>
+
+          <p class="ex"><span class="ex-num">1.</span> 古典定义、统计定义、公理化定义说的都是「概率」，它们是同一个东西吗？</p>
+          <div class="answer"><details><summary>看提示</summary><p>古典定义是一个模型，只在有限且等可能时能用；统计定义是用频率去估，结果随试验而变；公理化定义是对函数的刻画，前两者分别是它的特例与近似。三者回答的问题不同，别混着用。</p></details></div>
+
+          <p class="ex"><span class="ex-num">2.</span> \(P(A)=0\) 能不能推出 \(A\) 一定不发生？</p>
+          <div class="answer"><details><summary>看提示</summary><p>只在有限等可能模型里能。连续情形下单个点概率为 0，却照样可能被取到；反过来 \(P(A)=1\) 也不保证 \(A\) 必然发生。概率为零与不可能，在不可数样本空间里是两件事。</p></details></div>
+
+          <p class="ex"><span class="ex-num">3.</span> 可数可加性里「两两互不相容」这个条件能不能去掉？</p>
+          <div class="answer"><details><summary>看提示</summary><p>不能。\(A\) 与 \(B\) 相交时 \(P(A\cup B)=P(A)+P(B)\) 会把公共部分算两次，正确的式子是加法公式。若允许相交还照加，把 \(S\) 拆成两个 \(S\)，会得出 \(1=2\)。</p></details></div>
+        </div>
+
+      </div>
+
+      <h2 class="reveal">延伸阅读</h2>
+      <ul class="refs">
+        <li>盛骤、谢式千、潘承毅《概率论与数理统计》第四版，第一章 §1 至 §4。本章记号与例题口径以此为准。</li>
+        <li>柯尔莫哥洛夫《概率论基本概念》（Grundbegriffe der Wahrscheinlichkeitsrechnung），1933 年，第一章。三条公理的原始写法，六十多页，能读完。</li>
+        <li>博雷尔《可列概率及其算术应用》，1909 年。可数可加性被单独提出的那一篇。</li>
+        <li>希尔伯特《数学问题》，1900 年巴黎讲演，第六问题。看它要求了什么，也看它没说什么。</li>
+      </ul>
+
+    </article>
+  </div>
+
+  <div class="wrap">
+    <nav class="pager" aria-label="翻页">
+      <a class="pager-link prev" href="ch04.html"><span class="pager-dir">上一章</span><span class="pager-title">1763：贝叶斯留下的论文</span></a>
+      <a class="pager-link next" href="ch06.html"><span class="pager-dir">下一章</span><span class="pager-title">随机变量与分布</span></a>
+    </nav>
+  </div>
+
+</main>
+
+<footer class="footer field-dark">
+  <div class="wrap">
+    <p class="footer-mark">数学基础课</p>
+    <div class="footer-cols">
+      <div><p>三门课按同一套读法写：先看问题，再给定义与判别，最后落到计算与习题。</p></div>
+      <div><p><a href="index.html">概率论目录</a></p><p><a href="../index.html">返回主页</a></p></div>
+      <div><p>图示用脚本按真实数值画，公式由 KaTeX 排版。</p></div>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/katex/katex.min.js"></script>
+<script src="../assets/katex/auto-render.min.js"></script>
+<script src="../assets/site.js"></script>
+</body>
+</html>

@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>序章　穷竭法：微积分诞生之前 · 微积分：一部由问题写成的历史</title>
+<meta name="description" content="从阿基米德的抛物线弓形、刘徽割圆到卡瓦列里的不可分，看曲线面积如何被直线图形夹住。">
+<link rel="stylesheet" href="../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="nav-brand" href="../index.html">微积分<span> 一部由问题写成的历史</span></a>
+    <nav class="nav-links" aria-label="主导航">
+      <a href="index.html#map">本课目录</a>
+      <a class="xl" href="../linear-algebra/index.html">线性代数</a>
+      <a class="xl" href="../probability/index.html">概率论</a>
+      <a class="xl" href="../complex/index.html">复变函数</a>
+      <a class="opt" href="ch01.html">下一章</a>
+    </nav>
+  </div>
+  <div class="nav-progress" aria-hidden="true"></div>
+</header>
+
+<main>
+
+  <section class="chapter">
+    <div class="wrap">
+      <div class="ch-hero-band">
+        <div>
+          <p class="ch-label reveal"><span>序章</span><span class="ch-era">公元前三世纪至 1635 年</span></p>
+          <h1 class="ch-title reveal reveal-2">序章　穷竭法：微积分诞生之前</h1>
+          <p class="ch-deck reveal reveal-3">一条曲线围出的地，直尺量不了。阿基米德用一层层三角形去填它，刘徽用越来越多的边去围圆，卡瓦列里干脆把面积看成一堆线。三个人前后隔了两千年，干的却是同一件事：找一个算得出来的图形，把算不出来的图形夹住。</p>
+          <div class="ch-meta reveal reveal-3">
+            <div><strong>入口人物</strong>阿基米德、刘徽、卡瓦列里</div>
+            <div><strong>核心问题</strong>曲线围成的面积，能不能用一族由直线围成的图形把它夹住，从而算到任意精度？</div>
+            <div><strong>对应教材</strong>定积分与重积分的前史（§5.1、§10.1 的背景）</div>
+            <div><strong>前置</strong>面积与体积公式、相似三角形、等比数列</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap ch-body">
+    <aside class="rail">
+      <p class="rail-title">本章提纲</p>
+      <ol>
+        <li><a href="#s-origin">源头：一条曲线围出的面积</a></li>
+        <li><a href="#s-form">思想的成形</a></li>
+        <li><a href="#s-strict">严格化：希腊人为何停住</a></li>
+        <li><a href="#s-manual">方法手册</a></li>
+        <li><a href="#s-examples">例题</a></li>
+        <li><a href="#s-exercises">习题</a></li>
+        <li><a href="#s-extra">本书地图</a></li>
+      </ol>
+      <p class="rail-title">本章人物</p>
+      <p class="rail-who">欧多克斯　约前 408 至前 355<br>阿基米德　前 287 至前 212<br>刘徽　263 年注《九章算术》<br>祖冲之　429 至 500<br>祖暅　约六世纪<br>奥雷斯姆　约 1320 至 1382<br>卡瓦列里　1598 至 1647<br>费马　1636 年的求积法<br>帕斯卡　1658 年的摆线</p>
+    </aside>
+
+    <article class="prose">
+
+      <p class="lead reveal">公元前 3 世纪，叙拉古的阿基米德在撒了沙的板上画一条抛物线，用一条弦切下一块，想算出这块地的面积，可直尺量不了弯的边界；他先把答案猜出来，再用穷竭法把它证死。</p>
+
+      <h2 id="s-origin" class="reveal">一、源头：一条曲线围出的面积</h2>
+
+      <p>他把结果写成《抛物线求积》寄给多西修斯，全篇 24 个命题问的都是同一件农活：抛物线被一条弦切下一块，这块地有多少。</p>
+
+      <p>希腊人手上只有两类工具：直线围成的能拆成三角形，圆弧围成的只好靠逼近。欧多克斯在前 4 世纪给出标准做法，收在《几何原本》第 12 卷：内接从里面填，外切从外面盖。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定理（穷竭法，欧多克斯）</p>
+        <p>设 \(S\) 为待求量，\(\{A_n\}\) 是一族内接的直线图形，\(\{B_n\}\) 是一族外切的直线图形。若</p>
+        <p>（i）\(A_n&lt;S&lt;B_n\) 对一切 \(n\)；（ii）任给正数 \(\varepsilon\)，存在 \(n\) 使 \(S-A_n&lt;\varepsilon\) 且 \(B_n-S&lt;\varepsilon\)；（iii）存在常数 \(K\)，使 \(A_n&lt;K&lt;B_n\) 对一切 \(n\)，</p>
+        <p>则 \(S=K\)。</p>
+      </div>
+
+      <div class="proof">
+        <p>若 \(S&gt;K\)，取 \(\varepsilon=S-K\)，由（ii）有某个 \(n\) 使 \(A_n&gt;K\)，与（iii）矛盾；若 \(S&lt;K\)，取 \(\varepsilon=K-S\)，则有某个 \(n\) 使 \(B_n&lt;K\)，同样矛盾。两次反证各用一族，全程没取极限，每一步都是有限的不等式。</p>
+      </div>
+
+      <p>希腊人说的是「任给一个量，总能找到足够多的边数」，从不说「边数趋于无穷」，无限就藏在「任给」两个字里；今天课本写「任给 \(\varepsilon&gt;0\)」，用的还是这一手。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定理（抛物线弓形面积，阿基米德，约前 250 年）</p>
+        <p>设弓形由抛物线与一条弦围成，\(T\) 为以这条弦为底、以弓形顶点为顶点的三角形面积，则弓形面积为</p>
+        <p>\[ S=T+\frac{T}{4}+\frac{T}{16}+\cdots=\frac{4}{3}T. \]</p>
+      </div>
+
+      <p>算法是逐层加密：先放最大的内接三角形，两边剩的小弓形里各再放一个，一直放下去；每层面积和是上一层的 1/4，加起来是首项 \(T\)、公比 \(1/4\) 的等比级数。</p>
+
+      <div class="figure">
+        <!--FIG ch00_parabola--><svg viewBox="0 0 720 470" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<polygon points="72.07,353.35 647.93,353.35 360.00,101.54" fill="rgba(23, 57, 92, 0.07)" stroke="var(--ink-2)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="72.07,353.35 360.00,101.54 216.03,164.49" fill="rgba(23, 57, 92, 0.20)" stroke="var(--ink-2)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="360.00,101.54 647.93,353.35 503.97,164.49" fill="rgba(23, 57, 92, 0.20)" stroke="var(--ink-2)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="72.07,353.35 216.03,164.49 144.05,243.18" fill="rgba(23, 57, 92, 0.42)" stroke="var(--ink-2)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="216.03,164.49 360.00,101.54 288.02,117.28" fill="rgba(23, 57, 92, 0.42)" stroke="var(--ink-2)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="360.00,101.54 503.97,164.49 431.98,117.28" fill="rgba(23, 57, 92, 0.42)" stroke="var(--ink-2)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="503.97,164.49 647.93,353.35 575.95,243.18" fill="rgba(23, 57, 92, 0.42)" stroke="var(--ink-2)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="72.07" y1="353.35" x2="647.93" y2="353.35" stroke="var(--ink-2)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 72.07 353.35 L 73.87 350.21 L 75.67 347.09 L 77.47 344.00 L 79.27 340.92 L 81.07 337.86 L 82.87 334.82 L 84.67 331.80 L 86.47 328.80 L 88.27 325.82 L 90.06 322.86 L 91.86 319.92 L 93.66 316.99 L 95.46 314.09 L 97.26 311.21 L 99.06 308.35 L 100.86 305.51 L 102.66 302.68 L 104.46 299.88 L 106.26 297.10 L 108.06 294.33 L 109.86 291.59 L 111.66 288.86 L 113.46 286.16 L 115.26 283.47 L 117.06 280.81 L 118.86 278.16 L 120.66 275.54 L 122.46 272.93 L 124.26 270.34 L 126.06 267.77 L 127.86 265.23 L 129.66 262.70 L 131.45 260.19 L 133.25 257.70 L 135.05 255.23 L 136.85 252.78 L 138.65 250.35 L 140.45 247.94 L 142.25 245.55 L 144.05 243.18 L 145.85 240.83 L 147.65 238.50 L 149.45 236.19 L 151.25 233.90 L 153.05 231.63 L 154.85 229.37 L 156.65 227.14 L 158.45 224.93 L 160.25 222.73 L 162.05 220.56 L 163.85 218.41 L 165.65 216.27 L 167.45 214.16 L 169.25 212.06 L 171.05 209.99 L 172.84 207.93 L 174.64 205.89 L 176.44 203.88 L 178.24 201.88 L 180.04 199.90 L 181.84 197.95 L 183.64 196.01 L 185.44 194.09 L 187.24 192.19 L 189.04 190.31 L 190.84 188.46 L 192.64 186.62 L 194.44 184.80 L 196.24 183.00 L 198.04 181.22 L 199.84 179.45 L 201.64 177.71 L 203.44 175.99 L 205.24 174.29 L 207.04 172.61 L 208.84 170.95 L 210.64 169.30 L 212.44 167.68 L 214.23 166.08 L 216.03 164.49 L 217.83 162.93 L 219.63 161.39 L 221.43 159.86 L 223.23 158.36 L 225.03 156.87 L 226.83 155.41 L 228.63 153.96 L 230.43 152.53 L 232.23 151.13 L 234.03 149.74 L 235.83 148.37 L 237.63 147.02 L 239.43 145.70 L 241.23 144.39 L 243.03 143.10 L 244.83 141.83 L 246.63 140.58 L 248.43 139.35 L 250.23 138.14 L 252.03 136.95 L 253.83 135.78 L 255.62 134.63 L 257.42 133.50 L 259.22 132.39 L 261.02 131.30 L 262.82 130.22 L 264.62 129.17 L 266.42 128.14 L 268.22 127.13 L 270.02 126.13 L 271.82 125.16 L 273.62 124.20 L 275.42 123.27 L 277.22 122.36 L 279.02 121.46 L 280.82 120.59 L 282.62 119.73 L 284.42 118.89 L 286.22 118.08 L 288.02 117.28 L 289.82 116.50 L 291.62 115.75 L 293.42 115.01 L 295.22 114.29 L 297.02 113.59 L 298.81 112.91 L 300.61 112.25 L 302.41 111.61 L 304.21 110.99 L 306.01 110.39 L 307.81 109.81 L 309.61 109.25 L 311.41 108.71 L 313.21 108.19 L 315.01 107.69 L 316.81 107.21 L 318.61 106.75 L 320.41 106.30 L 322.21 105.88 L 324.01 105.48 L 325.81 105.09 L 327.61 104.73 L 329.41 104.38 L 331.21 104.06 L 333.01 103.76 L 334.81 103.47 L 336.61 103.20 L 338.41 102.96 L 340.20 102.73 L 342.00 102.53 L 343.80 102.34 L 345.60 102.17 L 347.40 102.02 L 349.20 101.90 L 351.00 101.79 L 352.80 101.70 L 354.60 101.63 L 356.40 101.58 L 358.20 101.55 L 360.00 101.54 L 361.80 101.55 L 363.60 101.58 L 365.40 101.63 L 367.20 101.70 L 369.00 101.79 L 370.80 101.90 L 372.60 102.02 L 374.40 102.17 L 376.20 102.34 L 378.00 102.53 L 379.80 102.73 L 381.59 102.96 L 383.39 103.20 L 385.19 103.47 L 386.99 103.76 L 388.79 104.06 L 390.59 104.38 L 392.39 104.73 L 394.19 105.09 L 395.99 105.48 L 397.79 105.88 L 399.59 106.30 L 401.39 106.75 L 403.19 107.21 L 404.99 107.69 L 406.79 108.19 L 408.59 108.71 L 410.39 109.25 L 412.19 109.81 L 413.99 110.39 L 415.79 110.99 L 417.59 111.61 L 419.39 112.25 L 421.19 112.91 L 422.98 113.59 L 424.78 114.29 L 426.58 115.01 L 428.38 115.75 L 430.18 116.50 L 431.98 117.28 L 433.78 118.08 L 435.58 118.89 L 437.38 119.73 L 439.18 120.59 L 440.98 121.46 L 442.78 122.36 L 444.58 123.27 L 446.38 124.20 L 448.18 125.16 L 449.98 126.13 L 451.78 127.13 L 453.58 128.14 L 455.38 129.17 L 457.18 130.22 L 458.98 131.30 L 460.78 132.39 L 462.58 133.50 L 464.38 134.63 L 466.17 135.78 L 467.97 136.95 L 469.77 138.14 L 471.57 139.35 L 473.37 140.58 L 475.17 141.83 L 476.97 143.10 L 478.77 144.39 L 480.57 145.70 L 482.37 147.02 L 484.17 148.37 L 485.97 149.74 L 487.77 151.13 L 489.57 152.53 L 491.37 153.96 L 493.17 155.41 L 494.97 156.87 L 496.77 158.36 L 498.57 159.86 L 500.37 161.39 L 502.17 162.93 L 503.97 164.49 L 505.77 166.08 L 507.56 167.68 L 509.36 169.30 L 511.16 170.95 L 512.96 172.61 L 514.76 174.29 L 516.56 175.99 L 518.36 177.71 L 520.16 179.45 L 521.96 181.22 L 523.76 183.00 L 525.56 184.80 L 527.36 186.62 L 529.16 188.46 L 530.96 190.31 L 532.76 192.19 L 534.56 194.09 L 536.36 196.01 L 538.16 197.95 L 539.96 199.90 L 541.76 201.88 L 543.56 203.88 L 545.36 205.89 L 547.16 207.93 L 548.95 209.99 L 550.75 212.06 L 552.55 214.16 L 554.35 216.27 L 556.15 218.41 L 557.95 220.56 L 559.75 222.73 L 561.55 224.93 L 563.35 227.14 L 565.15 229.37 L 566.95 231.63 L 568.75 233.90 L 570.55 236.19 L 572.35 238.50 L 574.15 240.83 L 575.95 243.18 L 577.75 245.55 L 579.55 247.94 L 581.35 250.35 L 583.15 252.78 L 584.95 255.23 L 586.75 257.70 L 588.55 260.19 L 590.34 262.70 L 592.14 265.23 L 593.94 267.77 L 595.74 270.34 L 597.54 272.93 L 599.34 275.54 L 601.14 278.16 L 602.94 280.81 L 604.74 283.47 L 606.54 286.16 L 608.34 288.86 L 610.14 291.59 L 611.94 294.33 L 613.74 297.10 L 615.54 299.88 L 617.34 302.68 L 619.14 305.51 L 620.94 308.35 L 622.74 311.21 L 624.54 314.09 L 626.34 316.99 L 628.14 319.92 L 629.94 322.86 L 631.73 325.82 L 633.53 328.80 L 635.33 331.80 L 637.13 334.82 L 638.93 337.86 L 640.73 340.92 L 642.53 344.00 L 644.33 347.09 L 646.13 350.21 L 647.93 353.35" fill="none" stroke="var(--accent-line)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="360.00" y1="353.35" x2="360.00" y2="101.54" stroke="var(--ink-2)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="5 5"/>
+<circle cx="360.00" cy="101.54" r="3.6" fill="var(--ink)"/>
+<text x="369.00" y="237.52" text-anchor="start" font-size="16" fill="var(--ink)" font-style="italic">h</text>
+<circle cx="72.07" cy="353.35" r="3.4" fill="var(--ink)"/>
+<circle cx="647.93" cy="353.35" r="3.4" fill="var(--ink)"/>
+<text x="360.00" y="302.99" text-anchor="middle" font-size="17" fill="var(--ink)" font-weight="600">T</text>
+<text x="360.00" y="202.27" text-anchor="middle" font-size="15.5" fill="var(--ink)" font-weight="600">T/4</text>
+<text x="181.48" y="297.95" text-anchor="middle" font-size="15" fill="var(--ink)" font-weight="600">T/16</text>
+<text x="561.55" y="81.40" text-anchor="start" font-size="14.5" fill="var(--ink-3)">y = 1 - x²</text>
+<text x="360.00" y="383.57" text-anchor="middle" font-size="17" fill="var(--prussian)" font-weight="600">T + T/4 + T/16 + ⋯ = 4T/3</text>
+<text x="360.00" y="416.30" text-anchor="middle" font-size="14" fill="var(--ink-3)">每层三角形的总面积是上一层的四分之一，层数越多，剩下的缝隙越薄</text>
+</svg>
+<!--/FIG ch00_parabola-->
+        <figcaption class="figcaption"><b>每加密一层，新增面积只有上一层的 1/4。</b>三层之后缝隙已经很薄，后面割圆、截片用的还是这套夹法。</figcaption>
+      </div>
+
+      <p>答案他其实先看出来了：写给埃拉托色尼的《力学方法》里说，这类结果能用机械办法先看出，把弓形切成薄片挂上杠杆配平，读出 4 比 3，再用穷竭法补证。</p>
+
+      <details class="fold">
+        <summary>面积挂上杠杆，怎么就读出 4 比 3 了？</summary>
+        <p>他把弓形切成许多竖条，每条挂在一根杠杆的某个位置，再用一块面积已知的三角形去配平。支点和各条的力臂按 \(1:1:2:3:\cdots\) 这类比例排好，配平之后读力臂的比，面积比就出来了。</p>
+      </details>
+
+      <div class="keyidea reveal">
+        <p>穷竭法的要诀：每一层算的都是有限的直线图形，误差想压多小就压多小，不用真的分到无穷。</p>
+      </div>
+
+      <h2 id="s-form" class="reveal">二、思想的成形</h2>
+
+      <h3>球：同一套办法的第二次使用</h3>
+
+      <p>《论球和圆柱》给出两个结论：球面积是大圆面积的 4 倍，球体积是外切圆柱的 2/3，即 \(\frac{4}{3}\pi R^{3}\)，他要人刻在墓碑上。证明还是穷竭法，切成薄片逐层比较，两头用反证堵住。</p>
+
+      <h3>割圆：刘徽与祖冲之</h3>
+
+      <p>中国这边要算的是圆周率。263 年，刘徽给《九章算术》「圆田术」作注，提出割圆术：从内接正 6 边形起，边数一次次加倍，用勾股定理算新边长，周长除以直径就得到 \(\pi\) 的下界。</p>
+
+      <p>记半径为 \(R\)、内接正 \(n\) 边形边长为 \(s_n\)，递推是</p>
+
+      <p>\[ s_{2n}=\sqrt{2R^{2}-R\sqrt{4R^{2}-s_n^{2}}},\qquad \pi_n=\frac{n s_n}{2R}. \]</p>
+
+      <p>从 \(s_6=R\) 算到正 192 边形得 3.14，记作 157/50，再算到正 3072 边形得 3.1416；边和弧之间那段「余径」，边数一加倍就缩到 1/4 左右。</p>
+
+      <div class="archive reveal">
+        <p class="archive-when"><!-- taste-skill-ignore -->263 年，刘徽注《九章算术》</p>
+        <h3>割之弥细，所失弥少</h3>
+        <p class="archive-quote">“割之弥细，所失弥少，割之又割，以至于不可割，则与圆合体而无所失矣。”</p>
+        <p class="archive-source">刘徽《九章算术注》方田章「圆田术」注，263 年</p>
+        <p>细分，误差递减，分到底就和圆合体；「无所失」是说合体之后没有差别。刘徽手上只有内接的一族，得到的是下界。</p>
+      </div>
+
+      <p>200 多年后，祖冲之把 \(\pi\) 夹到 3.1415926 和 3.1415927 之间，又给出密率 355/113，欧洲要到 16 世纪下半叶才重新算出。他的算法没留下来，一般认为用的还是割圆术。</p>
+
+      <details class="fold">
+        <summary>祖冲之算的东西，怎么传到祖暅手上？</summary>
+        <p>祖冲之写过《缀术》，也碰过球体积，书在北宋失传了。今天能看到的祖暅求球体积的办法，存在唐代李淳风注《九章算术》「开立圆术」的注文里：祖暅用了「幂势既同，则积不容异」一句，注文说这办法出自他父亲。</p>
+      </details>
+
+      <div class="figure">
+        <!--FIG ch00_circle--><svg viewBox="0 0 720 450" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<circle cx="232.00" cy="218.00" r="166.00" fill="none" stroke="var(--accent-line)" stroke-width="2.4"/>
+<polygon points="232.00,52.00 375.76,135.00 375.76,301.00 232.00,384.00 88.24,301.00 88.24,135.00" fill="rgba(23, 57, 92, 0.05)" stroke="var(--ink-3)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="232.00,52.00 315.00,74.24 375.76,135.00 398.00,218.00 375.76,301.00 315.00,361.76 232.00,384.00 149.00,361.76 88.24,301.00 66.00,218.00 88.24,135.00 149.00,74.24" fill="rgba(23, 57, 92, 0.09)" stroke="var(--ink-2)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="232.00,52.00 274.96,57.66 315.00,74.24 349.38,100.62 375.76,135.00 392.34,175.04 398.00,218.00 392.34,260.96 375.76,301.00 349.38,335.38 315.00,361.76 274.96,378.34 232.00,384.00 189.04,378.34 149.00,361.76 114.62,335.38 88.24,301.00 71.66,260.96 66.00,218.00 71.66,175.04 88.24,135.00 114.62,100.62 149.00,74.24 189.04,57.66" fill="rgba(23, 57, 92, 0.11)" stroke="var(--prussian)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="375.76" y1="218.00" x2="398.00" y2="218.00" stroke="var(--ink)" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="375.76" y1="212.00" x2="375.76" y2="224.00" stroke="var(--ink)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="398.00" cy="218.00" r="3.4" fill="var(--ink)"/>
+<text x="404.00" y="212.00" text-anchor="start" font-size="16" fill="var(--ink)" font-style="italic">h</text>
+<circle cx="232.00" cy="218.00" r="3.6" fill="var(--ink)"/>
+<line x1="232.00" y1="218.00" x2="315.00" y2="74.24" stroke="var(--ink-2)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="5 5"/>
+<text x="267.65" y="132.93" text-anchor="end" font-size="15.5" fill="var(--ink-2)" font-style="italic">R</text>
+<text x="424.00" y="92.00" text-anchor="start" font-size="14" fill="var(--ink-3)">内接正 n 边形周长除以直径</text>
+<text x="424.00" y="130.00" text-anchor="start" font-size="14.5" fill="var(--ink-2)">正六边形</text>
+<text x="668.00" y="130.00" text-anchor="end" font-size="15.5" fill="var(--ink)" font-weight="600">3.0000</text>
+<text x="424.00" y="166.00" text-anchor="start" font-size="14.5" fill="var(--ink-2)">正十二边形</text>
+<text x="668.00" y="166.00" text-anchor="end" font-size="15.5" fill="var(--ink)" font-weight="600">3.1058</text>
+<text x="424.00" y="202.00" text-anchor="start" font-size="14.5" fill="var(--ink-2)">正二十四边形</text>
+<text x="668.00" y="202.00" text-anchor="end" font-size="15.5" fill="var(--ink)" font-weight="600">3.1326</text>
+<text x="424.00" y="238.00" text-anchor="start" font-size="14.5" fill="var(--ink-2)">正九十六边形</text>
+<text x="668.00" y="238.00" text-anchor="end" font-size="15.5" fill="var(--ink)" font-weight="600">3.1394</text>
+<text x="424.00" y="274.00" text-anchor="start" font-size="14.5" fill="var(--ink-2)">正一百九十二边形</text>
+<text x="668.00" y="274.00" text-anchor="end" font-size="15.5" fill="var(--ink)" font-weight="600">3.1415</text>
+<text x="424.00" y="310.00" text-anchor="start" font-size="14.5" fill="var(--prussian)" font-weight="600">圆</text>
+<text x="668.00" y="310.00" text-anchor="end" font-size="15.5" fill="var(--prussian)" font-weight="600">3.14159</text>
+<text x="424.00" y="356.00" text-anchor="start" font-size="13.5" fill="var(--ink-3)">边数每加一倍，误差缩到约四分之一</text>
+<text x="424.00" y="386.00" text-anchor="start" font-size="14" fill="var(--ink-2)">刘徽：192 边形取 3.14</text>
+<text x="424.00" y="408.00" text-anchor="start" font-size="14" fill="var(--ink-2)">祖冲之：355/113 为密率</text>
+<text x="424.00" y="430.00" text-anchor="start" font-size="14" fill="var(--ink-2)">3.1415926 ＜ π ＜ 3.1415927</text>
+<text x="58.00" y="424.00" text-anchor="start" font-size="13.5" fill="var(--ink-3)">h 为余径：多边形边到弧的最大距离</text>
+</svg>
+<!--/FIG ch00_circle-->
+        <figcaption class="figcaption"><b>边数每加一倍，误差缩到约 1/4。</b>三层多边形叠在一起，余径 \(h\) 是这一层还能往里挤的余地。</figcaption>
+      </div>
+
+      <h3>祖暅原理：从平面到立体</h3>
+
+      <p>刘徽之后，祖冲之、祖暅父子把这套办法推到立体，依据是「幂势既同，则积不容异」，「幂」是截面积，「势」是高。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定理（祖暅原理，约 6 世纪，见《九章算术》注）</p>
+        <p>两个等高的立体，若同一高度处被平行于底面的平面截得的截面积都相等，则体积相等。</p>
+      </div>
+
+      <p>半球和「圆柱挖去圆锥」的剩余体，在高 \(z\) 处的截面积都是 \(\pi(R^{2}-z^{2})\)，处处相等，所以半球体积是 \(\frac{2}{3}\pi R^{3}\)，整球 \(\frac{4}{3}\pi R^{3}\)。</p>
+
+      <p>祖暅碰的是更难的对象：「牟合方盖」，两个圆柱正交相交围成的那块，他切成 8 块，和正方体挖去棱锥的剩余体逐层比较，绕开球面这个算不了的边界。</p>
+
+      <h3>中世纪：把速度画成图形</h3>
+
+      <p>14 世纪，牛津的默顿学派（约 1335 年）提出平均速度定理：匀加速运动一段时间的路程，等于用初末速度的平均值匀速走的时间。约 1350 年，奥雷斯姆在《形式纬度论》里配上图形证明：横轴是时间，纵轴是速度，路程成了斜线下的面积，三角形高出中线那块正好补上矩形缺的那块。</p>
+
+      <details class="fold">
+        <summary>「形式纬度」这名字到底在说什么？</summary>
+        <p>奥雷斯姆把能变大变小的量叫「形式」，把一个量取到的不同程度叫「纬度」，延展方向叫「经度」。速度是「形式的纬度」，时间是它的「经度」，速度随时间怎么变就画成了一条线。这套词来自经院哲学，后来没人再用。卡瓦列里的不可分原理就是从这张纬度图里长出来的。</p>
+      </details>
+
+      <div class="figure">
+        <!--FIG ch00_oresme--><svg viewBox="0 0 720 430" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<line x1="94.17" y1="349.32" x2="662.50" y2="349.32" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="94.17" y1="349.32" x2="94.17" y2="40.14" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="671.67" y="373.32" text-anchor="end" font-size="16" fill="var(--ink-2)" font-style="italic">t</text>
+<text x="80.17" y="36.14" text-anchor="end" font-size="16" fill="var(--ink-2)" font-style="italic">v</text>
+<polygon points="94.17,349.32 552.50,349.32 552.50,95.89" fill="rgba(23, 57, 92, 0.08)" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="94.17" y1="349.32" x2="552.50" y2="95.89" stroke="var(--accent-line)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="94.17" y1="222.60" x2="552.50" y2="222.60" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 6"/>
+<circle cx="94.17" cy="222.60" r="3.4" fill="var(--ink)"/>
+<text x="84.17" y="227.60" text-anchor="end" font-size="14.5" fill="var(--ink)" font-style="italic">v/2</text>
+<polygon points="94.17,349.32 323.33,222.60 94.17,222.60" fill="rgba(23, 57, 92, 0.32)" stroke="var(--prussian)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="323.33,222.60 552.50,222.60 552.50,95.89" fill="rgba(23, 57, 92, 0.32)" stroke="var(--prussian)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="94.17,349.32 552.50,349.32 552.50,222.60 94.17,222.60" fill="none" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="295.83" y="156.71" text-anchor="start" font-size="15" fill="var(--accent-line)">v = a t</text>
+<text x="213.33" y="283.42" text-anchor="middle" font-size="15" fill="var(--ink)" font-weight="600">A</text>
+<text x="460.83" y="189.66" text-anchor="middle" font-size="15" fill="var(--ink)" font-weight="600">B</text>
+<text x="323.33" y="374.66" text-anchor="middle" font-size="14.5" fill="var(--ink-3)">两块阴影三角形全等，因此三角形面积等于矩形面积</text>
+<text x="323.33" y="392.40" text-anchor="middle" font-size="15" fill="var(--prussian)" font-weight="600">s = v t / 2：匀加速运动等价于以平均速度 v/2 匀速运动</text>
+</svg>
+<!--/FIG ch00_oresme-->
+        <figcaption class="figcaption"><b>v-t 图下的面积就是路程。</b>斜直线与横轴围成的三角形，面积等于以平均速度 \(v/2\) 为高的矩形。</figcaption>
+      </div>
+
+            <h3>卡瓦列里：把面积看成一条条线</h3>
+
+      <p>1635 年，博洛尼亚的卡瓦列里出版《不可分连续量的几何学》，说面积是一堆平行线段摞起来的，立体是一堆截片摞起来的。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定理（卡瓦列里原理，1635）</p>
+        <p>夹在两条平行线之间的两个平面图形，若与平行线平行的每条直线截两者所得线段等长，则面积相等；两个等高的立体，若与底面平行的每个平面截两者所得截面积相等，则体积相等。</p>
+      </div>
+
+      <p>于是椭圆面积是 \(\pi ab\)，因为圆沿一个方向拉长时每条弦按同一比例变长；斜柱和直柱同体积，因为同一高度的截片是同一个平行四边形。</p>
+
+      <div class="figure">
+        <!--FIG ch00_cavalieri--><svg viewBox="0 0 720 450" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<polygon points="92.00,336.00 196.00,336.00 196.00,327.33 92.00,327.33" fill="rgba(23, 57, 92, 0.07)" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="196.00,336.00 250.08,304.80 250.08,296.13 196.00,327.33" fill="rgba(23, 57, 92, 0.13)" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="92.00,327.33 196.00,327.33 250.08,296.13 146.08,296.13" fill="rgba(23, 57, 92, 0.03)" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="92.00,327.33 196.00,327.33 196.00,318.67 92.00,318.67" fill="rgba(23, 57, 92, 0.07)" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="196.00,327.33 250.08,296.13 250.08,287.47 196.00,318.67" fill="rgba(23, 57, 92, 0.13)" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="92.00,318.67 196.00,318.67 250.08,287.47 146.08,287.47" fill="rgba(23, 57, 92, 0.03)" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="92.00,318.67 196.00,318.67 196.00,310.00 92.00,310.00" fill="rgba(23, 57, 92, 0.07)" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="196.00,318.67 250.08,287.47 250.08,278.80 196.00,310.00" fill="rgba(23, 57, 92, 0.13)" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="92.00,310.00 196.00,310.00 250.08,278.80 146.08,278.80" fill="rgba(23, 57, 92, 0.03)" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="92.00,310.00 196.00,310.00 196.00,301.33 92.00,301.33" fill="rgba(23, 57, 92, 0.26)" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="196.00,310.00 250.08,278.80 250.08,270.13 196.00,301.33" fill="rgba(23, 57, 92, 0.34)" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="92.00,301.33 196.00,301.33 250.08,270.13 146.08,270.13" fill="rgba(23, 57, 92, 0.16)" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="92.00,301.33 196.00,301.33 196.00,292.67 92.00,292.67" fill="rgba(23, 57, 92, 0.07)" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="196.00,301.33 250.08,270.13 250.08,261.47 196.00,292.67" fill="rgba(23, 57, 92, 0.13)" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="92.00,292.67 196.00,292.67 250.08,261.47 146.08,261.47" fill="rgba(23, 57, 92, 0.03)" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="92.00,292.67 196.00,292.67 196.00,284.00 92.00,284.00" fill="rgba(23, 57, 92, 0.07)" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="196.00,292.67 250.08,261.47 250.08,252.80 196.00,284.00" fill="rgba(23, 57, 92, 0.13)" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="92.00,284.00 196.00,284.00 250.08,252.80 146.08,252.80" fill="rgba(23, 57, 92, 0.03)" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="92.00,284.00 196.00,284.00 196.00,275.33 92.00,275.33" fill="rgba(23, 57, 92, 0.07)" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="196.00,284.00 250.08,252.80 250.08,244.13 196.00,275.33" fill="rgba(23, 57, 92, 0.13)" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="92.00,275.33 196.00,275.33 250.08,244.13 146.08,244.13" fill="rgba(23, 57, 92, 0.03)" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="92.00,275.33 196.00,275.33 196.00,266.67 92.00,266.67" fill="rgba(23, 57, 92, 0.07)" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="196.00,275.33 250.08,244.13 250.08,235.47 196.00,266.67" fill="rgba(23, 57, 92, 0.13)" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="92.00,266.67 196.00,266.67 250.08,235.47 146.08,235.47" fill="rgba(23, 57, 92, 0.03)" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="92.00,266.67 196.00,266.67 196.00,258.00 92.00,258.00" fill="rgba(23, 57, 92, 0.26)" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="196.00,266.67 250.08,235.47 250.08,226.80 196.00,258.00" fill="rgba(23, 57, 92, 0.34)" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="92.00,258.00 196.00,258.00 250.08,226.80 146.08,226.80" fill="rgba(23, 57, 92, 0.16)" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="92.00,258.00 196.00,258.00 196.00,249.33 92.00,249.33" fill="rgba(23, 57, 92, 0.07)" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="196.00,258.00 250.08,226.80 250.08,218.13 196.00,249.33" fill="rgba(23, 57, 92, 0.13)" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="92.00,249.33 196.00,249.33 250.08,218.13 146.08,218.13" fill="rgba(23, 57, 92, 0.03)" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="92.00,249.33 196.00,249.33 196.00,240.67 92.00,240.67" fill="rgba(23, 57, 92, 0.07)" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="196.00,249.33 250.08,218.13 250.08,209.47 196.00,240.67" fill="rgba(23, 57, 92, 0.13)" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="92.00,240.67 196.00,240.67 250.08,209.47 146.08,209.47" fill="rgba(23, 57, 92, 0.03)" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="92.00,240.67 196.00,240.67 196.00,232.00 92.00,232.00" fill="rgba(23, 57, 92, 0.07)" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="196.00,240.67 250.08,209.47 250.08,200.80 196.00,232.00" fill="rgba(23, 57, 92, 0.13)" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="92.00,232.00 196.00,232.00 250.08,200.80 146.08,200.80" fill="rgba(23, 57, 92, 0.03)" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="146.08,304.80 92.00,336.00 196.00,336.00 196.00,232.00 250.08,200.80 146.08,200.80" fill="none" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="404.00,336.00 508.00,336.00 513.20,327.33 409.20,327.33" fill="rgba(23, 57, 92, 0.07)" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="508.00,336.00 562.08,304.80 567.28,296.13 513.20,327.33" fill="rgba(23, 57, 92, 0.13)" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="409.20,327.33 513.20,327.33 567.28,296.13 463.28,296.13" fill="rgba(23, 57, 92, 0.03)" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="409.20,327.33 513.20,327.33 518.40,318.67 414.40,318.67" fill="rgba(23, 57, 92, 0.07)" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="513.20,327.33 567.28,296.13 572.48,287.47 518.40,318.67" fill="rgba(23, 57, 92, 0.13)" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="414.40,318.67 518.40,318.67 572.48,287.47 468.48,287.47" fill="rgba(23, 57, 92, 0.03)" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="414.40,318.67 518.40,318.67 523.60,310.00 419.60,310.00" fill="rgba(23, 57, 92, 0.07)" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="518.40,318.67 572.48,287.47 577.68,278.80 523.60,310.00" fill="rgba(23, 57, 92, 0.13)" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="419.60,310.00 523.60,310.00 577.68,278.80 473.68,278.80" fill="rgba(23, 57, 92, 0.03)" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="419.60,310.00 523.60,310.00 528.80,301.33 424.80,301.33" fill="rgba(23, 57, 92, 0.26)" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="523.60,310.00 577.68,278.80 582.88,270.13 528.80,301.33" fill="rgba(23, 57, 92, 0.34)" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="424.80,301.33 528.80,301.33 582.88,270.13 478.88,270.13" fill="rgba(23, 57, 92, 0.16)" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="424.80,301.33 528.80,301.33 534.00,292.67 430.00,292.67" fill="rgba(23, 57, 92, 0.07)" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="528.80,301.33 582.88,270.13 588.08,261.47 534.00,292.67" fill="rgba(23, 57, 92, 0.13)" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="430.00,292.67 534.00,292.67 588.08,261.47 484.08,261.47" fill="rgba(23, 57, 92, 0.03)" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="430.00,292.67 534.00,292.67 539.20,284.00 435.20,284.00" fill="rgba(23, 57, 92, 0.07)" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="534.00,292.67 588.08,261.47 593.28,252.80 539.20,284.00" fill="rgba(23, 57, 92, 0.13)" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="435.20,284.00 539.20,284.00 593.28,252.80 489.28,252.80" fill="rgba(23, 57, 92, 0.03)" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="435.20,284.00 539.20,284.00 544.40,275.33 440.40,275.33" fill="rgba(23, 57, 92, 0.07)" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="539.20,284.00 593.28,252.80 598.48,244.13 544.40,275.33" fill="rgba(23, 57, 92, 0.13)" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="440.40,275.33 544.40,275.33 598.48,244.13 494.48,244.13" fill="rgba(23, 57, 92, 0.03)" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="440.40,275.33 544.40,275.33 549.60,266.67 445.60,266.67" fill="rgba(23, 57, 92, 0.07)" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="544.40,275.33 598.48,244.13 603.68,235.47 549.60,266.67" fill="rgba(23, 57, 92, 0.13)" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="445.60,266.67 549.60,266.67 603.68,235.47 499.68,235.47" fill="rgba(23, 57, 92, 0.03)" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="445.60,266.67 549.60,266.67 554.80,258.00 450.80,258.00" fill="rgba(23, 57, 92, 0.26)" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="549.60,266.67 603.68,235.47 608.88,226.80 554.80,258.00" fill="rgba(23, 57, 92, 0.34)" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="450.80,258.00 554.80,258.00 608.88,226.80 504.88,226.80" fill="rgba(23, 57, 92, 0.16)" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="450.80,258.00 554.80,258.00 560.00,249.33 456.00,249.33" fill="rgba(23, 57, 92, 0.07)" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="554.80,258.00 608.88,226.80 614.08,218.13 560.00,249.33" fill="rgba(23, 57, 92, 0.13)" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="456.00,249.33 560.00,249.33 614.08,218.13 510.08,218.13" fill="rgba(23, 57, 92, 0.03)" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="456.00,249.33 560.00,249.33 565.20,240.67 461.20,240.67" fill="rgba(23, 57, 92, 0.07)" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="560.00,249.33 614.08,218.13 619.28,209.47 565.20,240.67" fill="rgba(23, 57, 92, 0.13)" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="461.20,240.67 565.20,240.67 619.28,209.47 515.28,209.47" fill="rgba(23, 57, 92, 0.03)" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="461.20,240.67 565.20,240.67 570.40,232.00 466.40,232.00" fill="rgba(23, 57, 92, 0.07)" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="565.20,240.67 619.28,209.47 624.48,200.80 570.40,232.00" fill="rgba(23, 57, 92, 0.13)" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="466.40,232.00 570.40,232.00 624.48,200.80 520.48,200.80" fill="rgba(23, 57, 92, 0.03)" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="458.08,304.80 404.00,336.00 508.00,336.00 570.40,232.00 624.48,200.80 520.48,200.80" fill="none" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="92.00" y1="305.67" x2="526.20" y2="305.67" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="5 6"/>
+<line x1="92.00" y1="262.33" x2="552.20" y2="262.33" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="5 6"/>
+<text x="327.00" y="250.33" text-anchor="middle" font-size="14.5" fill="var(--prussian)" font-weight="600">A(z)</text>
+<line x1="77.44" y1="336.00" x2="77.44" y2="232.00" stroke="var(--ink-3)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="71.20" y1="336.00" x2="85.76" y2="336.00" stroke="var(--ink-3)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="71.20" y1="232.00" x2="85.76" y2="232.00" stroke="var(--ink-3)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="60.80" y="284.00" text-anchor="end" font-size="15" fill="var(--ink-2)" font-style="italic">h</text>
+<text x="149.20" y="388.00" text-anchor="middle" font-size="15.5" fill="var(--ink)">直柱</text>
+<text x="492.40" y="388.00" text-anchor="middle" font-size="15.5" fill="var(--ink)">斜柱</text>
+<text x="360.00" y="418.00" text-anchor="middle" font-size="14.5" fill="var(--ink-3)">同一高度 z 处的两片面积都是 A(z)，所以两柱体积相等</text>
+<text x="360.00" y="116.00" text-anchor="middle" font-size="15.5" fill="var(--prussian)" font-weight="600">V = A(z) 沿高度累积</text>
+</svg>
+<!--/FIG ch00_cavalieri-->
+        <figcaption class="figcaption"><b>同一高度截面积处处相等，则体积相等。</b>直柱和斜柱是同一叠截片堆成的，只是每片横向挪了一点。</figcaption>
+      </div>
+
+      <details class="fold">
+        <summary>古尔丁到底挑出了什么毛病？</summary>
+        <p>1640 年代，古尔丁（Paul Guldin）说：不可分量没有宽度，无穷多条加起来凑不出有宽度的面积。卡瓦列里在《六篇几何演习》（1647）里答「你把线加粗到有宽度，就不合定义了」，等于承认那些线只能整块处理。</p>
+      </details>
+
+      <h3>费马与帕斯卡：无穷小成为算法</h3>
+
+      <p>1636 年，费马把区间按等比数列分割，用 \(1+r+r^{2}+\cdots\) 逼近 \(y=x^{n}\) 下的面积，再让 \(r\) 逼近 1，写成符号就能对整类曲线一次算完。</p>
+
+      <p>1658 年，帕斯卡用不可分方法算出摆线一拱的面积，是生圆面积的 3 倍，莱布尼茨说这类无穷多小三角形的论证让他看清了 \(\mathrm{d}x\) 和 \(\mathrm{d}y\) 的用法。</p>
+
+      <h2 id="s-strict" class="reveal">三、严格化：希腊人为何停住，17 世纪为何又能走</h2>
+
+      <p>亚里士多德在《物理学》第 3 卷把无限分成两种，一种永远可以再分，一种已经分完了，他只认前一种，因为线段能一直分，可谁也没见过分完了的整体。芝诺就卡在这儿：走完全程得先走一半，再先走 1/4，永远没有第一步；而每一瞬间箭都待在确定的位置上，于是每一瞬间它都静止。</p>
+
+      <p>穷竭法绕开这个坑，它不谈「无穷多条线段之和」，只谈「给你一个量，我找得到足够多的有限步」，所以安全，代价是慢，每碰一种新图形都得重设逼近族。阿基米德算得了抛物线、球和螺线，可每一种都得把夹逼的族重新设计一遍。</p>
+
+      <p>17 世纪这条路又能走了：符号代数让一族图形写成式子（韦达 1591 年的字母记法、笛卡尔 1637 年的《几何学》）；力学和天文学逼着人回答「瞬时」（开普勒 1615 年、伽利略的落体）；印刷让方法几年内传遍欧洲，实无限也早不是禁语。</p>
+
+      <p>代价是逻辑上的退步：卡瓦列里没交代「所有平行线」有多少条，牛顿和莱布尼茨的无穷小被贝克莱在 1734 年的《分析家》里叫作消失量的鬼魂。回答等到 19 世纪，柯西 1821 年的《分析教程》把「无限接近」改写成不等式，黎曼 1854 年用上、下和定义积分。</p>
+
+      <h3>用今天的记号重述</h3>
+
+      <p>这一节的东西，今天都写成了积分。抛物线弓形取 \(y=1-x^{2}\)、弦为 \([-1,1]\)，内接三角形面积 \(T=1\)，于是</p>
+
+      <p>\[ \int_{-1}^{1}(1-x^{2})\,\mathrm{d}x=\left[x-\frac{x^{3}}{3}\right]_{-1}^{1}=\frac{4}{3}. \]</p>
+
+      <p>祖暅原理和卡瓦列里原理就是截面法 \(V=\int_{a}^{b}A(z)\,\mathrm{d}z\)：今天要每个 \(z\) 上都成立，而且 \(A(z)\) 可积，截片才累加得起来；平面版本先沿一条线累加，再沿垂直方向累加。</p>
+
+      <div class="keyidea reveal">
+        <p>截面法一句话：两个立体，每个高度上截出来的面积都一样大，体积就一样大。</p>
+      </div>
+
+      <p>说回这本书为什么按历史顺序讲：定义都是从具体问题里磨出来的，第一章那套 \(\varepsilon\)-\(\delta\) 语言看着像天上掉下来的，可把阿基米德那句「任给一个量」摆在前头，它就是同一句话的现代写法。考试爱错的地方也常常是史上被挑过毛病的地方：芝诺对应「极限不存在时不能随便交换次序」，古尔丁对应「不可分量得换成可积性」，贝克莱对应「\(\mathrm{d}y/\mathrm{d}x\) 是比值的极限」。</p>
+
+      <h2 id="s-manual" class="reveal">四、方法手册</h2>
+
+      <p>穷竭法今天只剩一个骨架，四步。第一步造逼近族：选一族面积已知的直线图形 \(A_n\)，单调增且小于 \(S\)，再备外切的 \(B_n\)，单调减且大于 \(S\)。</p>
+
+      <ul>
+        <li>估误差。找 \(S-A_n\) 的递推关系，历史上几乎总是等比，抛物线弓形按层是 \(1/4\)，割圆术也压到 1/4 左右。</li>
+        <li>求和。算清有限和 \(\frac{1-q^{n}}{1-q}\)，再说明 \(q^{n}\) 比任何给定正数都小，它顶替了今天的取极限。</li>
+        <li>双重反证。设 \(S&gt;K\) 或 \(S&lt;K\)，取 \(\varepsilon\) 等于差额，用上一步逼出矛盾。</li>
+      </ul>
+
+      <p>要用的工具只有三个：等比求和 \(1+q+\cdots+q^{n-1}=\frac{1-q^{n}}{1-q}\)（\(0&lt;q&lt;1\)）；割圆递推 \(s_{2n}=\sqrt{2R^{2}-R\sqrt{4R^{2}-s_n^{2}}}\)，\(\pi_n=\frac{n s_n}{2R}\)，从 \(s_6=R\) 出发；截面法 \(V=\int_{a}^{b}A(z)\,\mathrm{d}z\)。</p>
+
+      <p>三处常见错法：只证一侧，内接族只给 \(S\ge K\)，\(S&gt;K\) 没被排除；把单调当收敛，单调有界只保证有上确界；反过来用截面法，由体积相等推截面积相等是错的。</p>
+
+      <h2 id="s-examples" class="reveal">五、例题</h2>
+
+      <div class="example">
+        <p class="example-head">例 <span>1</span>　抛物线 \(y=1-x^{2}\) 与 \(x\) 轴围成弓形，内接三角形取 \((-1,0)\)、\((1,0)\)、\((0,1)\)。求弓形面积，并用双重反证说明它不能更大也不能更小。</p>
+        <p class="solution">解　底 2、高 1，\(T=1\)。前 \(m\) 层之和 \(A_m=\frac{4}{3}\left(1-4^{-m}\right)\)，恒小于 \(4/3\)，剩下那点面积含在不超过 \(2\cdot4^{-m}\) 的细长矩形里，想多小有多小。若 \(S&lt;4/3\)，取 \(\varepsilon=4/3-S\)，就有某个 \(m\) 使 \(A_m&gt;S\)，与 \(A_m\) 在弓形内矛盾；若 \(S&gt;4/3\)，取 \(\varepsilon=S-4/3\)，内接面积已超过 \(4/3\)，与 \(A_m&lt;4/3\) 矛盾，故 \(S=4/3\)。</p>
+      </div>
+
+      <div class="example">
+        <p class="example-head">例 <span>2</span>　从内接正六边形出发，用递推算到正 192 边形，说明刘徽为什么可以断定 \(3.14&lt;\pi\)。</p>
+        <p class="solution">解　取 \(R=1\)，\(s_6=1\)，\(\pi_6=3\)；两次递推得 \(s_{12}\approx0.51764\)，\(\pi_{12}=3.1058\)，继续加倍依次得 3.1326、3.1394、3.14145。这些数都是内接周长除以直径算的，圆在多边形外侧，每一步都是下界，不必另外估误差：3.14145&lt;π，于是 3.14&lt;π。</p>
+      </div>
+
+      <div class="example">
+        <p class="example-head">例 <span>3</span>　用祖暅原理求半径为 \(R\) 的球体积。</p>
+        <p class="solution">解　先算上半球。取半径、高都是 \(R\) 的圆柱，挖去顶上为底、下底圆心为尖的圆锥：高 \(z\) 处半球截面积是 \(\pi(R^{2}-z^{2})\)，剩余体的也是 \(\pi R^{2}-\pi z^{2}\)，两者相等，体积相等，\(V=\pi R^{3}-\frac{1}{3}\pi R^{3}=\frac{2}{3}\pi R^{3}\)，整球 \(\frac{4}{3}\pi R^{3}\)。</p>
+      </div>
+
+      <h2 id="s-exercises" class="reveal">六、习题</h2>
+      <div class="exercises">
+        <div class="ex-group">
+          <p class="ex-group-head">A 档 <span>巩固定义与基本计算，每题 5 分钟内</span></p>
+          <p class="ex"><span class="ex-num">1.</span> 用 \(A_n=\frac{n}{2}R^{2}\sin\frac{2\pi}{n}\) 算 \(n=6,12,24\) 时 \(A_n\) 与 \(\pi R^{2}\) 的比值。</p>
+          <div class="answer"><details><summary>看答案</summary><p>取 \(R=1\)：\(A_6=2.5981\)（比值 \(0.8270\)），\(A_{12}=3\)（\(0.9549\)），\(A_{24}=3.1058\)（\(0.9886\)）。单调增加，每加倍误差约除以 4。</p></details></div>
+
+          <p class="ex"><span class="ex-num">2.</span> 求 \(1+\frac{1}{4}+\frac{1}{16}+\cdots\) 的前 \(m\) 项和；要使它与 \(4/3\) 的差小于 \(10^{-4}\)，\(m\) 至少多大。</p>
+          <div class="answer"><details><summary>看答案</summary><p>\(S_m=\frac{4}{3}\left(1-4^{-m}\right)\)，差为 \(\frac{4}{3}4^{-m}\)。需 \(4^{m}&gt;13333\)，由 \(4^{7}=16384\) 得 \(m\ge7\)。</p></details></div>
+
+          <p class="ex"><span class="ex-num">3.</span> 把 \([0,1]\) 四等分，对 \(y=x^{2}\) 算左端点矩形和 \(s_4\) 与右端点矩形和 \(S_4\)，说明面积夹在两者之间。</p>
+          <div class="answer"><details><summary>看答案</summary><p>\(s_4=0.21875\)，\(S_4=0.46875\)。每块矩形要么整个在曲线下，要么把曲线盖住，故 \(s_4&lt;\) 面积 \(&lt;S_4\)；而 \(S_4-s_4=\frac{1}{4}\) 随分点加密趋于 0。</p></details></div>
+
+          <p class="ex"><span class="ex-num">4.</span> 说明斜柱与等底等高的直柱体积相等，并由此得到底面积 \(A\)、高 \(h\) 的棱柱体积。</p>
+          <div class="answer"><details><summary>看答案</summary><p>平行于底面的截面全等，面积都是 \(A\)，由原理体积相等。直柱体积为 \(Ah\)，故两者都是 \(Ah\)。</p></details></div>
+
+        </div>
+
+        <div class="ex-group">
+          <p class="ex-group-head">B 档 <span>综合题，接近考试难度</span></p>
+          <p class="ex"><span class="ex-num">1.</span> 设 \(A\)、\(B\) 为抛物线 \(y=ax^{2}\) 上两点，弦 \(AB\) 切下弓形。说明弓形面积仍是内接三角形面积的 \(4/3\)，与 \(a\) 无关。</p>
+          <div class="answer"><details><summary>看答案</summary><p>纵坐标乘以 \(1/a\) 化 \(y=x^{2}\)，再作相似变换把两点横坐标归一。仿射变换保持面积之比，「逐层加密」的结构一一对应，故比值不变。难点是证明仿射变换保持面积比。</p></details></div>
+
+          <p class="ex"><span class="ex-num">2.</span> 用递推算 \(s_{12}\)、\(s_{24}\)，并证明 \(1-\frac{A_n}{\pi R^{2}}\approx\frac{2\pi^{2}}{3n^{2}}\)，说明误差每加倍缩为四分之一。</p>
+          <div class="answer"><details><summary>看答案</summary><p>\(s_{12}=0.51764\)，\(s_{24}=0.26105\)。由 \(\sin u=u-\frac{u^{3}}{6}+O(u^{5})\) 得 \(A_n=\pi R^{2}\left(1-\frac{2\pi^{2}}{3n^{2}}\right)+O(n^{-4})\)，把 \(n\) 换成 \(2n\) 误差项除以 4。\(n=192\) 时误差 \(1.8\times10^{-4}\)。</p></details></div>
+
+          <p class="ex"><span class="ex-num">3.</span> 用卡瓦列里原理求椭球 \(\frac{x^{2}}{a^{2}}+\frac{y^{2}}{b^{2}}+\frac{z^{2}}{c^{2}}\le1\) 的体积，并与二重积分对照。</p>
+          <div class="answer"><details><summary>看答案</summary><p>高度 \(z\) 处截面半轴为 \(a\sqrt{1-z^{2}/c^{2}}\) 与 \(b\sqrt{1-z^{2}/c^{2}}\)，面积 \(\pi ab\left(1-\frac{z^{2}}{c^{2}}\right)\)，积分得 \(\frac{4}{3}\pi abc\)。伸缩变换 \(x=au,\ y=bv,\ z=cw\) 的雅可比行列式是 \(abc\)，给出同一结果。</p></details></div>
+
+          <p class="ex"><span class="ex-num">4.</span> 设 \(0&lt;q&lt;1\)。证明部分和与 \(\frac{1}{1-q}\) 之差可小于任意 \(\varepsilon\)，并说明当时为什么只能说「不大于」。</p>
+          <div class="answer"><details><summary>看答案</summary><p>差为 \(\frac{q^{m}}{1-q}\)，取 \(m&gt;\frac{\ln(\varepsilon(1-q))}{\ln q}\) 即可（\(\ln q&lt;0\)，不等号翻向）。当时只有「任给量」与比例论，合法的说法只是「小于且能任意接近」。</p></details></div>
+        </div>
+
+        <div class="ex-group">
+          <p class="ex-group-head">C 档 <span>拓展与历史原题</span></p>
+          <p class="ex"><span class="ex-num">1.</span> 费马 1636 年的求积法。用 \(x_k=ar^{k}\)（\(0&lt;r&lt;1\)）分割 \([0,a]\)，对 \(f(x)=x^{2}\) 求 \(S(r)=\sum f(x_k)(x_{k-1}-x_k)\)，再令 \(r\to1\)。</p>
+          <div class="answer"><details><summary>看答案</summary><p>\(x_{k-1}-x_k=ar^{k-1}(1-r)\)，故 \(S(r)=\frac{a^{3}(1-r)r^{2}}{1-r^{3}}=\frac{a^{3}r^{2}}{1+r+r^{2}}\to\frac{a^{3}}{3}\)。一般 \(n\) 得 \(\frac{a^{n+1}}{n+1}\)；\(n=-1\) 时手法失效。</p></details></div>
+
+          <p class="ex"><span class="ex-num">2.</span> 阿基米德《圆的度量》命题 1：圆面积等于以周长为底、半径为高的三角形面积，即 \(S=\frac{1}{2}Cr\)。用双重反证证明。</p>
+          <div class="answer"><details><summary>看答案</summary><p>\(A_n=\frac{1}{2}P_nr\)，\(B_n=\frac{1}{2}Q_nr\)，且 \(P_n&lt;C&lt;Q_n\)，取 \(K=\frac{1}{2}Cr\)。若 \(S&gt;K\)，由内接族可任意接近圆得某 \(n\) 使 \(A_n&gt;K\)，而 \(A_n&lt;K\)，矛盾；若 \(S&lt;K\)，用外切族同理。难点在「可任意接近」这条引理本身也要用穷竭法。</p></details></div>
+
+          <p class="ex"><span class="ex-num">3.</span> 祖暅的原法：把「牟合方盖」切成八块，与「正方体挖去一个棱锥」的剩余体逐层比较，求球体积。写截面积对照，并用三重积分核对。</p>
+          <div class="answer"><details><summary>看答案</summary><p>八分之一牟合方盖在高 \(z\) 处截面是边长 \(\sqrt{r^{2}-z^{2}}\) 的正方形，面积 \(r^{2}-z^{2}\)；正方体挖棱锥的剩余截面也是 \(r^{2}-z^{2}\)。故这块体积 \(\frac{2}{3}r^{3}\)，八块是 \(\frac{16}{3}r^{3}\)，再按截面比 \(4:\pi\) 缩放得 \(\frac{4}{3}\pi r^{3}\)。三重积分 \(\int_{-r}^{r}\pi(r^{2}-z^{2})\,\mathrm{d}z\) 给出同一结果。</p></details></div>
+        </div>
+
+        <div class="ex-group">
+          <p class="ex-group-head">思考题 <span>不设标准答案，只给提示</span></p>
+          <p class="ex"><span class="ex-num">1.</span> 把「任给 \(\varepsilon\)」换成「存在某个 \(\varepsilon\)」，穷竭法还剩下什么？构造一个满足弱条件而结论错误的例子。</p>
+          <div class="answer"><details><summary>看提示</summary><p>提示：弱条件允许误差停在正数上。想想面积递增、却始终差着一条宽度不变带子的台阶状内接图形。</p></details></div>
+
+          <p class="ex"><span class="ex-num">2.</span> 为什么「线很多」不能直接当成「长度之和」？举一个面积为零但线段很多的例子。</p>
+          <div class="answer"><details><summary>看提示</summary><p>提示：一条线段面积为零，可数多条相加仍是零；要有面积须不可数多条并带厚度地累加。看 \([0,1]\) 上全体竖直线段。</p></details></div>
+
+          <p class="ex"><span class="ex-num">3.</span> 希腊人能算抛物线、球和螺线，却始终没有一般方法。缺的是符号，还是「函数」这个概念？只给阿基米德一套好符号，他能走多远？</p>
+          <div class="answer"><details><summary>看提示</summary><p>提示：符号解决「记得下」，概念解决「对哪一类对象一次说清」。比较费马：同一套等比分割，配上 \(y=x^{n}\) 才一次算完整类曲线。</p></details></div>
+        </div>
+      </div>
+
+      <h2 id="s-extra" class="reveal">七、本书地图</h2>
+
+      <p>序章停在这里：手上是一堆各自成立的手艺，缺一条统一的算法，后面 12 章讲的就是这条算法怎么被造出来、被用坏、再被修好。</p>
+
+      <p>第 1 章把芝诺的「永远到不了」改写成 \(\varepsilon\)-\(\delta\)，这是严格性的地基；第 2 章从费马的极值和牛顿的瞬时速度走到导数与微分，第 3 章用中值定理把局部信息还回整体；第 4、5 章是求导的反面，不定积分是技巧，定积分是黎曼和；第 6 章把积分用到长度、体积和做功上。</p>
+
+      <p>第 7 章由变化率还原过程；第 8 章起进入空间，多元微分和重积分把卡瓦列里的截片变成累次积分；第 11 章讲边界如何决定内部，第 12 章讲无穷多项相加什么时候还是一个数，奥雷斯姆和欧拉在那里重逢。</p>
+
+      <p>三条读法：第一次认真学，12 周每周一章，先读「源头」建立动机，再做 A 档；只补漏洞，4 周，只读极限与连续、中值定理、换元与分部；考前复习，2 周直读各章的「方法手册」和常见错法，回头做 C 档。</p>
+
+      <h2 class="reveal">延伸阅读</h2>
+      <ul class="refs">
+        <li>阿基米德《抛物线求积》《论球和圆柱》，见 T. L. Heath 编《阿基米德全集》，1897 年；《几何原本》第 12 卷。</li>
+        <li>刘徽《九章算术注》方田章「圆田术」注、开立圆术注，见郭书春汇校《九章算术》。</li>
+        <li>卡瓦列里《不可分连续量的几何学》，博洛尼亚，1635 年；奥雷斯姆《形式纬度论》，约 1350 年。</li>
+        <li>C. B. Boyer《微积分概念史》，1949 年，前三章。</li>
+      </ul>
+
+    </article>
+  </div>
+
+  <div class="wrap">
+    <nav class="pager" aria-label="翻页">
+      <a class="pager-link prev" href="index.html"><span class="pager-dir">上一章</span><span class="pager-title">全书目录：章节地图与学习路线</span></a>
+      <a class="pager-link next" href="ch01.html"><span class="pager-dir">下一章</span><span class="pager-title">函数与极限</span></a>
+    </nav>
+  </div>
+
+</main>
+
+<footer class="footer field-dark">
+  <div class="wrap">
+    <p class="footer-mark">微积分</p>
+    <div class="footer-cols">
+      <div><p>一部由问题写成的历史。以数学家最初面对的难题为索引，重讲同济《高等数学》第七版的全部章节范围。</p></div>
+      <div><p><a href="index.html#map">章节地图</a></p><p><a href="ch01.html">第一章　函数与极限</a></p></div>
+      <div><p>图示为本页脚本绘制，公式由 KaTeX 排版。</p></div>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/katex/katex.min.js"></script>
+<script src="../assets/katex/auto-render.min.js"></script>
+<script src="../assets/site.js"></script>
+</body>
+</html>

@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>第二章 1713：伯努利的《推测术》 · 概率论与数理统计</title>
+<meta name="description" content="频率与概率、事件的独立性、伯努利试验与二项概型、切比雪夫不等式，以及伯努利大数律的陈述与证明思路。">
+<link rel="stylesheet" href="../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="nav-brand" href="../index.html">数学基础课<span> 三门课，一套读法</span></a>
+    <nav class="nav-links" aria-label="主导航">
+      <a href="index.html#map">本课目录</a>
+      <a class="xl" href="../calculus/index.html">微积分</a>
+      <a class="xl" href="../linear-algebra/index.html">线性代数</a>
+      <a class="xl" href="../complex/index.html">复变函数</a>
+      <a class="opt" href="ch03.html">下一章</a>
+    </nav>
+  </div>
+  <div class="nav-progress" aria-hidden="true"></div>
+</header>
+
+<main>
+
+  <section class="chapter">
+    <div class="wrap">
+      <div class="ch-hero-band">
+        <div>
+          <p class="ch-label reveal"><span>第二章</span><span class="ch-era">1680 年代至 1867 年</span></p>
+          <h1 class="ch-title reveal reveal-2">1713：伯努利的《推测术》</h1>
+          <p class="ch-deck reveal reveal-3">一枚硬币抛十次，正面未必出现五次。抛到一万次，比值就贴着 0.5 不动了。这件事赌桌上的人天天在用，却隔了三十年才有人给出证明。这一章讲频率与概率的关系、事件的独立性和二项概型，最后用切比雪夫不等式证明伯努利的大数律。</p>
+          <div class="ch-meta reveal reveal-3">
+            <div><strong>本章知识点</strong>频率与概率、事件的独立性、伯努利试验与二项概型、切比雪夫不等式、伯努利大数律</div>
+            <div><strong>历史坐标</strong>伯努利 1713 年，棣莫弗 1738 年，切比雪夫 1867 年</div>
+            <div><strong>对应教材</strong>浙大《概率论与数理统计》第四版 第一章 §3、§6，第五章 §1</div>
+            <div><strong>前置</strong>古典概型、排列组合</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap ch-body">
+    <aside class="rail">
+      <p class="rail-title">本章提纲</p>
+      <ol>
+        <li><a href="#s-1">频率与概率</a></li>
+        <li><a href="#s-2">事件的独立性</a></li>
+        <li><a href="#s-3">伯努利试验与二项概型</a></li>
+        <li><a href="#s-4">切比雪夫不等式</a></li>
+        <li><a href="#s-5">伯努利大数律</a></li>
+        <li><a href="#s-manual">怎么算</a></li>
+        <li><a href="#s-examples">例题</a></li>
+        <li><a href="#s-exercises">习题</a></li>
+      </ol>
+      <p class="rail-title">历史坐标</p>
+      <p class="rail-who">雅各布·伯努利 1654 至 1705<br>《推测术》1713 年出版<br>棣莫弗 1738 年补上误差<br>切比雪夫 1867 年给出不等式</p>
+    </aside>
+
+    <article class="prose">
+
+      <p class="lead reveal">频率是数出来的，概率是算出来的，两个数常常不一样。可赌场按频率定赔率，保险公司按频率定保费，这些生意都做得下去。这一章说清这个放心从哪里来：先分清频率与概率的关系，再讲独立性和二项概型这两件常用工具，最后用切比雪夫不等式证明伯努利的大数律。伯努利从 1680 年代起写《推测术》，1705 年去世时没写完，书到 1713 年才出版，最后一章证的就是这件事。</p>
+
+      <h2 id="s-1" class="reveal">一、频率与概率</h2>
+
+      <p>把试验在相同条件下重复 \(n\) 次，记事件 \(A\) 发生的次数为 \(n_A\)，比值 \(f_n(A)=n_A/n\) 就叫 \(A\) 在这 \(n\) 次试验中出现的频率。它有三条性质：非负，不超过 1，互不相容的有限个事件的频率可以相加。这三条与概率的三条公理逐条对得上，所以频率看起来很像概率，赌桌、保单、户口册都在拿这个比值说话。</p>
+
+      <p>差别出在一个地方：频率跟着这 \(n\) 次试验的具体结果走，同一枚硬币抛 10 次可能给出 0.6，换 10 次可能给出 0.4，试验不做完你不知道它是多少；概率是事件本身带的数，硬币还没抛，它已经是 0.5 了。频率是随机的，概率是固定的，两者不在同一个层次上。</p>
+
+      <p>课本允许拿频率当概率的估计，凭的是一句话：试验次数很大时，频率会稳定在概率附近。这句话从 17 世纪的赌桌一直用到 20 世纪的保险业，人人都在信，可是没人证得出来，它只是一条经验。伯努利把这条经验做成了定理，他证出来的东西是：\(n\) 越大，频率与 \(p\) 的偏差超过某个给定界限的可能性越小。这句话里面没有「频率的极限等于 \(p\)」，18 世纪还没有极限这套语言，他只说偏差大到某个程度的概率可以小到「道德上的确定」。它的分量要等第五节用切比雪夫不等式重写一遍才看得清楚。</p>
+
+      <div class="archive reveal">
+        <p class="archive-when">1713 年，巴塞尔</p>
+        <h3>一部没写完就付印的《推测术》</h3>
+        <p class="archive-quote">「观察次数越多，频率偏离真实比例超过任意给定界限的可能性就越小。」</p>
+        <p class="archive-source">伯努利《推测术》第四部分第 5 章，1713 年（拉丁文，此处为译述）</p>
+        <p>伯努利 1680 年代动笔，1705 年去世，书由侄子尼古拉整理，1713 年在巴塞尔出版。他把最后一章这条定理叫「黄金定理」：在此之前，频率稳定只是从账本里看出来的经验，有了证明才第一次成为命题。</p>
+      </div>
+
+      <details class="fold">
+        <summary>什么时候不能拿频率当概率</summary>
+        <p>条件变了就不行。上午和下午的机器状态不同，两批数据就不是同一串伯努利试验，把频率混在一起算没有意义。次数太少也不行，抛 5 次出现 3 次正面，频率 0.6 与 0.5 的差距完全落在随机波动之内。</p>
+      </details>
+
+      <p>课本把这个用法写成概率的统计定义：试验次数很大时，取频率 \(f_n(A)\) 作为 \(P(A)\) 的近似值。它有短处，一是不说近似到什么程度，二是换一批试验数值就变；它的长处是不必事先知道样本空间长什么样，一枚不知道是否均匀的硬币，你只能靠数。</p>
+
+      <h2 id="s-2" class="reveal">二、事件的独立性</h2>
+
+      <p>两个事件一起发生的概率，一般不等于两个概率相乘。掷一枚骰子，\(A\) 是点数为偶数，\(B\) 是点数不超过 3，两个概率都是 \(1/2\)，而 \(AB\) 只含点数 2，概率是 \(1/6\)，比 \(1/4\) 小。也有刚好乘得起来的：\(A\) 是第一次掷出正面，\(B\) 是第二次掷出正面，掷两次硬币时 \(P(AB)=1/4\)，正好是两个 \(1/2\) 的积。后一种情形里，\(B\) 出不出，\(A\) 的机会都还是 \(1/2\)，\(B\) 没给 \(A\) 提供任何信息。</p>
+
+      <p>课本不去纠缠「影响」这种含糊的词，直接把乘法写成一个式子当定义。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定义（事件的独立性）</p>
+        <p>设 \(A\)、\(B\) 是两个事件，若满足 \(P(AB)=P(A)P(B)\)，则称事件 \(A\) 与事件 \(B\) 相互独立。</p>
+      </div>
+
+      <p>用乘法做定义有个好处：它不要求 \(P(B)\) 不为零，即使 \(B\) 是概率为零的事件，这个式子照样有意义。课本后面讲条件概率时会把两条路接通，那时你会发现，只要 \(P(B)&gt;0\)，独立就等价于 \(P(A\mid B)=P(A)\)，这也是判独立最常用的形式。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定理（独立性的判定）</p>
+        <p>设 \(P(B)&gt;0\)，则 \(P(AB)=P(A)P(B)\) 与 \(P(A\mid B)=P(A)\) 互为充要条件；同理，若 \(P(A)&gt;0\)，二者也等价于 \(P(B\mid A)=P(B)\)。</p>
+      </div>
+
+      <p>由定义能立刻得到几条推论：\(A\) 与 \(B\) 独立时，\(A\) 与 \(\bar B\) 独立，\(\bar A\) 与 \(B\) 独立，\(\bar A\) 与 \(\bar B\) 也独立，理由是 \(P(A\bar B)=P(A)-P(AB)=P(A)[1-P(B)]\)。算「至少有一个发生」时这条最省事，把对立事件乘起来再拿 1 去减就行了。</p>
+
+      <p>两个事件不够用，三个事件要叫相互独立，光有两两相乘成立还不行，三个一起乘也得成立，这样一共要验四个式子。一般地，说 \(n\) 个事件相互独立，指的是其中任意 \(k\) 个（\(k\) 从 2 到 \(n\)）的积的概率都等于各自概率的积。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定义（\(n\) 个事件相互独立）</p>
+        <p>设 \(A_1,A_2,\dots,A_n\) 是 \(n\) 个事件，若对任意 \(k\)（\(2\le k\le n\)）和任意 \(k\) 个事件 \(A_{i_1},\dots,A_{i_k}\)，都有 \(P(A_{i_1}\cdots A_{i_k})=P(A_{i_1})\cdots P(A_{i_k})\)，则称 \(A_1,\dots,A_n\) 相互独立。只有 \(k=2\) 的式子全部成立时，称它们两两独立。</p>
+      </div>
+
+      <p>两两独立推不出相互独立，缺的那几条式子不自动成立。这一点在考试里出现得很多，判断三个事件是否相互独立，四个式子都要算一遍。</p>
+
+      <details class="fold">
+        <summary>相互独立到底要验几个式子</summary>
+        <p>从 \(n\) 个事件里挑 \(k\) 个，有 \(C_n^k\) 种挑法，把 \(k\) 从 2 加到 \(n\) 一共 \(2^n-n-1\) 个式子，\(n=3\) 时是 4 个。两两独立只验其中 3 个，少掉的就是三个一起乘的那一个，而它并不由前三个推出来，习题 C 3 有一个具体例子。</p>
+      </details>
+
+      <h2 id="s-3" class="reveal">三、伯努利试验与二项概型</h2>
+
+      <p>把独立和重复这两件事并在一起，就得到概率论里用得最多的一种模型。若一次试验只有两个可能结果 \(A\) 与 \(\bar A\)，\(A\) 发生的概率 \(p\) 在每次试验中都一样，各次试验的结果又相互独立，则称这一串试验为 \(n\) 重伯努利试验，\(A\) 发生叫成功。掷硬币、抽检产品、射击命中，凡是能归成「成与不成」并且可以重复做的，都往这个筐里放。</p>
+
+      <p>\(n\) 重伯努利试验里，成功次数取各个值的概率可以直接写出来。指定的 \(k\) 次成功、其余 \(n-k\) 次失败，由独立性知这一串结果的概率是 \(p^k(1-p)^{n-k}\)；\(n\) 个位置里挑哪 \(k\) 个成功，有 \(C_n^k\) 种挑法；这些结果互不相容，加起来就是公式。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定理（二项概率公式）</p>
+        <p>在 \(n\) 重伯努利试验中，成功恰发生 \(k\) 次的概率为 \(P_n(k)=C_n^k p^k q^{n-k}\)，其中 \(q=1-p\)，\(k=0,1,\dots,n\)。若随机变量 \(X\) 取这些值的概率如上式，称 \(X\) 服从参数为 \(n,p\) 的二项分布，记作 \(X\sim B(n,p)\)。</p>
+      </div>
+
+      <p>公式里两个因子分工明确：\(p^kq^{n-k}\) 管一条具体路径的概率，\(C_n^k\) 管这样的路径有几条。做题时先把「恰 \(k\) 次」翻成「在 \(n\) 个位置里挑 \(k\) 个」，公式就不容易记错。</p>
+
+      <div class="figure">
+        <!--FIG pb02_binom--><svg viewBox="0 0 720 420" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<text x="20.00" y="30.00" text-anchor="start" font-size="15" fill="var(--ink)">n 重伯努利试验里成功次数 k 的分布，p = 0.4</text>
+<text x="20.00" y="51.00" text-anchor="start" font-size="13.5" fill="var(--ink-3)">三块图的纵轴各自按峰值归一，横轴都是 k/n；峰越高处越窄，说明偏差在收窄</text>
+<text x="147.00" y="96.00" text-anchor="middle" font-size="14" fill="var(--ink)">n = 10</text>
+<rect x="53.04" y="295.56" width="15.20" height="4.44" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.6"/>
+<rect x="70.31" y="270.43" width="15.20" height="29.57" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.6"/>
+<rect x="87.58" y="211.29" width="15.20" height="88.71" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.6"/>
+<rect x="104.85" y="142.29" width="15.20" height="157.71" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.6"/>
+<rect x="122.13" y="116.00" width="15.20" height="184.00" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.6"/>
+<rect x="139.40" y="152.80" width="15.20" height="147.20" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.6"/>
+<rect x="156.67" y="218.22" width="15.20" height="81.78" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.6"/>
+<rect x="173.95" y="268.85" width="15.20" height="31.15" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.6"/>
+<rect x="191.22" y="292.21" width="15.20" height="7.79" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.6"/>
+<line x1="52.00" y1="300.00" x2="242.00" y2="300.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<line x1="128.00" y1="300.00" x2="128.00" y2="108.00" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 6" opacity="0.85"/>
+<text x="128.00" y="100.00" text-anchor="middle" font-size="13" fill="var(--ink-2)">p</text>
+<line x1="52.00" y1="300.00" x2="52.00" y2="305.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<text x="52.00" y="320.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">0</text>
+<line x1="128.00" y1="300.00" x2="128.00" y2="305.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<text x="128.00" y="320.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">0.4</text>
+<line x1="242.00" y1="300.00" x2="242.00" y2="305.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<text x="242.00" y="320.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">1</text>
+<text x="147.00" y="340.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">k/n</text>
+<text x="147.00" y="366.00" text-anchor="middle" font-size="13" fill="var(--ink-2)">峰值 P = 0.251</text>
+<text x="367.00" y="96.00" text-anchor="middle" font-size="14" fill="var(--ink)">n = 20</text>
+<rect x="290.64" y="296.84" width="7.96" height="3.16" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.6"/>
+<rect x="299.69" y="287.36" width="7.96" height="12.64" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.6"/>
+<rect x="308.73" y="264.17" width="7.96" height="35.83" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.6"/>
+<rect x="317.78" y="223.57" width="7.96" height="76.43" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.6"/>
+<rect x="326.83" y="172.62" width="7.96" height="127.38" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.6"/>
+<rect x="335.88" y="130.15" width="7.96" height="169.85" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.6"/>
+<rect x="344.92" y="116.00" width="7.96" height="184.00" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.6"/>
+<rect x="353.97" y="136.44" width="7.96" height="163.56" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.6"/>
+<rect x="363.02" y="180.06" width="7.96" height="119.94" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.6"/>
+<rect x="372.07" y="227.31" width="7.96" height="72.69" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.6"/>
+<rect x="381.11" y="263.65" width="7.96" height="36.35" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.6"/>
+<rect x="390.16" y="285.09" width="7.96" height="14.91" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.6"/>
+<rect x="399.21" y="295.03" width="7.96" height="4.97" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.6"/>
+<line x1="272.00" y1="300.00" x2="462.00" y2="300.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<line x1="348.00" y1="300.00" x2="348.00" y2="108.00" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 6" opacity="0.85"/>
+<text x="348.00" y="100.00" text-anchor="middle" font-size="13" fill="var(--ink-2)">p</text>
+<line x1="272.00" y1="300.00" x2="272.00" y2="305.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<text x="272.00" y="320.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">0</text>
+<line x1="348.00" y1="300.00" x2="348.00" y2="305.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<text x="348.00" y="320.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">0.4</text>
+<line x1="462.00" y1="300.00" x2="462.00" y2="305.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<text x="462.00" y="320.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">1</text>
+<text x="367.00" y="340.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">k/n</text>
+<text x="367.00" y="366.00" text-anchor="middle" font-size="13" fill="var(--ink-2)">峰值 P = 0.180</text>
+<text x="587.00" y="96.00" text-anchor="middle" font-size="14" fill="var(--ink)">n = 60</text>
+<rect x="535.79" y="294.90" width="2.74" height="5.10" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.0"/>
+<rect x="538.91" y="289.56" width="2.74" height="10.44" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.0"/>
+<rect x="542.02" y="280.43" width="2.74" height="19.57" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.0"/>
+<rect x="545.14" y="266.23" width="2.74" height="33.77" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.0"/>
+<rect x="548.25" y="246.22" width="2.74" height="53.78" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.0"/>
+<rect x="551.37" y="220.75" width="2.74" height="79.25" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.0"/>
+<rect x="554.48" y="191.69" width="2.74" height="108.31" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.0"/>
+<rect x="557.60" y="162.47" width="2.74" height="137.53" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.0"/>
+<rect x="560.71" y="137.46" width="2.74" height="162.54" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.0"/>
+<rect x="563.83" y="120.97" width="2.74" height="179.03" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.0"/>
+<rect x="566.94" y="116.00" width="2.74" height="184.00" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.0"/>
+<rect x="570.06" y="123.36" width="2.74" height="176.64" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.0"/>
+<rect x="573.17" y="141.48" width="2.74" height="158.52" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.0"/>
+<rect x="576.29" y="166.92" width="2.74" height="133.08" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.0"/>
+<rect x="579.40" y="195.44" width="2.74" height="104.56" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.0"/>
+<rect x="582.51" y="223.08" width="2.74" height="76.92" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.0"/>
+<rect x="585.63" y="247.01" width="2.74" height="52.99" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.0"/>
+<rect x="588.74" y="265.81" width="2.74" height="34.19" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.0"/>
+<rect x="591.86" y="279.35" width="2.74" height="20.65" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.0"/>
+<rect x="594.97" y="288.32" width="2.74" height="11.68" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.0"/>
+<rect x="598.09" y="293.81" width="2.74" height="6.19" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.0"/>
+<line x1="492.00" y1="300.00" x2="682.00" y2="300.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<line x1="568.00" y1="300.00" x2="568.00" y2="108.00" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 6" opacity="0.85"/>
+<text x="568.00" y="100.00" text-anchor="middle" font-size="13" fill="var(--ink-2)">p</text>
+<line x1="492.00" y1="300.00" x2="492.00" y2="305.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<text x="492.00" y="320.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">0</text>
+<line x1="568.00" y1="300.00" x2="568.00" y2="305.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<text x="568.00" y="320.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">0.4</text>
+<line x1="682.00" y1="300.00" x2="682.00" y2="305.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<text x="682.00" y="320.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">1</text>
+<text x="587.00" y="340.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">k/n</text>
+<text x="587.00" y="366.00" text-anchor="middle" font-size="13" fill="var(--ink-2)">峰值 P = 0.105</text>
+</svg>
+<!--/FIG pb02_binom-->
+        <figcaption class="figcaption"><b>同一个 \(p=0.4\)，\(n\) 从 10 涨到 60。</b>横轴按 \(k/n\) 刻度，纵轴各自按峰值归一。柱子从散在 0 到 1 之间收成一束，峰值概率同时从 0.251 掉到 0.103，因为总量 1 要摊到更多的可能值上。</figcaption>
+      </div>
+
+      <p>这张图是大数律的图形版。\(n\) 变大，柱子的分布往 \(p\) 附近挤，宽度大约按 \(\sqrt n\) 缩短，而每根柱子变矮变窄，说明单个取值的概率在下降，靠得近的一群取值合起来才占掉几乎全部的概率。</p>
+
+      <h2 id="s-4" class="reveal">四、切比雪夫不等式</h2>
+
+      <p>要证明频率稳定，得有一个能把「偏离中心很远」的概率压下去的工具。1867 年切比雪夫给出了最省的一个：只要知道期望和方差，就能给任意随机变量偏离期望太远的概率封一个顶，分布长什么样都不问。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定理（切比雪夫不等式）</p>
+        <p>设随机变量 \(X\) 的期望 \(E(X)=\mu\) 与方差 \(D(X)\) 都存在，则对任意 \(\varepsilon&gt;0\)，有 \(P\{|X-\mu|\ge\varepsilon\}\le\dfrac{D(X)}{\varepsilon^2}\)。</p>
+      </div>
+
+      <p>证明只要一行拆分。以离散型为例，把方差按偏差的大小分成两段求和，落在 \(|x_k-\mu|\ge\varepsilon\) 这一段的每一项都不小于 \(\varepsilon^2p_k\)，于是</p>
+
+      \[ D(X)=\sum_k (x_k-\mu)^2p_k\ \ge\sum_{|x_k-\mu|\ge\varepsilon}(x_k-\mu)^2p_k\ \ge\ \varepsilon^2\!\!\sum_{|x_k-\mu|\ge\varepsilon}\!\!p_k=\varepsilon^2P\{|X-\mu|\ge\varepsilon\}, \]
+
+      <p>右边那个和就是要估的概率，两边同除 \(\varepsilon^2\) 即得。连续型把求和换成积分，一个符号都不用改。</p>
+
+      <div class="figure">
+        <!--FIG pb02_cheb--><svg viewBox="0 0 720 400" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<polygon points="58.00,342.00 58.00,341.88 59.84,341.87 61.68,341.85 63.52,341.84 65.36,341.82 67.20,341.81 69.03,341.79 70.87,341.77 72.71,341.75 74.55,341.72 76.39,341.70 78.23,341.67 80.07,341.64 81.91,341.61 83.75,341.58 85.59,341.54 87.43,341.50 89.26,341.45 91.10,341.41 92.94,341.36 94.78,341.30 96.62,341.24 98.46,341.18 100.30,341.11 102.14,341.04 103.98,340.96 105.82,340.87 107.66,340.78 109.49,340.68 111.33,340.58 113.17,340.47 115.01,340.35 116.85,340.22 118.69,340.08 120.53,339.94 122.37,339.78 124.21,339.61 126.05,339.43 127.89,339.24 129.73,339.04 131.56,338.82 133.40,338.60 135.24,338.35 137.08,338.09 138.92,337.82 140.76,337.52 142.60,337.21 144.44,336.89 146.28,336.54 148.12,336.17 149.96,335.78 151.79,335.37 153.63,334.93 155.47,334.47 157.31,333.99 159.15,333.48 160.99,332.94 162.83,332.37 164.67,331.77 166.51,331.14 168.35,330.48 170.19,329.79 172.02,329.06 173.86,328.30 175.70,327.50 177.54,326.66 179.38,325.78 181.22,324.86 183.06,323.90 184.90,322.90 186.74,321.85 188.58,320.75 190.42,319.61 192.25,318.42 194.09,317.19 195.93,315.90 197.77,314.56 199.61,313.17 201.45,311.72 203.29,310.22 205.13,308.67" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="514.87,308.67 516.71,310.22 518.55,311.72 520.39,313.17 522.23,314.56 524.07,315.90 525.91,317.19 527.75,318.42 529.58,319.61 531.42,320.75 533.26,321.85 535.10,322.90 536.94,323.90 538.78,324.86 540.62,325.78 542.46,326.66 544.30,327.50 546.14,328.30 547.98,329.06 549.81,329.79 551.65,330.48 553.49,331.14 555.33,331.77 557.17,332.37 559.01,332.94 560.85,333.48 562.69,333.99 564.53,334.47 566.37,334.93 568.21,335.37 570.04,335.78 571.88,336.17 573.72,336.54 575.56,336.89 577.40,337.21 579.24,337.52 581.08,337.82 582.92,338.09 584.76,338.35 586.60,338.60 588.44,338.82 590.27,339.04 592.11,339.24 593.95,339.43 595.79,339.61 597.63,339.78 599.47,339.94 601.31,340.08 603.15,340.22 604.99,340.35 606.83,340.47 608.67,340.58 610.51,340.68 612.34,340.78 614.18,340.87 616.02,340.96 617.86,341.04 619.70,341.11 621.54,341.18 623.38,341.24 625.22,341.30 627.06,341.36 628.90,341.41 630.74,341.45 632.57,341.50 634.41,341.54 636.25,341.58 638.09,341.61 639.93,341.64 641.77,341.67 643.61,341.70 645.45,341.72 647.29,341.75 649.13,341.77 650.97,341.79 652.80,341.81 654.64,341.82 656.48,341.84 658.32,341.85 660.16,341.87 662.00,341.88 662.00,342.00" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="58.00" y1="342.00" x2="662.00" y2="342.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<path d="M 58.00 341.88 L 59.89 341.87 L 61.78 341.85 L 63.66 341.84 L 65.55 341.82 L 67.44 341.80 L 69.32 341.79 L 71.21 341.76 L 73.10 341.74 L 74.99 341.72 L 76.88 341.69 L 78.76 341.66 L 80.65 341.63 L 82.54 341.60 L 84.43 341.56 L 86.31 341.52 L 88.20 341.48 L 90.09 341.43 L 91.98 341.38 L 93.86 341.33 L 95.75 341.27 L 97.64 341.21 L 99.52 341.14 L 101.41 341.07 L 103.30 340.99 L 105.19 340.90 L 107.08 340.81 L 108.96 340.71 L 110.85 340.61 L 112.74 340.50 L 114.62 340.37 L 116.51 340.24 L 118.40 340.10 L 120.29 339.96 L 122.17 339.80 L 124.06 339.63 L 125.95 339.44 L 127.84 339.25 L 129.73 339.04 L 131.61 338.82 L 133.50 338.58 L 135.39 338.33 L 137.28 338.06 L 139.16 337.78 L 141.05 337.48 L 142.94 337.16 L 144.83 336.81 L 146.71 336.45 L 148.60 336.07 L 150.49 335.66 L 152.38 335.23 L 154.26 334.78 L 156.15 334.30 L 158.04 333.79 L 159.92 333.25 L 161.81 332.69 L 163.70 332.09 L 165.59 331.46 L 167.47 330.80 L 169.36 330.10 L 171.25 329.37 L 173.14 328.60 L 175.03 327.80 L 176.91 326.95 L 178.80 326.06 L 180.69 325.13 L 182.58 324.16 L 184.46 323.14 L 186.35 322.07 L 188.24 320.96 L 190.13 319.80 L 192.01 318.58 L 193.90 317.32 L 195.79 316.00 L 197.67 314.63 L 199.56 313.20 L 201.45 311.72 L 203.34 310.18 L 205.22 308.58 L 207.11 306.93 L 209.00 305.21 L 210.89 303.43 L 212.78 301.59 L 214.66 299.68 L 216.55 297.71 L 218.44 295.68 L 220.32 293.59 L 222.21 291.42 L 224.10 289.20 L 225.99 286.91 L 227.88 284.55 L 229.76 282.13 L 231.65 279.64 L 233.54 277.09 L 235.42 274.47 L 237.31 271.79 L 239.20 269.05 L 241.09 266.25 L 242.98 263.38 L 244.86 260.45 L 246.75 257.47 L 248.64 254.43 L 250.53 251.33 L 252.41 248.18 L 254.30 244.98 L 256.19 241.72 L 258.07 238.42 L 259.96 235.08 L 261.85 231.69 L 263.74 228.26 L 265.62 224.80 L 267.51 221.30 L 269.40 217.77 L 271.29 214.22 L 273.17 210.64 L 275.06 207.04 L 276.95 203.42 L 278.84 199.79 L 280.72 196.16 L 282.61 192.52 L 284.50 188.88 L 286.39 185.24 L 288.27 181.61 L 290.16 178.00 L 292.05 174.40 L 293.94 170.83 L 295.82 167.29 L 297.71 163.77 L 299.60 160.30 L 301.49 156.87 L 303.38 153.48 L 305.26 150.15 L 307.15 146.87 L 309.04 143.66 L 310.93 140.51 L 312.81 137.43 L 314.70 134.43 L 316.59 131.52 L 318.47 128.68 L 320.36 125.94 L 322.25 123.29 L 324.14 120.74 L 326.02 118.30 L 327.91 115.96 L 329.80 113.73 L 331.69 111.62 L 333.57 109.63 L 335.46 107.76 L 337.35 106.01 L 339.24 104.39 L 341.12 102.91 L 343.01 101.55 L 344.90 100.34 L 346.79 99.26 L 348.68 98.32 L 350.56 97.52 L 352.45 96.86 L 354.34 96.35 L 356.22 95.99 L 358.11 95.77 L 360.00 95.70 L 361.89 95.77 L 363.77 95.99 L 365.66 96.35 L 367.55 96.86 L 369.44 97.52 L 371.32 98.32 L 373.21 99.26 L 375.10 100.34 L 376.99 101.55 L 378.88 102.91 L 380.76 104.39 L 382.65 106.01 L 384.54 107.76 L 386.42 109.63 L 388.31 111.62 L 390.20 113.73 L 392.09 115.96 L 393.97 118.30 L 395.86 120.74 L 397.75 123.29 L 399.64 125.94 L 401.52 128.68 L 403.41 131.52 L 405.30 134.43 L 407.19 137.43 L 409.07 140.51 L 410.96 143.66 L 412.85 146.87 L 414.74 150.15 L 416.62 153.48 L 418.51 156.87 L 420.40 160.30 L 422.29 163.77 L 424.17 167.29 L 426.06 170.83 L 427.95 174.40 L 429.84 178.00 L 431.73 181.61 L 433.61 185.24 L 435.50 188.88 L 437.39 192.52 L 439.27 196.16 L 441.16 199.79 L 443.05 203.42 L 444.94 207.04 L 446.83 210.64 L 448.71 214.22 L 450.60 217.77 L 452.49 221.30 L 454.38 224.80 L 456.26 228.26 L 458.15 231.69 L 460.04 235.08 L 461.93 238.42 L 463.81 241.72 L 465.70 244.98 L 467.59 248.18 L 469.48 251.33 L 471.36 254.43 L 473.25 257.47 L 475.14 260.45 L 477.02 263.38 L 478.91 266.25 L 480.80 269.05 L 482.69 271.79 L 484.58 274.47 L 486.46 277.09 L 488.35 279.64 L 490.24 282.13 L 492.12 284.55 L 494.01 286.91 L 495.90 289.20 L 497.79 291.42 L 499.68 293.59 L 501.56 295.68 L 503.45 297.71 L 505.34 299.68 L 507.22 301.59 L 509.11 303.43 L 511.00 305.21 L 512.89 306.93 L 514.77 308.58 L 516.66 310.18 L 518.55 311.72 L 520.44 313.20 L 522.33 314.63 L 524.21 316.00 L 526.10 317.32 L 527.99 318.58 L 529.88 319.80 L 531.76 320.96 L 533.65 322.07 L 535.54 323.14 L 537.43 324.16 L 539.31 325.13 L 541.20 326.06 L 543.09 326.95 L 544.97 327.80 L 546.86 328.60 L 548.75 329.37 L 550.64 330.10 L 552.52 330.80 L 554.41 331.46 L 556.30 332.09 L 558.19 332.69 L 560.07 333.25 L 561.96 333.79 L 563.85 334.30 L 565.74 334.78 L 567.62 335.23 L 569.51 335.66 L 571.40 336.07 L 573.29 336.45 L 575.17 336.81 L 577.06 337.16 L 578.95 337.48 L 580.84 337.78 L 582.73 338.06 L 584.61 338.33 L 586.50 338.58 L 588.39 338.82 L 590.27 339.04 L 592.16 339.25 L 594.05 339.44 L 595.94 339.63 L 597.82 339.80 L 599.71 339.96 L 601.60 340.10 L 603.49 340.24 L 605.38 340.37 L 607.26 340.50 L 609.15 340.61 L 611.04 340.71 L 612.92 340.81 L 614.81 340.90 L 616.70 340.99 L 618.59 341.07 L 620.48 341.14 L 622.36 341.21 L 624.25 341.27 L 626.14 341.33 L 628.02 341.38 L 629.91 341.43 L 631.80 341.48 L 633.69 341.52 L 635.57 341.56 L 637.46 341.60 L 639.35 341.63 L 641.24 341.66 L 643.13 341.69 L 645.01 341.72 L 646.90 341.74 L 648.79 341.76 L 650.67 341.79 L 652.56 341.80 L 654.45 341.82 L 656.34 341.84 L 658.23 341.85 L 660.11 341.87 L 662.00 341.88" fill="none" stroke="var(--accent-line)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="360.00" y1="342.00" x2="360.00" y2="95.70" stroke="var(--ink-3)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4 5" opacity="0.8"/>
+<line x1="205.13" y1="342.00" x2="205.13" y2="308.67" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 6"/>
+<line x1="514.87" y1="342.00" x2="514.87" y2="308.67" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 6"/>
+<text x="199.13" y="362.00" text-anchor="end" font-size="13.5" fill="var(--ink-2)">μ − ε</text>
+<text x="520.87" y="362.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">μ + ε</text>
+<text x="360.00" y="334.00" text-anchor="middle" font-size="13.5" fill="var(--ink-3)">μ</text>
+<line x1="205.13" y1="386.00" x2="514.87" y2="386.00" stroke="var(--ink-3)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="205.13" y1="381.00" x2="205.13" y2="391.00" stroke="var(--ink-3)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="514.87" y1="381.00" x2="514.87" y2="391.00" stroke="var(--ink-3)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="360.00" y="378.00" text-anchor="middle" font-size="13" fill="var(--ink-3)">宽 2ε</text>
+<line x1="123.82" y1="339.65" x2="67.29" y2="233.96" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="67.29" y="233.96" text-anchor="start" font-size="13.5" fill="var(--ink-2)">外侧两块之和 ≤ σ²/ε²</text>
+<line x1="408.01" y1="138.76" x2="462.22" y2="85.78" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="462.22" y="85.78" text-anchor="start" font-size="13.5" fill="var(--ink-2)">中间一段 ≥ 1 − σ²/ε²</text>
+<text x="14.00" y="28.00" text-anchor="start" font-size="15" fill="var(--ink)">偏差超过 ε 的概率，只用 σ² 就能封顶</text>
+<text x="14.00" y="49.00" text-anchor="start" font-size="13.5" fill="var(--ink-3)">ε = 2σ 时外侧 ≤ 0.25，ε = 3σ 时 ≤ 0.111；分布长什么样都不影响这条界</text>
+</svg>
+<!--/FIG pb02_cheb-->
+        <figcaption class="figcaption"><b>以 \(\mu\) 为中心，两边的尾部合起来不超过 \(\sigma^2/\varepsilon^2\)。</b>画的是一条对称分布，可这条界对任何有方差的分布都成立。\(\varepsilon\) 取 \(2\sigma\) 时界是 0.25，取 \(3\sigma\) 时是 0.111，区间越宽界越紧。</figcaption>
+      </div>
+
+      <p>它的用处有两头。理论上，它把「方差小」翻译成「大概率落在期望附近」，大数律的证明全靠这一句；实用上，它可以反过来定样本量：要求偏差不超过 \(\varepsilon\) 的概率至少 \(1-\delta\)，取 \(n\ge D(X)/(\varepsilon^2\delta)\) 就够了。</p>
+
+      <details class="fold">
+        <summary>这个界为什么这么松</summary>
+        <p>正态分布取 \(\varepsilon=2\sigma\) 时真概率约 0.045，切比雪夫给 0.25，差五倍多；取 \(3\sigma\) 时真概率 0.0027，界是 0.111。松的原因是它只知道方差一个数，却要对所有分布同时有效，碰到尾部特别厚的分布，这个界反而贴得住。</p>
+      </details>
+
+      <h2 id="s-5" class="reveal">五、伯努利大数律</h2>
+
+      <p>二项分布加上切比雪夫不等式，两样东西一拼，伯努利的定理就出来了。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定理（伯努利大数律）</p>
+        <p>设 \(n_A\) 是 \(n\) 重伯努利试验中事件 \(A\) 发生的次数，\(p\) 是 \(A\) 在每次试验中发生的概率，则对任意 \(\varepsilon&gt;0\)，有 \(\lim_{n\to\infty}P\left\{\left|\dfrac{n_A}{n}-p\right|\ge\varepsilon\right\}=0\)，也就是 \(P\left\{\left|\dfrac{n_A}{n}-p\right|&lt;\varepsilon\right\}\to1\)。</p>
+      </div>
+
+      <div class="proof">
+        <p>设 \(X\) 是单次试验中 \(A\) 发生的次数，则 \(n_A=\sum_{i=1}^n X_i\)，\(E(n_A)=np\)，\(D(n_A)=npq\)，于是频率的期望是 \(p\)，方差是 \(pq/n\)。因为 \(p(1-p)\le 1/4\)，方差不超过 \(1/(4n)\)。把切比雪夫不等式用在频率上，得 \(P\{|n_A/n-p|\ge\varepsilon\}\le\dfrac{1}{4n\varepsilon^2}\)，右边随 \(n\) 趋于零。</p>
+      </div>
+
+      <p>证明里最要紧的一步是 \(p(1-p)\le 1/4\)。有这个不等式，方差里就不含未知的 \(p\)，界只剩 \(1/(4n\varepsilon^2)\) 一个数，所以不管这枚硬币是否均匀、\(p\) 是多少，结论都成立。</p>
+
+      <p>这条定理说的是频率依概率收敛到 \(p\)：偏差超过 \(\varepsilon\) 的可能性随 \(n\) 一起消失。它没说每一次实验都会靠近 \(p\)，\(n\) 再大，也总有小概率出现一段连着的正面；它也没说 \(n\) 要取多大才够。前面提过切比雪夫给的是最保守的界，取 \(n=10000\)、\(\varepsilon=0.01\) 时它只保证 0.75，而实际概率已经接近 1，这个缺口要等正态逼近来填。</p>
+
+      <p>现在可以回答开头那个问题了。频率不等于概率，凭什么拿它估概率？答案在大数律这一头，不在定义那一头：定义只把频率和概率各自说清楚，大数律才说明两者在 \(n\) 大时挨得有多近，而且近到什么程度可以算出来。伯努利证出的就是这个「近」，他证的不是频率的极限等于 \(p\)，证的是偏差超过给定界限的概率趋于零。这两句话在 18 世纪分不清，今天分得很清楚，后一句叫依概率收敛。</p>
+
+      <details class="fold">
+        <summary>伯努利原来的证明长什么样</summary>
+        <p>他把 \(n\) 次试验里成功次数偏离 \(np\) 的程度分成若干段，对每一段用二项系数的单调性估上界，再逐段相加，最后说明只要 \(n\) 够大，总偏差的概率就能压到任意小。整段推理没有一个极限符号，用的是「道德上的确定性」这个说法。</p>
+      </details>
+
+      <div class="archive reveal">
+        <p class="archive-when">1738 年，伦敦</p>
+        <h3>棣莫弗补上伯努利缺的那一半</h3>
+        <p class="archive-quote">「伯努利先生证明了这种逼近一定会发生，却没有给出计算它的方法；第二版里我把这一项补上了。」</p>
+        <p class="archive-source">棣莫弗《机遇论》第二版序言，1738 年（据原文译述）</p>
+        <p>他补的是误差有多大。伯努利的界只说 \(n\) 大就小，小到多少、要多少 \(n\) 才够，得靠二项分布的正态逼近来算，那是第三章的内容。</p>
+      </div>
+
+      <div class="figure">
+        <!--FIG pb02_freq--><svg viewBox="0 0 720 420" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<defs><clipPath id="pb02freq"><rect x="58.00" y="58.00" width="604.00" height="304.00"/></clipPath></defs>
+<line x1="58.00" y1="362.00" x2="58.00" y2="58.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<line x1="58.00" y1="362.00" x2="662.00" y2="362.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<line x1="53.00" y1="286.00" x2="58.00" y2="286.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<text x="48.00" y="291.00" text-anchor="end" font-size="13" fill="var(--ink-3)">0.40</text>
+<line x1="53.00" y1="210.00" x2="58.00" y2="210.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<text x="48.00" y="215.00" text-anchor="end" font-size="13" fill="var(--ink-3)">0.50</text>
+<line x1="53.00" y1="134.00" x2="58.00" y2="134.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<text x="48.00" y="139.00" text-anchor="end" font-size="13" fill="var(--ink-3)">0.60</text>
+<line x1="58.00" y1="362.00" x2="58.00" y2="367.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<text x="58.00" y="384.00" text-anchor="middle" font-size="13" fill="var(--ink-3)">0</text>
+<line x1="209.00" y1="362.00" x2="209.00" y2="367.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<text x="209.00" y="384.00" text-anchor="middle" font-size="13" fill="var(--ink-3)">150</text>
+<line x1="360.00" y1="362.00" x2="360.00" y2="367.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<text x="360.00" y="384.00" text-anchor="middle" font-size="13" fill="var(--ink-3)">300</text>
+<line x1="511.00" y1="362.00" x2="511.00" y2="367.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<text x="511.00" y="384.00" text-anchor="middle" font-size="13" fill="var(--ink-3)">450</text>
+<line x1="662.00" y1="362.00" x2="662.00" y2="367.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<text x="662.00" y="384.00" text-anchor="middle" font-size="13" fill="var(--ink-3)">600</text>
+<line x1="58.00" y1="210.00" x2="662.00" y2="210.00" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 6" opacity="0.85"/>
+<text x="658.00" y="201.00" text-anchor="end" font-size="13" fill="var(--ink-2)">p = 0.5</text>
+<g clip-path="url(#pb02freq)">
+<path d="M 59.01 590.00 L 60.01 210.00 L 61.02 83.33 L 62.03 20.00 L 63.03 134.00 L 64.04 210.00 L 65.05 155.71 L 66.05 115.00 L 67.06 167.78 L 68.07 210.00 L 69.07 175.45 L 70.08 210.00 L 71.09 180.77 L 72.09 210.00 L 73.10 184.67 L 74.11 162.50 L 75.11 187.65 L 76.12 167.78 L 77.13 150.00 L 78.13 134.00 L 79.14 155.71 L 80.15 175.45 L 81.15 160.43 L 82.16 178.33 L 83.17 164.40 L 84.17 151.54 L 85.18 167.78 L 86.19 182.86 L 87.19 170.69 L 88.20 159.33 L 89.21 148.71 L 90.21 162.50 L 91.22 152.42 L 92.23 142.94 L 93.23 155.71 L 94.24 167.78 L 95.25 179.19 L 96.25 170.00 L 97.26 161.28 L 98.27 172.00 L 99.27 163.66 L 100.28 173.81 L 101.29 183.49 L 102.29 192.73 L 103.30 201.56 L 104.31 193.48 L 105.31 185.74 L 106.32 178.33 L 107.33 186.73 L 108.33 179.60 L 109.34 187.65 L 110.35 195.38 L 111.35 202.83 L 112.36 210.00 L 113.37 203.09 L 114.37 196.43 L 115.38 190.00 L 116.39 196.90 L 117.39 203.56 L 118.40 210.00 L 119.41 203.77 L 120.41 197.74 L 121.42 191.90 L 122.43 186.25 L 123.43 180.77 L 124.44 175.45 L 125.45 181.64 L 126.45 176.47 L 127.46 182.46 L 128.47 177.43 L 129.47 183.24 L 130.48 178.33 L 131.49 173.56 L 132.49 168.92 L 133.50 164.40 L 134.51 170.00 L 135.51 165.58 L 136.52 171.03 L 137.53 166.71 L 138.53 162.50 L 139.54 158.40 L 140.55 163.66 L 141.55 159.64 L 142.56 155.71 L 143.57 160.82 L 144.57 156.98 L 145.58 153.22 L 146.59 149.55 L 147.59 145.96 L 148.60 150.89 L 149.61 155.71 L 150.61 152.17 L 151.62 156.88 L 152.63 153.40 L 153.63 150.00 L 154.64 146.67 L 155.65 143.40 L 156.65 140.20 L 157.66 137.07 L 158.67 141.60 L 159.67 146.04 L 160.68 150.39 L 161.69 154.66 L 162.69 158.85 L 163.70 162.95 L 164.71 159.81 L 165.71 156.73 L 166.72 160.74 L 167.73 164.68 L 168.73 168.55 L 169.74 165.50 L 170.75 169.29 L 171.75 166.28 L 172.76 170.00 L 173.77 173.65 L 174.77 170.69 L 175.78 174.27 L 176.79 171.36 L 177.79 174.87 L 178.80 172.00 L 179.81 175.45 L 180.81 178.85 L 181.82 176.02 L 182.83 173.23 L 183.83 170.48 L 184.84 167.78 L 185.85 165.12 L 186.85 162.50 L 187.86 165.81 L 188.87 169.08 L 189.87 166.49 L 190.88 163.94 L 191.89 167.14 L 192.89 170.30 L 193.90 173.41 L 194.91 176.47 L 195.91 173.94 L 196.92 171.45 L 197.93 168.99 L 198.93 166.57 L 199.94 164.18 L 200.95 161.83 L 201.95 159.51 L 202.96 162.50 L 203.97 165.45 L 204.97 168.36 L 205.98 166.05 L 206.99 163.78 L 207.99 161.54 L 209.00 159.33 L 210.01 162.19 L 211.01 165.00 L 212.02 167.78 L 213.03 170.52 L 214.03 168.32 L 215.04 171.03 L 216.05 168.85 L 217.05 171.52 L 218.06 174.15 L 219.07 176.75 L 220.07 179.32 L 221.08 181.85 L 222.09 179.69 L 223.09 177.56 L 224.10 175.45 L 225.11 173.37 L 226.11 175.87 L 227.12 173.81 L 228.13 171.78 L 229.13 169.76 L 230.14 172.22 L 231.15 170.23 L 232.15 168.27 L 233.16 170.69 L 234.17 168.74 L 235.17 166.82 L 236.18 164.92 L 237.19 167.30 L 238.19 165.42 L 239.20 167.78 L 240.21 170.11 L 241.21 168.24 L 242.22 170.55 L 243.23 172.83 L 244.23 175.08 L 245.24 177.31 L 246.25 175.45 L 247.25 173.62 L 248.26 175.82 L 249.27 174.00 L 250.27 172.20 L 251.28 170.42 L 252.29 172.59 L 253.29 174.74 L 254.30 176.87 L 255.31 178.98 L 256.31 177.21 L 257.32 179.29 L 258.33 181.36 L 259.33 183.40 L 260.34 181.64 L 261.35 179.90 L 262.35 181.92 L 263.36 180.20 L 264.37 182.20 L 265.37 180.49 L 266.38 178.79 L 267.39 180.77 L 268.39 182.73 L 269.40 181.05 L 270.41 182.99 L 271.41 184.91 L 272.42 186.81 L 273.43 188.69 L 274.43 187.02 L 275.44 185.37 L 276.45 187.24 L 277.45 185.60 L 278.46 187.44 L 279.47 185.82 L 280.47 184.21 L 281.48 182.61 L 282.49 184.44 L 283.49 182.86 L 284.50 181.29 L 285.51 179.73 L 286.51 181.54 L 287.52 183.33 L 288.53 185.11 L 289.53 183.57 L 290.54 182.03 L 291.55 180.52 L 292.55 182.27 L 293.56 180.77 L 294.57 179.28 L 295.57 181.02 L 296.58 182.74 L 297.59 181.26 L 298.59 182.97 L 299.60 184.67 L 300.61 183.20 L 301.61 181.74 L 302.62 180.29 L 303.63 181.97 L 304.63 180.53 L 305.64 182.20 L 306.65 183.85 L 307.65 182.42 L 308.66 181.00 L 309.67 182.64 L 310.67 184.26 L 311.68 185.87 L 312.69 187.47 L 313.69 186.06 L 314.70 184.67 L 315.71 186.25 L 316.71 184.86 L 317.72 186.43 L 318.73 185.06 L 319.73 186.62 L 320.74 188.16 L 321.75 189.69 L 322.75 191.22 L 323.76 189.85 L 324.77 191.36 L 325.77 192.86 L 326.78 194.34 L 327.79 192.99 L 328.79 194.46 L 329.80 195.93 L 330.81 197.38 L 331.81 198.82 L 332.82 200.26 L 333.83 198.91 L 334.83 200.33 L 335.84 201.74 L 336.85 203.14 L 337.85 201.80 L 338.86 203.19 L 339.87 204.57 L 340.87 203.24 L 341.88 201.91 L 342.89 200.60 L 343.89 201.97 L 344.90 200.67 L 345.91 199.37 L 346.91 198.08 L 347.92 199.44 L 348.93 198.17 L 349.93 196.90 L 350.94 198.25 L 351.95 196.99 L 352.95 195.73 L 353.96 194.49 L 354.97 195.83 L 355.97 194.59 L 356.98 193.37 L 357.99 192.15 L 358.99 190.94 L 360.00 192.27 L 361.01 191.06 L 362.01 189.87 L 363.02 188.68 L 364.03 190.00 L 365.03 191.31 L 366.04 192.61 L 367.05 191.43 L 368.05 190.26 L 369.06 189.09 L 370.07 187.94 L 371.07 189.23 L 372.08 188.08 L 373.09 186.93 L 374.09 185.80 L 375.10 184.67 L 376.11 183.54 L 377.11 182.43 L 378.12 181.32 L 379.13 180.22 L 380.13 181.50 L 381.14 182.77 L 382.15 184.04 L 383.15 182.94 L 384.16 184.20 L 385.17 183.11 L 386.17 184.36 L 387.18 185.60 L 388.19 186.83 L 389.19 188.05 L 390.20 189.27 L 391.21 190.48 L 392.21 191.69 L 393.22 192.88 L 394.23 191.80 L 395.23 190.72 L 396.24 189.64 L 397.25 188.58 L 398.25 189.76 L 399.26 188.70 L 400.27 189.88 L 401.27 188.83 L 402.28 187.78 L 403.29 188.95 L 404.29 190.12 L 405.30 191.28 L 406.31 192.43 L 407.31 193.57 L 408.32 192.53 L 409.33 191.49 L 410.33 192.63 L 411.34 193.76 L 412.35 194.89 L 413.35 196.01 L 414.36 197.12 L 415.37 198.23 L 416.37 199.33 L 417.38 200.42 L 418.39 201.51 L 419.39 202.59 L 420.40 201.56 L 421.41 200.53 L 422.41 201.60 L 423.42 200.58 L 424.43 201.65 L 425.43 202.71 L 426.44 201.69 L 427.45 200.68 L 428.45 201.74 L 429.46 202.79 L 430.47 201.78 L 431.47 200.78 L 432.48 199.78 L 433.49 200.83 L 434.49 201.87 L 435.50 202.91 L 436.51 201.91 L 437.51 202.94 L 438.52 201.96 L 439.53 202.98 L 440.53 202.00 L 441.54 203.02 L 442.55 204.03 L 443.55 205.04 L 444.56 206.04 L 445.57 205.06 L 446.57 204.09 L 447.58 203.13 L 448.59 204.12 L 449.59 205.12 L 450.60 204.15 L 451.61 203.20 L 452.61 202.24 L 453.62 201.30 L 454.63 202.28 L 455.63 203.27 L 456.64 202.32 L 457.65 203.30 L 458.65 204.27 L 459.66 205.24 L 460.67 206.20 L 461.67 207.16 L 462.68 206.22 L 463.69 205.29 L 464.69 206.24 L 465.70 207.19 L 466.71 208.13 L 467.71 207.20 L 468.72 208.14 L 469.73 209.07 L 470.73 210.00 L 471.74 209.08 L 472.75 208.16 L 473.75 209.08 L 474.76 208.16 L 475.77 209.08 L 476.77 208.17 L 477.78 207.27 L 478.79 208.18 L 479.79 207.28 L 480.80 208.19 L 481.81 207.29 L 482.81 208.20 L 483.82 209.10 L 484.83 210.00 L 485.83 209.11 L 486.84 210.00 L 487.85 209.11 L 488.85 210.00 L 489.86 210.89 L 490.87 211.77 L 491.87 212.65 L 492.88 213.52 L 493.89 214.39 L 494.89 215.25 L 495.90 214.37 L 496.91 215.23 L 497.91 216.09 L 498.92 216.94 L 499.93 216.06 L 500.93 216.91 L 501.94 217.76 L 502.95 216.88 L 503.95 216.00 L 504.96 216.85 L 505.97 215.98 L 506.97 216.82 L 507.98 215.95 L 508.99 215.09 L 509.99 214.23 L 511.00 215.07 L 512.01 215.90 L 513.01 215.04 L 514.02 215.87 L 515.03 216.70 L 516.03 215.85 L 517.04 215.00 L 518.05 215.82 L 519.05 216.64 L 520.06 217.45 L 521.07 218.26 L 522.07 219.07 L 523.08 218.23 L 524.09 217.39 L 525.09 216.55 L 526.10 215.72 L 527.11 216.52 L 528.11 215.70 L 529.12 216.50 L 530.13 215.67 L 531.13 214.85 L 532.14 215.65 L 533.15 214.83 L 534.15 215.62 L 535.16 214.81 L 536.17 215.60 L 537.17 214.79 L 538.18 213.98 L 539.19 214.77 L 540.19 213.97 L 541.20 213.17 L 542.21 212.37 L 543.21 213.15 L 544.22 213.93 L 545.23 214.71 L 546.23 215.48 L 547.24 214.69 L 548.25 215.46 L 549.25 214.67 L 550.26 215.44 L 551.27 214.65 L 552.27 213.87 L 553.28 213.09 L 554.29 213.85 L 555.29 213.08 L 556.30 213.84 L 557.31 213.06 L 558.31 212.29 L 559.32 211.53 L 560.33 212.28 L 561.33 213.04 L 562.34 212.28 L 563.35 211.51 L 564.35 212.27 L 565.36 213.02 L 566.37 212.26 L 567.37 213.00 L 568.38 213.75 L 569.39 212.99 L 570.39 213.73 L 571.40 212.98 L 572.41 213.72 L 573.41 214.45 L 574.42 213.70 L 575.43 212.96 L 576.43 212.21 L 577.44 212.95 L 578.45 212.21 L 579.45 212.93 L 580.46 213.66 L 581.47 212.92 L 582.47 212.19 L 583.48 211.46 L 584.49 212.18 L 585.49 211.45 L 586.50 210.72 L 587.51 210.00 L 588.51 209.28 L 589.52 210.00 L 590.53 210.72 L 591.53 210.00 L 592.54 209.28 L 593.55 210.00 L 594.55 209.29 L 595.56 210.00 L 596.57 210.71 L 597.57 210.00 L 598.58 210.71 L 599.59 211.41 L 600.59 212.12 L 601.60 212.81 L 602.61 212.11 L 603.61 212.80 L 604.62 213.50 L 605.63 214.19 L 606.63 214.88 L 607.64 214.18 L 608.65 213.47 L 609.65 214.16 L 610.66 213.46 L 611.67 214.15 L 612.67 214.83 L 613.68 214.13 L 614.69 214.81 L 615.69 215.49 L 616.70 214.79 L 617.71 215.47 L 618.71 214.78 L 619.72 214.09 L 620.73 214.76 L 621.73 215.43 L 622.74 216.10 L 623.75 216.76 L 624.75 217.42 L 625.76 216.74 L 626.77 216.05 L 627.77 216.71 L 628.78 216.03 L 629.79 216.69 L 630.79 216.01 L 631.80 215.33 L 632.81 215.99 L 633.81 215.31 L 634.82 215.97 L 635.83 216.62 L 636.83 215.95 L 637.84 216.60 L 638.85 215.93 L 639.85 216.57 L 640.86 217.22 L 641.87 217.86 L 642.87 217.19 L 643.88 217.84 L 644.89 217.17 L 645.89 216.51 L 646.90 217.15 L 647.91 217.78 L 648.91 218.42 L 649.92 217.76 L 650.93 217.10 L 651.93 216.44 L 652.94 217.07 L 653.95 217.70 L 654.95 218.33 L 655.96 218.96 L 656.97 218.30 L 657.97 217.65 L 658.98 217.00 L 659.99 216.35 L 660.99 216.98 L 662.00 217.60" fill="none" stroke="var(--accent-line)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 59.01 590.00 L 60.01 590.00 L 61.02 590.00 L 62.03 400.00 L 63.03 286.00 L 64.04 210.00 L 65.05 155.71 L 66.05 115.00 L 67.06 83.33 L 68.07 58.00 L 69.07 106.36 L 70.08 146.67 L 71.09 122.31 L 72.09 101.43 L 73.10 83.33 L 74.11 115.00 L 75.11 98.24 L 76.12 125.56 L 77.13 110.00 L 78.13 134.00 L 79.14 155.71 L 80.15 140.91 L 81.15 127.39 L 82.16 146.67 L 83.17 134.00 L 84.17 151.54 L 85.18 139.63 L 86.19 155.71 L 87.19 170.69 L 88.20 184.67 L 89.21 197.74 L 90.21 210.00 L 91.22 221.52 L 92.23 210.00 L 93.23 199.14 L 94.24 188.89 L 95.25 199.73 L 96.25 210.00 L 97.26 200.26 L 98.27 210.00 L 99.27 200.73 L 100.28 210.00 L 101.29 218.84 L 102.29 210.00 L 103.30 218.44 L 104.31 210.00 L 105.31 218.09 L 106.32 210.00 L 107.33 202.24 L 108.33 194.80 L 109.34 202.55 L 110.35 210.00 L 111.35 217.17 L 112.36 224.07 L 113.37 230.73 L 114.37 237.14 L 115.38 230.00 L 116.39 236.21 L 117.39 229.32 L 118.40 222.67 L 119.41 228.69 L 120.41 234.52 L 121.42 228.10 L 122.43 221.87 L 123.43 215.85 L 124.44 221.52 L 125.45 227.01 L 126.45 221.18 L 127.46 226.52 L 128.47 220.86 L 129.47 226.06 L 130.48 231.11 L 131.49 236.03 L 132.49 230.54 L 133.50 235.33 L 134.51 240.00 L 135.51 234.68 L 136.52 229.49 L 137.53 234.05 L 138.53 229.00 L 139.54 224.07 L 140.55 219.27 L 141.55 223.73 L 142.56 219.05 L 143.57 223.41 L 144.57 218.84 L 145.58 223.10 L 146.59 218.64 L 147.59 222.81 L 148.60 218.44 L 149.61 214.18 L 150.61 218.26 L 151.62 214.09 L 152.63 218.09 L 153.63 222.00 L 154.64 225.83 L 155.65 229.59 L 156.65 233.27 L 157.66 236.87 L 158.67 240.40 L 159.67 243.86 L 160.68 247.25 L 161.69 250.58 L 162.69 253.85 L 163.70 257.05 L 164.71 260.19 L 165.71 256.17 L 166.72 259.26 L 167.73 255.32 L 168.73 251.45 L 169.74 247.66 L 170.75 250.71 L 171.75 246.99 L 172.76 243.33 L 173.77 246.35 L 174.77 249.31 L 175.78 252.22 L 176.79 255.08 L 177.79 257.90 L 178.80 260.67 L 179.81 263.39 L 180.81 266.07 L 181.82 268.70 L 182.83 265.16 L 183.83 261.68 L 184.84 264.29 L 185.85 260.87 L 186.85 263.44 L 187.86 265.97 L 188.87 268.46 L 189.87 270.92 L 190.88 273.33 L 191.89 270.00 L 192.89 266.72 L 193.90 269.11 L 194.91 265.88 L 195.91 268.25 L 196.92 270.58 L 197.93 267.41 L 198.93 269.71 L 199.94 271.99 L 200.95 274.23 L 201.95 271.12 L 202.96 268.06 L 203.97 270.28 L 204.97 272.47 L 205.98 274.63 L 206.99 276.76 L 207.99 273.76 L 209.00 275.87 L 210.01 277.95 L 211.01 275.00 L 212.02 272.09 L 213.03 274.16 L 214.03 271.29 L 215.04 268.46 L 216.05 265.67 L 217.05 262.91 L 218.06 264.97 L 219.07 267.00 L 220.07 269.01 L 221.08 266.30 L 222.09 268.28 L 223.09 265.61 L 224.10 267.58 L 225.11 264.94 L 226.11 266.89 L 227.12 264.29 L 228.13 266.21 L 229.13 268.12 L 230.14 270.00 L 231.15 267.44 L 232.15 264.91 L 233.16 262.41 L 234.17 264.29 L 235.17 261.82 L 236.18 259.38 L 237.19 261.24 L 238.19 258.83 L 239.20 256.44 L 240.21 254.09 L 241.21 255.93 L 242.22 253.61 L 243.23 251.30 L 244.23 249.03 L 245.24 246.77 L 246.25 248.61 L 247.25 250.43 L 248.26 252.22 L 249.27 250.00 L 250.27 251.78 L 251.28 249.58 L 252.29 251.35 L 253.29 249.18 L 254.30 247.03 L 255.31 248.78 L 256.31 246.65 L 257.32 248.38 L 258.33 246.28 L 259.33 244.20 L 260.34 242.14 L 261.35 240.10 L 262.35 238.08 L 263.36 239.80 L 264.37 241.51 L 265.37 239.51 L 266.38 241.21 L 267.39 239.23 L 268.39 237.27 L 269.40 235.33 L 270.41 237.01 L 271.41 235.09 L 272.42 236.76 L 273.43 238.41 L 274.43 240.05 L 275.44 238.15 L 276.45 236.27 L 277.45 237.89 L 278.46 236.03 L 279.47 234.18 L 280.47 232.35 L 281.48 233.96 L 282.49 235.56 L 283.49 237.14 L 284.50 238.71 L 285.51 236.90 L 286.51 235.11 L 287.52 233.33 L 288.53 234.89 L 289.53 236.43 L 290.54 237.97 L 291.55 236.21 L 292.55 237.73 L 293.56 239.23 L 294.57 237.49 L 295.57 235.76 L 296.58 237.26 L 297.59 235.55 L 298.59 237.03 L 299.60 235.33 L 300.61 236.80 L 301.61 238.26 L 302.62 236.58 L 303.63 234.92 L 304.63 236.37 L 305.64 237.80 L 306.65 236.15 L 307.65 234.52 L 308.66 235.94 L 309.67 237.36 L 310.67 238.76 L 311.68 237.14 L 312.69 235.53 L 313.69 236.93 L 314.70 235.33 L 315.71 236.72 L 316.71 238.09 L 317.72 239.46 L 318.73 240.81 L 319.73 242.15 L 320.74 240.57 L 321.75 241.91 L 322.75 240.34 L 323.76 241.67 L 324.77 242.98 L 325.77 244.29 L 326.78 242.73 L 327.79 244.03 L 328.79 242.49 L 329.80 243.78 L 330.81 242.25 L 331.81 240.74 L 332.82 242.01 L 333.83 240.51 L 334.83 241.78 L 335.84 243.04 L 336.85 241.55 L 337.85 242.81 L 338.86 244.05 L 339.87 245.29 L 340.87 246.51 L 341.88 245.04 L 342.89 246.25 L 343.89 247.46 L 344.90 246.00 L 345.91 244.55 L 346.91 245.75 L 347.92 244.31 L 348.93 242.87 L 349.93 241.45 L 350.94 242.65 L 351.95 243.84 L 352.95 242.42 L 353.96 241.02 L 354.97 239.63 L 355.97 240.81 L 356.98 239.43 L 357.99 238.05 L 358.99 236.69 L 360.00 237.87 L 361.01 236.51 L 362.01 237.68 L 363.02 236.34 L 364.03 235.00 L 365.03 236.16 L 366.04 234.84 L 367.05 235.99 L 368.05 237.14 L 369.06 238.28 L 370.07 236.97 L 371.07 235.66 L 372.08 236.79 L 373.09 235.50 L 374.09 236.62 L 375.10 237.75 L 376.11 238.86 L 377.11 239.97 L 378.12 238.68 L 379.13 239.78 L 380.13 238.50 L 381.14 239.60 L 382.15 240.68 L 383.15 241.76 L 384.16 240.49 L 385.17 241.57 L 386.17 242.64 L 387.18 241.38 L 388.19 242.44 L 389.19 241.19 L 390.20 242.24 L 391.21 241.00 L 392.21 242.05 L 393.22 243.09 L 394.23 241.86 L 395.23 242.90 L 396.24 243.93 L 397.25 242.70 L 398.25 243.73 L 399.26 242.51 L 400.27 241.29 L 401.27 240.09 L 402.28 238.89 L 403.29 237.70 L 404.29 236.51 L 405.30 235.33 L 406.31 236.36 L 407.31 235.19 L 408.32 236.21 L 409.33 235.04 L 410.33 233.89 L 411.34 232.74 L 412.35 231.59 L 413.35 232.61 L 414.36 233.62 L 415.37 232.48 L 416.37 233.48 L 417.38 232.35 L 418.39 231.23 L 419.39 232.23 L 420.40 233.22 L 421.41 232.11 L 422.41 233.09 L 423.42 234.08 L 424.43 232.97 L 425.43 231.86 L 426.44 232.84 L 427.45 231.74 L 428.45 230.65 L 429.46 231.63 L 430.47 232.59 L 431.47 231.51 L 432.48 230.43 L 433.49 231.39 L 434.49 230.32 L 435.50 229.25 L 436.51 228.19 L 437.51 227.14 L 438.52 226.08 L 439.53 225.04 L 440.53 226.00 L 441.54 224.96 L 442.55 223.93 L 443.55 222.90 L 444.56 221.87 L 445.57 222.83 L 446.57 223.78 L 447.58 224.73 L 448.59 225.67 L 449.59 224.65 L 450.60 225.59 L 451.61 226.52 L 452.61 225.51 L 453.62 226.44 L 454.63 227.36 L 455.63 228.28 L 456.64 227.27 L 457.65 228.19 L 458.65 229.10 L 459.66 228.10 L 460.67 229.00 L 461.67 229.90 L 462.68 230.80 L 463.69 229.80 L 464.69 230.69 L 465.70 231.58 L 466.71 232.46 L 467.71 231.47 L 468.72 230.49 L 469.73 231.37 L 470.73 230.39 L 471.74 231.27 L 472.75 232.14 L 473.75 231.16 L 474.76 230.19 L 475.77 229.23 L 476.77 228.27 L 477.78 227.31 L 478.79 226.36 L 479.79 227.23 L 480.80 228.10 L 481.81 228.95 L 482.81 229.81 L 483.82 228.87 L 484.83 229.72 L 485.83 230.56 L 486.84 231.41 L 487.85 232.25 L 488.85 233.08 L 489.86 232.14 L 490.87 232.98 L 491.87 233.81 L 492.88 232.87 L 493.89 233.70 L 494.89 232.76 L 495.90 231.84 L 496.91 232.66 L 497.91 231.74 L 498.92 230.82 L 499.93 231.64 L 500.93 230.73 L 501.94 229.82 L 502.95 230.63 L 503.95 229.73 L 504.96 230.54 L 505.97 231.35 L 506.97 230.45 L 507.98 231.25 L 508.99 232.05 L 509.99 231.16 L 511.00 230.27 L 512.01 231.06 L 513.01 230.18 L 514.02 230.97 L 515.03 230.09 L 516.03 230.88 L 517.04 231.67 L 518.05 230.79 L 519.05 229.91 L 520.06 229.04 L 521.07 228.17 L 522.07 227.31 L 523.08 228.10 L 524.09 228.88 L 525.09 228.02 L 526.10 227.16 L 527.11 226.31 L 528.11 227.09 L 529.12 226.24 L 530.13 227.01 L 531.13 226.17 L 532.14 226.94 L 533.15 227.71 L 534.15 226.87 L 535.16 227.64 L 536.17 228.40 L 537.17 229.16 L 538.18 229.92 L 539.19 229.08 L 540.19 229.83 L 541.20 230.58 L 542.21 229.75 L 543.21 230.50 L 544.22 229.67 L 545.23 230.41 L 546.23 231.15 L 547.24 230.33 L 548.25 231.07 L 549.25 231.80 L 550.26 230.98 L 551.27 230.16 L 552.27 229.35 L 553.28 228.54 L 554.29 227.73 L 555.29 228.46 L 556.30 229.19 L 557.31 229.92 L 558.31 229.11 L 559.32 228.31 L 560.33 227.52 L 561.33 228.24 L 562.34 227.45 L 563.35 228.17 L 564.35 227.38 L 565.36 226.59 L 566.37 227.31 L 567.37 228.02 L 568.38 227.24 L 569.39 227.95 L 570.39 227.17 L 571.40 227.88 L 572.41 228.59 L 573.41 227.81 L 574.42 227.04 L 575.43 226.26 L 576.43 226.97 L 577.44 226.20 L 578.45 226.91 L 579.45 227.61 L 580.46 226.84 L 581.47 226.08 L 582.47 225.32 L 583.48 224.56 L 584.49 225.26 L 585.49 225.95 L 586.50 225.20 L 587.51 225.89 L 588.51 225.14 L 589.52 224.39 L 590.53 225.09 L 591.53 225.77 L 592.54 226.46 L 593.55 227.14 L 594.55 226.40 L 595.56 227.08 L 596.57 227.76 L 597.57 228.43 L 598.58 227.69 L 599.59 226.95 L 600.59 226.22 L 601.60 225.48 L 602.61 226.16 L 603.61 226.83 L 604.62 226.10 L 605.63 226.76 L 606.63 227.43 L 607.64 226.70 L 608.65 225.98 L 609.65 226.64 L 610.66 225.92 L 611.67 226.58 L 612.67 227.24 L 613.68 226.52 L 614.69 227.18 L 615.69 227.83 L 616.70 228.49 L 617.71 227.77 L 618.71 228.42 L 619.72 229.07 L 620.73 229.71 L 621.73 229.00 L 622.74 229.64 L 623.75 230.28 L 624.75 229.57 L 625.76 230.21 L 626.77 230.85 L 627.77 230.14 L 628.78 230.78 L 629.79 231.41 L 630.79 230.70 L 631.80 231.33 L 632.81 231.96 L 633.81 231.26 L 634.82 231.88 L 635.83 232.51 L 636.83 231.81 L 637.84 231.11 L 638.85 231.73 L 639.85 232.35 L 640.86 231.66 L 641.87 232.28 L 642.87 232.89 L 643.88 232.20 L 644.89 232.81 L 645.89 232.12 L 646.90 231.44 L 647.91 232.05 L 648.91 231.36 L 649.92 231.97 L 650.93 231.29 L 651.93 230.61 L 652.94 231.22 L 653.95 231.82 L 654.95 231.15 L 655.96 231.75 L 656.97 232.35 L 657.97 232.95 L 658.98 233.55 L 659.99 232.88 L 660.99 232.20 L 662.00 232.80" fill="none" stroke="var(--ink-2)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 59.01 590.00 L 60.01 590.00 L 61.02 336.67 L 62.03 210.00 L 63.03 134.00 L 64.04 83.33 L 65.05 47.14 L 66.05 115.00 L 67.06 167.78 L 68.07 134.00 L 69.07 175.45 L 70.08 210.00 L 71.09 239.23 L 72.09 210.00 L 73.10 184.67 L 74.11 162.50 L 75.11 187.65 L 76.12 167.78 L 77.13 190.00 L 78.13 172.00 L 79.14 155.71 L 80.15 175.45 L 81.15 193.48 L 82.16 178.33 L 83.17 194.80 L 84.17 210.00 L 85.18 224.07 L 86.19 210.00 L 87.19 196.90 L 88.20 210.00 L 89.21 222.26 L 90.21 210.00 L 91.22 198.48 L 92.23 210.00 L 93.23 199.14 L 94.24 210.00 L 95.25 220.27 L 96.25 210.00 L 97.26 219.74 L 98.27 229.00 L 99.27 237.80 L 100.28 246.19 L 101.29 254.19 L 102.29 244.55 L 103.30 252.22 L 104.31 259.57 L 105.31 250.43 L 106.32 257.50 L 107.33 248.78 L 108.33 240.40 L 109.34 247.25 L 110.35 253.85 L 111.35 260.19 L 112.36 252.22 L 113.37 258.36 L 114.37 250.71 L 115.38 243.33 L 116.39 236.21 L 117.39 242.20 L 118.40 235.33 L 119.41 228.69 L 120.41 222.26 L 121.42 228.10 L 122.43 233.75 L 123.43 227.54 L 124.44 221.52 L 125.45 215.67 L 126.45 210.00 L 127.46 204.49 L 128.47 199.14 L 129.47 193.94 L 130.48 188.89 L 131.49 183.97 L 132.49 179.19 L 133.50 184.67 L 134.51 180.00 L 135.51 185.32 L 136.52 180.77 L 137.53 176.33 L 138.53 181.50 L 139.54 186.54 L 140.55 182.20 L 141.55 177.95 L 142.56 173.81 L 143.57 178.71 L 144.57 174.65 L 145.58 179.43 L 146.59 175.45 L 147.59 180.11 L 148.60 176.22 L 149.61 180.77 L 150.61 176.96 L 151.62 173.23 L 152.63 169.57 L 153.63 166.00 L 154.64 170.42 L 155.65 166.91 L 156.65 163.47 L 157.66 160.10 L 158.67 156.80 L 159.67 161.09 L 160.68 157.84 L 161.69 154.66 L 162.69 158.85 L 163.70 155.71 L 164.71 152.64 L 165.71 149.63 L 166.72 153.70 L 167.73 157.71 L 168.73 154.73 L 169.74 151.80 L 170.75 148.93 L 171.75 152.83 L 172.76 156.67 L 173.77 153.83 L 174.77 157.59 L 175.78 161.28 L 176.79 158.47 L 177.79 162.10 L 178.80 165.67 L 179.81 169.17 L 180.81 166.39 L 181.82 169.84 L 182.83 173.23 L 183.83 170.48 L 184.84 167.78 L 185.85 165.12 L 186.85 168.44 L 187.86 165.81 L 188.87 163.23 L 189.87 166.49 L 190.88 163.94 L 191.89 161.43 L 192.89 158.96 L 193.90 156.52 L 194.91 154.12 L 195.91 151.75 L 196.92 149.42 L 197.93 147.12 L 198.93 144.86 L 199.94 142.62 L 200.95 140.42 L 201.95 143.57 L 202.96 141.39 L 203.97 144.48 L 204.97 147.53 L 205.98 150.54 L 206.99 148.38 L 207.99 151.34 L 209.00 154.27 L 210.01 152.12 L 211.01 155.00 L 212.02 152.88 L 213.03 155.71 L 214.03 153.61 L 215.04 151.54 L 216.05 154.33 L 217.05 157.09 L 218.06 155.03 L 219.07 153.00 L 220.07 150.99 L 221.08 149.01 L 222.09 147.06 L 223.09 149.76 L 224.10 147.82 L 225.11 150.48 L 226.11 153.11 L 227.12 151.19 L 228.13 153.79 L 229.13 156.35 L 230.14 154.44 L 231.15 152.56 L 232.15 155.09 L 233.16 153.22 L 234.17 151.37 L 235.17 149.55 L 236.18 152.03 L 237.19 154.49 L 238.19 152.68 L 239.20 155.11 L 240.21 153.31 L 241.21 151.54 L 242.22 149.78 L 243.23 148.04 L 244.23 146.32 L 245.24 148.71 L 246.25 151.07 L 247.25 149.36 L 248.26 151.69 L 249.27 154.00 L 250.27 156.28 L 251.28 158.54 L 252.29 156.84 L 253.29 159.07 L 254.30 157.38 L 255.31 155.71 L 256.31 157.92 L 257.32 156.26 L 258.33 154.62 L 259.33 156.80 L 260.34 155.17 L 261.35 157.33 L 262.35 155.71 L 263.36 154.12 L 264.37 152.54 L 265.37 150.97 L 266.38 149.42 L 267.39 147.88 L 268.39 146.36 L 269.40 144.86 L 270.41 143.36 L 271.41 145.47 L 272.42 147.56 L 273.43 149.63 L 274.43 151.67 L 275.44 153.70 L 276.45 155.71 L 277.45 154.22 L 278.46 156.21 L 279.47 154.73 L 280.47 153.26 L 281.48 155.23 L 282.49 157.17 L 283.49 159.11 L 284.50 161.02 L 285.51 162.92 L 286.51 164.80 L 287.52 166.67 L 288.53 165.20 L 289.53 167.04 L 290.54 168.87 L 291.55 167.41 L 292.55 165.97 L 293.56 164.53 L 294.57 163.11 L 295.57 161.69 L 296.58 160.30 L 297.59 162.10 L 298.59 163.89 L 299.60 162.50 L 300.61 161.12 L 301.61 159.75 L 302.62 161.52 L 303.63 163.28 L 304.63 165.02 L 305.64 163.66 L 306.65 165.38 L 307.65 164.03 L 308.66 162.69 L 309.67 164.40 L 310.67 163.07 L 311.68 161.75 L 312.69 163.44 L 313.69 165.12 L 314.70 163.80 L 315.71 162.50 L 316.71 164.16 L 317.72 165.81 L 318.73 164.52 L 319.73 163.23 L 320.74 164.87 L 321.75 166.49 L 322.75 165.21 L 323.76 163.94 L 324.77 162.68 L 325.77 161.43 L 326.78 160.19 L 327.79 161.79 L 328.79 163.38 L 329.80 162.15 L 330.81 163.73 L 331.81 162.50 L 332.82 164.07 L 333.83 162.85 L 334.83 164.40 L 335.84 165.94 L 336.85 167.47 L 337.85 166.26 L 338.86 165.05 L 339.87 166.57 L 340.87 168.08 L 341.88 169.57 L 342.89 168.37 L 343.89 167.18 L 344.90 168.67 L 345.91 167.48 L 346.91 166.31 L 347.92 167.78 L 348.93 169.24 L 349.93 170.69 L 350.94 169.52 L 351.95 168.36 L 352.95 169.80 L 353.96 168.64 L 354.97 170.07 L 355.97 171.49 L 356.98 170.34 L 357.99 169.19 L 358.99 168.06 L 360.00 166.93 L 361.01 165.81 L 362.01 167.22 L 363.02 166.11 L 364.03 165.00 L 365.03 163.90 L 366.04 165.29 L 367.05 166.68 L 368.05 168.05 L 369.06 166.96 L 370.07 165.87 L 371.07 164.79 L 372.08 163.72 L 373.09 165.08 L 374.09 164.01 L 375.10 162.95 L 376.11 161.90 L 377.11 163.25 L 378.12 164.59 L 379.13 163.54 L 380.13 162.50 L 381.14 161.46 L 382.15 162.80 L 383.15 164.12 L 384.16 163.09 L 385.17 162.06 L 386.17 163.37 L 387.18 162.35 L 388.19 161.34 L 389.19 160.33 L 390.20 159.33 L 391.21 160.63 L 392.21 159.64 L 393.22 160.93 L 394.23 159.94 L 395.23 161.22 L 396.24 160.24 L 397.25 161.51 L 398.25 160.53 L 399.26 159.56 L 400.27 158.59 L 401.27 157.62 L 402.28 156.67 L 403.29 157.93 L 404.29 159.19 L 405.30 160.43 L 406.31 159.48 L 407.31 158.53 L 408.32 159.77 L 409.33 161.00 L 410.33 162.23 L 411.34 163.45 L 412.35 164.66 L 413.35 163.71 L 414.36 162.77 L 415.37 161.83 L 416.37 160.90 L 417.38 162.10 L 418.39 163.30 L 419.39 164.48 L 420.40 165.67 L 421.41 164.74 L 422.41 165.91 L 423.42 164.99 L 424.43 164.07 L 425.43 163.15 L 426.44 164.32 L 427.45 163.41 L 428.45 162.50 L 429.46 163.66 L 430.47 164.81 L 431.47 163.91 L 432.48 165.05 L 433.49 166.19 L 434.49 167.33 L 435.50 168.45 L 436.51 169.57 L 437.51 170.69 L 438.52 171.80 L 439.53 172.90 L 440.53 172.00 L 441.54 173.10 L 442.55 172.20 L 443.55 173.29 L 444.56 174.37 L 445.57 175.45 L 446.57 174.56 L 447.58 175.63 L 448.59 176.70 L 449.59 175.81 L 450.60 176.87 L 451.61 175.98 L 452.61 177.04 L 453.62 176.16 L 454.63 175.28 L 455.63 176.33 L 456.64 177.37 L 457.65 176.50 L 458.65 175.63 L 459.66 174.76 L 460.67 173.90 L 461.67 174.94 L 462.68 174.08 L 463.69 175.11 L 464.69 176.14 L 465.70 177.16 L 466.71 178.18 L 467.71 179.19 L 468.72 178.33 L 469.73 179.34 L 470.73 178.49 L 471.74 177.64 L 472.75 178.64 L 473.75 177.80 L 474.76 176.96 L 475.77 176.12 L 476.77 175.29 L 477.78 174.46 L 478.79 173.64 L 479.79 174.63 L 480.80 175.62 L 481.81 174.80 L 482.81 173.98 L 483.82 173.17 L 484.83 172.36 L 485.83 171.55 L 486.84 172.54 L 487.85 173.51 L 488.85 174.49 L 489.86 173.68 L 490.87 172.88 L 491.87 173.85 L 492.88 173.06 L 493.89 174.02 L 494.89 174.98 L 495.90 174.18 L 496.91 175.14 L 497.91 174.35 L 498.92 173.56 L 499.93 174.51 L 500.93 173.73 L 501.94 174.67 L 502.95 173.89 L 503.95 174.83 L 504.96 174.05 L 505.97 173.28 L 506.97 174.22 L 507.98 173.45 L 508.99 174.37 L 509.99 173.61 L 511.00 172.84 L 512.01 173.77 L 513.01 173.01 L 514.02 173.93 L 515.03 174.85 L 516.03 175.76 L 517.04 176.67 L 518.05 177.57 L 519.05 178.47 L 520.06 177.71 L 521.07 178.61 L 522.07 177.85 L 523.08 177.10 L 524.09 177.99 L 525.09 177.24 L 526.10 176.49 L 527.11 177.38 L 528.11 176.64 L 529.12 177.52 L 530.13 176.78 L 531.13 176.04 L 532.14 176.92 L 533.15 177.80 L 534.15 177.06 L 535.16 177.93 L 536.17 178.80 L 537.17 178.07 L 538.18 178.93 L 539.19 178.20 L 540.19 179.06 L 541.20 179.92 L 542.21 180.77 L 543.21 181.62 L 544.22 182.46 L 545.23 183.31 L 546.23 182.58 L 547.24 183.42 L 548.25 184.25 L 549.25 185.08 L 550.26 185.91 L 551.27 185.18 L 552.27 186.01 L 553.28 186.83 L 554.29 187.65 L 555.29 188.46 L 556.30 189.27 L 557.31 190.08 L 558.31 189.36 L 559.32 188.63 L 560.33 189.44 L 561.33 190.24 L 562.34 191.04 L 563.35 191.83 L 564.35 192.62 L 565.36 191.90 L 566.37 191.19 L 567.37 191.98 L 568.38 192.76 L 569.39 192.05 L 570.39 192.83 L 571.40 192.12 L 572.41 191.41 L 573.41 190.70 L 574.42 191.48 L 575.43 192.26 L 576.43 191.55 L 577.44 190.85 L 578.45 190.15 L 579.45 189.46 L 580.46 190.23 L 581.47 191.00 L 582.47 190.31 L 583.48 191.07 L 584.49 191.84 L 585.49 191.15 L 586.50 190.46 L 587.51 191.22 L 588.51 191.97 L 589.52 191.29 L 590.53 190.60 L 591.53 191.36 L 592.54 192.11 L 593.55 192.86 L 594.55 192.18 L 595.56 191.50 L 596.57 192.24 L 597.57 191.57 L 598.58 192.31 L 599.59 191.64 L 600.59 190.96 L 601.60 190.30 L 602.61 189.63 L 603.61 188.97 L 604.62 188.31 L 605.63 187.65 L 606.63 188.39 L 607.64 189.12 L 608.65 188.46 L 609.65 187.81 L 610.66 188.54 L 611.67 187.89 L 612.67 188.62 L 613.68 187.97 L 614.69 187.32 L 615.69 186.68 L 616.70 186.04 L 617.71 186.76 L 618.71 186.12 L 619.72 185.48 L 620.73 186.21 L 621.73 186.93 L 622.74 187.65 L 623.75 187.01 L 624.75 187.73 L 625.76 187.09 L 626.77 186.46 L 627.77 187.17 L 628.78 186.54 L 629.79 187.25 L 630.79 186.63 L 631.80 186.00 L 632.81 186.71 L 633.81 186.08 L 634.82 186.79 L 635.83 187.49 L 636.83 188.19 L 637.84 188.89 L 638.85 189.58 L 639.85 190.28 L 640.86 190.97 L 641.87 191.66 L 642.87 192.34 L 643.88 193.02 L 644.89 193.70 L 645.89 193.08 L 646.90 192.46 L 647.91 193.14 L 648.91 193.82 L 649.92 194.49 L 650.93 193.87 L 651.93 193.25 L 652.94 193.93 L 653.95 193.31 L 654.95 192.70 L 655.96 192.09 L 656.97 192.76 L 657.97 192.15 L 658.98 192.81 L 659.99 193.48 L 660.99 194.14 L 662.00 193.53" fill="none" stroke="var(--ink-3)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<line x1="308.00" y1="76.00" x2="350.00" y2="76.00" stroke="var(--accent-line)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="358.00" y="81.00" text-anchor="start" font-size="13" fill="var(--ink-2)">第 1 次模拟</text>
+<line x1="308.00" y1="98.00" x2="350.00" y2="98.00" stroke="var(--ink-2)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="358.00" y="103.00" text-anchor="start" font-size="13" fill="var(--ink-2)">第 2 次模拟</text>
+<line x1="308.00" y1="120.00" x2="350.00" y2="120.00" stroke="var(--ink-3)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="358.00" y="125.00" text-anchor="start" font-size="13" fill="var(--ink-2)">第 3 次模拟</text>
+<text x="16.00" y="30.00" text-anchor="start" font-size="15" fill="var(--ink)">同一枚硬币抛 n 次，正面出现的次数除以 n</text>
+<text x="16.00" y="51.00" text-anchor="start" font-size="13.5" fill="var(--ink-3)">三条线用三个随机种子各模拟一遍，前 100 次上下乱跳，后面才收拢</text>
+<text x="656.00" y="404.00" text-anchor="end" font-size="13" fill="var(--ink-3)">抛掷次数 n</text>
+</svg>
+<!--/FIG pb02_freq-->
+        <figcaption class="figcaption"><b>三次独立的模拟，纵轴是频率，横轴是抛掷次数。</b>前 100 次三条线上下乱窜，能窜到 0.6 以上；到 600 次时都挤进了 0.5 上下的一小段。线越走越平，就是大数律在图上的样子。</figcaption>
+      </div>
+
+      <h2 id="s-manual" class="reveal">怎么算</h2>
+
+      <ul>
+        <li><strong>判独立先算数。</strong>算出 \(P(AB)\) 和 \(P(A)P(B)\) 再比，别凭「两件事看起来无关」下结论。</li>
+        <li><strong>独立就敢连乘。</strong>串联系统可靠度是各件相乘，并联系统先算全坏的概率再拿 1 减。</li>
+        <li><strong>先认模型再套公式。</strong>问一句是不是 \(n\) 重伯努利试验：结果只有两种、概率不变、各次独立，三条齐了才用 \(C_n^kp^kq^{n-k}\)。</li>
+        <li><strong>「至少一个」用对立事件。</strong>\(1-q^n\) 比逐项相加快得多。</li>
+        <li><strong>切比雪夫三步走。</strong>写出 \(E(X)\) 与 \(D(X)\)，选好 \(\varepsilon\)，代入 \(D(X)/\varepsilon^2\)，答案是一个上界，不是精确值。</li>
+        <li><strong>估样本量反着用。</strong>由 \(D(X)/(n\varepsilon^2)\le\delta\) 解出 \(n\)，向上取整。</li>
+      </ul>
+
+      <h2 id="s-examples" class="reveal">例题</h2>
+
+      <div class="example">
+        <p class="example-head">例 <span>1</span>　某射手每次命中率为 0.6，独立射击 5 次。求恰好命中 3 次的概率，以及至少命中 1 次的概率。</p>
+        <p class="solution">这是 \(n=5\)、\(p=0.6\) 的伯努利试验，\(P\{X=3\}=C_5^3(0.6)^3(0.4)^2=10\times0.216\times0.16=0.3456\)。至少一次用对立事件：\(1-(0.4)^5=1-0.01024=0.98976\)。两问都假定各次独立，题面里的「独立」二字不能省。</p>
+      </div>
+
+      <div class="example">
+        <p class="example-head">例 <span>2</span>　甲、乙各自独立射击一次，命中率分别是 0.8 与 0.7。求目标被击中的概率。</p>
+        <p class="solution">设 \(A\)、\(B\) 为两人命中，目标被击中即 \(A\cup B\)。由独立，两人都脱靶的概率是 \(0.2\times0.3=0.06\)，所以 \(P(A\cup B)=1-0.06=0.94\)。用加法公式结果一样，只是要多算一项 \(P(AB)=0.56\)。</p>
+      </div>
+
+      <div class="example">
+        <p class="example-head">例 <span>3</span>　掷一枚均匀硬币 1000 次，用切比雪夫不等式估计正面频率与 0.5 相差不到 0.05 的概率下界。</p>
+        <p class="solution">频率的方差是 \(pq/n=0.25/1000=2.5\times10^{-4}\)，取 \(\varepsilon=0.05\)。由切比雪夫不等式，所求概率不小于 \(1-\dfrac{2.5\times10^{-4}}{0.0025}=1-0.1=0.9\)。实际的概率远高于 0.9，这个数只是保底。</p>
+      </div>
+
+      <h2 id="s-exercises" class="reveal">习题</h2>
+
+      <div class="exercises">
+
+        <div class="ex-group">
+          <p class="ex-group-head">A 档 <span>巩固定义与基本计算，每题五分钟内</span></p>
+
+          <p class="ex"><span class="ex-num">1.</span> 抛一枚硬币 200 次，正面出现 110 次。写出正面的频率，并说明它与 0.5 的差是不是错误。</p>
+          <div class="answer"><details><summary>看答案</summary><p>频率是 \(110/200=0.55\)。这不是错误，频率本来就会随试验波动，大数律只保证 \(n\) 大时偏差大到某个程度的概率很小。</p></details></div>
+
+          <p class="ex"><span class="ex-num">2.</span> 已知 \(P(A)=0.5\)，\(P(B)=0.4\)，\(P(AB)=0.2\)。判断 \(A\) 与 \(B\) 是否独立。</p>
+          <div class="answer"><details><summary>看答案</summary><p>\(P(A)P(B)=0.2=P(AB)\)，等式成立，两者独立。</p></details></div>
+
+          <p class="ex"><span class="ex-num">3.</span> \(P(A)=0.6\)，\(P(B)=0.5\)，\(A\) 与 \(B\) 独立，求 \(P(A\cup B)\)。</p>
+          <div class="answer"><details><summary>看答案</summary><p>\(P(AB)=0.3\)，所以 \(P(A\cup B)=0.6+0.5-0.3=0.8\)。</p></details></div>
+
+          <p class="ex"><span class="ex-num">4.</span> \(X\sim B(10,0.3)\)，求 \(P\{X=3\}\)。</p>
+          <div class="answer"><details><summary>看答案</summary><p>\(C_{10}^3(0.3)^3(0.7)^7=120\times0.027\times0.08235\approx0.2668\)。</p></details></div>
+
+          <p class="ex"><span class="ex-num">5.</span> \(E(X)=10\)，\(D(X)=4\)，用切比雪夫不等式估计 \(P\{|X-10|\ge4\}\) 的上界。</p>
+          <div class="answer"><details><summary>看答案</summary><p>取 \(\varepsilon=4\)，上界是 \(4/16=0.25\)。</p></details></div>
+
+          <p class="ex"><span class="ex-num">6.</span> 三个事件相互独立，概率都是 0.5。求至少有一个发生的概率。</p>
+          <div class="answer"><details><summary>看答案</summary><p>三个都不发生的概率是 \(0.5^3=0.125\)，所求为 \(1-0.125=0.875\)。</p></details></div>
+        </div>
+
+        <div class="ex-group">
+          <p class="ex-group-head">B 档 <span>综合题，接近期末与考研难度</span></p>
+
+          <p class="ex"><span class="ex-num">1.</span> 设 \(P(A)&gt;0\)，\(P(B)&gt;0\)。若 \(A\) 与 \(B\) 互不相容，它们能独立吗？说明理由。</p>
+          <div class="answer"><details><summary>看答案</summary><p>不能。互不相容时 \(P(AB)=0\)，而 \(P(A)P(B)&gt;0\)，定义式不成立。两个概率都为正时，互斥与独立互相排斥。</p></details></div>
+
+          <p class="ex"><span class="ex-num">2.</span> 某系统由两个元件组成，各自工作的概率都是 0.9 且相互独立。分别求串联与并联时系统正常工作的概率。</p>
+          <div class="answer"><details><summary>看答案</summary><p>串联要两个都工作：\(0.9\times0.9=0.81\)。并联只要一个工作：\(1-(0.1)^2=0.99\)。</p></details></div>
+
+          <p class="ex"><span class="ex-num">3.</span> 一批产品次品率 0.05，独立抽取 20 件。求恰有 1 件次品的概率，并求至少 1 件的概率。</p>
+          <div class="answer"><details><summary>看答案</summary><p>\(P\{X=1\}=C_{20}^1(0.05)(0.95)^{19}\approx0.3774\)。至少 1 件是 \(1-(0.95)^{20}\approx0.6415\)。</p></details></div>
+
+          <p class="ex"><span class="ex-num">4.</span> 在 \(n=10000\) 重伯努利试验中，用切比雪夫不等式估计频率与 \(p\) 相差不到 0.01 的概率下界，并说明为什么可以不问 \(p\) 是多少。</p>
+          <div class="answer"><details><summary>看答案</summary><p>方差不超过 \(1/(4n)=2.5\times10^{-5}\)，代入得下界 \(1-\dfrac{2.5\times10^{-5}}{10^{-4}}=0.75\)。因为 \(p(1-p)\le1/4\)，方差上界里没有 \(p\)。</p></details></div>
+        </div>
+
+        <div class="ex-group">
+          <p class="ex-group-head">C 档 <span>拓展与历史原题</span></p>
+
+          <p class="ex"><span class="ex-num">1.</span>（伯努利，1713）用你手上的工具重述并证明黄金定理：对任意 \(\varepsilon&gt;0\)，\(P\{|n_A/n-p|\ge\varepsilon\}\to0\)。说清伯努利当年缺的是哪一步。</p>
+          <div class="answer"><details><summary>看答案</summary><p>写 \(n_A\sim B(n,p)\)，得 \(E(n_A/n)=p\)，\(D(n_A/n)=pq/n\le1/(4n)\)，代入切比雪夫不等式即可。他缺的是方差这个概念，只能靠组合估计逐段压界，结论相同。</p></details></div>
+
+          <p class="ex"><span class="ex-num">2.</span>（棣莫弗，1738）伯努利的界在 \(n=10000\)、\(\varepsilon=0.01\) 时只给 0.75。讨论这个界为什么不能当作实际误差的估计，棣莫弗用什么补上了它。</p>
+          <div class="answer"><details><summary>看答案</summary><p>这个界对所有分布同时有效，用到的最坏情形未必发生在二项分布上，所以偏保守。棣莫弗用二项分布的正态逼近算出偏差的近似概率，把「会不会收敛」换成了「误差多大」。</p></details></div>
+
+          <p class="ex"><span class="ex-num">3.</span> 正四面体的四个面分别涂红、白、黑、红白黑三色，随机掷一次。记 \(A\) 为着地那面有红色，\(B\) 为有白色，\(C\) 为有黑色。验证三者两两独立但不相互独立。</p>
+          <div class="answer"><details><summary>看答案</summary><p>四个面等可能，各事件的概率都是 \(1/2\)，两两交的概率都是 \(1/4\)，两两独立成立。三事件交只含一个面，概率 \(1/4\)，而 \(1/2\cdot1/2\cdot1/2=1/8\)，不相等。</p></details></div>
+        </div>
+
+        <div class="ex-group">
+          <p class="ex-group-head">思考题 <span>不设标准答案，只给提示</span></p>
+
+          <p class="ex"><span class="ex-num">1.</span> 频率和概率，哪一个是你做实验能看到的，哪一个是理论里的？用一个具体例子说明两者的关系。</p>
+          <div class="answer"><details><summary>看提示</summary><p>能看到的只有频率，概率要靠模型算出来或者靠大数律倒推。想想一枚不知道是否均匀的硬币，你能拿到什么数据，又想回答什么问题。</p></details></div>
+
+          <p class="ex"><span class="ex-num">2.</span> 大数律保证频率靠近 \(p\)，那它能不能保证下一次抛硬币一定出现正面？</p>
+          <div class="answer"><details><summary>看提示</summary><p>不能。定理管的是一个概率序列的走向，不管单次结果。把「偏差超过 \(\varepsilon\) 的概率趋于零」和「偏差不会发生」分开想。</p></details></div>
+
+          <p class="ex"><span class="ex-num">3.</span> 实际问题里怎么判断两个事件独立？算不出来的时候你靠什么？</p>
+          <div class="answer"><details><summary>看提示</summary><p>多数时候靠的是对产生机制的理解：两次抛掷互不相干，因为硬币没有记忆。算不出来又拿不准时，就只能收集数据去检验，那是第九章的事。</p></details></div>
+        </div>
+
+      </div>
+
+      <h2 class="reveal">延伸阅读</h2>
+      <ul class="refs">
+        <li>浙江大学《概率论与数理统计》第四版，第一章 §3 与 §6、第五章 §1。本章的记号与例题口径以这本为准。</li>
+        <li>伯努利《推测术》（<em>Ars Conjectandi</em>，1713）第四部分。英译注本见 Edith Sylla 的译本，附有他原始证明的整理。</li>
+        <li>棣莫弗《机遇论》第二版（1738）序言，其中讨论频率稳定与正态逼近的段落，常被收在 Pearson 写的棣莫弗传记附录里。</li>
+        <li>Feller《概率论及其应用导论》第一卷第 1 章与第 4 章，对「频率为什么可以当概率用」讲得比课本细。</li>
+      </ul>
+
+    </article>
+  </div>
+
+  <div class="wrap">
+    <nav class="pager" aria-label="翻页">
+      <a class="pager-link prev" href="ch01.html"><span class="pager-dir">上一章</span><span class="pager-title">1654：一场通信与一个赌注</span></a>
+      <a class="pager-link next" href="ch03.html"><span class="pager-dir">下一章</span><span class="pager-title">1733 至 1812：从二项到钟形曲线</span></a>
+    </nav>
+  </div>
+
+</main>
+
+<footer class="footer field-dark">
+  <div class="wrap">
+    <p class="footer-mark">数学基础课</p>
+    <div class="footer-cols">
+      <div><p>三门课按同一套读法写：先看问题，再给定义与判别，最后落到计算与习题。</p></div>
+      <div><p><a href="index.html">概率论目录</a></p><p><a href="../index.html">返回主页</a></p></div>
+      <div><p>图示用脚本按真实数值画，公式由 KaTeX 排版。</p></div>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/katex/katex.min.js"></script>
+<script src="../assets/katex/auto-render.min.js"></script>
+<script src="../assets/site.js"></script>
+</body>
+</html>

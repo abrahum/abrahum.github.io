@@ -1,0 +1,45 @@
+<svg viewBox="0 0 720 440" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<text x="24.00" y="30.00" text-anchor="start" font-size="14.5" fill="var(--ink-2)">前 n 项平方倒数的和：走得慢，但确实停在 1.6449 上</text>
+<line x1="72.00" y1="296.28" x2="458.00" y2="296.28" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<line x1="72.00" y1="296.28" x2="72.00" y2="104.00" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<line x1="72.00" y1="137.30" x2="458.00" y2="137.30" stroke="var(--accent-line)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 6"/>
+<text x="458.00" y="127.30" text-anchor="end" font-size="14.5" fill="var(--ink)">π²/6 = 1.64493</text>
+<path d="M 94.71 296.28 L 117.41 234.65 L 140.12 207.26 L 162.82 191.85 L 185.53 181.99 L 208.24 175.15 L 230.94 170.12 L 253.65 166.26 L 276.35 163.22 L 299.06 160.75 L 321.76 158.72 L 344.47 157.01 L 367.18 155.55 L 389.88 154.29 L 412.59 153.19 L 435.29 152.23" fill="none" stroke="var(--accent-line)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="94.71" cy="296.28" r="4.0" fill="var(--prussian)"/>
+<circle cx="117.41" cy="234.65" r="4.0" fill="var(--prussian)"/>
+<circle cx="140.12" cy="207.26" r="4.0" fill="var(--prussian)"/>
+<circle cx="185.53" cy="181.99" r="4.0" fill="var(--prussian)"/>
+<circle cx="299.06" cy="160.75" r="4.0" fill="var(--prussian)"/>
+<circle cx="435.29" cy="152.23" r="4.0" fill="var(--prussian)"/>
+<text x="102.71" y="318.28" text-anchor="start" font-size="13.5" fill="var(--ink-2)">S(1) = 1</text>
+<text x="125.41" y="260.65" text-anchor="start" font-size="13.5" fill="var(--ink-2)">S(2) = 1.250</text>
+<text x="195.53" y="169.99" text-anchor="start" font-size="13.5" fill="var(--ink-2)">S(5) = 1.464</text>
+<text x="441.29" y="170.23" text-anchor="end" font-size="13.5" fill="var(--ink-2)">S(16) = 1.596</text>
+<line x1="94.71" y1="296.28" x2="94.71" y2="291.28" stroke="var(--ink-2)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="94.71" y="316.28" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">1</text>
+<line x1="185.53" y1="296.28" x2="185.53" y2="291.28" stroke="var(--ink-2)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="185.53" y="316.28" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">5</text>
+<line x1="299.06" y1="296.28" x2="299.06" y2="291.28" stroke="var(--ink-2)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="299.06" y="316.28" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">10</text>
+<line x1="412.59" y1="296.28" x2="412.59" y2="291.28" stroke="var(--ink-2)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="412.59" y="316.28" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">15</text>
+<text x="458.00" y="336.28" text-anchor="end" font-size="15" fill="var(--ink-3)" font-style="italic">n</text>
+<text x="526.00" y="96.00" text-anchor="start" font-size="15" fill="var(--ink)" font-weight="600">欧拉 1735 年的答案</text>
+<text x="526.00" y="136.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">S(1)</text>
+<text x="696.00" y="136.00" text-anchor="end" font-size="13.5" fill="var(--ink-2)">1.0000</text>
+<text x="526.00" y="164.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">S(2)</text>
+<text x="696.00" y="164.00" text-anchor="end" font-size="13.5" fill="var(--ink-2)">1.2500</text>
+<text x="526.00" y="192.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">S(3)</text>
+<text x="696.00" y="192.00" text-anchor="end" font-size="13.5" fill="var(--ink-2)">1.3611</text>
+<text x="526.00" y="220.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">S(4)</text>
+<text x="696.00" y="220.00" text-anchor="end" font-size="13.5" fill="var(--ink-2)">1.4236</text>
+<text x="526.00" y="248.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">S(10)</text>
+<text x="696.00" y="248.00" text-anchor="end" font-size="13.5" fill="var(--ink-2)">1.5498</text>
+<text x="526.00" y="276.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">S(100)</text>
+<text x="696.00" y="276.00" text-anchor="end" font-size="13.5" fill="var(--ink-2)">1.6350</text>
+<text x="526.00" y="310.00" text-anchor="start" font-size="14" fill="var(--ink)">目标</text>
+<text x="696.00" y="310.00" text-anchor="end" font-size="14" fill="var(--ink)">1.6449</text>
+<text x="526.00" y="356.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">雅各布·伯努利算到这一步</text>
+<text x="526.00" y="378.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">停住了：和看得见，写不出。</text>
+<text x="526.00" y="412.00" text-anchor="start" font-size="13.5" fill="var(--ink-3)">余项约 1/n，收敛极慢。</text>
+</svg>

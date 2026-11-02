@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>第一章 从《九章》的「方程」到消元法 · 线性代数</title>
+<meta name="description" content="线性方程组、增广矩阵、三种同解变形、行阶梯形与高斯消元，以及解的唯一、无解、无穷多解三种情形。">
+<link rel="stylesheet" href="../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="nav-brand" href="../index.html">数学基础课<span> 三门课，一套读法</span></a>
+    <nav class="nav-links" aria-label="主导航">
+      <a href="index.html#map">本课目录</a>
+      <a class="xl" href="../calculus/index.html">微积分</a>
+      <a class="xl" href="../probability/index.html">概率论</a>
+      <a class="xl" href="../complex/index.html">复变函数</a>
+      <a class="opt" href="ch02.html">下一章</a>
+    </nav>
+  </div>
+  <div class="nav-progress" aria-hidden="true"></div>
+</header>
+
+<main>
+
+  <section class="chapter">
+    <div class="wrap">
+      <div class="ch-hero-band">
+        <div>
+          <p class="ch-label reveal"><span>第一章</span><span class="ch-era">公元前 1 世纪至 1809 年</span></p>
+          <h1 class="ch-title reveal reveal-2">从《九章》的「方程」到消元法</h1>
+          <p class="ch-deck reveal reveal-3">《九章算术》第八章有十八道方程组题，做法是拿一行的数去减另一行，把未知数一个个消掉。这个动作和今天课本上的消元法几乎一样，只是古人写在算筹上，我们写在矩阵里。中间隔了一千九百年，欧洲人才给这套动作起了名字。</p>
+          <div class="ch-meta reveal reveal-3">
+            <div><strong>本章知识点</strong>线性方程组、增广矩阵、初等行变换、行阶梯形、解的三种情形</div>
+            <div><strong>历史坐标</strong>《九章算术》公元前 1 世纪，高斯 1809 年</div>
+            <div><strong>对应教材</strong>同济《线性代数》第一章、第三章</div>
+            <div><strong>前置</strong>会解二元一次方程组</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap ch-body">
+    <aside class="rail">
+      <p class="rail-title">本章提纲</p>
+      <ol>
+        <li><a href="#s-1">把方程组写成一张表</a></li>
+        <li><a href="#s-2">三种同解变形</a></li>
+        <li><a href="#s-3">化成阶梯形</a></li>
+        <li><a href="#s-4">解有几个</a></li>
+        <li><a href="#s-5">齐次方程组</a></li>
+        <li><a href="#s-manual">怎么算</a></li>
+        <li><a href="#s-examples">例题</a></li>
+        <li><a href="#s-exercises">习题</a></li>
+      </ol>
+      <p class="rail-title">历史坐标</p>
+      <p class="rail-who">《九章算术》公元前 1 世纪<br>刘徽 263 年作注<br>高斯 1809 年</p>
+    </aside>
+
+    <article class="prose">
+
+      <p class="lead reveal">《九章算术》第八章叫「方程」，第一题是这样的：上等的谷子三捆、中等的两捆、下等的一捆，一共打三十九斗；上等两捆、中等三捆、下等一捆，三十四斗；上等一捆、中等两捆、下等三捆，二十六斗。问三种谷子每捆各多少。这道题今天用消元法两分钟能算完，而书里给的做法两千年来几乎没有改动过。</p>
+
+      <h2 id="s-1" class="reveal">一、把方程组写成一张表</h2>
+
+      <p>设上、中、下三等每捆分别是 \(a,b,c\) 斗，题目就是三个方程：</p>
+
+      \[ \begin{cases} 3a+2b+c=39,\\ 2a+3b+c=34,\\ a+2b+3c=26. \end{cases} \]
+
+      <p>像这样，未知数都是一次的若干个方程放在一起叫<strong>线性方程组</strong>；使所有方程同时成立的一组数 \((a,b,c)\) 叫它的<strong>解</strong>，全部解构成的集合叫<strong>解集</strong>。</p>
+
+      <p>古人抄题的时候不写 \(a,b,c\)，只把数字摆成一张表：一「程」写成一列，从上到下是常数项和三个系数，所谓「实」放在最上面。</p>
+
+      <div class="figure">
+        <!--FIG la01_suanchou--><svg viewBox="0 0 720 400" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<text x="360.00" y="56.00" text-anchor="middle" font-size="15" fill="var(--ink)">一程写成一列，实数放在最上面</text>
+<text x="240.00" y="78.00" text-anchor="middle" font-size="14" fill="var(--ink-3)">第一程</text>
+<text x="360.00" y="78.00" text-anchor="middle" font-size="14" fill="var(--ink-3)">第二程</text>
+<text x="480.00" y="78.00" text-anchor="middle" font-size="14" fill="var(--ink-3)">第三程</text>
+<text x="162.00" y="129.00" text-anchor="end" font-size="15" fill="var(--ink-2)">实</text>
+<text x="162.00" y="191.00" text-anchor="end" font-size="15" fill="var(--ink-2)">下禾</text>
+<text x="162.00" y="253.00" text-anchor="end" font-size="15" fill="var(--ink-2)">中禾</text>
+<text x="162.00" y="315.00" text-anchor="end" font-size="15" fill="var(--ink-2)">上禾</text>
+<rect x="180.00" y="92.00" width="120.00" height="62.00" fill="var(--fig-fill)" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="240.00" y="132.00" text-anchor="middle" font-size="22" fill="var(--ink)">39</text>
+<rect x="300.00" y="92.00" width="120.00" height="62.00" fill="var(--fig-fill)" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="360.00" y="132.00" text-anchor="middle" font-size="22" fill="var(--ink)">34</text>
+<rect x="420.00" y="92.00" width="120.00" height="62.00" fill="var(--fig-fill)" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="480.00" y="132.00" text-anchor="middle" font-size="22" fill="var(--ink)">26</text>
+<rect x="180.00" y="154.00" width="120.00" height="62.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="240.00" y="194.00" text-anchor="middle" font-size="22" fill="var(--ink)">1</text>
+<rect x="300.00" y="154.00" width="120.00" height="62.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="360.00" y="194.00" text-anchor="middle" font-size="22" fill="var(--ink)">1</text>
+<rect x="420.00" y="154.00" width="120.00" height="62.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="480.00" y="194.00" text-anchor="middle" font-size="22" fill="var(--ink)">3</text>
+<rect x="180.00" y="216.00" width="120.00" height="62.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="240.00" y="256.00" text-anchor="middle" font-size="22" fill="var(--ink)">2</text>
+<rect x="300.00" y="216.00" width="120.00" height="62.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="360.00" y="256.00" text-anchor="middle" font-size="22" fill="var(--ink)">3</text>
+<rect x="420.00" y="216.00" width="120.00" height="62.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="480.00" y="256.00" text-anchor="middle" font-size="22" fill="var(--ink)">2</text>
+<rect x="180.00" y="278.00" width="120.00" height="62.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="240.00" y="318.00" text-anchor="middle" font-size="22" fill="var(--ink)">3</text>
+<rect x="300.00" y="278.00" width="120.00" height="62.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="360.00" y="318.00" text-anchor="middle" font-size="22" fill="var(--ink)">2</text>
+<rect x="420.00" y="278.00" width="120.00" height="62.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="480.00" y="318.00" text-anchor="middle" font-size="22" fill="var(--ink)">1</text>
+<text x="180.00" y="372.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">把这三列竖着读，就是三个方程：上禾 3 秉、中禾 2 秉、下禾 1 秉，共 39 斗，依此类推。</text>
+</svg>
+<!--/FIG la01_suanchou-->
+        <figcaption class="figcaption"><b>《九章》把一程写成一竖列，实数在最上。</b>今天横着写一行，是把这张表转了一下身，信息一个不少。图的读法与课本的增广矩阵只差一次转置。</figcaption>
+      </div>
+
+      <p>今天的写法是把每一程横过来，三行四个数排在一起，再用一条竖线把常数列隔开，写成</p>
+
+      \[ \left(\begin{array}{ccc|c} 3 & 2 & 1 & 39\\ 2 & 3 & 1 & 34\\ 1 & 2 & 3 & 26 \end{array}\right). \]
+
+      <p>这个对象叫<strong>增广矩阵</strong>，竖线左边是系数矩阵，右边是常数列。它把「未知数是谁」这件事完全省略了，只留数字。好处马上能看出来：既然未知数的名字无关紧要，变形的时候就只需要动数字。</p>
+
+      <p>方程个数不一定要等于未知数个数。三个未知数只给两个方程，解出来通常是一条直线；反过来两个未知数给三个方程，多半无解，因为第三个方程一般不会刚好被前两个满足。这一点等化成阶梯形之后会看得非常清楚，见本章第四节。</p>
+
+      
+
+      <details class="fold">
+        <summary>为什么可以只写数字不写未知数</summary>
+        <p>因为方程组里各项的位置是固定的：第一列永远是 \(a\) 的系数，第二列永远是 \(b\) 的。只要列的顺序不变，每个数字代表什么就不会混。课本第四章讲向量组时会给这件事一个更正式的说法：解方程组的过程，本质上是在处理三列向量之间的线性关系。</p>
+      </details>
+
+      <h2 id="s-2" class="reveal">二、三种同解变形</h2>
+
+      <p>解方程组天天在做的事只有三件：换两个方程的位置、把一个方程两边同乘非零数、把一个方程乘上某个数加到另一个方程上，对应到表上就是三种<strong>初等行变换</strong>：</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定义（初等行变换）</p>
+        <p>对矩阵的行做下面三种操作，叫初等行变换。一、交换两行；二、用非零数 \(k\) 乘某一行；三、把某一行的 \(k\) 倍加到另一行上。只做前两种的称为初等变换。</p>
+      </div>
+
+      <p>关键的一点是：<strong>做完这些操作，解集一点没变</strong>。交换行显然不影响；乘非零数只是把同一个方程两边放大了；把一行加到另一行，等于把两个成立的等式相加，得到的还是成立的等式，而且这个操作可以反着做回去，所以新旧两组方程是等价的。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定理</p>
+        <p>初等行变换把方程组变成同解方程组。也就是说，变换前后解集完全相同。</p>
+      </div>
+
+      <div class="archive reveal">
+        <p class="archive-when">263 年，洛阳</p>
+        <h3>刘徽给「方程」作的注</h3>
+        <p class="archive-quote">「令每行为率，二物者再程、三物者三程，皆如物数程之。」</p>
+        <p class="archive-source">刘徽《九章算术注》卷八</p>
+        <p>这句话说的是：有几个未知数就摆几程，摆成方阵再逐列相减。</p>
+        <p>刘徽还顺带解释了「方程」二字的来历：并列成方形叫「方」，比较程数叫「程」。后来这个词被借去翻译 equation，意思已经变了，今天说「方程」一般指含未知数的等式。</p>
+      </div>
+
+      <details class="fold">
+        <summary>为什么第三种变换不算作弊</summary>
+        <p>设第一个方程是 \(E_1=0\)，第二个是 \(E_2=0\)。把 \(E_2+kE_1\) 当新方程，它满足「原解代入为零」，所以新组不会多出解；反过来，由 \(E_1=0\) 与新方程可以减回去得到 \(E_2=0\)，所以也不会丢解。两个方向都成立，才叫同解。</p>
+      </details>
+
+      <h2 id="s-3" class="reveal">三、化成阶梯形</h2>
+
+      <p>三种变换配合起来用，目标是把表整理成一种特别好读的形状：每行第一个非零数出现在上一行第一个非零数的右边，它下面全是零。这种形状叫<strong>行阶梯形</strong>，每行第一个非零数叫<strong>主元</strong>。</p>
+
+      <p>要注意，我们做到阶梯形就收手，而不是继续消成对角线。若一路消下去，主元左右两侧全变零，解直接从表上读出来，但那要多花一倍的运算量。化成阶梯形再回代，是手算和机算都采用的折中。</p>
+
+      <p>具体的动作是：先拿第一行去消掉下面各行第一列的数，再拿第二行去消掉它下面第二列的数，一路做到最下面。课本把它叫<strong>消元法</strong>，欧洲则叫高斯消元法。</p>
+
+      <div class="figure">
+        <!--FIG la01_steps--><svg viewBox="0 0 720 420" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<text x="232.00" y="96.00" text-anchor="middle" font-size="15" fill="var(--ink)">原来</text>
+<rect x="40.00" y="120.00" width="88.00" height="38.00" fill="none" stroke="none" stroke-width="0"/>
+<text x="84.00" y="150.00" text-anchor="middle" font-size="19" fill="var(--ink)">1</text>
+<rect x="136.00" y="120.00" width="88.00" height="38.00" fill="none" stroke="none" stroke-width="0"/>
+<text x="180.00" y="150.00" text-anchor="middle" font-size="19" fill="var(--ink)">2</text>
+<rect x="232.00" y="120.00" width="88.00" height="38.00" fill="none" stroke="none" stroke-width="0"/>
+<text x="276.00" y="150.00" text-anchor="middle" font-size="19" fill="var(--ink)">3</text>
+<rect x="346.00" y="120.00" width="88.00" height="38.00" fill="none" stroke="none" stroke-width="0"/>
+<text x="390.00" y="150.00" text-anchor="middle" font-size="19" fill="var(--ink)">26</text>
+<rect x="40.00" y="166.00" width="88.00" height="38.00" fill="none" stroke="none" stroke-width="0"/>
+<text x="84.00" y="196.00" text-anchor="middle" font-size="19" fill="var(--ink)">2</text>
+<rect x="136.00" y="166.00" width="88.00" height="38.00" fill="none" stroke="none" stroke-width="0"/>
+<text x="180.00" y="196.00" text-anchor="middle" font-size="19" fill="var(--ink)">3</text>
+<rect x="232.00" y="166.00" width="88.00" height="38.00" fill="none" stroke="none" stroke-width="0"/>
+<text x="276.00" y="196.00" text-anchor="middle" font-size="19" fill="var(--ink)">1</text>
+<rect x="346.00" y="166.00" width="88.00" height="38.00" fill="none" stroke="none" stroke-width="0"/>
+<text x="390.00" y="196.00" text-anchor="middle" font-size="19" fill="var(--ink)">34</text>
+<rect x="40.00" y="212.00" width="88.00" height="38.00" fill="none" stroke="none" stroke-width="0"/>
+<text x="84.00" y="242.00" text-anchor="middle" font-size="19" fill="var(--ink)">3</text>
+<rect x="136.00" y="212.00" width="88.00" height="38.00" fill="none" stroke="none" stroke-width="0"/>
+<text x="180.00" y="242.00" text-anchor="middle" font-size="19" fill="var(--ink)">2</text>
+<rect x="232.00" y="212.00" width="88.00" height="38.00" fill="none" stroke="none" stroke-width="0"/>
+<text x="276.00" y="242.00" text-anchor="middle" font-size="19" fill="var(--ink)">1</text>
+<rect x="346.00" y="212.00" width="88.00" height="38.00" fill="none" stroke="none" stroke-width="0"/>
+<text x="390.00" y="242.00" text-anchor="middle" font-size="19" fill="var(--ink)">39</text>
+<text x="232.00" y="300.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">三行就是一个增广矩阵</text>
+<text x="446.00" y="189.00" text-anchor="middle" font-size="22" fill="var(--ink-3)">→</text>
+<text x="464.00" y="96.00" text-anchor="middle" font-size="15" fill="var(--ink)">消去第一列</text>
+<rect x="272.00" y="120.00" width="88.00" height="38.00" fill="none" stroke="none" stroke-width="0"/>
+<text x="316.00" y="150.00" text-anchor="middle" font-size="19" fill="var(--ink)">1</text>
+<rect x="368.00" y="120.00" width="88.00" height="38.00" fill="none" stroke="none" stroke-width="0"/>
+<text x="412.00" y="150.00" text-anchor="middle" font-size="19" fill="var(--ink)">2</text>
+<rect x="464.00" y="120.00" width="88.00" height="38.00" fill="none" stroke="none" stroke-width="0"/>
+<text x="508.00" y="150.00" text-anchor="middle" font-size="19" fill="var(--ink)">3</text>
+<rect x="578.00" y="120.00" width="88.00" height="38.00" fill="none" stroke="none" stroke-width="0"/>
+<text x="622.00" y="150.00" text-anchor="middle" font-size="19" fill="var(--ink)">26</text>
+<rect x="272.00" y="166.00" width="88.00" height="38.00" fill="none" stroke="none" stroke-width="0"/>
+<text x="316.00" y="196.00" text-anchor="middle" font-size="19" fill="var(--ink-3)">0</text>
+<rect x="368.00" y="166.00" width="88.00" height="38.00" fill="none" stroke="none" stroke-width="0"/>
+<text x="412.00" y="196.00" text-anchor="middle" font-size="19" fill="var(--ink)">-1</text>
+<rect x="464.00" y="166.00" width="88.00" height="38.00" fill="none" stroke="none" stroke-width="0"/>
+<text x="508.00" y="196.00" text-anchor="middle" font-size="19" fill="var(--ink)">-5</text>
+<rect x="578.00" y="166.00" width="88.00" height="38.00" fill="none" stroke="none" stroke-width="0"/>
+<text x="622.00" y="196.00" text-anchor="middle" font-size="19" fill="var(--ink)">-18</text>
+<rect x="272.00" y="212.00" width="88.00" height="38.00" fill="none" stroke="none" stroke-width="0"/>
+<text x="316.00" y="242.00" text-anchor="middle" font-size="19" fill="var(--ink-3)">0</text>
+<rect x="368.00" y="212.00" width="88.00" height="38.00" fill="none" stroke="none" stroke-width="0"/>
+<text x="412.00" y="242.00" text-anchor="middle" font-size="19" fill="var(--ink)">-4</text>
+<rect x="464.00" y="212.00" width="88.00" height="38.00" fill="none" stroke="none" stroke-width="0"/>
+<text x="508.00" y="242.00" text-anchor="middle" font-size="19" fill="var(--ink)">-8</text>
+<rect x="578.00" y="212.00" width="88.00" height="38.00" fill="none" stroke="none" stroke-width="0"/>
+<text x="622.00" y="242.00" text-anchor="middle" font-size="19" fill="var(--ink)">-39</text>
+<text x="464.00" y="300.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">第一行乘 -2、-3 加到后两行</text>
+<text x="678.00" y="189.00" text-anchor="middle" font-size="22" fill="var(--ink-3)">→</text>
+<text x="696.00" y="96.00" text-anchor="middle" font-size="15" fill="var(--ink)">化成阶梯</text>
+<rect x="504.00" y="120.00" width="88.00" height="38.00" fill="var(--fig-fill-2)" stroke="none" stroke-width="0"/>
+<text x="548.00" y="150.00" text-anchor="middle" font-size="19" fill="var(--ink)">1</text>
+<rect x="600.00" y="120.00" width="88.00" height="38.00" fill="var(--fig-fill-2)" stroke="none" stroke-width="0"/>
+<text x="644.00" y="150.00" text-anchor="middle" font-size="19" fill="var(--ink)">2</text>
+<rect x="696.00" y="120.00" width="88.00" height="38.00" fill="var(--fig-fill-2)" stroke="none" stroke-width="0"/>
+<text x="740.00" y="150.00" text-anchor="middle" font-size="19" fill="var(--ink)">3</text>
+<rect x="810.00" y="120.00" width="88.00" height="38.00" fill="var(--fig-fill-2)" stroke="none" stroke-width="0"/>
+<text x="854.00" y="150.00" text-anchor="middle" font-size="19" fill="var(--ink)">26</text>
+<rect x="504.00" y="166.00" width="88.00" height="38.00" fill="none" stroke="none" stroke-width="0"/>
+<text x="548.00" y="196.00" text-anchor="middle" font-size="19" fill="var(--ink-3)">0</text>
+<rect x="600.00" y="166.00" width="88.00" height="38.00" fill="var(--fig-fill-2)" stroke="none" stroke-width="0"/>
+<text x="644.00" y="196.00" text-anchor="middle" font-size="19" fill="var(--ink)">1</text>
+<rect x="696.00" y="166.00" width="88.00" height="38.00" fill="var(--fig-fill-2)" stroke="none" stroke-width="0"/>
+<text x="740.00" y="196.00" text-anchor="middle" font-size="19" fill="var(--ink)">5</text>
+<rect x="810.00" y="166.00" width="88.00" height="38.00" fill="var(--fig-fill-2)" stroke="none" stroke-width="0"/>
+<text x="854.00" y="196.00" text-anchor="middle" font-size="19" fill="var(--ink)">18</text>
+<rect x="504.00" y="212.00" width="88.00" height="38.00" fill="none" stroke="none" stroke-width="0"/>
+<text x="548.00" y="242.00" text-anchor="middle" font-size="19" fill="var(--ink-3)">0</text>
+<rect x="600.00" y="212.00" width="88.00" height="38.00" fill="none" stroke="none" stroke-width="0"/>
+<text x="644.00" y="242.00" text-anchor="middle" font-size="19" fill="var(--ink-3)">0</text>
+<rect x="696.00" y="212.00" width="88.00" height="38.00" fill="var(--fig-fill-2)" stroke="none" stroke-width="0"/>
+<text x="740.00" y="242.00" text-anchor="middle" font-size="19" fill="var(--ink)">12</text>
+<rect x="810.00" y="212.00" width="88.00" height="38.00" fill="var(--fig-fill-2)" stroke="none" stroke-width="0"/>
+<text x="854.00" y="242.00" text-anchor="middle" font-size="19" fill="var(--ink)">33</text>
+<text x="696.00" y="300.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">第二行乘 4 加到第三行</text>
+<text x="40.00" y="368.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">竖线右边是常数列。阴影里的三个数就是主元，回到原方程逐个回代，解就出来了。</text>
+</svg>
+<!--/FIG la01_steps-->
+        <figcaption class="figcaption"><b>三步就够：先消第一列，再消第二列。</b>阴影里是被保留下来的主元。化成阶梯形之后不用再往下做，直接回代即可。</figcaption>
+      </div>
+
+      <p>拿上面那道题做一遍。第一行和第三行换一下位置，让主元变成 1；再用第一行把后两行的第一列消成零；第二行乘 -1，然后把它加到第三行。三步之后是</p>
+
+      \[ \left(\begin{array}{ccc|c} 1 & 2 & 3 & 26\\ 0 & 1 & 5 & 18\\ 0 & 0 & 12 & 33 \end{array}\right). \]
+
+      <p>从这里往下读最容易：第三行说 \(12c=33\)，所以 \(c=11/4\)；代回第二行得 \(b=18-5\cdot\tfrac{11}{4}=\tfrac{17}{4}\)；再代回第一行得 \(a=26-2\cdot\tfrac{17}{4}-3\cdot\tfrac{11}{4}=\tfrac{37}{4}\)。验算 \(3\cdot\tfrac{37}{4}+2\cdot\tfrac{17}{4}+\tfrac{11}{4}=\tfrac{111+34+11}{4}=39\)，对上了。这一步往回代的过程叫<strong>回代</strong>。</p>
+
+      <p>《九章》里没有矩阵，也没有「回代」这个词，它把整个动作叫「直除」，一路把每一程减到底，答案直接落在表上，办法一模一样，只是没人给它单独命名。</p>
+
+      <h2 id="s-4" class="reveal">四、解有几个</h2>
+
+      <p>化成阶梯形之后，答案的形状有三种，看清楚最后一行就够了。</p>
+
+      <div class="figure">
+        <!--FIG la01_lines--><svg viewBox="0 0 720 300" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<text x="120.00" y="44.00" text-anchor="middle" font-size="15" fill="var(--ink)">一个交点：唯一解</text>
+<line x1="34.00" y1="168.00" x2="206.00" y2="168.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+<line x1="120.00" y1="74.00" x2="120.00" y2="258.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+<line x1="44.00" y1="122.40" x2="196.00" y2="213.60" stroke="var(--accent-line)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="44.00" y1="213.60" x2="196.00" y2="122.40" stroke="var(--ink-2)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="120.00" cy="168.00" r="5" fill="var(--prussian)"/>
+<text x="360.00" y="44.00" text-anchor="middle" font-size="15" fill="var(--ink)">两条平行线：无解</text>
+<line x1="274.00" y1="168.00" x2="446.00" y2="168.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+<line x1="360.00" y1="74.00" x2="360.00" y2="258.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+<line x1="284.00" y1="134.00" x2="436.00" y2="172.00" stroke="var(--accent-line)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="284.00" y1="194.00" x2="436.00" y2="232.00" stroke="var(--ink-2)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="600.00" y="44.00" text-anchor="middle" font-size="15" fill="var(--ink)">两条线重合：无穷多解</text>
+<line x1="514.00" y1="168.00" x2="686.00" y2="168.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+<line x1="600.00" y1="74.00" x2="600.00" y2="258.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+<line x1="524.00" y1="138.00" x2="676.00" y2="179.80" stroke="var(--accent-line)" stroke-width="5.2" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="524.00" y1="138.00" x2="676.00" y2="179.80" stroke="var(--ink-2)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="7 7"/>
+<text x="634.00" y="214.00" text-anchor="middle" font-size="13" fill="var(--ink-3)">同一条直线</text>
+</svg>
+<!--/FIG la01_lines-->
+        <figcaption class="figcaption"><b>二元情形下三种解的几何样子。</b>三条情形对应阶梯形最后一行是「非零主元」「零等于非零」「整行全零」。三个未知数时图形换成三张平面，结论一字不变。</figcaption>
+      </div>
+
+      <ul>
+        <li><strong>唯一解。</strong>每一行都有主元，个数正好等于未知数个数，回代就有唯一答案。</li>
+        <li><strong>无解。</strong>出现形如 \((0\ 0\ 0\mid d)\) 且 \(d\ne0\) 的一行，意思是 \(0=d\)，矛盾。</li>
+        <li><strong>无穷多解。</strong>主元个数少于未知数个数，但没出现矛盾行。这时把没有主元的那几列对应的未知数取作自由参数，解可以写成 \(x=x_0+t v\) 的样子。</li>
+      </ul>
+
+      <p>要一句话说清这三种情形，得用<strong>秩</strong>：系数矩阵的秩记作 \(r(A)\)，增广矩阵的秩记作 \(r(A\mid b)\)，未知数个数是 \(n\)。那么 \(r(A)\ne r(A\mid b)\) 时无解；\(r(A)=r(A\mid b)=n\) 时有唯一解；\(r(A)=r(A\mid b)&lt;n\) 时有无穷多解。秩的正式定义放在第四章，这里只要知道它数的是「阶梯形里有几个主元」。</p>
+
+      <p>无穷多解的写法值得单独看一眼：取方程组 \(x+y+z=1,\ x-y=0\)，消元后主元落在前两个未知数上，\(z\) 没有主元就留给参数 \(t\)，代回去得 \(x=y=\tfrac{1-t}{2}\)，于是一整族解可以写成 \((x,y,z)=\left(\tfrac12,\tfrac12,0\right)+t\left(-\tfrac12,-\tfrac12,1\right)\)。前一项是解集里的一个定点，后一项说明方向：\(t\) 怎么变，点就沿着一条直线滑。这条直线才是方程组真正的答案。</p>
+
+      <h2 id="s-5" class="reveal">五、齐次方程组</h2>
+
+      <p>常数列全是零的方程组叫<strong>齐次线性方程组</strong>。它永远有解，所有未知数取零就是一组，叫零解，所以对它只剩一个问题：除零解之外还有没有别的解。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定理</p>
+        <p>设齐次方程组有 \(n\) 个未知数，系数矩阵的秩为 \(r\)。则 \(r=n\) 时只有零解；\(r \lt n\) 时有无穷多解，即存在非零解。</p>
+      </div>
+
+      <p>道理很直接：齐次组不会出现 \(0=d\) 那种矛盾行，所以只剩唯一解与无穷多解两种，而 \(r\) 数的是主元个数。\(r \lt n\) 说明至少有一个未知数没有主元，可以任取，解就多得数不清。</p>
+
+      <p>比如 \(x+y+z=0,\ x-y=0\)，两个方程把 \(x,y\) 都定成 \(z\) 的倍数：\(x=y=-\tfrac{z}{2}\)；取 \(z=2\) 得 \((-1,-1,2)\)，取 \(z=-2\) 得 \((1,1,-2)\)，两者只差一个常数倍。解集是一条过原点的直线，而这条直线由任何一个非零解完全决定。第四章会把这样的解叫<strong>基础解系</strong>，那时你会发现：齐次组解空间的维数正好是 \(n-r\)。</p>
+
+      <details class="fold">
+        <summary>无解为什么不可能出现在齐次组里</summary>
+        <p>无解要有矛盾行，而齐次组的常数项在行变换中始终是零的线性组合、始终为零，所以不可能出现 \(0=d\) 且 \(d\ne0\)；零向量永远是一个解，解集非空，能出问题的只剩「解是否唯一」。</p>
+      </details>
+
+      <h2 id="s-manual" class="reveal">怎么算</h2>
+
+      <ul>
+        <li><strong>先看形状再动手。</strong>未知数个数 \(n\) 记下来，最后判断解的情形要用。</li>
+        <li><strong>主元先凑 1。</strong>若第一列某个位置是 1，换到第一行；没有就用分数或直接相除，避免一路带着分母算。</li>
+        <li><strong>只往下消。</strong>用第一行消掉它下面的第一列，再用第二行消掉它下面的第二列，不要来回折腾。</li>
+        <li><strong>出现零行就记一笔。</strong>零行是正常的；零行右边不是零就是矛盾，立刻停手写「无解」。</li>
+        <li><strong>回代从下往上。</strong>先解出最后一个未知数，再一路往上代。至少代回一个原方程验算。</li>
+      </ul>
+
+      <details class="fold">
+        <summary>主元能不能选得更好</summary>
+        <p>手算时选哪个都行，机算时不一样：若主元是一个很小的数，舍入误差会被放大得很厉害。实际软件会先在当前列里挑绝对值最大的那个换上来，叫列主元消去法。考试不用管，写论文要用。</p>
+      </details>
+
+      <h2 id="s-examples" class="reveal">例题</h2>
+
+      <div class="example">
+        <p class="example-head">例 <span>1</span>　解方程组 \(x+y+z=6,\ 2x-y+z=3,\ x+2y-z=2\)。</p>
+        <p class="solution">写出增广矩阵，第二行减两倍第一行得 \((0,-3,-1\mid-9)\)，第三行减第一行得 \((0,1,-2\mid-4)\)。交换这两行使主元为 1，再消一次得 \((0,0,-7\mid-21)\)，于是 \(z=3\)，回代得 \(y=2\)，\(x=1\)。</p>
+      </div>
+
+      <div class="example">
+        <p class="example-head">例 <span>2</span>　讨论 \(a,b\) 取何值时，方程组 \(x+y+z=1,\ x+ay+z=1,\ x+y+az=b\) 有唯一解、无解、无穷多解。</p>
+        <p class="solution">消去第一列后剩下两行 \((0,a-1,0\mid0)\) 与 \((0,0,a-1\mid b-1)\)。若 \(a\ne1\)，两行都有主元，唯一解。若 \(a=1\)，两行都变成零行，右边分别是 0 与 \(b-1\)：\(b\ne1\) 时出现矛盾，无解；\(b=1\) 时第三行整行是零，只剩一个方程，无穷多解。</p>
+      </div>
+
+      <div class="example">
+        <p class="example-head">例 <span>3</span>　\(\lambda\) 取何值时，齐次方程组 \(\lambda x+y+z=0,\ x+\lambda y+z=0,\ x+y+\lambda z=0\) 有非零解。</p>
+        <p class="solution">消元后阶梯形的第三行是 \((0,0,\lambda+2\mid0)\) 或类似形状，出现零主元的条件是 \(\lambda=1\) 或 \(\lambda=-2\)。\(\lambda=1\) 时三个方程相同，解是一个平面；\(\lambda=-2\) 时三行相加为零，解是一条直线。两者都对应 \(r \lt 3\)，所以有非零解。</p>
+      </div>
+
+      <h2 id="s-exercises" class="reveal">习题</h2>
+
+      <div class="exercises">
+
+        <div class="ex-group">
+          <p class="ex-group-head">A 档 <span>巩固定义与基本计算，每题五分钟内</span></p>
+
+          <p class="ex"><span class="ex-num">1.</span> 把 \(3x-2y+z=5,\ x+y-2z=0,\ 2x-y+3z=7\) 写成增广矩阵。</p>
+          <div class="answer"><details><summary>看答案</summary><p>三行四列，前三列依次是 \(x,y,z\) 的系数，竖线后是常数：\((3,-2,1\mid5)\)、\((1,1,-2\mid0)\)、\((2,-1,3\mid7)\)。</p></details></div>
+
+          <p class="ex"><span class="ex-num">2.</span> 解 \(x+y=3,\ x-y=1\)。</p>
+          <div class="answer"><details><summary>看答案</summary><p>两式相加得 \(2x=4\)，\(x=2\)，回代得 \(y=1\)。</p></details></div>
+
+          <p class="ex"><span class="ex-num">3.</span> 判断 \(\left(\begin{array}{cc|c}1&amp;2&amp;3\\2&amp;4&amp;6\end{array}\right)\) 对应方程组的解的情况。</p>
+          <div class="answer"><details><summary>看答案</summary><p>第二行是第一行的两倍，消元后变成零行且右边为零，没有矛盾。主元只有 1 个，未知数 2 个，所以有无穷多解：\(x=3-2y\)，\(y\) 任意。</p></details></div>
+
+          <p class="ex"><span class="ex-num">4.</span> 用行变换把 \(\left(\begin{array}{ccc}2&amp;1&amp;3\\4&amp;3&amp;5\\1&amp;1&amp;1\end{array}\right)\) 化成行阶梯形。</p>
+          <div class="answer"><details><summary>看答案</summary><p>先把第三行换到第一行，再消去后两行第一列，得 \((1,1,1)\)、\((0,-1,1)\)、\((0,1,3)\)；把第二行加到第三行，得 \((1,1,1)\)、\((0,-1,1)\)、\((0,0,4)\)。</p></details></div>
+
+          <p class="ex"><span class="ex-num">5.</span> 齐次方程组 \(x+y+z=0,\ 2x+2y+2z=0\) 有多少解。</p>
+          <div class="answer"><details><summary>看答案</summary><p>两行成比例，秩为 1，未知数 3 个，\(1 \lt 3\)，所以有无穷多解，解是一个平面 \(x+y+z=0\)。</p></details></div>
+
+          <p class="ex"><span class="ex-num">6.</span> 解 \(3x+2y=7,\ 6x+4y=14\)。</p>
+          <div class="answer"><details><summary>看答案</summary><p>第二行是第一行的两倍，消元后为零行。无穷多解：\(y=t\)，\(x=\dfrac{7-2t}{3}\)。</p></details></div>
+        </div>
+
+        <div class="ex-group">
+          <p class="ex-group-head">B 档 <span>综合题，接近期末与考研难度</span></p>
+
+          <p class="ex"><span class="ex-num">1.</span> 解《九章》第一题：三禾问题。求出上、中、下禾每捆各多少斗。</p>
+          <div class="answer"><details><summary>看答案</summary><p>化阶梯形得 \((0,0,12\mid33)\)，即 \(c=\tfrac{11}{4}\)；回代得 \(b=\tfrac{17}{4}\)，\(a=\tfrac{37}{4}\)。也就是上禾九斗二升五合、中禾四斗二升五合、下禾二斗七升五合。</p></details></div>
+
+          <p class="ex"><span class="ex-num">2.</span> 讨论 \(a\) 取何值时 \(x+y+z=1,\ x+ay+z=1,\ x+y+az=1\) 有唯一解、无解、无穷多解。</p>
+          <div class="answer"><details><summary>看答案</summary><p>这是例 2 中 \(b=1\) 的情形。\(a\ne1\) 时唯一解 \(x=z=0,\ y=1\)；\(a=1\) 时三个方程相同，无穷多解 \(x+y+z=1\)。这个方程组不会出现无解。</p></details></div>
+
+          <p class="ex"><span class="ex-num">3.</span> 三个平面两两相交、三条交线互相平行，对应方程组有解吗？说明理由。</p>
+          <div class="answer"><details><summary>看答案</summary><p>无解。三张平面没有公共点，说明方程组矛盾。阶梯形里会出现一行 \((0,0,0\mid d)\) 且 \(d\ne0\)，也就是 \(r(A) \lt r(A\mid b)\)。</p></details></div>
+
+          <p class="ex"><span class="ex-num">4.</span> \(\lambda\) 取何值时方程组 \(\lambda x+y+z=0,\ x+\lambda y+z=0,\ x+y+\lambda z=0\) 只有零解。</p>
+          <div class="answer"><details><summary>看答案</summary><p>消元后主元全在的条件是 \(\lambda\ne1\) 且 \(\lambda\ne-2\)。此时秩为 3，等于未知数个数，只有零解。</p></details></div>
+        </div>
+
+        <div class="ex-group">
+          <p class="ex-group-head">C 档 <span>拓展与历史原题</span></p>
+
+          <p class="ex"><span class="ex-num">1.</span>（高斯，1809）给三个数据点 \((0,1),(1,2),(2,4)\)，用最小二乘拟合直线 \(y=a+bx\)，写出关于 \(a,b\) 的方程组并求解。</p>
+          <div class="answer"><details><summary>看答案</summary><p>两个正规方程是 \(3a+3b=7\) 与 \(3a+5b=10\)。解得 \(b=\tfrac{3}{2}\)，\(a=\tfrac{5}{6}\)，直线是 \(y=\tfrac56+\tfrac32x\)。高斯正是为这类最小二乘问题系统使用消元法的，所以后人把名字安在它头上。</p></details></div>
+
+          <p class="ex"><span class="ex-num">2.</span> 证明：\(n\) 个未知数、\(n\) 个方程的齐次方程组有非零解，当且仅当消元化出的阶梯形里主元少于 \(n\) 个。</p>
+          <div class="answer"><details><summary>看答案</summary><p>充分性：主元少于 \(n\) 时至少有一个未知数可任取，取不为零即可得非零解。必要性：若主元恰有 \(n\) 个，每个未知数都被主元唯一确定，回代只能得全零。这条结论在第二章会换一个说法：系数行列式为零。</p></details></div>
+
+          <p class="ex"><span class="ex-num">3.</span> 举一个 \(m \gt n\) 却无解的方程组，再举一个 \(m \gt n\) 但有解的。说明「方程比未知数多」为什么不能保证有解。</p>
+          <div class="answer"><details><summary>看答案</summary><p>无解的例子：\(x+y=1,\ x+y=2\)。有解的例子：\(x+y=1,\ x+y=1,\ 2x+2y=2\)。多出来的方程若与前面的相容，只是重复信息；若不相容，就是矛盾。所以关键在秩，不在个数。</p></details></div>
+        </div>
+
+        <div class="ex-group">
+          <p class="ex-group-head">思考题 <span>不设标准答案，只给提示</span></p>
+
+          <p class="ex"><span class="ex-num">1.</span> 初等行变换里为什么规定乘数不能为零，也不允许「交换两列」？</p>
+          <div class="answer"><details><summary>看提示</summary><p>乘零会把一个方程整条抹掉，丢掉的解拾不回来，反向操作不存在。交换列则是在给未知数换名字，方程本身没变，但你的 \(x\) 已经不再是原来那个 \(x\)。什么时候允许换列，第四章讲列向量时会回答。</p></details></div>
+
+          <p class="ex"><span class="ex-num">2.</span> 把某一行所有元素乘以 2，解集变不变？如果把整张表乘以 2 呢？</p>
+          <div class="answer"><details><summary>看提示</summary><p>第一问不变，因为那只是把同一个等式两边放大。第二问要想清楚：整张表乘 2 等于所有方程两边都乘 2，仍然同解。真正会改变解集的是只乘左边的系数、不乘右边，那就变成另一个方程组了。</p></details></div>
+
+          <p class="ex"><span class="ex-num">3.</span> 三个未知数一般要几个方程才能定出唯一解？几何上这句话是什么意思。</p>
+          <div class="answer"><details><summary>看提示</summary><p>一般需要三个，对应三张平面交于一点。少于三个时交出来的是线或面，点定不下来；多于三个则可能过度约束，多出来的平面未必穿过那个点。所谓「一般」是相对于「秩恰好等于未知数个数」说的，不是数个数就够。</p></details></div>
+        </div>
+
+      </div>
+
+      <h2 class="reveal">延伸阅读</h2>
+      <ul class="refs">
+        <li>同济大学数学系《线性代数》第六版，第一章与第三章。本章的记号与例题口径以这本为准。</li>
+        <li>《九章算术》卷八「方程」，配合刘徽注一起看，能看出「直除」与消元法的对应。</li>
+        <li>莫里斯·克莱因《古今数学思想》，第一册关于中国古代代数的部分。</li>
+        <li>Gilbert Strang, <em>Introduction to Linear Algebra</em>，第一章。用消元法切入的方式与本书一致，例题更多。</li>
+      </ul>
+
+    </article>
+  </div>
+
+  <div class="wrap">
+    <nav class="pager" aria-label="翻页">
+      <a class="pager-link prev" href="index.html"><span class="pager-dir">上一页</span><span class="pager-title">线性代数目录</span></a>
+      <a class="pager-link next" href="ch02.html"><span class="pager-dir">下一章</span><span class="pager-title">行列式：一个数决定解的存在</span></a>
+    </nav>
+  </div>
+
+</main>
+
+<footer class="footer field-dark">
+  <div class="wrap">
+    <p class="footer-mark">数学基础课</p>
+    <div class="footer-cols">
+      <div><p>三门课按同一套读法写：先看问题，再给定义与判别，最后落到计算与习题。</p></div>
+      <div><p><a href="index.html">线性代数目录</a></p><p><a href="../index.html">返回主页</a></p></div>
+      <div><p>图示用脚本按真实数值画，公式由 KaTeX 排版。</p></div>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/katex/katex.min.js"></script>
+<script src="../assets/katex/auto-render.min.js"></script>
+<script src="../assets/site.js"></script>
+</body>
+</html>

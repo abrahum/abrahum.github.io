@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>第四章 秩与解的结构 · 线性代数</title>
+<meta name="description" content="矩阵的秩、有解判定定理、基础解系与 n−r、非齐次组的通解结构。">
+<link rel="stylesheet" href="../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="nav-brand" href="../index.html">数学基础课<span> 三门课，一套读法</span></a>
+    <nav class="nav-links" aria-label="主导航">
+      <a href="index.html#map">本课目录</a>
+      <a class="xl" href="../calculus/index.html">微积分</a>
+      <a class="xl" href="../probability/index.html">概率论</a>
+      <a class="xl" href="../complex/index.html">复变函数</a>
+      <a class="opt" href="ch05.html">下一章</a>
+    </nav>
+  </div>
+  <div class="nav-progress" aria-hidden="true"></div>
+</header>
+
+<main>
+
+  <section class="chapter">
+    <div class="wrap">
+      <div class="ch-hero-band">
+        <div>
+          <p class="ch-label reveal"><span>第四章</span><span class="ch-era">公元前 1 世纪至 1884 年</span></p>
+          <h1 class="ch-title reveal reveal-2">秩与解的结构</h1>
+          <p class="ch-deck reveal reveal-3">解方程组的动作第一章就学会了，可是没人回答一个更基本的问题：一组方程到底有几个解。回答它需要一个数，这个数数的是矩阵里真正独立的信息有几条。1884 年前后，弗罗贝尼乌斯给这个数起了名字，叫矩阵的秩，并用它一句话判定了方程组有没有解。</p>
+          <div class="ch-meta reveal reveal-3">
+            <div><strong>本章知识点</strong>矩阵等价、矩阵的秩、有解判定、基础解系、通解结构</div>
+            <div><strong>历史坐标</strong>《九章算术》，弗罗贝尼乌斯 1884 年前后</div>
+            <div><strong>对应教材</strong>同济《线性代数》第四章</div>
+            <div><strong>前置</strong>会化行阶梯形，会算行列式</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap ch-body">
+    <aside class="rail">
+      <p class="rail-title">本章提纲</p>
+      <ol>
+        <li><a href="#s-1">初等变换与矩阵等价</a></li>
+        <li><a href="#s-2">秩：一个数数清主元</a></li>
+        <li><a href="#s-3">有解的判定</a></li>
+        <li><a href="#s-4">齐次组与基础解系</a></li>
+        <li><a href="#s-5">非齐次组的通解</a></li>
+        <li><a href="#s-manual">怎么算</a></li>
+        <li><a href="#s-examples">例题</a></li>
+        <li><a href="#s-exercises">习题</a></li>
+      </ol>
+      <p class="rail-title">历史坐标</p>
+      <p class="rail-who">《九章算术》公元前 1 世纪<br>弗罗贝尼乌斯 1884 年前后<br>克罗内克 1880 年代</p>
+    </aside>
+
+    <article class="prose">
+
+      <p class="lead reveal">第一章把方程组化成阶梯形，答案就跟着出来了，那套动作只教你怎么算。要看懂阶梯形的最后几行，得先有一个数，用它把方程组的命运分成三种。这个数在《九章》的直除里已经悄悄在用，只是等到 19 世纪才有了名字。</p>
+
+      <h2 id="s-1" class="reveal">一、初等变换与矩阵等价</h2>
+
+      <p>第三章用过初等变换，那一节只许动行，三种动作分别是交换两行、用非零数乘某一行、把一行的 \(k\) 倍加到另一行。矩阵的初等变换放宽了一步，三种行变换与三种列变换合起来共六种，列上也能交换、也能乘非零数、也能把一列的倍数加到另一列。它们的共同点是都等于乘一个可逆的初等矩阵，所以每一步都能反着做回去，做过的动作不会丢信息。</p>
+
+      <p>这六种动作能带来一个分类。两个同型矩阵若能用有限次初等变换互相化过去，就叫<strong>等价</strong>，记作 \(A\sim B\)。等价和相等是两件事，相等要求每个位置上的数都一样，等价只要求两个矩阵的秩一样：秩一样的时候，两边都能化到同一个标准形。这个分类在第三章讲分块矩阵时露过一次面，到这里可以正式写下来了。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定义（矩阵等价）</p>
+        <p>设 \(A,B\) 都是 \(m\times n\) 矩阵，若 \(A\) 经有限次初等变换可以化成 \(B\)，则称 \(A\) 与 \(B\) 等价，记作 \(A\sim B\)。等价是自反的、对称的、传递的；同型矩阵等价的充要条件是 \(r(A)=r(B)\)，此时两者都等价于同一个标准形 \(\left(\begin{smallmatrix}I_r&amp;O\\O&amp;O\end{smallmatrix}\right)\)。</p>
+      </div>
+
+      <p>标准形的好处是把「一大堆矩阵」压成「几个代表」：形状只由一个数 \(r\) 决定，所以 \(m\times n\) 矩阵按等价分类，类的个数不超过 \(\min(m,n)+1\)，秩给每个等价类发了一个编号，编号从 0 数到 \(\min(m,n)\)。</p>
+
+      <details class="fold">
+        <summary>解方程组的时候为什么只许动行</summary>
+        <p>每一行是一个方程，换行、乘非零数、两行相加，说的还是同一件事，所以解集不变。换列等于给未知数改名：把 \(x\) 与 \(y\) 两列对调，方程本身没变，解却换了位置。列变换能用来化简矩阵、能用来判秩，不能直接用来解方程组。</p>
+      </details>
+
+      <h2 id="s-2" class="reveal">二、秩：一个数数清主元</h2>
+
+      <p>在 \(m\times n\) 矩阵 \(A\) 里任取 \(k\) 行 \(k\) 列，交叉位置上的数按原来的次序组成一个 \(k\) 阶行列式，叫 \(A\) 的<strong>\(k\) 阶子式</strong>。若 \(A\) 中有一个 \(r\) 阶子式不为零，而所有 \(r+1\) 阶子式（如果有）全为零，就把 \(r\) 叫作 \(A\) 的<strong>秩</strong>，记作 \(r(A)\)；零矩阵没有非零子式，规定 \(r(O)=0\)。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定义（矩阵的秩）</p>
+        <p>矩阵 \(A\) 中不为零的子式的最高阶数 \(r\) 称为 \(A\) 的秩，记作 \(r(A)\)。等价的说法有三个：\(r(A)\) 是最高阶非零子式的阶数；是行阶梯形里主元的个数；也是非零行的条数。</p>
+      </div>
+
+      <p>按子式去算秩不现实，\(4\times4\) 的矩阵有 16 个三阶子式，一个一个算要算到天黑。实际算法只有一句：把 \(A\) 化成行阶梯形，数非零行的条数。行阶梯形里每行第一个非零数叫<strong>主元</strong>，一行一个，所以秩也等于主元的个数，而主元的个数又等于非零行的条数。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定理（初等变换不改变秩，三秩相等）</p>
+        <p>若 \(A\sim B\)，则 \(r(A)=r(B)\)，也就是说初等行变换与初等列变换都不改变秩。对任意矩阵 \(A\)，它的行秩、列秩与秩三者相等，即 \(r(A)=r(A^{T})\)。</p>
+      </div>
+
+      <p>把这几句话并排看，就得到本章最要紧的一条：秩是最高阶非零子式的阶数，是行阶梯形里主元的个数，也是方程组里独立的方程的条数，三个说法数的是同一件事。多写的方程要么能被前面的方程凑出来，要么与前面根本对不上，前者不添主元，后者连解都没有，所以方程写得再密，独立的信息仍然只有 \(r\) 条。</p>
+
+      <div class="keyidea reveal">
+        <p>秩、主元个数、独立方程的条数，是同一件事的三个名字。</p>
+      </div>
+
+      <div class="figure">
+        <!--FIG ch04_span--><svg viewBox="0 0 720 330" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<text x="120.00" y="44.00" text-anchor="middle" font-size="15" fill="var(--ink)">秩 2：一张平面</text>
+<text x="360.00" y="44.00" text-anchor="middle" font-size="15" fill="var(--ink)">秩 1：一条直线</text>
+<text x="600.00" y="44.00" text-anchor="middle" font-size="15" fill="var(--ink)">秩 0：一个点</text>
+<polygon points="62.00,236.00 140.00,186.00 178.00,106.00 100.00,156.00" fill="var(--fig-fill)" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="62.00" y1="236.00" x2="140.00" y2="186.00" stroke="var(--accent-line)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M 133.02 195.76 L 140.00 186.00 L 128.22 188.27" fill="var(--accent-line)" stroke="var(--accent-line)" stroke-width="1" stroke-linejoin="round"/>
+<line x1="62.00" y1="236.00" x2="100.00" y2="156.00" stroke="var(--ink-2)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M 99.24 167.98 L 100.00 156.00 L 91.20 164.16" fill="var(--ink-2)" stroke="var(--ink-2)" stroke-width="1" stroke-linejoin="round"/>
+<text x="146.00" y="202.00" text-anchor="start" font-size="15" fill="var(--ink)" font-style="italic">a</text>
+<text x="90.00" y="152.00" text-anchor="end" font-size="15" fill="var(--ink)" font-style="italic">b</text>
+<text x="170.00" y="276.00" text-anchor="middle" font-size="13.5" fill="var(--ink-3)">整张平面</text>
+<circle cx="62.00" cy="236.00" r="3.4" fill="var(--ink)"/>
+<line x1="254.70" y1="261.30" x2="435.30" y2="164.70" stroke="var(--ink-3)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 6"/>
+<line x1="302.00" y1="236.00" x2="345.00" y2="213.00" stroke="var(--ink-2)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M 337.27 222.18 L 345.00 213.00 L 333.07 214.33" fill="var(--ink-2)" stroke="var(--ink-2)" stroke-width="1" stroke-linejoin="round"/>
+<line x1="302.00" y1="236.00" x2="388.00" y2="190.00" stroke="var(--accent-line)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M 380.27 199.18 L 388.00 190.00 L 376.07 191.33" fill="var(--accent-line)" stroke="var(--accent-line)" stroke-width="1" stroke-linejoin="round"/>
+<text x="302.00" y="276.00" text-anchor="middle" font-size="13.5" fill="var(--ink-3)">只有这一条线</text>
+<circle cx="302.00" cy="236.00" r="3.4" fill="var(--ink)"/>
+<circle cx="542.00" cy="236.00" r="26.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1" stroke-dasharray="4 5"/>
+<circle cx="542.00" cy="236.00" r="5.5" fill="var(--accent-line)"/>
+<text x="542.00" y="276.00" text-anchor="middle" font-size="13.5" fill="var(--ink-3)">只有一个点</text>
+<text x="62.00" y="306.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">主元有几个，能分辨的方向就有几个；方向少了，解就多出来一批。</text>
+</svg>
+<!--/FIG ch04_span-->
+        <figcaption class="figcaption"><b>秩是能分辨的方向个数。</b>两个不共线的向量撑起一张平面，共线时只剩一条直线，全是零向量时只剩一个原点。维数掉一级，解里就多一个自由参数。</figcaption>
+      </div>
+
+      <details class="fold">
+        <summary>行变换为什么改不了秩</summary>
+        <p>交换两行只是把子式的行换个次序，乘非零数只是给子式提一个非零因子，\(r\) 阶子式零与非零都不变。把一行的 \(k\) 倍加到另一行，子式按行列式的性质拆成两个子式之和，其中一个有两行成比例而为零，剩下的正好是原来的那个子式。三件事都不改变「有没有非零的 \(r\) 阶子式」。</p>
+      </details>
+
+      <div class="archive reveal">
+        <p class="archive-when">1884 年，柏林</p>
+        <h3>秩成了矩阵自己的属性</h3>
+        <p class="archive-quote">「一个线性方程组相容的充要条件，是系数矩阵与增广矩阵的秩相等。」</p>
+        <p class="archive-source">弗罗贝尼乌斯 1884 年前后论文中的结论，此处按通行叙述转述</p>
+        <p>在此之前，「秩」只是消元过程中冒出来的一个数字；弗罗贝尼乌斯把它说成矩阵自身的属性，再用它判定相容性。克罗内克在 1880 年代也独立得到过接近的结果，欧洲的教科书因此把这条判据叫克罗内克-卡佩利定理，中文教材大多只叫有解判定定理。</p>
+      </div>
+
+      <h2 id="s-3" class="reveal">三、有解的判定</h2>
+
+      <p>把常数列并进系数矩阵，得到增广矩阵 \((A\mid b)\)，对它做同样的行变换。前 \(n\) 列是系数，最后一列是常数项，主元平时落在前 \(n\) 列里；一旦某个主元落到最后一列，那一行左边的系数全是零，方程只剩 \(0=d\) 这一句。于是阶梯形只有三种样子：每行都有主元且主元全在前 \(n\) 列，此时 \(r(A)=r(A\mid b)=n\)，回代一路走下来，解唯一；有的行整行为零，连常数项也是零，此时 \(r(A)=r(A\mid b)&lt;n\)，有 \(n-r\) 个未知数没被定死，解有无穷多；出现 \((0\ 0\ \cdots\ 0\mid d)\) 且 \(d\ne0\) 的一行，没有任何一组数能让它成立，无解，此时 \(r(A\mid b)=r(A)+1\)。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定理（有解判定）</p>
+        <p>设 \(A\) 是 \(m\times n\) 矩阵，\(Ax=b\) 的增广矩阵为 \((A\mid b)\)。若 \(r(A)&lt;r(A\mid b)\)，方程组无解；若 \(r(A)=r(A\mid b)=n\)，有唯一解；若 \(r(A)=r(A\mid b)&lt;n\)，有无穷多解。合起来说，\(Ax=b\) 有解当且仅当 \(r(A)=r(A\mid b)\)。</p>
+      </div>
+
+      <p>判据只剩一条：两个秩相等就有解。理由在阶梯形上看得见，两个秩的差只可能取 0 与 1，因为增广矩阵比系数矩阵只多一列；差为 1 时多出的那个主元只能落在最后一列，那行的方程是 \(0=d\)；差为 0 时最后一列没有主元，每行都能解出某个未知数，解集不空。所以做题的顺序是先化阶梯形，数两个秩，再决定要不要往下算。</p>
+
+      <details class="fold">
+        <summary>两个秩的差为什么最多是 1</summary>
+        <p>增广矩阵只比系数矩阵多一列，多一列最多多出一个主元，所以 \(r(A\mid b)\) 只能等于 \(r(A)\) 或 \(r(A)+1\)，不会更大。讨论参数时这条很省事：算出 \(r(A)=2\) 之后，只要有一行常数项对不上，就能断定 \(r(A\mid b)=3\)，不必再逐行算。</p>
+      </details>
+
+      <div class="archive reveal">
+        <p class="archive-when">公元前 1 世纪，长安</p>
+        <h3>直除早就在数秩</h3>
+        <p class="archive-quote">「置上禾三秉，中禾二秉，下禾一秉，实三十九斗，于右方。」</p>
+        <p class="archive-source">《九章算术》卷八「方程」</p>
+        <p>接下来是一遍遍「以少减多」的直除，把某一程减到整行为零。能被减成零行的条数就是 \(n-r\)，剩下的非零行就是 \(r\)。古人靠数剩下几行来判断还有没有解，做法和今天的判定定理一样，只是没有把这件事写成一条定理。</p>
+      </div>
+
+      <h2 id="s-4" class="reveal">四、齐次组与基础解系</h2>
+
+      <p>常数列全是零的方程组 \(Ax=0\) 叫<strong>齐次线性方程组</strong>。它至少有零解，所以问题只剩一个：除了零解还有没有别的解。化成行阶梯形之后，若 \(r(A)=n\)，每一列都有主元，回代只能得零；若 \(r&lt;n\)，就有 \(n-r\) 列没有主元，对应的未知数可以随便取，解立刻多起来。</p>
+
+      <p>这些解放在一起有个好脾气：两个解相加还是解，一个解乘任意常数还是解，因为 \(A(x+y)=Ax+Ay\) 与 \(A(kx)=kAx\)。所以齐次组的解集是一个向量空间，叫解空间，零解就是它的原点，这个空间的维数是 \(n-r\)。要把这个空间写出来，只需找到一组骨架向量，其余的解都由它们组合而成。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定义与定理（基础解系）</p>
+        <p>齐次组 \(Ax=0\) 的一组解 \(\xi_1,\xi_2,\dots,\xi_s\) 若线性无关，并且方程组的任一解都能写成它们的线性组合，就称为该方程组的<strong>基础解系</strong>。设 \(A\) 是 \(m\times n\) 矩阵且 \(r(A)=r&lt;n\)，则基础解系恰好含 \(n-r\) 个解，通解为 \(x=k_1\xi_1+\cdots+k_{n-r}\xi_{n-r}\)，其中 \(k_i\) 任意。</p>
+      </div>
+
+      <p>求基础解系只动行，四步走：化行阶梯形；认准有主元的列与没有主元的列；让自由未知数轮流取 1、其余取 0；回代求出主元对应的未知数。下面拿一个具体的组从头走到尾。</p>
+
+      \[ \begin{cases} x_1+2x_2+x_3=3,\\ 2x_1+4x_2+3x_3+x_4=5,\\ 3x_1+6x_2+4x_3+x_4=8. \end{cases} \]
+
+      <p>写出增广矩阵，第二行减两倍第一行得 \((0,0,1,-1\mid-1)\)，乘 \(-1\) 之后写成 \((0,0,1,-1\mid1)\)；第三行减三倍第一行得 \((0,0,1,-1\mid-1)\)，与第二行只差一个符号，消掉就是零行。于是</p>
+
+      \[ \left(\begin{array}{cccc|c} 1&amp;2&amp;1&amp;0&amp;3\\ 2&amp;4&amp;3&amp;1&amp;5\\ 3&amp;6&amp;4&amp;1&amp;8 \end{array}\right)\to \left(\begin{array}{cccc|c} 1&amp;2&amp;1&amp;0&amp;3\\ 0&amp;0&amp;1&amp;-1&amp;1\\ 0&amp;0&amp;0&amp;0&amp;0 \end{array}\right). \]
+
+      <p>非零行 2 条，所以 \(r(A)=r(A\mid b)=2\)，两个秩相等，方程组有解；未知数 4 个，自由未知数 2 个，基础解系里就有 2 个向量。主元落在第 1 列与第 3 列，主元未知数是 \(x_1,x_3\)，自由未知数是 \(x_2,x_4\)。</p>
+
+      <div class="figure">
+        <!--FIG ch04_pivot--><svg viewBox="0 0 720 380" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<text x="193.00" y="92.00" text-anchor="middle" font-size="15" fill="var(--ink-2)">x₁</text>
+<text x="279.00" y="92.00" text-anchor="middle" font-size="15" fill="var(--ink-2)">x₂</text>
+<text x="365.00" y="92.00" text-anchor="middle" font-size="15" fill="var(--ink-2)">x₃</text>
+<text x="451.00" y="92.00" text-anchor="middle" font-size="15" fill="var(--ink-2)">x₄</text>
+<rect x="151.00" y="109.00" width="84.00" height="52.00" fill="var(--fig-fill-2)" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="193.00" y="142.00" text-anchor="middle" font-size="20" fill="var(--ink)">1</text>
+<rect x="237.00" y="109.00" width="84.00" height="52.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1" opacity="0.75"/>
+<text x="279.00" y="142.00" text-anchor="middle" font-size="20" fill="var(--ink)">2</text>
+<rect x="323.00" y="109.00" width="84.00" height="52.00" fill="var(--fig-fill-2)" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="365.00" y="142.00" text-anchor="middle" font-size="20" fill="var(--ink)">1</text>
+<rect x="409.00" y="109.00" width="84.00" height="52.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1" opacity="0.75"/>
+<text x="451.00" y="142.00" text-anchor="middle" font-size="20" fill="var(--ink-3)">0</text>
+<rect x="495.00" y="109.00" width="84.00" height="52.00" fill="none" stroke="none" stroke-width="0"/>
+<text x="537.00" y="142.00" text-anchor="middle" font-size="20" fill="var(--ink)">3</text>
+<rect x="151.00" y="163.00" width="84.00" height="52.00" fill="var(--fig-fill-2)" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="193.00" y="196.00" text-anchor="middle" font-size="20" fill="var(--ink-3)">0</text>
+<rect x="237.00" y="163.00" width="84.00" height="52.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1" opacity="0.75"/>
+<text x="279.00" y="196.00" text-anchor="middle" font-size="20" fill="var(--ink-3)">0</text>
+<rect x="323.00" y="163.00" width="84.00" height="52.00" fill="var(--fig-fill-2)" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="365.00" y="196.00" text-anchor="middle" font-size="20" fill="var(--ink)">1</text>
+<rect x="409.00" y="163.00" width="84.00" height="52.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1" opacity="0.75"/>
+<text x="451.00" y="196.00" text-anchor="middle" font-size="20" fill="var(--ink)">-1</text>
+<rect x="495.00" y="163.00" width="84.00" height="52.00" fill="none" stroke="none" stroke-width="0"/>
+<text x="537.00" y="196.00" text-anchor="middle" font-size="20" fill="var(--ink)">1</text>
+<rect x="151.00" y="217.00" width="84.00" height="52.00" fill="var(--fig-fill-2)" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="193.00" y="250.00" text-anchor="middle" font-size="20" fill="var(--ink-3)">0</text>
+<rect x="237.00" y="217.00" width="84.00" height="52.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1" opacity="0.75"/>
+<text x="279.00" y="250.00" text-anchor="middle" font-size="20" fill="var(--ink-3)">0</text>
+<rect x="323.00" y="217.00" width="84.00" height="52.00" fill="var(--fig-fill-2)" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="365.00" y="250.00" text-anchor="middle" font-size="20" fill="var(--ink-3)">0</text>
+<rect x="409.00" y="217.00" width="84.00" height="52.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1" opacity="0.75"/>
+<text x="451.00" y="250.00" text-anchor="middle" font-size="20" fill="var(--ink-3)">0</text>
+<rect x="495.00" y="217.00" width="84.00" height="52.00" fill="none" stroke="none" stroke-width="0"/>
+<text x="537.00" y="250.00" text-anchor="middle" font-size="20" fill="var(--ink-3)">0</text>
+<rect x="151.00" y="109.00" width="84.00" height="52.00" fill="none" stroke="var(--accent-line)" stroke-width="2.0"/>
+<rect x="323.00" y="163.00" width="84.00" height="52.00" fill="none" stroke="var(--accent-line)" stroke-width="2.0"/>
+<line x1="494.00" y1="100.00" x2="494.00" y2="278.00" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="193.00" y="304.00" text-anchor="middle" font-size="13.5" fill="var(--accent-line)">主元列</text>
+<text x="365.00" y="304.00" text-anchor="middle" font-size="13.5" fill="var(--accent-line)">主元列</text>
+<text x="279.00" y="304.00" text-anchor="middle" font-size="13.5" fill="var(--ink-2)">自由列</text>
+<text x="451.00" y="304.00" text-anchor="middle" font-size="13.5" fill="var(--ink-2)">自由列</text>
+<text x="537.00" y="304.00" text-anchor="middle" font-size="13.5" fill="var(--ink-3)">常数列</text>
+<line x1="610.00" y1="112.00" x2="610.00" y2="212.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="610.00" y1="112.00" x2="619.00" y2="112.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="610.00" y1="212.00" x2="619.00" y2="212.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="626.00" y="158.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">非零行</text>
+<text x="626.00" y="178.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">2 条</text>
+<text x="150.00" y="348.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">主元列 2 列，秩就是 2；自由列 2 列，4 − 2 = 2，基础解系里就有 2 个向量。</text>
+</svg>
+<!--/FIG ch04_pivot-->
+        <figcaption class="figcaption"><b>阶梯形把未知数分成两拨。</b>第 1、3 列有主元，对应的 x₁、x₃ 由方程定死；第 2、4 列没有主元，x₂、x₄ 可以任取，取一次就得到一个基础解。</figcaption>
+      </div>
+
+      <p>先算齐次组 \(Ax=0\)，阶梯形给出的两个方程是 \(x_1+2x_2+x_3=0\) 与 \(x_3-x_4=0\)。取 \(x_2=1,x_4=0\)，得 \(x_3=0\)，\(x_1=-2\)，向量 \(\xi_1=(-2,1,0,0)\)；取 \(x_2=0,x_4=1\)，得 \(x_3=1\)，\(x_1=-1\)，向量 \(\xi_2=(-1,0,1,1)\)。这两个向量线性无关，任何一个齐次解都是它们的组合，所以通解是 \(x=k_1\xi_1+k_2\xi_2\)。代回验一次，\(A\xi_2\) 的第二行是 \(-2+0+1+1=0\)，第三行是 \(-3+0+2+1=0\)，对上了。</p>
+
+      <details class="fold">
+        <summary>自由未知数一定要取 1 吗</summary>
+        <p>不一定，取什么都行，只要这 \(n-r\) 次取值让系数矩阵化成单位矩阵。习惯取 1 和 0，好处是写出来的 \(\xi\) 在自由位置上直接就是标准基，答案好检查。换成别的值，得到的是同一组解的另一组基，通解的形式不唯一，解集本身不变。</p>
+      </details>
+
+      <h2 id="s-5" class="reveal">五、非齐次组的通解</h2>
+
+      <p>回到上面那个组，常数项不是零。阶梯形已经说明两个秩相等，所以有解，而且 \(r=2&lt;4\)，解有无穷多。取自由未知数 \(x_2=x_4=0\)，回代得 \(x_3=1\)、\(x_1=2\)，得到一个特解 \(\eta^{*}=(2,0,1,0)\)。齐次组的解刚才已经算出来，是 \(k_1\xi_1+k_2\xi_2\)。两者相加还是解，因为 \(A(\eta^{*}+k_1\xi_1+k_2\xi_2)=b+0=b\)。</p>
+
+      <p>反过来也成立。任取一个解 \(x\)，它减去特解满足 \(A(x-\eta^{*})=b-b=0\)，所以 \(x-\eta^{*}\) 是齐次组的解。两个方向合起来，非齐次组的全部解就是一个特解加上齐次组的全部解。几何上，解集是一条不过原点的直线，它由过原点的那条平行线整体平移得到，平移量就是这个特解。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定理（非齐次组的通解结构）</p>
+        <p>设 \(Ax=b\) 有解，\(\eta^{*}\) 是它的一个特解，\(\xi_1,\dots,\xi_{n-r}\) 是 \(Ax=0\) 的基础解系，则 \(Ax=b\) 的通解为 \(x=\eta^{*}+k_1\xi_1+\cdots+k_{n-r}\xi_{n-r}\)，其中 \(k_i\) 任意。\(r=n\) 时没有自由未知数，通解只剩特解本身，解唯一。</p>
+      </div>
+
+      <div class="figure">
+        <!--FIG ch04_tongjie--><svg viewBox="0 0 720 400" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<line x1="54.00" y1="246.45" x2="666.00" y2="246.45" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<line x1="176.40" y1="346.00" x2="176.40" y2="54.00" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<text x="660.00" y="266.45" text-anchor="end" font-size="15" fill="var(--ink-3)" font-style="italic">x</text>
+<text x="164.40" y="68.00" text-anchor="end" font-size="15" fill="var(--ink-3)" font-style="italic">y</text>
+<line x1="54.00" y1="306.18" x2="666.00" y2="7.55" stroke="var(--ink-2)" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="7 6"/>
+<line x1="54.00" y1="372.55" x2="666.00" y2="73.91" stroke="var(--accent-line)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="176.40" y1="246.45" x2="312.40" y2="246.45" stroke="var(--ink)" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round"/><path d="M 302.18 250.53 L 312.40 246.45 L 302.18 242.37" fill="var(--ink)" stroke="var(--ink)" stroke-width="1" stroke-linejoin="round"/>
+<line x1="312.40" y1="246.45" x2="448.40" y2="180.09" stroke="var(--accent-line)" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round"/><path d="M 441.01 188.24 L 448.40 180.09 L 437.43 180.90" fill="var(--accent-line)" stroke="var(--accent-line)" stroke-width="1" stroke-linejoin="round"/>
+<circle cx="312.40" cy="246.45" r="5" fill="var(--prussian)"/>
+<circle cx="448.40" cy="180.09" r="3.6" fill="var(--accent-line)"/>
+<circle cx="584.40" cy="113.73" r="3.6" fill="var(--accent-line)"/>
+<text x="238.96" y="266.36" text-anchor="middle" font-size="16" fill="var(--ink)">x₀</text>
+<text x="360.00" y="205.31" text-anchor="middle" font-size="17" fill="var(--accent-line)" font-style="italic">ξ</text>
+<line x1="523.20" y1="143.59" x2="570.80" y2="97.14" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="570.80" y="97.14" text-anchor="middle" font-size="13.5" fill="var(--ink-2)">Ax = b 的解集</text>
+<line x1="101.60" y1="282.95" x2="128.80" y2="324.76" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="128.80" y="324.76" text-anchor="middle" font-size="13.5" fill="var(--ink-2)">Ax = 0 的解集</text>
+<text x="67.60" y="72.58" text-anchor="start" font-size="13.5" fill="var(--ink-3)">两条线方向相同，只差一个平移 x₀</text>
+</svg>
+<!--/FIG ch04_tongjie-->
+        <figcaption class="figcaption"><b>通解 = 一个特解 + 齐次组的方向。</b>两条线平行，上面那条由下面那条平移 \(x_0\) 得到；沿着 \(\xi\) 的方向走多远，都还停在解集里。</figcaption>
+      </div>
+
+      <p>把刚才那个组的答案拼完整：\(x=(2,0,1,0)+k_1(-2,1,0,0)+k_2(-1,0,1,1)\)。取 \(k_1=k_2=0\) 就是特解，取 \(k_1=1,k_2=0\) 得 \((0,1,1,0)\)，代回第一个方程是 \(0+2+1=3\)，对得上。\(k_1,k_2\) 取遍所有实数，就得到解集里的全部点。</p>
+
+      <div class="keyidea reveal">
+        <p>解的结构只有一句：非齐次组的解，是一个特解加上齐次组的全部解。</p>
+      </div>
+
+      <h2 id="s-manual" class="reveal">怎么算</h2>
+
+      <ul>
+        <li><strong>先记下未知数个数 \(n\)。</strong>后面判断有没有唯一解、自由未知数有几个，都要用它。</li>
+        <li><strong>化成行阶梯形，数非零行。</strong>这一步给 \(r(A)\)，顺手把主元列圈出来。</li>
+        <li><strong>常数列并进去再数一次。</strong>得到 \(r(A\mid b)\)，两个数一比，无解的情形当场就能收工。</li>
+        <li><strong>齐次组按列认人。</strong>主元列对主元未知数，自由列对自由未知数，让自由未知数轮流取 1、其余取 0。</li>
+        <li><strong>非齐次组先要一个特解。</strong>把自由未知数全取 0，回代即得，再加上刚算好的齐次通解。</li>
+        <li><strong>答案代回验一行。</strong>常数列最容易抄错，验一次能省掉大半返工。</li>
+      </ul>
+
+      <h2 id="s-examples" class="reveal">例题</h2>
+
+      <div class="example">
+        <p class="example-head">例 <span>1</span>　求 \(A=\begin{pmatrix}1&amp;-1&amp;2\\2&amp;1&amp;1\\3&amp;0&amp;3\end{pmatrix}\) 的秩。</p>
+        <p class="solution">第二行减两倍第一行得 \((0,3,-3)\)，第三行减三倍第一行也得 \((0,3,-3)\)，两行相减成零行，非零行剩 2 条，所以 \(r(A)=2\)。用子式验一遍：左上角二阶子式 \(1\cdot1-(-1)\cdot2=3\ne0\)，而三阶行列式算出来是 \(3+3-6=0\)，所以最高阶非零子式的阶数是 2。</p>
+      </div>
+
+      <div class="example">
+        <p class="example-head">例 <span>2</span>　讨论 \(a\) 取何值时，方程组 \(x_1+x_2+x_3=1,\ 2x_1+3x_2+ax_3=3,\ x_1+ax_2+3x_3=2\) 无解、有唯一解、有无穷多解。</p>
+        <p class="solution">第二行减两倍第一行得 \((0,1,a-2\mid1)\)，第三行减第一行得 \((0,a-1,2\mid1)\)。再用第二行消第三行，末位是 \(a(3-a)\)，常数位是 \(2-a\)。\(a\ne0\) 且 \(a\ne3\) 时末位非零，\(r(A)=r(A\mid b)=3\)，唯一解；\(a=0\) 时末位为零而常数位是 2，出现 \(0=2\)，无解；\(a=3\) 时末位为零而常数位是 \(-1\)，同样无解。这两种情形都没有自由未知数可用，所以不会出现无穷多解。</p>
+      </div>
+
+      <div class="example">
+        <p class="example-head">例 <span>3</span>　求 \(x_1+x_2+x_3+x_4=4,\ x_1+2x_2+3x_3+4x_4=10\) 的通解。</p>
+        <p class="solution">两个方程不成比例，\(r(A)=r(A\mid b)=2\)，\(n=4\)，自由未知数 2 个。取 \(x_3=x_4=0\) 得特解 \((1,1,1,1)\)；对应的齐次组两行相减得 \(x_2=-2x_3-3x_4\) 与 \(x_1=x_3+2x_4\)，令自由未知数轮流取 1 得 \(\xi_1=(1,-2,1,0)\)、\(\xi_2=(2,-3,0,1)\)。通解 \(x=(1,1,1,1)+k_1\xi_1+k_2\xi_2\)。</p>
+      </div>
+
+      <h2 id="s-exercises" class="reveal">习题</h2>
+
+      <div class="exercises">
+
+        <div class="ex-group">
+          <p class="ex-group-head">A 档 <span>巩固定义与基本计算，每题五分钟内</span></p>
+
+          <p class="ex"><span class="ex-num">1.</span> 把 \(\begin{pmatrix}1&amp;2&amp;-1\\2&amp;4&amp;-2\\3&amp;1&amp;0\end{pmatrix}\) 化成行阶梯形，写出它的秩。</p>
+          <div class="answer"><details><summary>看答案</summary><p>第二行减两倍第一行成零行，第三行减三倍第一行得 \((0,-5,3)\)。非零行 2 条，\(r(A)=2\)。</p></details></div>
+
+          <p class="ex"><span class="ex-num">2.</span> 用子式说明 \(\begin{pmatrix}1&amp;2&amp;3\\2&amp;4&amp;6\\3&amp;6&amp;9\end{pmatrix}\) 的秩为 1。</p>
+          <div class="answer"><details><summary>看答案</summary><p>任意两行成比例，所有二阶子式都为零；而元素 1 本身是一个非零的一阶子式。最高阶非零子式是一阶，\(r=1\)。</p></details></div>
+
+          <p class="ex"><span class="ex-num">3.</span> 判断 \(x+y=1,\ x-y=2,\ 2x=3\) 有没有解。</p>
+          <div class="answer"><details><summary>看答案</summary><p>第三行是前两行之和，消元后成零行且常数位为零。\(r(A)=r(A\mid b)=2=n\)，唯一解 \(x=\tfrac32,\ y=-\tfrac12\)。</p></details></div>
+
+          <p class="ex"><span class="ex-num">4.</span> 求齐次组 \(x_1+x_2+x_3=0,\ 2x_1+2x_2+2x_3=0\) 的基础解系。</p>
+          <div class="answer"><details><summary>看答案</summary><p>两行成比例，\(r=1\)，\(n=3\)，基础解系含 2 个解：\(\xi_1=(-1,1,0)\)，\(\xi_2=(-1,0,1)\)。通解 \(x=k_1\xi_1+k_2\xi_2\)。</p></details></div>
+
+          <p class="ex"><span class="ex-num">5.</span> 设 \(A\) 是 \(4\times5\) 矩阵且 \(r(A)=3\)，\(Ax=0\) 的基础解系含几个解？</p>
+          <div class="answer"><details><summary>看答案</summary><p>\(n-r=5-3=2\) 个。行数 4 与答案无关，只有未知数个数和秩起作用。</p></details></div>
+
+          <p class="ex"><span class="ex-num">6.</span> 把 \(x+y+z=1,\ x-y=0\) 的通解写成「特解 + 齐次通解」。</p>
+          <div class="answer"><details><summary>看答案</summary><p>\(r=2\)，\(n=3\)，自由未知数 1 个。取 \(z=0\) 得特解 \(\left(\tfrac12,\tfrac12,0\right)\)，齐次组的基础解系取 \((-1,-1,2)\)，通解 \(x=\left(\tfrac12,\tfrac12,0\right)+k(-1,-1,2)\)。</p></details></div>
+        </div>
+
+        <div class="ex-group">
+          <p class="ex-group-head">B 档 <span>综合题，接近期末与考研难度</span></p>
+
+          <p class="ex"><span class="ex-num">1.</span> 设 \(A\) 是 \(m\times n\) 矩阵，\(r(A)=r\)，证明 \(Ax=0\) 的解空间维数是 \(n-r\)。</p>
+          <div class="answer"><details><summary>看答案</summary><p>化成行阶梯形，主元列 \(r\) 个，自由列 \(n-r\) 个。每个自由未知数取 1、其余取 0，回代得到一个解，这 \(n-r\) 个解线性无关；任一解又被 \(n-r\) 个自由未知数唯一确定，所以它们的基础解系就是 \(n-r\) 个。</p></details></div>
+
+          <p class="ex"><span class="ex-num">2.</span> \(a\) 取何值时 \(x+y+z=0,\ x+2y+3z=0,\ x+4y+az=0\) 有非零解？写出此时的基础解系。</p>
+          <div class="answer"><details><summary>看答案</summary><p>系数行列式是 \(a-7\)，\(a=7\) 时为零，有非零解。此时第三行等于前两行的组合，\(r=2\)，取 \(z=1\) 得 \(y=-2,\ x=1\)，基础解系只有一个解 \((1,-2,1)\)。</p></details></div>
+
+          <p class="ex"><span class="ex-num">3.</span> 设 \(Ax=b\) 有两个解 \(\eta_1=(1,1,1)\)、\(\eta_2=(2,3,4)\)，且 \(A\) 是 \(3\) 阶方阵、\(r(A)=2\)，写出 \(Ax=b\) 的通解。</p>
+          <div class="answer"><details><summary>看答案</summary><p>两解之差 \(\eta_1-\eta_2=(-1,-2,-3)\) 是齐次解，\(n-r=1\)，基础解系取 \((1,2,3)\)。通解 \(x=(1,1,1)+k(1,2,3)\)。</p></details></div>
+
+          <p class="ex"><span class="ex-num">4.</span> 证明：若 \(Ax=b\) 有两个不同的解，则它有无穷多解。</p>
+          <div class="answer"><details><summary>看答案</summary><p>两个不同的解之差是非零的齐次解，说明 \(r(A)&lt;n\)，有自由未知数。由判定定理 \(r(A)=r(A\mid b)&lt;n\)，解集里含着一条直线，所以有无穷多解。</p></details></div>
+        </div>
+
+        <div class="ex-group">
+          <p class="ex-group-head">C 档 <span>拓展与历史原题</span></p>
+
+          <p class="ex"><span class="ex-num">1.</span>（弗罗贝尼乌斯，1884）设 \(A\) 是 \(3\times3\) 矩阵而 \(r(A)=2\)、\(r(A\mid b)=3\)，说明这个方程组无解，并指出阶梯形里会出现什么样的行。</p>
+          <div class="answer"><details><summary>看答案</summary><p>两个秩差 1，多出的主元只能落在常数列上，阶梯形里必有一行是 \((0\ 0\ 0\mid d)\) 且 \(d\ne0\)，写成方程就是 \(0=d\)。没有任何一组 \(x\) 能让它成立，所以无解。</p></details></div>
+
+          <p class="ex"><span class="ex-num">2.</span>（克罗内克-卡佩利）用一行符号写出这条定理，并说明为什么两个名字会并排出现。</p>
+          <div class="answer"><details><summary>看答案</summary><p>定理说 \(Ax=b\) 有解当且仅当 \(r(A)=r(A\mid b)\)。克罗内克与弗罗贝尼乌斯在 1880 年代各自得到这条判据，卡佩利后来把它写进意大利语教材，欧洲的习惯就把名字合起来叫。中文教材多数只叫有解判定定理。</p></details></div>
+
+          <p class="ex"><span class="ex-num">3.</span> 用基础解系写出 \(x_1+x_2+x_3=3\) 的通解。</p>
+          <div class="answer"><details><summary>看答案</summary><p>\(r(A)=r(A\mid b)=1\)，\(n=3\)，基础解系含 2 个解。取 \(x_2=x_3=0\) 得特解 \((3,0,0)\)，齐次组的基础解系取 \(\xi_1=(-1,1,0)\)、\(\xi_2=(-1,0,1)\)，通解 \(x=(3,0,0)+k_1\xi_1+k_2\xi_2\)。</p></details></div>
+        </div>
+
+        <div class="ex-group">
+          <p class="ex-group-head">思考题 <span>不设标准答案，只给提示</span></p>
+
+          <p class="ex"><span class="ex-num">1.</span> 同型且秩相等的两个矩阵为什么一定等价？</p>
+          <div class="answer"><details><summary>看提示</summary><p>把两个矩阵各自化成等价标准形，标准形的形状只由秩决定，所以化出来的是同一个矩阵。于是 \(A\) 与 \(B\) 都能化到它，再由等价可以倒着走，两者就等价。</p></details></div>
+
+          <p class="ex"><span class="ex-num">2.</span> 一个非齐次组有两个不同的解，能不能断定它有无穷多解？</p>
+          <div class="answer"><details><summary>看提示</summary><p>能。两解之差是非零的齐次解，说明 \(r(A)&lt;n\)，解集里至少有一条直线，直线上的点一个一个都是解。</p></details></div>
+
+          <p class="ex"><span class="ex-num">3.</span> 若系数矩阵是 \(n\) 阶方阵且 \(r(A)=n\)，\(Ax=b\) 有几个解？几何上怎么读？</p>
+          <div class="answer"><details><summary>看提示</summary><p>恰好一个。主元一列不缺，回代只有一条路可走；几何上是 \(n\) 张平面交于一点，既没有多余的自由方向，也没有互相矛盾的一对。</p></details></div>
+        </div>
+
+      </div>
+
+      <h2 class="reveal">延伸阅读</h2>
+      <ul class="refs">
+        <li>同济大学数学系《线性代数》第六版，第四章「线性方程组」。本章的秩、基础解系与通解口径以这本为准。</li>
+        <li>《九章算术》卷八「方程」，配合刘徽注读，看直除怎么把一程减成零行。</li>
+        <li>莫里斯·克莱因《古今数学思想》，第 3 册关于 19 世纪线性代数的部分，秩与矩阵如何从方程组里长出来。</li>
+        <li>Gilbert Strang, <em>Introduction to Linear Algebra</em>，第 3 章。用列空间讲秩与可解性，与本章的说法可以对着看。</li>
+      </ul>
+
+    </article>
+  </div>
+
+  <div class="wrap">
+    <nav class="pager" aria-label="翻页">
+      <a class="pager-link prev" href="ch03.html"><span class="pager-dir">上一章</span><span class="pager-title">矩阵：把线性运算当成对象</span></a>
+      <a class="pager-link next" href="ch05.html"><span class="pager-dir">下一章</span><span class="pager-title">向量空间：把几何抽象出来</span></a>
+    </nav>
+  </div>
+
+</main>
+
+<footer class="footer field-dark">
+  <div class="wrap">
+    <p class="footer-mark">数学基础课</p>
+    <div class="footer-cols">
+      <div><p>三门课按同一套读法写：先看问题，再给定义与判别，最后落到计算与习题。</p></div>
+      <div><p><a href="index.html">线性代数目录</a></p><p><a href="../index.html">返回主页</a></p></div>
+      <div><p>图示用脚本按真实数值画，公式由 KaTeX 排版。</p></div>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/katex/katex.min.js"></script>
+<script src="../assets/katex/auto-render.min.js"></script>
+<script src="../assets/site.js"></script>
+</body>
+</html>

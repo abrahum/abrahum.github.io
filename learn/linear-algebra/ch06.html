@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>第六章 特征值与特征向量 · 线性代数</title>
+<meta name="description" content="方向不变的向量、特征多项式、迹与行列式、三种根的情形、凯莱-哈密顿定理。">
+<link rel="stylesheet" href="../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="nav-brand" href="../index.html">数学基础课<span> 三门课，一套读法</span></a>
+    <nav class="nav-links" aria-label="主导航">
+      <a href="index.html#map">本课目录</a>
+      <a class="xl" href="../calculus/index.html">微积分</a>
+      <a class="xl" href="../probability/index.html">概率论</a>
+      <a class="xl" href="../complex/index.html">复变函数</a>
+      <a class="opt" href="ch07.html">下一章</a>
+    </nav>
+  </div>
+  <div class="nav-progress" aria-hidden="true"></div>
+</header>
+
+<main>
+
+  <section class="chapter">
+    <div class="wrap">
+      <div class="ch-hero-band">
+        <div>
+          <p class="ch-label reveal"><span>第六章</span><span class="ch-era">1743 年至 1858 年</span></p>
+          <h1 class="ch-title reveal reveal-2">特征值与特征向量</h1>
+          <p class="ch-deck reveal reveal-3">一个矩阵乘一支向量，结果通常拐向别处。可是每个方阵都有几个方向例外，落在这些方向上的向量乘完还留在原地，只是长度变了几倍，倍数由矩阵自己定。欧拉 1743 年研究刚体转动时找的就是这几个方向，那时还没有矩阵这个词。</p>
+          <div class="ch-meta reveal reveal-3">
+            <div><strong>本章知识点</strong>特征值与特征向量、特征多项式、迹与行列式、三种根的情形、凯莱-哈密顿定理</div>
+            <div><strong>历史坐标</strong>欧拉 1743，拉格朗日 1774，柯西 1829，凯莱与哈密顿 1858</div>
+            <div><strong>对应教材</strong>同济《线性代数》第六版第五章第一、二节</div>
+            <div><strong>前置</strong>行列式、矩阵乘法、齐次方程组的基础解系</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap ch-body">
+    <aside class="rail">
+      <p class="rail-title">本章提纲</p>
+      <ol>
+        <li><a href="#s-1">有些方向不会被扳弯</a></li>
+        <li><a href="#s-2">把方向不变写成方程</a></li>
+        <li><a href="#s-3">和等于迹，积等于行列式</a></li>
+        <li><a href="#s-4">三种情形</a></li>
+        <li><a href="#s-5">换个矩阵，特征值怎么变</a></li>
+        <li><a href="#s-6">实对称矩阵</a></li>
+        <li><a href="#s-manual">怎么算</a></li>
+        <li><a href="#s-examples">例题</a></li>
+        <li><a href="#s-exercises">习题</a></li>
+      </ol>
+      <p class="rail-title">历史坐标</p>
+      <p class="rail-who">欧拉 1743 年，主轴<br>拉格朗日 1774 年<br>拉普拉斯 1780 年<br>柯西 1829 年，二次型<br>凯莱、哈密顿 1858 年</p>
+    </aside>
+
+    <article class="prose">
+
+      <p class="lead reveal">拿一个矩阵去乘一支向量，结果通常拐向别处，方向变了，长度也变了。可是每个方阵都有几个特别的方向，向量落在这些方向上，乘完还留在原地，只是被拉长或压短，倍数由矩阵自己决定。欧拉 1743 年研究刚体转动时找的就是这几个方向，他管它们叫主轴。</p>
+
+      <h2 id="s-1" class="reveal">一、有些方向不会被扳弯</h2>
+
+      <p>把平面上的每一点都乘上同一个矩阵，等于对整个平面做一次动作。动作的品种不多：沿两个方向拉长或压扁，沿一条直线把半个平面翻个身，绕原点转一个角度，再把这几种叠起来用。拿单位圆当探针，看它被送到哪里，动作的样子就清楚了。</p>
+
+      <p>取 \(A=\begin{pmatrix}2&amp;1\\1&amp;2\end{pmatrix}\)，把单位圆上每一点 \(x\) 换成 \(Ax\)，圆变成椭圆（见下图）。圆上多数点被送出了原来的方向，\((1,0)\) 变成 \((2,1)\)，从横轴跑进了第一象限；只有四个点留在原方向上，\(A(1,1)^T=(3,3)^T\) 被拉长 3 倍，\(A(1,-1)^T=(1,-1)^T\) 的长度一点没动。</p>
+
+      <p>倍数可以看成这个方向上的伸缩率：大于 1 拉长，介于 0 与 1 之间压短，负数先掉头再伸缩，等于 1 就是原地不动。这几个方向和倍数由 \(A\) 自己决定，换一组坐标轴描述它们，向量还是那几支，所以值得单独给个名字。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定义（特征值与特征向量）</p>
+        <p>设 \(A\) 是 \(n\) 阶方阵。若存在数 \(\lambda\) 与 \(n\) 维非零向量 \(x\)，使 \(Ax=\lambda x\)，则称 \(\lambda\) 是 \(A\) 的一个<strong>特征值</strong>，\(x\) 是 \(A\) 属于特征值 \(\lambda\) 的一个<strong>特征向量</strong>。</p>
+      </div>
+
+      <p>名字是译过来的。德语把这件事叫 Eigenwert，eigen 是自己的意思，说的是这个数属于矩阵本身，跟计算时挑哪组坐标无关；中文取了「特征」两个字，落点在这个矩阵特有的那上面。</p>
+
+      <p>同一个特征值挂着的向量不止一支：若 \(x\) 属于 \(\lambda\)，则 \(kx\) 也属于 \(\lambda\)，全体这样的向量再加上零向量凑成一个子空间，叫<strong>特征子空间</strong>。它的维数说明这个特征值有几个独立方向，第七章要用到这个数。</p>
+
+      <details class="fold">
+        <summary>零向量为什么被排除在外</summary>
+        <p>若允许 \(x=0\)，\(Ax=0=\lambda\cdot0\) 对任何 \(\lambda\) 都成立，每个数都成了特征值，这条定义就空了。排除零向量之后，一支向量只对应一个特征值：若 \(x\) 同时满足 \(Ax=\lambda x\) 与 \(Ax=\mu x\)，两式相减得 \((\lambda-\mu)x=0\)，\(x\) 非零就逼出 \(\lambda=\mu\)。</p>
+      </details>
+
+      <div class="figure">
+        <!--FIG ch06_ellipse--><svg viewBox="0 0 720 420" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<line x1="88.00" y1="215.00" x2="632.00" y2="215.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+<line x1="360.00" y1="407.00" x2="360.00" y2="23.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+<text x="630.00" y="235.00" text-anchor="end" font-size="15" fill="var(--ink-3)" font-style="italic">x1</text>
+<text x="348.00" y="31.00" text-anchor="end" font-size="15" fill="var(--ink-3)" font-style="italic">x2</text>
+<circle cx="360.00" cy="215.00" r="80.00" fill="none" stroke="var(--ink-3)" stroke-width="1.4" stroke-dasharray="6 6"/>
+<path d="M 520.00 135.00 L 522.04 130.84 L 523.97 126.74 L 525.78 122.69 L 527.49 118.71 L 529.07 114.80 L 530.54 110.96 L 531.90 107.18 L 533.14 103.48 L 534.25 99.86 L 535.25 96.31 L 536.13 92.85 L 536.89 89.47 L 537.53 86.18 L 538.04 82.97 L 538.44 79.86 L 538.71 76.84 L 538.85 73.91 L 538.88 71.08 L 538.78 68.35 L 538.56 65.72 L 538.22 63.19 L 537.76 60.76 L 537.17 58.44 L 536.47 56.23 L 535.64 54.13 L 534.69 52.14 L 533.62 50.26 L 532.43 48.49 L 531.13 46.83 L 529.71 45.29 L 528.17 43.87 L 526.51 42.57 L 524.74 41.38 L 522.86 40.31 L 520.87 39.36 L 518.77 38.53 L 516.56 37.83 L 514.24 37.24 L 511.81 36.78 L 509.28 36.44 L 506.65 36.22 L 503.92 36.12 L 501.09 36.15 L 498.16 36.29 L 495.14 36.56 L 492.03 36.96 L 488.82 37.47 L 485.53 38.11 L 482.15 38.87 L 478.69 39.75 L 475.14 40.75 L 471.52 41.86 L 467.82 43.10 L 464.04 44.46 L 460.20 45.93 L 456.29 47.51 L 452.31 49.22 L 448.26 51.03 L 444.16 52.96 L 440.00 55.00 L 435.78 57.15 L 431.52 59.41 L 427.20 61.77 L 422.84 64.24 L 418.43 66.81 L 413.99 69.48 L 409.50 72.26 L 404.99 75.13 L 400.44 78.10 L 395.86 81.16 L 391.26 84.31 L 386.64 87.55 L 382.00 90.88 L 377.35 94.30 L 372.68 97.79 L 368.01 101.37 L 363.33 105.03 L 358.64 108.76 L 353.96 112.56 L 349.28 116.44 L 344.61 120.38 L 339.95 124.38 L 335.31 128.45 L 330.68 132.58 L 326.07 136.76 L 321.48 141.00 L 316.92 145.29 L 312.39 149.63 L 307.89 154.01 L 303.43 158.43 L 299.01 162.89 L 294.63 167.39 L 290.29 171.92 L 286.00 176.48 L 281.76 181.07 L 277.58 185.68 L 273.45 190.31 L 269.38 194.95 L 265.38 199.61 L 261.44 204.28 L 257.56 208.96 L 253.76 213.64 L 250.03 218.33 L 246.37 223.01 L 242.79 227.68 L 239.30 232.35 L 235.88 237.00 L 232.55 241.64 L 229.31 246.26 L 226.16 250.86 L 223.10 255.44 L 220.13 259.99 L 217.26 264.50 L 214.48 268.99 L 211.81 273.43 L 209.24 277.84 L 206.77 282.20 L 204.41 286.52 L 202.15 290.78 L 200.00 295.00 L 197.96 299.16 L 196.03 303.26 L 194.22 307.31 L 192.51 311.29 L 190.93 315.20 L 189.46 319.04 L 188.10 322.82 L 186.86 326.52 L 185.75 330.14 L 184.75 333.69 L 183.87 337.15 L 183.11 340.53 L 182.47 343.82 L 181.96 347.03 L 181.56 350.14 L 181.29 353.16 L 181.15 356.09 L 181.12 358.92 L 181.22 361.65 L 181.44 364.28 L 181.78 366.81 L 182.24 369.24 L 182.83 371.56 L 183.53 373.77 L 184.36 375.87 L 185.31 377.86 L 186.38 379.74 L 187.57 381.51 L 188.87 383.17 L 190.29 384.71 L 191.83 386.13 L 193.49 387.43 L 195.26 388.62 L 197.14 389.69 L 199.13 390.64 L 201.23 391.47 L 203.44 392.17 L 205.76 392.76 L 208.19 393.22 L 210.72 393.56 L 213.35 393.78 L 216.08 393.88 L 218.91 393.85 L 221.84 393.71 L 224.86 393.44 L 227.97 393.04 L 231.18 392.53 L 234.47 391.89 L 237.85 391.13 L 241.31 390.25 L 244.86 389.25 L 248.48 388.14 L 252.18 386.90 L 255.96 385.54 L 259.80 384.07 L 263.71 382.49 L 267.69 380.78 L 271.74 378.97 L 275.84 377.04 L 280.00 375.00 L 284.22 372.85 L 288.48 370.59 L 292.80 368.23 L 297.16 365.76 L 301.57 363.19 L 306.01 360.52 L 310.50 357.74 L 315.01 354.87 L 319.56 351.90 L 324.14 348.84 L 328.74 345.69 L 333.36 342.45 L 338.00 339.12 L 342.65 335.70 L 347.32 332.21 L 351.99 328.63 L 356.67 324.97 L 361.36 321.24 L 366.04 317.44 L 370.72 313.56 L 375.39 309.62 L 380.05 305.62 L 384.69 301.55 L 389.32 297.42 L 393.93 293.24 L 398.52 289.00 L 403.08 284.71 L 407.61 280.37 L 412.11 275.99 L 416.57 271.57 L 420.99 267.11 L 425.37 262.61 L 429.71 258.08 L 434.00 253.52 L 438.24 248.93 L 442.42 244.32 L 446.55 239.69 L 450.62 235.05 L 454.62 230.39 L 458.56 225.72 L 462.44 221.04 L 466.24 216.36 L 469.97 211.67 L 473.63 206.99 L 477.21 202.32 L 480.70 197.65 L 484.12 193.00 L 487.45 188.36 L 490.69 183.74 L 493.84 179.14 L 496.90 174.56 L 499.87 170.01 L 502.74 165.50 L 505.52 161.01 L 508.19 156.57 L 510.76 152.16 L 513.23 147.80 L 515.59 143.48 L 517.85 139.22 L 520.00 135.00" fill="none" stroke="var(--accent-line)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="360.00" y1="215.00" x2="529.71" y2="45.29" stroke="var(--accent-line)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M 525.37 55.40 L 529.71 45.29 L 519.60 49.63" fill="var(--accent-line)" stroke="var(--accent-line)" stroke-width="1" stroke-linejoin="round"/>
+<circle cx="416.57" cy="158.43" r="3.6" fill="var(--prussian)"/>
+<text x="495.71" y="33.29" text-anchor="end" font-size="14" fill="var(--accent-line)">Au = 3u</text>
+<line x1="360.00" y1="215.00" x2="416.57" y2="271.57" stroke="var(--ink)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M 406.46 267.23 L 416.57 271.57 L 412.23 261.46" fill="var(--ink)" stroke="var(--ink)" stroke-width="1" stroke-linejoin="round"/>
+<text x="426.57" y="291.57" text-anchor="start" font-size="14" fill="var(--ink)">Av = v</text>
+<line x1="360.00" y1="215.00" x2="440.00" y2="215.00" stroke="var(--ink-2)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="5 5"/><path d="M 429.78 219.08 L 440.00 215.00 L 429.78 210.92" fill="var(--ink-2)" stroke="var(--ink-2)" stroke-width="1" stroke-linejoin="round"/>
+<line x1="360.00" y1="215.00" x2="520.00" y2="135.00" stroke="var(--prussian)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M 512.69 143.22 L 520.00 135.00 L 509.04 135.92" fill="var(--prussian)" stroke="var(--prussian)" stroke-width="1" stroke-linejoin="round"/>
+<circle cx="520.00" cy="135.00" r="3.4" fill="var(--prussian)"/>
+<text x="446.00" y="207.00" text-anchor="start" font-size="14" fill="var(--ink-2)" font-style="italic">x</text>
+<line x1="520.00" y1="135.00" x2="556.00" y2="118.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="556.00" y="118.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">Ax = (2,1)</text>
+<line x1="302.40" y1="159.00" x2="104.00" y2="92.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="104.00" y="92.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">虚线：单位圆，变换前</text>
+<line x1="207.60" y1="280.76" x2="92.00" y2="356.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="92.00" y="356.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">实线：圆被送成的椭圆</text>
+<text x="352.00" y="235.00" text-anchor="end" font-size="14" fill="var(--ink-3)">O</text>
+</svg>
+<!--/FIG ch06_ellipse-->
+        <figcaption class="figcaption"><b>圆被送成椭圆，两条轴上的向量方向没变。</b>长轴对应 \(\lambda=3\)，短轴对应 \(\lambda=1\)；虚线是变换前的单位圆。</figcaption>
+      </div>
+
+      <h2 id="s-2" class="reveal">二、把「方向不变」写成方程</h2>
+
+      <p>定义只说清了什么是特征向量，要算出来还得靠行列式。把 \(Ax=\lambda x\) 右边的 \(\lambda x\) 写成 \(\lambda Ex\)，移项得到 \((A-\lambda E)x=0\)。这是一个齐次方程组，系数矩阵里带着参数 \(\lambda\)，它有非零解的条件，第五章已经给过了：系数行列式等于零。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定义（特征多项式与特征方程）</p>
+        <p>\(f(\lambda)=|\lambda E-A|\) 叫 \(A\) 的<strong>特征多项式</strong>，\(|\lambda E-A|=0\) 叫 \(A\) 的<strong>特征方程</strong>。\(n\) 阶方阵的特征方程是 \(n\) 次方程，在复数范围内恰有 \(n\) 个根（按重数计），这些根就是 \(A\) 的全部特征值。</p>
+      </div>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定理（特征值的判别）</p>
+        <p>设 \(A\) 是 \(n\) 阶方阵，\(\lambda\) 是一个数。\(\lambda\) 是 \(A\) 的特征值，当且仅当 \(f(\lambda)=|\lambda E-A|=0\)。这时 \((A-\lambda E)x=0\) 的每一个非零解，都是 \(A\) 属于 \(\lambda\) 的特征向量。</p>
+      </div>
+
+      <p>求特征值于是成了一条固定的路：写出行列式，展开成多项式，解出它的根；每拿到一个根，再回代去解齐次方程组，取基础解系当特征向量。中间这两步各自独立，根错了后面全废，算完拿 \(\lambda_1+\dots+\lambda_n\) 跟迹对一下最省事，下一节说为什么。</p>
+
+      <p>展开之后首项是 \((-1)^n\lambda^n\)，常数项是 \(|A|\)，一头的符号跟着阶数的奇偶走。课本写 \(|\lambda E-A|\) 而不用 \(|A-\lambda E|\)，图的是首项为正、常数项恰好是 \(|A|\)，读起来顺；两个行列式的零点完全一样，用哪个都不影响答案。</p>
+
+      <details class="fold">
+        <summary>展开式里那些系数到底是什么</summary>
+        <p>\(n\) 阶时 \(f(\lambda)=\lambda^n-(a_{11}+\dots+a_{nn})\lambda^{n-1}+\dots+(-1)^n|A|\)，次高项的系数带着迹，常数项带着行列式。3 阶时中间那项是全部二阶主子式之和：\(f(\lambda)=\lambda^3-(\mathrm{tr}\,A)\lambda^2+(A_{11}+A_{22}+A_{33})\lambda-|A|\)，其中 \(A_{ii}\) 是划掉第 \(i\) 行第 \(i\) 列剩下的 2 阶行列式。</p>
+      </details>
+
+      <h2 id="s-3" class="reveal">三、和等于迹，积等于行列式</h2>
+
+      <p>阶数一高，逐个解根就费时间，可是有两样东西不用解方程就能拿到手：\(n\) 个特征值的和，\(n\) 个特征值的积。它们各等于 \(A\) 身上一个熟悉的量。</p>
+
+      <p>看法是把特征多项式从两头各写一遍。按行列式展开，\(\lambda^{n-1}\) 的系数只可能由主对角线上 \(n\) 个元素相乘得来，等于 \(-(a_{11}+\dots+a_{nn})\)；常数项是 \(\lambda=0\) 时的取值，也就是 \(|-A|=(-1)^n|A|\)。换到根这一边，多项式按根分解成 \((\lambda-\lambda_1)(\lambda-\lambda_2)\cdots(\lambda-\lambda_n)\)，同一个位置上，\(\lambda^{n-1}\) 的系数是 \(-\sum\lambda_i\)，常数项是 \((-1)^n\prod\lambda_i\)。两边逐项对上，结论就出来了。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定理（根与系数的关系）</p>
+        <p>设 \(n\) 阶方阵 \(A\) 的特征值（按重数计，允许是复数）为 \(\lambda_1,\lambda_2,\dots,\lambda_n\)，则 \(\lambda_1+\lambda_2+\dots+\lambda_n=a_{11}+a_{22}+\dots+a_{nn}\)，这个和叫 \(A\) 的<strong>迹</strong>，记作 \(\mathrm{tr}\,A\)；并且 \(\lambda_1\lambda_2\cdots\lambda_n=|A|\)。</p>
+      </div>
+
+      <p>2 阶时这条结论最好用。\(f(\lambda)=\lambda^2-(\mathrm{tr}\,A)\lambda+|A|\)，两个特征值就是它的两个根，和与积都是现成的；判别式 \((\mathrm{tr}\,A)^2-4|A|\) 的正负，还直接告诉你根是实的、重的还是复的。</p>
+
+      <p>行列式那一半带一个常用推论：\(|A|=\lambda_1\lambda_2\cdots\lambda_n\)，所以 \(A\) 可逆当且仅当没有一个特征值为零，\(A\) 不可逆时 0 必定是它的特征值。判断矩阵能不能对角化时，还要回到这条推论上。</p>
+
+      <div class="figure">
+        <!--FIG ch06_trace--><svg viewBox="0 0 720 340" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<text x="168.00" y="42.00" text-anchor="middle" font-size="15" fill="var(--ink)">两个特征值叠起来，正好到迹</text>
+<rect x="223.06" y="236.00" width="45.88" height="14.00" fill="var(--fig-fill)" stroke="var(--ink-2)" stroke-width="1.4"/>
+<rect x="93.06" y="124.00" width="45.88" height="126.00" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.6"/>
+<rect x="223.06" y="110.00" width="45.88" height="126.00" fill="var(--fig-fill)" stroke="var(--ink-2)" stroke-width="1.4"/>
+<line x1="70.00" y1="250.00" x2="312.00" y2="250.00" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="70.00" y1="110.00" x2="330.00" y2="110.00" stroke="var(--prussian)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 5"/>
+<text x="336.00" y="115.00" text-anchor="start" font-size="14" fill="var(--prussian)">迹 = 2</text>
+<text x="116.00" y="274.00" text-anchor="middle" font-size="13.5" fill="var(--ink)">λ1 = 1.8</text>
+<text x="246.00" y="274.00" text-anchor="middle" font-size="13.5" fill="var(--ink)">λ1 + λ2</text>
+<line x1="282.00" y1="243.00" x2="338.00" y2="212.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="338.00" y="212.00" text-anchor="start" font-size="13" fill="var(--ink-2)">λ2 = 0.2</text>
+<text x="180.00" y="300.00" text-anchor="middle" font-size="13" fill="var(--ink-3)">A 的对角线上是两个 1，其余是 0.8</text>
+<text x="180.00" y="322.00" text-anchor="middle" font-size="13" fill="var(--ink-3)">1.8 + 0.2 正好等于对角线之和</text>
+<text x="546.00" y="42.00" text-anchor="middle" font-size="15" fill="var(--ink)">行列式就是特征值之积</text>
+<line x1="423.82" y1="215.16" x2="668.18" y2="215.16" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<line x1="546.00" y1="286.83" x2="546.00" y2="54.60" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<text x="666.24" y="235.16" text-anchor="end" font-size="15" fill="var(--ink-3)" font-style="italic">b</text>
+<text x="534.00" y="59.47" text-anchor="end" font-size="15" fill="var(--ink-3)" font-style="italic">det</text>
+<path d="M 434.48 261.39 L 435.18 259.02 L 435.88 256.68 L 436.58 254.34 L 437.27 252.03 L 437.97 249.72 L 438.67 247.44 L 439.36 245.16 L 440.06 242.90 L 440.76 240.66 L 441.45 238.43 L 442.15 236.22 L 442.85 234.02 L 443.55 231.83 L 444.24 229.66 L 444.94 227.51 L 445.64 225.37 L 446.33 223.24 L 447.03 221.13 L 447.73 219.03 L 448.42 216.95 L 449.12 214.89 L 449.82 212.84 L 450.52 210.80 L 451.21 208.78 L 451.91 206.77 L 452.61 204.78 L 453.30 202.80 L 454.00 200.84 L 454.70 198.89 L 455.39 196.96 L 456.09 195.04 L 456.79 193.14 L 457.48 191.25 L 458.18 189.38 L 458.88 187.52 L 459.58 185.67 L 460.27 183.84 L 460.97 182.03 L 461.67 180.23 L 462.36 178.44 L 463.06 176.67 L 463.76 174.92 L 464.45 173.18 L 465.15 171.45 L 465.85 169.74 L 466.55 168.05 L 467.24 166.37 L 467.94 164.70 L 468.64 163.05 L 469.33 161.41 L 470.03 159.79 L 470.73 158.18 L 471.42 156.59 L 472.12 155.01 L 472.82 153.45 L 473.52 151.90 L 474.21 150.37 L 474.91 148.85 L 475.61 147.35 L 476.30 145.86 L 477.00 144.39 L 477.70 142.93 L 478.39 141.48 L 479.09 140.05 L 479.79 138.64 L 480.48 137.24 L 481.18 135.85 L 481.88 134.48 L 482.58 133.13 L 483.27 131.79 L 483.97 130.46 L 484.67 129.15 L 485.36 127.86 L 486.06 126.58 L 486.76 125.31 L 487.45 124.06 L 488.15 122.82 L 488.85 121.60 L 489.55 120.39 L 490.24 119.20 L 490.94 118.02 L 491.64 116.86 L 492.33 115.71 L 493.03 114.58 L 493.73 113.46 L 494.42 112.36 L 495.12 111.27 L 495.82 110.19 L 496.52 109.14 L 497.21 108.09 L 497.91 107.06 L 498.61 106.05 L 499.30 105.05 L 500.00 104.06 L 500.70 103.09 L 501.39 102.14 L 502.09 101.20 L 502.79 100.27 L 503.48 99.36 L 504.18 98.46 L 504.88 97.58 L 505.58 96.72 L 506.27 95.86 L 506.97 95.03 L 507.67 94.21 L 508.36 93.40 L 509.06 92.61 L 509.76 91.83 L 510.45 91.07 L 511.15 90.32 L 511.85 89.58 L 512.55 88.87 L 513.24 88.16 L 513.94 87.47 L 514.64 86.80 L 515.33 86.14 L 516.03 85.50 L 516.73 84.87 L 517.42 84.25 L 518.12 83.65 L 518.82 83.07 L 519.52 82.50 L 520.21 81.94 L 520.91 81.40 L 521.61 80.88 L 522.30 80.36 L 523.00 79.87 L 523.70 79.39 L 524.39 78.92 L 525.09 78.47 L 525.79 78.03 L 526.48 77.61 L 527.18 77.20 L 527.88 76.81 L 528.58 76.43 L 529.27 76.07 L 529.97 75.72 L 530.67 75.39 L 531.36 75.07 L 532.06 74.77 L 532.76 74.48 L 533.45 74.20 L 534.15 73.94 L 534.85 73.70 L 535.55 73.47 L 536.24 73.25 L 536.94 73.06 L 537.64 72.87 L 538.33 72.70 L 539.03 72.54 L 539.73 72.40 L 540.42 72.28 L 541.12 72.17 L 541.82 72.07 L 542.52 71.99 L 543.21 71.92 L 543.91 71.87 L 544.61 71.83 L 545.30 71.81 L 546.00 71.80 L 546.70 71.81 L 547.39 71.83 L 548.09 71.87 L 548.79 71.92 L 549.48 71.99 L 550.18 72.07 L 550.88 72.17 L 551.58 72.28 L 552.27 72.40 L 552.97 72.54 L 553.67 72.70 L 554.36 72.87 L 555.06 73.06 L 555.76 73.25 L 556.45 73.47 L 557.15 73.70 L 557.85 73.94 L 558.55 74.20 L 559.24 74.48 L 559.94 74.77 L 560.64 75.07 L 561.33 75.39 L 562.03 75.72 L 562.73 76.07 L 563.42 76.43 L 564.12 76.81 L 564.82 77.20 L 565.52 77.61 L 566.21 78.03 L 566.91 78.47 L 567.61 78.92 L 568.30 79.39 L 569.00 79.87 L 569.70 80.36 L 570.39 80.88 L 571.09 81.40 L 571.79 81.94 L 572.48 82.50 L 573.18 83.07 L 573.88 83.65 L 574.58 84.25 L 575.27 84.87 L 575.97 85.50 L 576.67 86.14 L 577.36 86.80 L 578.06 87.47 L 578.76 88.16 L 579.45 88.87 L 580.15 89.58 L 580.85 90.32 L 581.55 91.07 L 582.24 91.83 L 582.94 92.61 L 583.64 93.40 L 584.33 94.21 L 585.03 95.03 L 585.73 95.86 L 586.42 96.72 L 587.12 97.58 L 587.82 98.46 L 588.52 99.36 L 589.21 100.27 L 589.91 101.20 L 590.61 102.14 L 591.30 103.09 L 592.00 104.06 L 592.70 105.05 L 593.39 106.05 L 594.09 107.06 L 594.79 108.09 L 595.48 109.14 L 596.18 110.19 L 596.88 111.27 L 597.58 112.36 L 598.27 113.46 L 598.97 114.58 L 599.67 115.71 L 600.36 116.86 L 601.06 118.02 L 601.76 119.20 L 602.45 120.39 L 603.15 121.60 L 603.85 122.82 L 604.55 124.06 L 605.24 125.31 L 605.94 126.58 L 606.64 127.86 L 607.33 129.15 L 608.03 130.46 L 608.73 131.79 L 609.42 133.13 L 610.12 134.48 L 610.82 135.85 L 611.52 137.24 L 612.21 138.64 L 612.91 140.05 L 613.61 141.48 L 614.30 142.93 L 615.00 144.39 L 615.70 145.86 L 616.39 147.35 L 617.09 148.85 L 617.79 150.37 L 618.48 151.90 L 619.18 153.45 L 619.88 155.01 L 620.58 156.59 L 621.27 158.18 L 621.97 159.79 L 622.67 161.41 L 623.36 163.05 L 624.06 164.70 L 624.76 166.37 L 625.45 168.05 L 626.15 169.74 L 626.85 171.45 L 627.55 173.18 L 628.24 174.92 L 628.94 176.67 L 629.64 178.44 L 630.33 180.23 L 631.03 182.03 L 631.73 183.84 L 632.42 185.67 L 633.12 187.52 L 633.82 189.38 L 634.52 191.25 L 635.21 193.14 L 635.91 195.04 L 636.61 196.96 L 637.30 198.89 L 638.00 200.84 L 638.70 202.80 L 639.39 204.78 L 640.09 206.77 L 640.79 208.78 L 641.48 210.80 L 642.18 212.84 L 642.88 214.89 L 643.58 216.95 L 644.27 219.03 L 644.97 221.13 L 645.67 223.24 L 646.36 225.37 L 647.06 227.51 L 647.76 229.66 L 648.45 231.83 L 649.15 234.02 L 649.85 236.22 L 650.55 238.43 L 651.24 240.66 L 651.94 242.90 L 652.64 245.16 L 653.33 247.44 L 654.03 249.72 L 654.73 252.03 L 655.42 254.34 L 656.12 256.68 L 656.82 259.02 L 657.52 261.39" fill="none" stroke="var(--accent-line)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="449.03" cy="215.16" r="4.0" fill="var(--prussian)"/>
+<circle cx="642.97" cy="215.16" r="4.0" fill="var(--prussian)"/>
+<text x="447.03" y="235.16" text-anchor="middle" font-size="13" fill="var(--ink-3)">−1</text>
+<text x="644.97" y="235.16" text-anchor="middle" font-size="13" fill="var(--ink-3)">1</text>
+<line x1="468.42" y1="215.16" x2="468.42" y2="163.55" stroke="var(--ink-3)" stroke-width="1.0" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4 4"/>
+<circle cx="468.42" cy="163.55" r="4.0" fill="var(--prussian)"/>
+<line x1="623.58" y1="215.16" x2="623.58" y2="163.55" stroke="var(--ink-3)" stroke-width="1.0" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4 4"/>
+<circle cx="623.58" cy="163.55" r="4.0" fill="var(--prussian)"/>
+<text x="615.58" y="193.35" text-anchor="end" font-size="13" fill="var(--ink)">0.36</text>
+<text x="546.00" y="308.00" text-anchor="middle" font-size="13" fill="var(--ink-3)">b 从 −1 走到 1，积从 0 升到 1 再回到 0</text>
+<text x="546.00" y="330.00" text-anchor="middle" font-size="13" fill="var(--ink-3)">b = ±1 时行列式为零，0 成了特征值</text>
+</svg>
+<!--/FIG ch06_trace-->
+        <figcaption class="figcaption"><b>和与积都写在 \(A\) 身上。</b>取 \(A=\begin{pmatrix}1&amp;b\\b&amp;1\end{pmatrix}\)：特征值是 \(1\pm b\)，和恒为 2，积随 \(b\) 走抛物线。</figcaption>
+      </div>
+
+      <h2 id="s-4" class="reveal">四、三种情形</h2>
+
+      <p>2 阶矩阵的判别式 \((\mathrm{tr}\,A)^2-4|A|\) 把情形分成三类，三类对应的动作样子完全不同，认出属于哪一类，就知道平面上会看见什么。</p>
+
+      <p>判别式为正，两个特征值不相等，各管一个方向。对角矩阵最直白：\(\mathrm{diag}(1.9,0.55)\) 把横轴方向拉长 1.9 倍，把竖轴方向压到 0.55 倍，单位正方形变成一块扁长方形，两条边的方向都还在（见下图左）。</p>
+
+      <p>判别式为零，两个特征值相同，方向却未必有两个。\(A=\begin{pmatrix}1&amp;1\\0&amp;1\end{pmatrix}\) 的特征值 1 是二重根，代回 \((A-E)x=0\) 只剩一个方程 \(x_2=0\)，解空间是一维的；正方形被推成面积不变的平行四边形，只有横轴那一个方向留在原地（见下图中）。</p>
+
+      <p>判别式为负，两个特征值是一对共轭复数，平面上一个不动方向也没有。\(\begin{pmatrix}0&amp;-1\\1&amp;0\end{pmatrix}\) 的特征值是 \(\pm i\)，每支向量都被转走，一支都留不下（见下图右）。这类动作里带着转动，伸缩的倍数由复数的模给出，模是 1 的时候就只剩转了。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定理（不同特征值的特征向量线性无关）</p>
+        <p>设 \(\lambda_1,\lambda_2,\dots,\lambda_m\) 是 \(A\) 的互不相同的特征值，\(x_i\) 是 \(A\) 属于 \(\lambda_i\) 的特征向量，则 \(x_1,x_2,\dots,x_m\) 线性无关。</p>
+      </div>
+
+      <p>这条定理省掉一道手续：特征值互不相同时，找出来的特征向量自动线性无关，不必另外验。重根要单独看，见下面的折叠块。</p>
+
+      <details class="fold">
+        <summary>重根时为什么会缺方向</summary>
+        <p>\(\begin{pmatrix}1&amp;1\\0&amp;1\end{pmatrix}\) 的 \(\lambda=1\) 是二重根，解 \((A-E)x=0\) 只约化出 \(x_2=0\) 一个条件，特征子空间是一维的，只能取出一支独立向量。代数重数是 2，几何重数是 1，缺的那个方向补不上。几何重数永远不超过代数重数，两者相等时矩阵才有 \(n\) 支独立特征向量。</p>
+      </details>
+
+      <div class="figure">
+        <!--FIG ch06_cases--><svg viewBox="0 0 720 340" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<text x="140.00" y="42.00" text-anchor="middle" font-size="15" fill="var(--ink)">两个不同实根</text>
+<line x1="7.20" y1="246.00" x2="197.60" y2="246.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+<line x1="66.00" y1="296.40" x2="66.00" y2="148.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+<polygon points="66.00,246.00 122.00,246.00 122.00,190.00 66.00,190.00" fill="var(--fig-fill)" stroke="var(--ink-3)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+<polygon points="66.00,246.00 172.40,246.00 172.40,215.20 66.00,215.20" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.85"/>
+<line x1="10.00" y1="246.00" x2="194.80" y2="246.00" stroke="var(--prussian)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 5"/>
+<text x="194.80" y="268.00" text-anchor="end" font-size="13" fill="var(--prussian)">方向不变</text>
+<line x1="66.00" y1="293.60" x2="66.00" y2="150.80" stroke="var(--prussian)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 5"/>
+<text x="74.00" y="162.80" text-anchor="start" font-size="13" fill="var(--prussian)">方向不变</text>
+<text x="140.00" y="300.00" text-anchor="middle" font-size="13" fill="var(--ink-3)">两个方向各自伸缩</text>
+<text x="140.00" y="322.00" text-anchor="middle" font-size="13" fill="var(--ink-3)">λ = 1.9 与 0.55</text>
+<text x="380.00" y="42.00" text-anchor="middle" font-size="15" fill="var(--ink)">重根</text>
+<line x1="247.20" y1="246.00" x2="437.60" y2="246.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+<line x1="306.00" y1="296.40" x2="306.00" y2="148.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+<polygon points="306.00,246.00 362.00,246.00 362.00,190.00 306.00,190.00" fill="var(--fig-fill)" stroke="var(--ink-3)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+<polygon points="306.00,246.00 362.00,246.00 418.00,190.00 362.00,190.00" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.85"/>
+<line x1="250.00" y1="246.00" x2="434.80" y2="246.00" stroke="var(--prussian)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 5"/>
+<text x="434.80" y="268.00" text-anchor="end" font-size="13" fill="var(--prussian)">方向不变</text>
+<text x="380.00" y="300.00" text-anchor="middle" font-size="13" fill="var(--ink-3)">只留住一个方向</text>
+<text x="380.00" y="322.00" text-anchor="middle" font-size="13" fill="var(--ink-3)">λ = 1 与 1，面积不变</text>
+<text x="620.00" y="42.00" text-anchor="middle" font-size="15" fill="var(--ink)">共轭复根</text>
+<line x1="487.20" y1="246.00" x2="677.60" y2="246.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+<line x1="546.00" y1="296.40" x2="546.00" y2="148.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+<polygon points="546.00,246.00 602.00,246.00 602.00,190.00 546.00,190.00" fill="var(--fig-fill)" stroke="var(--ink-3)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+<polygon points="546.00,246.00 595.33,204.60 553.94,155.27 504.60,196.67" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.85"/>
+<line x1="602.00" y1="246.00" x2="595.33" y2="204.60" stroke="var(--ink-3)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4 4"/>
+<text x="581.84" y="221.36" text-anchor="middle" font-size="13" fill="var(--ink-3)">40°</text>
+<text x="620.00" y="300.00" text-anchor="middle" font-size="13" fill="var(--ink-3)">没有方向被留住</text>
+<text x="620.00" y="322.00" text-anchor="middle" font-size="13" fill="var(--ink-3)">λ 是一对共轭复数</text>
+</svg>
+<!--/FIG ch06_cases-->
+        <figcaption class="figcaption"><b>同一个单位正方形，三种命运。</b>左：两条边都留在原方向；中：只留一条；右：一条也不留，转过去 40°。</figcaption>
+      </div>
+
+      <h2 id="s-5" class="reveal">五、换个矩阵，特征值怎么变</h2>
+
+      <p>知道 \(A\) 的特征值以后，一串相关矩阵的特征值不用重算，因为它们挂的是同一批特征向量。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定理（特征值的传递）</p>
+        <p>设 \(\lambda\) 是 \(A\) 的特征值，\(x\) 是相应的特征向量。则 \(k\lambda\)、\(\lambda^m\) 分别是 \(kA\)、\(A^m\) 的特征值，对任意多项式 \(f\)，\(f(\lambda)\) 是 \(f(A)\) 的特征值，特征向量都还是 \(x\)。若 \(A\) 可逆，则 \(\lambda\ne0\)，\(\lambda^{-1}\) 是 \(A^{-1}\) 的特征值，\(|A|/\lambda\) 是 \(A^{*}\) 的特征值。</p>
+      </div>
+
+      <p>理由是同一条式子反复用。\(Ax=\lambda x\) 两边左乘 \(A\) 得 \(A^2x=\lambda Ax=\lambda^2x\)，乘 \(m\) 次就到 \(A^mx=\lambda^mx\)；多项式那一串把 \(A\) 一处一处换成 \(\lambda\)，\(x\) 从头到尾不动。可逆的情形反着做，两边乘 \(A^{-1}\) 得 \(x=\lambda A^{-1}x\)，\(\lambda\) 不为零时除过去就完了。</p>
+
+      <p>几个数顺带也一起有了：\(|A|=\lambda_1\cdots\lambda_n\)，\(|A^{-1}|=1/|A|\)，\(|A^{*}|=|A|^{n-1}\)。另外 \(A\) 与 \(A^T\) 的特征多项式相同，因为 \(|\lambda E-A^T|=|(\lambda E-A)^T|=|\lambda E-A|\)，所以两者特征值一样，特征向量通常不同。</p>
+
+      <p>矩阵还满足一条更强的等式：把特征多项式里的 \(\lambda\) 整个换成 \(A\)，得到的是零矩阵。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定理（凯莱-哈密顿）</p>
+        <p>设 \(f(\lambda)=|\lambda E-A|=\lambda^n+a_1\lambda^{n-1}+\dots+a_n\) 是 \(n\) 阶方阵 \(A\) 的特征多项式，则 \(f(A)=A^n+a_1A^{n-1}+\dots+a_nE=O\)。也就是 \(A\) 满足自己的特征方程。</p>
+      </div>
+
+      <p>用处是把高次幂压回低次：\(n\) 阶方阵的 \(A^n\) 能用 \(A^{n-1},\dots,A,E\) 线性表出，任何多项式都能一路降到 \(n-1\) 次以下。求逆也走这条路，把常数项挪到等号另一边，再提出一个 \(A\)，得 \(A^{-1}=-\dfrac{1}{a_n}\left(A^{n-1}+a_1A^{n-2}+\dots+a_{n-1}E\right)\)，其中 \(a_n=(-1)^n|A|\) 不为零，所以这式子只在 \(A\) 可逆时说得通。</p>
+
+      <div class="archive reveal">
+        <p class="archive-when">1858 年，剑桥</p>
+        <h3>矩阵满足自己的方程</h3>
+        <p class="archive-quote">「每个方阵都满足它自己的特征方程。」（转述）</p>
+        <p class="archive-source">凯莱《矩阵论》（A Memoir on the Theory of Matrices），1858 年</p>
+        <p>凯莱在这篇论文里第一次把矩阵当成能加能乘的对象，顺手写下 2 阶与 3 阶情形的这条恒等式；哈密顿在四元数的工作里碰到了同一件事。定理的一般证明要等到 1870 年前后，而考场上用它求逆，只需要把常数项挪到另一边再提一个 \(A\) 出来。</p>
+      </div>
+
+      <h2 id="s-6" class="reveal">六、实对称矩阵</h2>
+
+      <p>前面几节允许特征值落在复平面上。有一类矩阵的根一定在实轴上，而且不同根上的特征向量互相垂直，这类矩阵满足 \(A^T=A\)，叫<strong>实对称矩阵</strong>。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定理（实对称矩阵的特征值与特征向量）</p>
+        <p>实对称矩阵的特征值都是实数；属于不同特征值的特征向量互相正交。</p>
+      </div>
+
+      <p>正交这一条给计算带来方便。把 \(n\) 个特征向量各自单位化，再横着拼成一个矩阵 \(P\)，\(P\) 的列两两垂直、长度都是 1，满足 \(P^TP=E\)；用 \(P\) 换一组基，\(A\) 就变成对角矩阵，对角线正是那些特征值。第七章会把这件事写成相似对角化的完整判据。</p>
+
+      <p>现实里的对称矩阵很多：二次型的矩阵、刚体的惯性张量、数据的协方差矩阵。欧拉找主轴，找的就是惯性张量的特征向量，只是他的论文里这些词一个都还没有。</p>
+
+      <div class="archive reveal">
+        <p class="archive-when">1743 年，柏林</p>
+        <h3>刚体绕哪条轴转得最省事</h3>
+        <p class="archive-quote">「求三条互相垂直的轴，使刚体关于各轴的惯性积都为零。」（意译）</p>
+        <p class="archive-source">欧拉 1743 年关于刚体转动的论文，此处按通行叙述转述</p>
+        <p>这三条轴就是惯性张量（一个实对称矩阵）的特征向量，欧拉用它们把转动方程拆成三个互不牵连的式子，算起来一下子轻了。拉格朗日 1774 年、拉普拉斯 1780 年处理天体力学里的同类问题时也做过这件事，柯西 1829 年把二次型的对角化写成一般方法，主轴才从力学里独立出来。</p>
+      </div>
+
+      <h2 id="s-manual" class="reveal">怎么算</h2>
+
+      <ul>
+        <li><strong>先看阶数和主对角线。</strong>把迹和行列式算出来记在草稿角上，后面要拿它们对答案。</li>
+        <li><strong>写 \(|\lambda E-A|\)，不要写 \(A-\lambda E\) 之后又改符号。</strong>行列式先按行或按列降阶，再展开成多项式。</li>
+        <li><strong>3 阶先试整根。</strong>常数项是 \(|A|\)，整根只可能是 \(|A|\) 的因数，从 \(\pm1,\pm2,\pm3\) 试起，试出一个就做多项式除法降次。</li>
+        <li><strong>每个根回代解 \((A-\lambda E)x=0\)。</strong>化行阶梯形，取基础解系；同一个 \(\lambda\) 只取线性无关的那几支。</li>
+        <li><strong>三角矩阵不用算。</strong>上三角、下三角、对角矩阵的特征值就是主对角线上的数，行列式那一步省掉。</li>
+      </ul>
+
+      <details class="fold">
+        <summary>手算最容易错的三处</summary>
+        <p>一是把 \(A-\lambda E\) 里某一行的符号抄反，整条多项式跟着错；二是解出 \(\lambda\) 就交卷，忘了回代求特征向量；三是同一个特征值下把两支成比例的向量都写上去，把一维的特征子空间当成了二维。前两处直接扣分，第三处往往被判成概念不清。</p>
+      </details>
+
+      <h2 id="s-examples" class="reveal">例题</h2>
+
+      <div class="example">
+        <p class="example-head">例 <span>1</span>　求 \(A=\begin{pmatrix}1&amp;-1\\2&amp;4\end{pmatrix}\) 的特征值与特征向量。</p>
+        <p class="solution">\(f(\lambda)=(\lambda-1)(\lambda-4)+2=\lambda^2-5\lambda+6\)，根是 2 与 3，和 5 是迹，积 6 是 \(|A|\)，都对得上。\(\lambda=2\) 时 \((A-2E)x=0\) 给出 \(x_1+x_2=0\)，特征向量取 \((1,-1)^T\)；\(\lambda=3\) 时给出 \(2x_1+x_2=0\)，取 \((1,-2)^T\)。</p>
+      </div>
+
+      <div class="example">
+        <p class="example-head">例 <span>2</span>　求 \(A=\begin{pmatrix}-1&amp;1&amp;0\\-4&amp;3&amp;0\\1&amp;0&amp;2\end{pmatrix}\) 的特征值与特征向量。</p>
+        <p class="solution">\(|\lambda E-A|\) 沿第三列展开得 \((\lambda-2)(\lambda-1)^2\)，特征值是 2 与二重根 1。\(\lambda=2\) 时 \((A-2E)x=0\) 逼出 \(x_1=x_2=0\)，特征向量取 \((0,0,1)^T\)；\(\lambda=1\) 时得 \(x_2=2x_1\)、\(x_3=-x_1\)，只有一支独立向量 \((1,2,-1)^T\)。</p>
+      </div>
+
+      <div class="example">
+        <p class="example-head">例 <span>3</span>　求 \(A=\begin{pmatrix}1&amp;-1\\1&amp;1\end{pmatrix}\) 的特征值，并说明它在平面上做了什么。</p>
+        <p class="solution">\(f(\lambda)=(\lambda-1)^2+1=\lambda^2-2\lambda+2\)，判别式 \(4-8&lt;0\)，根是 \(1+i\) 与 \(1-i\)。迹 2、行列式 2 都对得上。没有实特征值，平面上没有不动方向；这个矩阵把平面转 45°，再放大 \(\sqrt2\) 倍。</p>
+      </div>
+
+      <h2 id="s-exercises" class="reveal">习题</h2>
+
+      <div class="exercises">
+
+        <div class="ex-group">
+          <p class="ex-group-head">A 档 <span>巩固定义与基本计算，每题五分钟内</span></p>
+
+          <p class="ex"><span class="ex-num">1.</span> 写出 \(\mathrm{diag}(2,-3,1)\) 的全部特征值，并说明为什么不必算行列式。</p>
+          <div class="answer"><details><summary>看答案</summary><p>对角矩阵把三个坐标轴方向分别乘上 2、−3、1，\(e_1,e_2,e_3\) 就是特征向量，特征值是 2、−3、1。\(|\lambda E-A|\) 也直接拆成 \((\lambda-2)(\lambda+3)(\lambda-1)\)。</p></details></div>
+
+          <p class="ex"><span class="ex-num">2.</span> 求 \(A=\begin{pmatrix}1&amp;2\\2&amp;1\end{pmatrix}\) 的特征值与特征向量。</p>
+          <div class="answer"><details><summary>看答案</summary><p>\(f(\lambda)=\lambda^2-2\lambda-3=(\lambda-3)(\lambda+1)\)，特征值 3 与 −1。\(\lambda=3\) 时 \(x_1=x_2\)，取 \((1,1)^T\)；\(\lambda=-1\) 时 \(x_1=-x_2\)，取 \((1,-1)^T\)。</p></details></div>
+
+          <p class="ex"><span class="ex-num">3.</span> 求上三角矩阵 \(\begin{pmatrix}2&amp;3&amp;1\\0&amp;-1&amp;4\\0&amp;0&amp;5\end{pmatrix}\) 的特征多项式与特征值。</p>
+          <div class="answer"><details><summary>看答案</summary><p>三角矩阵的 \(|\lambda E-A|\) 等于对角元相乘：\((\lambda-2)(\lambda+1)(\lambda-5)\)。特征值是 2、−1、5，和 6 等于迹，积 −10 等于行列式。</p></details></div>
+
+          <p class="ex"><span class="ex-num">4.</span> 设 2 阶矩阵 \(A\) 的特征值是 2 与 5，写出 \(\mathrm{tr}\,A\) 与 \(|A|\)；反过来，只给迹 7、行列式 10，两个特征值是多少。</p>
+          <div class="answer"><details><summary>看答案</summary><p>\(\mathrm{tr}\,A=7\)，\(|A|=10\)。反过来两个特征值是 \(\lambda^2-7\lambda+10=0\) 的根，还是 2 与 5。</p></details></div>
+
+          <p class="ex"><span class="ex-num">5.</span> 判断 \(\begin{pmatrix}0&amp;-1\\1&amp;0\end{pmatrix}\) 有没有实特征值，并说出它对平面做了什么。</p>
+          <div class="answer"><details><summary>看答案</summary><p>\(f(\lambda)=\lambda^2+1\)，根是 \(\pm i\)，没有实特征值。它把平面绕原点转 90°，没有哪支向量留在原方向上。</p></details></div>
+
+          <p class="ex"><span class="ex-num">6.</span> 设 \(x\) 是 \(A\) 属于 \(\lambda\) 的特征向量，\(k\ne0\)。验证 \(kx\) 也是特征向量；再验证 \(A^2\) 的特征值是 \(\lambda^2\)。</p>
+          <div class="answer"><details><summary>看答案</summary><p>\(A(kx)=kAx=k\lambda x=\lambda(kx)\)，所以 \(kx\) 属于同一个 \(\lambda\)。\(A^2x=A(\lambda x)=\lambda Ax=\lambda^2x\)，特征向量还是 \(x\)。</p></details></div>
+        </div>
+
+        <div class="ex-group">
+          <p class="ex-group-head">B 档 <span>综合题，接近期末与考研难度</span></p>
+
+          <p class="ex"><span class="ex-num">1.</span> 求 \(A=\begin{pmatrix}1&amp;2&amp;2\\2&amp;1&amp;2\\2&amp;2&amp;1\end{pmatrix}\) 的特征值与特征向量。</p>
+          <div class="answer"><details><summary>看答案</summary><p>\(f(\lambda)=(\lambda-5)(\lambda+1)^2\)，特征值 5 与二重根 −1。\(\lambda=5\) 时 \(x_1=x_2=x_3\)，取 \((1,1,1)^T\)；\(\lambda=-1\) 时只剩 \(x_1+x_2+x_3=0\)，取 \((1,-1,0)^T\) 与 \((1,0,-1)^T\)，共 3 支独立向量。</p></details></div>
+
+          <p class="ex"><span class="ex-num">2.</span> 设 \(A\) 可逆，\(\lambda\) 是 \(A\) 的特征值。写出 \(A^{-1}\)、\(A^{*}\)、\(A^2+2A+E\) 的特征值，并说明 \(A\) 可逆与 0 不是特征值是一回事。</p>
+          <div class="answer"><details><summary>看答案</summary><p>依次是 \(\lambda^{-1}\)、\(|A|/\lambda\)、\((\lambda+1)^2\)。\(|A|=\lambda_1\cdots\lambda_n\)，所以 \(A\) 可逆时每个特征值都不为零，反过来也成立。</p></details></div>
+
+          <p class="ex"><span class="ex-num">3.</span> 证明 \(A\) 与 \(A^T\) 的特征多项式相同，由此说明两者特征值一样、特征向量一般不同。</p>
+          <div class="answer"><details><summary>看答案</summary><p>\(|\lambda E-A^T|=|(\lambda E-A)^T|=|\lambda E-A|\)，转置不改变行列式，两个多项式逐项相同。特征值是多项式的根，当然一样；特征向量是各自方程组的解，一般不同。</p></details></div>
+
+          <p class="ex"><span class="ex-num">4.</span> 已知 3 阶矩阵 \(A\) 的特征值为 1、2、3，求 \(\mathrm{tr}\,A\)、\(|A|\)、\(|A^{*}|\) 与 \(|A^{-1}+E|\)。</p>
+          <div class="answer"><details><summary>看答案</summary><p>\(\mathrm{tr}\,A=6\)，\(|A|=6\)，\(|A^{*}|=|A|^{2}=36\)。\(A^{-1}+E\) 的特征值是 \(1/\lambda_i+1\)，三个都为正，行列式是 \(2\cdot\frac32\cdot\frac43=4\)。</p></details></div>
+        </div>
+
+        <div class="ex-group">
+          <p class="ex-group-head">C 档 <span>拓展与历史原题</span></p>
+
+          <p class="ex"><span class="ex-num">1.</span>（欧拉，1743）刚体的惯性张量是 3 阶实对称矩阵。用本章的定理说明它的三个特征值都是实数，三条主轴两两垂直。</p>
+          <div class="answer"><details><summary>看答案</summary><p>实对称矩阵的特征值全为实数，属于不同特征值的特征向量正交，所以三条实主轴存在且互相垂直。三个特征值就是绕三条主轴转动的惯性矩。</p></details></div>
+
+          <p class="ex"><span class="ex-num">2.</span>（凯莱-哈密顿，1858）取 \(A=\begin{pmatrix}1&amp;2\\3&amp;4\end{pmatrix}\)，验证 \(f(A)=O\)，并由此求 \(A^{-1}\)。</p>
+          <div class="answer"><details><summary>看答案</summary><p>\(f(\lambda)=\lambda^2-5\lambda-2\)，算出 \(A^2-5A-2E=O\)，直接验算成立。把 \(-2E\) 挪到右边再乘 \(A^{-1}\)，得 \(A^{-1}=(A-5E)/2=\begin{pmatrix}-2&amp;1\\1.5&amp;-0.5\end{pmatrix}\)。</p></details></div>
+
+          <p class="ex"><span class="ex-num">3.</span> 求 \(A=\begin{pmatrix}0&amp;1&amp;1\\1&amp;0&amp;1\\1&amp;1&amp;0\end{pmatrix}\) 的特征值与特征向量，并检验不同特征值的特征向量是否正交。</p>
+          <div class="answer"><details><summary>看答案</summary><p>\(f(\lambda)=(\lambda-2)(\lambda+1)^2\)，\(\lambda=2\) 对应 \((1,1,1)^T\)，\(\lambda=-1\) 对应 \((1,-1,0)^T\) 与 \((1,0,-1)^T\)。三支向量两两点积皆为零，因为 \(A\) 是实对称矩阵。</p></details></div>
+        </div>
+
+        <div class="ex-group">
+          <p class="ex-group-head">思考题 <span>不设标准答案，只给提示</span></p>
+
+          <p class="ex"><span class="ex-num">1.</span> 特征向量能不能是零向量？如果允许，每个数会变成什么。</p>
+          <div class="answer"><details><summary>看提示</summary><p>若允许 \(x=0\)，\(Ax=0=\lambda\cdot0\) 对任何 \(\lambda\) 都成立，任何数都成了特征值，特征值这个概念就失去分辨力。定义里那句「非零」是拿来撑住整条定理的。</p></details></div>
+
+          <p class="ex"><span class="ex-num">2.</span> 一个 \(n\) 阶矩阵最多有几支线性无关的特征向量？重根时为什么可能凑不够。</p>
+          <div class="answer"><details><summary>看提示</summary><p>最多 \(n\) 支。重根的特征子空间维数可能小于重数，\(\begin{pmatrix}1&amp;1\\0&amp;1\end{pmatrix}\) 就只给出一支。这件事决定矩阵能否对角化，第七章展开。</p></details></div>
+
+          <p class="ex"><span class="ex-num">3.</span> 迹在换一组基之后为什么不变？这件事对相似矩阵意味着什么。</p>
+          <div class="answer"><details><summary>看提示</summary><p>迹等于特征值之和，而特征值是特征多项式的根，换基不改变特征多项式。所以相似矩阵的迹与行列式都相同，它们是最省事的两个不变量。</p></details></div>
+        </div>
+
+      </div>
+
+      <h2 class="reveal">延伸阅读</h2>
+      <ul class="refs">
+        <li>同济大学数学系《线性代数》第六版，第五章第一、二节。本章的记号、例题口径与「特征值」这个叫法都以此为准。</li>
+        <li>Gilbert Strang, <em>Introduction to Linear Algebra</em>，第 6 章。用图形讲特征值，图示比本书多。</li>
+        <li>莫里斯·克莱因《古今数学思想》第 3 册，18 世纪力学与分析的部分。欧拉的主轴、拉格朗日的转动方程都在这里。</li>
+        <li>T. Hawkins, “Cauchy and the Spectral Theory of Matrices”, <em>Historia Mathematica</em> 2 (1975)。讲柯西 1829 年那篇论文怎样把二次型对角化做成一般方法。</li>
+      </ul>
+
+    </article>
+  </div>
+
+  <div class="wrap">
+    <nav class="pager" aria-label="翻页">
+      <a class="pager-link prev" href="ch05.html"><span class="pager-dir">上一章</span><span class="pager-title">向量空间：把几何抽象出来</span></a>
+      <a class="pager-link next" href="ch07.html"><span class="pager-dir">下一章</span><span class="pager-title">相似与对角化</span></a>
+    </nav>
+  </div>
+
+</main>
+
+<footer class="footer field-dark">
+  <div class="wrap">
+    <p class="footer-mark">数学基础课</p>
+    <div class="footer-cols">
+      <div><p>三门课按同一套读法写：先看问题，再给定义与判别，最后落到计算与习题。</p></div>
+      <div><p><a href="index.html">线性代数目录</a></p><p><a href="../index.html">返回主页</a></p></div>
+      <div><p>图示用脚本按真实数值画，公式由 KaTeX 排版。</p></div>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/katex/katex.min.js"></script>
+<script src="../assets/katex/auto-render.min.js"></script>
+<script src="../assets/site.js"></script>
+</body>
+</html>

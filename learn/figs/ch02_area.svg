@@ -1,0 +1,25 @@
+<svg viewBox="0 0 720 350" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<text x="175.00" y="36.00" text-anchor="middle" font-size="15" fill="var(--ink)">先取 (3,1)，再取 (1,2)</text>
+<line x1="40.00" y1="271.43" x2="310.00" y2="271.43" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+<line x1="72.40" y1="310.00" x2="72.40" y2="40.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+<polygon points="72.40,271.43 234.40,207.14 288.40,78.57 126.40,142.86" fill="var(--fig-fill)" stroke="var(--accent-line)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="72.40" y1="271.43" x2="234.40" y2="207.14" stroke="var(--accent-line)" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round"/><path d="M 225.68 215.39 L 234.40 207.14 L 222.40 207.12" fill="var(--accent-line)" stroke="var(--accent-line)" stroke-width="1" stroke-linejoin="round"/>
+<line x1="72.40" y1="271.43" x2="126.40" y2="142.86" stroke="var(--ink-2)" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round"/><path d="M 126.19 154.86 L 126.40 142.86 L 117.98 151.41" fill="var(--ink-2)" stroke="var(--ink-2)" stroke-width="1" stroke-linejoin="round"/>
+<text x="176.40" y="209.00" text-anchor="middle" font-size="13.5" fill="var(--ink-2)">面积 5</text>
+<text x="242.40" y="227.14" text-anchor="start" font-size="12.5" fill="var(--accent-line)">(3,1)</text>
+<text x="118.40" y="132.86" text-anchor="end" font-size="12.5" fill="var(--ink-2)">(1,2)</text>
+<text x="175.00" y="288.00" text-anchor="middle" font-size="14" fill="var(--ink)">det = 3·2 − 1·1 = 5</text>
+<text x="175.00" y="310.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">逆时针转过去，取正</text>
+<text x="545.00" y="36.00" text-anchor="middle" font-size="15" fill="var(--ink)">把这两列换个顺序</text>
+<line x1="410.00" y1="271.43" x2="680.00" y2="271.43" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+<line x1="442.40" y1="310.00" x2="442.40" y2="40.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+<polygon points="442.40,271.43 496.40,142.86 658.40,78.57 604.40,207.14" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="442.40" y1="271.43" x2="496.40" y2="142.86" stroke="var(--accent-line)" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round"/><path d="M 496.19 154.86 L 496.40 142.86 L 487.98 151.41" fill="var(--accent-line)" stroke="var(--accent-line)" stroke-width="1" stroke-linejoin="round"/>
+<line x1="442.40" y1="271.43" x2="604.40" y2="207.14" stroke="var(--ink-2)" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round"/><path d="M 595.68 215.39 L 604.40 207.14 L 592.40 207.12" fill="var(--ink-2)" stroke="var(--ink-2)" stroke-width="1" stroke-linejoin="round"/>
+<text x="546.40" y="209.00" text-anchor="middle" font-size="13.5" fill="var(--ink-2)">面积 5</text>
+<text x="504.40" y="162.86" text-anchor="start" font-size="12.5" fill="var(--accent-line)">(1,2)</text>
+<text x="596.40" y="197.14" text-anchor="end" font-size="12.5" fill="var(--ink-2)">(3,1)</text>
+<text x="545.00" y="288.00" text-anchor="middle" font-size="14" fill="var(--ink)">det = 1·1 − 3·2 = −5</text>
+<text x="545.00" y="310.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">顺时针转过去，取负</text>
+<text x="360.00" y="340.00" text-anchor="middle" font-size="13" fill="var(--ink-2)">同一块平行四边形，面积还是 5，行列式却从 5 变成了 −5。</text>
+</svg>

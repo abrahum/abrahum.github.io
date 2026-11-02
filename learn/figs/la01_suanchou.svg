@@ -1,0 +1,35 @@
+<svg viewBox="0 0 720 400" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<text x="360.00" y="56.00" text-anchor="middle" font-size="15" fill="var(--ink)">一程写成一列，实数放在最上面</text>
+<text x="240.00" y="78.00" text-anchor="middle" font-size="14" fill="var(--ink-3)">第一程</text>
+<text x="360.00" y="78.00" text-anchor="middle" font-size="14" fill="var(--ink-3)">第二程</text>
+<text x="480.00" y="78.00" text-anchor="middle" font-size="14" fill="var(--ink-3)">第三程</text>
+<text x="162.00" y="129.00" text-anchor="end" font-size="15" fill="var(--ink-2)">实</text>
+<text x="162.00" y="191.00" text-anchor="end" font-size="15" fill="var(--ink-2)">下禾</text>
+<text x="162.00" y="253.00" text-anchor="end" font-size="15" fill="var(--ink-2)">中禾</text>
+<text x="162.00" y="315.00" text-anchor="end" font-size="15" fill="var(--ink-2)">上禾</text>
+<rect x="180.00" y="92.00" width="120.00" height="62.00" fill="var(--fig-fill)" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="240.00" y="132.00" text-anchor="middle" font-size="22" fill="var(--ink)">39</text>
+<rect x="300.00" y="92.00" width="120.00" height="62.00" fill="var(--fig-fill)" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="360.00" y="132.00" text-anchor="middle" font-size="22" fill="var(--ink)">34</text>
+<rect x="420.00" y="92.00" width="120.00" height="62.00" fill="var(--fig-fill)" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="480.00" y="132.00" text-anchor="middle" font-size="22" fill="var(--ink)">26</text>
+<rect x="180.00" y="154.00" width="120.00" height="62.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="240.00" y="194.00" text-anchor="middle" font-size="22" fill="var(--ink)">1</text>
+<rect x="300.00" y="154.00" width="120.00" height="62.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="360.00" y="194.00" text-anchor="middle" font-size="22" fill="var(--ink)">1</text>
+<rect x="420.00" y="154.00" width="120.00" height="62.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="480.00" y="194.00" text-anchor="middle" font-size="22" fill="var(--ink)">3</text>
+<rect x="180.00" y="216.00" width="120.00" height="62.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="240.00" y="256.00" text-anchor="middle" font-size="22" fill="var(--ink)">2</text>
+<rect x="300.00" y="216.00" width="120.00" height="62.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="360.00" y="256.00" text-anchor="middle" font-size="22" fill="var(--ink)">3</text>
+<rect x="420.00" y="216.00" width="120.00" height="62.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="480.00" y="256.00" text-anchor="middle" font-size="22" fill="var(--ink)">2</text>
+<rect x="180.00" y="278.00" width="120.00" height="62.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="240.00" y="318.00" text-anchor="middle" font-size="22" fill="var(--ink)">3</text>
+<rect x="300.00" y="278.00" width="120.00" height="62.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="360.00" y="318.00" text-anchor="middle" font-size="22" fill="var(--ink)">2</text>
+<rect x="420.00" y="278.00" width="120.00" height="62.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="480.00" y="318.00" text-anchor="middle" font-size="22" fill="var(--ink)">1</text>
+<text x="180.00" y="372.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">把这三列竖着读，就是三个方程：上禾 3 秉、中禾 2 秉、下禾 1 秉，共 39 斗，依此类推。</text>
+</svg>

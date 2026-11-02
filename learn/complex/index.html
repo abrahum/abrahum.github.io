@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>复变函数 · 数学基础课</title>
+<meta name="description" content="从卡丹笔下「不可能的数」，讲到黎曼面与共形映射。七章覆盖复变函数与积分变换的主要内容：复数与复平面、解析函数、复积分、级数与洛朗展开、留数、">
+<link rel="stylesheet" href="../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="nav-brand" href="../index.html">数学基础课<span> 三门课，一套读法</span></a>
+        <nav class="nav-links" aria-label="主导航">
+      <a href="#map">章节地图</a>
+      <a class="xl" href="../calculus/index.html">微积分</a>
+      <a class="xl" href="../linear-algebra/index.html">线性代数</a>
+      <a class="xl" href="../probability/index.html">概率论</a>
+    </nav>
+  </div>
+  <div class="nav-progress" aria-hidden="true"></div>
+</header>
+
+<main>
+
+  <section class="hero">
+    <div class="wrap">
+      <p class="hero-line reveal">按历史顺序讲，以知识点为骨架</p>
+      <h1 class="reveal reveal-2">复变函数</h1>
+      <p class="hero-sub reveal reveal-3">从卡丹笔下「不可能的数」，讲到黎曼面与共形映射。七章覆盖复变函数与积分变换的主要内容：复数与复平面、解析函数、复积分、级数与洛朗展开、留数、共形映射，最后一章是傅里叶与拉普拉斯变换。</p>
+      <div class="ch-meta reveal reveal-3" style="max-width:54rem">
+        <div><strong>章数</strong>7 章</div><div><strong>年代</strong>1545 年至 1914 年</div><div><strong>对应教材</strong>钟玉泉《复变函数论》第四版</div><div><strong>前置</strong>微积分的导数与积分、偏导数</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section field-tone">
+    <div class="wrap">
+      <h2 class="section-head reveal">这门课怎么读</h2>
+      <div class="method-body reveal reveal-2" style="max-width:44rem">
+        <p>复变函数跟实分析最大的差别是：可导这个要求太强了。在实轴上，可导只说明曲线有切线；到了复平面，从任何方向逼近都要给出同一个导数，于是可导一次就自动可导无穷次，还能展开成幂级数。这是柯西与黎曼的发现，也是这门课全部结论的来源。</p><p>章节按历史排。虚数被当成工具用了一百多年，复平面要到 1799 年与 1831 年才由韦塞尔、阿尔冈、高斯做出几何解释；柯西 1825 年的积分定理之后，这门课才算立住；留数、共形映射、黎曼面都是十九世纪中后叶的事。</p><p>每章主干仍是知识点。历史只出现在章首一句和每章一个的档案块里，读的时候跳过不影响。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="map">
+    <div class="wrap">
+      <h2 class="section-head reveal">章节目录</h2>
+      <p class="section-intro reveal reveal-2">每一行写清这一章讲什么、历史上谁先碰上它。顺序跟课本一致。</p>
+      <ul class="chapter-map reveal reveal-3">
+        <li><a class="chapter-row" href="ch01.html">
+          <span class="row-num">第一章</span>
+          <span class="row-title">从「不可能的数」到复平面</span>
+          <span class="row-question">复数运算、模与辐角、欧拉公式、复球面</span>
+          <span class="row-who">卡丹、邦贝利、韦塞尔、高斯</span>
+        </a></li>
+        <li><a class="chapter-row" href="ch02.html">
+          <span class="row-num">第二章</span>
+          <span class="row-title">解析函数：加一条条件就够了</span>
+          <span class="row-question">复变函数、柯西-黎曼方程、调和函数、初等函数</span>
+          <span class="row-who">达朗贝尔、欧拉、柯西、黎曼</span>
+        </a></li>
+        <li><a class="chapter-row" href="ch03.html">
+          <span class="row-num">第三章</span>
+          <span class="row-title">复积分与柯西定理</span>
+          <span class="row-question">复积分、柯西积分定理、原函数、柯西积分公式</span>
+          <span class="row-who">柯西、莫雷拉</span>
+        </a></li>
+        <li><a class="chapter-row" href="ch04.html">
+          <span class="row-num">第四章</span>
+          <span class="row-title">级数：泰勒与洛朗</span>
+          <span class="row-question">幂级数与收敛圆、泰勒展开、洛朗展开</span>
+          <span class="row-who">泰勒、洛朗、魏尔斯特拉斯</span>
+        </a></li>
+        <li><a class="chapter-row" href="ch05.html">
+          <span class="row-num">第五章</span>
+          <span class="row-title">留数：算不出的积分有救了</span>
+          <span class="row-question">孤立奇点、留数定理、用留数算实积分、辐角原理</span>
+          <span class="row-who">柯西、皮卡</span>
+        </a></li>
+        <li><a class="chapter-row" href="ch06.html">
+          <span class="row-num">第六章</span>
+          <span class="row-title">共形映射</span>
+          <span class="row-question">导数的几何意义、分式线性变换、黎曼映射定理</span>
+          <span class="row-who">黎曼、施瓦茨、茹科夫斯基</span>
+        </a></li>
+        <li><a class="chapter-row" href="ch07.html">
+          <span class="row-num">第七章</span>
+          <span class="row-title">积分变换：傅里叶与拉普拉斯</span>
+          <span class="row-question">傅里叶变换、拉普拉斯变换、性质与解方程</span>
+          <span class="row-who">傅里叶、拉普拉斯、赫维赛德</span>
+        </a></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section-tight section field-tone">
+    <div class="wrap footer-cols">
+      <p><a href="../calculus/ch05.html">与微积分的接口：实积分的换元与反常积分</a></p><p><a href="../linear-algebra/ch03.html">与线性代数的接口：矩阵与线性变换（分式线性变换）</a></p><p><a href="../index.html">回到主页看四门课</a></p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer field-dark">
+  <div class="wrap">
+    <p class="footer-mark">数学基础课</p>
+    <div class="footer-cols">
+      <div><p>复变函数。四门课用的是同一套版式与同一套练习体例。</p></div>
+      <div><p><a href="../index.html">返回主页</a></p><p><a href="index.html#map">章节目录</a></p></div>
+      <div><p>图示用脚本按真实数值画，公式由 KaTeX 排版。</p></div>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/katex/katex.min.js"></script>
+<script src="../assets/katex/auto-render.min.js"></script>
+<script src="../assets/site.js"></script>
+</body>
+</html>

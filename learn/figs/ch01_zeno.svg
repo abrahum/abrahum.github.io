@@ -1,0 +1,28 @@
+<svg viewBox="0 0 720 420" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<line x1="85.54" y1="360.00" x2="634.46" y2="360.00" stroke="var(--ink-2)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="638.46" y="366.00" text-anchor="start" font-size="16" fill="var(--ink-2)">1</text>
+<text x="77.54" y="366.00" text-anchor="end" font-size="16" fill="var(--ink-2)">0</text>
+<line x1="603.39" y1="354.00" x2="603.39" y2="366.00" stroke="var(--ink-2)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="85.54" y="326.00" width="258.93" height="20.00" fill="var(--fig-fill)" stroke="var(--accent-line)" stroke-width="1.2"/>
+<line x1="85.54" y1="346.00" x2="85.54" y2="360.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4 5" opacity="0.7"/>
+<text x="215.00" y="341.00" text-anchor="middle" font-size="14" fill="var(--accent-line)">1/2</text>
+<rect x="344.46" y="292.00" width="129.46" height="20.00" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.2"/>
+<line x1="344.46" y1="312.00" x2="344.46" y2="326.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4 5" opacity="0.7"/>
+<text x="409.20" y="307.00" text-anchor="middle" font-size="14" fill="var(--accent-line)">1/4</text>
+<rect x="473.93" y="258.00" width="64.73" height="20.00" fill="var(--fig-fill)" stroke="var(--accent-line)" stroke-width="1.2"/>
+<line x1="473.93" y1="278.00" x2="473.93" y2="292.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4 5" opacity="0.7"/>
+<rect x="538.66" y="224.00" width="32.37" height="20.00" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.2"/>
+<line x1="538.66" y1="244.00" x2="538.66" y2="258.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4 5" opacity="0.7"/>
+<rect x="571.03" y="190.00" width="16.18" height="20.00" fill="var(--fig-fill)" stroke="var(--accent-line)" stroke-width="1.2"/>
+<line x1="571.03" y1="210.00" x2="571.03" y2="224.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4 5" opacity="0.7"/>
+<rect x="587.21" y="156.00" width="8.09" height="20.00" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.2"/>
+<line x1="587.21" y1="176.00" x2="587.21" y2="190.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4 5" opacity="0.7"/>
+<rect x="595.30" y="122.00" width="4.05" height="20.00" fill="var(--fig-fill)" stroke="var(--accent-line)" stroke-width="1.2"/>
+<line x1="595.30" y1="142.00" x2="595.30" y2="156.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4 5" opacity="0.7"/>
+<line x1="599.35" y1="122.00" x2="603.39" y2="122.00" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4 5"/>
+<text x="601.37" y="112.00" text-anchor="middle" font-size="14" fill="var(--ink-2)">还剩 1/128</text>
+<line x1="603.39" y1="102.00" x2="603.39" y2="360.00" stroke="var(--ink-3)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 6"/>
+<text x="95.89" y="34.00" text-anchor="start" font-size="16" fill="var(--ink)">每一步走完剩下的那一半，步数越多，离终点越近</text>
+<text x="95.89" y="58.00" text-anchor="start" font-size="14.5" fill="var(--ink-2)">但任何一步都没有走到。庄子说“万世不竭”，芝诺说这就是走不动的证明</text>
+<text x="85.54" y="390.00" text-anchor="start" font-size="14" fill="var(--ink-3)">累计走过的路程</text>
+</svg>

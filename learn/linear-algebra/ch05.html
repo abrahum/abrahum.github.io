@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>第五章 向量空间：把几何抽象出来 · 线性代数</title>
+<meta name="description" content="n 维向量、线性相关与无关、极大无关组与秩、基与坐标、过渡矩阵、内积与施密特正交化、正交矩阵。">
+<link rel="stylesheet" href="../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="nav-brand" href="../index.html">数学基础课<span> 三门课，一套读法</span></a>
+    <nav class="nav-links" aria-label="主导航">
+      <a href="index.html#map">本课目录</a>
+      <a class="xl" href="../calculus/index.html">微积分</a>
+      <a class="xl" href="../probability/index.html">概率论</a>
+      <a class="xl" href="../complex/index.html">复变函数</a>
+      <a class="opt" href="ch06.html">下一章</a>
+    </nav>
+  </div>
+  <div class="nav-progress" aria-hidden="true"></div>
+</header>
+
+<main>
+
+  <section class="chapter">
+    <div class="wrap">
+      <div class="ch-hero-band">
+        <div>
+          <p class="ch-label reveal"><span>第五章</span><span class="ch-era">1883 年至 1918 年</span></p>
+          <h1 class="ch-title reveal reveal-2">向量空间：把几何抽象出来</h1>
+          <p class="ch-deck reveal reveal-3">平面上的箭头能相加、能放大，也能比长短、量夹角。方程组的解集是一片点，它也能相加、能放大。这两样东西做法一样，被研究的对象却完全不同。1900 年前后，数学家把这些做法单独抽出来，写成一串公理，凡是满足公理的对象都叫向量空间。</p>
+          <div class="ch-meta reveal reveal-3">
+            <div><strong>本章知识点</strong>线性相关、极大无关组与秩、基与坐标、过渡矩阵、内积与正交化</div>
+            <div><strong>历史坐标</strong>格拉姆 1883，皮亚诺 1888，施密特 1907，外尔 1918</div>
+            <div><strong>对应教材</strong>同济《线性代数》第六版第四章、第五章第一节</div>
+            <div><strong>前置</strong>会解线性方程组，知道矩阵的秩与行阶梯形</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap ch-body">
+    <aside class="rail">
+      <p class="rail-title">本章提纲</p>
+      <ol>
+        <li><a href="#s-1">一支箭头，一列数</a></li>
+        <li><a href="#s-2">能不能互相表示</a></li>
+        <li><a href="#s-3">极大无关组与秩</a></li>
+        <li><a href="#s-4">向量空间、基与维数</a></li>
+        <li><a href="#s-5">换一组基，坐标怎么变</a></li>
+        <li><a href="#s-6">内积、正交与施密特正交化</a></li>
+        <li><a href="#s-7">正交矩阵</a></li>
+        <li><a href="#s-manual">怎么算</a></li>
+        <li><a href="#s-examples">例题</a></li>
+        <li><a href="#s-exercises">习题</a></li>
+      </ol>
+      <p class="rail-title">历史坐标</p>
+      <p class="rail-who">格拉姆 1883<br>皮亚诺 1888<br>施密特 1907<br>外尔 1918</p>
+    </aside>
+
+    <article class="prose">
+
+      <p class="lead reveal">第三章把矩阵当成一个对象来算，第四章用秩数清了方程组有几个解，秩数的就是表里主元的个数，也就是独立方向的个数。这一章换个问法：一个方程组的全部解凑在一起，究竟是一条直线、一张平面，还是更长的一段东西。直线和平面可以相加、可以放大，也能量长度、量夹角，一旦发现这些做法跟对象本身无关，只跟「能加、能数乘」有关，把它们收进一串公理就只是时间问题。1888 年皮亚诺在《几何演算》里第一次写出了这串公理。</p>
+
+      <h2 id="s-1" class="reveal">一、一支箭头，一列数</h2>
+
+      <p>平面上的一支箭头由两个数定住：向东走多少，向北走多少。三个未知数的方程组，一组解同样是三个数排在一起。把「几个数排成一列」当成一个整体，就得到 <strong>n 维向量</strong>：\(n\) 个实数组成的有序数组记作 \(\alpha=(a_1,a_2,\dots,a_n)\)，横着写叫行向量，竖着写叫列向量，第 \(i\) 个数叫它的第 \(i\) 个分量。课本按列向量处理，一个向量就对应矩阵的一列，所有 \(n\) 维实向量组成的集合记作 \(\mathbb{R}^n\)。</p>
+
+      <p>两种运算跟着数走。两支向量相加，就把对应分量相加；数 \(k\) 乘一支向量，就把每个分量都乘 \(k\)，结果仍然落在 \(\mathbb{R}^n\) 里。几何上，相加是把一支箭头的起点搬到另一支箭头的终点，也就是平行四边形法则；数乘是把箭头沿原方向拉长或压短，\(k \lt 0\) 时掉头。这套运算满足八条律：加法交换、加法结合、有零元、有负元，数乘对向量加法分配、对数加法分配、数乘结合，还有 1 乘不变。</p>
+
+      <p>八条律里没有一条提到箭头，也没提到平面，这是后来所有抽象的起点。只要一批对象能加、能数乘，又满足这八条，关于向量的结论就都对它成立，多项式、矩阵、连续函数都算在内。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定义（n 维向量与线性运算）</p>
+        <p>设 \(\alpha=(a_1,\dots,a_n)\)、\(\beta=(b_1,\dots,b_n)\) 是 \(n\) 维向量，\(k\) 是数。规定 \(\alpha+\beta=(a_1+b_1,\dots,a_n+b_n)\)，\(k\alpha=(ka_1,\dots,ka_n)\)。零向量 \(0=(0,\dots,0)\)，\(\alpha\) 的负向量 \(-\alpha=(-a_1,\dots,-a_n)\)。\(n\) 维实向量的全体记作 \(\mathbb{R}^n\)。</p>
+      </div>
+
+      <details class="fold">
+        <summary>箭头和数组凭什么算同一支向量</summary>
+        <p>因为一支箭头完全由它在一组坐标轴上的读数决定：读数相同就是同一支，读数变了就是另一支。数组是这套读数的记录方式，箭头的加法正好对上读数的加法，数乘也一样。后面提到向量时，脑子里可以继续想箭头，只是 \(n\) 大于 3 的时候画不出来。</p>
+      </details>
+
+      <h2 id="s-2" class="reveal">二、能不能互相表示</h2>
+
+      <p>拿到一组向量，最先做的动作是拿它们拼：\(k_1\alpha_1+\dots+k_s\alpha_s\) 这样的式子叫这组向量的<strong>线性组合</strong>，若 \(\beta\) 等于它们的某个线性组合，就说 \(\beta\) 能由 \(\alpha_1,\dots,\alpha_s\) <strong>线性表示</strong>。于是有一个很实际的问题：一组向量里有没有闲人，能被其余的表示出来。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定义与判定（线性相关与线性无关）</p>
+        <p>设 \(\alpha_1,\dots,\alpha_s\) 是一组 \(n\) 维向量。若存在<strong>不全为零</strong>的数 \(k_1,\dots,k_s\) 使 \(k_1\alpha_1+\dots+k_s\alpha_s=0\)，称这组向量<strong>线性相关</strong>；若这个等式只在 \(k_1=\dots=k_s=0\) 时成立，称它们<strong>线性无关</strong>。</p>
+        <p>把它们按列摆成 \(n\times s\) 矩阵 \(A\)，那么「相关」「\(Ax=0\) 有非零解」「\(r(A) \lt s\)」三句话说的是同一件事；无关则等价于 \(r(A)=s\)，也等价于 \(Ax=0\) 只有零解。当 \(s=n\) 时还能换一种说法：相关当且仅当 \(|A|=0\)。</p>
+      </div>
+
+      <p>把定义翻译成白话：相关意味着有一组不全为零的系数，让这些向量按这组系数加起来正好抵消成零。系数不全为零，就说明至少有一个向量真的被用上了，把它移项解出来，它就能由其余的表示。无关意味着谁也不能被谁顶替，每支箭头都带着别人没有的方向。平面上两支不共线的箭头，要凑成零向量只能两个系数都取零；三条挤在同一条直线上的箭头，取 1、-2、1 三个系数就凑成了零，中间那条可以由另外两条表示。</p>
+
+      <div class="keyidea reveal">
+        <p>相关说的是这一组里有人能被别人顶替，无关说的是谁都顶替不了谁。</p>
+      </div>
+
+      <p>判定交给消元，是因为矩阵的秩数的正是独立方向的个数：主元比向量个数少，就说明有向量没带来新方向。跟着定义走，还有几条结论随手能用。一组向量里若已有一部分相关，整组必相关，凑成零的那组系数给其余向量补零就够了；整组无关，则任何一部分也无关。反过来不成立：整组相关时，挑出的某几个向量可能无关。还有一条常用的是计数：\(n\) 维空间里任取 \(n+1\) 个向量一定相关，把它们摆成 \(n\times(n+1)\) 矩阵，秩最多是 \(n\)，比列数少。</p>
+
+      <div class="figure">
+        <!--FIG ch05_dep--><svg viewBox="0 0 720 330" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<text x="120.00" y="44.00" text-anchor="middle" font-size="15" fill="var(--ink)">两个向量共线</text>
+<text x="120.00" y="300.00" text-anchor="middle" font-size="13" fill="var(--ink-3)">c = -0.69a，可以互相表示</text>
+<text x="360.00" y="44.00" text-anchor="middle" font-size="15" fill="var(--ink)">两个向量不共线</text>
+<text x="360.00" y="300.00" text-anchor="middle" font-size="13" fill="var(--ink-3)">谁也表示不出谁，要用到平面</text>
+<text x="600.00" y="44.00" text-anchor="middle" font-size="15" fill="var(--ink)">三个向量共面</text>
+<text x="600.00" y="300.00" text-anchor="middle" font-size="13" fill="var(--ink-3)">c = a + b，落在同一张平面里</text>
+<line x1="62.80" y1="228.38" x2="195.68" y2="162.38" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 6" opacity="0.75"/>
+<line x1="120.00" y1="200.00" x2="183.80" y2="168.32" stroke="var(--accent-line)" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round"/><path d="M 176.47 176.52 L 183.80 168.32 L 172.84 169.21" fill="var(--accent-line)" stroke="var(--accent-line)" stroke-width="1" stroke-linejoin="round"/>
+<line x1="120.00" y1="200.00" x2="75.98" y2="221.86" stroke="var(--ink-2)" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round"/><path d="M 83.31 213.66 L 75.98 221.86 L 86.94 220.97" fill="var(--ink-2)" stroke="var(--ink-2)" stroke-width="1" stroke-linejoin="round"/>
+<text x="147.28" y="193.84" text-anchor="start" font-size="15" fill="var(--ink)">a</text>
+<text x="75.12" y="213.20" text-anchor="end" font-size="15" fill="var(--ink)">c</text>
+<circle cx="120.00" cy="200.00" r="3.4" fill="var(--prussian)"/>
+<polygon points="360.00,200.00 422.48,186.80 449.76,130.48 387.28,143.68" fill="var(--fig-fill)" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.75"/>
+<line x1="360.00" y1="200.00" x2="422.48" y2="186.80" stroke="var(--accent-line)" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round"/><path d="M 413.33 192.90 L 422.48 186.80 L 411.64 184.92" fill="var(--accent-line)" stroke="var(--accent-line)" stroke-width="1" stroke-linejoin="round"/>
+<line x1="360.00" y1="200.00" x2="387.28" y2="143.68" stroke="var(--ink-2)" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round"/><path d="M 386.50 154.65 L 387.28 143.68 L 379.15 151.09" fill="var(--ink-2)" stroke="var(--ink-2)" stroke-width="1" stroke-linejoin="round"/>
+<line x1="387.28" y1="143.68" x2="449.76" y2="130.48" stroke="var(--accent-line)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="5 5"/><path d="M 440.61 136.58 L 449.76 130.48 L 438.92 128.60" fill="var(--accent-line)" stroke="var(--accent-line)" stroke-width="1" stroke-linejoin="round"/>
+<line x1="422.48" y1="186.80" x2="449.76" y2="130.48" stroke="var(--ink-2)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="5 5"/><path d="M 448.98 141.45 L 449.76 130.48 L 441.63 137.89" fill="var(--ink-2)" stroke="var(--ink-2)" stroke-width="1" stroke-linejoin="round"/>
+<text x="386.40" y="195.60" text-anchor="end" font-size="15" fill="var(--ink)">a</text>
+<text x="364.40" y="147.20" text-anchor="start" font-size="15" fill="var(--ink)">b</text>
+<circle cx="360.00" cy="200.00" r="3.4" fill="var(--prussian)"/>
+<polygon points="587.68,210.56 644.88,206.16 663.36,159.96 606.16,164.36" fill="var(--fig-fill)" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+<line x1="600.00" y1="200.00" x2="657.20" y2="195.60" stroke="var(--accent-line)" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round"/><path d="M 647.33 200.45 L 657.20 195.60 L 646.70 192.32" fill="var(--accent-line)" stroke="var(--accent-line)" stroke-width="1" stroke-linejoin="round"/>
+<line x1="600.00" y1="200.00" x2="618.48" y2="153.80" stroke="var(--ink-2)" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round"/><path d="M 618.47 164.80 L 618.48 153.80 L 610.90 161.77" fill="var(--ink-2)" stroke="var(--ink-2)" stroke-width="1" stroke-linejoin="round"/>
+<line x1="600.00" y1="200.00" x2="675.68" y2="149.40" stroke="var(--prussian)" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round"/><path d="M 669.46 158.47 L 675.68 149.40 L 664.92 151.69" fill="var(--prussian)" stroke="var(--prussian)" stroke-width="1" stroke-linejoin="round"/>
+<text x="622.88" y="200.88" text-anchor="end" font-size="15" fill="var(--ink)">a</text>
+<text x="598.24" y="159.52" text-anchor="end" font-size="15" fill="var(--ink)">b</text>
+<text x="678.32" y="146.76" text-anchor="start" font-size="15" fill="var(--ink)">c</text>
+<circle cx="600.00" cy="200.00" r="3.4" fill="var(--prussian)"/>
+<text x="40.00" y="322.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">三个向量都被同一张平面装下，所以只能有两个独立方向。</text>
+</svg>
+<!--/FIG ch05_dep-->
+        <figcaption class="figcaption"><b>相关与无关的三种样子。</b>左图两箭头共线，一个是另一个的数乘，能互相表示；中图张开一个角，谁也顶不掉谁；右图三支箭头躺在同一张平面里，第三个是前两个的和。</figcaption>
+      </div>
+
+      <details class="fold">
+        <summary>含零向量的组为什么一定相关</summary>
+        <p>设组里有一支是零向量，取它的系数为 1、其余系数全取零，加起来就是零向量，系数又不全为零，定义直接满足。所以只要组里混进零向量，这条就不用再算了，它一定相关，而且它不属于任何极大无关组。</p>
+      </details>
+
+      <h2 id="s-3" class="reveal">三、极大无关组与秩</h2>
+
+      <p>一组向量里，无关的部分组可以挑出很多种。能挑出的最大那一种，个数就是这个向量组的<strong>秩</strong>。几何上看得见：几条箭头挤在同一条直线上，只要一支就顶用，秩是 1；张开成一张平面，要两支，秩是 2；撑满整个三维空间，要三支。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定义（极大线性无关组与向量组的秩）</p>
+        <p>向量组的一个部分组若线性无关，且把组里剩下的任何一个向量添进来都变成相关，称它为这个向量组的一个<strong>极大线性无关组</strong>。极大无关组所含向量的个数叫向量组的<strong>秩</strong>，记作 \(r(\alpha_1,\dots,\alpha_s)\)，也就是以它们为列的矩阵的秩。</p>
+      </div>
+
+      <p>极大无关组是「够用又不浪费」的一组：少一个表示不出全部，多一个就带进多余的成分。求法跟判相关性一样，摆成矩阵消元：化到行阶梯形之后，主元所在的那些列，对应回原来的向量，就是一个极大无关组，主元个数就是秩。挑法不唯一，个数固定，原因是不同的极大无关组能互相表示，等价的两组向量组秩相同，个数不能此多彼少。</p>
+
+      <div class="figure">
+        <!--FIG ch05_span--><svg viewBox="0 0 720 340" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<text x="150.00" y="44.00" text-anchor="middle" font-size="15" fill="var(--ink)">一个独立方向：张成一条直线</text>
+<line x1="29.10" y1="268.76" x2="274.00" y2="146.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 6" opacity="0.8"/>
+<line x1="150.00" y1="208.00" x2="246.10" y2="159.64" stroke="var(--accent-line)" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round"/><path d="M 238.81 167.88 L 246.10 159.64 L 235.14 160.59" fill="var(--accent-line)" stroke="var(--accent-line)" stroke-width="1" stroke-linejoin="round"/>
+<text x="280.82" y="150.96" text-anchor="start" font-size="14" fill="var(--ink)">a1</text>
+<line x1="150.00" y1="208.00" x2="203.32" y2="181.34" stroke="var(--ink-2)" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round"/><path d="M 196.01 189.56 L 203.32 181.34 L 192.36 182.26" fill="var(--ink-2)" stroke="var(--ink-2)" stroke-width="1" stroke-linejoin="round"/>
+<text x="202.08" y="168.94" text-anchor="start" font-size="14" fill="var(--ink)">a2</text>
+<line x1="150.00" y1="208.00" x2="60.10" y2="253.26" stroke="var(--ink-2)" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round"/><path d="M 67.39 245.02 L 60.10 253.26 L 71.06 252.31" fill="var(--ink-2)" stroke="var(--ink-2)" stroke-width="1" stroke-linejoin="round"/>
+<text x="41.50" y="268.14" text-anchor="start" font-size="14" fill="var(--ink)">a3</text>
+<circle cx="150.00" cy="208.00" r="3.4" fill="var(--prussian)"/>
+<text x="150.00" y="300.00" text-anchor="middle" font-size="13" fill="var(--ink-3)">a2、a3 都能用 a1 表示</text>
+<text x="150.00" y="322.00" text-anchor="middle" font-size="13" fill="var(--ink-3)">极大无关组只有 1 个向量，秩为 1</text>
+<text x="528.00" y="44.00" text-anchor="middle" font-size="15" fill="var(--ink)">两个独立方向：张成整张平面</text>
+<polygon points="474.28,250.33 652.06,237.16 685.91,122.07 508.14,135.24" fill="var(--fig-fill)" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<line x1="474.28" y1="250.33" x2="508.14" y2="135.24" stroke="var(--ink-3)" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round" opacity="0.35"/>
+<line x1="503.91" y1="248.14" x2="537.76" y2="133.04" stroke="var(--ink-3)" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round" opacity="0.35"/>
+<line x1="533.54" y1="245.94" x2="567.39" y2="130.85" stroke="var(--ink-3)" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round" opacity="0.35"/>
+<line x1="563.17" y1="243.75" x2="597.02" y2="128.65" stroke="var(--ink-3)" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round" opacity="0.35"/>
+<line x1="592.80" y1="241.55" x2="626.65" y2="126.46" stroke="var(--ink-3)" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round" opacity="0.35"/>
+<line x1="622.43" y1="239.36" x2="656.28" y2="124.26" stroke="var(--ink-3)" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round" opacity="0.35"/>
+<line x1="652.06" y1="237.16" x2="685.91" y2="122.07" stroke="var(--ink-3)" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round" opacity="0.35"/>
+<line x1="474.28" y1="250.33" x2="652.06" y2="237.16" stroke="var(--ink-3)" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round" opacity="0.35"/>
+<line x1="479.93" y1="231.15" x2="657.70" y2="217.98" stroke="var(--ink-3)" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round" opacity="0.35"/>
+<line x1="485.57" y1="211.97" x2="663.35" y2="198.80" stroke="var(--ink-3)" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round" opacity="0.35"/>
+<line x1="491.21" y1="192.79" x2="668.99" y2="179.62" stroke="var(--ink-3)" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round" opacity="0.35"/>
+<line x1="496.85" y1="173.60" x2="674.63" y2="160.43" stroke="var(--ink-3)" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round" opacity="0.35"/>
+<line x1="502.49" y1="154.42" x2="680.27" y2="141.25" stroke="var(--ink-3)" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round" opacity="0.35"/>
+<line x1="508.14" y1="135.24" x2="685.91" y2="122.07" stroke="var(--ink-3)" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round" opacity="0.35"/>
+<line x1="528.00" y1="208.00" x2="628.44" y2="200.56" stroke="var(--accent-line)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M 618.55 205.38 L 628.44 200.56 L 617.95 197.25" fill="var(--accent-line)" stroke="var(--accent-line)" stroke-width="1" stroke-linejoin="round"/>
+<line x1="528.00" y1="208.00" x2="546.60" y2="144.76" stroke="var(--ink-2)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M 547.63 155.71 L 546.60 144.76 L 539.80 153.41" fill="var(--ink-2)" stroke="var(--ink-2)" stroke-width="1" stroke-linejoin="round"/>
+<line x1="528.00" y1="208.00" x2="604.04" y2="156.59" stroke="var(--prussian)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="5 5"/><path d="M 597.86 165.69 L 604.04 156.59 L 593.29 158.93" fill="var(--prussian)" stroke="var(--prussian)" stroke-width="1" stroke-linejoin="round"/>
+<text x="630.92" y="210.48" text-anchor="start" font-size="14" fill="var(--ink)">a1</text>
+<text x="528.00" y="141.04" text-anchor="end" font-size="14" fill="var(--ink)">a2</text>
+<text x="625.12" y="140.47" text-anchor="start" font-size="14" fill="var(--ink)">a3</text>
+<circle cx="528.00" cy="208.00" r="3.4" fill="var(--prussian)"/>
+<text x="528.00" y="300.00" text-anchor="middle" font-size="13" fill="var(--ink-3)">a3 落在平面里，加进去不添新方向</text>
+<text x="528.00" y="322.00" text-anchor="middle" font-size="13" fill="var(--ink-3)">极大无关组可取 a1、a2，秩为 2</text>
+</svg>
+<!--/FIG ch05_span-->
+        <figcaption class="figcaption"><b>一组向量张成的子空间。</b>左边三支箭头都在一条直线上，一支就够表示全部；右边两支箭头张开整张平面，第三支落在平面内，添进去不增加独立方向。</figcaption>
+      </div>
+
+      <details class="fold">
+        <summary>换一种挑法，秩为什么还是同一个数</summary>
+        <p>设甲组、乙组都是极大无关组，个数分别为 \(r\) 与 \(s\)。甲组的向量都能由乙组表示，那么甲组里任取 \(r+1\) 个也能由乙组的 \(s\) 个表示；若 \(r+1 \gt s\)，这 \(r+1\) 个向量摆成的矩阵秩最多为 \(s\)，必相关，与甲组无关矛盾，所以 \(r \le s\)。两个方向一夹，得到 \(r=s\)。</p>
+      </details>
+
+      <h2 id="s-4" class="reveal">四、向量空间、基与维数</h2>
+
+      <p>秩把「有几个独立方向」这件事定下来了。向量空间给这一类能加能数乘的对象取个名字：设 \(V\) 是一批 \(n\) 维向量组成的非空集合，对加法与数乘都封闭（\(V\) 中任意两个向量之和仍在 \(V\)，任意向量乘任何数也仍在 \(V\)），就称 \(V\) 是一个<strong>向量空间</strong>；如果 \(V\) 本身又是 \(\mathbb{R}^n\) 的一部分，叫它 \(\mathbb{R}^n\) 的<strong>子空间</strong>。</p>
+
+      <p>例子看三个。\(\mathbb{R}^n\) 自己是一个向量空间，过原点的一条直线、一张平面也是子空间，都对加法与数乘封闭。齐次方程组 \(Ax=0\) 的全部解也组成子空间，维数是 \(n-r(A)\)，第四章说过：两个解相加还是解，乘个数还是解。非齐次方程组的解集不封闭，它连零向量都不含，一个解加另一个解也不再是解。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定义（基、维数与坐标）</p>
+        <p>若向量空间 \(V\) 中的向量组 \(\alpha_1,\dots,\alpha_r\) 线性无关，且 \(V\) 中每个向量都能由它们线性表示，称它们是 \(V\) 的一组<strong>基</strong>，\(r\) 叫 \(V\) 的<strong>维数</strong>，记作 \(\dim V\)。向量 \(\gamma\) 写成 \(\gamma=x_1\alpha_1+\dots+x_r\alpha_r\) 时，系数排成的列向量 \((x_1,\dots,x_r)^T\) 叫 \(\gamma\) 在这组基下的<strong>坐标</strong>。基一旦固定，坐标就唯一：两组系数相减得到一个等于零的组合，基线性无关，系数只能全为零。</p>
+      </div>
+
+      <p>\(\mathbb{R}^n\) 里最省事的一组基是 \(e_1=(1,0,\dots,0)\) 到 \(e_n=(0,\dots,0,1)\)，叫标准基，向量在它下面的坐标就是分量本身。基可以换：\(\mathbb{R}^2\) 里 \((1,0),(0,1)\) 是一组，\((1,1),(1,-1)\) 也是一组，同一支箭头读数不同。</p>
+
+      <div class="archive reveal">
+        <p class="archive-when">1888 年，都灵</p>
+        <h3>皮亚诺把向量空间写成公理</h3>
+        <p class="archive-quote">「线性系统是这样的类：其中任意两个对象有和，任意对象与任意实数有积，且这些运算服从结合、交换、分配诸律。」（意译）</p>
+        <p class="archive-source">皮亚诺《几何演算》（Calcolo geometrico），1888 年，第一章</p>
+        <p>皮亚诺要处理几何对象的运算规则，索性只留下规则本身，把「对象是什么」交给用的人去填。这套写法后来成了线性空间的标准定义。外尔 1918 年在《空间·时间·物质》里用它写相对论的几何，线性代数从此被当作几何的语言使用。</p>
+      </div>
+
+      <h2 id="s-5" class="reveal">五、换一组基，坐标怎么变</h2>
+
+      <p>基不唯一，坐标就跟着不唯一。同一支箭头换一把尺子量，读数变了，向量本身一点没动。要把这件事算清楚，只需要把新基用老基表示出来，系数排成一张表。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定理（过渡矩阵与坐标变换公式）</p>
+        <p>设 \(\alpha_1,\dots,\alpha_r\) 与 \(\beta_1,\dots,\beta_r\) 是同一个 \(r\) 维向量空间的两组基，把新基按老基展开：\((\beta_1,\dots,\beta_r)=(\alpha_1,\dots,\alpha_r)P\)，则 \(P\) 可逆，称为从基 \(\alpha\) 到基 \(\beta\) 的<strong>过渡矩阵</strong>。若向量 \(\gamma\) 在这两组基下的坐标分别是 \(x\) 与 \(y\)，则 \(x=Py\)。</p>
+      </div>
+
+      \[ (\beta_1,\beta_2,\dots,\beta_r)=(\alpha_1,\alpha_2,\dots,\alpha_r)P,\qquad x=Py,\qquad y=P^{-1}x. \]
+
+      <p>\(P\) 的第 \(j\) 列就是 \(\beta_j\) 在 \(\alpha\) 基下的坐标，所以写法只有一种：把每支新基向量用老基表示，系数按列排。公式的方向容易记反，推一遍就清楚：\(\gamma\) 用老基写是 \((\alpha_1,\dots,\alpha_r)x\)，用新基写是 \((\beta_1,\dots,\beta_r)y\)，后者又等于 \((\alpha_1,\dots,\alpha_r)Py\)，两个写法是同一个向量，于是 \(x=Py\)。\(P\) 可逆的理由也在这里：换过去还能换回来，反向的过渡矩阵就是 \(P^{-1}\)，也就是 \(y=P^{-1}x\)。</p>
+
+      <h2 id="s-6" class="reveal">六、内积、正交与施密特正交化</h2>
+
+      <p>到这里向量只有加法和数乘，长度与夹角还没有定义。三维里点积的公式是 \(a\cdot b=|a||b|\cos\theta\)，把分量相乘再相加就得到这个数。\(n\) 维里没有箭头可看，于是反过来把「分量相乘再相加」当成定义，长度和夹角全部从它算出来。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定义（内积、正交与规范正交基）</p>
+        <p>设 \(\alpha=(a_1,\dots,a_n)\)，\(\beta=(b_1,\dots,b_n)\)，称实数 \([\alpha,\beta]=a_1b_1+\dots+a_nb_n\) 为它们的内积，也记作 \(\alpha^T\beta\)。长度 \(\|\alpha\|=\sqrt{[\alpha,\alpha]}\)，夹角由 \(\cos\theta=\dfrac{[\alpha,\beta]}{\|\alpha\|\,\|\beta\|}\) 定出，\([\alpha,\beta]=0\) 时称 \(\alpha\) 与 \(\beta\) <strong>正交</strong>。一组两两正交、长度都为 1 的向量叫<strong>规范正交基</strong>。</p>
+      </div>
+
+      <p>规范正交基的好处是省掉解方程。\(\gamma\) 在规范正交基 \(e_1,\dots,e_r\) 下的坐标，一个内积给一个：\(x_i=[\gamma,e_i]\)。把 \(\gamma=x_1e_1+\dots+x_re_r\) 两边与 \(e_i\) 作内积，除第 \(i\) 项外全为零，剩下的就是这个系数。求坐标不必回代，遇到函数、波形这类「向量」也照样能用，傅里叶系数就是这么来的。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定理（施密特正交化）</p>
+        <p>设 \(\alpha_1,\dots,\alpha_r\) 线性无关。依次取 \(b_1=\alpha_1\)，\(b_2=\alpha_2-\dfrac{[\alpha_2,b_1]}{[b_1,b_1]}b_1\)，一直到 \(b_k=\alpha_k-\sum_{i=1}^{k-1}\dfrac{[\alpha_k,b_i]}{[b_i,b_i]}b_i\)，则 \(b_1,\dots,b_r\) 两两正交，且与原来那组向量等价；再把每个 \(b_i\) 除以它的长度，\(e_i=\dfrac{b_i}{\|b_i\|}\)，得到的就是规范正交基。</p>
+      </div>
+
+      <div class="figure">
+        <!--FIG ch05_gram--><svg viewBox="0 0 720 330" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<text x="120.00" y="46.00" text-anchor="middle" font-size="15" fill="var(--ink)">1. 两支斜向量</text>
+<text x="120.00" y="300.00" text-anchor="middle" font-size="13" fill="var(--ink-3)">夹角不是 90°</text>
+<text x="360.00" y="46.00" text-anchor="middle" font-size="15" fill="var(--ink)">2. 求 a2 在 a1 上的投影</text>
+<text x="360.00" y="300.00" text-anchor="middle" font-size="13" fill="var(--ink-3)">投影系数 t = 0.68</text>
+<text x="600.00" y="46.00" text-anchor="middle" font-size="15" fill="var(--ink)">3. 减掉投影，得到 b2</text>
+<text x="600.00" y="300.00" text-anchor="middle" font-size="13" fill="var(--ink-3)">b2 与 a1 垂直</text>
+<line x1="58.00" y1="248.00" x2="223.00" y2="198.50" stroke="var(--accent-line)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M 214.39 205.34 L 223.00 198.50 L 212.04 197.53" fill="var(--accent-line)" stroke="var(--accent-line)" stroke-width="1" stroke-linejoin="round"/>
+<line x1="58.00" y1="248.00" x2="140.50" y2="116.00" stroke="var(--ink-2)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M 138.55 126.83 L 140.50 116.00 L 131.63 122.50" fill="var(--ink-2)" stroke="var(--ink-2)" stroke-width="1" stroke-linejoin="round"/>
+<text x="219.00" y="218.50" text-anchor="end" font-size="15" fill="var(--ink)">a1</text>
+<text x="150.50" y="118.00" text-anchor="start" font-size="15" fill="var(--ink)">a2</text>
+<circle cx="58.00" cy="248.00" r="3.4" fill="var(--prussian)"/>
+<line x1="298.00" y1="248.00" x2="463.00" y2="198.50" stroke="var(--accent-line)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M 454.39 205.34 L 463.00 198.50 L 452.04 197.53" fill="var(--accent-line)" stroke="var(--accent-line)" stroke-width="1" stroke-linejoin="round"/>
+<line x1="298.00" y1="248.00" x2="380.50" y2="116.00" stroke="var(--ink-2)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M 378.55 126.83 L 380.50 116.00 L 371.63 122.50" fill="var(--ink-2)" stroke="var(--ink-2)" stroke-width="1" stroke-linejoin="round"/>
+<line x1="298.00" y1="248.00" x2="410.02" y2="214.39" stroke="var(--prussian)" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="5 4"/><path d="M 401.41 221.24 L 410.02 214.39 L 399.06 213.42" fill="var(--prussian)" stroke="var(--prussian)" stroke-width="1" stroke-linejoin="round"/>
+<line x1="410.02" y1="214.39" x2="380.50" y2="116.00" stroke="var(--ink-3)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4 4"/>
+<path d="M 418.64 211.81 L 416.05 203.19 L 407.43 205.77" fill="none" stroke="var(--ink-3)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="459.00" y="218.50" text-anchor="end" font-size="15" fill="var(--ink)">a1</text>
+<text x="390.50" y="118.00" text-anchor="start" font-size="15" fill="var(--ink)">a2</text>
+<text x="418.02" y="230.39" text-anchor="start" font-size="13.5" fill="var(--ink-2)">投影</text>
+<circle cx="298.00" cy="248.00" r="3.4" fill="var(--prussian)"/>
+<line x1="538.00" y1="248.00" x2="703.00" y2="198.50" stroke="var(--accent-line)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M 694.39 205.34 L 703.00 198.50 L 692.04 197.53" fill="var(--accent-line)" stroke="var(--accent-line)" stroke-width="1" stroke-linejoin="round"/>
+<line x1="538.00" y1="248.00" x2="620.50" y2="116.00" stroke="var(--ink-3)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="5 4"/><path d="M 618.55 126.83 L 620.50 116.00 L 611.63 122.50" fill="var(--ink-3)" stroke="var(--ink-3)" stroke-width="1" stroke-linejoin="round"/>
+<line x1="538.00" y1="248.00" x2="508.48" y2="149.61" stroke="var(--prussian)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M 515.33 158.22 L 508.48 149.61 L 507.51 160.56" fill="var(--prussian)" stroke="var(--prussian)" stroke-width="1" stroke-linejoin="round"/>
+<path d="M 546.62 245.41 L 544.03 236.79 L 535.41 239.38" fill="none" stroke="var(--ink-3)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="699.00" y="218.50" text-anchor="end" font-size="15" fill="var(--ink)">a1</text>
+<text x="628.50" y="118.00" text-anchor="start" font-size="13" fill="var(--ink-3)">a2</text>
+<text x="533.76" y="191.88" text-anchor="start" font-size="15" fill="var(--ink)">b2</text>
+</svg>
+<!--/FIG ch05_gram-->
+        <figcaption class="figcaption"><b>一步减一个投影。</b>把 \(a_2\) 拆成顺着 \(a_1\) 的一段与垂直的一段，减掉顺着的那段，剩下的 \(b_2\) 就与 \(a_1\) 正交，可以顶替 \(a_2\) 继续用。</figcaption>
+      </div>
+
+      <details class="fold">
+        <summary>减掉的倍数为什么正好是投影</summary>
+        <p>要让 \(b_2\) 与 \(b_1\) 正交，把 \(b_2=\alpha_2-tb_1\) 代进内积：\([\alpha_2-tb_1,b_1]=[\alpha_2,b_1]-t[b_1,b_1]=0\)，解出 \(t=[\alpha_2,b_1]/[b_1,b_1]\)，正好是 \(\alpha_2\) 在 \(b_1\) 上投影的系数。换别的倍数，剩下的那一段就不会垂直，正交性一破，后面的坐标公式全部失效。</p>
+      </details>
+
+      <div class="archive reveal">
+        <p class="archive-when">1907 年，哥廷根</p>
+        <h3>正交化的两个签名</h3>
+        <p class="archive-quote">「把每个函数减去它在前面那些函数上的投影，剩下的部分两两正交。」（转述）</p>
+        <p class="archive-source">施密特《线性与非线性积分方程理论》，1907 年，第一章</p>
+        <p>格拉姆 1883 年在展开实函数的级数时用过同样的构造，施密特 1907 年处理积分方程时把它写成固定步骤，今天才叫格拉姆-施密特正交化。两人相隔 24 年，做的是同一件事：把一组函数或向量换成一组正交的，好让每个系数用一个内积就算出来。</p>
+      </div>
+
+      <h2 id="s-7" class="reveal">七、正交矩阵</h2>
+
+      <p>上一节把一组基换成了规范正交的。把这些向量按列摆成方阵，得到的矩阵有一个专门的名字。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定义（正交矩阵）</p>
+        <p>设 \(A\) 是 \(n\) 阶方阵，若 \(A^TA=E\)，称 \(A\) 为<strong>正交矩阵</strong>。换成元素的说法：\(A\) 的列向量两两正交且长度为 1，构成 \(\mathbb{R}^n\) 的一组规范正交基；反过来，任取一组规范正交基按列摆成的方阵都是正交矩阵。</p>
+      </div>
+
+      <p>等价的写法有好几种：\(A\) 的行向量组也是规范正交基；\(A^{-1}=A^T\)，求逆不用算，转置就够；\(A\) 乘任何向量都不改变内积，\([Ax,Ay]=[x,y]\)，长度与夹角一并保住。两个例子是旋转与反射：\(\begin{pmatrix}\cos\theta&amp;-\sin\theta\\ \sin\theta&amp;\cos\theta\end{pmatrix}\) 把平面转一个角，\(\begin{pmatrix}1&amp;0\\ 0&amp;-1\end{pmatrix}\) 关于 \(x\) 轴翻一下，两者都不改变长度。</p>
+
+      <details class="fold">
+        <summary>正交矩阵的行列式为什么只能是 ±1</summary>
+        <p>由 \(A^TA=E\) 两边取行列式，\(|A^T||A|=|A|^2=1\)，所以 \(|A|=1\) 或 \(|A|=-1\)。行列式为 1 的保持定向，旋转属于这一类；为 -1 的会翻转定向，反射属于后一类。这也说明正交矩阵的行列式不会等于零，可逆这件事从一开始就有保证。</p>
+      </details>
+
+      <h2 id="s-manual" class="reveal">怎么算</h2>
+
+      <ul>
+        <li><strong>判相关先摆矩阵。</strong>向量按列摆成 \(A\)，化行阶梯形数主元。主元个数少于列数就相关，等于就无关。</li>
+        <li><strong>求极大无关组看列。</strong>主元落在第几列，就取原向量组的第几个向量，顺序不要打乱。</li>
+        <li><strong>求坐标解方程。</strong>写 \(\gamma=x_1\alpha_1+\dots+x_r\alpha_r\)，化成方程组解出来；基若是规范正交的，改成直接算内积 \([\gamma,e_i]\)。</li>
+        <li><strong>换基先写过渡矩阵。</strong>新基用老基表示，系数按列排成 \(P\)，再用 \(x=Py\)。把方向写反是最常见的错，算完用两组坐标各拼一次 \(\gamma\)，看是不是同一支向量。</li>
+        <li><strong>正交化两步不跳。</strong>先减投影得到 \(b_i\)，再除以长度得到 \(e_i\)。每一步回头验一下 \([b_i,b_j]=0\)，错在这儿的题占多数。</li>
+      </ul>
+
+      <h2 id="s-examples" class="reveal">例题</h2>
+
+      <div class="example">
+        <p class="example-head">例 <span>1</span>　判断 \(\alpha_1=(1,1,1)^T\)、\(\alpha_2=(1,2,3)^T\)、\(\alpha_3=(3,5,7)^T\) 的相关性，求秩与一个极大无关组，并把多余的向量表示出来。</p>
+        <p class="solution">按列摆成矩阵，第二行、第三行各减第一行，得 \((1,1,3)\)、\((0,1,2)\)、\((0,2,4)\)；第三行再减两倍第二行，整行变零。主元 2 个，秩为 2，\(\alpha_1,\alpha_2\) 是极大无关组；回代得 \(\alpha_3=\alpha_1+2\alpha_2\)。</p>
+      </div>
+
+      <div class="example">
+        <p class="example-head">例 <span>2</span>　\(\mathbb{R}^2\) 的两组基：\(\alpha_1=(1,1)^T,\alpha_2=(1,0)^T\) 与 \(\beta_1=(2,1)^T,\beta_2=(1,1)^T\)。求从 \(\alpha\) 到 \(\beta\) 的过渡矩阵；已知 \(\gamma\) 在 \(\alpha\) 基下的坐标是 \((1,2)^T\)，求它在 \(\beta\) 基下的坐标。</p>
+        <p class="solution">把新基用老基表示：\(\beta_1=\alpha_1+\alpha_2\)，\(\beta_2=\alpha_1\)，故 \(P=\begin{pmatrix}1&amp;1\\1&amp;0\end{pmatrix}\)，\(|P|=-1\)，可逆。\(P^{-1}=\begin{pmatrix}0&amp;1\\1&amp;-1\end{pmatrix}\)，\(y=P^{-1}x=(2,-1)^T\)。验算 \(2\beta_1-\beta_2=(3,1)^T=\alpha_1+2\alpha_2\)。</p>
+      </div>
+
+      <div class="example">
+        <p class="example-head">例 <span>3</span>　用施密特正交化把 \(\alpha_1=(1,1,0)^T\)、\(\alpha_2=(1,0,1)^T\)、\(\alpha_3=(0,1,1)^T\) 变成规范正交基。</p>
+        <p class="solution">\(b_1=\alpha_1=(1,1,0)\)。\(b_2=\alpha_2-\tfrac12 b_1=(\tfrac12,-\tfrac12,1)\)。\(b_3=\alpha_3-\tfrac12 b_1-\tfrac13 b_2=(-\tfrac23,\tfrac23,\tfrac23)\)。单位化得 \(e_1=\tfrac{1}{\sqrt2}(1,1,0)\)，\(e_2=\tfrac{1}{\sqrt6}(1,-1,2)\)，\(e_3=\tfrac{1}{\sqrt3}(-1,1,1)\)。</p>
+      </div>
+
+      <h2 id="s-exercises" class="reveal">习题</h2>
+
+      <div class="exercises">
+
+        <div class="ex-group">
+          <p class="ex-group-head">A 档 <span>巩固定义与基本计算，每题五分钟内</span></p>
+
+          <p class="ex"><span class="ex-num">1.</span> 设 \(\alpha=(1,2,3)^T\)，\(\beta=(0,-1,2)^T\)，求 \(\alpha+2\beta\)、\(3\alpha-\beta\) 与内积 \([\alpha,\beta]\)。</p>
+          <div class="answer"><details><summary>看答案</summary><p>按分量算：\(\alpha+2\beta=(1,0,7)\)，\(3\alpha-\beta=(3,7,7)\)，\([\alpha,\beta]=0-2+6=4\)。</p></details></div>
+
+          <p class="ex"><span class="ex-num">2.</span> 判断 \(\alpha_1=(1,1)^T\)、\(\alpha_2=(1,-1)^T\) 是否线性无关。</p>
+          <div class="answer"><details><summary>看答案</summary><p>以两向量为列的行列式是 \(-2\ne0\)，所以无关。也可以直接看：它们不共线，凑成零只能两个系数都为零。</p></details></div>
+
+          <p class="ex"><span class="ex-num">3.</span> 求向量组 \(\alpha_1=(1,2)^T\)、\(\alpha_2=(2,4)^T\)、\(\alpha_3=(3,6)^T\) 的秩与一个极大无关组。</p>
+          <div class="answer"><details><summary>看答案</summary><p>三个向量共线，秩为 1，取 \(\{\alpha_1\}\) 即够。\(\alpha_2=2\alpha_1\)，\(\alpha_3=3\alpha_1\)。</p></details></div>
+
+          <p class="ex"><span class="ex-num">4.</span> 写出 \(\mathbb{R}^3\) 的标准基，并写出 \(\alpha=(2,0,-1)\) 在这组基下的坐标。</p>
+          <div class="answer"><details><summary>看答案</summary><p>标准基是 \(e_1=(1,0,0)\)、\(e_2=(0,1,0)\)、\(e_3=(0,0,1)\)。坐标就是分量本身：\((2,0,-1)^T\)。</p></details></div>
+
+          <p class="ex"><span class="ex-num">5.</span> 求 \(\alpha=(1,2,3)\)、\(\beta=(-1,0,1)\) 的长度与夹角的余弦。</p>
+          <div class="answer"><details><summary>看答案</summary><p>\(\|\alpha\|=\sqrt{14}\)，\(\|\beta\|=\sqrt2\)，\([\alpha,\beta]=2\)，故 \(\cos\theta=2/\sqrt{28}=1/\sqrt7\)。</p></details></div>
+
+          <p class="ex"><span class="ex-num">6.</span> 判断 \(A=\begin{pmatrix}0&amp;1\\-1&amp;0\end{pmatrix}\) 是否为正交矩阵。</p>
+          <div class="answer"><details><summary>看答案</summary><p>算出 \(A^TA=E\)，所以是。它的两列分别是 \((0,-1)^T\) 与 \((1,0)^T\)，正交且长度为 1，几何上是转 90°。</p></details></div>
+        </div>
+
+        <div class="ex-group">
+          <p class="ex-group-head">B 档 <span>综合题，接近期末与考研难度</span></p>
+
+          <p class="ex"><span class="ex-num">1.</span> \(a\) 取何值时，\(\alpha_1=(1,1,a)^T\)、\(\alpha_2=(1,a,1)^T\)、\(\alpha_3=(a,1,1)^T\) 线性相关。</p>
+          <div class="answer"><details><summary>看答案</summary><p>算行列式得 \(|A|=-(a-1)^2(a+2)\)。令它为零，得 \(a=1\) 或 \(a=-2\)；其余取值下三向量无关。</p></details></div>
+
+          <p class="ex"><span class="ex-num">2.</span> 证明 \(\alpha_1=(1,0,1)^T\)、\(\alpha_2=(2,1,0)^T\)、\(\alpha_3=(1,1,1)^T\) 是 \(\mathbb{R}^3\) 的基，并求 \(\gamma=(3,2,1)^T\) 在它下面的坐标。</p>
+          <div class="answer"><details><summary>看答案</summary><p>以三向量为列的行列式为 2，不为零，秩为 3，等于维数，所以是基。解 \(x\alpha_1+y\alpha_2+z\alpha_3=\gamma\) 得 \(x=0\)，\(y=1\)，\(z=1\)。</p></details></div>
+
+          <p class="ex"><span class="ex-num">3.</span> 设 \(\beta_1=\alpha_1+\alpha_2\)，\(\beta_2=2\alpha_1+\alpha_2\)，\(\gamma\) 在 \(\alpha\) 基下的坐标是 \((1,-1)^T\)，求它在 \(\beta\) 基下的坐标。</p>
+          <div class="answer"><details><summary>看答案</summary><p>过渡矩阵 \(P=\begin{pmatrix}1&amp;2\\1&amp;1\end{pmatrix}\)，\(|P|=-1\)，\(P^{-1}=\begin{pmatrix}-1&amp;2\\1&amp;-1\end{pmatrix}\)，故 \(y=P^{-1}x=(-3,2)^T\)。验算 \(-3\beta_1+2\beta_2=\alpha_1-\alpha_2\)。</p></details></div>
+
+          <p class="ex"><span class="ex-num">4.</span> 用施密特正交化把 \(\alpha_1=(1,1,1)^T\)、\(\alpha_2=(1,2,0)^T\) 变成规范正交基。</p>
+          <div class="answer"><details><summary>看答案</summary><p>\(b_1=(1,1,1)\)，\([b_1,b_1]=3\)，\([\alpha_2,b_1]=3\)，故 \(b_2=\alpha_2-b_1=(0,1,-1)\)。单位化得 \(e_1=\tfrac{1}{\sqrt3}(1,1,1)\)，\(e_2=\tfrac{1}{\sqrt2}(0,1,-1)\)。</p></details></div>
+        </div>
+
+        <div class="ex-group">
+          <p class="ex-group-head">C 档 <span>拓展与历史原题</span></p>
+
+          <p class="ex"><span class="ex-num">1.</span>（格拉姆，1883）在区间 \([-1,1]\) 上按内积 \([f,g]=\int_{-1}^{1}fg\,\mathrm{d}x\) 正交化 \(1,x,x^2\)，求出前三个正交多项式。</p>
+          <div class="answer"><details><summary>看答案</summary><p>\([1,1]=2\)，\([x,1]=0\)，所以 \(b_1=1\)、\(b_2=x\)。又有 \([x^2,1]=\tfrac23\)，\([x^2,x]=0\)，得 \(b_3=x^2-\tfrac13\)。这三个多项式乘上常数就是勒让德多项式的前三个。</p></details></div>
+
+          <p class="ex"><span class="ex-num">2.</span>（傅里叶，1822）已知规范正交基 \(e_1=\tfrac{1}{\sqrt2}(1,1,0)\)、\(e_2=\tfrac{1}{\sqrt6}(1,-1,2)\)、\(e_3=\tfrac{1}{\sqrt3}(-1,1,1)\)，求 \(\gamma=(1,0,3)\) 的坐标。</p>
+          <div class="answer"><details><summary>看答案</summary><p>规范正交基下坐标就是内积：\([\gamma,e_1]=\tfrac{1}{\sqrt2}\)，\([\gamma,e_2]=\tfrac{7}{\sqrt6}\)，\([\gamma,e_3]=\tfrac{2}{\sqrt3}\)。不必解方程组，三个内积一次算完。</p></details></div>
+
+          <p class="ex"><span class="ex-num">3.</span>（皮亚诺，1888）判断 \(V=\{(x,y)\mid x+y=0\}\) 与 \(W=\{(x,y)\mid x+y=1\}\) 是不是向量空间，说明理由。</p>
+          <div class="answer"><details><summary>看答案</summary><p>\(V\) 是：两个和为零的向量相加和仍为零，乘数也一样，零向量也在其中。\(W\) 不是：零向量不在里面，且 \((1,0)+(0,1)=(1,1)\) 已经不满足 \(x+y=1\)，加法不封闭。</p></details></div>
+        </div>
+
+        <div class="ex-group">
+          <p class="ex-group-head">思考题 <span>不设标准答案，只给提示</span></p>
+
+          <p class="ex"><span class="ex-num">1.</span> 两个向量线性相关，画在平面上是什么样子？三个向量相关呢？</p>
+          <div class="answer"><details><summary>看提示</summary><p>两个相关就是共线，一个躺在另一个所在的直线上。三个相关在三维里是共面，三支箭头都在过原点的一张平面里。维数越高，这种图就越难画，计数的那条判据正是替图说话的。</p></details></div>
+
+          <p class="ex"><span class="ex-num">2.</span> 同一组数在不同基下坐标不同，「坐标」到底属于向量，还是属于基？</p>
+          <div class="answer"><details><summary>看提示</summary><p>坐标属于「向量加基」这个配对，单说其中哪一个都不完整。课本写坐标时总要交代基，就是这个道理。过渡矩阵的作用，是把同一个向量在两套交代里的读数对上。</p></details></div>
+
+          <p class="ex"><span class="ex-num">3.</span> 施密特正交化每一步减掉的倍数，为什么必须是投影的那个倍数？</p>
+          <div class="answer"><details><summary>看提示</summary><p>倍数由正交条件唯一确定：要让内积为零，方程只有一个解。换成别的倍数，剩下的向量不再与前一支垂直，后面求坐标的内积公式全部失效。</p></details></div>
+        </div>
+
+      </div>
+
+      <h2 class="reveal">延伸阅读</h2>
+      <ul class="refs">
+        <li>同济大学数学系《线性代数》第六版，第四章（向量组的线性相关性、向量空间）与第五章第一节（内积、正交矩阵）。本章记号以此为准。</li>
+        <li>皮亚诺《几何演算》（Calcolo geometrico），1888 年；英译本题作 <em>Geometric Calculus</em>，公理化定义在第一部分。</li>
+        <li>外尔《空间·时间·物质》，1918 年，第 1 章。看他怎么把线性代数的语言搬进几何与相对论。</li>
+        <li>P. Halmos, <em>Finite-Dimensional Vector Spaces</em>, 1942 年，第 1、2 章。向量空间的公理写法在这本书里定型的。</li>
+      </ul>
+
+    </article>
+  </div>
+
+  <div class="wrap">
+    <nav class="pager" aria-label="翻页">
+      <a class="pager-link prev" href="ch04.html"><span class="pager-dir">上一章</span><span class="pager-title">秩与解的结构</span></a>
+      <a class="pager-link next" href="ch06.html"><span class="pager-dir">下一章</span><span class="pager-title">特征值与特征向量</span></a>
+    </nav>
+  </div>
+
+</main>
+
+<footer class="footer field-dark">
+  <div class="wrap">
+    <p class="footer-mark">数学基础课</p>
+    <div class="footer-cols">
+      <div><p>三门课按同一套读法写：先看问题，再给定义与判别，最后落到计算与习题。</p></div>
+      <div><p><a href="index.html">线性代数目录</a></p><p><a href="../index.html">返回主页</a></p></div>
+      <div><p>图示用脚本按真实数值画，公式由 KaTeX 排版。</p></div>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/katex/katex.min.js"></script>
+<script src="../assets/katex/auto-render.min.js"></script>
+<script src="../assets/site.js"></script>
+</body>
+</html>

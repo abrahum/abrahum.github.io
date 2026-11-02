@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>第三章 矩阵：把线性运算当成对象 · 线性代数</title>
+<meta name="description" content="矩阵的加法、乘法与不可交换、转置、逆矩阵、分块矩阵，以及初等矩阵与初等变换的对应。">
+<link rel="stylesheet" href="../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="nav-brand" href="../index.html">数学基础课<span> 三门课，一套读法</span></a>
+    <nav class="nav-links" aria-label="主导航">
+      <a href="index.html#map">本课目录</a>
+      <a class="xl" href="../calculus/index.html">微积分</a>
+      <a class="xl" href="../probability/index.html">概率论</a>
+      <a class="xl" href="../complex/index.html">复变函数</a>
+      <a class="opt" href="ch04.html">下一章</a>
+    </nav>
+  </div>
+  <div class="nav-progress" aria-hidden="true"></div>
+</header>
+
+<main>
+
+  <section class="chapter">
+    <div class="wrap">
+      <div class="ch-hero-band">
+        <div>
+          <p class="ch-label reveal"><span>第三章</span><span class="ch-era">1850 至 1870 年</span></p>
+          <h1 class="ch-title reveal reveal-2">矩阵：把线性运算当成对象</h1>
+          <p class="ch-deck reveal reveal-3">第一章把方程组压成一张数表，第二章用一个数判断解的存在。这一章把数表本身当成对象，给它定加法、乘法、逆，再用它描述一次线性变换。历史上先有行列式，矩阵要等到 1850 年代才被人当成可以运算的东西。</p>
+          <div class="ch-meta reveal reveal-3">
+            <div><strong>本章知识点</strong>矩阵乘法、逆矩阵、分块矩阵、初等变换</div>
+            <div><strong>历史坐标</strong>西尔维斯特 1850 年，凯莱 1855 年、1858 年</div>
+            <div><strong>对应教材</strong>同济《线性代数》第二章、第三章</div>
+            <div><strong>前置</strong>第一章的初等行变换、第二章的行列式</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap ch-body">
+    <aside class="rail">
+      <p class="rail-title">本章提纲</p>
+      <ol>
+        <li><a href="#s-1">一张数表变成一个对象</a></li>
+        <li><a href="#s-2">加法与数乘</a></li>
+        <li><a href="#s-3">乘法：两次变换叠在一起</a></li>
+        <li><a href="#s-4">转置与行列式</a></li>
+        <li><a href="#s-5">逆矩阵</a></li>
+        <li><a href="#s-6">分块矩阵</a></li>
+        <li><a href="#s-7">初等矩阵</a></li>
+        <li><a href="#s-manual">怎么算</a></li>
+        <li><a href="#s-examples">例题</a></li>
+        <li><a href="#s-exercises">习题</a></li>
+      </ol>
+      <p class="rail-title">历史坐标</p>
+      <p class="rail-who">西尔维斯特 1850 年<br>凯莱 1855 年、1858 年<br>若尔当 1870 年（分块与标准型）</p>
+    </aside>
+
+    <article class="prose">
+
+      <p class="lead reveal">矩阵这个叫法是西尔维斯特 1850 年造的，用来指行列式展开的那张母表；凯莱 1855 年给它配了记号，1858 年在《矩阵论》里定下加法与乘法，证明了结合律，还讨论了逆矩阵。这一章把这些规矩讲清楚：矩阵怎么乘，为什么这样乘，逆怎么求，行变换怎么写成乘法。</p>
+
+      <h2 id="s-1" class="reveal">一、一张数表变成一个对象</h2>
+
+      <p>第一章把方程组压成一张增广矩阵，用完就把数字还给方程组。矩阵的做法是把这张表本身当成独立对象，允许对它做加法、相乘、求逆，就像对数字做的那样；同济课本的定义是，把 \(m\) 乘 \(n\) 个数按 \(m\) 行 \(n\) 列排成数表，就叫 \(m\times n\) 矩阵，记作 \(A=(a_{ij})\)，第 \(i\) 行第 \(j\) 列的那个数是它的元素。</p>
+
+      <p>行数列数不必相同，\(2\times3\) 与 \(3\times2\) 是两个形状不同的东西；两个矩阵相等要求同型且每个位置上的数都相等，元素逐一对上才写 \(A=B\)。</p>
+
+      <p>常用的几种矩阵按形状命名：主对角线以外全是零的方阵叫对角矩阵，主对角线上方全是零的叫下三角矩阵、下方全是零的叫上三角矩阵，对角线上全是 1 的对角矩阵叫单位矩阵，记作 \(I\) 或 \(E\)。</p>
+
+      <p>单位矩阵在乘法里充当 1，它把每个向量原封不动送回去，下一节会写成 \(AI=IA=A\)。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定义（矩阵与几种特殊矩阵）</p>
+        <p>\(m\times n\) 个数按 \(m\) 行 \(n\) 列排成的数表叫 \(m\times n\) 矩阵，第 \(i\) 行第 \(j\) 列的数记作 \(a_{ij}\)；\(m=n\) 时叫 \(n\) 阶方阵，同型且对应元素全相等才写 \(A=B\)。</p>
+        <p>对角矩阵是主对角线以外全为零的方阵，记作 \(\mathrm{diag}(\lambda_1,\dots,\lambda_n)\)；主对角线上方全为零的是下三角矩阵，下方全为零的是上三角矩阵；主对角线全为 1 的对角矩阵叫单位矩阵 \(I_n\)。对称矩阵满足 \(A^{T}=A\)，反对称矩阵满足 \(A^{T}=-A\)。</p>
+      </div>
+
+      <details class="fold">
+        <summary>反对称矩阵的主对角线为什么全是零</summary>
+        <p>反对称要求 \(a_{ij}=-a_{ji}\)，把 \(i\) 和 \(j\) 取成同一个数得 \(a_{ii}=-a_{ii}\)，于是主对角线全是零。二阶的反对称矩阵只能长成 \(\left(\begin{smallmatrix}0&amp;b\\-b&amp;0\end{smallmatrix}\right)\) 的样子，\(n\) 阶的只有主对角线以外那 \(n(n-1)/2\) 个位置可以自由填。</p>
+      </details>
+
+      <div class="archive reveal">
+        <p class="archive-when">1850 年，伦敦</p>
+        <h3>西尔维斯特给这张表起了名字</h3>
+        <p class="archive-quote">“I have in previous papers defined a ‘Matrix’ as a rectangular array of terms, out of which different systems of determinants may be engendered as from the womb of a common parent.”</p>
+        <p class="archive-source">西尔维斯特《关于一类新定理的补充》，1850 年</p>
+        <p>他挑 matrix 是因为行列式都从这张表里生出来，拉丁语里 matrix 原本指子宫，同一句话里「母腹」的比方说得更直白。这层生育的意思后来掉干净了，今天说矩阵只指数表。</p>
+      </div>
+
+      <h2 id="s-2" class="reveal">二、加法与数乘</h2>
+
+      <p>两种最简单的运算都按位置做：同型矩阵相加，对应位置的数相加；数 \(k\) 乘矩阵，每个位置都乘 \(k\)。这两种合起来叫线性运算，八条运算律一条不缺，交换、结合、分配都和数的加法乘法一样，前提只有一个，形状得对得上。</p>
+
+      <p>形状不对就加不起来，\(3\times2\) 与 \(2\times3\) 放到一起一个位置也对不上，因为加法的意思就是同一个位置上的两个数叠加；这条限制看着琐碎，判分块能不能乘时用的还是它。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定义（加法与数乘）</p>
+        <p>设 \(A,B\) 同型，\(k\) 是数，规定 \((A+B)_{ij}=a_{ij}+b_{ij}\)，\((kA)_{ij}=ka_{ij}\)，各元素全为零的矩阵记作 \(O\)，\(A+(-1)B\) 简写为 \(A-B\)。加法只对同型矩阵有意义，数乘对任何矩阵都有意义。</p>
+      </div>
+
+      <p>数乘和加法配起来，能把「乘一个矩阵」读成按列加权：设 \(A\) 的列是 \(\alpha_1,\dots,\alpha_n\)，则 \(Ax=x_1\alpha_1+\cdots+x_n\alpha_n\)，各列按 \(x\) 的分量加起来，第四章讲向量组时要反复用它。</p>
+
+      <h2 id="s-3" class="reveal">三、乘法：两次变换叠在一起</h2>
+
+      <p>乘法是这一章的关口，因为它看起来不像乘法：若按对应位置相乘来定义，两个 2 阶矩阵乘出来还是 2 阶矩阵，形式好看，可它跟方程组、跟变换全都对不上。凯莱定的规矩从行与列的配对里来，左取一行、右取一列，按顺序相乘再相加，得到的数放进积矩阵的对应位置。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定义（矩阵乘法）</p>
+        <p>设 \(A=(a_{ij})\) 是 \(m\times s\) 矩阵，\(B=(b_{ij})\) 是 \(s\times n\) 矩阵，则 \(AB\) 是 \(m\times n\) 矩阵，第 \(i\) 行第 \(j\) 列元素为 \(c_{ij}=a_{i1}b_{1j}+a_{i2}b_{2j}+\cdots+a_{is}b_{sj}\)；\(A\) 的列数必须等于 \(B\) 的行数，乘积才有意义。</p>
+      </div>
+
+      <p>为什么是这种配法，最好从变换上解释：把矩阵当成机器，给它 \(x\) 就吐出 \(Ax\)，乘 \(A\) 是把整个空间拉伸、旋转、压扁一次。先做 \(A\) 再做 \(B\)，\(x\) 落在 \(B(Ax)\)，而这个结果对每个 \(x\) 都等于 \((BA)x\)，所以「先 \(A\) 后 \(B\)」本身就是个矩阵，它第 \(i\) 行第 \(j\) 列只能等于 \(A\) 的第 \(i\) 行与 \(B\) 的第 \(j\) 列的配对和。</p>
+
+      <p>拿两个矩阵试一下：\(A=\left(\begin{smallmatrix}2&amp;0\\1&amp;1\end{smallmatrix}\right)\) 把单位正方形拉成面积 2 的平行四边形，\(B=\left(\begin{smallmatrix}1&amp;1\\0&amp;2\end{smallmatrix}\right)\) 接着再拉一次，两种次序的结果不同，\(AB=\left(\begin{smallmatrix}2&amp;2\\1&amp;3\end{smallmatrix}\right)\)，而 \(BA=\left(\begin{smallmatrix}3&amp;1\\2&amp;2\end{smallmatrix}\right)\)。换个次序就换出一个新矩阵，所以矩阵乘法没有交换律，写 \(AB\) 和写 \(BA\) 是两件事。</p>
+
+      <div class="figure">
+        <!--FIG ch03_compose--><svg viewBox="0 0 720 410" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<text x="120.00" y="34.00" text-anchor="middle" font-size="14.5" fill="var(--ink)">单位正方形</text>
+<line x1="24.00" y1="254.67" x2="216.00" y2="254.67" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.45"/>
+<line x1="61.33" y1="292.00" x2="61.33" y2="100.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.45"/>
+<polygon points="61.33,254.67 168.00,254.67 168.00,148.00 61.33,148.00" fill="var(--fig-fill)" stroke="var(--accent-line)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.75"/>
+<line x1="61.33" y1="254.67" x2="168.00" y2="254.67" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M 157.78 258.75 L 168.00 254.67 L 157.78 250.59" fill="var(--ink-2)" stroke="var(--ink-2)" stroke-width="1" stroke-linejoin="round"/>
+<line x1="61.33" y1="254.67" x2="61.33" y2="148.00" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M 65.41 158.22 L 61.33 148.00 L 57.25 158.22" fill="var(--ink-2)" stroke="var(--ink-2)" stroke-width="1" stroke-linejoin="round"/>
+<text x="172.00" y="272.67" text-anchor="start" font-size="12" fill="var(--ink-3)">(1,0)</text>
+<text x="55.33" y="142.00" text-anchor="end" font-size="12" fill="var(--ink-3)">(0,1)</text>
+<text x="120.00" y="348.00" text-anchor="middle" font-size="12.5" fill="var(--ink-2)">边长 1，面积 1</text>
+<text x="360.00" y="34.00" text-anchor="middle" font-size="14.5" fill="var(--ink)">乘 A 之后</text>
+<line x1="264.00" y1="266.40" x2="456.00" y2="266.40" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.45"/>
+<line x1="289.60" y1="292.00" x2="289.60" y2="100.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.45"/>
+<polygon points="289.60,266.40 353.60,266.40 353.60,202.40 289.60,202.40" fill="none" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="289.60,266.40 417.60,202.40 417.60,138.40 289.60,202.40" fill="var(--fig-fill)" stroke="var(--accent-line)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.75"/>
+<line x1="289.60" y1="266.40" x2="417.60" y2="202.40" stroke="var(--accent-line)" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round"/><path d="M 410.29 210.62 L 417.60 202.40 L 406.64 203.32" fill="var(--accent-line)" stroke="var(--accent-line)" stroke-width="1" stroke-linejoin="round"/>
+<line x1="289.60" y1="266.40" x2="289.60" y2="202.40" stroke="var(--ink-2)" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round"/><path d="M 293.68 212.62 L 289.60 202.40 L 285.52 212.62" fill="var(--ink-2)" stroke="var(--ink-2)" stroke-width="1" stroke-linejoin="round"/>
+<text x="422.60" y="222.40" text-anchor="start" font-size="12" fill="var(--ink-3)">(2,1)</text>
+<text x="283.60" y="194.40" text-anchor="end" font-size="12" fill="var(--ink-3)">(0,1)</text>
+<text x="360.00" y="348.00" text-anchor="middle" font-size="12.5" fill="var(--ink-2)">A 把面积放大 2 倍</text>
+<text x="600.00" y="34.00" text-anchor="middle" font-size="14.5" fill="var(--ink)">再乘 B，得 BA</text>
+<line x1="504.00" y1="273.18" x2="696.00" y2="273.18" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.45"/>
+<line x1="522.82" y1="292.00" x2="522.82" y2="100.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.45"/>
+<polygon points="522.82,273.18 560.47,273.18 560.47,235.53 522.82,235.53" fill="none" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="522.82,273.18 598.12,235.53 598.12,197.88 522.82,235.53" fill="none" stroke="var(--ink-3)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="522.82,273.18 635.76,197.88 673.41,122.59 560.47,197.88" fill="var(--fig-fill)" stroke="var(--accent-line)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.75"/>
+<line x1="522.82" y1="273.18" x2="635.76" y2="197.88" stroke="var(--accent-line)" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round"/><path d="M 629.53 206.94 L 635.76 197.88 L 625.00 200.15" fill="var(--accent-line)" stroke="var(--accent-line)" stroke-width="1" stroke-linejoin="round"/>
+<line x1="522.82" y1="273.18" x2="560.47" y2="197.88" stroke="var(--ink-2)" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round"/><path d="M 559.55 208.84 L 560.47 197.88 L 552.25 205.19" fill="var(--ink-2)" stroke="var(--ink-2)" stroke-width="1" stroke-linejoin="round"/>
+<text x="640.76" y="217.88" text-anchor="start" font-size="12" fill="var(--ink-3)">(3,2)</text>
+<text x="554.47" y="189.88" text-anchor="end" font-size="12" fill="var(--ink-3)">(1,2)</text>
+<text x="600.00" y="348.00" text-anchor="middle" font-size="12.5" fill="var(--ink-2)">BA 把面积放大 4 倍</text>
+<text x="240.00" y="190.00" text-anchor="middle" font-size="20" fill="var(--ink-3)">A</text>
+<text x="480.00" y="190.00" text-anchor="middle" font-size="20" fill="var(--ink-3)">B</text>
+</svg>
+<!--/FIG ch03_compose-->
+        <figcaption class="figcaption"><b>先做 \(A\) 再做 \(B\)，合起来是矩阵 \(BA\)。</b>单位正方形先变成面积 2 的平行四边形，再变成面积 4 的，两条边的像 \((3,2)\) 与 \((1,2)\) 就是 \(BA\) 的两列。</figcaption>
+      </div>
+
+      <p>三个矩阵连乘，先括哪一对都行：\((AB)C=A(BC)\)，这叫结合律。换到变换的说法里它几乎不用证，先 \(C\) 再 \(B\) 再 \(A\) 的次序从头到尾没变，换的只是记账的分组；写成式子也不过是把两边展开成三重求和再交换次序。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定理（乘法结合律）</p>
+        <p>设 \(A\) 是 \(m\times s\) 矩阵，\(B\) 是 \(s\times p\) 矩阵，\(C\) 是 \(p\times n\) 矩阵，则 \((AB)C=A(BC)\)，两边都是 \(m\times n\) 矩阵，所以 \(ABC\) 不必再加括号。</p>
+      </div>
+
+      <details class="fold">
+        <summary>结合律那一步到底换了什么</summary>
+        <p>\((AB)C\) 的第 \((i,j)\) 元素是 \(\sum_k\big(\sum_l a_{il}b_{lk}\big)c_{kj}\)，\(A(BC)\) 的是 \(\sum_l a_{il}\big(\sum_k b_{lk}c_{kj}\big)\)，两个都是 \(\sum_l\sum_k a_{il}b_{lk}c_{kj}\) 的某种加法次序，有限项相加与次序无关。\(s\) 与 \(p\) 再大也一样，只是求和的层数多了一层。</p>
+      </details>
+
+      <p>单位矩阵在乘法里充当 1：\(I_mA=AI_n=A\)。能交换的例子很少，数量矩阵 \(kI\) 与任何同阶矩阵都交换，一个矩阵与它的逆也交换，所以条件里出现 \(AB=BA\) 时那是额外给的信息，用得上。</p>
+
+      <p>把 \(Ax=b\) 展开，左边第 \(i\) 个分量是 \(A\) 的第 \(i\) 行与 \(x\) 的配对和，正好是第 \(i\) 个方程的左端，整组方程因此压成一行；第一章的每步行变换，也等于在左边乘一个初等矩阵。</p>
+
+      <div class="keyidea reveal">
+        <p>乘法的口诀只有一句：左边取一行，右边取一列，配对相乘再相加。</p>
+      </div>
+
+      <h2 id="s-4" class="reveal">四、转置与行列式</h2>
+
+      <p>转置是把行换成列。\(A\) 的转置记作 \(A^{T}\)，它的第 \(i\) 行第 \(j\) 列是 \(A\) 的第 \(j\) 行第 \(i\) 列，形状从 \(m\times n\) 换成 \(n\times m\)，转两次回到原样；加法和数乘都能穿过去，乘法穿过去要换序，\((AB)^{T}=B^{T}A^{T}\)。</p>
+
+      <details class="fold">
+        <summary>转置为什么要把顺序倒过来</summary>
+        <p>\((AB)^{T}\) 的第 \((i,j)\) 元素是 \(AB\) 的第 \((j,i)\) 元素，也就是 \(A\) 的第 \(j\) 行与 \(B\) 的第 \(i\) 列配对，它同时等于 \(B^{T}\) 的第 \(i\) 行与 \(A^{T}\) 的第 \(j\) 列配对，所以结果只能是 \(B^{T}A^{T}\)。写成 \(A^{T}B^{T}\) 是最常见的错，形状往往第一个就对不上。</p>
+      </details>
+
+      <p>对称是 \(A^{T}=A\)，反对称是 \(A^{T}=-A\)；两个对称矩阵的乘积一般不再对称，转置一下得 \(B^{T}A^{T}=BA\)，要它等于 \(AB\) 还得另外加条件。</p>
+
+      <p>方阵才能算行列式，记作 \(|A|\) 或 \(\det A\)，算法照第二章那一套；行列式对乘法友好，两个同阶方阵的积的行列式等于两个行列式的积。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定理（行列式的乘法公式）</p>
+        <p>设 \(A,B\) 都是 \(n\) 阶方阵，则 \(|AB|=|A|\,|B|\)，由此 \(|kA|=k^{n}|A|\)、\(|A^{m}|=|A|^{m}\)、\(|AB|=|BA|\)，\(A\) 可逆时 \(|A^{-1}|=1/|A|\)。</p>
+      </div>
+
+      <p>这条公式的量尺意义很清楚：一次变换把面积放大 \(|A|\) 倍，再做一次放大 \(|B|\) 倍，合起来放大 \(|A||B|\) 倍，正好是复合矩阵的行列式，前面那张图把这件事演了一遍，面积从 1 到 2 再到 4。</p>
+
+      <p>加法上就没有这样的公式，\(|A+B|\) 一般不等于 \(|A|+|B|\)：取 \(A=\left(\begin{smallmatrix}1&amp;0\\0&amp;0\end{smallmatrix}\right)\)、\(B=\left(\begin{smallmatrix}0&amp;0\\0&amp;1\end{smallmatrix}\right)\)，两个行列式都是 0，加起来还是 0，而 \(A+B=I\) 的行列式是 1。</p>
+
+      <h2 id="s-5" class="reveal">五、逆矩阵</h2>
+
+      <p>数的乘法有倒数，矩阵也想有一个：设 \(A\) 是 \(n\) 阶方阵，若存在 \(n\) 阶方阵 \(B\) 使 \(AB=BA=I\)，就说 \(A\) 可逆，\(B\) 叫 \(A\) 的逆矩阵，记作 \(A^{-1}\)。逆若存在就唯一，设 \(B,C\) 都是 \(A\) 的逆，则 \(B=BI=B(AC)=(BA)C=C\)，四步里把结合律用了个遍。</p>
+
+      <p>判断可逆有一个干净的标准，看行列式：\(A\) 可逆当且仅当 \(|A|\ne0\)。这时逆还有一个写得出的公式，用伴随矩阵来写，把每个元素的代数余子式按原位置排好再转置，得到 \(A^{*}\)，逆就是 \(A^{*}/|A|\)。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定理（可逆的充要条件与伴随公式）</p>
+        <p>\(n\) 阶方阵 \(A\) 可逆的充要条件是 \(|A|\ne0\)，且此时 \(A^{-1}=\dfrac{1}{|A|}A^{*}\)，其中 \(A^{*}\) 的第 \(i\) 行第 \(j\) 列元素是 \(a_{ji}\) 的代数余子式；\(|A|=0\) 的方阵叫奇异矩阵，它没有逆。</p>
+      </div>
+
+      <p>公式的道理集中在 \(AA^{*}=|A|I\) 这一步：把 \(A\) 的第 \(i\) 行与 \(A^{*}\) 的第 \(j\) 列配对相乘，得到的是把 \(|A|\) 按第 \(i\) 行展开的结果，\(i=j\) 时等于 \(|A|\)，\(i\ne j\) 时等于零，因为那相当于把第 \(i\) 行换成了第 \(j\) 行。</p>
+
+      <p>二阶最好记：\(A=\left(\begin{smallmatrix}a&amp;b\\c&amp;d\end{smallmatrix}\right)\) 时 \(A^{-1}=\dfrac{1}{ad-bc}\left(\begin{smallmatrix}d&amp;-b\\-c&amp;a\end{smallmatrix}\right)\)，主对角线换位，副对角线变号，再除行列式。三阶照公式要算 9 个二阶行列式，四阶要算 16 个三阶行列式，手算立刻变慢，所以伴随公式的长处只是写得出来，实战用下一节的初等变换。</p>
+
+      <p>逆的运算和转置走一个路子：\((A^{-1})^{-1}=A\)，\((kA)^{-1}=k^{-1}A^{-1}\)，\((A^{T})^{-1}=(A^{-1})^{T}\)，乘积求逆把顺序倒过来，\((AB)^{-1}=B^{-1}A^{-1}\)，两边乘起来中间那一对约掉就能验。</p>
+
+      <h2 id="s-6" class="reveal">六、分块矩阵</h2>
+
+      <p>矩阵大到一定程度就要按块处理：用几条横线和竖线把 \(A\) 划成若干块，每块当一个小矩阵看待，叫分块矩阵，怎么划随你，前后一致即可。</p>
+
+      <p>分块之后加法和数乘照旧逐块做，乘法也照旧，把块当成数用，\(AB\) 的第 \((i,j)\) 块等于 \(\sum_k A_{ik}B_{kj}\)，前提是 \(A\) 的列的分法与 \(B\) 的行的分法一致，这样中间的块才对得上。</p>
+
+      <p>分块乘法不新增运算，它是同一个乘法的另一种读法：把 \(B\) 按列分成 \(n\) 块，每块是一列，\(AB\) 的第 \(j\) 列就是 \(A\) 乘上 \(B\) 的第 \(j\) 列，乘法的规矩最终来自「把一列送过去」这个动作。</p>
+
+      <div class="figure">
+        <!--FIG ch03_blockmul--><svg viewBox="0 0 720 360" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<rect x="32.00" y="62.00" width="68.00" height="60.00" fill="var(--fig-fill)" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="66.00" y="84.00" text-anchor="middle" font-size="11.5" fill="var(--ink-3)">A₁₁</text>
+<text x="66.00" y="109.00" text-anchor="middle" font-size="19" fill="var(--ink)">2</text>
+<rect x="100.00" y="62.00" width="68.00" height="60.00" fill="var(--fig-fill)" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="134.00" y="84.00" text-anchor="middle" font-size="11.5" fill="var(--ink-3)">A₁₂</text>
+<text x="134.00" y="109.00" text-anchor="middle" font-size="19" fill="var(--ink)">1</text>
+<rect x="32.00" y="122.00" width="68.00" height="60.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="66.00" y="144.00" text-anchor="middle" font-size="11.5" fill="var(--ink-3)">A₂₁</text>
+<text x="66.00" y="169.00" text-anchor="middle" font-size="19" fill="var(--ink)">0</text>
+<rect x="100.00" y="122.00" width="68.00" height="60.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="134.00" y="144.00" text-anchor="middle" font-size="11.5" fill="var(--ink-3)">A₂₂</text>
+<text x="134.00" y="169.00" text-anchor="middle" font-size="19" fill="var(--ink)">3</text>
+<rect x="232.00" y="62.00" width="68.00" height="60.00" fill="var(--fig-fill)" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="266.00" y="84.00" text-anchor="middle" font-size="11.5" fill="var(--ink-3)">B₁₁</text>
+<text x="266.00" y="109.00" text-anchor="middle" font-size="19" fill="var(--ink)">1</text>
+<rect x="300.00" y="62.00" width="68.00" height="60.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="334.00" y="84.00" text-anchor="middle" font-size="11.5" fill="var(--ink-3)">B₁₂</text>
+<text x="334.00" y="109.00" text-anchor="middle" font-size="19" fill="var(--ink)">4</text>
+<rect x="232.00" y="122.00" width="68.00" height="60.00" fill="var(--fig-fill)" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="266.00" y="144.00" text-anchor="middle" font-size="11.5" fill="var(--ink-3)">B₂₁</text>
+<text x="266.00" y="169.00" text-anchor="middle" font-size="19" fill="var(--ink)">2</text>
+<rect x="300.00" y="122.00" width="68.00" height="60.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="334.00" y="144.00" text-anchor="middle" font-size="11.5" fill="var(--ink-3)">B₂₂</text>
+<text x="334.00" y="169.00" text-anchor="middle" font-size="19" fill="var(--ink)">1</text>
+<rect x="432.00" y="62.00" width="68.00" height="60.00" fill="var(--fig-fill)" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="466.00" y="84.00" text-anchor="middle" font-size="11.5" fill="var(--ink-3)">C₁₁</text>
+<text x="466.00" y="109.00" text-anchor="middle" font-size="19" fill="var(--ink)">4</text>
+<rect x="500.00" y="62.00" width="68.00" height="60.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="534.00" y="84.00" text-anchor="middle" font-size="11.5" fill="var(--ink-3)">C₁₂</text>
+<text x="534.00" y="109.00" text-anchor="middle" font-size="19" fill="var(--ink)">9</text>
+<rect x="432.00" y="122.00" width="68.00" height="60.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="466.00" y="144.00" text-anchor="middle" font-size="11.5" fill="var(--ink-3)">C₂₁</text>
+<text x="466.00" y="169.00" text-anchor="middle" font-size="19" fill="var(--ink)">6</text>
+<rect x="500.00" y="122.00" width="68.00" height="60.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="534.00" y="144.00" text-anchor="middle" font-size="11.5" fill="var(--ink-3)">C₂₂</text>
+<text x="534.00" y="169.00" text-anchor="middle" font-size="19" fill="var(--ink)">3</text>
+<text x="100.00" y="40.00" text-anchor="middle" font-size="15" fill="var(--ink)">A</text>
+<text x="300.00" y="40.00" text-anchor="middle" font-size="15" fill="var(--ink)">B</text>
+<text x="500.00" y="40.00" text-anchor="middle" font-size="15" fill="var(--ink)">C</text>
+<line x1="178.00" y1="122.00" x2="222.00" y2="122.00" stroke="var(--ink-3)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M 211.78 126.08 L 222.00 122.00 L 211.78 117.92" fill="var(--ink-3)" stroke="var(--ink-3)" stroke-width="1" stroke-linejoin="round"/>
+<text x="200.00" y="110.00" text-anchor="middle" font-size="16" fill="var(--ink-2)">×</text>
+<line x1="378.00" y1="122.00" x2="422.00" y2="122.00" stroke="var(--ink-3)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M 411.78 126.08 L 422.00 122.00 L 411.78 117.92" fill="var(--ink-3)" stroke="var(--ink-3)" stroke-width="1" stroke-linejoin="round"/>
+<text x="400.00" y="110.00" text-anchor="middle" font-size="16" fill="var(--ink-2)">=</text>
+<text x="100.00" y="206.00" text-anchor="middle" font-size="12.5" fill="var(--ink-2)">按 1 行 1 列切</text>
+<text x="300.00" y="206.00" text-anchor="middle" font-size="12.5" fill="var(--ink-2)">切法要与 A 对齐</text>
+<text x="500.00" y="206.00" text-anchor="middle" font-size="12.5" fill="var(--ink-2)">每块是两个积之和</text>
+<line x1="568.00" y1="92.00" x2="582.00" y2="152.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="582.00" y="152.00" text-anchor="start" font-size="11.5" fill="var(--ink-2)">C₁₁ 的配方</text>
+<text x="40.00" y="258.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">C₁₁ = A₁₁B₁₁ + A₁₂B₂₁ = 2·1 + 1·2 = 4</text>
+<text x="40.00" y="290.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">C₁₂ = A₁₁B₁₂ + A₁₂B₂₂ = 2·4 + 1·1 = 9</text>
+<text x="382.00" y="258.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">C₂₁ = A₂₁B₁₁ + A₂₂B₂₁ = 0·1 + 3·2 = 6</text>
+<text x="382.00" y="290.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">C₂₂ = A₂₁B₁₂ + A₂₂B₂₂ = 0·4 + 3·1 = 3</text>
+<text x="40.00" y="328.00" text-anchor="start" font-size="12.5" fill="var(--ink-3)">块的行列数不必相等，只要 A 的列分法与 B 的行分法一致，块就能当数一样相乘。</text>
+</svg>
+<!--/FIG ch03_blockmul-->
+        <figcaption class="figcaption"><b>分块乘法和普通乘法是同一个算式。</b>阴影的 \(A\) 第一行块与 \(B\) 第一列块配出 \(C\) 的第一个块，其余三块同理，切法对不齐时中间那一项加不起来。</figcaption>
+      </div>
+
+      <p>分块对角矩阵 \(\left(\begin{smallmatrix}A&amp;0\\0&amp;B\end{smallmatrix}\right)\) 求逆，分别求 \(A\)、\(B\) 的逆再摆回对角就行，前提是两块都可逆；分块还能把大矩阵的证明拆小，C 档第 2 题用两行分块就证完了 \(|AB|=|A||B|\)。</p>
+
+      <details class="fold">
+        <summary>分块对角矩阵的逆是怎么算出来的</summary>
+        <p>设 \(\left(\begin{smallmatrix}A&amp;0\\0&amp;B\end{smallmatrix}\right)\) 的逆是 \(\left(\begin{smallmatrix}X&amp;Y\\Z&amp;W\end{smallmatrix}\right)\)，按分块乘法展开得 \(AX=I\)、\(BW=I\)、\(AY=0\)、\(BZ=0\)，\(A\)、\(B\) 可逆时由后两式得 \(Y=Z=0\)，所以逆是 \(\left(\begin{smallmatrix}A^{-1}&amp;0\\0&amp;B^{-1}\end{smallmatrix}\right)\)，两块的行列数不必相等。</p>
+      </details>
+
+      <h2 id="s-7" class="reveal">七、初等矩阵与初等变换</h2>
+
+      <p>把行变换翻译成乘法只要一个观察：对单位矩阵做一次初等变换，得到的矩阵再去左乘 \(A\)，效果等于对 \(A\) 做同一次变换。这样的矩阵叫初等矩阵，一共三种，来自互换 \(I\) 的两行、把某一行乘非零数 \(k\)、把某一行乘 \(k\) 加到另一行上。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定理（初等矩阵与初等变换一一对应）</p>
+        <p>设 \(E\) 是对 \(n\) 阶单位矩阵做一次初等变换得到的矩阵，\(A\) 是 \(n\times m\) 矩阵，则 \(EA\) 等于对 \(A\) 做同一次行变换；\(A\) 是 \(m\times n\) 矩阵时 \(AE\) 等于同一次列变换。三种初等变换与三种初等矩阵一一对应，初等矩阵都可逆，逆仍是同类型的初等矩阵。</p>
+      </div>
+
+      <p>这条定理把行变换从手写的动作变成一个对象：第一章里「第二行减三倍第一行」，现在写成左乘一个主对角线全 1、某个位置放 \(-3\) 的矩阵，一串行变换就是一串初等矩阵的连乘。</p>
+
+      <div class="figure">
+        <!--FIG ch03_elem--><svg viewBox="0 0 720 424" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<text x="20.00" y="110.00" text-anchor="start" font-size="13.5" fill="var(--ink)">互换两行</text>
+<text x="242.00" y="52.00" text-anchor="middle" font-size="13" fill="var(--ink-3)">I</text>
+<text x="398.00" y="52.00" text-anchor="middle" font-size="13" fill="var(--ink-3)">E</text>
+<rect x="196.00" y="62.00" width="46.00" height="40.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="219.00" y="89.00" text-anchor="middle" font-size="18" fill="var(--ink)">1</text>
+<rect x="242.00" y="62.00" width="46.00" height="40.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="265.00" y="89.00" text-anchor="middle" font-size="18" fill="var(--ink)">0</text>
+<rect x="196.00" y="102.00" width="46.00" height="40.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="219.00" y="129.00" text-anchor="middle" font-size="18" fill="var(--ink)">0</text>
+<rect x="242.00" y="102.00" width="46.00" height="40.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="265.00" y="129.00" text-anchor="middle" font-size="18" fill="var(--ink)">1</text>
+<rect x="352.00" y="62.00" width="46.00" height="40.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="375.00" y="89.00" text-anchor="middle" font-size="18" fill="var(--ink)">0</text>
+<rect x="398.00" y="62.00" width="46.00" height="40.00" fill="var(--fig-fill-2)" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="421.00" y="89.00" text-anchor="middle" font-size="18" fill="var(--ink)">1</text>
+<rect x="352.00" y="102.00" width="46.00" height="40.00" fill="var(--fig-fill-2)" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="375.00" y="129.00" text-anchor="middle" font-size="18" fill="var(--ink)">1</text>
+<rect x="398.00" y="102.00" width="46.00" height="40.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="421.00" y="129.00" text-anchor="middle" font-size="18" fill="var(--ink)">0</text>
+<line x1="306.00" y1="102.00" x2="334.00" y2="102.00" stroke="var(--ink-3)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M 323.78 106.08 L 334.00 102.00 L 323.78 97.92" fill="var(--ink-3)" stroke="var(--ink-3)" stroke-width="1" stroke-linejoin="round"/>
+<text x="470.00" y="110.00" text-anchor="start" font-size="13" fill="var(--ink-2)">A 的第一、二行互换</text>
+<line x1="174.00" y1="117.00" x2="174.00" y2="87.00" stroke="var(--accent-line)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M 178.08 97.22 L 174.00 87.00 L 169.92 97.22" fill="var(--accent-line)" stroke="var(--accent-line)" stroke-width="1" stroke-linejoin="round"/>
+<line x1="183.00" y1="87.00" x2="183.00" y2="117.00" stroke="var(--accent-line)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M 178.92 106.78 L 183.00 117.00 L 187.08 106.78" fill="var(--accent-line)" stroke="var(--accent-line)" stroke-width="1" stroke-linejoin="round"/>
+<text x="20.00" y="226.00" text-anchor="start" font-size="13.5" fill="var(--ink)">一行乘 k</text>
+<text x="242.00" y="168.00" text-anchor="middle" font-size="13" fill="var(--ink-3)">I</text>
+<text x="398.00" y="168.00" text-anchor="middle" font-size="13" fill="var(--ink-3)">E</text>
+<rect x="196.00" y="178.00" width="46.00" height="40.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="219.00" y="205.00" text-anchor="middle" font-size="18" fill="var(--ink)">1</text>
+<rect x="242.00" y="178.00" width="46.00" height="40.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="265.00" y="205.00" text-anchor="middle" font-size="18" fill="var(--ink)">0</text>
+<rect x="196.00" y="218.00" width="46.00" height="40.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="219.00" y="245.00" text-anchor="middle" font-size="18" fill="var(--ink)">0</text>
+<rect x="242.00" y="218.00" width="46.00" height="40.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="265.00" y="245.00" text-anchor="middle" font-size="18" fill="var(--ink)">1</text>
+<rect x="352.00" y="178.00" width="46.00" height="40.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="375.00" y="205.00" text-anchor="middle" font-size="18" fill="var(--ink)">1</text>
+<rect x="398.00" y="178.00" width="46.00" height="40.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="421.00" y="205.00" text-anchor="middle" font-size="18" fill="var(--ink)">0</text>
+<rect x="352.00" y="218.00" width="46.00" height="40.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="375.00" y="245.00" text-anchor="middle" font-size="18" fill="var(--ink)">0</text>
+<rect x="398.00" y="218.00" width="46.00" height="40.00" fill="var(--fig-fill-2)" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="421.00" y="245.00" text-anchor="middle" font-size="18" fill="var(--ink)">k</text>
+<line x1="306.00" y1="218.00" x2="334.00" y2="218.00" stroke="var(--ink-3)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M 323.78 222.08 L 334.00 218.00 L 323.78 213.92" fill="var(--ink-3)" stroke="var(--ink-3)" stroke-width="1" stroke-linejoin="round"/>
+<text x="470.00" y="226.00" text-anchor="start" font-size="13" fill="var(--ink-2)">A 的第二行每个数乘 k</text>
+<text x="20.00" y="342.00" text-anchor="start" font-size="13.5" fill="var(--ink)">一行加另一行的 k 倍</text>
+<text x="242.00" y="284.00" text-anchor="middle" font-size="13" fill="var(--ink-3)">I</text>
+<text x="398.00" y="284.00" text-anchor="middle" font-size="13" fill="var(--ink-3)">E</text>
+<rect x="196.00" y="294.00" width="46.00" height="40.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="219.00" y="321.00" text-anchor="middle" font-size="18" fill="var(--ink)">1</text>
+<rect x="242.00" y="294.00" width="46.00" height="40.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="265.00" y="321.00" text-anchor="middle" font-size="18" fill="var(--ink)">0</text>
+<rect x="196.00" y="334.00" width="46.00" height="40.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="219.00" y="361.00" text-anchor="middle" font-size="18" fill="var(--ink)">0</text>
+<rect x="242.00" y="334.00" width="46.00" height="40.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="265.00" y="361.00" text-anchor="middle" font-size="18" fill="var(--ink)">1</text>
+<rect x="352.00" y="294.00" width="46.00" height="40.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="375.00" y="321.00" text-anchor="middle" font-size="18" fill="var(--ink)">1</text>
+<rect x="398.00" y="294.00" width="46.00" height="40.00" fill="var(--fig-fill-2)" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="421.00" y="321.00" text-anchor="middle" font-size="18" fill="var(--ink)">k</text>
+<rect x="352.00" y="334.00" width="46.00" height="40.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="375.00" y="361.00" text-anchor="middle" font-size="18" fill="var(--ink)">0</text>
+<rect x="398.00" y="334.00" width="46.00" height="40.00" fill="none" stroke="var(--ink-3)" stroke-width="1.1"/>
+<text x="421.00" y="361.00" text-anchor="middle" font-size="18" fill="var(--ink)">1</text>
+<line x1="306.00" y1="334.00" x2="334.00" y2="334.00" stroke="var(--ink-3)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M 323.78 338.08 L 334.00 334.00 L 323.78 329.92" fill="var(--ink-3)" stroke="var(--ink-3)" stroke-width="1" stroke-linejoin="round"/>
+<text x="470.00" y="342.00" text-anchor="start" font-size="13" fill="var(--ink-2)">A 的第一行加第二行的 k 倍</text>
+<line x1="432.00" y1="366.00" x2="432.00" y2="302.00" stroke="var(--accent-line)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M 436.08 312.22 L 432.00 302.00 L 427.92 312.22" fill="var(--accent-line)" stroke="var(--accent-line)" stroke-width="1" stroke-linejoin="round"/>
+<text x="360.00" y="400.00" text-anchor="middle" font-size="13" fill="var(--ink-2)">左乘 E 等于做一次行变换，右乘 E 等于做一次列变换。</text>
+</svg>
+<!--/FIG ch03_elem-->
+        <figcaption class="figcaption"><b>三种初等矩阵由单位矩阵做一次变换得来。</b>左乘它们，动的永远是行，右乘动的是列，图里只画到 2 阶，\(n\) 阶照样只动一行或一列。</figcaption>
+      </div>
+
+      <p>求逆的方法从这里长出来：\(A\) 可逆当且仅当它能写成若干个初等矩阵的乘积，因为初等变换不改变可逆性，可逆矩阵一路消下去最后一定化成 \(I\)。设这些初等矩阵是 \(E_1\) 到 \(E_k\)，则 \(E_k\cdots E_1A=I\)，于是 \(A^{-1}=E_k\cdots E_1\)，而同一串变换作用在 \(I\) 上得到的正是 \(A^{-1}\)，写成算式就是把 \((A\mid I)\) 化成 \((I\mid A^{-1})\)。</p>
+
+      <p>这个方法的好处是不用回头：左边每消一步，右边跟着记一步，等左边成了 \(I\)，右边已经站着答案，最后乘一遍验算就行。伴随公式在二阶三阶上还快，四阶以上一律用这个方法，软件里的求逆也是它。</p>
+
+      <div class="keyidea reveal">
+        <p>左乘初等矩阵等于做一次行变换，所以 \((A\mid I)\) 化成 \((I\mid A^{-1})\) 时，两边做的是同一件事。</p>
+      </div>
+
+      <details class="fold">
+        <summary>\(AB=AC\) 能不能把 \(A\) 约掉</summary>
+        <p>只有当 \(A\) 可逆时才能。两边左乘 \(A^{-1}\) 立刻得 \(B=C\)；\(A\) 不可逆时结论不成立，因为 \(A\) 可能把 \(B-C\) 的每一列都压成零。第一章说系数行列式非零，这里说 \(A\) 可逆，是同一句话。</p>
+      </details>
+
+      <h2 id="s-manual" class="reveal">怎么算</h2>
+
+      <ul>
+        <li><strong>先看形状。</strong>\(m\times s\) 乘 \(s\times n\) 才乘得起来，结果的形状是 \(m\times n\)，动手之前先标出来。</li>
+        <li><strong>一次只取一行一列。</strong>左边第 \(i\) 行、右边第 \(j\) 列，配对相乘再相加，不要整块混着算。</li>
+        <li><strong>求逆先算行列式。</strong>\(|A|=0\) 就写「不可逆」收工，别往下做。</li>
+        <li><strong>二、三阶用伴随公式。</strong>二阶换位变号除行列式，三阶算 9 个代数余子式，慢但稳。</li>
+        <li><strong>三阶以上用 \((A\mid I)\)。</strong>只做行变换，左边化成 \(I\)，右边就是 \(A^{-1}\)，最后乘一遍验算。</li>
+      </ul>
+
+      <h2 id="s-examples" class="reveal">例题</h2>
+
+      <div class="example">
+        <p class="example-head">例 <span>1</span>　设 \(A=\left(\begin{smallmatrix}1&amp;2\\3&amp;4\end{smallmatrix}\right)\)，\(B=\left(\begin{smallmatrix}0&amp;1\\1&amp;0\end{smallmatrix}\right)\)，求 \(AB\) 与 \(BA\)。</p>
+        <p class="solution">\(AB\) 的第 \((1,1)\) 元素是 \(1\cdot0+2\cdot1=2\)，逐格算完得 \(AB=\left(\begin{smallmatrix}2&amp;1\\4&amp;3\end{smallmatrix}\right)\)，同法得 \(BA=\left(\begin{smallmatrix}3&amp;4\\1&amp;2\end{smallmatrix}\right)\)。两个结果不同，乘法不能换次序，\(B\) 单独看是把两列换了位置。</p>
+      </div>
+
+      <div class="example">
+        <p class="example-head">例 <span>2</span>　求 \(A=\left(\begin{smallmatrix}1&amp;2&amp;3\\2&amp;2&amp;1\\3&amp;4&amp;3\end{smallmatrix}\right)\) 的逆矩阵。</p>
+        <p class="solution">按第一行展开得 \(|A|=2\)，九个代数余子式排好再转置，得 \(A^{*}=\left(\begin{smallmatrix}2&amp;6&amp;-4\\-3&amp;-6&amp;5\\2&amp;2&amp;-2\end{smallmatrix}\right)\)，除以 2 得 \(A^{-1}=\left(\begin{smallmatrix}1&amp;3&amp;-2\\-3/2&amp;-3&amp;5/2\\1&amp;1&amp;-1\end{smallmatrix}\right)\)。</p>
+      </div>
+
+      <div class="example">
+        <p class="example-head">例 <span>3</span>　用初等变换求例 2 中同一个 \(A\) 的逆。</p>
+        <p class="solution">写出 \((A\mid I)\)，第二行减两倍第一行、第三行减三倍第一行，再把第三行减去第二行，得第三行 \((0,0,-1\mid-1,-1,1)\)；第三行乘 \(-1\) 后向上消元，左边化成 \(I\)，右边与例 2 逐格相同。</p>
+      </div>
+
+      <h2 id="s-exercises" class="reveal">习题</h2>
+
+      <div class="exercises">
+
+        <div class="ex-group">
+          <p class="ex-group-head">A 档 <span>巩固定义与基本计算，每题五分钟内</span></p>
+
+          <p class="ex"><span class="ex-num">1.</span> 写出 \(3\times2\) 矩阵 \(A\)，其中 \(a_{ij}=i-j\)。</p>
+          <div class="answer"><details><summary>看答案</summary><p>\(a_{11}=0\)、\(a_{12}=-1\)；\(a_{21}=1\)、\(a_{22}=0\)；\(a_{31}=2\)、\(a_{32}=1\)。三行两列，别把行号列号弄反。</p></details></div>
+
+          <p class="ex"><span class="ex-num">2.</span> 设 \(A=\left(\begin{smallmatrix}2&amp;-1\\3&amp;0\end{smallmatrix}\right)\)，\(B=\left(\begin{smallmatrix}1&amp;4\\-2&amp;5\end{smallmatrix}\right)\)，求 \(A+B\) 与 \(2A-3B\)。</p>
+          <div class="answer"><details><summary>看答案</summary><p>\(A+B=\left(\begin{smallmatrix}3&amp;3\\1&amp;5\end{smallmatrix}\right)\)。\(2A=\left(\begin{smallmatrix}4&amp;-2\\6&amp;0\end{smallmatrix}\right)\)，\(3B=\left(\begin{smallmatrix}3&amp;12\\-6&amp;15\end{smallmatrix}\right)\)，相减得 \(2A-3B=\left(\begin{smallmatrix}1&amp;-14\\12&amp;-15\end{smallmatrix}\right)\)。</p></details></div>
+
+          <p class="ex"><span class="ex-num">3.</span> 计算 \(\left(\begin{smallmatrix}1&amp;2\\3&amp;4\end{smallmatrix}\right)\left(\begin{smallmatrix}1&amp;0\\0&amp;0\end{smallmatrix}\right)\) 与反过来的乘积。</p>
+          <div class="answer"><details><summary>看答案</summary><p>前者是 \(\left(\begin{smallmatrix}1&amp;0\\3&amp;0\end{smallmatrix}\right)\)，后者是 \(\left(\begin{smallmatrix}1&amp;2\\0&amp;0\end{smallmatrix}\right)\)。右边那个矩阵只留下第一列，乘在左边留下的是列，乘在右边留下的是行。</p></details></div>
+
+          <p class="ex"><span class="ex-num">4.</span> 求 \(\left(\begin{smallmatrix}1&amp;2\\2&amp;4\end{smallmatrix}\right)\) 的行列式，判断它是否可逆。</p>
+          <div class="answer"><details><summary>看答案</summary><p>\(|A|=1\cdot4-2\cdot2=0\)，不可逆，叫奇异矩阵。第二行是第一行的两倍，两行成比例，行列式必然是零。</p></details></div>
+
+          <p class="ex"><span class="ex-num">5.</span> 求 \(\left(\begin{smallmatrix}2&amp;5\\1&amp;3\end{smallmatrix}\right)\) 的逆矩阵。</p>
+          <div class="answer"><details><summary>看答案</summary><p>\(|A|=6-5=1\)，\(A^{-1}=\left(\begin{smallmatrix}3&amp;-5\\-1&amp;2\end{smallmatrix}\right)\)。主对角线换位，副对角线变号，再除行列式。</p></details></div>
+
+          <p class="ex"><span class="ex-num">6.</span> 设 \(A=\mathrm{diag}(1,2,3)\)，求 \(|A|\) 与 \(A^{-1}\)。</p>
+          <div class="answer"><details><summary>看答案</summary><p>\(|A|=1\cdot2\cdot3=6\)。对角矩阵的逆还是对角矩阵，对角线上取倒数：\(A^{-1}=\mathrm{diag}(1,\tfrac12,\tfrac13)\)。对角线上没有零，所以可逆。</p></details></div>
+        </div>
+
+        <div class="ex-group">
+          <p class="ex-group-head">B 档 <span>综合题，接近期末与考研难度</span></p>
+
+          <p class="ex"><span class="ex-num">1.</span> 设 \(A=\left(\begin{smallmatrix}1&amp;1\\0&amp;1\end{smallmatrix}\right)\)，求 \(A^{n}\)（\(n\) 为正整数）。</p>
+          <div class="answer"><details><summary>看答案</summary><p>算得 \(A^{2}=\left(\begin{smallmatrix}1&amp;2\\0&amp;1\end{smallmatrix}\right)\)、\(A^{3}=\left(\begin{smallmatrix}1&amp;3\\0&amp;1\end{smallmatrix}\right)\)，猜 \(A^{n}=\left(\begin{smallmatrix}1&amp;n\\0&amp;1\end{smallmatrix}\right)\)，再用归纳法：每乘一次 \(A\)，右上角加 1。这个矩阵是剪切变换，做 \(n\) 次等于剪切 \(n\) 倍。</p></details></div>
+
+          <p class="ex"><span class="ex-num">2.</span> 设 \(A,B\) 为 \(n\) 阶方阵，且 \(AB=A+B\)，证明 \(A-I\) 与 \(B-I\) 互为逆矩阵。</p>
+          <div class="answer"><details><summary>看答案</summary><p>由 \(AB-A-B=O\) 两边加 \(I\)，得 \(AB-A-B+I=I\)，左边正好分解成 \((A-I)(B-I)\)。同理 \((B-I)(A-I)=I\)，两个方向都成立，所以互为逆矩阵，\(A-I\) 可逆。</p></details></div>
+
+          <p class="ex"><span class="ex-num">3.</span> 设 \(A=\left(\begin{smallmatrix}1&amp;2\\0&amp;1\end{smallmatrix}\right)\)，\(B=\left(\begin{smallmatrix}2&amp;1\\1&amp;1\end{smallmatrix}\right)\)，求分块对角矩阵 \(\mathrm{diag}(A,B)\) 的逆。</p>
+          <div class="answer"><details><summary>看答案</summary><p>两块分别求逆：\(A^{-1}=\left(\begin{smallmatrix}1&amp;-2\\0&amp;1\end{smallmatrix}\right)\)，\(B^{-1}=\left(\begin{smallmatrix}1&amp;-1\\-1&amp;2\end{smallmatrix}\right)\)（\(|B|=1\)）。分块对角的逆就是 \(\mathrm{diag}(A^{-1},B^{-1})\)，拼成一个 4 阶矩阵。</p></details></div>
+
+          <p class="ex"><span class="ex-num">4.</span> 证明：\(A\) 可逆时 \(A^{T}\) 也可逆，且 \((A^{T})^{-1}=(A^{-1})^{T}\)。</p>
+          <div class="answer"><details><summary>看答案</summary><p>由 \(AA^{-1}=I\) 两边转置得 \((A^{-1})^{T}A^{T}=I\)，同理由 \(A^{-1}A=I\) 得 \(A^{T}(A^{-1})^{T}=I\)，所以 \(A^{T}\) 可逆，逆就是 \((A^{-1})^{T}\)。也可以先由 \(|A^{T}|=|A|\ne0\) 判它可逆。</p></details></div>
+        </div>
+
+        <div class="ex-group">
+          <p class="ex-group-head">C 档 <span>拓展与历史原题</span></p>
+
+          <p class="ex"><span class="ex-num">1.</span>（凯莱，1858）凯莱在《矩阵论》里用「行配列」的办法定义两个矩阵相乘，并在同一篇文章里验证了结合律。取 \(A=\left(\begin{smallmatrix}a&amp;b\\c&amp;d\end{smallmatrix}\right)\)、\(B=\left(\begin{smallmatrix}e&amp;f\\g&amp;h\end{smallmatrix}\right)\)、\(C=\left(\begin{smallmatrix}p&amp;q\\r&amp;s\end{smallmatrix}\right)\)，写出 \((AB)C\) 与 \(A(BC)\) 的第 \((1,1)\) 元素。</p>
+          <div class="answer"><details><summary>看答案</summary><p>前者是 \((ae+bg)p+(af+bh)r\)，后者是 \(a(ep+fr)+b(gp+hr)\)。展开都是 \(aep+bgr+afr+bhr\) 四项，逐项对上。</p></details></div>
+
+          <p class="ex"><span class="ex-num">2.</span> 用分块矩阵证明 \(n\) 阶方阵的 \(|AB|=|A||B|\)。</p>
+          <div class="answer"><details><summary>看答案</summary><p>取 \(2n\) 阶分块矩阵 \(M=\left(\begin{smallmatrix}A&amp;0\\-I&amp;B\end{smallmatrix}\right)\)，它是分块下三角，\(|M|=|A||B|\)。把第一块行加上 \(A\) 乘第二块行，\(|M|\) 不变，\(M\) 变成 \(\left(\begin{smallmatrix}0&amp;AB\\-I&amp;B\end{smallmatrix}\right)\)。交换两块行乘两次 \((-1)^{n}\)，得 \(|M|=|AB|\)，所以 \(|AB|=|A||B|\)。</p></details></div>
+
+          <p class="ex"><span class="ex-num">3.</span> 设 \(A\) 是 \(n\) 阶方阵，且 \(A^{m}=O\)（\(m\) 为正整数），证明 \(I-A\) 可逆，并求 \((I-A)^{-1}\)。</p>
+          <div class="answer"><details><summary>看答案</summary><p>直接乘开：\((I-A)(I+A+\cdots+A^{m-1})=I-A^{m}=I\)，中间项两两抵消。所以 \(I-A\) 可逆，逆就是那个有限和，幂级数在 \(A^{m}=O\) 时自动截断。</p></details></div>
+        </div>
+
+        <div class="ex-group">
+          <p class="ex-group-head">思考题 <span>不设标准答案，只给提示</span></p>
+
+          <p class="ex"><span class="ex-num">1.</span> 矩阵乘法为什么不定义成对应位置相乘？</p>
+          <div class="answer"><details><summary>看提示</summary><p>那样定义的话，\(Ax=b\) 凑不出方程组的左端，「先做 \(A\) 再做 \(B\)」也写不成一个矩阵。乘法是被变换的复合逼出来的，配对的样子别扭是代价。</p></details></div>
+
+          <p class="ex"><span class="ex-num">2.</span> 由 \(AB=O\) 能不能推出 \(A=O\) 或 \(B=O\)？</p>
+          <div class="answer"><details><summary>看提示</summary><p>不能。取 \(A=B=\left(\begin{smallmatrix}0&amp;1\\0&amp;0\end{smallmatrix}\right)\)，\(A^{2}=O\) 而 \(A\) 不是零矩阵。矩阵会把某些方向直接压成零，所以两个非零矩阵乘起来可以是零。什么时候能把因子约掉，看第七节末尾那个折叠块。</p></details></div>
+
+          <p class="ex"><span class="ex-num">3.</span> 为什么左乘初等矩阵是行变换，右乘是列变换？</p>
+          <div class="answer"><details><summary>看提示</summary><p>按配对规则，\(EA\) 的第 \(i\) 行由 \(E\) 的第 \(i\) 行与 \(A\) 的各列配成，动的是行；\(AE\) 的第 \(j\) 列由 \(A\) 的各行与 \(E\) 的第 \(j\) 列配成，动的是列。同一个 \(E\) 站在左边和站在右边，碰上的是不同的东西。</p></details></div>
+        </div>
+
+      </div>
+
+      <h2 class="reveal">延伸阅读</h2>
+      <ul class="refs">
+        <li>同济大学数学系《线性代数》第六版，第二章「矩阵及其运算」与第三章「矩阵的初等变换与线性方程组」。本章记号与例题口径以这本为准。</li>
+        <li>《九章算术》卷八「方程」。算筹摆出来的那张表就是增广矩阵，只是当时没有这个名目，也没有矩阵运算。</li>
+        <li>Arthur Cayley, <em>A Memoir on the Theory of Matrices</em>, Philosophical Transactions of the Royal Society of London, 1858。乘法、结合律与逆矩阵都在这一篇里。</li>
+        <li>Gilbert Strang, <em>Introduction to Linear Algebra</em>, 第 2 章。把矩阵乘法讲成列的组合，与本章第六节的说法一致。</li>
+      </ul>
+
+    </article>
+  </div>
+
+  <div class="wrap">
+    <nav class="pager" aria-label="翻页">
+      <a class="pager-link prev" href="ch02.html"><span class="pager-dir">上一章</span><span class="pager-title">行列式：一个数决定解的存在</span></a>
+      <a class="pager-link next" href="ch04.html"><span class="pager-dir">下一章</span><span class="pager-title">秩与解的结构</span></a>
+    </nav>
+  </div>
+
+</main>
+
+<footer class="footer field-dark">
+  <div class="wrap">
+    <p class="footer-mark">数学基础课</p>
+    <div class="footer-cols">
+      <div><p>三门课按同一套读法写：先看问题，再给定义与判别，最后落到计算与习题。</p></div>
+      <div><p><a href="index.html">线性代数目录</a></p><p><a href="../index.html">返回主页</a></p></div>
+      <div><p>图示用脚本按真实数值画，公式由 KaTeX 排版。</p></div>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/katex/katex.min.js"></script>
+<script src="../assets/katex/auto-render.min.js"></script>
+<script src="../assets/site.js"></script>
+</body>
+</html>

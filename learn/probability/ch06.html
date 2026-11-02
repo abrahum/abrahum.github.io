@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>第六章 随机变量与分布 · 概率论与数理统计</title>
+<meta name="description" content="随机变量、分布律、分布函数、概率密度，五个常见离散分布与三个连续分布，以及随机变量函数的分布。">
+<link rel="stylesheet" href="../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="nav-brand" href="../index.html">数学基础课<span> 三门课，一套读法</span></a>
+    <nav class="nav-links" aria-label="主导航">
+      <a href="index.html#map">本课目录</a>
+      <a class="xl" href="../calculus/index.html">微积分</a>
+      <a class="xl" href="../linear-algebra/index.html">线性代数</a>
+      <a class="xl" href="../complex/index.html">复变函数</a>
+      <a class="opt" href="ch07.html">下一章</a>
+    </nav>
+  </div>
+  <div class="nav-progress" aria-hidden="true"></div>
+</header>
+
+<main>
+
+  <section class="chapter">
+    <div class="wrap">
+      <div class="ch-hero-band">
+        <div>
+          <p class="ch-label reveal"><span>第六章</span><span class="ch-era">1714 年至 20 世纪</span></p>
+          <h1 class="ch-title reveal reveal-2">随机变量与分布</h1>
+          <p class="ch-deck reveal reveal-3">抛硬币十次，你关心正面出现几次；站在站台等车，你关心还要等多久。这两件事都要先把结果换成一个数，再问这个数落在某一段的可能有多大。伯努利 1714 年的遗作、泊松 1837 年对罕见事件的研究、高斯 1809 年的误差曲线，都在这条路上。</p>
+          <div class="ch-meta reveal reveal-3">
+            <div><strong>本章知识点</strong>随机变量、分布律、分布函数、概率密度、常见分布、随机变量函数的分布</div>
+            <div><strong>历史坐标</strong>伯努利 1714 年，高斯 1809 年，泊松 1837 年</div>
+            <div><strong>对应教材</strong>浙大《概率论与数理统计》第四版 第二章 §1 至 §4</div>
+            <div><strong>前置</strong>排列组合、定积分与变上限积分</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap ch-body">
+    <aside class="rail">
+      <p class="rail-title">本章提纲</p>
+      <ol>
+        <li><a href="#s-1">把结果翻译成数字</a></li>
+        <li><a href="#s-2">分布律与常见离散分布</a></li>
+        <li><a href="#s-3">分布函数</a></li>
+        <li><a href="#s-4">概率密度与常见连续分布</a></li>
+        <li><a href="#s-5">随机变量函数的分布</a></li>
+        <li><a href="#s-manual">怎么算</a></li>
+        <li><a href="#s-examples">例题</a></li>
+        <li><a href="#s-exercises">习题</a></li>
+      </ol>
+      <p class="rail-title">历史坐标</p>
+      <p class="rail-who">伯努利 1714 年遗作<br>高斯 1809 年误差曲线<br>泊松 1837 年罕见事件<br>指数分布 20 世纪</p>
+    </aside>
+
+    <article class="prose">
+
+      <p class="lead reveal">抛一枚硬币十次，你可能只关心正面出现几次；站在站台等车，你关心的是还要等多久。这两件事都可以先换成一个数，再问这个数落在某一段的可能有多大。把「怎样把结果换成数」讲清楚，后面的分布律、密度、分布函数才有落脚的地方。伯努利 1714 年的遗作《推测术》、泊松 1837 年对罕见事件的研究、高斯 1809 年写下的误差曲线，以及 20 世纪由寿命与排队问题推出来的指数分布，都在这一章里变成具体的式子。</p>
+
+      <h2 id="s-1" class="reveal">一、随机变量：把结果翻译成数字</h2>
+
+      <p>掷三枚硬币，样本空间里放着 8 个等可能的结果。你关心的通常是「一共出了几个正面」，把 8 个结果按这个标准一个个折算成数，就只剩 0、1、2、3 四个取值，往后算概率只需要动这四个数。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定义（随机变量）</p>
+        <p>设随机试验的样本空间为 \(\Omega=\{\omega\}\)。如果对每一个结果 \(\omega\) 都有一个实数 \(X(\omega)\) 与之对应，就称 \(X=X(\omega)\) 为<strong>随机变量</strong>，常用 \(X,Y,Z\) 表示。</p>
+      </div>
+
+      <p>这个折算规则就是随机变量，写法 \(X=X(\omega)\) 里，\(\omega\) 是样本空间中的一个结果，\(X\) 把它送到一个实数上。课本叫它「变量」，它的身份其实是一个函数：给定一次具体的试验结果，它才吐出一个数，同一个 \(X\) 在两次试验里完全可以取到不同的值。</p>
+
+      <p>有了它，事件可以改写成关于 \(X\) 的条件。集合 \(\{\omega:X(\omega)\le x\}\) 通常简写成 \(\{X\le x\}\)，它仍然是一个事件，概率 \(P\{X\le x\}\) 才有意义。习题里「求 \(P\{X=2\}\)」「求 \(P\{1&lt;X\le3\}\)」这类问题，问的都是这种事件的概率，所以第一步总是先把这个事件翻译成 \(X\) 的取值范围。</p>
+
+      <p>按取值的形状分两类。取值能一个个排出来的叫<strong>离散型随机变量</strong>，比如正面次数、次品个数；取值能填满一段区间的叫<strong>连续型随机变量</strong>，比如等车时间、零件直径。分类只看你记下来的那个数：同一台仪器量同一根轴，记「合格 / 不合格」得到离散型，记「直径多少毫米」就得到连续型。</p>
+
+      <details class="fold">
+        <summary>有没有既不离散也不连续的随机变量</summary>
+        <p>有。设 \(X\) 有一半概率取 0，另一半概率均匀落在 \([1,2]\) 上，它的分布函数在 0 处跳一下，之后是一段斜线，两类都不是。课本主线只处理离散与连续，这种混合型的题在考研里偶尔出现，判别办法还是那四条性质。</p>
+      </details>
+
+      <h2 id="s-2" class="reveal">二、离散型随机变量与分布律</h2>
+
+      <p>离散型要交代的只有两件事：可能取哪些值，取每个值的概率是多少。把这两件事排成一张表，就叫分布律，有的教材写成分布列。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定义（分布律）</p>
+        <p>设离散型随机变量 \(X\) 的全部可能取值为 \(x_k\)（\(k=1,2,\dots\)），\(X\) 取各个值的概率为
+        \[ P\{X=x_k\}=p_k,\quad k=1,2,\dots, \]
+        则称这一列为 \(X\) 的<strong>分布律</strong>。它满足两条：\(p_k\ge0\)（\(k=1,2,\dots\)）；\(\sum_{k=1}^{\infty}p_k=1\)。</p>
+      </div>
+
+      <p>这两条要一起用。每个 \(p_k\) 不小于零是显然的，加起来等于 1 则是个现成的检查口：一列概率加出来是 0.9 或者 1.2，中间必然有项漏了、重了或者算错了，回头找比硬着头皮往下算省事得多。</p>
+
+      <p>最简单的一种只取 0 与 1，叫 <strong>0-1 分布</strong>：一件事成不成，成了记 1，不成记 0，成的概率记为 \(p\)。把它独立重复做 \(n\) 次，成功的次数 \(X\) 服从<strong>二项分布</strong> \(X\sim B(n,p)\)，分布律是 \(P\{X=k\}=\binom{n}{k}p^kq^{n-k}\)，其中 \(q=1-p\)。这个式子可以拆成两半看：指定的 \(k\) 次成功配上 \(n-k\) 次失败，概率是 \(p^kq^{n-k}\)；\(n\) 次里挑哪 \(k\) 次成功有 \(\binom{n}{k}\) 种挑法，两半一乘就是它。</p>
+
+      <p>二项分布在 \(n\) 很大、\(p\) 很小时会贴到另一个式子上：\(P\{X=k\}=\dfrac{\lambda^k}{k!}e^{-\lambda}\)，其中 \(\lambda=np\)，这个分布叫<strong>泊松分布</strong>，记作 \(X\sim P(\lambda)\)。它专门用来数「一段时间里来了几次」，一小时内的电话呼入、一页稿子上的错字、一克镭在 1 秒里的衰变次数都属于这种。</p>
+
+      <p><strong>几何分布</strong>数的是「第几次才成」：前 \(k-1\) 次全失败，第 \(k\) 次成功，概率是 \(P\{X=k\}=q^{k-1}p\)，\(k=1,2,\dots\)。<strong>超几何分布</strong>出在不放回抽样里：\(N\) 件产品中有 \(M\) 件次品，任取 \(n\) 件，其中的次品数满足 \(P\{X=k\}=\dfrac{\binom{M}{k}\binom{N-M}{n-k}}{\binom{N}{n}}\)。二项分布对应有放回，超几何对应不放回；\(N\) 比 \(n\) 大得多时，两者差得可以忽略。</p>
+
+      <details class="fold">
+        <summary>二项什么时候可以换成泊松</summary>
+        <p>经验口径是 \(n\) 不小于 20、\(p\) 不超过 0.05、\(np\) 大小适中。\(n=100\)、\(p=0.05\) 时，逐项比较的最大误差不到 0.003；\(n=10\)、\(p=0.3\) 时误差就明显了。题目里写着「用泊松定理近似」，照做即可，别自作主张换公式。</p>
+      </details>
+
+      <div class="archive reveal">
+        <p class="archive-when">1714 年，巴塞尔</p>
+        <h3>《推测术》里关于二项试验的那一章</h3>
+        <p class="archive-quote">「试验重复 \(n\) 次，全部情形按成功次数分成 \(n+1\) 类，每一类里的排法由展开式的系数给出。」</p>
+        <p class="archive-source">伯努利《推测术》第二部分，1714 年（拉丁文，此处为译述）</p>
+        <p>这一部分把二项试验算是讲完了：按成功次数分类、用二项式系数数排法、逐项算出概率。他 1705 年去世，书由侄子尼古拉整理，1713 年在巴塞尔印出，1714 年正式发行。今天写的 \(B(n,p)\) 和二项分布表，源头就是这一章。</p>
+      </div>
+
+      <h2 id="s-3" class="reveal">三、分布函数</h2>
+
+      <p>离散型有表格，连续型没有：等车时间可以取一段区间里的任何一个数，每个点上的概率都是 0，表列不完。要找一个两类都能用的说法，办法是把「取某个值」换成「不超过某个数」，让 \(x\) 从左往右滑，看概率怎么跟着变。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定义（分布函数）</p>
+        <p>设 \(X\) 是一个随机变量，\(x\) 是任意实数，函数
+        \[ F(x)=P\{X\le x\},\quad -\infty&lt;x&lt;+\infty \]
+        称为 \(X\) 的<strong>分布函数</strong>。</p>
+      </div>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定理（分布函数的四条性质）</p>
+        <p>分布函数 \(F(x)\) 具有以下性质：1° 单调不减，即当 \(x_1&lt;x_2\) 时有 \(F(x_1)\le F(x_2)\)；2° \(0\le F(x)\le1\)，且 \(F(-\infty)=0\)，\(F(+\infty)=1\)；3° 右连续，即 \(F(x+0)=F(x)\)；4° 对任意 \(x_1&lt;x_2\)，
+        \[ P\{x_1&lt;X\le x_2\}=F(x_2)-F(x_1). \]</p>
+      </div>
+
+      <p>前两条看图就懂：事件 \(\{X\le x_1\}\) 装在 \(\{X\le x_2\}\) 里面，概率不会倒退；\(x\) 往左跑到负无穷，事件越来越接近不可能，\(F\) 趋于 0，往右跑到正无穷就趋于 1。第 4 条在算题时用得最多，一段区间上的概率不必积分，两端相减就得到，代价是左端不能带等号。</p>
+
+      <p>第 3 条要在图上辨认。定义里写的是 \(X\le x\)，等号在右边，所以 \(F\) 在跳点处取上面那一级的值，图上画成实心圆；下面那一级在跳点处取不到，画成空心圆。这条规矩叫右连续，它保证 \(F\) 在跳点处的跳跃高度正好等于 \(P\{X=x\}\)。</p>
+
+      <div class="figure">
+        <!--FIG pb06_cdf--><svg viewBox="0 0 720 430" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<text x="26.00" y="30.00" text-anchor="start" font-size="15" fill="var(--ink)">同一个问题问两遍：X 不超过 x 的概率有多少</text>
+<text x="26.00" y="52.00" text-anchor="start" font-size="13" fill="var(--ink-3)">左边取值只有 4 个，概率只能一级一级往上跳；右边取值填满一段，概率一路滑上去</text>
+<text x="215.00" y="84.00" text-anchor="middle" font-size="14" fill="var(--ink)">离散型 B(3, 0.5)：阶梯</text>
+<line x1="62.00" y1="334.00" x2="356.00" y2="334.00" stroke="var(--ink-2)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<line x1="62.00" y1="334.00" x2="62.00" y2="94.00" stroke="var(--ink-2)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<text x="54.00" y="102.00" text-anchor="end" font-size="13" fill="var(--ink-3)" font-style="italic">F(x)</text>
+<line x1="78.00" y1="334.00" x2="115.36" y2="334.00" stroke="var(--accent-line)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="115.36" y1="305.75" x2="177.64" y2="305.75" stroke="var(--accent-line)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="177.64" y1="221.00" x2="239.91" y2="221.00" stroke="var(--accent-line)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="239.91" y1="136.25" x2="302.18" y2="136.25" stroke="var(--accent-line)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="302.18" y1="108.00" x2="364.45" y2="108.00" stroke="var(--accent-line)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="302.18" y1="108.00" x2="352.00" y2="108.00" stroke="var(--accent-line)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="115.36" y1="334.00" x2="115.36" y2="305.75" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4 4"/>
+<line x1="177.64" y1="305.75" x2="177.64" y2="221.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4 4"/>
+<line x1="239.91" y1="221.00" x2="239.91" y2="136.25" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4 4"/>
+<line x1="302.18" y1="136.25" x2="302.18" y2="108.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4 4"/>
+<circle cx="115.36" cy="305.75" r="4.40" fill="var(--prussian)" stroke="var(--ink-2)" stroke-width="1.3"/>
+<circle cx="177.64" cy="221.00" r="4.40" fill="var(--prussian)" stroke="var(--ink-2)" stroke-width="1.3"/>
+<circle cx="239.91" cy="136.25" r="4.40" fill="var(--prussian)" stroke="var(--ink-2)" stroke-width="1.3"/>
+<circle cx="302.18" cy="108.00" r="4.40" fill="var(--prussian)" stroke="var(--ink-2)" stroke-width="1.3"/>
+<circle cx="302.18" cy="108.00" r="4.40" fill="var(--prussian)" stroke="var(--ink-2)" stroke-width="1.3"/>
+<circle cx="177.64" cy="305.75" r="4.40" fill="var(--paper)" stroke="var(--ink-2)" stroke-width="1.3"/>
+<circle cx="239.91" cy="221.00" r="4.40" fill="var(--paper)" stroke="var(--ink-2)" stroke-width="1.3"/>
+<circle cx="302.18" cy="136.25" r="4.40" fill="var(--paper)" stroke="var(--ink-2)" stroke-width="1.3"/>
+<circle cx="364.45" cy="108.00" r="4.40" fill="var(--paper)" stroke="var(--ink-2)" stroke-width="1.3"/>
+<text x="54.00" y="310.25" text-anchor="end" font-size="12.5" fill="var(--ink-3)">1/8</text>
+<text x="54.00" y="225.50" text-anchor="end" font-size="12.5" fill="var(--ink-3)">1/2</text>
+<text x="54.00" y="140.75" text-anchor="end" font-size="12.5" fill="var(--ink-3)">7/8</text>
+<text x="54.00" y="112.50" text-anchor="end" font-size="12.5" fill="var(--ink-3)">1</text>
+<text x="54.00" y="338.00" text-anchor="end" font-size="12.5" fill="var(--ink-3)">0</text>
+<line x1="115.36" y1="334.00" x2="115.36" y2="339.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<text x="115.36" y="355.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">0</text>
+<line x1="177.64" y1="334.00" x2="177.64" y2="339.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<text x="177.64" y="355.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">1</text>
+<line x1="239.91" y1="334.00" x2="239.91" y2="339.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<text x="239.91" y="355.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">2</text>
+<line x1="302.18" y1="334.00" x2="302.18" y2="339.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<text x="302.18" y="355.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">3</text>
+<text x="354.00" y="355.00" text-anchor="end" font-size="13" fill="var(--ink-3)" font-style="italic">x</text>
+<line x1="265.91" y1="221.00" x2="265.91" y2="136.25" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="261.91" y1="221.00" x2="269.91" y2="221.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="261.91" y1="136.25" x2="269.91" y2="136.25" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="273.91" y="182.51" text-anchor="start" font-size="12.5" fill="var(--ink-2)">跳 3/8</text>
+<text x="215.00" y="378.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">跳点处取上值、跳一下停一段</text>
+<text x="545.00" y="84.00" text-anchor="middle" font-size="14" fill="var(--ink)">连续型 E(0.7)：曲线</text>
+<line x1="392.00" y1="334.00" x2="686.00" y2="334.00" stroke="var(--ink-2)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<line x1="392.00" y1="334.00" x2="392.00" y2="94.00" stroke="var(--ink-2)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<text x="384.00" y="102.00" text-anchor="end" font-size="13" fill="var(--ink-3)" font-style="italic">F(x)</text>
+<path d="M 408.00 334.00 L 409.05 330.98 L 410.11 328.00 L 411.16 325.05 L 412.22 322.15 L 413.27 319.29 L 414.32 316.46 L 415.38 313.68 L 416.43 310.93 L 417.48 308.21 L 418.54 305.54 L 419.59 302.89 L 420.65 300.29 L 421.70 297.72 L 422.75 295.18 L 423.81 292.68 L 424.86 290.21 L 425.92 287.77 L 426.97 285.37 L 428.02 283.00 L 429.08 280.66 L 430.13 278.35 L 431.18 276.07 L 432.24 273.82 L 433.29 271.61 L 434.35 269.42 L 435.40 267.26 L 436.45 265.13 L 437.51 263.03 L 438.56 260.96 L 439.62 258.91 L 440.67 256.89 L 441.72 254.90 L 442.78 252.94 L 443.83 251.00 L 444.88 249.09 L 445.94 247.20 L 446.99 245.34 L 448.05 243.50 L 449.10 241.69 L 450.15 239.90 L 451.21 238.14 L 452.26 236.40 L 453.32 234.68 L 454.37 232.99 L 455.42 231.32 L 456.48 229.67 L 457.53 228.04 L 458.58 226.44 L 459.64 224.85 L 460.69 223.29 L 461.75 221.75 L 462.80 220.23 L 463.85 218.73 L 464.91 217.25 L 465.96 215.79 L 467.02 214.35 L 468.07 212.92 L 469.12 211.52 L 470.18 210.14 L 471.23 208.77 L 472.28 207.42 L 473.34 206.09 L 474.39 204.78 L 475.45 203.49 L 476.50 202.21 L 477.55 200.95 L 478.61 199.71 L 479.66 198.48 L 480.72 197.27 L 481.77 196.08 L 482.82 194.90 L 483.88 193.74 L 484.93 192.59 L 485.98 191.46 L 487.04 190.35 L 488.09 189.24 L 489.15 188.16 L 490.20 187.09 L 491.25 186.03 L 492.31 184.99 L 493.36 183.96 L 494.42 182.94 L 495.47 181.94 L 496.52 180.95 L 497.58 179.97 L 498.63 179.01 L 499.68 178.06 L 500.74 177.13 L 501.79 176.20 L 502.85 175.29 L 503.90 174.39 L 504.95 173.50 L 506.01 172.63 L 507.06 171.76 L 508.12 170.91 L 509.17 170.07 L 510.22 169.24 L 511.28 168.42 L 512.33 167.61 L 513.38 166.81 L 514.44 166.03 L 515.49 165.25 L 516.55 164.49 L 517.60 163.73 L 518.65 162.99 L 519.71 162.25 L 520.76 161.53 L 521.82 160.81 L 522.87 160.10 L 523.92 159.41 L 524.98 158.72 L 526.03 158.04 L 527.08 157.37 L 528.14 156.71 L 529.19 156.06 L 530.25 155.42 L 531.30 154.78 L 532.35 154.16 L 533.41 153.54 L 534.46 152.93 L 535.52 152.33 L 536.57 151.74 L 537.62 151.15 L 538.68 150.58 L 539.73 150.01 L 540.78 149.45 L 541.84 148.89 L 542.89 148.34 L 543.95 147.81 L 545.00 147.27 L 546.05 146.75 L 547.11 146.23 L 548.16 145.72 L 549.22 145.21 L 550.27 144.72 L 551.32 144.23 L 552.38 143.74 L 553.43 143.26 L 554.48 142.79 L 555.54 142.33 L 556.59 141.87 L 557.65 141.41 L 558.70 140.97 L 559.75 140.53 L 560.81 140.09 L 561.86 139.66 L 562.92 139.24 L 563.97 138.82 L 565.02 138.41 L 566.08 138.00 L 567.13 137.60 L 568.18 137.21 L 569.24 136.82 L 570.29 136.43 L 571.35 136.05 L 572.40 135.68 L 573.45 135.31 L 574.51 134.94 L 575.56 134.58 L 576.62 134.22 L 577.67 133.87 L 578.72 133.53 L 579.78 133.19 L 580.83 132.85 L 581.88 132.52 L 582.94 132.19 L 583.99 131.87 L 585.05 131.55 L 586.10 131.23 L 587.15 130.92 L 588.21 130.61 L 589.26 130.31 L 590.32 130.01 L 591.37 129.72 L 592.42 129.43 L 593.48 129.14 L 594.53 128.86 L 595.58 128.58 L 596.64 128.31 L 597.69 128.03 L 598.75 127.77 L 599.80 127.50 L 600.85 127.24 L 601.91 126.98 L 602.96 126.73 L 604.02 126.48 L 605.07 126.23 L 606.12 125.99 L 607.18 125.75 L 608.23 125.51 L 609.28 125.28 L 610.34 125.05 L 611.39 124.82 L 612.45 124.59 L 613.50 124.37 L 614.55 124.15 L 615.61 123.94 L 616.66 123.72 L 617.72 123.51 L 618.77 123.31 L 619.82 123.10 L 620.88 122.90 L 621.93 122.70 L 622.98 122.50 L 624.04 122.31 L 625.09 122.12 L 626.15 121.93 L 627.20 121.74 L 628.25 121.56 L 629.31 121.38 L 630.36 121.20 L 631.42 121.02 L 632.47 120.85 L 633.52 120.68 L 634.58 120.51 L 635.63 120.34 L 636.68 120.17 L 637.74 120.01 L 638.79 119.85 L 639.85 119.69 L 640.90 119.54 L 641.95 119.38 L 643.01 119.23 L 644.06 119.08 L 645.12 118.93 L 646.17 118.79 L 647.22 118.64 L 648.28 118.50 L 649.33 118.36 L 650.38 118.22 L 651.44 118.08 L 652.49 117.95 L 653.55 117.82 L 654.60 117.68 L 655.65 117.56 L 656.71 117.43 L 657.76 117.30 L 658.82 117.18 L 659.87 117.05 L 660.92 116.93 L 661.98 116.81 L 663.03 116.70 L 664.08 116.58 L 665.14 116.46 L 666.19 116.35 L 667.25 116.24 L 668.30 116.13 L 669.35 116.02 L 670.41 115.91 L 671.46 115.81 L 672.52 115.70 L 673.57 115.60 L 674.62 115.50 L 675.68 115.40 L 676.73 115.30 L 677.78 115.20 L 678.84 115.11 L 679.89 115.01 L 680.95 114.92 L 682.00 114.82" fill="none" stroke="var(--accent-line)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="384.00" y="338.00" text-anchor="end" font-size="12.5" fill="var(--ink-3)">0</text>
+<text x="384.00" y="112.00" text-anchor="end" font-size="12.5" fill="var(--ink-3)">1</text>
+<line x1="388.00" y1="108.00" x2="396.00" y2="108.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<line x1="462.80" y1="334.00" x2="462.80" y2="220.23" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="5 5"/>
+<circle cx="462.80" cy="220.23" r="4.2" fill="var(--prussian)"/>
+<line x1="462.80" y1="334.00" x2="462.80" y2="339.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<text x="462.80" y="355.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">1</text>
+<line x1="572.40" y1="334.00" x2="572.40" y2="135.68" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="5 5"/>
+<circle cx="572.40" cy="135.68" r="4.2" fill="var(--prussian)"/>
+<line x1="572.40" y1="334.00" x2="572.40" y2="339.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<text x="572.40" y="355.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">3</text>
+<text x="684.00" y="355.00" text-anchor="end" font-size="13" fill="var(--ink-3)" font-style="italic">x</text>
+<text x="404.00" y="122.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">P{1&lt;X≤3}</text>
+<text x="404.00" y="142.00" text-anchor="start" font-size="13" fill="var(--ink-3)">= F(3) − F(1) ≈ 0.38</text>
+<text x="682.00" y="166.76" text-anchor="end" font-size="12.5" fill="var(--ink-3)">曲线没有跳点</text>
+<text x="545.00" y="378.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">斜率处处为正，这条曲线的高度随 x 往上爬</text>
+<text x="26.00" y="396.00" text-anchor="start" font-size="13" fill="var(--ink-2)">台阶的右端画空心圆、跳点上画实心圆，实心圆取上面那一级的值，这就是右连续；右边的曲线一个跳点都没有。</text>
+</svg>
+<!--/FIG pb06_cdf-->
+        <figcaption class="figcaption"><b>左图是台阶，右图是曲线，问的是同一件事。</b>实心圆取上面那一级的值，这是右连续；右图没有跳点，任何一个点都不带正概率。</figcaption>
+      </div>
+
+      <p>一个 \(F\) 就把两类随机变量装下了。离散型的 \(F\) 是台阶，每一级跳跃的高度等于该点的概率，概率大的地方跳得高；连续型的 \(F\) 一路平滑，没有跳跃，也就没有哪个点带着正概率。反过来也能从 \(F\) 认出类型：跳点有几个，带正概率的点就有几个。</p>
+
+      <details class="fold">
+        <summary>为什么定义成 P{X≤x}，不定义成 P{X&lt;x}</summary>
+        <p>用严格小于的话，\(F\) 会变成左连续，区间公式要跟着改成 \(P\{a\le X&lt;b\}=F(b)-F(a)\)，跳点上的取值也要换到下面那一级。两种约定都自洽，课本选右连续，是因为这样 \(F(x)-F(x-0)=P\{X=x\}\)，写单点概率时少一次换算。</p>
+      </details>
+
+      <h2 id="s-4" class="reveal">四、连续型随机变量与概率密度</h2>
+
+      <p>连续型得换一个量来描述。单个点上分不到概率，就去看一段小长度：\(X\) 落在 \([x,x+\Delta x]\) 里的概率与 \(\Delta x\) 的比值，\(\Delta x\) 缩小时趋于一个数，这个数叫 \(x\) 处的概率密度。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定义（概率密度）</p>
+        <p>设 \(X\) 的分布函数为 \(F(x)\)。如果存在非负可积函数 \(f(x)\)，使对任意实数 \(x\) 有
+        \[ F(x)=\int_{-\infty}^{x}f(t)\,dt, \]
+        则称 \(X\) 为<strong>连续型随机变量</strong>，\(f(x)\) 称为 \(X\) 的<strong>概率密度函数</strong>，简称概率密度。等价的说法是，对任意 \(a&lt;b\) 有 \(P\{a&lt;X\le b\}=\int_{a}^{b}f(x)\,dx\)。</p>
+      </div>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定理（密度与分布函数的关系）</p>
+        <p>密度与分布函数互为「积分—求导」：在 \(f\) 的连续点处 \(F'(x)=f(x)\)；反过来 \(F\) 是 \(f\) 的一个原函数，所以区间概率用 \(f\) 积出来和用 \(F\) 相减算出来是同一个数。</p>
+      </div>
+
+      <p>三件事要记住。\(f(x)\) 本身不是概率，它可以大于 1：\(X\) 在 \([0,0.5]\) 上均匀分布时密度是 2，密度要乘上一小段长度才变成概率。连续型随机变量 \(P\{X=a\}=0\) 对每个点都成立，所以 \(a&lt;X\le b\)、\(a\le X&lt;b\)、\(a\le X\le b\) 的概率完全一样，端点归谁不影响答案。第三件事与画面有关：概率问的是曲线围出来的面积，纵轴高度只是密度。</p>
+
+      <div class="figure">
+        <!--FIG pb06_area--><svg viewBox="0 0 720 408" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<text x="26.00" y="32.00" text-anchor="start" font-size="15" fill="var(--ink)">密度曲线下的面积就是概率</text>
+<text x="26.00" y="54.00" text-anchor="start" font-size="13" fill="var(--ink-3)">f(x) 取 N(0, 1) 的密度；两条竖线之间那块阴影，面积正是 P{a&lt;X≤b}</text>
+<line x1="80.00" y1="330.00" x2="664.00" y2="330.00" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<line x1="80.00" y1="330.00" x2="80.00" y2="102.00" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<text x="68.00" y="110.00" text-anchor="end" font-size="13" fill="var(--ink-3)" font-style="italic">f(x)</text>
+<text x="662.00" y="352.00" text-anchor="end" font-size="13" fill="var(--ink-3)" font-style="italic">x</text>
+<polygon points="307.11,330.00 307.11,196.49 309.00,194.01 310.90,191.56 312.79,189.15 314.68,186.76 316.57,184.42 318.47,182.12 320.36,179.87 322.25,177.66 324.14,175.51 326.04,173.41 327.93,171.37 329.82,169.39 331.71,167.47 333.61,165.62 335.50,163.84 337.39,162.14 339.29,160.50 341.18,158.95 343.07,157.47 344.96,156.08 346.86,154.77 348.75,153.54 350.64,152.41 352.53,151.36 354.43,150.41 356.32,149.54 358.21,148.78 360.10,148.11 362.00,147.53 363.89,147.06 365.78,146.68 367.67,146.40 369.57,146.22 371.46,146.14 373.35,146.17 375.24,146.29 377.14,146.51 379.03,146.83 380.92,147.25 382.81,147.77 384.71,148.38 386.60,149.09 388.49,149.90 390.39,150.80 392.28,151.80 394.17,152.88 396.06,154.06 397.96,155.32 399.85,156.66 401.74,158.09 403.63,159.60 405.53,161.19 407.42,162.86 409.31,164.60 411.20,166.41 413.10,168.29 414.99,170.23 416.88,172.24 418.77,174.30 420.67,176.43 422.56,178.60 424.45,180.83 426.34,183.10 428.24,185.42 430.13,187.78 432.02,190.18 433.91,192.61 435.81,195.07 437.70,197.56 439.59,200.08 441.49,202.61 443.38,205.17 445.27,207.74 447.16,210.32 449.06,212.91 450.95,215.51 452.84,218.11 454.73,220.71 456.63,223.31 458.52,225.91 460.41,228.49 462.30,231.07 464.20,233.63 466.09,236.18 467.98,238.71 469.87,241.22 471.77,243.71 473.66,246.17 475.55,248.61 477.44,251.02 477.44,330.00" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 84.06 329.66 L 85.98 329.63 L 87.89 329.60 L 89.81 329.57 L 91.73 329.53 L 93.65 329.49 L 95.57 329.45 L 97.49 329.40 L 99.41 329.35 L 101.33 329.30 L 103.25 329.24 L 105.17 329.18 L 107.09 329.11 L 109.01 329.04 L 110.93 328.97 L 112.85 328.88 L 114.77 328.80 L 116.69 328.70 L 118.61 328.60 L 120.53 328.50 L 122.45 328.38 L 124.37 328.26 L 126.29 328.13 L 128.21 327.99 L 130.13 327.84 L 132.05 327.69 L 133.97 327.52 L 135.89 327.34 L 137.81 327.15 L 139.72 326.95 L 141.64 326.74 L 143.56 326.52 L 145.48 326.28 L 147.40 326.02 L 149.32 325.75 L 151.24 325.47 L 153.16 325.17 L 155.08 324.85 L 157.00 324.52 L 158.92 324.17 L 160.84 323.79 L 162.76 323.40 L 164.68 322.99 L 166.60 322.55 L 168.52 322.10 L 170.44 321.61 L 172.36 321.11 L 174.28 320.58 L 176.20 320.02 L 178.12 319.44 L 180.04 318.83 L 181.96 318.19 L 183.88 317.52 L 185.80 316.81 L 187.72 316.08 L 189.64 315.32 L 191.55 314.52 L 193.47 313.69 L 195.39 312.82 L 197.31 311.92 L 199.23 310.98 L 201.15 310.00 L 203.07 308.98 L 204.99 307.93 L 206.91 306.83 L 208.83 305.69 L 210.75 304.51 L 212.67 303.29 L 214.59 302.03 L 216.51 300.73 L 218.43 299.37 L 220.35 297.98 L 222.27 296.54 L 224.19 295.06 L 226.11 293.53 L 228.03 291.95 L 229.95 290.33 L 231.87 288.66 L 233.79 286.95 L 235.71 285.19 L 237.63 283.39 L 239.55 281.54 L 241.47 279.64 L 243.38 277.70 L 245.30 275.71 L 247.22 273.69 L 249.14 271.61 L 251.06 269.50 L 252.98 267.35 L 254.90 265.15 L 256.82 262.91 L 258.74 260.64 L 260.66 258.33 L 262.58 255.98 L 264.50 253.60 L 266.42 251.19 L 268.34 248.75 L 270.26 246.28 L 272.18 243.78 L 274.10 241.26 L 276.02 238.71 L 277.94 236.14 L 279.86 233.56 L 281.78 230.96 L 283.70 228.35 L 285.62 225.72 L 287.54 223.09 L 289.46 220.45 L 291.38 217.81 L 293.30 215.18 L 295.21 212.54 L 297.13 209.91 L 299.05 207.30 L 300.97 204.69 L 302.89 202.10 L 304.81 199.53 L 306.73 196.99 L 308.65 194.47 L 310.57 191.98 L 312.49 189.52 L 314.41 187.10 L 316.33 184.72 L 318.25 182.38 L 320.17 180.09 L 322.09 177.85 L 324.01 175.66 L 325.93 173.53 L 327.85 171.46 L 329.77 169.45 L 331.69 167.50 L 333.61 165.62 L 335.53 163.82 L 337.45 162.09 L 339.37 160.43 L 341.29 158.86 L 343.21 157.37 L 345.13 155.96 L 347.04 154.64 L 348.96 153.41 L 350.88 152.27 L 352.80 151.22 L 354.72 150.26 L 356.64 149.41 L 358.56 148.65 L 360.48 147.98 L 362.40 147.42 L 364.32 146.96 L 366.24 146.60 L 368.16 146.35 L 370.08 146.19 L 372.00 146.14 L 373.92 146.19 L 375.84 146.35 L 377.76 146.60 L 379.68 146.96 L 381.60 147.42 L 383.52 147.98 L 385.44 148.65 L 387.36 149.41 L 389.28 150.26 L 391.20 151.22 L 393.12 152.27 L 395.04 153.41 L 396.96 154.64 L 398.87 155.96 L 400.79 157.37 L 402.71 158.86 L 404.63 160.43 L 406.55 162.09 L 408.47 163.82 L 410.39 165.62 L 412.31 167.50 L 414.23 169.45 L 416.15 171.46 L 418.07 173.53 L 419.99 175.66 L 421.91 177.85 L 423.83 180.09 L 425.75 182.38 L 427.67 184.72 L 429.59 187.10 L 431.51 189.52 L 433.43 191.98 L 435.35 194.47 L 437.27 196.99 L 439.19 199.53 L 441.11 202.10 L 443.03 204.69 L 444.95 207.30 L 446.87 209.91 L 448.79 212.54 L 450.70 215.18 L 452.62 217.81 L 454.54 220.45 L 456.46 223.09 L 458.38 225.72 L 460.30 228.35 L 462.22 230.96 L 464.14 233.56 L 466.06 236.14 L 467.98 238.71 L 469.90 241.26 L 471.82 243.78 L 473.74 246.28 L 475.66 248.75 L 477.58 251.19 L 479.50 253.60 L 481.42 255.98 L 483.34 258.33 L 485.26 260.64 L 487.18 262.91 L 489.10 265.15 L 491.02 267.35 L 492.94 269.50 L 494.86 271.61 L 496.78 273.69 L 498.70 275.71 L 500.62 277.70 L 502.53 279.64 L 504.45 281.54 L 506.37 283.39 L 508.29 285.19 L 510.21 286.95 L 512.13 288.66 L 514.05 290.33 L 515.97 291.95 L 517.89 293.53 L 519.81 295.06 L 521.73 296.54 L 523.65 297.98 L 525.57 299.37 L 527.49 300.73 L 529.41 302.03 L 531.33 303.29 L 533.25 304.51 L 535.17 305.69 L 537.09 306.83 L 539.01 307.93 L 540.93 308.98 L 542.85 310.00 L 544.77 310.98 L 546.69 311.92 L 548.61 312.82 L 550.53 313.69 L 552.45 314.52 L 554.36 315.32 L 556.28 316.08 L 558.20 316.81 L 560.12 317.52 L 562.04 318.19 L 563.96 318.83 L 565.88 319.44 L 567.80 320.02 L 569.72 320.58 L 571.64 321.11 L 573.56 321.61 L 575.48 322.10 L 577.40 322.55 L 579.32 322.99 L 581.24 323.40 L 583.16 323.79 L 585.08 324.17 L 587.00 324.52 L 588.92 324.85 L 590.84 325.17 L 592.76 325.47 L 594.68 325.75 L 596.60 326.02 L 598.52 326.28 L 600.44 326.52 L 602.36 326.74 L 604.28 326.95 L 606.19 327.15 L 608.11 327.34 L 610.03 327.52 L 611.95 327.69 L 613.87 327.84 L 615.79 327.99 L 617.71 328.13 L 619.63 328.26 L 621.55 328.38 L 623.47 328.50 L 625.39 328.60 L 627.31 328.70 L 629.23 328.80 L 631.15 328.88 L 633.07 328.97 L 634.99 329.04 L 636.91 329.11 L 638.83 329.18 L 640.75 329.24 L 642.67 329.30 L 644.59 329.35 L 646.51 329.40 L 648.43 329.45 L 650.35 329.49 L 652.27 329.53 L 654.19 329.57 L 656.11 329.60 L 658.02 329.63 L 659.94 329.66" fill="none" stroke="var(--accent-line)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="307.11" y1="330.00" x2="307.11" y2="196.49" stroke="var(--ink-2)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="307.11" y1="330.00" x2="307.11" y2="335.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<text x="307.11" y="352.00" text-anchor="middle" font-size="13" fill="var(--ink-3)" font-style="italic">a</text>
+<line x1="477.44" y1="330.00" x2="477.44" y2="251.02" stroke="var(--ink-2)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="477.44" y1="330.00" x2="477.44" y2="335.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<text x="477.44" y="352.00" text-anchor="middle" font-size="13" fill="var(--ink-3)" font-style="italic">b</text>
+<text x="128.67" y="352.00" text-anchor="middle" font-size="12" fill="var(--ink-3)">-3</text>
+<line x1="128.67" y1="330.00" x2="128.67" y2="334.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+<text x="209.78" y="352.00" text-anchor="middle" font-size="12" fill="var(--ink-3)">-2</text>
+<line x1="209.78" y1="330.00" x2="209.78" y2="334.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+<text x="290.89" y="352.00" text-anchor="middle" font-size="12" fill="var(--ink-3)">-1</text>
+<line x1="290.89" y1="330.00" x2="290.89" y2="334.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+<text x="372.00" y="352.00" text-anchor="middle" font-size="12" fill="var(--ink-3)">0</text>
+<line x1="372.00" y1="330.00" x2="372.00" y2="334.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+<text x="453.11" y="352.00" text-anchor="middle" font-size="12" fill="var(--ink-3)">1</text>
+<line x1="453.11" y1="330.00" x2="453.11" y2="334.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+<text x="534.22" y="352.00" text-anchor="middle" font-size="12" fill="var(--ink-3)">2</text>
+<line x1="534.22" y1="330.00" x2="534.22" y2="334.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+<text x="615.33" y="352.00" text-anchor="middle" font-size="12" fill="var(--ink-3)">3</text>
+<line x1="615.33" y1="330.00" x2="615.33" y2="334.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+<text x="392.28" y="274.70" text-anchor="middle" font-size="14" fill="var(--ink)">面积 = P{a&lt;X≤b}</text>
+<text x="392.28" y="295.70" text-anchor="middle" font-size="13" fill="var(--ink-2)">= F(b) − F(a)</text>
+<line x1="88.11" y1="92.00" x2="655.89" y2="92.00" stroke="var(--ink-3)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="88.11" y1="87.00" x2="88.11" y2="97.00" stroke="var(--ink-3)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="655.89" y1="87.00" x2="655.89" y2="97.00" stroke="var(--ink-3)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="372.00" y="84.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">整条曲线下的总面积 = 1</text>
+<line x1="607.22" y1="330.00" x2="607.22" y2="327.26" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="3 4"/>
+<line x1="607.22" y1="334.00" x2="655.89" y2="234.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="659.94" y="236.00" text-anchor="end" font-size="12.5" fill="var(--ink-2)">单点只占一条竖线，面积为零</text>
+<line x1="372.00" y1="330.00" x2="372.00" y2="146.14" stroke="var(--ink-3)" stroke-width="1.0" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="3 4" opacity="0.8"/>
+<circle cx="372.00" cy="146.14" r="3.6" fill="var(--ink-3)"/>
+<text x="26.00" y="382.00" text-anchor="start" font-size="13" fill="var(--ink-2)">曲线越高，说明那一段更容易被抽到；阴影的总面积与曲线高矮无关，任何合法密度的总面积都是 1。</text>
+</svg>
+<!--/FIG pb06_area-->
+        <figcaption class="figcaption"><b>两条竖线之间那块阴影，面积就是 P{a&lt;X≤b}。</b>曲线有多高不重要，重要的是它圈住的面积；单点只占一条竖线，面积为零。</figcaption>
+      </div>
+
+      <p>常见的连续分布有三个，前两个先看清楚，第三个要多花点篇幅。<strong>均匀分布</strong> \(U(a,b)\) 在区间内密度是常数 \(\frac{1}{b-a}\)，等车时间在 0 到 10 分钟之间均匀时，等超过 7 分钟的概率是 \(3/10\)。<strong>指数分布</strong> \(E(\lambda)\) 的密度是 \(f(x)=\lambda e^{-\lambda x}\)（\(x&gt;0\)），分布函数是 \(F(x)=1-e^{-\lambda x}\)，它描述元件寿命、服务台前的等待，特点是会「忘事」：一只已经亮了 1000 小时的灯泡，再撑 500 小时的概率与全新的灯泡一样。</p>
+
+      <details class="fold">
+        <summary>指数分布的无记忆性是怎么算出来的</summary>
+        <p>对 \(s,t&gt;0\)，条件概率写成 \(P\{X&gt;s+t\mid X&gt;s\}=\frac{P\{X&gt;s+t\}}{P\{X&gt;s\}}\)，分子分母都是 \(e^{-\lambda}\) 的幂，约掉之后剩下 \(e^{-\lambda t}\)，正好等于 \(P\{X&gt;t\}\)。几何分布也有这条性质，两者是离散与连续的同一个脾气。</p>
+      </details>
+
+      <p><strong>正态分布</strong> \(N(\mu,\sigma^2)\) 的密度是
+      \[ f(x)=\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{(x-\mu)^2}{2\sigma^2}}. \]
+      \(\mu\) 管位置，曲线在 \(x=\mu\) 处最高；\(\sigma\) 管胖瘦，\(\sigma\) 越大曲线越矮越宽，围住的面积不变。这个积分没有初等原函数，所以课本配一张 \(\Phi\) 表，表里记的是 \(N(0,1)\) 的分布函数值。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定理（正态分布的标准化）</p>
+        <p>若 \(X\sim N(\mu,\sigma^2)\)，则 \(Z=\dfrac{X-\mu}{\sigma}\sim N(0,1)\)，且对任意 \(a&lt;b\) 有
+        \[ P\{a&lt;X\le b\}=\Phi\Big(\frac{b-\mu}{\sigma}\Big)-\Phi\Big(\frac{a-\mu}{\sigma}\Big). \]</p>
+      </div>
+
+      <p>标准化这一步把所有的正态分布压成同一条曲线。\(X\sim N(1,4)\) 时 \(\sigma=2\)，\(P\{0&lt;X\le3\}=\Phi(\frac{3-1}{2})-\Phi(\frac{0-1}{2})=\Phi(1)-\Phi(-0.5)\)，查表得 \(0.8413-0.3085=0.5328\)。表里没有负数也不要紧，用 \(\Phi(-z)=1-\Phi(z)\) 翻过来查。</p>
+
+      <div class="figure">
+        <!--FIG pb06_family--><svg viewBox="0 0 720 444" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<text x="26.00" y="32.00" text-anchor="start" font-size="15" fill="var(--ink)">五个常见分布排在一起看</text>
+<text x="26.00" y="54.00" text-anchor="start" font-size="13" fill="var(--ink-3)">左边两张分布律都归一，柱高是可以直接相加的概率；右边三条密度也各自归一，面积才是概率</text>
+<rect x="26.00" y="74.00" width="10.00" height="12.00" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.2"/>
+<text x="42.00" y="84.00" text-anchor="start" font-size="12.5" fill="var(--ink-2)">二项 B(20, 0.35)</text>
+<rect x="176.00" y="74.00" width="10.00" height="12.00" fill="var(--fig-fill)" stroke="var(--prussian)" stroke-width="1.2"/>
+<text x="192.00" y="84.00" text-anchor="start" font-size="12.5" fill="var(--ink-2)">泊松 P(7)</text>
+<line x1="286.00" y1="80.00" x2="312.00" y2="80.00" stroke="var(--accent-line)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="318.00" y="84.00" text-anchor="start" font-size="12.5" fill="var(--ink-2)">均匀 U(0, 2)</text>
+<line x1="432.00" y1="80.00" x2="458.00" y2="80.00" stroke="var(--ink-2)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="464.00" y="84.00" text-anchor="start" font-size="12.5" fill="var(--ink-2)">指数 E(1)</text>
+<line x1="548.00" y1="80.00" x2="574.00" y2="80.00" stroke="var(--prussian)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="580.00" y="84.00" text-anchor="start" font-size="12.5" fill="var(--ink-2)">正态 N(2.5, 0.49)</text>
+<text x="207.00" y="116.00" text-anchor="middle" font-size="13.5" fill="var(--ink)">离散型：分布律</text>
+<line x1="56.00" y1="332.00" x2="354.00" y2="332.00" stroke="var(--ink-2)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<line x1="56.00" y1="332.00" x2="56.00" y2="124.00" stroke="var(--ink-2)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<text x="48.00" y="132.00" text-anchor="end" font-size="13" fill="var(--ink-3)" font-style="italic">p</text>
+<rect x="68.19" y="331.81" width="5.33" height="0.19" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.2"/>
+<rect x="83.86" y="329.95" width="5.33" height="2.05" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.2"/>
+<rect x="99.53" y="321.50" width="5.33" height="10.50" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.2"/>
+<rect x="115.19" y="298.06" width="5.33" height="33.94" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.2"/>
+<rect x="130.86" y="254.34" width="5.33" height="77.66" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.2"/>
+<rect x="146.53" y="198.18" width="5.33" height="133.82" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.2"/>
+<rect x="162.19" y="151.86" width="5.33" height="180.14" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.2"/>
+<rect x="177.86" y="138.00" width="5.33" height="194.00" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.2"/>
+<rect x="193.53" y="162.25" width="5.33" height="169.75" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.2"/>
+<rect x="209.19" y="210.13" width="5.33" height="121.87" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.2"/>
+<rect x="224.86" y="259.81" width="5.33" height="72.19" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.2"/>
+<rect x="240.53" y="296.66" width="5.33" height="35.34" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.2"/>
+<rect x="256.19" y="317.73" width="5.33" height="14.27" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.2"/>
+<rect x="271.86" y="327.27" width="5.33" height="4.73" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.2"/>
+<rect x="287.53" y="330.73" width="5.33" height="1.27" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.2"/>
+<rect x="303.19" y="331.73" width="5.33" height="0.27" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.2"/>
+<rect x="318.86" y="331.95" width="5.33" height="0.05" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.2"/>
+<rect x="334.53" y="331.99" width="5.33" height="0.01" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.2"/>
+<rect x="74.15" y="331.04" width="5.33" height="0.96" fill="var(--fig-fill)" stroke="var(--prussian)" stroke-width="1.2"/>
+<rect x="89.81" y="325.28" width="5.33" height="6.72" fill="var(--fig-fill)" stroke="var(--prussian)" stroke-width="1.2"/>
+<rect x="105.48" y="308.50" width="5.33" height="23.50" fill="var(--fig-fill)" stroke="var(--prussian)" stroke-width="1.2"/>
+<rect x="121.15" y="277.16" width="5.33" height="54.84" fill="var(--fig-fill)" stroke="var(--prussian)" stroke-width="1.2"/>
+<rect x="136.81" y="236.03" width="5.33" height="95.97" fill="var(--fig-fill)" stroke="var(--prussian)" stroke-width="1.2"/>
+<rect x="152.48" y="197.64" width="5.33" height="134.36" fill="var(--fig-fill)" stroke="var(--prussian)" stroke-width="1.2"/>
+<rect x="168.15" y="175.24" width="5.33" height="156.76" fill="var(--fig-fill)" stroke="var(--prussian)" stroke-width="1.2"/>
+<rect x="183.81" y="175.24" width="5.33" height="156.76" fill="var(--fig-fill)" stroke="var(--prussian)" stroke-width="1.2"/>
+<rect x="199.48" y="194.84" width="5.33" height="137.16" fill="var(--fig-fill)" stroke="var(--prussian)" stroke-width="1.2"/>
+<rect x="215.15" y="225.32" width="5.33" height="106.68" fill="var(--fig-fill)" stroke="var(--prussian)" stroke-width="1.2"/>
+<rect x="230.81" y="257.32" width="5.33" height="74.68" fill="var(--fig-fill)" stroke="var(--prussian)" stroke-width="1.2"/>
+<rect x="246.48" y="284.48" width="5.33" height="47.52" fill="var(--fig-fill)" stroke="var(--prussian)" stroke-width="1.2"/>
+<rect x="262.15" y="304.28" width="5.33" height="27.72" fill="var(--fig-fill)" stroke="var(--prussian)" stroke-width="1.2"/>
+<rect x="277.81" y="317.07" width="5.33" height="14.93" fill="var(--fig-fill)" stroke="var(--prussian)" stroke-width="1.2"/>
+<rect x="293.48" y="324.54" width="5.33" height="7.46" fill="var(--fig-fill)" stroke="var(--prussian)" stroke-width="1.2"/>
+<rect x="309.15" y="328.52" width="5.33" height="3.48" fill="var(--fig-fill)" stroke="var(--prussian)" stroke-width="1.2"/>
+<rect x="324.81" y="330.48" width="5.33" height="1.52" fill="var(--fig-fill)" stroke="var(--prussian)" stroke-width="1.2"/>
+<rect x="340.48" y="331.37" width="5.33" height="0.63" fill="var(--fig-fill)" stroke="var(--prussian)" stroke-width="1.2"/>
+<line x1="73.83" y1="332.00" x2="73.83" y2="336.00" stroke="var(--ink-2)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+<text x="73.83" y="351.00" text-anchor="middle" font-size="11.5" fill="var(--ink-3)">0</text>
+<line x1="105.17" y1="332.00" x2="105.17" y2="336.00" stroke="var(--ink-2)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+<text x="105.17" y="351.00" text-anchor="middle" font-size="11.5" fill="var(--ink-3)">2</text>
+<line x1="136.50" y1="332.00" x2="136.50" y2="336.00" stroke="var(--ink-2)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+<text x="136.50" y="351.00" text-anchor="middle" font-size="11.5" fill="var(--ink-3)">4</text>
+<line x1="167.83" y1="332.00" x2="167.83" y2="336.00" stroke="var(--ink-2)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+<text x="167.83" y="351.00" text-anchor="middle" font-size="11.5" fill="var(--ink-3)">6</text>
+<line x1="199.17" y1="332.00" x2="199.17" y2="336.00" stroke="var(--ink-2)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+<text x="199.17" y="351.00" text-anchor="middle" font-size="11.5" fill="var(--ink-3)">8</text>
+<line x1="230.50" y1="332.00" x2="230.50" y2="336.00" stroke="var(--ink-2)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+<text x="230.50" y="351.00" text-anchor="middle" font-size="11.5" fill="var(--ink-3)">10</text>
+<line x1="261.83" y1="332.00" x2="261.83" y2="336.00" stroke="var(--ink-2)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+<text x="261.83" y="351.00" text-anchor="middle" font-size="11.5" fill="var(--ink-3)">12</text>
+<line x1="293.17" y1="332.00" x2="293.17" y2="336.00" stroke="var(--ink-2)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+<text x="293.17" y="351.00" text-anchor="middle" font-size="11.5" fill="var(--ink-3)">14</text>
+<line x1="324.50" y1="332.00" x2="324.50" y2="336.00" stroke="var(--ink-2)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+<text x="324.50" y="351.00" text-anchor="middle" font-size="11.5" fill="var(--ink-3)">16</text>
+<text x="352.00" y="351.00" text-anchor="end" font-size="12.5" fill="var(--ink-3)" font-style="italic">k</text>
+<text x="207.00" y="372.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">np = 7，两条柱顶几乎重合</text>
+<text x="549.00" y="116.00" text-anchor="middle" font-size="13.5" fill="var(--ink)">连续型：概率密度</text>
+<line x1="402.00" y1="332.00" x2="692.00" y2="332.00" stroke="var(--ink-2)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<line x1="402.00" y1="332.00" x2="402.00" y2="124.00" stroke="var(--ink-2)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<text x="394.00" y="132.00" text-anchor="end" font-size="13" fill="var(--ink-3)" font-style="italic">f(x)</text>
+<line x1="412.00" y1="240.49" x2="517.38" y2="240.49" stroke="var(--accent-line)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 412.00 148.98 L 412.94 152.22 L 413.88 155.40 L 414.82 158.53 L 415.76 161.60 L 416.70 164.61 L 417.65 167.58 L 418.59 170.49 L 419.53 173.34 L 420.47 176.15 L 421.41 178.91 L 422.35 181.62 L 423.29 184.28 L 424.23 186.90 L 425.17 189.46 L 426.11 191.99 L 427.05 194.47 L 428.00 196.90 L 428.94 199.29 L 429.88 201.64 L 430.82 203.95 L 431.76 206.21 L 432.70 208.44 L 433.64 210.63 L 434.58 212.77 L 435.52 214.88 L 436.46 216.96 L 437.41 218.99 L 438.35 220.99 L 439.29 222.96 L 440.23 224.89 L 441.17 226.78 L 442.11 228.65 L 443.05 230.48 L 443.99 232.27 L 444.93 234.04 L 445.87 235.77 L 446.81 237.47 L 447.76 239.15 L 448.70 240.79 L 449.64 242.40 L 450.58 243.99 L 451.52 245.55 L 452.46 247.08 L 453.40 248.58 L 454.34 250.06 L 455.28 251.51 L 456.22 252.93 L 457.16 254.33 L 458.11 255.71 L 459.05 257.06 L 459.99 258.38 L 460.93 259.69 L 461.87 260.97 L 462.81 262.22 L 463.75 263.46 L 464.69 264.67 L 465.63 265.86 L 466.57 267.03 L 467.52 268.18 L 468.46 269.31 L 469.40 270.42 L 470.34 271.51 L 471.28 272.58 L 472.22 273.63 L 473.16 274.67 L 474.10 275.68 L 475.04 276.68 L 475.98 277.66 L 476.92 278.62 L 477.87 279.56 L 478.81 280.49 L 479.75 281.40 L 480.69 282.30 L 481.63 283.18 L 482.57 284.04 L 483.51 284.89 L 484.45 285.73 L 485.39 286.54 L 486.33 287.35 L 487.27 288.14 L 488.22 288.92 L 489.16 289.68 L 490.10 290.43 L 491.04 291.16 L 491.98 291.89 L 492.92 292.60 L 493.86 293.29 L 494.80 293.98 L 495.74 294.65 L 496.68 295.31 L 497.62 295.96 L 498.57 296.60 L 499.51 297.23 L 500.45 297.84 L 501.39 298.45 L 502.33 299.04 L 503.27 299.62 L 504.21 300.20 L 505.15 300.76 L 506.09 301.31 L 507.03 301.86 L 507.98 302.39 L 508.92 302.91 L 509.86 303.43 L 510.80 303.93 L 511.74 304.43 L 512.68 304.92 L 513.62 305.40 L 514.56 305.87 L 515.50 306.33 L 516.44 306.78 L 517.38 307.23 L 518.33 307.67 L 519.27 308.10 L 520.21 308.52 L 521.15 308.94 L 522.09 309.35 L 523.03 309.75 L 523.97 310.14 L 524.91 310.53 L 525.85 310.91 L 526.79 311.28 L 527.73 311.65 L 528.68 312.01 L 529.62 312.36 L 530.56 312.71 L 531.50 313.05 L 532.44 313.39 L 533.38 313.72 L 534.32 314.04 L 535.26 314.36 L 536.20 314.67 L 537.14 314.98 L 538.09 315.28 L 539.03 315.57 L 539.97 315.86 L 540.91 316.15 L 541.85 316.43 L 542.79 316.71 L 543.73 316.98 L 544.67 317.24 L 545.61 317.50 L 546.55 317.76 L 547.49 318.01 L 548.44 318.26 L 549.38 318.50 L 550.32 318.74 L 551.26 318.98 L 552.20 319.21 L 553.14 319.43 L 554.08 319.66 L 555.02 319.87 L 555.96 320.09 L 556.90 320.30 L 557.84 320.51 L 558.79 320.71 L 559.73 320.91 L 560.67 321.11 L 561.61 321.30 L 562.55 321.49 L 563.49 321.67 L 564.43 321.86 L 565.37 322.04 L 566.31 322.21 L 567.25 322.39 L 568.20 322.56 L 569.14 322.72 L 570.08 322.89 L 571.02 323.05 L 571.96 323.21 L 572.90 323.36 L 573.84 323.52 L 574.78 323.67 L 575.72 323.81 L 576.66 323.96 L 577.60 324.10 L 578.55 324.24 L 579.49 324.38 L 580.43 324.51 L 581.37 324.65 L 582.31 324.78 L 583.25 324.90 L 584.19 325.03 L 585.13 325.15 L 586.07 325.27 L 587.01 325.39 L 587.95 325.51 L 588.90 325.62 L 589.84 325.74 L 590.78 325.85 L 591.72 325.96 L 592.66 326.06 L 593.60 326.17 L 594.54 326.27 L 595.48 326.37 L 596.42 326.47 L 597.36 326.57 L 598.30 326.67 L 599.25 326.76 L 600.19 326.85 L 601.13 326.95 L 602.07 327.03 L 603.01 327.12 L 603.95 327.21 L 604.89 327.29 L 605.83 327.38 L 606.77 327.46 L 607.71 327.54 L 608.66 327.62 L 609.60 327.70 L 610.54 327.77 L 611.48 327.85 L 612.42 327.92 L 613.36 327.99 L 614.30 328.06 L 615.24 328.13 L 616.18 328.20 L 617.12 328.27 L 618.06 328.33 L 619.01 328.40 L 619.95 328.46 L 620.89 328.53 L 621.83 328.59 L 622.77 328.65 L 623.71 328.71 L 624.65 328.77 L 625.59 328.82 L 626.53 328.88 L 627.47 328.93 L 628.41 328.99 L 629.36 329.04 L 630.30 329.09 L 631.24 329.15 L 632.18 329.20 L 633.12 329.25 L 634.06 329.29 L 635.00 329.34 L 635.94 329.39 L 636.88 329.44 L 637.82 329.48 L 638.77 329.53 L 639.71 329.57 L 640.65 329.61 L 641.59 329.65 L 642.53 329.70 L 643.47 329.74 L 644.41 329.78 L 645.35 329.82 L 646.29 329.85 L 647.23 329.89 L 648.17 329.93 L 649.12 329.97 L 650.06 330.00 L 651.00 330.04 L 651.94 330.07 L 652.88 330.11 L 653.82 330.14 L 654.76 330.17 L 655.70 330.21 L 656.64 330.24 L 657.58 330.27 L 658.52 330.30 L 659.47 330.33 L 660.41 330.36 L 661.35 330.39 L 662.29 330.42 L 663.23 330.44 L 664.17 330.47 L 665.11 330.50 L 666.05 330.53 L 666.99 330.55 L 667.93 330.58 L 668.88 330.60 L 669.82 330.63 L 670.76 330.65 L 671.70 330.68 L 672.64 330.70 L 673.58 330.72 L 674.52 330.74 L 675.46 330.77" fill="none" stroke="var(--ink-2)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 412.00 331.82 L 412.94 331.81 L 413.88 331.79 L 414.82 331.77 L 415.76 331.75 L 416.70 331.72 L 417.65 331.70 L 418.59 331.67 L 419.53 331.64 L 420.47 331.61 L 421.41 331.57 L 422.35 331.54 L 423.29 331.50 L 424.23 331.45 L 425.17 331.40 L 426.11 331.35 L 427.05 331.30 L 428.00 331.24 L 428.94 331.18 L 429.88 331.11 L 430.82 331.04 L 431.76 330.96 L 432.70 330.88 L 433.64 330.79 L 434.58 330.69 L 435.52 330.59 L 436.46 330.48 L 437.41 330.36 L 438.35 330.24 L 439.29 330.11 L 440.23 329.97 L 441.17 329.82 L 442.11 329.66 L 443.05 329.49 L 443.99 329.31 L 444.93 329.11 L 445.87 328.91 L 446.81 328.70 L 447.76 328.47 L 448.70 328.23 L 449.64 327.97 L 450.58 327.70 L 451.52 327.42 L 452.46 327.12 L 453.40 326.80 L 454.34 326.47 L 455.28 326.12 L 456.22 325.75 L 457.16 325.36 L 458.11 324.95 L 459.05 324.52 L 459.99 324.08 L 460.93 323.61 L 461.87 323.11 L 462.81 322.60 L 463.75 322.06 L 464.69 321.50 L 465.63 320.91 L 466.57 320.30 L 467.52 319.66 L 468.46 319.00 L 469.40 318.31 L 470.34 317.59 L 471.28 316.85 L 472.22 316.07 L 473.16 315.27 L 474.10 314.44 L 475.04 313.58 L 475.98 312.69 L 476.92 311.77 L 477.87 310.82 L 478.81 309.84 L 479.75 308.83 L 480.69 307.79 L 481.63 306.72 L 482.57 305.62 L 483.51 304.49 L 484.45 303.33 L 485.39 302.14 L 486.33 300.92 L 487.27 299.67 L 488.22 298.40 L 489.16 297.09 L 490.10 295.76 L 491.04 294.40 L 491.98 293.02 L 492.92 291.61 L 493.86 290.18 L 494.80 288.73 L 495.74 287.25 L 496.68 285.76 L 497.62 284.25 L 498.57 282.71 L 499.51 281.17 L 500.45 279.61 L 501.39 278.03 L 502.33 276.44 L 503.27 274.85 L 504.21 273.25 L 505.15 271.64 L 506.09 270.03 L 507.03 268.41 L 507.98 266.80 L 508.92 265.19 L 509.86 263.58 L 510.80 261.98 L 511.74 260.39 L 512.68 258.82 L 513.62 257.25 L 514.56 255.70 L 515.50 254.17 L 516.44 252.67 L 517.38 251.18 L 518.33 249.72 L 519.27 248.29 L 520.21 246.89 L 521.15 245.52 L 522.09 244.19 L 523.03 242.89 L 523.97 241.64 L 524.91 240.42 L 525.85 239.25 L 526.79 238.13 L 527.73 237.06 L 528.68 236.03 L 529.62 235.06 L 530.56 234.14 L 531.50 233.28 L 532.44 232.47 L 533.38 231.72 L 534.32 231.03 L 535.26 230.41 L 536.20 229.84 L 537.14 229.34 L 538.09 228.91 L 539.03 228.54 L 539.97 228.24 L 540.91 228.00 L 541.85 227.83 L 542.79 227.73 L 543.73 227.69 L 544.67 227.73 L 545.61 227.83 L 546.55 228.00 L 547.49 228.24 L 548.44 228.54 L 549.38 228.91 L 550.32 229.34 L 551.26 229.84 L 552.20 230.41 L 553.14 231.03 L 554.08 231.72 L 555.02 232.47 L 555.96 233.28 L 556.90 234.14 L 557.84 235.06 L 558.79 236.03 L 559.73 237.06 L 560.67 238.13 L 561.61 239.25 L 562.55 240.42 L 563.49 241.64 L 564.43 242.89 L 565.37 244.19 L 566.31 245.52 L 567.25 246.89 L 568.20 248.29 L 569.14 249.72 L 570.08 251.18 L 571.02 252.67 L 571.96 254.17 L 572.90 255.70 L 573.84 257.25 L 574.78 258.82 L 575.72 260.39 L 576.66 261.98 L 577.60 263.58 L 578.55 265.19 L 579.49 266.80 L 580.43 268.41 L 581.37 270.03 L 582.31 271.64 L 583.25 273.25 L 584.19 274.85 L 585.13 276.44 L 586.07 278.03 L 587.01 279.61 L 587.95 281.17 L 588.90 282.71 L 589.84 284.25 L 590.78 285.76 L 591.72 287.25 L 592.66 288.73 L 593.60 290.18 L 594.54 291.61 L 595.48 293.02 L 596.42 294.40 L 597.36 295.76 L 598.30 297.09 L 599.25 298.40 L 600.19 299.67 L 601.13 300.92 L 602.07 302.14 L 603.01 303.33 L 603.95 304.49 L 604.89 305.62 L 605.83 306.72 L 606.77 307.79 L 607.71 308.83 L 608.66 309.84 L 609.60 310.82 L 610.54 311.77 L 611.48 312.69 L 612.42 313.58 L 613.36 314.44 L 614.30 315.27 L 615.24 316.07 L 616.18 316.85 L 617.12 317.59 L 618.06 318.31 L 619.01 319.00 L 619.95 319.66 L 620.89 320.30 L 621.83 320.91 L 622.77 321.50 L 623.71 322.06 L 624.65 322.60 L 625.59 323.11 L 626.53 323.61 L 627.47 324.08 L 628.41 324.52 L 629.36 324.95 L 630.30 325.36 L 631.24 325.75 L 632.18 326.12 L 633.12 326.47 L 634.06 326.80 L 635.00 327.12 L 635.94 327.42 L 636.88 327.70 L 637.82 327.97 L 638.77 328.23 L 639.71 328.47 L 640.65 328.70 L 641.59 328.91 L 642.53 329.11 L 643.47 329.31 L 644.41 329.49 L 645.35 329.66 L 646.29 329.82 L 647.23 329.97 L 648.17 330.11 L 649.12 330.24 L 650.06 330.36 L 651.00 330.48 L 651.94 330.59 L 652.88 330.69 L 653.82 330.79 L 654.76 330.88 L 655.70 330.96 L 656.64 331.04 L 657.58 331.11 L 658.52 331.18 L 659.47 331.24 L 660.41 331.30 L 661.35 331.35 L 662.29 331.40 L 663.23 331.45 L 664.17 331.50 L 665.11 331.54 L 666.05 331.57 L 666.99 331.61 L 667.93 331.64 L 668.88 331.67 L 669.82 331.70 L 670.76 331.72 L 671.70 331.75 L 672.64 331.77 L 673.58 331.79 L 674.52 331.81 L 675.46 331.82" fill="none" stroke="var(--prussian)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="412.00" y1="332.00" x2="412.00" y2="336.00" stroke="var(--ink-2)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+<text x="412.00" y="351.00" text-anchor="middle" font-size="11.5" fill="var(--ink-3)">0</text>
+<line x1="464.69" y1="332.00" x2="464.69" y2="336.00" stroke="var(--ink-2)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+<text x="464.69" y="351.00" text-anchor="middle" font-size="11.5" fill="var(--ink-3)">1</text>
+<line x1="517.38" y1="332.00" x2="517.38" y2="336.00" stroke="var(--ink-2)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+<text x="517.38" y="351.00" text-anchor="middle" font-size="11.5" fill="var(--ink-3)">2</text>
+<line x1="570.08" y1="332.00" x2="570.08" y2="336.00" stroke="var(--ink-2)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+<text x="570.08" y="351.00" text-anchor="middle" font-size="11.5" fill="var(--ink-3)">3</text>
+<line x1="622.77" y1="332.00" x2="622.77" y2="336.00" stroke="var(--ink-2)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+<text x="622.77" y="351.00" text-anchor="middle" font-size="11.5" fill="var(--ink-3)">4</text>
+<line x1="675.46" y1="332.00" x2="675.46" y2="336.00" stroke="var(--ink-2)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+<text x="675.46" y="351.00" text-anchor="middle" font-size="11.5" fill="var(--ink-3)">5</text>
+<text x="690.00" y="351.00" text-anchor="end" font-size="12.5" fill="var(--ink-3)" font-style="italic">x</text>
+<text x="430.44" y="229.51" text-anchor="start" font-size="12" fill="var(--ink-3)">0.5</text>
+<text x="601.69" y="289.65" text-anchor="middle" font-size="12" fill="var(--ink-3)">钟形</text>
+<text x="549.00" y="372.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">均匀是平的，指数一头高一头低，正态两边对称</text>
+<text x="26.00" y="404.00" text-anchor="start" font-size="13" fill="var(--ink-2)">左边两张图的柱高加起来都是 1，右边三条曲线的面积各是 1；横轴刻度不同，纵轴高度不能直接比大小。</text>
+</svg>
+<!--/FIG pb06_family-->
+        <figcaption class="figcaption"><b>五个常见分布的形状。</b>左边两张是分布律，柱高能直接相加；右边三条是密度，面积才是概率。横轴刻度各不相同，柱高与峰高不能直接比大小。</figcaption>
+      </div>
+
+      <div class="archive reveal">
+        <p class="archive-when">1837 年，巴黎</p>
+        <h3>《关于判断的概率之研究》里的小数定律</h3>
+        <p class="archive-quote">「当试验次数很大、每次成功的概率很小时，成功次数的分布只依赖于两者的乘积。」</p>
+        <p class="archive-source">泊松《关于判断的概率之研究》，1837 年（法文，此处为译述）</p>
+        <p>他用这个极限处理误判、溺水这类一年才发生几起的案子，说它们服从「小数定律」：事件再罕见，发生率也稳在一个很小的数附近。1837 年书印出来时没人拿它处理数据，直到 19 世纪末有人用它数士兵被马踢死的例数，这个分布才有了实测对照。</p>
+      </div>
+
+      <h2 id="s-5" class="reveal">五、随机变量函数的分布</h2>
+
+      <p>已知 \(X\) 的分布，问 \(Y=g(X)\) 的分布，这类题按 \(X\) 的类型分两条路，每条路只有一种固定套路。</p>
+
+      <p>离散型直接算：把 \(g(x)\) 的值一个个算出来，同一个 \(y\) 可能由好几个 \(x\) 得来，把这几个 \(x\) 的概率加在一起就是 \(Y\) 取 \(y\) 的概率，
+      \[ P\{Y=y\}=\sum_{g(x)=y}P\{X=x\}. \]
+      \(X\) 取 \(-1,0,1\) 各 \(1/3\) 时，\(Y=X^2\) 只取 0 与 1，概率分别是 \(1/3\) 与 \(2/3\)，两头的 \(-1\) 与 \(1\) 合成了同一项。</p>
+
+      <p>连续型的标准套路叫<strong>分布函数法</strong>，分三步：先写 \(F_Y(y)=P\{g(X)\le y\}\)，再把 \(\{g(X)\le y\}\) 解成关于 \(X\) 的区间、用 \(F_X\) 表示出来，最后对 \(y\) 求导。拿 \(Y=X^2\)、\(X\sim N(0,1)\) 走一遍：\(y&gt;0\) 时 \(F_Y(y)=P\{-\sqrt{y}\le X\le\sqrt{y}\}=2\Phi(\sqrt{y})-1\)，求导得 \(f_Y(y)=\dfrac{1}{\sqrt{2\pi y}}e^{-y/2}\)，\(y\le0\) 时密度是 0。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定理（随机变量函数的密度公式）</p>
+        <p>设 \(X\) 的密度为 \(f_X(x)\)，\(y=g(x)\) 严格单调且可导，\(g'(x)\ne0\)，其反函数为 \(x=h(y)\)，则 \(Y=g(X)\) 是连续型随机变量，密度为
+        \[ f_Y(y)=f_X\big(h(y)\big)\,\big|h'(y)\big|, \]
+        \(y\) 取在 \(g\) 的值域内；其余地方 \(f_Y(y)=0\)。</p>
+      </div>
+
+      <p>公式法就是分布函数法做完求导的结果。单调保证反函数 \(h\) 存在，事件 \(\{g(X)\le y\}\) 能一路化成 \(\{X\le h(y)\}\) 或 \(\{X\ge h(y)\}\)，两种情况求导之后差一个负号，绝对值把它们并成一条式子。\(g\) 不单调时把区间拆开，或者干脆退回分布函数法，比如 \(Y=X^2\) 在 \(y&gt;0\) 时就要拆成两段。</p>
+
+      <details class="fold">
+        <summary>公式里的绝对值为什么必须留着</summary>
+        <p>因为 \(g\) 递减时 \(h'(y)&lt;0\)，密度不能是负数。用 \(Y=-X\) 试一下就明白：\(h(y)=-y\)，\(|h'|=1\)，\(f_Y(y)=f_X(-y)\)，负号被绝对值吃掉了。忘了写它，递减的那一半函数会算出负密度，答案一眼就能看出不对。</p>
+      </details>
+
+      <h2 id="s-manual" class="reveal">怎么算</h2>
+
+      <ul>
+        <li><strong>先分类型。</strong>取值能一个个排队的是离散型，能填满一段区间的连续型，两类的公式不通用。</li>
+        <li><strong>分布律先验归一。</strong>所有 \(p_k\) 加起来是不是 1，查过这一步再往下算。</li>
+        <li><strong>求概率三条路。</strong>离散查表求和，连续积分，任何情况都能用 \(F(b)-F(a)\)。</li>
+        <li><strong>连续型端点随便取。</strong>\(P\{X=a\}=0\)，开区间、闭区间给出同一个答案。</li>
+        <li><strong>正态先标准化再查表。</strong>\(z=\frac{x-\mu}{\sigma}\)，\(z\) 为负时用 \(\Phi(-z)=1-\Phi(z)\) 翻过来。</li>
+        <li><strong>求 \(Y=g(X)\)。</strong>离散合并同值，连续先写 \(F_Y(y)\) 再求导，单调时直接用公式。</li>
+      </ul>
+
+      <h2 id="s-examples" class="reveal">例题</h2>
+
+      <div class="example">
+        <p class="example-head">例 <span>1</span>　一批零件次品率 0.05，任取 4 件，\(X\) 为其中的次品数。写出分布律，并求至少 1 件次品的概率。</p>
+        <p class="solution">\(X\sim B(4,0.05)\)，\(P\{X=k\}=\binom{4}{k}0.05^k0.95^{4-k}\)，逐项算出 0.8145、0.1715、0.0135、0.0005、0.000006。五项加起来是 1，验算通过。至少 1 件的概率用对立事件：\(1-0.8145=0.1855\)。</p>
+      </div>
+
+      <div class="example">
+        <p class="example-head">例 <span>2</span>　\(X\sim N(2,9)\)，求 \(P\{-1&lt;X\le5\}\) 与 \(P\{X&gt;8\}\)。</p>
+        <p class="solution">\(\sigma=3\)，标准化后 \(-1\) 与 \(5\) 分别落到 \(-1\) 与 \(1\)，所以 \(P\{-1&lt;X\le5\}=\Phi(1)-\Phi(-1)=2\Phi(1)-1=0.6826\)。\(P\{X&gt;8\}=1-\Phi(\frac{8-2}{3})=1-\Phi(2)=0.0228\)。</p>
+      </div>
+
+      <div class="example">
+        <p class="example-head">例 <span>3</span>　\(X\sim U(0,1)\)，求 \(Y=-2\ln X\) 的密度。</p>
+        <p class="solution">\(g(x)=-2\ln x\) 在 \((0,1)\) 上严格递减，反函数 \(h(y)=e^{-y/2}\)，\(h'(y)=-\frac12e^{-y/2}\)。\(f_X=1\)，代入公式得 \(f_Y(y)=\frac12e^{-y/2}\)（\(y&gt;0\)），其余处为 0，也就是 \(Y\sim E(0.5)\)。</p>
+      </div>
+
+      <h2 id="s-exercises" class="reveal">习题</h2>
+
+      <div class="exercises">
+
+        <div class="ex-group">
+          <p class="ex-group-head">A 档 <span>巩固定义与基本计算，每题五分钟内</span></p>
+
+          <p class="ex"><span class="ex-num">1.</span> 袋中 3 个红球、2 个白球，任取 2 个，\(X\) 为红球个数。写出 \(X\) 的分布律并验算归一性。</p>
+          <div class="answer"><details><summary>看答案</summary><p>\(P\{X=0\}=\frac{1}{10}\)，\(P\{X=1\}=\frac{6}{10}\)，\(P\{X=2\}=\frac{3}{10}\)，三项相加为 1。</p></details></div>
+
+          <p class="ex"><span class="ex-num">2.</span> \(X\sim B(5,0.4)\)，求 \(P\{X=2\}\) 与 \(P\{X\ge1\}\)。</p>
+          <div class="answer"><details><summary>看答案</summary><p>\(P\{X=2\}=\binom{5}{2}0.4^2 0.6^3=0.3456\)；\(P\{X\ge1\}=1-0.6^5=0.9222\)。</p></details></div>
+
+          <p class="ex"><span class="ex-num">3.</span> \(X\sim P(2)\)，求 \(P\{X=0\}\) 与 \(P\{X\le1\}\)。</p>
+          <div class="answer"><details><summary>看答案</summary><p>\(e^{-2}=0.1353\)，\(P\{X\le1\}=0.1353+2e^{-2}=0.4060\)。</p></details></div>
+
+          <p class="ex"><span class="ex-num">4.</span> \(X\sim U(2,6)\)，写出密度并求 \(P\{3&lt;X\le5\}\)。</p>
+          <div class="answer"><details><summary>看答案</summary><p>\(f(x)=\frac14\)（\(2&lt;x&lt;6\)），其余处为 0；\(P\{3&lt;X\le5\}=\frac{5-3}{4}=0.5\)。</p></details></div>
+
+          <p class="ex"><span class="ex-num">5.</span> \(X\sim E(0.5)\)，求 \(P\{X&gt;2\}\) 与 \(P\{1&lt;X\le3\}\)。</p>
+          <div class="answer"><details><summary>看答案</summary><p>\(P\{X&gt;2\}=e^{-1}=0.3679\)；\(P\{1&lt;X\le3\}=e^{-0.5}-e^{-1.5}=0.3834\)。</p></details></div>
+
+          <p class="ex"><span class="ex-num">6.</span> \(X\) 的分布函数为 \(F(x)=0\)（\(x&lt;0\)）、\(1-e^{-2x}\)（\(x\ge0\)），求密度与 \(P\{1&lt;X\le3\}\)。</p>
+          <div class="answer"><details><summary>看答案</summary><p>求导得 \(f(x)=2e^{-2x}\)（\(x&gt;0\)）；\(P\{1&lt;X\le3\}=e^{-2}-e^{-6}=0.1328\)。</p></details></div>
+        </div>
+
+        <div class="ex-group">
+          <p class="ex-group-head">B 档 <span>综合题，接近期末与考研难度</span></p>
+
+          <p class="ex"><span class="ex-num">1.</span> 200 件产品中有 2% 的次品，用泊松定理近似求「至少 2 件次品」的概率。</p>
+          <div class="answer"><details><summary>看答案</summary><p>\(\lambda=np=4\)，\(P\{X\ge2\}=1-e^{-4}(1+4)=1-0.0916=0.9084\)。直接按二项算得 0.9106，两者相差约 0.002。</p></details></div>
+
+          <p class="ex"><span class="ex-num">2.</span> 设 \(X\) 的分布律为 \(P\{X=k\}=\frac{a}{3^k}\)，\(k=1,2,3\)。求 \(a\) 与 \(P\{X\ge2\}\)。</p>
+          <div class="answer"><details><summary>看答案</summary><p>归一性给出 \(a(\frac13+\frac19+\frac1{27})=\frac{13a}{27}=1\)，所以 \(a=\frac{27}{13}\)。分布律是 \(\frac{9}{13},\frac{3}{13},\frac{1}{13}\)，\(P\{X\ge2\}=\frac{4}{13}\)。</p></details></div>
+
+          <p class="ex"><span class="ex-num">3.</span> 零件直径 \(X\sim N(10,0.04)\)，规定 9.7 到 10.3 为合格。求合格率；若标准差不变，要把公差放宽到多少才使合格率达到 0.99。</p>
+          <div class="answer"><details><summary>看答案</summary><p>\(\sigma=0.2\)，\(P=2\Phi(1.5)-1=0.8664\)。要 0.99 需 \(z=2.575\)，公差取 \(10\pm0.515\)，即 9.485 到 10.515。</p></details></div>
+
+          <p class="ex"><span class="ex-num">4.</span> \(X\) 的密度为 \(f_X(x)=2x\)（\(0&lt;x&lt;1\)），求 \(Y=3X-1\) 的密度。</p>
+          <div class="answer"><details><summary>看答案</summary><p>\(h(y)=\frac{y+1}{3}\)，\(|h'(y)|=\frac13\)，所以 \(f_Y(y)=\frac{2}{3}\cdot\frac{y+1}{3}=\frac{2(y+1)}{9}\)（\(-1&lt;y&lt;2\)），其余处为 0。</p></details></div>
+        </div>
+
+        <div class="ex-group">
+          <p class="ex-group-head">C 档 <span>拓展与历史原题</span></p>
+
+          <p class="ex"><span class="ex-num">1.</span>（伯努利，1714）《推测术》里把 \(n=14\)、\(p=1/2\) 时的成功次数逐项列出。用二项分布算成功次数落在 6 到 8 之间的概率，并说明他为什么挑这串数。</p>
+          <div class="answer"><details><summary>看答案</summary><p>\(\frac{\binom{14}{6}+\binom{14}{7}+\binom{14}{8}}{2^{14}}=\frac{9438}{16384}=0.576\)。他要说明的是：次数足够多时，频率落在一个窄带里的可能性很大，频率稳定才有算术上的保证。</p></details></div>
+
+          <p class="ex"><span class="ex-num">2.</span>（泊松，1837）设 \(X\sim P(2)\)，求 \(P\{X=0\}\) 与 \(P\{X=3\}\)，并说明「小数定律」指的是什么。</p>
+          <div class="answer"><details><summary>看答案</summary><p>\(e^{-2}=0.1353\)，\(\frac{8}{6}e^{-2}=0.1804\)。小数定律说的是 \(n\) 很大、\(p\) 很小时，成功次数只由 \(\lambda=np\) 决定，事件再罕见也有稳定的发生率。</p></details></div>
+
+          <p class="ex"><span class="ex-num">3.</span>（高斯，1809；指数分布，20 世纪）\(X\sim N(0,1)\)，求 \(P\{|X|\le1\}\)；元件寿命 \(X\sim E(0.001)\)（单位小时），求 \(P\{X&gt;1000\}\)，并说明无记忆性在寿命问题里意味着什么。</p>
+          <div class="answer"><details><summary>看答案</summary><p>\(2\Phi(1)-1=0.6826\)；\(e^{-1}=0.3679\)。无记忆性意味着用过一个小时不会变得更差，剩下的寿命与全新的相同，所以指数分布只适合失效随时可能降临的元件。</p></details></div>
+        </div>
+
+        <div class="ex-group">
+          <p class="ex-group-head">思考题 <span>不设标准答案，只给提示</span></p>
+
+          <p class="ex"><span class="ex-num">1.</span> 四条性质里把「右连续」换成「左连续」，图上的实心圆要搬到哪里，第 4 条的公式怎么改？</p>
+          <div class="answer"><details><summary>看提示</summary><p>实心圆搬到跳点的左侧，取值改下面那一级，区间公式跟着变成 \(P\{a\le X&lt;b\}=F(b)-F(a)\)。跳点上的概率仍然能用两个单侧极限相减得到。</p></details></div>
+
+          <p class="ex"><span class="ex-num">2.</span> 密度可以大于 1，「概率密度」这个名字容易让人在哪一步出错？</p>
+          <div class="answer"><details><summary>看提示</summary><p>错在把 \(f(x)\) 当成 \(P\{X=x\}\)。概率要乘上区间长度再积分，宽度小于 1 时密度超过 1 完全正常。查一下总面积是不是 1，比盯着峰值高低有用。</p></details></div>
+
+          <p class="ex"><span class="ex-num">3.</span> \(Y=g(X)\) 与 \(X\) 一定是同一类型吗？举一个把连续型变成离散型的例子。</p>
+          <div class="answer"><details><summary>看提示</summary><p>不必同类。取 \(X\sim U(0,1)\)，令 \(g(x)=1\)（\(x&gt;0.5\)）、\(g(x)=0\)（\(x\le0.5\)），\(Y\) 只取两个值，是 0-1 分布。函数的取值集合决定类型，与 \(X\) 的类型无关。</p></details></div>
+        </div>
+
+      </div>
+
+      <h2 class="reveal">延伸阅读</h2>
+      <ul class="refs">
+        <li>浙江大学《概率论与数理统计》第四版，第二章 §1 至 §4。本章的定义口径、例题难度与习题档位以这本为准。</li>
+        <li>伯努利《推测术》第二部分，1713 年巴塞尔印行、1714 年发行；英译本见 E. D. Sylla 译《The Art of Conjecturing》，约翰斯·霍普金斯大学出版社，2006 年。</li>
+        <li>泊松《关于判断的概率之研究》，1837 年，后半部分推导罕见事件的极限分布，附有误判人数的算例。</li>
+        <li>Feller, <em>An Introduction to Probability Theory and Its Applications</em> 第一卷，第六章。二项、泊松、几何三种分布的对照比课本细。</li>
+      </ul>
+
+    </article>
+  </div>
+
+  <div class="wrap">
+    <nav class="pager" aria-label="翻页">
+      <a class="pager-link prev" href="ch05.html"><span class="pager-dir">上一章</span><span class="pager-title">1933：柯尔莫哥洛夫的公理</span></a>
+      <a class="pager-link next" href="ch07.html"><span class="pager-dir">下一章</span><span class="pager-title">期望与方差：一个赌局的价码</span></a>
+    </nav>
+  </div>
+
+</main>
+
+<footer class="footer field-dark">
+  <div class="wrap">
+    <p class="footer-mark">数学基础课</p>
+    <div class="footer-cols">
+      <div><p>概率论与数理统计。三门课用的是同一套版式与同一套练习体例。</p></div>
+      <div><p><a href="index.html">概率论目录</a></p><p><a href="../index.html">返回主页</a></p></div>
+      <div><p>图示用脚本按真实数值画，公式由 KaTeX 排版。</p></div>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/katex/katex.min.js"></script>
+<script src="../assets/katex/auto-render.min.js"></script>
+<script src="../assets/site.js"></script>
+</body>
+</html>

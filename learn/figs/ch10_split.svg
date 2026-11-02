@@ -1,0 +1,92 @@
+<svg viewBox="0 0 720 440" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<line x1="44.00" y1="344.00" x2="44.00" y2="168.00" stroke="var(--ink-2)" stroke-width="1.0" stroke-linecap="round" stroke-linejoin="round" opacity="0.45"/>
+<line x1="91.67" y1="344.00" x2="91.67" y2="168.00" stroke="var(--ink-2)" stroke-width="1.0" stroke-linecap="round" stroke-linejoin="round" opacity="0.45"/>
+<line x1="139.33" y1="344.00" x2="139.33" y2="168.00" stroke="var(--ink-2)" stroke-width="1.0" stroke-linecap="round" stroke-linejoin="round" opacity="0.45"/>
+<line x1="187.00" y1="344.00" x2="187.00" y2="168.00" stroke="var(--ink-2)" stroke-width="1.0" stroke-linecap="round" stroke-linejoin="round" opacity="0.45"/>
+<line x1="234.67" y1="344.00" x2="234.67" y2="168.00" stroke="var(--ink-2)" stroke-width="1.0" stroke-linecap="round" stroke-linejoin="round" opacity="0.45"/>
+<line x1="282.33" y1="344.00" x2="282.33" y2="168.00" stroke="var(--ink-2)" stroke-width="1.0" stroke-linecap="round" stroke-linejoin="round" opacity="0.45"/>
+<line x1="330.00" y1="344.00" x2="330.00" y2="168.00" stroke="var(--ink-2)" stroke-width="1.0" stroke-linecap="round" stroke-linejoin="round" opacity="0.45"/>
+<line x1="44.00" y1="344.00" x2="330.00" y2="344.00" stroke="var(--ink-2)" stroke-width="1.0" stroke-linecap="round" stroke-linejoin="round" opacity="0.45"/>
+<line x1="44.00" y1="300.00" x2="330.00" y2="300.00" stroke="var(--ink-2)" stroke-width="1.0" stroke-linecap="round" stroke-linejoin="round" opacity="0.45"/>
+<line x1="44.00" y1="256.00" x2="330.00" y2="256.00" stroke="var(--ink-2)" stroke-width="1.0" stroke-linecap="round" stroke-linejoin="round" opacity="0.45"/>
+<line x1="44.00" y1="212.00" x2="330.00" y2="212.00" stroke="var(--ink-2)" stroke-width="1.0" stroke-linecap="round" stroke-linejoin="round" opacity="0.45"/>
+<line x1="44.00" y1="168.00" x2="330.00" y2="168.00" stroke="var(--ink-2)" stroke-width="1.0" stroke-linecap="round" stroke-linejoin="round" opacity="0.45"/>
+<polygon points="187.00,300.00 234.67,300.00 234.67,256.00 187.00,256.00" fill="var(--fig-fill-2)" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="44.00,344.00 330.00,344.00 330.00,168.00 44.00,168.00" fill="none" stroke="var(--accent-line)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="216.55" cy="282.40" r="4.0" fill="var(--prussian)"/>
+<text x="225.55" y="274.40" text-anchor="start" font-size="13.5" fill="var(--ink)">(ξ, η)</text>
+<line x1="187.00" y1="322.00" x2="234.67" y2="322.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="187.00" y1="317.00" x2="187.00" y2="327.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="234.67" y1="317.00" x2="234.67" y2="327.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="210.83" y="338.00" text-anchor="middle" font-size="13" fill="var(--ink-2)">Δx</text>
+<line x1="165.00" y1="300.00" x2="165.00" y2="256.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="160.00" y1="300.00" x2="170.00" y2="300.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="160.00" y1="256.00" x2="170.00" y2="256.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="156.00" y="283.00" text-anchor="end" font-size="13" fill="var(--ink-2)">Δy</text>
+<text x="266.50" y="214.07" text-anchor="start" font-size="17" fill="var(--ink)" font-style="italic">D</text>
+<text x="48.00" y="154.00" text-anchor="start" font-size="13" fill="var(--ink-2)">n 块：Δσ = ΔxΔy</text>
+<text x="28.00" y="32.00" text-anchor="start" font-size="15.5" fill="var(--ink)" font-weight="600">一，把平面区域切成小块</text>
+<text x="28.00" y="58.00" text-anchor="start" font-size="13" fill="var(--ink-2)">每块面积 Δσ = ΔxΔy，块内任取一点</text>
+<text x="28.00" y="80.00" text-anchor="start" font-size="13" fill="var(--ink-2)">块的位置用 (ξ, η) 表示</text>
+<text x="44.00" y="372.00" text-anchor="end" font-size="14" fill="var(--ink-3)" font-style="italic">x</text>
+<text x="44.00" y="372.00" text-anchor="start" font-size="1" fill="var(--ink-3)"></text>
+<text x="36.00" y="164.00" text-anchor="end" font-size="14" fill="var(--ink-3)" font-style="italic">y</text>
+<polygon points="417.36,280.02 572.31,320.43 522.64,380.00 367.69,339.60" fill="#f1ece0" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="384.24,319.74 415.23,327.82 415.23,261.34 384.24,253.26" fill="#eaeae6" stroke="var(--ink-2)" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="415.23,327.82 398.68,347.68 398.68,281.20 415.23,261.34" fill="#dde3e9" stroke="var(--ink-2)" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="384.24,253.26 415.23,261.34 398.68,281.20 367.69,273.12" fill="#d0d8e0" stroke="var(--ink-2)" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="415.23,327.82 446.23,335.90 446.23,250.46 415.23,242.38" fill="#eaeae6" stroke="var(--ink-2)" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="446.23,335.90 429.67,355.76 429.67,270.32 446.23,250.46" fill="#dde3e9" stroke="var(--ink-2)" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="415.23,242.38 446.23,250.46 429.67,270.32 398.68,262.24" fill="#d0d8e0" stroke="var(--ink-2)" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="446.23,335.90 477.22,343.98 477.22,260.12 446.23,252.04" fill="#eaeae6" stroke="var(--ink-2)" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="477.22,343.98 460.66,363.84 460.66,279.98 477.22,260.12" fill="#dde3e9" stroke="var(--ink-2)" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="446.23,252.04 477.22,260.12 460.66,279.98 429.67,271.90" fill="#d0d8e0" stroke="var(--ink-2)" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="477.22,343.98 508.21,352.06 508.21,288.37 477.22,280.29" fill="#eaeae6" stroke="var(--ink-2)" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="508.21,352.06 491.65,371.92 491.65,308.23 508.21,288.37" fill="#dde3e9" stroke="var(--ink-2)" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="477.22,280.29 508.21,288.37 491.65,308.23 460.66,300.14" fill="#d0d8e0" stroke="var(--ink-2)" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="508.21,352.06 539.20,360.14 539.20,314.11 508.21,306.03" fill="#eaeae6" stroke="var(--ink-2)" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="539.20,360.14 522.64,380.00 522.64,333.97 539.20,314.11" fill="#dde3e9" stroke="var(--ink-2)" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="508.21,306.03 539.20,314.11 522.64,333.97 491.65,325.89" fill="#d0d8e0" stroke="var(--ink-2)" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="400.80,299.88 431.79,307.96 431.79,225.07 400.80,216.99" fill="#eaeae6" stroke="var(--ink-2)" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="431.79,307.96 415.23,327.82 415.23,244.93 431.79,225.07" fill="#dde3e9" stroke="var(--ink-2)" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="400.80,216.99 431.79,225.07 415.23,244.93 384.24,236.85" fill="#d0d8e0" stroke="var(--ink-2)" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="431.79,307.96 462.78,316.04 462.78,203.56 431.79,195.48" fill="#eaeae6" stroke="var(--ink-2)" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="462.78,316.04 446.23,335.90 446.23,223.42 462.78,203.56" fill="#dde3e9" stroke="var(--ink-2)" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="431.79,195.48 462.78,203.56 446.23,223.42 415.23,215.34" fill="#d0d8e0" stroke="var(--ink-2)" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="462.78,316.04 493.77,324.12 493.77,214.11 462.78,206.03" fill="#eaeae6" stroke="var(--ink-2)" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="493.77,324.12 477.22,343.98 477.22,233.96 493.77,214.11" fill="#dde3e9" stroke="var(--ink-2)" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="462.78,206.03 493.77,214.11 477.22,233.96 446.23,225.88" fill="#d0d8e0" stroke="var(--ink-2)" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="493.77,324.12 524.77,332.21 524.77,253.66 493.77,245.58" fill="#eaeae6" stroke="var(--ink-2)" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="524.77,332.21 508.21,352.06 508.21,273.52 524.77,253.66" fill="#dde3e9" stroke="var(--ink-2)" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="493.77,245.58 524.77,253.66 508.21,273.52 477.22,265.44" fill="#d0d8e0" stroke="var(--ink-2)" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="524.77,332.21 555.76,340.29 555.76,289.30 524.77,281.22" fill="#eaeae6" stroke="var(--ink-2)" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="555.76,340.29 539.20,360.14 539.20,309.16 555.76,289.30" fill="#dde3e9" stroke="var(--ink-2)" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="524.77,281.22 555.76,289.30 539.20,309.16 508.21,301.08" fill="#d0d8e0" stroke="var(--ink-2)" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="417.36,280.02 448.35,288.11 448.35,215.48 417.36,207.40" fill="#eaeae6" stroke="var(--ink-2)" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="448.35,288.11 431.79,307.96 431.79,235.33 448.35,215.48" fill="#dde3e9" stroke="var(--ink-2)" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="417.36,207.40 448.35,215.48 431.79,235.33 400.80,227.25" fill="#d0d8e0" stroke="var(--ink-2)" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="448.35,288.11 479.34,296.19 479.34,200.61 448.35,192.53" fill="#eaeae6" stroke="var(--ink-2)" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="479.34,296.19 462.78,316.04 462.78,220.47 479.34,200.61" fill="#dde3e9" stroke="var(--ink-2)" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="448.35,192.53 479.34,200.61 462.78,220.47 431.79,212.39" fill="#d0d8e0" stroke="var(--ink-2)" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="479.34,296.19 510.33,304.27 510.33,210.60 479.34,202.52" fill="#eaeae6" stroke="var(--ink-2)" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="510.33,304.27 493.77,324.12 493.77,230.46 510.33,210.60" fill="#dde3e9" stroke="var(--ink-2)" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="479.34,202.52 510.33,210.60 493.77,230.46 462.78,222.38" fill="#d0d8e0" stroke="var(--ink-2)" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="510.33,304.27 541.32,312.35 541.32,243.09 510.33,235.01" fill="#eaeae6" stroke="var(--ink-2)" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="541.32,312.35 524.77,332.21 524.77,262.94 541.32,243.09" fill="#dde3e9" stroke="var(--ink-2)" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="510.33,235.01 541.32,243.09 524.77,262.94 493.77,254.86" fill="#d0d8e0" stroke="var(--ink-2)" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="541.32,312.35 572.31,320.43 572.31,272.54 541.32,264.46" fill="#eaeae6" stroke="var(--ink-2)" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="572.31,320.43 555.76,340.29 555.76,292.40 572.31,272.54" fill="#dde3e9" stroke="var(--ink-2)" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="541.32,264.46 572.31,272.54 555.76,292.40 524.77,284.32" fill="#d0d8e0" stroke="var(--ink-2)" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 417.36 227.51 L 419.94 226.84 L 422.53 226.12 L 425.11 225.35 L 427.69 224.55 L 430.27 223.71 L 432.86 222.86 L 435.44 222.00 L 438.02 221.14 L 440.60 220.30 L 443.19 219.48 L 445.77 218.70 L 448.35 217.98 L 450.93 217.31 L 453.52 216.73 L 456.10 216.23 L 458.68 215.84 L 461.26 215.56 L 463.85 215.40 L 466.43 215.37 L 469.01 215.48 L 471.59 215.74 L 474.18 216.14 L 476.76 216.70 L 479.34 217.41 L 481.93 218.28 L 484.51 219.30 L 487.09 220.46 L 489.67 221.77 L 492.26 223.21 L 494.84 224.78 L 497.42 226.46 L 500.00 228.25 L 502.59 230.14 L 505.17 232.11 L 507.75 234.16 L 510.33 236.26 L 512.92 238.41 L 515.50 240.59 L 518.08 242.79 L 520.66 244.99 L 523.25 247.20 L 525.83 249.39 L 528.41 251.55 L 530.99 253.69 L 533.58 255.78 L 536.16 257.82 L 538.74 259.81 L 541.32 261.74 L 543.91 263.61 L 546.49 265.41 L 549.07 267.15 L 551.65 268.82 L 554.24 270.42 L 556.82 271.95 L 559.40 273.41 L 561.98 274.81 L 564.57 276.14 L 567.15 277.42 L 569.73 278.64 L 572.31 279.80" fill="none" stroke="var(--accent-line)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="566.00" y1="240.00" x2="544.00" y2="257.00" stroke="var(--accent-line)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4 4"/>
+<text x="568.00" y="238.00" text-anchor="start" font-size="13" fill="var(--accent-line)">曲顶</text>
+<line x1="417.36" y1="280.02" x2="417.36" y2="207.40" stroke="var(--accent-line)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="5 5"/>
+<text x="409.36" y="248.71" text-anchor="end" font-size="13" fill="var(--ink)">f(ξ, η)</text>
+<line x1="403.36" y1="302.02" x2="423.75" y2="294.99" stroke="var(--accent-line)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4 4"/>
+<text x="401.36" y="306.02" text-anchor="end" font-size="13" fill="var(--ink-2)">Δσ</text>
+<text x="352.00" y="32.00" text-anchor="start" font-size="15.5" fill="var(--ink)" font-weight="600">二，在每块上立一根柱子</text>
+<text x="352.00" y="58.00" text-anchor="start" font-size="13" fill="var(--ink-2)">柱高 = 该点函数值 f(ξ, η)</text>
+<text x="352.00" y="80.00" text-anchor="start" font-size="13" fill="var(--ink-2)">柱体体积 = f(ξ, η)Δσ，块的最大直径记作 λ</text>
+<text x="28.00" y="402.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">求和 S = Σ f(ξ, η)Δσ 是曲顶柱体体积的近似值；网格越密，每块的直径越小，</text>
+<text x="28.00" y="424.00" text-anchor="start" font-size="13.5" fill="var(--ink-3)">柱顶与曲面之间的误差才被逼到零。定义要求的是：无论怎样切、怎样取点，S 都趋于同一个数。</text>
+</svg>

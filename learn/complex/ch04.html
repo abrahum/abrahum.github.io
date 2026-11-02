@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>第四章 级数：泰勒与洛朗 · 复变函数</title>
+<meta name="description" content="幂级数的收敛圆、泰勒展开与洛朗展开：把解析函数写成级数，负幂项为什么是留数的来源。">
+<link rel="stylesheet" href="../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="nav-brand" href="../index.html">数学基础课<span> 四门课，一套读法</span></a>
+    <nav class="nav-links" aria-label="主导航">
+      <a href="index.html#map">本课目录</a>
+      <a class="xl" href="../calculus/index.html">微积分</a>
+      <a class="xl" href="../linear-algebra/index.html">线性代数</a>
+      <a class="xl" href="../probability/index.html">概率论</a>
+      <a class="opt" href="ch05.html">下一章</a>
+    </nav>
+  </div>
+  <div class="nav-progress" aria-hidden="true"></div>
+</header>
+
+<main>
+
+  <section class="chapter">
+    <div class="wrap">
+      <div class="ch-hero-band">
+        <div>
+          <p class="ch-label reveal"><span>第四章</span><span class="ch-era">1831 年至 1843 年</span></p>
+          <h1 class="ch-title reveal reveal-2">级数：泰勒与洛朗</h1>
+          <p class="ch-deck reveal reveal-3">实数的幂级数收敛在一段区间里，复数把这段区间换成一个圆盘：半径以内绝对收敛，外面发散，圆周上的每一点要单独判。这一章算清收敛半径，再把解析函数在圆盘里展成泰勒级数、在圆环里展成洛朗级数。洛朗 1843 年寄给柯西的论文里，第一次写出环域上的展开。</p>
+          <div class="ch-meta reveal reveal-3">
+            <div><strong>本章知识点</strong>幂级数与收敛圆、泰勒展开、洛朗展开</div>
+            <div><strong>历史坐标</strong>柯西 1831 年，洛朗 1843 年，魏尔斯特拉斯 1841 年前后</div>
+            <div><strong>对应教材</strong>钟玉泉《复变函数论》第四章</div>
+            <div><strong>前置</strong>柯西积分定理与柯西积分公式、实数的幂级数</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap ch-body">
+    <aside class="rail">
+      <p class="rail-title">本章提纲</p>
+      <ol>
+        <li><a href="#s-1">复数项级数</a></li>
+        <li><a href="#s-2">幂级数与收敛圆</a></li>
+        <li><a href="#s-3">泰勒级数</a></li>
+        <li><a href="#s-4">洛朗级数</a></li>
+        <li><a href="#s-manual">怎么算</a></li>
+        <li><a href="#s-examples">例题</a></li>
+        <li><a href="#s-exercises">习题</a></li>
+      </ol>
+      <p class="rail-title">历史坐标</p>
+      <p class="rail-who">泰勒 1715 年<br>柯西 1831 年<br>魏尔斯特拉斯 1841 年前后<br>洛朗 1843 年</p>
+    </aside>
+
+    <article class="prose">
+
+      <p class="lead reveal">这一章要回答的问题是：解析函数能不能写成一串幂的和，写成以后在哪里收敛。实数里泰勒级数只在区间上成立，复数里这块区间变成一个圆盘，圆盘多大由离得最近的奇点决定；奇点要是落在圆心，就得改到环域上去展开，级数也跟着多出负幂项。洛朗 1843 年在给柯西的论文里写出了环域上的展开。</p>
+
+      <h2 id="s-1" class="reveal">一、复数项级数</h2>
+
+      <p>复数列 \(z_n\) 有极限 \(z\)，意思是 \(|z_n-z|\to 0\)，而 \(|z_n-z|\) 本来就是平面上两点之间的距离，所以实数里关于极限的那一套话可以原封不动搬过来，连柯西准则也一样：\(\{z_n\}\) 收敛，当且仅当对任意 \(\varepsilon&gt;0\) 存在 \(N\)，使 \(m,n&gt;N\) 时 \(|z_m-z_n|&lt;\varepsilon\)。级数 \(\sum_{n=1}^{\infty}z_n\) 收敛，指的是部分和 \(S_n=z_1+\cdots+z_n\) 这个数列有极限，这跟实数里的定义逐字相同。</p>
+
+      <p>判别法也不用重造。比值判别、根值判别、比较判别用的都是 \(|z_n|\) 这个正数，所以 \(\sum|z_n|\) 收敛时 \(\sum z_n\) 一定收敛，而且 \(|\sum z_n|\le\sum|z_n|\)。差别只有一处：实数里还有交错级数这一招，正负号一替一换，相邻两项自己抵消；复数的项散在平面上，相位能绕整圈，没有一条类似莱布尼茨的判别法能接这个活。所以复级数通常只走绝对收敛这一条路，条件收敛的情形要靠拆成实部与虚部两条实级数，各自去判。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定理（绝对收敛与条件收敛）</p>
+        <p>若 \(\sum_{n=1}^{\infty}|z_n|\) 收敛，则 \(\sum_{n=1}^{\infty}z_n\) 收敛，且 \(\left|\sum_{n=1}^{\infty}z_n\right|\le\sum_{n=1}^{\infty}|z_n|\)。反之不成立：\(\sum_{n=1}^{\infty}\dfrac{i^n}{n}\) 收敛，可取模之后得到调和级数，它发散。</p>
+      </div>
+
+      <p>绝对收敛还有两个附带的许可，重排任意多项不改变和，两个级数可以逐项相乘得到柯西乘积。后面用现成的展开拼出新展开，靠的就是这两条许可。</p>
+
+      <details class="fold">
+        <summary>为什么复级数几乎只讲绝对收敛</summary>
+        <p>实数里判一个级数收敛，还有交错级数这一手：符号一正一负，相邻两项互相抵消。复数的项落在平面上，相位能绕 360 度，抵消的形态太多，没有一条能顶替莱布尼茨判别法的通用规则。所以复级数先看正项级数 \(\sum|z_n|\) 收不收敛。</p>
+      </details>
+
+      <h2 id="s-2" class="reveal">二、幂级数与收敛圆</h2>
+
+      <p>把复数列换成 \(z\) 的多项式，得到幂级数 \(\sum_{n=0}^{\infty}c_n(z-z_0)^n\)，其中 \(z_0\) 叫展开点。它的收敛范围有很强的规律，叫阿贝尔定理：只要它在某一点 \(z_1\ne z_0\) 收敛，那么在 \(|z-z_0|&lt;|z_1-z_0|\) 的整个圆盘里就处处绝对收敛，而且在半径更小的闭圆盘上一致收敛。这条定理只有一句要记：收敛与发散的分界是一圈以 \(z_0\) 为心的圆。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定理（阿贝尔定理与收敛半径）</p>
+        <p>对幂级数 \(\sum_{n=0}^{\infty}c_n(z-z_0)^n\)，存在唯一的数 \(R\)（\(0\le R\le\infty\)），使 \(|z-z_0|&lt;R\) 时级数绝对收敛，\(|z-z_0|&gt;R\) 时发散。\(R\) 叫收敛半径，圆周 \(|z-z_0|=R\) 叫收敛圆。半径由系数算出：\(\dfrac{1}{R}=\limsup_{n\to\infty}\sqrt[n]{|c_n|}\)。</p>
+      </div>
+
+      <p>与实数的幂级数对照，有两处变化值得单独记下来。收敛域从一段区间变成一块圆盘，区间只往两个方向退，圆盘四面八方都封死，只要 \(R\) 定下来，整个圆盘里全部绝对收敛。边界从两个端点变成一整条圆周，而且圆周上每一点的命运可以不一样。</p>
+
+      <p>举三个半径都是 1 的例子就看清楚了。\(\sum z^n\) 在 \(|z|=1\) 上处处发散，因为通项的模恒等于 1，不趋于 0；\(\sum\dfrac{z^n}{n}\) 在圆周上除 \(z=1\) 外处处收敛，在 \(z=1\) 处退化成调和级数；\(\sum\dfrac{z^n}{n^2}\) 在整个圆周上处处绝对收敛。所以收敛圆上既不能一律说收敛，也不能一律说发散，只能逐点讨论。这也是柯西-阿达马公式只给半径、不给圆周的原因。</p>
+
+      <div class="figure">
+        <!--FIG cx04_disk--><svg viewBox="0 0 720 430" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<text x="56.00" y="96.00" text-anchor="start" font-size="15.5" fill="var(--ink)">实数：收敛域是一条线段</text>
+<line x1="56.00" y1="250.00" x2="300.00" y2="250.00" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<line x1="124.00" y1="250.00" x2="236.00" y2="250.00" stroke="var(--accent-line)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="124.00" cy="250.00" r="5.80" fill="var(--paper)" stroke="var(--ink-2)" stroke-width="1.8"/>
+<circle cx="236.00" cy="250.00" r="5.80" fill="var(--paper)" stroke="var(--ink-2)" stroke-width="1.8"/>
+<text x="124.00" y="280.00" text-anchor="middle" font-size="14" fill="var(--ink-3)">−R</text>
+<text x="236.00" y="280.00" text-anchor="middle" font-size="14" fill="var(--ink-3)">R</text>
+<text x="124.00" y="224.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">端点</text>
+<text x="236.00" y="224.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">端点</text>
+<text x="178.00" y="326.00" text-anchor="middle" font-size="13.5" fill="var(--ink-2)">区间里收敛，区间外发散，</text>
+<text x="178.00" y="348.00" text-anchor="middle" font-size="13.5" fill="var(--ink-2)">边界只剩 2 个点要看。</text>
+<text x="384.00" y="96.00" text-anchor="start" font-size="15.5" fill="var(--ink)">复数：收敛域是一个圆盘</text>
+<circle cx="532.00" cy="236.00" r="104.00" fill="var(--fig-fill)" stroke="var(--accent-line)" stroke-width="2.4"/>
+<line x1="398.00" y1="236.00" x2="666.00" y2="236.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+<line x1="532.00" y1="106.00" x2="532.00" y2="366.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+<circle cx="532.00" cy="236.00" r="4.4" fill="var(--prussian)"/>
+<text x="522.00" y="256.00" text-anchor="end" font-size="14" fill="var(--ink-3)">z₀</text>
+<line x1="532.00" y1="236.00" x2="616.14" y2="174.87" stroke="var(--prussian)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 6"/>
+<text x="578.07" y="197.44" text-anchor="start" font-size="15" fill="var(--prussian)" font-style="italic">R</text>
+<circle cx="484.00" cy="282.00" r="5.2" fill="var(--prussian)"/>
+<text x="484.00" y="308.00" text-anchor="middle" font-size="13.5" fill="var(--ink-2)">绝对收敛</text>
+<circle cx="644.00" cy="302.00" r="5.2" fill="var(--ink-3)"/>
+<text x="644.00" y="328.00" text-anchor="middle" font-size="13.5" fill="var(--ink-2)">发散</text>
+<circle cx="434.27" cy="271.57" r="5.2" fill="var(--prussian)"/>
+<text x="420.27" y="295.57" text-anchor="end" font-size="13.5" fill="var(--ink-2)">逐点另判</text>
+<text x="56.00" y="404.00" text-anchor="start" font-size="14" fill="var(--ink-3)">同一个幂级数，实数里只切一段，复数里切出一个圆。</text>
+</svg>
+<!--/FIG cx04_disk-->
+        <figcaption class="figcaption"><b>同一个幂级数，实数里切一段，复数里切一个圆。</b>左边只有两个端点要单独判，右边一整条圆周上的每一点都要单独判；发散的范围从一个点变成了一整圈。</figcaption>
+      </div>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定理（和函数的解析性）</p>
+        <p>设 \(S(z)=\sum_{n=0}^{\infty}c_n(z-z_0)^n\) 的收敛半径为 \(R&gt;0\)，则 \(S(z)\) 在 \(|z-z_0|&lt;R\) 内解析，可以逐项求导与逐项积分，且 \(S'(z)=\sum_{n=1}^{\infty}n\,c_n(z-z_0)^{n-1}\) 的收敛半径仍是 \(R\)。</p>
+      </div>
+
+      <p>这条定理的分量在于它给了幂级数一张解析函数的身份证：收敛圆里的和函数一定解析，求导可以一直做下去，半径保持不变。第三章是从解析函数出发推出柯西公式，这一节反过来，从级数出发得到解析函数，两条路在下一节会合。</p>
+
+      <details class="fold">
+        <summary>阿贝尔定理那一步是怎么走的</summary>
+        <p>设 \(\sum c_nz_1^n\) 收敛，则它的通项有界，存在 \(M\) 使 \(|c_nz_1^n|\le M\)。于是 \(|c_nz^n|\le M\left|\dfrac{z}{z_1}\right|^n\)，右边是公比小于 1 的等比级数，逐项比较就得到绝对收敛；把 \(|z|\le\rho&lt;|z_1|\) 固定住，这个估计与 \(n\) 无关，一致收敛也跟着来了。</p>
+      </details>
+
+      <h2 id="s-3" class="reveal">三、泰勒级数</h2>
+
+      <p>第三章的柯西积分公式给出 \(f(z)=\dfrac{1}{2\pi i}\oint_C\dfrac{f(\zeta)}{\zeta-z}\,d\zeta\)。把被积的那个分式单独拿出来看，\(\dfrac{1}{\zeta-z}=\dfrac{1}{\zeta-z_0}\cdot\dfrac{1}{1-\dfrac{z-z_0}{\zeta-z_0}}\)，右边在 \(\zeta\) 沿圆周跑时是一个公比小于 1 的等比级数，展开后逐项积分，\(\zeta\) 全部进了系数，剩下的就是 \(z-z_0\) 的幂。这一步就是泰勒定理的证明，路线与实数完全不同：实数那边靠反复用中值定理，复数这边靠一次积分。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定理（泰勒定理）</p>
+        <p>设 \(f(z)\) 在圆盘 \(|z-z_0|&lt;R\) 内解析，则在此圆盘内 \(f(z)=\sum_{n=0}^{\infty}c_n(z-z_0)^n\)，其中 \(c_n=\dfrac{f^{(n)}(z_0)}{n!}=\dfrac{1}{2\pi i}\oint_C\dfrac{f(\zeta)}{(\zeta-z_0)^{n+1}}\,d\zeta\)，\(C\) 是圆盘内绕 \(z_0\) 的任一闭路。这个展开在圆盘内唯一，级数的收敛半径至少是 \(R\)。</p>
+      </div>
+
+      <p>与实数对照，这里的差别是根本性的。实数里一个函数可以无穷次可导，泰勒级数却收敛到别的东西：\(f(x)=e^{-1/x^2}\)（\(x\ne0\)）、\(f(0)=0\)，这个函数在 0 处每阶导数都是 0，泰勒级数恒等于 0，可函数在 0 附近并不恒等于 0。复数里没有这个坑，因为解析比实可导强得多，一次复可导就够推出无穷次可导，还够推出泰勒级数在圆盘内处处收敛到 \(f\) 本身。</p>
+
+      <p>收敛半径也有一个干净的答案。泰勒定理只保证半径至少是多少，事实上半径刚好等于从 \(z_0\) 到最近奇点的距离。以 \(\dfrac{1}{z}\) 在 \(z_0=1\) 处为例，奇点在 0，距离是 1，展开 \(\sum(-1)^n(z-1)^n\) 的半径就是 1；想让它在更大的圆上收敛，就必须跨过 0 这个奇点，而那一步做不到。</p>
+
+      <details class="fold">
+        <summary>展开半径为什么刚好是到最近奇点的距离</summary>
+        <p>两头夹一下。泰勒定理在 \(|z-z_0|&lt;d\) 内给得出展开，\(d\) 是到最近奇点的距离，所以 \(R\ge d\)。反过来若 \(R&gt;d\)，幂级数的和函数在整个 \(|z-z_0|&lt;R\) 内解析，而它与原函数在圆盘内处处相等，等于说原函数在奇点处也解析，与奇点的说法矛盾。于是 \(R=d\)。</p>
+      </details>
+
+      <p>系数的唯一性带来一个非常省事的算法。既然同一个圆盘里只可能有一个幂级数等于 \(f\)，那就不必按公式求导算系数，拿一个已知的展开做代数变形、换元、逐项求导，只要变形在收敛圆内合法，结果就一定对。</p>
+
+      <div class="keyidea reveal">
+        <p>系数由函数定死，所以展式可以拿现成的级数拼出来，不必求导。</p>
+      </div>
+
+      <div class="archive reveal">
+        <p class="archive-when">1841 年前后，柏林</p>
+        <h3>魏尔斯特拉斯把幂级数当成定义</h3>
+        <p class="archive-quote">「一个函数是解析的，如果它在每一点的邻域里都能展开成一个收敛的幂级数。」</p>
+        <p class="archive-source">魏尔斯特拉斯 1841 年前后的手稿，后由学生整理成讲义</p>
+        <p>这句话把解析函数的入口整个换掉，从「可导」换成「能展成幂级数」。柯西走积分，黎曼走几何，魏尔斯特拉斯走幂级数，三条路在十九世纪末被证明等价，今天课本取的仍是柯西那条，因为积分公式顺手就能给出系数。</p>
+      </div>
+
+      <h2 id="s-4" class="reveal">四、洛朗级数</h2>
+
+      <p>泰勒定理要求圆盘里没有奇点，可奇点常常就落在圆心：\(\dfrac{1}{z}\)、\(e^{1/z}\)、\(\dfrac{1}{z(z-1)}\) 都是这种情形。这时把圆心那一块挖掉，改在环域 \(r&lt;|z-z_0|&lt;R\) 里做，函数在剩下的环带上解析，级数就多出一半负幂项。</p>
+
+      <div class="figure">
+        <!--FIG cx04_annulus--><svg viewBox="0 0 720 452" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<text x="104.00" y="96.00" text-anchor="start" font-size="15.5" fill="var(--ink)">泰勒：一个圆盘</text>
+<circle cx="206.00" cy="236.00" r="98.00" fill="var(--fig-fill)" stroke="var(--accent-line)" stroke-width="2.4"/>
+<circle cx="206.00" cy="236.00" r="4.6" fill="var(--prussian)"/>
+<text x="196.00" y="258.00" text-anchor="end" font-size="14" fill="var(--ink-3)">z₀</text>
+<circle cx="275.30" cy="166.70" r="5.40" fill="var(--paper)" stroke="var(--ink-2)" stroke-width="1.8"/>
+<text x="285.30" y="158.70" text-anchor="start" font-size="13.5" fill="var(--ink-2)">奇点 a</text>
+<line x1="206.00" y1="236.00" x2="275.30" y2="166.70" stroke="var(--prussian)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 6"/>
+<text x="236.00" y="192.00" text-anchor="middle" font-size="15" fill="var(--prussian)" font-style="italic">R</text>
+<text x="206.00" y="378.00" text-anchor="middle" font-size="13.5" fill="var(--ink-2)">圆盘里没有奇点，</text>
+<text x="206.00" y="400.00" text-anchor="middle" font-size="13.5" fill="var(--ink-2)">半径 R 由最近的奇点定。</text>
+<text x="444.00" y="96.00" text-anchor="start" font-size="15.5" fill="var(--ink)">洛朗：一个环域</text>
+<circle cx="528.00" cy="236.00" r="83.00" fill="none" stroke="var(--fig-fill)" stroke-width="70"/>
+<circle cx="528.00" cy="236.00" r="118.00" fill="none" stroke="var(--accent-line)" stroke-width="2.4"/>
+<circle cx="528.00" cy="236.00" r="48.00" fill="var(--paper)" stroke="var(--accent-line)" stroke-width="2.4"/>
+<circle cx="528.00" cy="236.00" r="4.6" fill="var(--prussian)"/>
+<text x="528.00" y="222.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">z₀ 可以是奇点</text>
+<line x1="528.00" y1="236.00" x2="646.00" y2="236.00" stroke="var(--prussian)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 6"/>
+<text x="572.00" y="228.00" text-anchor="start" font-size="15" fill="var(--prussian)" font-style="italic">R</text>
+<line x1="528.00" y1="246.00" x2="557.55" y2="273.82" stroke="var(--prussian)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 6"/>
+<text x="538.00" y="270.00" text-anchor="start" font-size="15" fill="var(--prussian)" font-style="italic">r</text>
+<circle cx="454.00" cy="190.00" r="5.0" fill="var(--prussian)"/>
+<text x="454.00" y="174.00" text-anchor="middle" font-size="13" fill="var(--ink-2)">f 在这里解析</text>
+<text x="528.00" y="398.00" text-anchor="middle" font-size="13.5" fill="var(--ink-2)">除 z₀ 之外还要挖掉一圈，</text>
+<text x="528.00" y="420.00" text-anchor="middle" font-size="13.5" fill="var(--ink-2)">两圆之间才是展开的地方。</text>
+<text x="56.00" y="438.00" text-anchor="start" font-size="14" fill="var(--ink-3)">区域里挖掉一个圆，级数就多出一半负幂项。</text>
+</svg>
+<!--/FIG cx04_annulus-->
+        <figcaption class="figcaption"><b>泰勒的圆心在区域里，洛朗的圆心在区域外。</b>圆盘里没有奇点，半径由最近的奇点挡住；环域把那一圈奇点挖空，两圆之间才是能展开的地方。</figcaption>
+      </div>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定义（洛朗级数、解析部分与主要部分）</p>
+        <p>形如 \(\sum_{n=-\infty}^{\infty}c_n(z-z_0)^n\) 的双边级数叫洛朗级数。其中 \(n\ge0\) 的各项合称解析部分（正则部分），\(n&lt;0\) 的各项合称主要部分。</p>
+      </div>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定理（洛朗定理）</p>
+        <p>设 \(f(z)\) 在环域 \(D:r&lt;|z-z_0|&lt;R\) 内解析，则 \(f\) 在 \(D\) 内可展开成洛朗级数 \(f(z)=\sum_{n=-\infty}^{\infty}c_n(z-z_0)^n\)，其中 \(c_n=\dfrac{1}{2\pi i}\oint_C\dfrac{f(\zeta)}{(\zeta-z_0)^{n+1}}\,d\zeta\)，\(C\) 是 \(D\) 内绕 \(z_0\) 的任一逆时针闭路。这个展开在 \(D\) 内唯一。</p>
+      </div>
+
+      <p>证明走的还是柯西积分公式那条路，只是积分路径从一个圆变成两个同心圆组成的复合闭路：外圆上 \(\zeta-z_0\) 比 \(z-z_0\) 大，按等比级数展开给出正幂项；内圆上大小反过来，比值取倒数，给出负幂项。环域这个条件不是技术性的，它决定了哪些项允许出现。</p>
+
+      <div class="archive reveal">
+        <p class="archive-when">1843 年，巴黎</p>
+        <h3>洛朗把幂次放宽到负数</h3>
+        <p class="archive-quote">「在两个同心圆之间的区域里，函数可以展开成按 \((z-a)\) 的整数次幂排列的级数，幂次取遍全体整数。」</p>
+        <p class="archive-source">洛朗 1843 年提交巴黎科学院的论文</p>
+        <p>论文的题目接着柯西的积分定理往下做，只把积分路径换成两个同心圆。魏尔斯特拉斯 1841 年前后在阿贝尔函数的研究里独立得到同一个展开，一个从积分公式进来，一个从幂级数本身进来。</p>
+      </div>
+
+      <p>把两个定理摊开对比，差别只有一个负幂部分：泰勒级数从常数项往上走，洛朗级数还往下走。这一部分的信息量很大，\(z_0\) 附近发生的事全被负幂项记着。</p>
+
+      <div class="figure">
+        <!--FIG cx04_tworing--><svg viewBox="0 0 720 440" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<text x="58.00" y="66.00" text-anchor="start" font-size="15.5" fill="var(--ink)">|z| &lt; 1</text>
+<circle cx="196.00" cy="232.00" r="57.00" fill="var(--fig-fill)" stroke="none" stroke-width="0"/>
+<line x1="44.00" y1="232.00" x2="348.00" y2="232.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.45"/>
+<line x1="196.00" y1="82.00" x2="196.00" y2="382.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.45"/>
+<circle cx="196.00" cy="232.00" r="60.00" fill="none" stroke="var(--accent-line)" stroke-width="2.0"/>
+<circle cx="196.00" cy="232.00" r="120.00" fill="none" stroke="var(--ink-3)" stroke-width="1.6" stroke-dasharray="7 6"/>
+<circle cx="256.00" cy="232.00" r="5.40" fill="var(--paper)" stroke="var(--ink-2)" stroke-width="1.8"/>
+<text x="258.00" y="218.00" text-anchor="middle" font-size="12.5" fill="var(--ink-2)">极点 1</text>
+<circle cx="316.00" cy="232.00" r="5.40" fill="var(--paper)" stroke="var(--ink-2)" stroke-width="1.8"/>
+<text x="312.00" y="256.00" text-anchor="middle" font-size="12.5" fill="var(--ink-2)">极点 2</text>
+<text x="188.00" y="220.00" text-anchor="end" font-size="13" fill="var(--ink-3)">0</text>
+<line x1="212.00" y1="278.00" x2="308.00" y2="278.00" stroke="var(--prussian)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M 297.78 282.08 L 308.00 278.00 L 297.78 273.92" fill="var(--prussian)" stroke="var(--prussian)" stroke-width="1" stroke-linejoin="round"/>
+<text x="260.00" y="264.00" text-anchor="middle" font-size="12" fill="var(--prussian)">z 的幂</text>
+<text x="66.00" y="384.00" text-anchor="start" font-size="13.5" fill="var(--ink)">f = 1/2 + 3z/4 + 7z²/8 + ⋯</text>
+<text x="66.00" y="408.00" text-anchor="start" font-size="13" fill="var(--ink-2)">只有正的幂：这一块是泰勒级数</text>
+<text x="386.00" y="66.00" text-anchor="start" font-size="15.5" fill="var(--ink)">1 &lt; |z| &lt; 2</text>
+<circle cx="524.00" cy="232.00" r="90.00" fill="none" stroke="var(--fig-fill)" stroke-width="60.0"/>
+<line x1="372.00" y1="232.00" x2="676.00" y2="232.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.45"/>
+<line x1="524.00" y1="82.00" x2="524.00" y2="382.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.45"/>
+<circle cx="524.00" cy="232.00" r="60.00" fill="none" stroke="var(--accent-line)" stroke-width="2.0"/>
+<circle cx="524.00" cy="232.00" r="120.00" fill="none" stroke="var(--ink-3)" stroke-width="1.6" stroke-dasharray="7 6"/>
+<circle cx="584.00" cy="232.00" r="5.40" fill="var(--paper)" stroke="var(--ink-2)" stroke-width="1.8"/>
+<text x="586.00" y="218.00" text-anchor="middle" font-size="12.5" fill="var(--ink-2)">极点 1</text>
+<circle cx="644.00" cy="232.00" r="5.40" fill="var(--paper)" stroke="var(--ink-2)" stroke-width="1.8"/>
+<text x="640.00" y="256.00" text-anchor="middle" font-size="12.5" fill="var(--ink-2)">极点 2</text>
+<text x="516.00" y="220.00" text-anchor="end" font-size="13" fill="var(--ink-3)">0</text>
+<line x1="412.00" y1="278.00" x2="462.00" y2="278.00" stroke="var(--prussian)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M 451.78 282.08 L 462.00 278.00 L 451.78 273.92" fill="var(--prussian)" stroke="var(--prussian)" stroke-width="1" stroke-linejoin="round"/>
+<text x="436.00" y="264.00" text-anchor="middle" font-size="12" fill="var(--prussian)">1/z 的幂</text>
+<text x="394.00" y="384.00" text-anchor="start" font-size="13.5" fill="var(--ink)">f = ⋯ − 1/z² − 1/z − 1/2 − z/4 − ⋯</text>
+<text x="394.00" y="408.00" text-anchor="start" font-size="13" fill="var(--ink-2)">负的幂也进来了：这一块是洛朗级数</text>
+<text x="60.00" y="52.00" text-anchor="start" font-size="14" fill="var(--ink-3)">同一个函数，环域换一个，展开就换一套。</text>
+</svg>
+<!--/FIG cx04_tworing-->
+        <figcaption class="figcaption"><b>同一个函数，环域换一个，展开就换一套。</b>左边 \(|z|&lt;1\) 里两个分式都按 \(z\) 展开，级数只有正幂；右边 \(1&lt;|z|&lt;2\) 里 \(\dfrac{1}{z-1}\) 改成按 \(1/z\) 展开，负幂就进来了。</figcaption>
+      </div>
+
+      <p>同一个函数换一个环域，展开就得换一套，这一点与泰勒级数不同：泰勒展开只要圆盘定下来就定了，洛朗展开还要定环域。以 \(f(z)=\dfrac{1}{(z-1)(z-2)}\) 为例，在 \(|z|&lt;1\) 里它是纯正幂的 \(f(z)=\dfrac{1}{2}+\dfrac{3z}{4}+\dfrac{7z^2}{8}+\cdots\)，到了 \(1&lt;|z|&lt;2\) 里，\(\dfrac{1}{z-1}\) 那一项改成按 \(\dfrac{1}{z}\) 展开，级数就带上了一串负幂。</p>
+
+      <p>系数公式只能写成积分，不能写成 \(\dfrac{f^{(n)}(z_0)}{n!}\)，因为 \(z_0\) 处函数往往没有定义，导数无从谈起。这也解释了为什么做题时几乎不用积分：积分公式只管存在性与唯一性，真正的计算靠代数变形。</p>
+
+      <details class="fold">
+        <summary>洛朗系数为什么不能用求导算</summary>
+        <p>泰勒系数 \(c_n=\dfrac{f^{(n)}(z_0)}{n!}\) 要求 \(f\) 在 \(z_0\) 有各阶导数，而洛朗展开的圆心恰好常常是奇点，\(f(z_0)\) 根本没有定义。系数只能用积分写，做题时再用变形绕开它，比如把 \(\dfrac{1}{z-1}\) 提出 \(\dfrac{1}{z}\) 之后按等比级数展开。</p>
+      </details>
+
+      <p>把 \(\oint_C(z-z_0)^k\,dz\) 挨个算一遍，除了 \(k=-1\) 那一项得 \(2\pi i\)，其余全是 0。于是沿闭路积分一圈，双边级数里只剩一项活着：\(\oint_Cf(z)\,dz=2\pi i\,c_{-1}\)。这个 \(c_{-1}\) 有个专门的名字叫留数，第五章整章都围绕它转。</p>
+
+      <div class="keyidea reveal">
+        <p>洛朗级数比泰勒级数多出的只是负幂项，而这些项里只有 \(c_{-1}\) 在闭合积分后留下 \(2\pi i\)，留数就长在这里。</p>
+      </div>
+
+      <details class="fold">
+        <summary>常见错法：把 \(\dfrac{1}{z-1}\) 写成 \(\sum z^n\)</summary>
+        <p>在 \(|z|&gt;1\) 里 \(\dfrac{1}{z-1}\) 不能写成 \(1+z+z^2+\cdots\)，那一串只在 \(|z|&lt;1\) 收敛。正确做法是先提出 \(\dfrac{1}{z}\)：\(\dfrac{1}{z-1}=\dfrac{1}{z}\cdot\dfrac{1}{1-1/z}=\sum_{n=1}^{\infty}z^{-n}\)。判断朝哪边展开只看一件事：分母里提出来的那个因子取 \(z\) 还是 \(\dfrac{1}{z}\)，看 \(|z|\) 比 1 大还是小。</p>
+      </details>
+
+      <h2 id="s-manual" class="reveal">怎么算</h2>
+
+      <ul>
+        <li><strong>先定范围，再动笔。</strong>泰勒展开先算 \(R\)，也就是展开点到最近奇点的距离，圆盘就是它。</li>
+        <li><strong>洛朗展开先划环域。</strong>把奇点按到 \(z_0\) 的距离排好，每两个相邻距离之间是一个环域，一个环域一套答案。</li>
+        <li><strong>每个分式单独判方向。</strong>分母里提出来的量是 \(z\) 还是 \(\dfrac{1}{z}\)，看 \(|z|\) 比 1 大还是小。</li>
+        <li><strong>先拆部分分式。</strong>拆完每一项都是 \(\dfrac{1}{z-a}\) 的形状，比通分硬展快得多。</li>
+        <li><strong>四个现成展开够用。</strong>\(e^z\)、\(\sin z\)、\(\cos z\)、\(\dfrac{1}{1-z}\)，其余靠换元凑出来。</li>
+      </ul>
+
+      <h2 id="s-examples" class="reveal">例题</h2>
+
+      <div class="example">
+        <p class="example-head">例 <span>1</span>　求 \(\sum_{n=1}^{\infty}nz^n\) 的收敛半径与和函数。</p>
+        <p class="solution">由 \(\sqrt[n]{n}\to1\) 得 \(R=1\)。在 \(|z|&lt;1\) 内把 \(\dfrac{1}{1-z}=\sum z^n\) 逐项求导，得 \(\dfrac{1}{(1-z)^2}=\sum n z^{n-1}\)，两边乘 \(z\)，和函数为 \(\dfrac{z}{(1-z)^2}\)。</p>
+      </div>
+
+      <div class="example">
+        <p class="example-head">例 <span>2</span>　把 \(\dfrac{1}{z}\) 在 \(z_0=1\) 处展成泰勒级数，说明半径为什么是 1。</p>
+        <p class="solution">\(\dfrac{1}{z}=\dfrac{1}{1+(z-1)}=\sum_{n=0}^{\infty}(-1)^n(z-1)^n\)，成立范围是 \(|z-1|&lt;1\)。半径由奇点 0 到 1 的距离定下，想在更大的圆里收敛就得跨过奇点。</p>
+      </div>
+
+      <div class="example">
+        <p class="example-head">例 <span>3</span>　把 \(f(z)=\dfrac{1}{(z-1)(z-2)}\) 在 \(1&lt;|z|&lt;2\) 内展开。</p>
+        <p class="solution">拆成 \(\dfrac{1}{z-2}-\dfrac{1}{z-1}\)。前者在 \(|z|&lt;2\) 里按 \(z\) 展开得 \(-\sum_{n=0}^{\infty}\dfrac{z^n}{2^{n+1}}\)，后者在 \(|z|&gt;1\) 里按 \(\dfrac{1}{z}\) 展开得 \(-\sum_{n=1}^{\infty}z^{-n}\)，两者相加即为所求。</p>
+      </div>
+
+      <h2 id="s-exercises" class="reveal">习题</h2>
+
+      <div class="exercises">
+
+        <div class="ex-group">
+          <p class="ex-group-head">A 档 <span>巩固定义与基本计算，每题五分钟内</span></p>
+
+          <p class="ex"><span class="ex-num">1.</span> 求 \(\sum_{n=0}^{\infty}\dfrac{z^n}{n!}\) 的收敛半径。</p>
+          <div class="answer"><details><summary>看答案</summary><p>\(\sqrt[n]{1/n!}\to0\)，故 \(R=\infty\)，级数在整个复平面上收敛，和函数是 \(e^z\)。</p></details></div>
+
+          <p class="ex"><span class="ex-num">2.</span> 求 \(\sum_{n=0}^{\infty}\dfrac{(z-i)^n}{4^n}\) 的收敛圆。</p>
+          <div class="answer"><details><summary>看答案</summary><p>系数模的 \(n\) 次根恒为 \(\dfrac14\)，故 \(R=4\)，收敛圆是 \(|z-i|&lt;4\)，圆周上的点要逐点另判。</p></details></div>
+
+          <p class="ex"><span class="ex-num">3.</span> 判断 \(\sum_{n=0}^{\infty}\left(\dfrac{1+i}{2}\right)^n\) 是否收敛，收敛时求和。</p>
+          <div class="answer"><details><summary>看答案</summary><p>公比的模是 \(\dfrac{\sqrt2}{2}&lt;1\)，绝对收敛。和为 \(\dfrac{1}{1-(1+i)/2}=\dfrac{2}{1-i}=1+i\)。</p></details></div>
+
+          <p class="ex"><span class="ex-num">4.</span> 写出 \(\dfrac{1}{1+z}\) 在 \(z=0\) 处的泰勒展开前四项与收敛半径。</p>
+          <div class="answer"><details><summary>看答案</summary><p>把 \(z\) 换成 \(-z\) 得 \(1-z+z^2-z^3+\cdots\)。奇点在 \(-1\)，半径为 1。</p></details></div>
+
+          <p class="ex"><span class="ex-num">5.</span> 把 \(\dfrac{1}{z-2}\) 在 \(z_0=0\) 处展开。</p>
+          <div class="answer"><details><summary>看答案</summary><p>提出 \(-\dfrac12\)：\(\dfrac{1}{z-2}=-\dfrac12\cdot\dfrac{1}{1-z/2}=-\sum_{n=0}^{\infty}\dfrac{z^n}{2^{n+1}}\)，成立范围 \(|z|&lt;2\)。</p></details></div>
+
+          <p class="ex"><span class="ex-num">6.</span> 说明 \(\sum z^n\) 在 \(|z|=1\) 上为什么处处发散。</p>
+          <div class="answer"><details><summary>看答案</summary><p>圆周上 \(|z^n|=1\)，通项的模恒为 1，不趋于 0，级数收敛的必要条件不成立。</p></details></div>
+        </div>
+
+        <div class="ex-group">
+          <p class="ex-group-head">B 档 <span>综合题，接近期末与考研难度</span></p>
+
+          <p class="ex"><span class="ex-num">1.</span> 设 \(\sum c_nz_1^n\) 在 \(z_1\ne0\) 处收敛，证明 \(\sum c_nz^n\) 在 \(|z|&lt;|z_1|\) 内绝对收敛。</p>
+          <div class="answer"><details><summary>看答案</summary><p>收敛级数的通项有界，\(|c_nz_1^n|\le M\)。于是 \(|c_nz^n|\le M\left|\dfrac{z}{z_1}\right|^n\)，右边是公比小于 1 的等比级数，比较判别法给出绝对收敛。</p></details></div>
+
+          <p class="ex"><span class="ex-num">2.</span> 把 \(\dfrac{1}{z^2+1}\) 在 \(z_0=0\) 处展开到 \(z^4\) 项，写出收敛半径。</p>
+          <div class="answer"><details><summary>看答案</summary><p>\(\dfrac{1}{1+z^2}=\sum(-1)^nz^{2n}=1-z^2+z^4-\cdots\)。奇点在 \(\pm i\)，半径为 1。</p></details></div>
+
+          <p class="ex"><span class="ex-num">3.</span> 讨论 \(\sum\dfrac{z^n}{n}\) 在 \(|z|=1\) 上的收敛性。</p>
+          <div class="answer"><details><summary>看答案</summary><p>\(z=1\) 时是调和级数，发散。其余点写 \(z=e^{i\theta}\)（\(\theta\ne0\)），部分和 \(\sum e^{ik\theta}\) 有界，\(1/n\) 单调趋于 0，由狄利克雷判别法收敛，但不绝对收敛。</p></details></div>
+
+          <p class="ex"><span class="ex-num">4.</span> 把 \(f(z)=\dfrac{1}{(z-1)(z-2)}\) 在 \(|z|&lt;1\) 内展开，并说明为什么这里不需要负幂项。</p>
+          <div class="answer"><details><summary>看答案</summary><p>两项都按 \(z\) 展开：\(f(z)=\sum_{n=0}^{\infty}\left(1-\dfrac{1}{2^{n+1}}\right)z^n=\dfrac12+\dfrac{3z}{4}+\dfrac{7z^2}{8}+\cdots\)。圆盘 \(|z|&lt;1\) 里没有奇点，泰勒定理直接适用，故没有负幂项。</p></details></div>
+        </div>
+
+        <div class="ex-group">
+          <p class="ex-group-head">C 档 <span>拓展与历史原题</span></p>
+
+          <p class="ex"><span class="ex-num">1.</span>（洛朗，1843）把 \(\dfrac{1}{(z-1)(z-3)}\) 分别在 \(1&lt;|z|&lt;3\) 与 \(|z|&gt;3\) 内展开。</p>
+          <div class="answer"><details><summary>看答案</summary><p>先拆成 \(\dfrac12\left(\dfrac{1}{z-3}-\dfrac{1}{z-1}\right)\)。在 \(1&lt;|z|&lt;3\) 里前项按 \(z\) 展、后项按 \(1/z\) 展，得 \(-\dfrac12\sum_{n=0}^{\infty}\dfrac{z^n}{3^{n+1}}-\dfrac12\sum_{n=1}^{\infty}z^{-n}\)。在 \(|z|&gt;3\) 里两项都按 \(1/z\) 展，得 \(\dfrac12\sum_{n=0}^{\infty}(3^n-1)z^{-n-1}\)。</p></details></div>
+
+          <p class="ex"><span class="ex-num">2.</span>（洛朗，1843）求 \(e^{1/z}\) 在 \(0&lt;|z|&lt;\infty\) 内的洛朗级数，指出主要部分有几项。</p>
+          <div class="answer"><details><summary>看答案</summary><p>把 \(e^w\) 的展开里的 \(w\) 换成 \(\dfrac{1}{z}\)，得 \(\sum_{n=0}^{\infty}\dfrac{1}{n!\,z^n}=1+\dfrac{1}{z}+\dfrac{1}{2!\,z^2}+\cdots\)。解析部分只剩常数 1，主要部分有无穷多项。负幂项无穷多，说明 \(z=0\) 是本性奇点。</p></details></div>
+
+          <p class="ex"><span class="ex-num">3.</span> 把 \(\dfrac{1}{z(z-1)}\) 在三个环域 \(0&lt;|z|&lt;1\)、\(1&lt;|z|&lt;\infty\)、\(0&lt;|z-1|&lt;1\) 内分别展开。</p>
+          <div class="answer"><details><summary>看答案</summary><p>\(0&lt;|z|&lt;1\) 里 \(-\dfrac1z\cdot\dfrac{1}{1-z}=-\dfrac1z-1-z-z^2-\cdots\)。\(1&lt;|z|&lt;\infty\) 里 \(\dfrac{1}{z^2}\cdot\dfrac{1}{1-1/z}=z^{-2}+z^{-3}+\cdots\)。\(0&lt;|z-1|&lt;1\) 里以 \(z-1\) 为幂，得 \(\dfrac{1}{z-1}-1+(z-1)-(z-1)^2+\cdots\)。</p></details></div>
+        </div>
+
+        <div class="ex-group">
+          <p class="ex-group-head">思考题 <span>不设标准答案，只给提示</span></p>
+
+          <p class="ex"><span class="ex-num">1.</span> 实数幂级数的边界只是两个端点，复数为什么多出一整条圆周？</p>
+          <div class="answer"><details><summary>看提示</summary><p>半径只由系数决定，与方向无关。实数轴上每个方向只对应一个端点，两个方向给出两个；复平面上每个方向对应一整条射线，所有射线的端点合起来就是一整条圆周。</p></details></div>
+
+          <p class="ex"><span class="ex-num">2.</span> 泰勒系数既然由函数唯一决定，用代数变形拼出来的级数为什么不会错？</p>
+          <div class="answer"><details><summary>看提示</summary><p>唯一性保证圆盘内只有一个幂级数等于 \(f\)，所以拼出来的只要在圆盘内收敛，就必然是那一个。出错的通常是收敛域，比如在 \(|z|&gt;1\) 里套用了 \(|z|&lt;1\) 的展开。</p></details></div>
+
+          <p class="ex"><span class="ex-num">3.</span> \(\oint_C(z-z_0)^kdz\) 为什么只在 \(k=-1\) 时不为零？</p>
+          <div class="answer"><details><summary>看提示</summary><p>\(k\ne-1\) 时被积函数有原函数 \(\dfrac{(z-z_0)^{k+1}}{k+1}\)，沿闭路走一圈回到起点，积分为零。\(k=-1\) 时原函数是对数，绕一圈多出 \(2\pi i\)。</p></details></div>
+        </div>
+
+      </div>
+
+      <h2 class="reveal">延伸阅读</h2>
+      <ul class="refs">
+        <li>钟玉泉《复变函数论》第四版，第四章。本章记号、定理顺序与例题口径以此为准。</li>
+        <li>Laurent 1843 年提交巴黎科学院的论文，环域展开第一次出现，魏尔斯特拉斯几乎同时在阿贝尔函数的研究里得到同样的结果。</li>
+        <li>Ahlfors, <em>Complex Analysis</em>, 第 5 章。幂级数展开讲得最紧凑，收敛半径的证明只用一行。</li>
+        <li>Tristan Needham, <em>Visual Complex Analysis</em>, 第 4 章。把洛朗级数当向量场分解来看，图比文字多。</li>
+      </ul>
+
+    </article>
+  </div>
+
+  <div class="wrap">
+    <nav class="pager" aria-label="翻页">
+      <a class="pager-link prev" href="ch03.html"><span class="pager-dir">上一章</span><span class="pager-title">复积分与柯西定理</span></a>
+      <a class="pager-link next" href="ch05.html"><span class="pager-dir">下一章</span><span class="pager-title">留数：算不出的积分有救了</span></a>
+    </nav>
+  </div>
+
+</main>
+
+<footer class="footer field-dark">
+  <div class="wrap">
+    <p class="footer-mark">数学基础课</p>
+    <div class="footer-cols">
+      <div><p>四门课按同一套读法写：先看问题，再给定义与判别，最后落到计算与习题。</p></div>
+      <div><p><a href="index.html">复变函数目录</a></p><p><a href="../index.html">返回主页</a></p></div>
+      <div><p>图示用脚本按真实数值画，公式由 KaTeX 排版。</p></div>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/katex/katex.min.js"></script>
+<script src="../assets/katex/auto-render.min.js"></script>
+<script src="../assets/site.js"></script>
+</body>
+</html>

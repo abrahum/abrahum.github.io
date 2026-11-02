@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>第三章 复积分与柯西定理 · 复变函数</title>
+<meta name="description" content="复积分的定义与算法、柯西积分定理的分割证明、原函数与路径无关、复合闭路与柯西积分公式。">
+<link rel="stylesheet" href="../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="nav-brand" href="../index.html">数学基础课<span> 四门课，一套读法</span></a>
+    <nav class="nav-links" aria-label="主导航">
+      <a href="index.html#map">本课目录</a>
+      <a class="xl" href="../calculus/index.html">微积分</a>
+      <a class="xl" href="../linear-algebra/index.html">线性代数</a>
+      <a class="xl" href="../probability/index.html">概率论</a>
+      <a class="opt" href="ch04.html">下一章</a>
+    </nav>
+  </div>
+  <div class="nav-progress" aria-hidden="true"></div>
+</header>
+
+<main>
+
+  <section class="chapter">
+    <div class="wrap">
+      <div class="ch-hero-band">
+        <div>
+          <p class="ch-label reveal"><span>第三章</span><span class="ch-era">1825 年至 1886 年</span></p>
+          <h1 class="ch-title reveal reveal-2">复积分与柯西定理</h1>
+          <p class="ch-deck reveal reveal-3">这一章要算一个复变函数沿曲线累加的结果。定义跟实积分一样，可算完会碰上实积分里没有的事：同一个函数从同一点走到同一点，换条路，答案就变了。柯西 1825 年给出了答案不变的条件，条件里只看函数在区域里解不解析，不看曲线长什么样。</p>
+          <div class="ch-meta reveal reveal-3">
+            <div><strong>本章知识点</strong>复积分与它的算法、柯西积分定理、原函数、复合闭路、柯西积分公式</div>
+            <div><strong>历史坐标</strong>柯西 1825 年，古尔萨 1883 年，莫雷拉 1886 年</div>
+            <div><strong>对应教材</strong>钟玉泉《复变函数论》第三章</div>
+            <div><strong>前置</strong>解析函数与柯西-黎曼方程、第二类曲线积分</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap ch-body">
+    <aside class="rail">
+      <p class="rail-title">本章提纲</p>
+      <ol>
+        <li><a href="#s-1">把曲线切成小段</a></li>
+        <li><a href="#s-2">柯西积分定理</a></li>
+        <li><a href="#s-3">原函数与路径无关</a></li>
+        <li><a href="#s-4">多连通区域与桥</a></li>
+        <li><a href="#s-5">柯西积分公式</a></li>
+        <li><a href="#s-manual">怎么算</a></li>
+        <li><a href="#s-examples">例题</a></li>
+        <li><a href="#s-exercises">习题</a></li>
+      </ol>
+      <p class="rail-title">历史坐标</p>
+      <p class="rail-who">柯西 1825 年<br>刘维尔 1847 年<br>古尔萨 1883 年<br>莫雷拉 1886 年</p>
+    </aside>
+
+    <article class="prose">
+
+      <p class="lead reveal">复积分的定义是把曲线切成小段，每段乘上函数值再相加，跟实积分的黎曼和没什么两样。麻烦出在算出来的结果上：同一条曲线的起点终点不变，换一条路走，积分可以完全不同，这让复积分没法照搬实积分那套直接算。柯西 1814 年把这件事写成报告，1825 年刊出，第一次说清了积分与路径无关的条件，后面每个定理都要用到它。</p>
+
+      <h2 id="s-1" class="reveal">一、把曲线切成小段</h2>
+
+      <p>设 C 是复平面上一条有向曲线，起点 A、终点 B，f 在 C 上有定义。把 C 沿自己的方向依次取分点 \(z_0=A,z_1,\dots,z_n=B\)，在每一小段上任取一点 \(\zeta_k\)，作乘积 \(f(\zeta_k)\Delta z_k\) 并全部加起来，得到一个复数；让分点越来越密，最大的弧长 \(\lambda\) 趋于零，如果这些和都趋向同一个确定的复数，就说 f 沿 C 可积，那个极限叫 f 沿 C 的积分。</p>
+
+      <p>定义里唯一要留神的地方在 \(\Delta z_k\) 上：它带方向，可以取负，所以每个乘积都是复平面里的一根小向量，全部加起来要按向量的规矩相加。图里左边把曲线切成 6 段，右边把这些小向量逐段首尾相接，从起点接出来的合向量就是积分的近似值，段数加多，合向量就稳定下来，不再乱跑。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定义（复积分）</p>
+        <p>设 C 为起点 A、终点 B 的有向曲线，用分点把 C 分成 n 段，第 k 段上任取一点 \(\zeta_k\)，作和 \(S_n=\sum_{k=1}^{n}f(\zeta_k)\Delta z_k\)。当最大弧长 \(\lambda\to0\) 时 \(S_n\) 趋于定值 I，则称 f 沿 C 可积，I 叫 f 沿 C 的积分，记作 \(\int_C f(z)\,dz\)。若 C 分段光滑、f 在 C 上连续，这个积分一定存在。</p>
+      </div>
+
+      <div class="figure">
+        <!--FIG cx03_sum--><svg viewBox="0 0 720 430" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<text x="24.00" y="44.00" text-anchor="start" font-size="14.5" fill="var(--ink-2)">把曲线切成小段，每段乘一个函数值，再把得到的小向量首尾相接</text>
+<path d="M 83.23 278.36 L 84.34 276.55 L 85.45 274.75 L 86.55 272.94 L 87.66 271.14 L 88.77 269.35 L 89.88 267.56 L 90.98 265.77 L 92.09 263.99 L 93.20 262.21 L 94.31 260.43 L 95.42 258.67 L 96.52 256.91 L 97.63 255.15 L 98.74 253.40 L 99.85 251.66 L 100.95 249.93 L 102.06 248.21 L 103.17 246.49 L 104.28 244.79 L 105.38 243.09 L 106.49 241.40 L 107.60 239.72 L 108.71 238.06 L 109.82 236.40 L 110.92 234.76 L 112.03 233.12 L 113.14 231.50 L 114.25 229.89 L 115.35 228.30 L 116.46 226.71 L 117.57 225.14 L 118.68 223.59 L 119.78 222.05 L 120.89 220.52 L 122.00 219.01 L 123.11 217.51 L 124.22 216.03 L 125.32 214.56 L 126.43 213.12 L 127.54 211.68 L 128.65 210.27 L 129.75 208.87 L 130.86 207.49 L 131.97 206.12 L 133.08 204.78 L 134.18 203.45 L 135.29 202.14 L 136.40 200.86 L 137.51 199.59 L 138.62 198.34 L 139.72 197.11 L 140.83 195.90 L 141.94 194.71 L 143.05 193.54 L 144.15 192.39 L 145.26 191.26 L 146.37 190.16 L 147.48 189.08 L 148.58 188.02 L 149.69 186.98 L 150.80 185.96 L 151.91 184.97 L 153.02 184.00 L 154.12 183.05 L 155.23 182.13 L 156.34 181.23 L 157.45 180.35 L 158.55 179.50 L 159.66 178.67 L 160.77 177.86 L 161.88 177.08 L 162.98 176.33 L 164.09 175.60 L 165.20 174.89 L 166.31 174.22 L 167.42 173.56 L 168.52 172.93 L 169.63 172.33 L 170.74 171.75 L 171.85 171.20 L 172.95 170.68 L 174.06 170.18 L 175.17 169.71 L 176.28 169.26 L 177.38 168.84 L 178.49 168.45 L 179.60 168.08 L 180.71 167.74 L 181.82 167.43 L 182.92 167.14 L 184.03 166.88 L 185.14 166.65 L 186.25 166.45 L 187.35 166.27 L 188.46 166.12 L 189.57 166.00 L 190.68 165.90 L 191.78 165.83 L 192.89 165.79 L 194.00 165.78 L 195.11 165.79 L 196.22 165.83 L 197.32 165.90 L 198.43 166.00 L 199.54 166.12 L 200.65 166.27 L 201.75 166.45 L 202.86 166.65 L 203.97 166.88 L 205.08 167.14 L 206.18 167.43 L 207.29 167.74 L 208.40 168.08 L 209.51 168.45 L 210.62 168.84 L 211.72 169.26 L 212.83 169.71 L 213.94 170.18 L 215.05 170.68 L 216.15 171.20 L 217.26 171.75 L 218.37 172.33 L 219.48 172.93 L 220.58 173.56 L 221.69 174.22 L 222.80 174.89 L 223.91 175.60 L 225.02 176.33 L 226.12 177.08 L 227.23 177.86 L 228.34 178.67 L 229.45 179.50 L 230.55 180.35 L 231.66 181.23 L 232.77 182.13 L 233.88 183.05 L 234.98 184.00 L 236.09 184.97 L 237.20 185.96 L 238.31 186.98 L 239.42 188.02 L 240.52 189.08 L 241.63 190.16 L 242.74 191.26 L 243.85 192.39 L 244.95 193.54 L 246.06 194.71 L 247.17 195.90 L 248.28 197.11 L 249.38 198.34 L 250.49 199.59 L 251.60 200.86 L 252.71 202.14 L 253.82 203.45 L 254.92 204.78 L 256.03 206.12 L 257.14 207.49 L 258.25 208.87 L 259.35 210.27 L 260.46 211.68 L 261.57 213.12 L 262.68 214.56 L 263.78 216.03 L 264.89 217.51 L 266.00 219.01 L 267.11 220.52 L 268.22 222.05 L 269.32 223.59 L 270.43 225.14 L 271.54 226.71 L 272.65 228.30 L 273.75 229.89 L 274.86 231.50 L 275.97 233.12 L 277.08 234.76 L 278.18 236.40 L 279.29 238.06 L 280.40 239.72 L 281.51 241.40 L 282.62 243.09 L 283.72 244.79 L 284.83 246.49 L 285.94 248.21 L 287.05 249.93 L 288.15 251.66 L 289.26 253.40 L 290.37 255.15 L 291.48 256.91 L 292.58 258.67 L 293.69 260.43 L 294.80 262.21 L 295.91 263.99 L 297.02 265.77 L 298.12 267.56 L 299.23 269.35 L 300.34 271.14 L 301.45 272.94 L 302.55 274.75 L 303.66 276.55 L 304.77 278.36" fill="none" stroke="var(--ink-3)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 6"/>
+<text x="215.69" y="156.22" text-anchor="middle" font-size="15" fill="var(--ink-3)" font-style="italic">C</text>
+<line x1="78.62" y1="285.90" x2="117.08" y2="225.84" stroke="var(--accent-line)" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/><path d="M 115.57 233.70 L 117.08 225.84 L 110.57 230.50" fill="var(--accent-line)" stroke="var(--accent-line)" stroke-width="1" stroke-linejoin="round"/>
+<line x1="117.08" y1="225.84" x2="155.54" y2="181.87" stroke="var(--accent-line)" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/><path d="M 152.88 189.42 L 155.54 181.87 L 148.41 185.51" fill="var(--accent-line)" stroke="var(--accent-line)" stroke-width="1" stroke-linejoin="round"/>
+<line x1="155.54" y1="181.87" x2="194.00" y2="165.78" stroke="var(--accent-line)" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/><path d="M 188.29 171.39 L 194.00 165.78 L 186.00 165.91" fill="var(--accent-line)" stroke="var(--accent-line)" stroke-width="1" stroke-linejoin="round"/>
+<line x1="194.00" y1="165.78" x2="232.46" y2="181.87" stroke="var(--accent-line)" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/><path d="M 224.46 181.74 L 232.46 181.87 L 226.75 176.27" fill="var(--accent-line)" stroke="var(--accent-line)" stroke-width="1" stroke-linejoin="round"/>
+<line x1="232.46" y1="181.87" x2="270.92" y2="225.84" stroke="var(--accent-line)" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/><path d="M 263.80 222.20 L 270.92 225.84 L 268.26 218.29" fill="var(--accent-line)" stroke="var(--accent-line)" stroke-width="1" stroke-linejoin="round"/>
+<line x1="270.92" y1="225.84" x2="309.38" y2="285.90" stroke="var(--accent-line)" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/><path d="M 302.88 281.24 L 309.38 285.90 L 307.88 278.04" fill="var(--accent-line)" stroke="var(--accent-line)" stroke-width="1" stroke-linejoin="round"/>
+<circle cx="78.62" cy="285.90" r="5.0" fill="var(--prussian)"/>
+<circle cx="309.38" cy="285.90" r="5.0" fill="var(--prussian)"/>
+<text x="74.62" y="311.90" text-anchor="middle" font-size="14" fill="var(--ink)">z₀ = A</text>
+<text x="313.38" y="311.90" text-anchor="middle" font-size="14" fill="var(--ink)">z_n = B</text>
+<circle cx="232.46" cy="181.87" r="3.60" fill="var(--paper)" stroke="var(--prussian)" stroke-width="1.4"/>
+<text x="244.46" y="186.87" text-anchor="start" font-size="13" fill="var(--ink-2)">z₄</text>
+<circle cx="136.31" cy="200.96" r="3.4" fill="var(--prussian)"/>
+<line x1="136.31" y1="200.96" x2="176.31" y2="246.96" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="176.31" y="246.96" text-anchor="start" font-size="13" fill="var(--prussian)">ζ_k</text>
+<line x1="136.31" y1="205.86" x2="156.31" y2="281.86" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="156.31" y="281.86" text-anchor="start" font-size="13" fill="var(--ink-2)">Δz_k</text>
+<text x="24.00" y="410.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">切分点越密，折线越贴近曲线；和不变号，只变得更细。</text>
+<line x1="457.23" y1="281.47" x2="454.68" y2="280.36" stroke="var(--accent-line)" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="454.68" y1="280.36" x2="439.69" y2="268.86" stroke="var(--accent-line)" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="439.69" y1="268.86" x2="430.00" y2="237.42" stroke="var(--accent-line)" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 436.59 244.95 L 430.00 237.42 L 428.79 247.35" fill="none" stroke="var(--accent-line)" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="430.00" y1="237.42" x2="460.92" y2="199.27" stroke="var(--accent-line)" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 458.34 208.93 L 460.92 199.27 L 452.00 203.80" fill="none" stroke="var(--accent-line)" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="460.92" y1="199.27" x2="542.50" y2="198.53" stroke="var(--accent-line)" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 533.41 202.69 L 542.50 198.53 L 533.34 194.54" fill="none" stroke="var(--accent-line)" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="542.50" y1="198.53" x2="642.00" y2="276.37" stroke="var(--accent-line)" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 632.30 273.96 L 642.00 276.37 L 637.32 267.53" fill="none" stroke="var(--accent-line)" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="457.23" cy="281.47" r="3.2" fill="var(--accent-line)"/>
+<circle cx="454.68" cy="280.36" r="3.2" fill="var(--accent-line)"/>
+<circle cx="439.69" cy="268.86" r="3.2" fill="var(--accent-line)"/>
+<circle cx="430.00" cy="237.42" r="3.2" fill="var(--accent-line)"/>
+<circle cx="460.92" cy="199.27" r="3.2" fill="var(--accent-line)"/>
+<circle cx="542.50" cy="198.53" r="3.2" fill="var(--accent-line)"/>
+<circle cx="642.00" cy="276.37" r="3.2" fill="var(--accent-line)"/>
+<line x1="457.23" y1="281.47" x2="642.00" y2="276.37" stroke="var(--prussian)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 5"/><path d="M 632.82 280.34 L 642.00 276.37 L 632.61 272.92" fill="var(--prussian)" stroke="var(--prussian)" stroke-width="1" stroke-linejoin="round"/>
+<circle cx="457.23" cy="281.47" r="4.6" fill="var(--ink-2)"/>
+<circle cx="642.00" cy="276.37" r="4.6" fill="var(--prussian)"/>
+<line x1="516.00" y1="320.00" x2="556.00" y2="288.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="512.00" y="336.00" text-anchor="end" font-size="14" fill="var(--prussian)">Σ f(ζ_k)Δz_k</text>
+<text x="430.00" y="96.00" text-anchor="start" font-size="14.5" fill="var(--ink)">小向量首尾相接</text>
+<text x="430.00" y="386.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">首尾接出来的合向量，就是积分的近似值。</text>
+<text x="430.00" y="410.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">段数加到无穷，这个和趋于一个定值。</text>
+</svg>
+<!--/FIG cx03_sum-->
+        <figcaption class="figcaption"><b>积分是「每段乘函数值再相加」，加的是向量。</b>左边是分划，右边是向量加法。段数增加时折线贴近曲线，合向量也趋于一个定值。</figcaption>
+      </div>
+
+      <p>要真算一个积分，得先把曲线写成参数式。设 \(C:z=z(t)\)，\(\alpha\le t\le\beta\)，\(z'(t)\) 连续，那么 \(\Delta z_k\) 就换成 \(z'(t)dt\)，复积分变成一个实变量的复值积分，对 t 直接算就行。把实部虚部分开还能得到另一副面孔，\(\int_C f\,dz=\int_C(u\,dx-v\,dy)+i\int_C(v\,dx+u\,dy)\)，它把复积分拆成两个实的第二类曲线积分，第二章的柯西-黎曼方程从这里能看出点影子。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定理（复积分的计算）</p>
+        <p>设 \(C:z=z(t)=x(t)+iy(t)\)，\(\alpha\le t\le\beta\)，\(z'(t)\) 连续且不为零，\(f=u+iv\) 在 C 上连续，则</p>
+        <p>\[ \int_C f(z)\,dz=\int_\alpha^\beta f[z(t)]\,z'(t)\,dt. \]</p>
+        <p>右端是实变量 t 的积分，按实部虚部分开算即可。</p>
+      </div>
+
+      <p>三条性质跟着定义就来。线性是显然的：\(\int_C(\alpha f+\beta g)dz=\alpha\int_C f\,dz+\beta\int_C g\,dz\)。方向性也不难：把曲线反过来走，每一段的 \(\Delta z_k\) 都变号，所以 \(\int_{C^-}f\,dz=-\int_C f\,dz\)。第三条最常用，叫估值不等式，\(\left|\int_C f\,dz\right|\le\int_C|f|\,|dz|\le ML\)，其中 M 是 |f| 在 C 上的最大值，L 是 C 的长度。第五章把实积分换成复积分来算的时候，收尾全靠这一条。</p>
+
+      <details class="fold">
+        <summary>为什么乘的是 Δz_k 而不是弧长</summary>
+        <p>实积分乘的 \(\Delta x\) 恒为正，所以积分值一定夹在上下界之间。复积分的 \(\Delta z_k\) 带方向，同一条曲线换个走法就变号，两段的贡献能互相抵消，积分因此可以是零，也可以不是实数，\(1/z\) 沿单位圆一圈得到 \(2\pi i\) 就是例子。带方向是复积分与实积分的第一处差别。</p>
+      </details>
+
+      <h2 id="s-2" class="reveal">二、柯西积分定理</h2>
+
+      <p>算几个例子会碰上一件怪事：\(f(z)=z\) 沿任何闭路走一圈的积分都是零，\(f(z)=1/z\) 绕原点一圈却得到 \(2\pi i\)。前者在整个平面上处处可导，后者在原点没有定义。柯西看出这不是巧合，只要函数在区域里处处可导，闭路上的积分就只能是零，这条结论叫柯西积分定理，是整章的地基，后面每个定理都要靠它。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定理（柯西积分定理）</p>
+        <p>设 f 在单连通区域 D 内解析，C 是 D 内任意一条简单闭曲线，则</p>
+        <p>\[ \oint_C f(z)\,dz=0. \]</p>
+        <p>把 C 换成 D 内任意一条复合闭路，结论同样成立。</p>
+      </div>
+
+      <p>证明的办法是把区域切碎。用有限条横线和竖线把 D 分成一堆小方格，压在外边界上的那几块再补几刀切成更小的块，总之让每一块都整个躺在 D 里，而且直径可以任意小。对每一块取沿它边界逆时针一圈的积分，再全部加起来：内部的公共边被相邻两块各走了一次，方向一正一反，两次的积分互相抵消，最后只剩最外面那一圈 C。这一步只跟记账有关，跟 f 是什么没有关系。</p>
+
+      <div class="figure">
+        <!--FIG cx03_mesh--><svg viewBox="0 0 720 460" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<text x="24.00" y="44.00" text-anchor="start" font-size="14.5" fill="var(--ink-2)">把区域切成小方格：内部每条边被走两次，方向相反</text>
+<rect x="128.00" y="84.00" width="300.00" height="300.00" fill="var(--fig-fill)" stroke="none" stroke-width="1.4"/>
+<rect x="278.00" y="159.00" width="75.00" height="75.00" fill="var(--fig-fill-2)" stroke="none" stroke-width="1.4"/>
+<text x="315.50" y="202.50" text-anchor="middle" font-size="15" fill="var(--prussian)">Δ</text>
+<line x1="203.00" y1="84.00" x2="203.00" y2="384.00" stroke="var(--ink-2)" stroke-width="1.0" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<line x1="128.00" y1="159.00" x2="428.00" y2="159.00" stroke="var(--ink-2)" stroke-width="1.0" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<line x1="278.00" y1="84.00" x2="278.00" y2="384.00" stroke="var(--ink-2)" stroke-width="1.0" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<line x1="128.00" y1="234.00" x2="428.00" y2="234.00" stroke="var(--ink-2)" stroke-width="1.0" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<line x1="353.00" y1="84.00" x2="353.00" y2="384.00" stroke="var(--ink-2)" stroke-width="1.0" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<line x1="128.00" y1="309.00" x2="428.00" y2="309.00" stroke="var(--ink-2)" stroke-width="1.0" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<polygon points="128.00,84.00 428.00,84.00 428.00,384.00 128.00,384.00" fill="none" stroke="var(--accent-line)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 278.87 388.08 L 288.00 384.00 L 278.87 379.92" fill="none" stroke="var(--accent-line)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 432.08 213.13 L 428.00 204.00 L 423.92 213.13" fill="none" stroke="var(--accent-line)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 277.13 79.92 L 268.00 84.00 L 277.13 88.08" fill="none" stroke="var(--accent-line)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 132.08 193.13 L 128.00 184.00 L 123.92 193.13" fill="none" stroke="var(--accent-line)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="140.00" y="110.00" text-anchor="start" font-size="16" fill="var(--ink)" font-style="italic">D</text>
+<text x="140.00" y="370.00" text-anchor="start" font-size="15" fill="var(--accent-line)" font-style="italic">C</text>
+<line x1="198.00" y1="284.50" x2="198.00" y2="258.50" stroke="var(--prussian)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M 200.60 265.00 L 198.00 258.50 L 195.40 265.00" fill="var(--prussian)" stroke="var(--prussian)" stroke-width="1" stroke-linejoin="round"/>
+<line x1="208.00" y1="258.50" x2="208.00" y2="284.50" stroke="var(--prussian)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M 205.40 278.00 L 208.00 284.50 L 210.60 278.00" fill="var(--prussian)" stroke="var(--prussian)" stroke-width="1" stroke-linejoin="round"/>
+<line x1="340.00" y1="154.00" x2="366.00" y2="154.00" stroke="var(--prussian)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M 359.50 156.60 L 366.00 154.00 L 359.50 151.40" fill="var(--prussian)" stroke="var(--prussian)" stroke-width="1" stroke-linejoin="round"/>
+<line x1="366.00" y1="164.00" x2="340.00" y2="164.00" stroke="var(--prussian)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M 346.50 161.40 L 340.00 164.00 L 346.50 166.60" fill="var(--prussian)" stroke="var(--prussian)" stroke-width="1" stroke-linejoin="round"/>
+<line x1="273.00" y1="359.50" x2="273.00" y2="333.50" stroke="var(--prussian)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M 275.60 340.00 L 273.00 333.50 L 270.40 340.00" fill="var(--prussian)" stroke="var(--prussian)" stroke-width="1" stroke-linejoin="round"/>
+<line x1="283.00" y1="333.50" x2="283.00" y2="359.50" stroke="var(--prussian)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M 280.40 353.00 L 283.00 359.50 L 285.60 353.00" fill="var(--prussian)" stroke="var(--prussian)" stroke-width="1" stroke-linejoin="round"/>
+<line x1="369.00" y1="161.00" x2="470.00" y2="132.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="470.00" y="132.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">内部公共边：两个方向各走一次</text>
+<text x="470.00" y="156.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">两段的积分相加正好为零，</text>
+<text x="470.00" y="178.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">于是把所有小方格的边界加起来，</text>
+<text x="470.00" y="200.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">只剩最外面那一圈 C。</text>
+<text x="470.00" y="252.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">每个小方格上，可微性把被积</text>
+<text x="470.00" y="274.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">函数拆成三块：常数项与一次</text>
+<text x="470.00" y="296.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">项沿闭路积分都是零，只剩一</text>
+<text x="470.00" y="318.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">个比边长更高阶的小量。</text>
+<text x="470.00" y="372.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">格子切得越细，剩下的越少；</text>
+<text x="470.00" y="394.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">外圈积分与切法无关，只能是零。</text>
+</svg>
+<!--/FIG cx03_mesh-->
+        <figcaption class="figcaption"><b>内部边界两两抵消，只剩外圈。</b>小块切得越细，每条公共边被走两次这件事越彻底，抵消后留下的就越是干净的 C。</figcaption>
+      </div>
+
+      <p>剩下的问题是一块小方格上的积分到底有多小。f 在 \(z_0\) 可导，意思是 \(f(z)=f(z_0)+f'(z_0)(z-z_0)+o(|z-z_0|)\)，末尾那一项比 \(|z-z_0|\) 还小。前两项沿闭合周线的积分都是零，因为 \(\oint dz=0\) 且 \(\oint z\,dz=0\)，能留下来的只有那个 o 项，它沿一圈的积分不超过「o(直径) 乘 周长」，比整块的面积还小得快。格子切细，所有小块的贡献加起来就压到零，而左边的 \(\oint_C f\,dz\) 与怎么切无关，于是它只能等于零。</p>
+
+      <p>单连通这条要求管的是切分能不能做成。区域里有洞时，绕着洞的那几块方格无论怎么切都不会整个躺在 D 里，总有一块压住洞，公共边抵消不干净，最里面会留下一圈绕洞的积分。区域没有洞，任意一条闭曲线都能在区域内连续收缩成一点，切分就能一路做到底。\(f(z)=1/z\) 在圆环 \(1/2&lt;|z|&lt;2\) 内处处可导，绕 \(|z|=1\) 一圈的积分却是 \(2\pi i\)，这个例子说明「处处可导」这一句不能单独用，还得看区域有没有洞。</p>
+
+      <div class="archive reveal">
+        <p class="archive-when">1825 年，巴黎</p>
+        <h3>柯西把积分限放到虚轴上</h3>
+        <p class="archive-quote">「当积分限取虚数值时，积分的值取决于所沿的路线。」</p>
+        <p class="archive-source">柯西《关于积分限为虚数的定积分的报告》，1825 年</p>
+        <p>这份报告 1814 年提交、1825 年刊出，第一次把复积分与积分定理写下来，当时还要求 f 的导数连续。古尔萨 1883 年免掉了这一条，莫雷拉 1886 年补上逆命题：f 只要连续、沿任意闭路的积分为零，它就是解析的。</p>
+      </div>
+
+      <h2 id="s-3" class="reveal">三、原函数与路径无关</h2>
+
+      <p>柯西定理最直接的用处是造原函数。设 f 在单连通区域 D 内解析，取定 \(z_0\in D\)，让 z 在 D 内动，定义 \(F(z)=\int_{z_0}^{z}f(\zeta)\,d\zeta\)。这个写法先得说明自己站得住：从 \(z_0\) 到 z 有无数条路，要证明每条路算出来是同一个数。理由很短，任意两条路合起来是一条闭路，柯西定理说沿它一圈为零，于是走第一条与走第二条的积分之差是零。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定理（原函数与牛顿-莱布尼茨公式）</p>
+        <p>设 f 在单连通区域 D 内解析，则 \(F(z)=\int_{z_0}^{z}f(\zeta)\,d\zeta\) 在 D 内解析，且 \(F'(z)=f(z)\)。对 D 内任意两点 \(z_0,z_1\)，积分与路径无关，并且</p>
+        <p>\[ \int_{z_0}^{z_1}f(z)\,dz=F(z_1)-F(z_0). \]</p>
+      </div>
+
+      <p>这件事在多元微积分里有现成的对应物。一个向量场沿路径的线积分与路径无关，当且仅当它是某个数量函数的梯度，那个函数叫势函数；这里的 f 相当于梯度场，F 相当于势函数，牛顿-莱布尼茨公式相当于势差。两边的条件形状也一样，多元那边要求旋度为零再加上区域没有洞，这边只写「f 解析」四个字，因为解析比旋度为零强，它把积分与路径无关的另一半也一起包了进去。</p>
+
+      <p>在单连通区域里，下面四条说法是同一件事：f 解析；f 沿区域内任意闭路的积分为零；f 的积分与路径无关；f 有原函数。考试里判断一个积分能不能用牛顿-莱布尼茨公式，问的就是这四条里的最后一条，而它由前三条任意一条给出。</p>
+
+      <details class="fold">
+        <summary>柯西定理能不能反过来用</summary>
+        <p>能，这就是莫雷拉定理。f 在区域 D 内连续、沿 D 内任意周线的积分为零，则 f 在 D 内解析。证法还是造 \(F(z)=\int_{z_0}^{z}f\,d\zeta\)，先验出 \(F'=f\)，再对 F 用柯西定理得 F 二阶可导，于是 f 作为 F 的导数也解析。这条路把「积分为零」与「解析」接成了等价的两件事。</p>
+      </details>
+
+      <h2 id="s-4" class="reveal">四、多连通区域与桥</h2>
+
+      <p>区域有洞时，柯西定理得改写。做法是把内外边界接成一条闭路：从外边界上一点出发，沿一条线段走进洞里，绕内边界走一圈，再沿同一条线段走回来，最后沿外边界剩下的部分回到起点。那条线段在图上叫桥，来回各走一次，方向相反，两段的积分一正一负互相抵消，剩下的大闭路就是「绕外圈」加「反向绕内圈」这两件事拼在一起。</p>
+
+      <div class="figure">
+        <!--FIG cx03_bridge--><svg viewBox="0 0 720 460" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<text x="24.00" y="44.00" text-anchor="start" font-size="14.5" fill="var(--ink-2)">有洞的区域：用两条方向相反的线段把内外边界接起来</text>
+<path d="M 392.00 254.00 L 391.95 250.13 L 391.80 246.25 L 391.54 242.39 L 391.19 238.53 L 390.73 234.68 L 390.18 230.85 L 389.52 227.03 L 388.77 223.23 L 387.91 219.45 L 386.96 215.69 L 385.91 211.97 L 384.76 208.27 L 383.51 204.60 L 382.17 200.96 L 380.73 197.36 L 379.20 193.80 L 377.58 190.28 L 375.87 186.81 L 374.06 183.38 L 372.17 180.00 L 370.19 176.67 L 368.12 173.39 L 365.97 170.17 L 363.73 167.01 L 361.42 163.90 L 359.02 160.86 L 356.54 157.88 L 353.99 154.97 L 351.36 152.12 L 348.65 149.35 L 345.88 146.64 L 343.03 144.01 L 340.12 141.46 L 337.14 138.98 L 334.10 136.58 L 330.99 134.27 L 327.83 132.03 L 324.61 129.88 L 321.33 127.81 L 318.00 125.83 L 314.62 123.94 L 311.19 122.13 L 307.72 120.42 L 304.20 118.80 L 300.64 117.27 L 297.04 115.83 L 293.40 114.49 L 289.73 113.24 L 286.03 112.09 L 282.31 111.04 L 278.55 110.09 L 274.77 109.23 L 270.97 108.48 L 267.15 107.82 L 263.32 107.27 L 259.47 106.81 L 255.61 106.46 L 251.75 106.20 L 247.87 106.05 L 244.00 106.00 L 240.13 106.05 L 236.25 106.20 L 232.39 106.46 L 228.53 106.81 L 224.68 107.27 L 220.85 107.82 L 217.03 108.48 L 213.23 109.23 L 209.45 110.09 L 205.69 111.04 L 201.97 112.09 L 198.27 113.24 L 194.60 114.49 L 190.96 115.83 L 187.36 117.27 L 183.80 118.80 L 180.28 120.42 L 176.81 122.13 L 173.38 123.94 L 170.00 125.83 L 166.67 127.81 L 163.39 129.88 L 160.17 132.03 L 157.01 134.27 L 153.90 136.58 L 150.86 138.98 L 147.88 141.46 L 144.97 144.01 L 142.12 146.64 L 139.35 149.35 L 136.64 152.12 L 134.01 154.97 L 131.46 157.88 L 128.98 160.86 L 126.58 163.90 L 124.27 167.01 L 122.03 170.17 L 119.88 173.39 L 117.81 176.67 L 115.83 180.00 L 113.94 183.38 L 112.13 186.81 L 110.42 190.28 L 108.80 193.80 L 107.27 197.36 L 105.83 200.96 L 104.49 204.60 L 103.24 208.27 L 102.09 211.97 L 101.04 215.69 L 100.09 219.45 L 99.23 223.23 L 98.48 227.03 L 97.82 230.85 L 97.27 234.68 L 96.81 238.53 L 96.46 242.39 L 96.20 246.25 L 96.05 250.13 L 96.00 254.00 L 96.05 257.87 L 96.20 261.75 L 96.46 265.61 L 96.81 269.47 L 97.27 273.32 L 97.82 277.15 L 98.48 280.97 L 99.23 284.77 L 100.09 288.55 L 101.04 292.31 L 102.09 296.03 L 103.24 299.73 L 104.49 303.40 L 105.83 307.04 L 107.27 310.64 L 108.80 314.20 L 110.42 317.72 L 112.13 321.19 L 113.94 324.62 L 115.83 328.00 L 117.81 331.33 L 119.88 334.61 L 122.03 337.83 L 124.27 340.99 L 126.58 344.10 L 128.98 347.14 L 131.46 350.12 L 134.01 353.03 L 136.64 355.88 L 139.35 358.65 L 142.12 361.36 L 144.97 363.99 L 147.88 366.54 L 150.86 369.02 L 153.90 371.42 L 157.01 373.73 L 160.17 375.97 L 163.39 378.12 L 166.67 380.19 L 170.00 382.17 L 173.38 384.06 L 176.81 385.87 L 180.28 387.58 L 183.80 389.20 L 187.36 390.73 L 190.96 392.17 L 194.60 393.51 L 198.27 394.76 L 201.97 395.91 L 205.69 396.96 L 209.45 397.91 L 213.23 398.77 L 217.03 399.52 L 220.85 400.18 L 224.68 400.73 L 228.53 401.19 L 232.39 401.54 L 236.25 401.80 L 240.13 401.95 L 244.00 402.00 L 247.87 401.95 L 251.75 401.80 L 255.61 401.54 L 259.47 401.19 L 263.32 400.73 L 267.15 400.18 L 270.97 399.52 L 274.77 398.77 L 278.55 397.91 L 282.31 396.96 L 286.03 395.91 L 289.73 394.76 L 293.40 393.51 L 297.04 392.17 L 300.64 390.73 L 304.20 389.20 L 307.72 387.58 L 311.19 385.87 L 314.62 384.06 L 318.00 382.17 L 321.33 380.19 L 324.61 378.12 L 327.83 375.97 L 330.99 373.73 L 334.10 371.42 L 337.14 369.02 L 340.12 366.54 L 343.03 363.99 L 345.88 361.36 L 348.65 358.65 L 351.36 355.88 L 353.99 353.03 L 356.54 350.12 L 359.02 347.14 L 361.42 344.10 L 363.73 340.99 L 365.97 337.83 L 368.12 334.61 L 370.19 331.33 L 372.17 328.00 L 374.06 324.62 L 375.87 321.19 L 377.58 317.72 L 379.20 314.20 L 380.73 310.64 L 382.17 307.04 L 383.51 303.40 L 384.76 299.73 L 385.91 296.03 L 386.96 292.31 L 387.91 288.55 L 388.77 284.77 L 389.52 280.97 L 390.18 277.15 L 390.73 273.32 L 391.19 269.47 L 391.54 265.61 L 391.80 261.75 L 391.95 257.87 L 392.00 254.00 Z M 302.00 254.00 L 301.96 251.72 L 301.82 249.45 L 301.60 247.18 L 301.29 244.93 L 300.89 242.68 L 300.40 240.46 L 299.82 238.26 L 299.16 236.08 L 298.42 233.93 L 297.59 231.80 L 296.67 229.72 L 295.68 227.67 L 294.60 225.66 L 293.45 223.70 L 292.23 221.78 L 290.92 219.91 L 289.55 218.09 L 288.10 216.33 L 286.59 214.63 L 285.01 212.99 L 283.37 211.41 L 281.67 209.90 L 279.91 208.45 L 278.09 207.08 L 276.22 205.77 L 274.30 204.55 L 272.34 203.40 L 270.33 202.32 L 268.28 201.33 L 266.20 200.41 L 264.07 199.58 L 261.92 198.84 L 259.74 198.18 L 257.54 197.60 L 255.32 197.11 L 253.07 196.71 L 250.82 196.40 L 248.55 196.18 L 246.28 196.04 L 244.00 196.00 L 241.72 196.04 L 239.45 196.18 L 237.18 196.40 L 234.93 196.71 L 232.68 197.11 L 230.46 197.60 L 228.26 198.18 L 226.08 198.84 L 223.93 199.58 L 221.80 200.41 L 219.72 201.33 L 217.67 202.32 L 215.66 203.40 L 213.70 204.55 L 211.78 205.77 L 209.91 207.08 L 208.09 208.45 L 206.33 209.90 L 204.63 211.41 L 202.99 212.99 L 201.41 214.63 L 199.90 216.33 L 198.45 218.09 L 197.08 219.91 L 195.77 221.78 L 194.55 223.70 L 193.40 225.66 L 192.32 227.67 L 191.33 229.72 L 190.41 231.80 L 189.58 233.93 L 188.84 236.08 L 188.18 238.26 L 187.60 240.46 L 187.11 242.68 L 186.71 244.93 L 186.40 247.18 L 186.18 249.45 L 186.04 251.72 L 186.00 254.00 L 186.04 256.28 L 186.18 258.55 L 186.40 260.82 L 186.71 263.07 L 187.11 265.32 L 187.60 267.54 L 188.18 269.74 L 188.84 271.92 L 189.58 274.07 L 190.41 276.20 L 191.33 278.28 L 192.32 280.33 L 193.40 282.34 L 194.55 284.30 L 195.77 286.22 L 197.08 288.09 L 198.45 289.91 L 199.90 291.67 L 201.41 293.37 L 202.99 295.01 L 204.63 296.59 L 206.33 298.10 L 208.09 299.55 L 209.91 300.92 L 211.78 302.23 L 213.70 303.45 L 215.66 304.60 L 217.67 305.68 L 219.72 306.67 L 221.80 307.59 L 223.93 308.42 L 226.08 309.16 L 228.26 309.82 L 230.46 310.40 L 232.68 310.89 L 234.93 311.29 L 237.18 311.60 L 239.45 311.82 L 241.72 311.96 L 244.00 312.00 L 246.28 311.96 L 248.55 311.82 L 250.82 311.60 L 253.07 311.29 L 255.32 310.89 L 257.54 310.40 L 259.74 309.82 L 261.92 309.16 L 264.07 308.42 L 266.20 307.59 L 268.28 306.67 L 270.33 305.68 L 272.34 304.60 L 274.30 303.45 L 276.22 302.23 L 278.09 300.92 L 279.91 299.55 L 281.67 298.10 L 283.37 296.59 L 285.01 295.01 L 286.59 293.37 L 288.10 291.67 L 289.55 289.91 L 290.92 288.09 L 292.23 286.22 L 293.45 284.30 L 294.60 282.34 L 295.68 280.33 L 296.67 278.28 L 297.59 276.20 L 298.42 274.07 L 299.16 271.92 L 299.82 269.74 L 300.40 267.54 L 300.89 265.32 L 301.29 263.07 L 301.60 260.82 L 301.82 258.55 L 301.96 256.28 L 302.00 254.00 Z" fill-rule="evenodd" fill="var(--fig-fill)" stroke="none"/>
+<path d="M 392.00 254.00 L 391.95 250.13 L 391.80 246.25 L 391.54 242.39 L 391.19 238.53 L 390.73 234.68 L 390.18 230.85 L 389.52 227.03 L 388.77 223.23 L 387.91 219.45 L 386.96 215.69 L 385.91 211.97 L 384.76 208.27 L 383.51 204.60 L 382.17 200.96 L 380.73 197.36 L 379.20 193.80 L 377.58 190.28 L 375.87 186.81 L 374.06 183.38 L 372.17 180.00 L 370.19 176.67 L 368.12 173.39 L 365.97 170.17 L 363.73 167.01 L 361.42 163.90 L 359.02 160.86 L 356.54 157.88 L 353.99 154.97 L 351.36 152.12 L 348.65 149.35 L 345.88 146.64 L 343.03 144.01 L 340.12 141.46 L 337.14 138.98 L 334.10 136.58 L 330.99 134.27 L 327.83 132.03 L 324.61 129.88 L 321.33 127.81 L 318.00 125.83 L 314.62 123.94 L 311.19 122.13 L 307.72 120.42 L 304.20 118.80 L 300.64 117.27 L 297.04 115.83 L 293.40 114.49 L 289.73 113.24 L 286.03 112.09 L 282.31 111.04 L 278.55 110.09 L 274.77 109.23 L 270.97 108.48 L 267.15 107.82 L 263.32 107.27 L 259.47 106.81 L 255.61 106.46 L 251.75 106.20 L 247.87 106.05 L 244.00 106.00 L 240.13 106.05 L 236.25 106.20 L 232.39 106.46 L 228.53 106.81 L 224.68 107.27 L 220.85 107.82 L 217.03 108.48 L 213.23 109.23 L 209.45 110.09 L 205.69 111.04 L 201.97 112.09 L 198.27 113.24 L 194.60 114.49 L 190.96 115.83 L 187.36 117.27 L 183.80 118.80 L 180.28 120.42 L 176.81 122.13 L 173.38 123.94 L 170.00 125.83 L 166.67 127.81 L 163.39 129.88 L 160.17 132.03 L 157.01 134.27 L 153.90 136.58 L 150.86 138.98 L 147.88 141.46 L 144.97 144.01 L 142.12 146.64 L 139.35 149.35 L 136.64 152.12 L 134.01 154.97 L 131.46 157.88 L 128.98 160.86 L 126.58 163.90 L 124.27 167.01 L 122.03 170.17 L 119.88 173.39 L 117.81 176.67 L 115.83 180.00 L 113.94 183.38 L 112.13 186.81 L 110.42 190.28 L 108.80 193.80 L 107.27 197.36 L 105.83 200.96 L 104.49 204.60 L 103.24 208.27 L 102.09 211.97 L 101.04 215.69 L 100.09 219.45 L 99.23 223.23 L 98.48 227.03 L 97.82 230.85 L 97.27 234.68 L 96.81 238.53 L 96.46 242.39 L 96.20 246.25 L 96.05 250.13 L 96.00 254.00 L 96.05 257.87 L 96.20 261.75 L 96.46 265.61 L 96.81 269.47 L 97.27 273.32 L 97.82 277.15 L 98.48 280.97 L 99.23 284.77 L 100.09 288.55 L 101.04 292.31 L 102.09 296.03 L 103.24 299.73 L 104.49 303.40 L 105.83 307.04 L 107.27 310.64 L 108.80 314.20 L 110.42 317.72 L 112.13 321.19 L 113.94 324.62 L 115.83 328.00 L 117.81 331.33 L 119.88 334.61 L 122.03 337.83 L 124.27 340.99 L 126.58 344.10 L 128.98 347.14 L 131.46 350.12 L 134.01 353.03 L 136.64 355.88 L 139.35 358.65 L 142.12 361.36 L 144.97 363.99 L 147.88 366.54 L 150.86 369.02 L 153.90 371.42 L 157.01 373.73 L 160.17 375.97 L 163.39 378.12 L 166.67 380.19 L 170.00 382.17 L 173.38 384.06 L 176.81 385.87 L 180.28 387.58 L 183.80 389.20 L 187.36 390.73 L 190.96 392.17 L 194.60 393.51 L 198.27 394.76 L 201.97 395.91 L 205.69 396.96 L 209.45 397.91 L 213.23 398.77 L 217.03 399.52 L 220.85 400.18 L 224.68 400.73 L 228.53 401.19 L 232.39 401.54 L 236.25 401.80 L 240.13 401.95 L 244.00 402.00 L 247.87 401.95 L 251.75 401.80 L 255.61 401.54 L 259.47 401.19 L 263.32 400.73 L 267.15 400.18 L 270.97 399.52 L 274.77 398.77 L 278.55 397.91 L 282.31 396.96 L 286.03 395.91 L 289.73 394.76 L 293.40 393.51 L 297.04 392.17 L 300.64 390.73 L 304.20 389.20 L 307.72 387.58 L 311.19 385.87 L 314.62 384.06 L 318.00 382.17 L 321.33 380.19 L 324.61 378.12 L 327.83 375.97 L 330.99 373.73 L 334.10 371.42 L 337.14 369.02 L 340.12 366.54 L 343.03 363.99 L 345.88 361.36 L 348.65 358.65 L 351.36 355.88 L 353.99 353.03 L 356.54 350.12 L 359.02 347.14 L 361.42 344.10 L 363.73 340.99 L 365.97 337.83 L 368.12 334.61 L 370.19 331.33 L 372.17 328.00 L 374.06 324.62 L 375.87 321.19 L 377.58 317.72 L 379.20 314.20 L 380.73 310.64 L 382.17 307.04 L 383.51 303.40 L 384.76 299.73 L 385.91 296.03 L 386.96 292.31 L 387.91 288.55 L 388.77 284.77 L 389.52 280.97 L 390.18 277.15 L 390.73 273.32 L 391.19 269.47 L 391.54 265.61 L 391.80 261.75 L 391.95 257.87 L 392.00 254.00" fill="none" stroke="var(--accent-line)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 302.00 254.00 L 301.96 251.72 L 301.82 249.45 L 301.60 247.18 L 301.29 244.93 L 300.89 242.68 L 300.40 240.46 L 299.82 238.26 L 299.16 236.08 L 298.42 233.93 L 297.59 231.80 L 296.67 229.72 L 295.68 227.67 L 294.60 225.66 L 293.45 223.70 L 292.23 221.78 L 290.92 219.91 L 289.55 218.09 L 288.10 216.33 L 286.59 214.63 L 285.01 212.99 L 283.37 211.41 L 281.67 209.90 L 279.91 208.45 L 278.09 207.08 L 276.22 205.77 L 274.30 204.55 L 272.34 203.40 L 270.33 202.32 L 268.28 201.33 L 266.20 200.41 L 264.07 199.58 L 261.92 198.84 L 259.74 198.18 L 257.54 197.60 L 255.32 197.11 L 253.07 196.71 L 250.82 196.40 L 248.55 196.18 L 246.28 196.04 L 244.00 196.00 L 241.72 196.04 L 239.45 196.18 L 237.18 196.40 L 234.93 196.71 L 232.68 197.11 L 230.46 197.60 L 228.26 198.18 L 226.08 198.84 L 223.93 199.58 L 221.80 200.41 L 219.72 201.33 L 217.67 202.32 L 215.66 203.40 L 213.70 204.55 L 211.78 205.77 L 209.91 207.08 L 208.09 208.45 L 206.33 209.90 L 204.63 211.41 L 202.99 212.99 L 201.41 214.63 L 199.90 216.33 L 198.45 218.09 L 197.08 219.91 L 195.77 221.78 L 194.55 223.70 L 193.40 225.66 L 192.32 227.67 L 191.33 229.72 L 190.41 231.80 L 189.58 233.93 L 188.84 236.08 L 188.18 238.26 L 187.60 240.46 L 187.11 242.68 L 186.71 244.93 L 186.40 247.18 L 186.18 249.45 L 186.04 251.72 L 186.00 254.00 L 186.04 256.28 L 186.18 258.55 L 186.40 260.82 L 186.71 263.07 L 187.11 265.32 L 187.60 267.54 L 188.18 269.74 L 188.84 271.92 L 189.58 274.07 L 190.41 276.20 L 191.33 278.28 L 192.32 280.33 L 193.40 282.34 L 194.55 284.30 L 195.77 286.22 L 197.08 288.09 L 198.45 289.91 L 199.90 291.67 L 201.41 293.37 L 202.99 295.01 L 204.63 296.59 L 206.33 298.10 L 208.09 299.55 L 209.91 300.92 L 211.78 302.23 L 213.70 303.45 L 215.66 304.60 L 217.67 305.68 L 219.72 306.67 L 221.80 307.59 L 223.93 308.42 L 226.08 309.16 L 228.26 309.82 L 230.46 310.40 L 232.68 310.89 L 234.93 311.29 L 237.18 311.60 L 239.45 311.82 L 241.72 311.96 L 244.00 312.00 L 246.28 311.96 L 248.55 311.82 L 250.82 311.60 L 253.07 311.29 L 255.32 310.89 L 257.54 310.40 L 259.74 309.82 L 261.92 309.16 L 264.07 308.42 L 266.20 307.59 L 268.28 306.67 L 270.33 305.68 L 272.34 304.60 L 274.30 303.45 L 276.22 302.23 L 278.09 300.92 L 279.91 299.55 L 281.67 298.10 L 283.37 296.59 L 285.01 295.01 L 286.59 293.37 L 288.10 291.67 L 289.55 289.91 L 290.92 288.09 L 292.23 286.22 L 293.45 284.30 L 294.60 282.34 L 295.68 280.33 L 296.67 278.28 L 297.59 276.20 L 298.42 274.07 L 299.16 271.92 L 299.82 269.74 L 300.40 267.54 L 300.89 265.32 L 301.29 263.07 L 301.60 260.82 L 301.82 258.55 L 301.96 256.28 L 302.00 254.00" fill="none" stroke="var(--accent-line)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="244.00" y="261.00" text-anchor="middle" font-size="14" fill="var(--ink-3)">洞</text>
+<path d="M 98.91 210.75 L 99.79 220.71 L 106.62 213.40" fill="none" stroke="var(--accent-line)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 279.09 401.28 L 287.27 395.53 L 277.53 393.27" fill="none" stroke="var(--accent-line)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 354.00 149.98 L 344.94 145.76 L 347.85 155.33" fill="none" stroke="var(--accent-line)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 192.34 268.04 L 186.32 260.06 L 184.40 269.88" fill="none" stroke="var(--accent-line)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 281.99 291.71 L 278.09 300.92 L 287.55 297.68" fill="none" stroke="var(--accent-line)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 257.67 202.24 L 267.59 201.01 L 260.05 194.45" fill="none" stroke="var(--accent-line)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="301.13" y1="244.00" x2="391.66" y2="244.00" stroke="var(--prussian)" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/><path d="M 382.38 247.71 L 391.66 244.00 L 382.38 240.29" fill="var(--prussian)" stroke="var(--prussian)" stroke-width="1" stroke-linejoin="round"/>
+<line x1="391.66" y1="264.00" x2="301.13" y2="264.00" stroke="var(--prussian)" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/><path d="M 310.42 260.29 L 301.13 264.00 L 310.42 267.71" fill="var(--prussian)" stroke="var(--prussian)" stroke-width="1" stroke-linejoin="round"/>
+<text x="346.40" y="288.00" text-anchor="middle" font-size="14" fill="var(--prussian)">桥</text>
+<text x="86.00" y="328.00" text-anchor="end" font-size="14" fill="var(--accent-line)">C₀</text>
+<text x="196.00" y="340.00" text-anchor="end" font-size="14" fill="var(--accent-line)">C₁</text>
+<text x="452.00" y="118.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">外边界 C₀ 逆时针走，内边界</text>
+<text x="452.00" y="140.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">C₁ 顺时针走，再用桥接起来。</text>
+<text x="452.00" y="176.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">沿外圈一圈，拐进桥，绕内圈</text>
+<text x="452.00" y="198.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">反向一圈，再从桥走回来。</text>
+<text x="452.00" y="234.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">桥上的两段方向相反，积分</text>
+<text x="452.00" y="256.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">一正一负，正好抵消。</text>
+<text x="452.00" y="296.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">f 沿这条闭路的积分为零，</text>
+<text x="452.00" y="318.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">外圈的积分等于内圈之和。</text>
+<text x="24.00" y="434.00" text-anchor="start" font-size="13.5" fill="var(--ink-3)">桥可以随意弯曲、随意挪位置，只要不穿过洞，抵消的方式不变。</text>
+</svg>
+<!--/FIG cx03_bridge-->
+        <figcaption class="figcaption"><b>两条方向相反的线段把内外边界缝成一条。</b>桥上的积分相消，于是绕外圈与绕内圈的积分从此绑在一起，不必再分开算。</figcaption>
+      </div>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定理（复合闭路定理）</p>
+        <p>设区域 D 的边界由外边界 \(C_0\) 与内部若干条边界 \(C_1,\dots,C_n\) 组成，f 在 D 内与这些边界上都解析。把 \(C_0\) 与各 \(C_k\) 都取逆时针方向，则</p>
+        <p>\[ \oint_{C_0}f(z)\,dz=\sum_{k=1}^{n}\oint_{C_k}f(z)\,dz. \]</p>
+        <p>沿外圈走一圈的值，等于沿里面每个洞各走一圈的值之和。</p>
+      </div>
+
+      <p>由此得到一条好用的推论，叫闭路变形原理：一条闭曲线在区域内连续变形，只要变形过程中不扫过 f 的奇点，积分值就不变。所以算 \(\oint\frac{f(z)}{z-a}dz\) 这类式子时，围住 a 的曲线长什么样不重要，把它换成以 a 为心、半径很小的圆最省事，圆上的参数式简单，分母也好处理。</p>
+
+      <h2 id="s-5" class="reveal">五、柯西积分公式</h2>
+
+      <p>柯西定理说解析函数沿闭路的积分为零，可被积函数里多一个分母 \(z-z_0\)，结果就不再是零，而且这个非零的数正好是函数在 \(z_0\) 处的值乘 \(2\pi i\)。柯西积分公式讲的就是这件事：区域内部的函数值，完全由边界上的值定下来。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定理（柯西积分公式）</p>
+        <p>设 f 在简单闭曲线 C 的内部与 C 上解析，\(z_0\) 是 C 内部一点，则</p>
+        <p>\[ \oint_C\frac{f(z)}{z-z_0}\,dz=2\pi i\,f(z_0). \]</p>
+      </div>
+
+      <p>推导只用闭路变形原理。以 \(z_0\) 为心作半径 \(\rho\) 的小圆 \(C_\rho\)，整个落在 C 内部，沿 C 的积分等于沿 \(C_\rho\) 的积分。在小圆上 \(z-z_0=\rho e^{i\theta}\)，积分变成 \(\int_0^{2\pi}f(z_0+\rho e^{i\theta})\,i\,d\theta\)，f 连续，\(\rho\to0\) 时被积函数一致趋于 \(f(z_0)\)，极限就是 \(2\pi i f(z_0)\)。奇点没有被消掉，它被绕了过去，多出来的那一份由 \(2\pi i\) 记在账上。同一段推导还读出一条平均值公式：\(f(z_0)=\frac{1}{2\pi}\int_0^{2\pi}f(z_0+re^{i\theta})\,d\theta\)，解析函数在圆心处的值，等于它在圆周上的平均值。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定理（高阶导数公式与柯西不等式）</p>
+        <p>在柯西积分公式的条件下，f 在 \(z_0\) 有各阶导数，且</p>
+        <p>\[ f^{(n)}(z_0)=\frac{n!}{2\pi i}\oint_C\frac{f(z)}{(z-z_0)^{n+1}}\,dz. \]</p>
+        <p>若 C 是以 \(z_0\) 为心、半径为 R 的圆，f 在 C 上满足 \(|f(z)|\le M\)，则 \(\left|f^{(n)}(z_0)\right|\le\dfrac{n!\,M}{R^{n}}\)。</p>
+      </div>
+
+      <details class="fold">
+        <summary>高阶导数公式是怎么推出来的</summary>
+        <p>把柯西公式里的 \(z_0\) 换成 \(z_0+\Delta z\)，两个积分相减，被积函数差出一项 \(\frac{\Delta z}{(z-z_0)(z-z_0-\Delta z)}\)。\(\Delta z\to0\) 时这一项一致地趋于 \(\frac{1}{(z-z_0)^2}\)，求导与积分可以交换次序，反复做 n 次就得到 n 阶导数的公式。</p>
+      </details>
+
+      <p>这条公式的后果比它本身重要。右边只用到 f 在边界那一圈的值，所以 f 在内部不只有一阶导数，还能一直求导下去，求一次导只是把分母的幂次加一。实变函数里可导一次不保证导函数连续，这里可导一次就自动可导无穷次，差别出在「从任何方向逼近都要给出同一个导数」这条要求上。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定理（刘维尔定理）</p>
+        <p>若 f 在整个复平面上解析且有界，即存在 M 使 \(|f(z)|\le M\) 对一切 z 成立，则 f 恒等于一个常数。</p>
+      </div>
+
+      <p>把它用在 \(1/p(z)\) 上就得到代数基本定理。设 \(p(z)=a_nz^n+\cdots+a_0\)，\(n\ge1\)，假设 p 在复平面上没有零点，则 \(1/p\) 是整函数，而 \(|p(z)|\to\infty\) 又保证 \(1/p\) 有界，刘维尔定理说这个有界的整函数只能是常数，于是 p 也只能是常数，与 \(n\ge1\) 矛盾。所以 p 至少有一个根，除掉这个根再对商用一次同样的论证，就凑够 n 个根。</p>
+
+      <p>柯西积分公式还留下一句话要好记：解析函数在区域内部没有自由，边界上一圈值定死了里面的一切。同一个函数在两条不同曲线上的积分只差一份，差多少由两条曲线之间有几个奇点决定，第五章的留数就是专门算这一份的。</p>
+
+      <h2 id="s-manual" class="reveal">怎么算</h2>
+
+      <ul>
+        <li><strong>先看奇点在哪。</strong>被积函数在闭路围成的区域内处处解析，直接写零，不用算。</li>
+        <li><strong>奇点在内部就换小圆。</strong>用闭路变形原理把复杂曲线换成以奇点为心的小圆，半径取方便算的。</li>
+        <li><strong>参数式优先选圆心形式。</strong>\(z=z_0+re^{i\theta}\) 时 \(dz=ire^{i\theta}d\theta\)，分母同时化简。</li>
+        <li><strong>方向要跟题目一致。</strong>顺时针的闭路等于逆时针的结果加一个负号，漏掉符号是这一章最常见的错。</li>
+        <li><strong>分段光滑的曲线分段算。</strong>每一段单独写参数式，注意接点处方向连续。</li>
+        <li><strong>估积分用 ML。</strong>M 取 |f| 在曲线上的最大值，L 是弧长，估出来的是上界，不要写成等号。</li>
+      </ul>
+
+      <details class="fold">
+        <summary>1/z 在圆环里为什么没有原函数</summary>
+        <p>\(1/z\) 在 \(0&lt;|z|&lt;2\) 内处处解析，可它在这个环域里没有原函数。若 \(F'=1/z\)，沿正向单位圆走一圈，积分既是 \(2\pi i\)，又等于 \(F(1)-F(1)=0\)，矛盾。原函数的存在性靠的是区域单连通，这条性质在圆环里断掉了。</p>
+      </details>
+
+      <h2 id="s-examples" class="reveal">例题</h2>
+
+      <div class="example">
+        <p class="example-head">例 <span>1</span>　沿两条路径计算 \(\int_C\bar z\,dz\)：一条是从 0 到 \(1+i\) 的直线段，另一条是从 0 到 1 再到 \(1+i\) 的折线，比较结果。</p>
+        <p class="solution">直线：\(z=(1+i)t\)，\(\bar z=(1-i)t\)，\(dz=(1+i)dt\)，积分为 \(\int_0^1 2t\,dt=1\)。折线：0 到 1 上是 \(1/2\)，1 到 \(1+i\) 上是 \(1/2+i\)，合计 \(1+i\)。两条路不相等，因为 \(\bar z\) 不解析。</p>
+      </div>
+
+      <div class="example">
+        <p class="example-head">例 <span>2</span>　计算 \(\oint_{|z-1|=1}\dfrac{dz}{z^2-1}\)。</p>
+        <p class="solution">把被积式写成 \(\dfrac{1/(z+1)}{z-1}\)，圆内只有奇点 \(z=1\)，\(f(z)=1/(z+1)\) 在圆内解析。由柯西积分公式，积分等于 \(2\pi i f(1)=2\pi i\cdot\frac12=\pi i\)。</p>
+      </div>
+
+      <div class="example">
+        <p class="example-head">例 <span>3</span>　计算 \(\oint_{|z|=2}\dfrac{e^z}{(z-1)^2}\,dz\)。</p>
+        <p class="solution">被积式是 \(f(z)=e^z\) 除以 \((z-1)^2\)，\(z=1\) 在圆内。高阶导数公式取 \(n=1\)，积分等于 \(2\pi i f'(1)=2\pi i\,e\)。</p>
+      </div>
+
+      <h2 id="s-exercises" class="reveal">习题</h2>
+
+      <div class="exercises">
+
+        <div class="ex-group">
+          <p class="ex-group-head">A 档 <span>巩固定义与基本计算，每题五分钟内</span></p>
+
+          <p class="ex"><span class="ex-num">1.</span> 用参数法计算 \(\int_C\bar z\,dz\)，其中 \(C:z=2e^{i\theta}\)，\(0\le\theta\le\pi\)。</p>
+          <div class="answer"><details><summary>看答案</summary><p>\(\bar z=2e^{-i\theta}\)，\(dz=2ie^{i\theta}d\theta\)，积分为 \(\int_0^\pi 4i\,d\theta=4\pi i\)。</p></details></div>
+
+          <p class="ex"><span class="ex-num">2.</span> 用估值不等式估计 \(\left|\oint_{|z|=2}\dfrac{dz}{z^2-1}\right|\)。</p>
+          <div class="answer"><details><summary>看答案</summary><p>在 \(|z|=2\) 上 \(|z^2-1|\ge3\)，故 \(|1/(z^2-1)|\le1/3\)，弧长 \(4\pi\)，估计值不超过 \(4\pi/3\)。</p></details></div>
+
+          <p class="ex"><span class="ex-num">3.</span> 计算 \(\oint_{|z|=1}\dfrac{dz}{z-2}\)。</p>
+          <div class="answer"><details><summary>看答案</summary><p>奇点 2 在圆外，被积函数在闭圆盘上解析，由柯西积分定理值为 0。</p></details></div>
+
+          <p class="ex"><span class="ex-num">4.</span> 计算 \(\oint_{|z|=2}\dfrac{dz}{z-1}\)。</p>
+          <div class="answer"><details><summary>看答案</summary><p>取 \(f(z)=1\)，奇点 1 在圆内，柯西积分公式给出 \(2\pi i f(1)=2\pi i\)。</p></details></div>
+
+          <p class="ex"><span class="ex-num">5.</span> 用牛顿-莱布尼茨公式计算 \(\int_0^{1+i}z^2\,dz\)。</p>
+          <div class="answer"><details><summary>看答案</summary><p>原函数 \(z^3/3\)，代入得 \((1+i)^3/3=(-2+2i)/3\)。</p></details></div>
+
+          <p class="ex"><span class="ex-num">6.</span> 分别计算 \(\oint_{|z|=1}z^{-1}dz\) 与 \(\oint_{|z|=1}z^{-2}dz\)，并解释两者为什么不同。</p>
+          <div class="answer"><details><summary>看答案</summary><p>前者 \(2\pi i\)，后者 0。\(z^{-2}\) 有原函数 \(-1/z\)，闭路积分为零；\(z^{-1}\) 在去心区域没有原函数，只能靠柯西公式算。</p></details></div>
+        </div>
+
+        <div class="ex-group">
+          <p class="ex-group-head">B 档 <span>综合题，接近期末与考研难度</span></p>
+
+          <p class="ex"><span class="ex-num">1.</span> 计算 \(\oint_{|z|=2}\dfrac{z+1}{z^2-1}\,dz\)。</p>
+          <div class="answer"><details><summary>看答案</summary><p>被积式在 \(z\ne-1\) 处等于 \(1/(z-1)\)，\(z=-1\) 是可去奇点。圆内只剩奇点 1，积分为 \(2\pi i\)。</p></details></div>
+
+          <p class="ex"><span class="ex-num">2.</span> 计算 \(\oint_{|z|=2}\dfrac{e^{2z}}{(z-1)^3}\,dz\)。</p>
+          <div class="answer"><details><summary>看答案</summary><p>取 \(n=2\)、\(f(z)=e^{2z}\)，\(f''(z)=4e^{2z}\)，积分为 \(\frac{2\pi i}{2!}\cdot4e^2=4\pi i\,e^2\)。</p></details></div>
+
+          <p class="ex"><span class="ex-num">3.</span> 设 f 在区域 D 内解析且 \(|f(z)|\) 是常数，证明 f 为常数。</p>
+          <div class="answer"><details><summary>看答案</summary><p>记 \(|f|=c\)。\(c=0\) 时 f 恒为零；否则 \(u^2+v^2=c^2\)，两边对 x、y 求偏导，代入柯西-黎曼方程得 \(u_x=u_y=0\)，故 f 为常数。</p></details></div>
+
+          <p class="ex"><span class="ex-num">4.</span> 设 f 为整函数且 \(|f(z)|\le|z|\) 对一切 z 成立，证明 \(f(z)=az\) 且 \(|a|\le1\)。</p>
+          <div class="answer"><details><summary>看答案</summary><p>f 在 \(|z|\le R\) 上满足 \(|f|\le R\)，柯西不等式给 \(|a_n|\le R^{1-n}\)，令 \(R\to\infty\) 得 \(n\ge2\) 的系数全为零；再由 \(|f(0)|\le0\) 得 \(f(0)=0\)，于是 \(f(z)=az\)，\(|a|\le1\)。</p></details></div>
+        </div>
+
+        <div class="ex-group">
+          <p class="ex-group-head">C 档 <span>拓展与历史原题</span></p>
+
+          <p class="ex"><span class="ex-num">1.</span>（柯西，1825）这份报告里的命题是：f 在矩形区域上解析，则沿矩形边界的积分为零。说明这个结论怎么推到任意闭曲线上去。</p>
+          <div class="answer"><details><summary>看答案</summary><p>用折线逼近任意闭曲线，折线围成的区域切成有限个矩形，每个矩形的积分为零，内部边成对相消，故沿折线的积分也为零。折线逼近时积分连续地趋于原曲线上的值，于是任意闭曲线的积分都是零。</p></details></div>
+
+          <p class="ex"><span class="ex-num">2.</span> 用柯西积分公式计算 \(\oint_{|z-a|=r}\dfrac{dz}{z-a}\)，并说明换成另一条不绕其他奇点的闭路后答案为什么还是 \(2\pi i\)。</p>
+          <div class="answer"><details><summary>看答案</summary><p>取 \(f\equiv1\)，公式给出 \(2\pi i\)。换曲线时用闭路变形原理，只要变形不扫过 a 与别的奇点，积分值不变；扫过别的奇点则按复合闭路定理把那一份另计。</p></details></div>
+
+          <p class="ex"><span class="ex-num">3.</span>（刘维尔）用刘维尔定理证明代数基本定理。</p>
+          <div class="answer"><details><summary>看答案</summary><p>若 p 没有零点，则 \(1/p\) 为整函数；\(|p(z)|\to\infty\) 保证它有界，刘维尔定理说它是常数，于是 p 为常数，与次数 \(n\ge1\) 矛盾。</p></details></div>
+        </div>
+
+        <div class="ex-group">
+          <p class="ex-group-head">思考题 <span>不设标准答案，只给提示</span></p>
+
+          <p class="ex"><span class="ex-num">1.</span> 柯西定理的条件里，单连通是说区域没有洞；如果一条闭路绕过的奇点在区域之外，定理成立吗？把「区域」与「闭路围成的内部」分开想一想。</p>
+          <div class="answer"><details><summary>看提示</summary><p>条件说的是 f 在 D 内解析、C 在 D 内。奇点若落在 C 的内部却不在 D 内，C 围住的那块就不属于 D，D 也就不是单连通的，定理的前提没满足。</p></details></div>
+
+          <p class="ex"><span class="ex-num">2.</span> 估值不等式 \(\left|\int_C f\,dz\right|\le ML\) 什么时候取等号？</p>
+          <div class="answer"><details><summary>看提示</summary><p>要 \(|f|\) 在 C 上恒等于 M，且所有小向量同向，也就是 f 的辐角沿 C 不变。一般曲线上两者凑不齐，所以这个不等式只用来估上界。</p></details></div>
+
+          <p class="ex"><span class="ex-num">3.</span> 柯西积分公式说内部的值由边界值决定，为什么实际计算时不直接给边界数据，仍要回到被积函数？</p>
+          <div class="answer"><details><summary>看提示</summary><p>边界值必须是解析函数在整条曲线上的精确值，一点误差就会传进内部，而题目给的通常是 f 的表达式。公式的用法是反过来的：把内部的 f(z_0) 换成一圈边界积分来算。</p></details></div>
+        </div>
+
+      </div>
+
+      <h2 class="reveal">延伸阅读</h2>
+      <ul class="refs">
+        <li>钟玉泉《复变函数论》第四版，第三章。本章记号、定理顺序与例题口径以此为准。</li>
+        <li>Cauchy, <em>Mémoire sur les intégrales définies prises entre des limites imaginaires</em>, 1825。复积分与积分定理第一次出现在这里。</li>
+        <li>Ahlfors, <em>Complex Analysis</em>, 第 4 章。柯西定理的拓扑讲法写得最清楚。</li>
+        <li>Tristan Needham, <em>Visual Complex Analysis</em>, 第 2 章。用向量与流解释复积分，图比文字多。</li>
+      </ul>
+
+    </article>
+  </div>
+
+  <div class="wrap">
+    <nav class="pager" aria-label="翻页">
+      <a class="pager-link prev" href="ch02.html"><span class="pager-dir">上一章</span><span class="pager-title">解析函数：加一条条件就够了</span></a>
+      <a class="pager-link next" href="ch04.html"><span class="pager-dir">下一章</span><span class="pager-title">级数：泰勒与洛朗</span></a>
+    </nav>
+  </div>
+
+</main>
+
+<footer class="footer field-dark">
+  <div class="wrap">
+    <p class="footer-mark">数学基础课</p>
+    <div class="footer-cols">
+      <div><p>四门课按同一套读法写：先看问题，再给定义与判别，最后落到计算与习题。</p></div>
+      <div><p><a href="index.html">复变函数目录</a></p><p><a href="../index.html">返回主页</a></p></div>
+      <div><p>图示用脚本按真实数值画，公式由 KaTeX 排版。</p></div>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/katex/katex.min.js"></script>
+<script src="../assets/katex/auto-render.min.js"></script>
+<script src="../assets/site.js"></script>
+</body>
+</html>

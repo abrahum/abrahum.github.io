@@ -1,0 +1,31 @@
+<svg viewBox="0 0 720 330" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<text x="120.00" y="44.00" text-anchor="middle" font-size="15" fill="var(--ink)">两个向量共线</text>
+<text x="120.00" y="300.00" text-anchor="middle" font-size="13" fill="var(--ink-3)">c = -0.69a，可以互相表示</text>
+<text x="360.00" y="44.00" text-anchor="middle" font-size="15" fill="var(--ink)">两个向量不共线</text>
+<text x="360.00" y="300.00" text-anchor="middle" font-size="13" fill="var(--ink-3)">谁也表示不出谁，要用到平面</text>
+<text x="600.00" y="44.00" text-anchor="middle" font-size="15" fill="var(--ink)">三个向量共面</text>
+<text x="600.00" y="300.00" text-anchor="middle" font-size="13" fill="var(--ink-3)">c = a + b，落在同一张平面里</text>
+<line x1="62.80" y1="228.38" x2="195.68" y2="162.38" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 6" opacity="0.75"/>
+<line x1="120.00" y1="200.00" x2="183.80" y2="168.32" stroke="var(--accent-line)" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round"/><path d="M 176.47 176.52 L 183.80 168.32 L 172.84 169.21" fill="var(--accent-line)" stroke="var(--accent-line)" stroke-width="1" stroke-linejoin="round"/>
+<line x1="120.00" y1="200.00" x2="75.98" y2="221.86" stroke="var(--ink-2)" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round"/><path d="M 83.31 213.66 L 75.98 221.86 L 86.94 220.97" fill="var(--ink-2)" stroke="var(--ink-2)" stroke-width="1" stroke-linejoin="round"/>
+<text x="147.28" y="193.84" text-anchor="start" font-size="15" fill="var(--ink)">a</text>
+<text x="75.12" y="213.20" text-anchor="end" font-size="15" fill="var(--ink)">c</text>
+<circle cx="120.00" cy="200.00" r="3.4" fill="var(--prussian)"/>
+<polygon points="360.00,200.00 422.48,186.80 449.76,130.48 387.28,143.68" fill="var(--fig-fill)" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.75"/>
+<line x1="360.00" y1="200.00" x2="422.48" y2="186.80" stroke="var(--accent-line)" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round"/><path d="M 413.33 192.90 L 422.48 186.80 L 411.64 184.92" fill="var(--accent-line)" stroke="var(--accent-line)" stroke-width="1" stroke-linejoin="round"/>
+<line x1="360.00" y1="200.00" x2="387.28" y2="143.68" stroke="var(--ink-2)" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round"/><path d="M 386.50 154.65 L 387.28 143.68 L 379.15 151.09" fill="var(--ink-2)" stroke="var(--ink-2)" stroke-width="1" stroke-linejoin="round"/>
+<line x1="387.28" y1="143.68" x2="449.76" y2="130.48" stroke="var(--accent-line)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="5 5"/><path d="M 440.61 136.58 L 449.76 130.48 L 438.92 128.60" fill="var(--accent-line)" stroke="var(--accent-line)" stroke-width="1" stroke-linejoin="round"/>
+<line x1="422.48" y1="186.80" x2="449.76" y2="130.48" stroke="var(--ink-2)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="5 5"/><path d="M 448.98 141.45 L 449.76 130.48 L 441.63 137.89" fill="var(--ink-2)" stroke="var(--ink-2)" stroke-width="1" stroke-linejoin="round"/>
+<text x="386.40" y="195.60" text-anchor="end" font-size="15" fill="var(--ink)">a</text>
+<text x="364.40" y="147.20" text-anchor="start" font-size="15" fill="var(--ink)">b</text>
+<circle cx="360.00" cy="200.00" r="3.4" fill="var(--prussian)"/>
+<polygon points="587.68,210.56 644.88,206.16 663.36,159.96 606.16,164.36" fill="var(--fig-fill)" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+<line x1="600.00" y1="200.00" x2="657.20" y2="195.60" stroke="var(--accent-line)" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round"/><path d="M 647.33 200.45 L 657.20 195.60 L 646.70 192.32" fill="var(--accent-line)" stroke="var(--accent-line)" stroke-width="1" stroke-linejoin="round"/>
+<line x1="600.00" y1="200.00" x2="618.48" y2="153.80" stroke="var(--ink-2)" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round"/><path d="M 618.47 164.80 L 618.48 153.80 L 610.90 161.77" fill="var(--ink-2)" stroke="var(--ink-2)" stroke-width="1" stroke-linejoin="round"/>
+<line x1="600.00" y1="200.00" x2="675.68" y2="149.40" stroke="var(--prussian)" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round"/><path d="M 669.46 158.47 L 675.68 149.40 L 664.92 151.69" fill="var(--prussian)" stroke="var(--prussian)" stroke-width="1" stroke-linejoin="round"/>
+<text x="622.88" y="200.88" text-anchor="end" font-size="15" fill="var(--ink)">a</text>
+<text x="598.24" y="159.52" text-anchor="end" font-size="15" fill="var(--ink)">b</text>
+<text x="678.32" y="146.76" text-anchor="start" font-size="15" fill="var(--ink)">c</text>
+<circle cx="600.00" cy="200.00" r="3.4" fill="var(--prussian)"/>
+<text x="40.00" y="322.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">三个向量都被同一张平面装下，所以只能有两个独立方向。</text>
+</svg>

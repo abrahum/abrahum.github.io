@@ -1,0 +1,21 @@
+<svg viewBox="0 0 720 360" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<circle cx="190.00" cy="186.00" r="108.00" fill="none" stroke="var(--ink-3)" stroke-width="1.4"/>
+<line x1="52.00" y1="186.00" x2="328.00" y2="186.00" stroke="var(--ink-3)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+<line x1="190.00" y1="48.00" x2="190.00" y2="324.00" stroke="var(--ink-3)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+<circle cx="298.00" cy="186.00" r="5" fill="var(--prussian)"/>
+<text x="310.00" y="191.00" text-anchor="middle" font-size="15" fill="var(--ink)">1</text>
+<circle cx="190.00" cy="78.00" r="5" fill="var(--prussian)"/>
+<text x="190.00" y="71.00" text-anchor="middle" font-size="15" fill="var(--ink)">i</text>
+<circle cx="82.00" cy="186.00" r="5" fill="var(--prussian)"/>
+<text x="70.00" y="191.00" text-anchor="middle" font-size="15" fill="var(--ink)">−1</text>
+<circle cx="190.00" cy="294.00" r="5" fill="var(--prussian)"/>
+<text x="190.00" y="311.00" text-anchor="middle" font-size="15" fill="var(--ink)">−i</text>
+<path d="M 317.44 144.59 L 315.10 137.98 L 312.42 131.50 L 309.39 125.17 L 306.05 119.00 L 302.38 113.02 L 298.41 107.24 L 294.14 101.67 L 289.58 96.34 L 284.75 91.25 L 279.66 86.42 L 274.33 81.86 L 268.76 77.59 L 262.98 73.62 L 257.00 69.95 L 250.83 66.61 L 244.50 63.58 L 238.02 60.90 L 231.41 58.56 L 224.68 56.57 L 217.86 54.93 L 210.96 53.65 L 204.01 52.73 L 197.01 52.18 L 190.00 52.00 L 182.99 52.18 L 175.99 52.73 L 169.04 53.65 L 162.14 54.93 L 155.32 56.57 L 148.59 58.56" fill="none" stroke="var(--accent-line)" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="286.00" y="90.00" text-anchor="start" font-size="14" fill="var(--accent-line)">乘 i：逆时针转 90°</text>
+<text x="470.00" y="92.00" text-anchor="start" font-size="15" fill="var(--ink)">z = a + bi</text>
+<text x="470.00" y="120.00" text-anchor="start" font-size="15" fill="var(--ink)">iz = −b + ai</text>
+<text x="470.00" y="168.00" text-anchor="start" font-size="14" fill="var(--ink-2)">模不变，辐角加 90°。</text>
+<text x="470.00" y="194.00" text-anchor="start" font-size="14" fill="var(--ink-2)">这条性质是复数的乘法，</text>
+<text x="470.00" y="220.00" text-anchor="start" font-size="14" fill="var(--ink-2)">也是复平面上旋转的算法。</text>
+<text x="470.00" y="268.00" text-anchor="start" font-size="14" fill="var(--ink-3)">i² = −1 只是它转两次的结果。</text>
+</svg>

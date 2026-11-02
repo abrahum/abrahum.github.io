@@ -1,0 +1,191 @@
+<svg viewBox="0 0 720 604" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<text x="360.00" y="26.00" text-anchor="middle" font-size="16" fill="var(--ink)">四组点，四个相关系数</text>
+<text x="206.00" y="56.00" text-anchor="middle" font-size="15" fill="var(--ink)">一起涨：正相关</text>
+<line x1="64.00" y1="174.00" x2="348.00" y2="174.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.45"/>
+<line x1="206.00" y1="74.00" x2="206.00" y2="274.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.45"/>
+<line x1="72.88" y1="249.00" x2="339.12" y2="99.00" stroke="var(--accent-line)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="7 6"/>
+<circle cx="194.59" cy="209.48" r="3.4" fill="var(--prussian)"/>
+<circle cx="197.77" cy="190.09" r="3.4" fill="var(--prussian)"/>
+<circle cx="207.88" cy="180.44" r="3.4" fill="var(--prussian)"/>
+<circle cx="208.85" cy="176.98" r="3.4" fill="var(--prussian)"/>
+<circle cx="237.12" cy="154.83" r="3.4" fill="var(--prussian)"/>
+<circle cx="158.89" cy="206.43" r="3.4" fill="var(--prussian)"/>
+<circle cx="107.91" cy="221.52" r="3.4" fill="var(--prussian)"/>
+<circle cx="96.22" cy="255.52" r="3.4" fill="var(--prussian)"/>
+<circle cx="321.55" cy="89.36" r="3.4" fill="var(--prussian)"/>
+<circle cx="233.69" cy="162.80" r="3.4" fill="var(--prussian)"/>
+<circle cx="123.93" cy="203.46" r="3.4" fill="var(--prussian)"/>
+<circle cx="100.46" cy="231.87" r="3.4" fill="var(--prussian)"/>
+<circle cx="131.77" cy="215.65" r="3.4" fill="var(--prussian)"/>
+<circle cx="197.36" cy="175.47" r="3.4" fill="var(--prussian)"/>
+<circle cx="191.75" cy="172.90" r="3.4" fill="var(--prussian)"/>
+<circle cx="239.62" cy="168.97" r="3.4" fill="var(--prussian)"/>
+<circle cx="205.95" cy="181.98" r="3.4" fill="var(--prussian)"/>
+<circle cx="152.84" cy="216.91" r="3.4" fill="var(--prussian)"/>
+<circle cx="325.25" cy="80.49" r="3.4" fill="var(--prussian)"/>
+<circle cx="255.80" cy="146.66" r="3.4" fill="var(--prussian)"/>
+<circle cx="161.74" cy="197.49" r="3.4" fill="var(--prussian)"/>
+<circle cx="103.01" cy="220.75" r="3.4" fill="var(--prussian)"/>
+<circle cx="269.81" cy="159.63" r="3.4" fill="var(--prussian)"/>
+<circle cx="178.81" cy="173.73" r="3.4" fill="var(--prussian)"/>
+<circle cx="315.76" cy="111.90" r="3.4" fill="var(--prussian)"/>
+<circle cx="136.44" cy="213.56" r="3.4" fill="var(--prussian)"/>
+<circle cx="304.31" cy="156.48" r="3.4" fill="var(--prussian)"/>
+<circle cx="181.42" cy="180.62" r="3.4" fill="var(--prussian)"/>
+<circle cx="103.69" cy="248.04" r="3.4" fill="var(--prussian)"/>
+<circle cx="150.83" cy="222.43" r="3.4" fill="var(--prussian)"/>
+<circle cx="107.07" cy="247.32" r="3.4" fill="var(--prussian)"/>
+<circle cx="267.83" cy="108.37" r="3.4" fill="var(--prussian)"/>
+<circle cx="114.46" cy="225.43" r="3.4" fill="var(--prussian)"/>
+<circle cx="100.54" cy="227.07" r="3.4" fill="var(--prussian)"/>
+<circle cx="277.17" cy="126.18" r="3.4" fill="var(--prussian)"/>
+<circle cx="193.40" cy="165.28" r="3.4" fill="var(--prussian)"/>
+<circle cx="131.88" cy="216.58" r="3.4" fill="var(--prussian)"/>
+<circle cx="240.44" cy="161.84" r="3.4" fill="var(--prussian)"/>
+<circle cx="114.11" cy="234.13" r="3.4" fill="var(--prussian)"/>
+<circle cx="150.84" cy="200.53" r="3.4" fill="var(--prussian)"/>
+<circle cx="318.85" cy="106.57" r="3.4" fill="var(--prussian)"/>
+<circle cx="298.22" cy="133.10" r="3.4" fill="var(--prussian)"/>
+<text x="64.00" y="294.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">r = +0.95</text>
+<text x="542.00" y="56.00" text-anchor="middle" font-size="15" fill="var(--ink)">一个涨一个跌：负相关</text>
+<line x1="400.00" y1="174.00" x2="684.00" y2="174.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.45"/>
+<line x1="542.00" y1="74.00" x2="542.00" y2="274.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.45"/>
+<line x1="408.88" y1="99.00" x2="675.12" y2="249.00" stroke="var(--accent-line)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="7 6"/>
+<circle cx="571.45" cy="191.85" r="3.4" fill="var(--prussian)"/>
+<circle cx="648.02" cy="258.18" r="3.4" fill="var(--prussian)"/>
+<circle cx="599.49" cy="203.44" r="3.4" fill="var(--prussian)"/>
+<circle cx="533.76" cy="170.92" r="3.4" fill="var(--prussian)"/>
+<circle cx="648.24" cy="251.38" r="3.4" fill="var(--prussian)"/>
+<circle cx="449.31" cy="145.59" r="3.4" fill="var(--prussian)"/>
+<circle cx="534.59" cy="169.45" r="3.4" fill="var(--prussian)"/>
+<circle cx="559.72" cy="166.76" r="3.4" fill="var(--prussian)"/>
+<circle cx="425.33" cy="105.96" r="3.4" fill="var(--prussian)"/>
+<circle cx="641.77" cy="219.32" r="3.4" fill="var(--prussian)"/>
+<circle cx="605.67" cy="196.66" r="3.4" fill="var(--prussian)"/>
+<circle cx="455.44" cy="104.53" r="3.4" fill="var(--prussian)"/>
+<circle cx="570.14" cy="189.28" r="3.4" fill="var(--prussian)"/>
+<circle cx="631.00" cy="223.55" r="3.4" fill="var(--prussian)"/>
+<circle cx="472.38" cy="126.36" r="3.4" fill="var(--prussian)"/>
+<circle cx="631.24" cy="186.10" r="3.4" fill="var(--prussian)"/>
+<circle cx="491.51" cy="128.94" r="3.4" fill="var(--prussian)"/>
+<circle cx="584.61" cy="202.11" r="3.4" fill="var(--prussian)"/>
+<circle cx="471.26" cy="114.51" r="3.4" fill="var(--prussian)"/>
+<circle cx="653.80" cy="244.62" r="3.4" fill="var(--prussian)"/>
+<circle cx="636.35" cy="231.08" r="3.4" fill="var(--prussian)"/>
+<circle cx="461.95" cy="116.49" r="3.4" fill="var(--prussian)"/>
+<circle cx="457.10" cy="115.49" r="3.4" fill="var(--prussian)"/>
+<circle cx="566.71" cy="183.29" r="3.4" fill="var(--prussian)"/>
+<circle cx="423.00" cy="112.42" r="3.4" fill="var(--prussian)"/>
+<circle cx="496.46" cy="159.57" r="3.4" fill="var(--prussian)"/>
+<circle cx="618.32" cy="228.89" r="3.4" fill="var(--prussian)"/>
+<circle cx="537.50" cy="170.02" r="3.4" fill="var(--prussian)"/>
+<circle cx="591.04" cy="166.63" r="3.4" fill="var(--prussian)"/>
+<circle cx="427.67" cy="96.49" r="3.4" fill="var(--prussian)"/>
+<circle cx="601.86" cy="206.25" r="3.4" fill="var(--prussian)"/>
+<circle cx="610.95" cy="215.02" r="3.4" fill="var(--prussian)"/>
+<circle cx="509.93" cy="157.57" r="3.4" fill="var(--prussian)"/>
+<circle cx="433.38" cy="113.69" r="3.4" fill="var(--prussian)"/>
+<circle cx="465.54" cy="122.19" r="3.4" fill="var(--prussian)"/>
+<circle cx="603.28" cy="211.05" r="3.4" fill="var(--prussian)"/>
+<circle cx="644.96" cy="220.20" r="3.4" fill="var(--prussian)"/>
+<circle cx="507.20" cy="158.90" r="3.4" fill="var(--prussian)"/>
+<circle cx="547.92" cy="176.28" r="3.4" fill="var(--prussian)"/>
+<circle cx="601.52" cy="214.02" r="3.4" fill="var(--prussian)"/>
+<circle cx="613.22" cy="211.74" r="3.4" fill="var(--prussian)"/>
+<circle cx="648.82" cy="237.08" r="3.4" fill="var(--prussian)"/>
+<text x="400.00" y="294.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">r = -0.96</text>
+<text x="206.00" y="332.00" text-anchor="middle" font-size="15" fill="var(--ink)">看不出方向：零相关</text>
+<line x1="64.00" y1="450.00" x2="348.00" y2="450.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.45"/>
+<line x1="206.00" y1="350.00" x2="206.00" y2="550.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.45"/>
+<circle cx="204.68" cy="516.16" r="3.4" fill="var(--prussian)"/>
+<circle cx="163.02" cy="474.62" r="3.4" fill="var(--prussian)"/>
+<circle cx="163.10" cy="465.63" r="3.4" fill="var(--prussian)"/>
+<circle cx="172.30" cy="491.90" r="3.4" fill="var(--prussian)"/>
+<circle cx="183.36" cy="461.28" r="3.4" fill="var(--prussian)"/>
+<circle cx="237.58" cy="429.42" r="3.4" fill="var(--prussian)"/>
+<circle cx="300.36" cy="470.63" r="3.4" fill="var(--prussian)"/>
+<circle cx="167.07" cy="500.98" r="3.4" fill="var(--prussian)"/>
+<circle cx="190.07" cy="411.38" r="3.4" fill="var(--prussian)"/>
+<circle cx="157.23" cy="400.74" r="3.4" fill="var(--prussian)"/>
+<circle cx="156.10" cy="414.91" r="3.4" fill="var(--prussian)"/>
+<circle cx="320.71" cy="454.26" r="3.4" fill="var(--prussian)"/>
+<circle cx="234.27" cy="446.18" r="3.4" fill="var(--prussian)"/>
+<circle cx="129.00" cy="504.36" r="3.4" fill="var(--prussian)"/>
+<circle cx="257.01" cy="452.18" r="3.4" fill="var(--prussian)"/>
+<circle cx="117.45" cy="410.40" r="3.4" fill="var(--prussian)"/>
+<circle cx="100.19" cy="454.40" r="3.4" fill="var(--prussian)"/>
+<circle cx="178.49" cy="445.17" r="3.4" fill="var(--prussian)"/>
+<circle cx="289.90" cy="409.37" r="3.4" fill="var(--prussian)"/>
+<circle cx="112.04" cy="450.39" r="3.4" fill="var(--prussian)"/>
+<circle cx="169.14" cy="425.01" r="3.4" fill="var(--prussian)"/>
+<circle cx="235.08" cy="439.41" r="3.4" fill="var(--prussian)"/>
+<circle cx="234.00" cy="406.06" r="3.4" fill="var(--prussian)"/>
+<circle cx="187.44" cy="441.22" r="3.4" fill="var(--prussian)"/>
+<circle cx="181.53" cy="424.38" r="3.4" fill="var(--prussian)"/>
+<circle cx="110.69" cy="420.94" r="3.4" fill="var(--prussian)"/>
+<circle cx="250.60" cy="482.22" r="3.4" fill="var(--prussian)"/>
+<circle cx="183.83" cy="494.02" r="3.4" fill="var(--prussian)"/>
+<circle cx="315.46" cy="467.76" r="3.4" fill="var(--prussian)"/>
+<circle cx="175.66" cy="430.79" r="3.4" fill="var(--prussian)"/>
+<circle cx="304.90" cy="413.98" r="3.4" fill="var(--prussian)"/>
+<circle cx="311.00" cy="394.91" r="3.4" fill="var(--prussian)"/>
+<circle cx="290.33" cy="491.39" r="3.4" fill="var(--prussian)"/>
+<circle cx="295.03" cy="440.91" r="3.4" fill="var(--prussian)"/>
+<circle cx="256.40" cy="441.51" r="3.4" fill="var(--prussian)"/>
+<circle cx="231.93" cy="472.76" r="3.4" fill="var(--prussian)"/>
+<circle cx="263.08" cy="448.05" r="3.4" fill="var(--prussian)"/>
+<circle cx="287.76" cy="423.66" r="3.4" fill="var(--prussian)"/>
+<circle cx="222.33" cy="487.71" r="3.4" fill="var(--prussian)"/>
+<circle cx="147.84" cy="426.00" r="3.4" fill="var(--prussian)"/>
+<circle cx="145.59" cy="419.19" r="3.4" fill="var(--prussian)"/>
+<circle cx="121.34" cy="425.62" r="3.4" fill="var(--prussian)"/>
+<text x="64.00" y="570.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">r = +0.00</text>
+<text x="542.00" y="332.00" text-anchor="middle" font-size="15" fill="var(--ink)">有规律，但不是直线：非线性</text>
+<line x1="400.00" y1="450.00" x2="684.00" y2="450.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.45"/>
+<line x1="542.00" y1="350.00" x2="542.00" y2="550.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.45"/>
+<path d="M 431.06 353.63 L 432.45 357.39 L 433.84 361.11 L 435.22 364.77 L 436.61 368.39 L 438.00 371.96 L 439.38 375.49 L 440.77 378.96 L 442.16 382.39 L 443.54 385.77 L 444.93 389.11 L 446.32 392.40 L 447.70 395.64 L 449.09 398.83 L 450.48 401.98 L 451.86 405.07 L 453.25 408.12 L 454.64 411.13 L 456.02 414.09 L 457.41 416.99 L 458.80 419.86 L 460.18 422.67 L 461.57 425.44 L 462.96 428.16 L 464.34 430.83 L 465.73 433.46 L 467.12 436.03 L 468.50 438.56 L 469.89 441.05 L 471.28 443.48 L 472.66 445.87 L 474.05 448.21 L 475.44 450.51 L 476.82 452.75 L 478.21 454.95 L 479.60 457.11 L 480.98 459.21 L 482.37 461.27 L 483.76 463.28 L 485.14 465.24 L 486.53 467.16 L 487.92 469.03 L 489.30 470.85 L 490.69 472.62 L 492.08 474.35 L 493.46 476.03 L 494.85 477.66 L 496.24 479.24 L 497.62 480.78 L 499.01 482.27 L 500.40 483.71 L 501.79 485.11 L 503.17 486.46 L 504.56 487.76 L 505.95 489.01 L 507.33 490.22 L 508.72 491.38 L 510.11 492.49 L 511.49 493.55 L 512.88 494.57 L 514.27 495.54 L 515.65 496.46 L 517.04 497.34 L 518.43 498.16 L 519.81 498.95 L 521.20 499.68 L 522.59 500.36 L 523.97 501.00 L 525.36 501.59 L 526.75 502.14 L 528.13 502.63 L 529.52 503.08 L 530.91 503.49 L 532.29 503.84 L 533.68 504.15 L 535.07 504.41 L 536.45 504.62 L 537.84 504.79 L 539.23 504.91 L 540.61 504.98 L 542.00 505.00 L 543.39 504.98 L 544.77 504.91 L 546.16 504.79 L 547.55 504.62 L 548.93 504.41 L 550.32 504.15 L 551.71 503.84 L 553.09 503.49 L 554.48 503.08 L 555.87 502.63 L 557.25 502.14 L 558.64 501.59 L 560.03 501.00 L 561.41 500.36 L 562.80 499.68 L 564.19 498.95 L 565.57 498.16 L 566.96 497.34 L 568.35 496.46 L 569.73 495.54 L 571.12 494.57 L 572.51 493.55 L 573.89 492.49 L 575.28 491.38 L 576.67 490.22 L 578.05 489.01 L 579.44 487.76 L 580.83 486.46 L 582.21 485.11 L 583.60 483.71 L 584.99 482.27 L 586.38 480.78 L 587.76 479.24 L 589.15 477.66 L 590.54 476.03 L 591.92 474.35 L 593.31 472.62 L 594.70 470.85 L 596.08 469.03 L 597.47 467.16 L 598.86 465.24 L 600.24 463.28 L 601.63 461.27 L 603.02 459.21 L 604.40 457.11 L 605.79 454.95 L 607.18 452.75 L 608.56 450.51 L 609.95 448.21 L 611.34 445.87 L 612.72 443.48 L 614.11 441.05 L 615.50 438.56 L 616.88 436.03 L 618.27 433.46 L 619.66 430.83 L 621.04 428.16 L 622.43 425.44 L 623.82 422.67 L 625.20 419.86 L 626.59 416.99 L 627.98 414.09 L 629.36 411.13 L 630.75 408.12 L 632.14 405.07 L 633.52 401.98 L 634.91 398.83 L 636.30 395.64 L 637.68 392.40 L 639.07 389.11 L 640.46 385.77 L 641.84 382.39 L 643.23 378.96 L 644.62 375.49 L 646.00 371.96 L 647.39 368.39 L 648.78 364.77 L 650.16 361.11 L 651.55 357.39 L 652.94 353.63" fill="none" stroke="var(--accent-line)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="7 6"/>
+<circle cx="630.80" cy="406.44" r="3.4" fill="var(--prussian)"/>
+<circle cx="497.35" cy="484.87" r="3.4" fill="var(--prussian)"/>
+<circle cx="562.53" cy="507.96" r="3.4" fill="var(--prussian)"/>
+<circle cx="431.39" cy="353.28" r="3.4" fill="var(--prussian)"/>
+<circle cx="560.08" cy="487.60" r="3.4" fill="var(--prussian)"/>
+<circle cx="489.82" cy="479.77" r="3.4" fill="var(--prussian)"/>
+<circle cx="631.92" cy="394.15" r="3.4" fill="var(--prussian)"/>
+<circle cx="477.23" cy="451.47" r="3.4" fill="var(--prussian)"/>
+<circle cx="622.08" cy="426.82" r="3.4" fill="var(--prussian)"/>
+<circle cx="537.60" cy="493.53" r="3.4" fill="var(--prussian)"/>
+<circle cx="471.91" cy="451.55" r="3.4" fill="var(--prussian)"/>
+<circle cx="561.67" cy="502.99" r="3.4" fill="var(--prussian)"/>
+<circle cx="458.70" cy="415.98" r="3.4" fill="var(--prussian)"/>
+<circle cx="440.67" cy="369.86" r="3.4" fill="var(--prussian)"/>
+<circle cx="520.53" cy="498.88" r="3.4" fill="var(--prussian)"/>
+<circle cx="643.57" cy="380.70" r="3.4" fill="var(--prussian)"/>
+<circle cx="575.19" cy="479.08" r="3.4" fill="var(--prussian)"/>
+<circle cx="633.04" cy="394.86" r="3.4" fill="var(--prussian)"/>
+<circle cx="517.34" cy="491.24" r="3.4" fill="var(--prussian)"/>
+<circle cx="556.35" cy="491.89" r="3.4" fill="var(--prussian)"/>
+<circle cx="524.03" cy="498.50" r="3.4" fill="var(--prussian)"/>
+<circle cx="544.30" cy="492.73" r="3.4" fill="var(--prussian)"/>
+<circle cx="525.22" cy="501.78" r="3.4" fill="var(--prussian)"/>
+<circle cx="647.08" cy="362.22" r="3.4" fill="var(--prussian)"/>
+<circle cx="452.32" cy="399.78" r="3.4" fill="var(--prussian)"/>
+<circle cx="472.04" cy="443.87" r="3.4" fill="var(--prussian)"/>
+<circle cx="584.51" cy="484.20" r="3.4" fill="var(--prussian)"/>
+<circle cx="602.74" cy="465.80" r="3.4" fill="var(--prussian)"/>
+<circle cx="446.80" cy="411.95" r="3.4" fill="var(--prussian)"/>
+<circle cx="455.19" cy="423.05" r="3.4" fill="var(--prussian)"/>
+<circle cx="525.81" cy="492.01" r="3.4" fill="var(--prussian)"/>
+<circle cx="646.93" cy="365.79" r="3.4" fill="var(--prussian)"/>
+<circle cx="505.96" cy="484.94" r="3.4" fill="var(--prussian)"/>
+<circle cx="463.38" cy="424.86" r="3.4" fill="var(--prussian)"/>
+<circle cx="466.92" cy="428.42" r="3.4" fill="var(--prussian)"/>
+<circle cx="446.43" cy="395.98" r="3.4" fill="var(--prussian)"/>
+<circle cx="495.48" cy="476.05" r="3.4" fill="var(--prussian)"/>
+<circle cx="621.24" cy="441.39" r="3.4" fill="var(--prussian)"/>
+<circle cx="492.98" cy="490.11" r="3.4" fill="var(--prussian)"/>
+<circle cx="448.79" cy="384.55" r="3.4" fill="var(--prussian)"/>
+<circle cx="526.94" cy="492.23" r="3.4" fill="var(--prussian)"/>
+<circle cx="564.67" cy="498.93" r="3.4" fill="var(--prussian)"/>
+<text x="400.00" y="570.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">r = +0.00</text>
+<text x="30.00" y="594.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">最后一张里 y 完全由 x 决定，相关系数却接近 0。相关系数量的只是直线趋势，量不到弯曲的关系。</text>
+</svg>

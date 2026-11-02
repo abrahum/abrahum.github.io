@@ -1,0 +1,40 @@
+<svg viewBox="0 0 720 440" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<polygon points="108.00,316.00 300.00,316.00 251.62,281.44 59.62,281.44" fill="none" stroke="var(--ink-3)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+<polygon points="108.00,280.10 300.00,221.34 251.62,159.37 59.62,218.12" fill="var(--fig-fill)" stroke="var(--accent-line)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 156.00 265.41 L 153.98 262.83 L 151.97 260.24 L 149.95 257.66 L 147.94 255.08 L 145.92 252.50 L 143.90 249.91 L 141.89 247.33 L 139.87 244.75 L 137.86 242.17 L 135.84 239.58 L 133.82 237.00 L 131.81 234.42 L 129.79 231.84 L 127.78 229.25 L 125.76 226.67 L 123.74 224.09 L 121.73 221.51 L 119.71 218.92 L 117.70 216.34 L 115.68 213.76 L 113.66 211.18 L 111.65 208.60 L 109.63 206.01 L 107.62 203.43" fill="none" stroke="var(--ink-2)" stroke-width="1.0" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<path d="M 204.00 250.72 L 201.98 248.14 L 199.97 245.56 L 197.95 242.97 L 195.94 240.39 L 193.92 237.81 L 191.90 235.23 L 189.89 232.64 L 187.87 230.06 L 185.86 227.48 L 183.84 224.90 L 181.82 222.31 L 179.81 219.73 L 177.79 217.15 L 175.78 214.57 L 173.76 211.98 L 171.74 209.40 L 169.73 206.82 L 167.71 204.24 L 165.70 201.65 L 163.68 199.07 L 161.66 196.49 L 159.65 193.91 L 157.63 191.32 L 155.62 188.74" fill="none" stroke="var(--ink-2)" stroke-width="1.0" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<path d="M 252.00 236.03 L 249.98 233.45 L 247.97 230.87 L 245.95 228.28 L 243.94 225.70 L 241.92 223.12 L 239.90 220.54 L 237.89 217.96 L 235.87 215.37 L 233.86 212.79 L 231.84 210.21 L 229.82 207.63 L 227.81 205.04 L 225.79 202.46 L 223.78 199.88 L 221.76 197.30 L 219.74 194.71 L 217.73 192.13 L 215.71 189.55 L 213.70 186.97 L 211.68 184.38 L 209.66 181.80 L 207.65 179.22 L 205.63 176.64 L 203.62 174.05" fill="none" stroke="var(--ink-2)" stroke-width="1.0" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<path d="M 91.87 259.44 L 97.87 257.60 L 103.87 255.76 L 109.87 253.93 L 115.87 252.09 L 121.87 250.26 L 127.87 248.42 L 133.87 246.58 L 139.87 244.75 L 145.87 242.91 L 151.87 241.08 L 157.87 239.24 L 163.87 237.40 L 169.87 235.57 L 175.87 233.73 L 181.87 231.90 L 187.87 230.06 L 193.87 228.22 L 199.87 226.39 L 205.87 224.55 L 211.87 222.72 L 217.87 220.88 L 223.87 219.04 L 229.87 217.21 L 235.87 215.37 L 241.87 213.54 L 247.87 211.70 L 253.87 209.86 L 259.87 208.03 L 265.87 206.19 L 271.87 204.36 L 277.87 202.52 L 283.87 200.68" fill="none" stroke="var(--ink-2)" stroke-width="1.0" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<path d="M 75.74 238.78 L 81.74 236.94 L 87.74 235.11 L 93.74 233.27 L 99.74 231.43 L 105.74 229.60 L 111.74 227.76 L 117.74 225.93 L 123.74 224.09 L 129.74 222.25 L 135.74 220.42 L 141.74 218.58 L 147.74 216.75 L 153.74 214.91 L 159.74 213.07 L 165.74 211.24 L 171.74 209.40 L 177.74 207.57 L 183.74 205.73 L 189.74 203.89 L 195.74 202.06 L 201.74 200.22 L 207.74 198.39 L 213.74 196.55 L 219.74 194.71 L 225.74 192.88 L 231.74 191.04 L 237.74 189.21 L 243.74 187.37 L 249.74 185.53 L 255.74 183.70 L 261.74 181.86 L 267.74 180.03" fill="none" stroke="var(--ink-2)" stroke-width="1.0" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<polygon points="161.86,234.82 209.86,220.13 197.76,204.64 149.76,219.33" fill="var(--fig-fill-2)" stroke="var(--prussian)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="161.86,303.04 209.86,303.04 197.76,294.40 149.76,294.40" fill="var(--fig-fill-2)" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="161.86" y1="234.82" x2="161.86" y2="303.04" stroke="var(--ink-3)" stroke-width="1.0" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4 4" opacity="0.8"/>
+<line x1="209.86" y1="220.13" x2="209.86" y2="303.04" stroke="var(--ink-3)" stroke-width="1.0" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4 4" opacity="0.8"/>
+<line x1="197.76" y1="204.64" x2="197.76" y2="294.40" stroke="var(--ink-3)" stroke-width="1.0" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4 4" opacity="0.8"/>
+<line x1="149.76" y1="219.33" x2="149.76" y2="294.40" stroke="var(--ink-3)" stroke-width="1.0" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4 4" opacity="0.8"/>
+<line x1="179.81" y1="219.73" x2="144.43" y2="152.59" stroke="var(--prussian)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 152.29 158.77 L 144.43 152.59 L 145.08 162.57" fill="none" stroke="var(--prussian)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="179.81" y1="219.73" x2="179.81" y2="128.34" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 6"/>
+<path d="M 183.89 137.47 L 179.81 128.34 L 175.73 137.47" fill="none" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 160.86 183.77 L 161.61 182.96 L 162.39 182.17 L 163.18 181.40 L 163.99 180.63 L 164.81 179.88 L 165.65 179.15 L 166.50 178.44 L 167.36 177.74 L 168.24 177.07 L 169.12 176.43 L 170.00 175.80 L 170.90 175.20 L 171.80 174.63 L 172.70 174.09 L 173.60 173.57 L 174.50 173.08 L 175.40 172.63 L 176.29 172.20 L 177.18 171.80 L 178.07 171.43 L 178.94 171.08 L 179.81 170.77" fill="none" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="168.23" y="191.76" text-anchor="end" font-size="16" fill="var(--ink)">γ</text>
+<circle cx="179.81" cy="219.73" r="3.4" fill="var(--prussian)"/>
+<text x="173.81" y="207.73" text-anchor="end" font-size="15" fill="var(--ink)">ΔS</text>
+<text x="185.81" y="336.72" text-anchor="middle" font-size="14" fill="var(--ink)">ΔxΔy</text>
+<text x="134.43" y="150.59" text-anchor="end" font-size="15" fill="var(--prussian)">n</text>
+<text x="187.81" y="132.34" text-anchor="start" font-size="13.5" fill="var(--ink-2)">z 轴</text>
+<text x="49.62" y="214.12" text-anchor="middle" font-size="17" fill="var(--ink)">Σ</text>
+<text x="30.00" y="424.00" text-anchor="start" font-size="14" fill="var(--ink-2)">ΔxΔy ＝ ΔS cos γ：曲面越斜，投影越小</text>
+<text x="356.00" y="44.00" text-anchor="start" font-size="15.5" fill="var(--ink)" font-weight="600">同一块曲面，两种积分</text>
+<text x="356.00" y="92.00" text-anchor="start" font-size="14" fill="var(--ink-2)">第一类（对面积）∬ f dS：</text>
+<text x="356.00" y="116.00" text-anchor="start" font-size="14" fill="var(--ink-2)">把曲面割成小块，只量面积，</text>
+<text x="356.00" y="140.00" text-anchor="start" font-size="14" fill="var(--ink-2)">与方向无关，故 dS 不小于零。</text>
+<text x="356.00" y="180.00" text-anchor="start" font-size="14" fill="var(--ink-2)">第二类（对坐标）∬ R dxdy：</text>
+<text x="356.00" y="204.00" text-anchor="start" font-size="14" fill="var(--ink-2)">量的是穿过曲面的通量，投影</text>
+<text x="356.00" y="228.00" text-anchor="start" font-size="14" fill="var(--ink-2)">带正负号，dxdy ＝ cos γ dS。</text>
+<text x="356.00" y="268.00" text-anchor="start" font-size="14" fill="var(--ink-2)">所以 R dxdy 与 R cos γ dS 是</text>
+<text x="356.00" y="292.00" text-anchor="start" font-size="14" fill="var(--ink-2)">同一个积分的两种写法，</text>
+<text x="356.00" y="316.00" text-anchor="start" font-size="14" fill="var(--ink-2)">差别只在用哪把尺去量。</text>
+<text x="356.00" y="356.00" text-anchor="start" font-size="14" fill="var(--ink-2)">cos γ 为零时，曲面垂直于 xOy 面，</text>
+<text x="356.00" y="380.00" text-anchor="start" font-size="14" fill="var(--ink-2)">通量也为零：没有东西穿过去。</text>
+</svg>

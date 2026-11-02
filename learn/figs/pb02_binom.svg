@@ -1,0 +1,83 @@
+<svg viewBox="0 0 720 420" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<text x="20.00" y="30.00" text-anchor="start" font-size="15" fill="var(--ink)">n 重伯努利试验里成功次数 k 的分布，p = 0.4</text>
+<text x="20.00" y="51.00" text-anchor="start" font-size="13.5" fill="var(--ink-3)">三块图的纵轴各自按峰值归一，横轴都是 k/n；峰越高处越窄，说明偏差在收窄</text>
+<text x="147.00" y="96.00" text-anchor="middle" font-size="14" fill="var(--ink)">n = 10</text>
+<rect x="53.04" y="295.56" width="15.20" height="4.44" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.6"/>
+<rect x="70.31" y="270.43" width="15.20" height="29.57" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.6"/>
+<rect x="87.58" y="211.29" width="15.20" height="88.71" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.6"/>
+<rect x="104.85" y="142.29" width="15.20" height="157.71" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.6"/>
+<rect x="122.13" y="116.00" width="15.20" height="184.00" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.6"/>
+<rect x="139.40" y="152.80" width="15.20" height="147.20" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.6"/>
+<rect x="156.67" y="218.22" width="15.20" height="81.78" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.6"/>
+<rect x="173.95" y="268.85" width="15.20" height="31.15" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.6"/>
+<rect x="191.22" y="292.21" width="15.20" height="7.79" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.6"/>
+<line x1="52.00" y1="300.00" x2="242.00" y2="300.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<line x1="128.00" y1="300.00" x2="128.00" y2="108.00" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 6" opacity="0.85"/>
+<text x="128.00" y="100.00" text-anchor="middle" font-size="13" fill="var(--ink-2)">p</text>
+<line x1="52.00" y1="300.00" x2="52.00" y2="305.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<text x="52.00" y="320.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">0</text>
+<line x1="128.00" y1="300.00" x2="128.00" y2="305.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<text x="128.00" y="320.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">0.4</text>
+<line x1="242.00" y1="300.00" x2="242.00" y2="305.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<text x="242.00" y="320.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">1</text>
+<text x="147.00" y="340.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">k/n</text>
+<text x="147.00" y="366.00" text-anchor="middle" font-size="13" fill="var(--ink-2)">峰值 P = 0.251</text>
+<text x="367.00" y="96.00" text-anchor="middle" font-size="14" fill="var(--ink)">n = 20</text>
+<rect x="290.64" y="296.84" width="7.96" height="3.16" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.6"/>
+<rect x="299.69" y="287.36" width="7.96" height="12.64" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.6"/>
+<rect x="308.73" y="264.17" width="7.96" height="35.83" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.6"/>
+<rect x="317.78" y="223.57" width="7.96" height="76.43" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.6"/>
+<rect x="326.83" y="172.62" width="7.96" height="127.38" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.6"/>
+<rect x="335.88" y="130.15" width="7.96" height="169.85" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.6"/>
+<rect x="344.92" y="116.00" width="7.96" height="184.00" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.6"/>
+<rect x="353.97" y="136.44" width="7.96" height="163.56" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.6"/>
+<rect x="363.02" y="180.06" width="7.96" height="119.94" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.6"/>
+<rect x="372.07" y="227.31" width="7.96" height="72.69" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.6"/>
+<rect x="381.11" y="263.65" width="7.96" height="36.35" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.6"/>
+<rect x="390.16" y="285.09" width="7.96" height="14.91" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.6"/>
+<rect x="399.21" y="295.03" width="7.96" height="4.97" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.6"/>
+<line x1="272.00" y1="300.00" x2="462.00" y2="300.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<line x1="348.00" y1="300.00" x2="348.00" y2="108.00" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 6" opacity="0.85"/>
+<text x="348.00" y="100.00" text-anchor="middle" font-size="13" fill="var(--ink-2)">p</text>
+<line x1="272.00" y1="300.00" x2="272.00" y2="305.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<text x="272.00" y="320.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">0</text>
+<line x1="348.00" y1="300.00" x2="348.00" y2="305.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<text x="348.00" y="320.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">0.4</text>
+<line x1="462.00" y1="300.00" x2="462.00" y2="305.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<text x="462.00" y="320.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">1</text>
+<text x="367.00" y="340.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">k/n</text>
+<text x="367.00" y="366.00" text-anchor="middle" font-size="13" fill="var(--ink-2)">峰值 P = 0.180</text>
+<text x="587.00" y="96.00" text-anchor="middle" font-size="14" fill="var(--ink)">n = 60</text>
+<rect x="535.79" y="294.90" width="2.74" height="5.10" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.0"/>
+<rect x="538.91" y="289.56" width="2.74" height="10.44" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.0"/>
+<rect x="542.02" y="280.43" width="2.74" height="19.57" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.0"/>
+<rect x="545.14" y="266.23" width="2.74" height="33.77" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.0"/>
+<rect x="548.25" y="246.22" width="2.74" height="53.78" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.0"/>
+<rect x="551.37" y="220.75" width="2.74" height="79.25" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.0"/>
+<rect x="554.48" y="191.69" width="2.74" height="108.31" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.0"/>
+<rect x="557.60" y="162.47" width="2.74" height="137.53" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.0"/>
+<rect x="560.71" y="137.46" width="2.74" height="162.54" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.0"/>
+<rect x="563.83" y="120.97" width="2.74" height="179.03" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.0"/>
+<rect x="566.94" y="116.00" width="2.74" height="184.00" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.0"/>
+<rect x="570.06" y="123.36" width="2.74" height="176.64" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.0"/>
+<rect x="573.17" y="141.48" width="2.74" height="158.52" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.0"/>
+<rect x="576.29" y="166.92" width="2.74" height="133.08" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.0"/>
+<rect x="579.40" y="195.44" width="2.74" height="104.56" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.0"/>
+<rect x="582.51" y="223.08" width="2.74" height="76.92" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.0"/>
+<rect x="585.63" y="247.01" width="2.74" height="52.99" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.0"/>
+<rect x="588.74" y="265.81" width="2.74" height="34.19" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.0"/>
+<rect x="591.86" y="279.35" width="2.74" height="20.65" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.0"/>
+<rect x="594.97" y="288.32" width="2.74" height="11.68" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.0"/>
+<rect x="598.09" y="293.81" width="2.74" height="6.19" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.0"/>
+<line x1="492.00" y1="300.00" x2="682.00" y2="300.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<line x1="568.00" y1="300.00" x2="568.00" y2="108.00" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 6" opacity="0.85"/>
+<text x="568.00" y="100.00" text-anchor="middle" font-size="13" fill="var(--ink-2)">p</text>
+<line x1="492.00" y1="300.00" x2="492.00" y2="305.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<text x="492.00" y="320.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">0</text>
+<line x1="568.00" y1="300.00" x2="568.00" y2="305.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<text x="568.00" y="320.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">0.4</text>
+<line x1="682.00" y1="300.00" x2="682.00" y2="305.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<text x="682.00" y="320.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">1</text>
+<text x="587.00" y="340.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">k/n</text>
+<text x="587.00" y="366.00" text-anchor="middle" font-size="13" fill="var(--ink-2)">峰值 P = 0.105</text>
+</svg>

@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>第三章 1733 至 1812：从二项到钟形曲线 · 概率论与数理统计</title>
+<meta name="description" content="二项分布的泊松近似、棣莫弗-拉普拉斯局部与积分极限定理、正态密度的标准化、误差的正态模型与正态分布表的使用。">
+<link rel="stylesheet" href="../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="nav-brand" href="../index.html">数学基础课<span> 三门课，一套读法</span></a>
+    <nav class="nav-links" aria-label="主导航">
+      <a href="index.html#map">本课目录</a>
+      <a class="xl" href="../calculus/index.html">微积分</a>
+      <a class="xl" href="../linear-algebra/index.html">线性代数</a>
+      <a class="xl" href="../complex/index.html">复变函数</a>
+      <a class="opt" href="ch04.html">下一章</a>
+    </nav>
+  </div>
+  <div class="nav-progress" aria-hidden="true"></div>
+</header>
+
+<main>
+
+  <section class="chapter">
+    <div class="wrap">
+      <div class="ch-hero-band">
+        <div>
+          <p class="ch-label reveal"><span>第三章</span><span class="ch-era">1733 年至 1812 年</span></p>
+          <h1 class="ch-title reveal reveal-2">1733 至 1812：从二项到钟形曲线</h1>
+          <p class="ch-deck reveal reveal-3">抛 100 次硬币，正面出现 56 次以上的概率，手算要加四十多项。1733 年棣莫弗用一条曲线把这笔账接了，可惜当时没人理会；1812 年拉普拉斯重新算出它，接到天文观测的误差上。这一章讲这条曲线的密度与标准化、正态分布表怎么查，也讲二项分布为什么会变成它。</p>
+          <div class="ch-meta reveal reveal-3">
+            <div><strong>本章知识点</strong>泊松近似、棣莫弗-拉普拉斯定理、正态密度与标准化、误差的正态模型、正态分布表</div>
+            <div><strong>历史坐标</strong>棣莫弗 1733 年，高斯 1809 年，拉普拉斯 1812 年</div>
+            <div><strong>对应教材</strong>浙大《概率论与数理统计》第四版 第二章 §4、§5，第五章 §2</div>
+            <div><strong>前置</strong>二项分布、定积分与换元积分</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap ch-body">
+    <aside class="rail">
+      <p class="rail-title">本章提纲</p>
+      <ol>
+        <li><a href="#s-1">二项概率算不动了</a></li>
+        <li><a href="#s-2">柱顶连成一条曲线</a></li>
+        <li><a href="#s-3">从一次成功到一段区间</a></li>
+        <li><a href="#s-4">正态分布的密度与标准化</a></li>
+        <li><a href="#s-5">误差为什么长成钟形</a></li>
+        <li><a href="#s-manual">怎么算</a></li>
+        <li><a href="#s-examples">例题</a></li>
+        <li><a href="#s-exercises">习题</a></li>
+      </ol>
+      <p class="rail-title">历史坐标</p>
+      <p class="rail-who">棣莫弗 1733 年<br>高斯 1809 年<br>拉普拉斯 1812 年</p>
+    </aside>
+
+    <article class="prose">
+
+      <p class="lead reveal">二项概率 \(C_n^kp^kq^{n-k}\) 在 \(n\) 小的时候还能一个数一个数地算，\(n\) 上到 100，手算就只剩查表这一条路。1733 年棣莫弗找到一条曲线，能把整张表替掉，印出来以后几乎没人注意；1812 年拉普拉斯在《概率的分析理论》里重新算出它，顺手用在天文观测的误差上。这一章讲这条曲线的密度、标准化和查表，也讲它为什么会从二项分布里长出来。</p>
+
+      <h2 id="s-1" class="reveal">一、二项概率算不动了</h2>
+
+      <p>抛一枚硬币 100 次，问正面出现 56 次以上的概率。式子写出来只有一行，\(P=\sum_{k=56}^{100}C_{100}^k\left(\tfrac12\right)^{100}\)，要算出数字，得把四十多个组合数挨个算出来相加，每一项还拖着 \(2^{-100}\) 这样的量。\(n\) 再往上走，比如抽检 1000 件产品问次品不超过 5 件的概率，这条手算的路就彻底断了。</p>
+
+      <p>有一片区域里公式能瘦下来：当 \(p\) 很小、\(n\) 很大、而乘积 \(np\) 稳在一个中等数上时，二项概率几乎只由 \(\lambda=np\) 决定，组合数那一大坨可以整块换掉。课本把这条结论叫泊松定理，它把查表的工作从一串组合数转到了指数函数上。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定理（泊松定理）</p>
+        <p>设 \(np_n\to\lambda&gt;0\)（\(\lambda\) 为常数），则对任意固定的 \(k=0,1,2,\dots\)，有 \(\lim\limits_{n\to\infty}C_n^kp_n^k(1-p_n)^{n-k}=\dfrac{\lambda^k}{k!}e^{-\lambda}\)。实际计算中 \(n\ge20\)、\(p\le0.05\) 时，直接取 \(P_n(k)\approx\dfrac{(np)^k}{k!}e^{-np}\)。</p>
+      </div>
+
+      <p>泊松近似管的是一类事：一页纸上的错字、一批零件里的次品、一小时里打进来的电话。这些事件单次发生的机会极小，\(n\) 次里能撞上几回主要看 \(\lambda\)。抛硬币的参数落在另一片地方，\(p=0.5\) 时 \(\lambda\) 会跟着 \(n\) 一路涨到 50、500，指数尾巴只往一边拖，而二项分布在 \(p=0.5\) 时两边一样长，两条曲线差得越来越远。</p>
+
+      <details class="fold">
+        <summary>两个条件哪一个更要紧</summary>
+        <p>\(p\) 小是前提，\(np\) 不过大是补充。经验判据是 \(n\ge20\) 且 \(p\le0.05\)，或者 \(n\ge100\) 且 \(np\le10\)。抛 100 次硬币时 \(p=0.5\)、\(\lambda=50\)，用泊松公式算出来的值与精确值差好几个数量级，因为泊松分布只有一条右边的尾巴。</p>
+      </details>
+
+      <h2 id="s-2" class="reveal">二、柱顶连成一条曲线</h2>
+
+      <p>把二项概率按 \(k\) 画成柱状图，\(n=10\) 时柱顶高低参差，看不出章法；\(n=20\) 时轮廓开始变圆；\(n=50\) 时柱顶几乎全落在一条光滑曲线上，中间高、两边低、左右对称。这条曲线的中心在 \(np\)，两个拐点离中心约 \(\sqrt{npq}\)，方程能从二项系数直接推出来，用的工具是斯特林公式。</p>
+
+      <p>为了把不同的 \(n\) 放在一起比，先把横轴的单位换掉：把 \(k\) 减掉中心 \(np\)，再除以 \(\sqrt{npq}\)。换完之后，无论 \(n\) 是 10 还是 500，分布的中心都挪到原点，宽度都归一成 1，剩下要看的只是形状贴得多紧。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定理（棣莫弗-拉普拉斯局部极限定理）</p>
+        <p>设 \(X\sim B(n,p)\)，\(0&lt;p&lt;1\)，\(q=1-p\)，记 \(x_k=\dfrac{k-np}{\sqrt{npq}}\)，\(\varphi(x)=\dfrac{1}{\sqrt{2\pi}}e^{-x^2/2}\)。则当 \(n\to\infty\) 时，对 \(k\) 一致地有 \(\sqrt{npq}\,P_n(k)\to\varphi(x_k)\)，即 \(P_n(k)\approx\dfrac{1}{\sqrt{2\pi npq}}\exp\left[-\dfrac{(k-np)^2}{2npq}\right]\)。</p>
+      </div>
+
+      <p>式子里两个因子分工不同。前面的系数 \(1/\sqrt{2\pi npq}\) 定高度，\(n\) 越大 \(npq\) 越大，系数越小，柱子被压得越矮；指数分母里的 \(2npq\) 定宽度，\(n\) 越大分布摊得越开。这两件事同时发生，柱子底下的总面积始终是 1，矮下去的那部分正好摊到了两边去。</p>
+
+      <div class="figure">
+        <!--FIG pb03_binom--><svg viewBox="0 0 720 432" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<text x="26.00" y="30.00" text-anchor="start" font-size="15" fill="var(--ink)">抛 n 次硬币，正面出现 k 次的概率，柱高与曲线同尺度</text>
+<text x="26.00" y="51.00" text-anchor="start" font-size="13.5" fill="var(--ink-3)">曲线是 N(np, npq) 的密度，三块图各自归一；n 越大，柱顶越贴曲线</text>
+<line x1="28.00" y1="74.00" x2="58.00" y2="74.00" stroke="var(--prussian)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="64.00" y="79.00" text-anchor="start" font-size="13" fill="var(--ink-2)">正态密度 N(np, npq)</text>
+<rect x="246.00" y="63.00" width="9.00" height="16.00" fill="var(--fig-fill-2)" stroke="var(--ink-3)" stroke-width="0.9"/>
+<text x="261.00" y="79.00" text-anchor="start" font-size="13" fill="var(--ink-2)">二项概率 P(k)</text>
+<text x="125.00" y="100.00" text-anchor="middle" font-size="14.5" fill="var(--ink)">n = 10</text>
+<text x="125.00" y="117.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">σ = 1.58，np = 5</text>
+<rect x="43.76" y="308.72" width="13.76" height="7.28" fill="var(--fig-fill-2)" stroke="var(--ink-3)" stroke-width="0.9"/>
+<rect x="62.35" y="283.26" width="13.76" height="32.74" fill="var(--fig-fill-2)" stroke="var(--ink-3)" stroke-width="0.9"/>
+<rect x="80.94" y="228.68" width="13.76" height="87.32" fill="var(--fig-fill-2)" stroke="var(--ink-3)" stroke-width="0.9"/>
+<rect x="99.53" y="163.20" width="13.76" height="152.80" fill="var(--fig-fill-2)" stroke="var(--ink-3)" stroke-width="0.9"/>
+<rect x="118.12" y="132.63" width="13.76" height="183.37" fill="var(--fig-fill-2)" stroke="var(--ink-3)" stroke-width="0.9"/>
+<rect x="136.71" y="163.20" width="13.76" height="152.80" fill="var(--fig-fill-2)" stroke="var(--ink-3)" stroke-width="0.9"/>
+<rect x="155.30" y="228.68" width="13.76" height="87.32" fill="var(--fig-fill-2)" stroke="var(--ink-3)" stroke-width="0.9"/>
+<rect x="173.89" y="283.26" width="13.76" height="32.74" fill="var(--fig-fill-2)" stroke="var(--ink-3)" stroke-width="0.9"/>
+<rect x="192.48" y="308.72" width="13.76" height="7.28" fill="var(--fig-fill-2)" stroke="var(--ink-3)" stroke-width="0.9"/>
+<path d="M 28.00 315.19 L 28.69 315.12 L 29.39 315.05 L 30.08 314.98 L 30.77 314.90 L 31.46 314.81 L 32.16 314.72 L 32.85 314.62 L 33.54 314.51 L 34.24 314.40 L 34.93 314.28 L 35.62 314.15 L 36.31 314.02 L 37.01 313.87 L 37.70 313.72 L 38.39 313.55 L 39.09 313.38 L 39.78 313.19 L 40.47 312.99 L 41.16 312.78 L 41.86 312.56 L 42.55 312.32 L 43.24 312.07 L 43.94 311.81 L 44.63 311.53 L 45.32 311.23 L 46.01 310.92 L 46.71 310.59 L 47.40 310.24 L 48.09 309.87 L 48.79 309.48 L 49.48 309.07 L 50.17 308.64 L 50.86 308.19 L 51.56 307.71 L 52.25 307.21 L 52.94 306.68 L 53.64 306.13 L 54.33 305.55 L 55.02 304.95 L 55.71 304.31 L 56.41 303.65 L 57.10 302.96 L 57.79 302.23 L 58.49 301.47 L 59.18 300.68 L 59.87 299.85 L 60.56 298.99 L 61.26 298.09 L 61.95 297.16 L 62.64 296.19 L 63.34 295.18 L 64.03 294.13 L 64.72 293.04 L 65.41 291.91 L 66.11 290.74 L 66.80 289.52 L 67.49 288.27 L 68.19 286.97 L 68.88 285.62 L 69.57 284.23 L 70.26 282.80 L 70.96 281.32 L 71.65 279.79 L 72.34 278.22 L 73.04 276.60 L 73.73 274.93 L 74.42 273.22 L 75.11 271.46 L 75.81 269.66 L 76.50 267.81 L 77.19 265.91 L 77.89 263.97 L 78.58 261.98 L 79.27 259.95 L 79.96 257.87 L 80.66 255.75 L 81.35 253.58 L 82.04 251.38 L 82.74 249.13 L 83.43 246.85 L 84.12 244.52 L 84.81 242.16 L 85.51 239.76 L 86.20 237.33 L 86.89 234.87 L 87.59 232.37 L 88.28 229.85 L 88.97 227.30 L 89.66 224.73 L 90.36 222.13 L 91.05 219.51 L 91.74 216.88 L 92.44 214.22 L 93.13 211.56 L 93.82 208.89 L 94.51 206.21 L 95.21 203.52 L 95.90 200.83 L 96.59 198.15 L 97.29 195.46 L 97.98 192.79 L 98.67 190.12 L 99.36 187.47 L 100.06 184.84 L 100.75 182.23 L 101.44 179.64 L 102.14 177.08 L 102.83 174.55 L 103.52 172.05 L 104.21 169.59 L 104.91 167.17 L 105.60 164.79 L 106.29 162.47 L 106.99 160.19 L 107.68 157.97 L 108.37 155.80 L 109.06 153.69 L 109.76 151.65 L 110.45 149.68 L 111.14 147.77 L 111.84 145.94 L 112.53 144.18 L 113.22 142.50 L 113.91 140.91 L 114.61 139.39 L 115.30 137.96 L 115.99 136.62 L 116.69 135.37 L 117.38 134.21 L 118.07 133.15 L 118.76 132.18 L 119.46 131.31 L 120.15 130.54 L 120.84 129.87 L 121.54 129.30 L 122.23 128.83 L 122.92 128.47 L 123.61 128.21 L 124.31 128.05 L 125.00 128.00 L 125.69 128.05 L 126.39 128.21 L 127.08 128.47 L 127.77 128.83 L 128.46 129.30 L 129.16 129.87 L 129.85 130.54 L 130.54 131.31 L 131.24 132.18 L 131.93 133.15 L 132.62 134.21 L 133.31 135.37 L 134.01 136.62 L 134.70 137.96 L 135.39 139.39 L 136.09 140.91 L 136.78 142.50 L 137.47 144.18 L 138.16 145.94 L 138.86 147.77 L 139.55 149.68 L 140.24 151.65 L 140.94 153.69 L 141.63 155.80 L 142.32 157.97 L 143.01 160.19 L 143.71 162.47 L 144.40 164.79 L 145.09 167.17 L 145.79 169.59 L 146.48 172.05 L 147.17 174.55 L 147.86 177.08 L 148.56 179.64 L 149.25 182.23 L 149.94 184.84 L 150.64 187.47 L 151.33 190.12 L 152.02 192.79 L 152.71 195.46 L 153.41 198.15 L 154.10 200.83 L 154.79 203.52 L 155.49 206.21 L 156.18 208.89 L 156.87 211.56 L 157.56 214.22 L 158.26 216.88 L 158.95 219.51 L 159.64 222.13 L 160.34 224.73 L 161.03 227.30 L 161.72 229.85 L 162.41 232.37 L 163.11 234.87 L 163.80 237.33 L 164.49 239.76 L 165.19 242.16 L 165.88 244.52 L 166.57 246.85 L 167.26 249.13 L 167.96 251.38 L 168.65 253.58 L 169.34 255.75 L 170.04 257.87 L 170.73 259.95 L 171.42 261.98 L 172.11 263.97 L 172.81 265.91 L 173.50 267.81 L 174.19 269.66 L 174.89 271.46 L 175.58 273.22 L 176.27 274.93 L 176.96 276.60 L 177.66 278.22 L 178.35 279.79 L 179.04 281.32 L 179.74 282.80 L 180.43 284.23 L 181.12 285.62 L 181.81 286.97 L 182.51 288.27 L 183.20 289.52 L 183.89 290.74 L 184.59 291.91 L 185.28 293.04 L 185.97 294.13 L 186.66 295.18 L 187.36 296.19 L 188.05 297.16 L 188.74 298.09 L 189.44 298.99 L 190.13 299.85 L 190.82 300.68 L 191.51 301.47 L 192.21 302.23 L 192.90 302.96 L 193.59 303.65 L 194.29 304.31 L 194.98 304.95 L 195.67 305.55 L 196.36 306.13 L 197.06 306.68 L 197.75 307.21 L 198.44 307.71 L 199.14 308.19 L 199.83 308.64 L 200.52 309.07 L 201.21 309.48 L 201.91 309.87 L 202.60 310.24 L 203.29 310.59 L 203.99 310.92 L 204.68 311.23 L 205.37 311.53 L 206.06 311.81 L 206.76 312.07 L 207.45 312.32 L 208.14 312.56 L 208.84 312.78 L 209.53 312.99 L 210.22 313.19 L 210.91 313.38 L 211.61 313.55 L 212.30 313.72 L 212.99 313.87 L 213.69 314.02 L 214.38 314.15 L 215.07 314.28 L 215.76 314.40 L 216.46 314.51 L 217.15 314.62 L 217.84 314.72 L 218.54 314.81 L 219.23 314.90 L 219.92 314.98 L 220.61 315.05 L 221.31 315.12 L 222.00 315.19" fill="none" stroke="var(--prussian)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="28.00" y1="316.00" x2="222.00" y2="316.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<line x1="66.21" y1="316.00" x2="66.21" y2="321.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<text x="66.21" y="336.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">2</text>
+<line x1="125.00" y1="316.00" x2="125.00" y2="321.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<text x="125.00" y="336.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">5</text>
+<line x1="183.79" y1="316.00" x2="183.79" y2="321.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<text x="183.79" y="336.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">8</text>
+<text x="125.00" y="356.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">k</text>
+<text x="360.00" y="100.00" text-anchor="middle" font-size="14.5" fill="var(--ink)">n = 20</text>
+<text x="360.00" y="117.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">σ = 2.24，np = 10</text>
+<rect x="276.26" y="311.13" width="9.73" height="4.87" fill="var(--fig-fill-2)" stroke="var(--ink-3)" stroke-width="0.9"/>
+<rect x="289.41" y="300.42" width="9.73" height="15.58" fill="var(--fig-fill-2)" stroke="var(--ink-3)" stroke-width="0.9"/>
+<rect x="302.55" y="277.05" width="9.73" height="38.95" fill="var(--fig-fill-2)" stroke="var(--ink-3)" stroke-width="0.9"/>
+<rect x="315.70" y="238.10" width="9.73" height="77.90" fill="var(--fig-fill-2)" stroke="var(--ink-3)" stroke-width="0.9"/>
+<rect x="328.85" y="189.41" width="9.73" height="126.59" fill="var(--fig-fill-2)" stroke="var(--ink-3)" stroke-width="0.9"/>
+<rect x="341.99" y="147.21" width="9.73" height="168.79" fill="var(--fig-fill-2)" stroke="var(--ink-3)" stroke-width="0.9"/>
+<rect x="355.14" y="130.33" width="9.73" height="185.67" fill="var(--fig-fill-2)" stroke="var(--ink-3)" stroke-width="0.9"/>
+<rect x="368.28" y="147.21" width="9.73" height="168.79" fill="var(--fig-fill-2)" stroke="var(--ink-3)" stroke-width="0.9"/>
+<rect x="381.43" y="189.41" width="9.73" height="126.59" fill="var(--fig-fill-2)" stroke="var(--ink-3)" stroke-width="0.9"/>
+<rect x="394.57" y="238.10" width="9.73" height="77.90" fill="var(--fig-fill-2)" stroke="var(--ink-3)" stroke-width="0.9"/>
+<rect x="407.72" y="277.05" width="9.73" height="38.95" fill="var(--fig-fill-2)" stroke="var(--ink-3)" stroke-width="0.9"/>
+<rect x="420.86" y="300.42" width="9.73" height="15.58" fill="var(--fig-fill-2)" stroke="var(--ink-3)" stroke-width="0.9"/>
+<rect x="434.01" y="311.13" width="9.73" height="4.87" fill="var(--fig-fill-2)" stroke="var(--ink-3)" stroke-width="0.9"/>
+<path d="M 263.00 315.19 L 263.69 315.12 L 264.39 315.05 L 265.08 314.98 L 265.77 314.90 L 266.46 314.81 L 267.16 314.72 L 267.85 314.62 L 268.54 314.51 L 269.24 314.40 L 269.93 314.28 L 270.62 314.15 L 271.31 314.02 L 272.01 313.87 L 272.70 313.72 L 273.39 313.55 L 274.09 313.38 L 274.78 313.19 L 275.47 312.99 L 276.16 312.78 L 276.86 312.56 L 277.55 312.32 L 278.24 312.07 L 278.94 311.81 L 279.63 311.53 L 280.32 311.23 L 281.01 310.92 L 281.71 310.59 L 282.40 310.24 L 283.09 309.87 L 283.79 309.48 L 284.48 309.07 L 285.17 308.64 L 285.86 308.19 L 286.56 307.71 L 287.25 307.21 L 287.94 306.68 L 288.64 306.13 L 289.33 305.55 L 290.02 304.95 L 290.71 304.31 L 291.41 303.65 L 292.10 302.96 L 292.79 302.23 L 293.49 301.47 L 294.18 300.68 L 294.87 299.85 L 295.56 298.99 L 296.26 298.09 L 296.95 297.16 L 297.64 296.19 L 298.34 295.18 L 299.03 294.13 L 299.72 293.04 L 300.41 291.91 L 301.11 290.74 L 301.80 289.52 L 302.49 288.27 L 303.19 286.97 L 303.88 285.62 L 304.57 284.23 L 305.26 282.80 L 305.96 281.32 L 306.65 279.79 L 307.34 278.22 L 308.04 276.60 L 308.73 274.93 L 309.42 273.22 L 310.11 271.46 L 310.81 269.66 L 311.50 267.81 L 312.19 265.91 L 312.89 263.97 L 313.58 261.98 L 314.27 259.95 L 314.96 257.87 L 315.66 255.75 L 316.35 253.58 L 317.04 251.38 L 317.74 249.13 L 318.43 246.85 L 319.12 244.52 L 319.81 242.16 L 320.51 239.76 L 321.20 237.33 L 321.89 234.87 L 322.59 232.37 L 323.28 229.85 L 323.97 227.30 L 324.66 224.73 L 325.36 222.13 L 326.05 219.51 L 326.74 216.88 L 327.44 214.22 L 328.13 211.56 L 328.82 208.89 L 329.51 206.21 L 330.21 203.52 L 330.90 200.83 L 331.59 198.15 L 332.29 195.46 L 332.98 192.79 L 333.67 190.12 L 334.36 187.47 L 335.06 184.84 L 335.75 182.23 L 336.44 179.64 L 337.14 177.08 L 337.83 174.55 L 338.52 172.05 L 339.21 169.59 L 339.91 167.17 L 340.60 164.79 L 341.29 162.47 L 341.99 160.19 L 342.68 157.97 L 343.37 155.80 L 344.06 153.69 L 344.76 151.65 L 345.45 149.68 L 346.14 147.77 L 346.84 145.94 L 347.53 144.18 L 348.22 142.50 L 348.91 140.91 L 349.61 139.39 L 350.30 137.96 L 350.99 136.62 L 351.69 135.37 L 352.38 134.21 L 353.07 133.15 L 353.76 132.18 L 354.46 131.31 L 355.15 130.54 L 355.84 129.87 L 356.54 129.30 L 357.23 128.83 L 357.92 128.47 L 358.61 128.21 L 359.31 128.05 L 360.00 128.00 L 360.69 128.05 L 361.39 128.21 L 362.08 128.47 L 362.77 128.83 L 363.46 129.30 L 364.16 129.87 L 364.85 130.54 L 365.54 131.31 L 366.24 132.18 L 366.93 133.15 L 367.62 134.21 L 368.31 135.37 L 369.01 136.62 L 369.70 137.96 L 370.39 139.39 L 371.09 140.91 L 371.78 142.50 L 372.47 144.18 L 373.16 145.94 L 373.86 147.77 L 374.55 149.68 L 375.24 151.65 L 375.94 153.69 L 376.63 155.80 L 377.32 157.97 L 378.01 160.19 L 378.71 162.47 L 379.40 164.79 L 380.09 167.17 L 380.79 169.59 L 381.48 172.05 L 382.17 174.55 L 382.86 177.08 L 383.56 179.64 L 384.25 182.23 L 384.94 184.84 L 385.64 187.47 L 386.33 190.12 L 387.02 192.79 L 387.71 195.46 L 388.41 198.15 L 389.10 200.83 L 389.79 203.52 L 390.49 206.21 L 391.18 208.89 L 391.87 211.56 L 392.56 214.22 L 393.26 216.88 L 393.95 219.51 L 394.64 222.13 L 395.34 224.73 L 396.03 227.30 L 396.72 229.85 L 397.41 232.37 L 398.11 234.87 L 398.80 237.33 L 399.49 239.76 L 400.19 242.16 L 400.88 244.52 L 401.57 246.85 L 402.26 249.13 L 402.96 251.38 L 403.65 253.58 L 404.34 255.75 L 405.04 257.87 L 405.73 259.95 L 406.42 261.98 L 407.11 263.97 L 407.81 265.91 L 408.50 267.81 L 409.19 269.66 L 409.89 271.46 L 410.58 273.22 L 411.27 274.93 L 411.96 276.60 L 412.66 278.22 L 413.35 279.79 L 414.04 281.32 L 414.74 282.80 L 415.43 284.23 L 416.12 285.62 L 416.81 286.97 L 417.51 288.27 L 418.20 289.52 L 418.89 290.74 L 419.59 291.91 L 420.28 293.04 L 420.97 294.13 L 421.66 295.18 L 422.36 296.19 L 423.05 297.16 L 423.74 298.09 L 424.44 298.99 L 425.13 299.85 L 425.82 300.68 L 426.51 301.47 L 427.21 302.23 L 427.90 302.96 L 428.59 303.65 L 429.29 304.31 L 429.98 304.95 L 430.67 305.55 L 431.36 306.13 L 432.06 306.68 L 432.75 307.21 L 433.44 307.71 L 434.14 308.19 L 434.83 308.64 L 435.52 309.07 L 436.21 309.48 L 436.91 309.87 L 437.60 310.24 L 438.29 310.59 L 438.99 310.92 L 439.68 311.23 L 440.37 311.53 L 441.06 311.81 L 441.76 312.07 L 442.45 312.32 L 443.14 312.56 L 443.84 312.78 L 444.53 312.99 L 445.22 313.19 L 445.91 313.38 L 446.61 313.55 L 447.30 313.72 L 447.99 313.87 L 448.69 314.02 L 449.38 314.15 L 450.07 314.28 L 450.76 314.40 L 451.46 314.51 L 452.15 314.62 L 452.84 314.72 L 453.54 314.81 L 454.23 314.90 L 454.92 314.98 L 455.61 315.05 L 456.31 315.12 L 457.00 315.19" fill="none" stroke="var(--prussian)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="263.00" y1="316.00" x2="457.00" y2="316.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<line x1="301.21" y1="316.00" x2="301.21" y2="321.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<text x="301.21" y="336.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">6</text>
+<line x1="360.00" y1="316.00" x2="360.00" y2="321.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<text x="360.00" y="336.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">10</text>
+<line x1="418.79" y1="316.00" x2="418.79" y2="321.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<text x="418.79" y="336.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">14</text>
+<text x="360.00" y="356.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">k</text>
+<text x="595.00" y="100.00" text-anchor="middle" font-size="14.5" fill="var(--ink)">n = 50</text>
+<text x="595.00" y="117.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">σ = 3.54，np = 25</text>
+<rect x="500.47" y="314.61" width="6.15" height="1.39" fill="var(--fig-fill-2)" stroke="var(--ink-3)" stroke-width="0.9"/>
+<rect x="508.79" y="312.67" width="6.15" height="3.33" fill="var(--fig-fill-2)" stroke="var(--ink-3)" stroke-width="0.9"/>
+<rect x="517.10" y="308.71" width="6.15" height="7.29" fill="var(--fig-fill-2)" stroke="var(--ink-3)" stroke-width="0.9"/>
+<rect x="525.41" y="301.43" width="6.15" height="14.57" fill="var(--fig-fill-2)" stroke="var(--ink-3)" stroke-width="0.9"/>
+<rect x="533.73" y="289.28" width="6.15" height="26.72" fill="var(--fig-fill-2)" stroke="var(--ink-3)" stroke-width="0.9"/>
+<rect x="542.04" y="271.01" width="6.15" height="44.99" fill="var(--fig-fill-2)" stroke="var(--ink-3)" stroke-width="0.9"/>
+<rect x="550.35" y="246.26" width="6.15" height="69.74" fill="var(--fig-fill-2)" stroke="var(--ink-3)" stroke-width="0.9"/>
+<rect x="558.67" y="216.37" width="6.15" height="99.63" fill="var(--fig-fill-2)" stroke="var(--ink-3)" stroke-width="0.9"/>
+<rect x="566.98" y="184.67" width="6.15" height="131.33" fill="var(--fig-fill-2)" stroke="var(--ink-3)" stroke-width="0.9"/>
+<rect x="575.30" y="156.12" width="6.15" height="159.88" fill="var(--fig-fill-2)" stroke="var(--ink-3)" stroke-width="0.9"/>
+<rect x="583.61" y="136.13" width="6.15" height="179.87" fill="var(--fig-fill-2)" stroke="var(--ink-3)" stroke-width="0.9"/>
+<rect x="591.92" y="128.94" width="6.15" height="187.06" fill="var(--fig-fill-2)" stroke="var(--ink-3)" stroke-width="0.9"/>
+<rect x="600.24" y="136.13" width="6.15" height="179.87" fill="var(--fig-fill-2)" stroke="var(--ink-3)" stroke-width="0.9"/>
+<rect x="608.55" y="156.12" width="6.15" height="159.88" fill="var(--fig-fill-2)" stroke="var(--ink-3)" stroke-width="0.9"/>
+<rect x="616.87" y="184.67" width="6.15" height="131.33" fill="var(--fig-fill-2)" stroke="var(--ink-3)" stroke-width="0.9"/>
+<rect x="625.18" y="216.37" width="6.15" height="99.63" fill="var(--fig-fill-2)" stroke="var(--ink-3)" stroke-width="0.9"/>
+<rect x="633.49" y="246.26" width="6.15" height="69.74" fill="var(--fig-fill-2)" stroke="var(--ink-3)" stroke-width="0.9"/>
+<rect x="641.81" y="271.01" width="6.15" height="44.99" fill="var(--fig-fill-2)" stroke="var(--ink-3)" stroke-width="0.9"/>
+<rect x="650.12" y="289.28" width="6.15" height="26.72" fill="var(--fig-fill-2)" stroke="var(--ink-3)" stroke-width="0.9"/>
+<rect x="658.43" y="301.43" width="6.15" height="14.57" fill="var(--fig-fill-2)" stroke="var(--ink-3)" stroke-width="0.9"/>
+<rect x="666.75" y="308.71" width="6.15" height="7.29" fill="var(--fig-fill-2)" stroke="var(--ink-3)" stroke-width="0.9"/>
+<rect x="675.06" y="312.67" width="6.15" height="3.33" fill="var(--fig-fill-2)" stroke="var(--ink-3)" stroke-width="0.9"/>
+<rect x="683.38" y="314.61" width="6.15" height="1.39" fill="var(--fig-fill-2)" stroke="var(--ink-3)" stroke-width="0.9"/>
+<path d="M 498.00 315.19 L 498.69 315.12 L 499.39 315.05 L 500.08 314.98 L 500.77 314.90 L 501.46 314.81 L 502.16 314.72 L 502.85 314.62 L 503.54 314.51 L 504.24 314.40 L 504.93 314.28 L 505.62 314.15 L 506.31 314.02 L 507.01 313.87 L 507.70 313.72 L 508.39 313.55 L 509.09 313.38 L 509.78 313.19 L 510.47 312.99 L 511.16 312.78 L 511.86 312.56 L 512.55 312.32 L 513.24 312.07 L 513.94 311.81 L 514.63 311.53 L 515.32 311.23 L 516.01 310.92 L 516.71 310.59 L 517.40 310.24 L 518.09 309.87 L 518.79 309.48 L 519.48 309.07 L 520.17 308.64 L 520.86 308.19 L 521.56 307.71 L 522.25 307.21 L 522.94 306.68 L 523.64 306.13 L 524.33 305.55 L 525.02 304.95 L 525.71 304.31 L 526.41 303.65 L 527.10 302.96 L 527.79 302.23 L 528.49 301.47 L 529.18 300.68 L 529.87 299.85 L 530.56 298.99 L 531.26 298.09 L 531.95 297.16 L 532.64 296.19 L 533.34 295.18 L 534.03 294.13 L 534.72 293.04 L 535.41 291.91 L 536.11 290.74 L 536.80 289.52 L 537.49 288.27 L 538.19 286.97 L 538.88 285.62 L 539.57 284.23 L 540.26 282.80 L 540.96 281.32 L 541.65 279.79 L 542.34 278.22 L 543.04 276.60 L 543.73 274.93 L 544.42 273.22 L 545.11 271.46 L 545.81 269.66 L 546.50 267.81 L 547.19 265.91 L 547.89 263.97 L 548.58 261.98 L 549.27 259.95 L 549.96 257.87 L 550.66 255.75 L 551.35 253.58 L 552.04 251.38 L 552.74 249.13 L 553.43 246.85 L 554.12 244.52 L 554.81 242.16 L 555.51 239.76 L 556.20 237.33 L 556.89 234.87 L 557.59 232.37 L 558.28 229.85 L 558.97 227.30 L 559.66 224.73 L 560.36 222.13 L 561.05 219.51 L 561.74 216.88 L 562.44 214.22 L 563.13 211.56 L 563.82 208.89 L 564.51 206.21 L 565.21 203.52 L 565.90 200.83 L 566.59 198.15 L 567.29 195.46 L 567.98 192.79 L 568.67 190.12 L 569.36 187.47 L 570.06 184.84 L 570.75 182.23 L 571.44 179.64 L 572.14 177.08 L 572.83 174.55 L 573.52 172.05 L 574.21 169.59 L 574.91 167.17 L 575.60 164.79 L 576.29 162.47 L 576.99 160.19 L 577.68 157.97 L 578.37 155.80 L 579.06 153.69 L 579.76 151.65 L 580.45 149.68 L 581.14 147.77 L 581.84 145.94 L 582.53 144.18 L 583.22 142.50 L 583.91 140.91 L 584.61 139.39 L 585.30 137.96 L 585.99 136.62 L 586.69 135.37 L 587.38 134.21 L 588.07 133.15 L 588.76 132.18 L 589.46 131.31 L 590.15 130.54 L 590.84 129.87 L 591.54 129.30 L 592.23 128.83 L 592.92 128.47 L 593.61 128.21 L 594.31 128.05 L 595.00 128.00 L 595.69 128.05 L 596.39 128.21 L 597.08 128.47 L 597.77 128.83 L 598.46 129.30 L 599.16 129.87 L 599.85 130.54 L 600.54 131.31 L 601.24 132.18 L 601.93 133.15 L 602.62 134.21 L 603.31 135.37 L 604.01 136.62 L 604.70 137.96 L 605.39 139.39 L 606.09 140.91 L 606.78 142.50 L 607.47 144.18 L 608.16 145.94 L 608.86 147.77 L 609.55 149.68 L 610.24 151.65 L 610.94 153.69 L 611.63 155.80 L 612.32 157.97 L 613.01 160.19 L 613.71 162.47 L 614.40 164.79 L 615.09 167.17 L 615.79 169.59 L 616.48 172.05 L 617.17 174.55 L 617.86 177.08 L 618.56 179.64 L 619.25 182.23 L 619.94 184.84 L 620.64 187.47 L 621.33 190.12 L 622.02 192.79 L 622.71 195.46 L 623.41 198.15 L 624.10 200.83 L 624.79 203.52 L 625.49 206.21 L 626.18 208.89 L 626.87 211.56 L 627.56 214.22 L 628.26 216.88 L 628.95 219.51 L 629.64 222.13 L 630.34 224.73 L 631.03 227.30 L 631.72 229.85 L 632.41 232.37 L 633.11 234.87 L 633.80 237.33 L 634.49 239.76 L 635.19 242.16 L 635.88 244.52 L 636.57 246.85 L 637.26 249.13 L 637.96 251.38 L 638.65 253.58 L 639.34 255.75 L 640.04 257.87 L 640.73 259.95 L 641.42 261.98 L 642.11 263.97 L 642.81 265.91 L 643.50 267.81 L 644.19 269.66 L 644.89 271.46 L 645.58 273.22 L 646.27 274.93 L 646.96 276.60 L 647.66 278.22 L 648.35 279.79 L 649.04 281.32 L 649.74 282.80 L 650.43 284.23 L 651.12 285.62 L 651.81 286.97 L 652.51 288.27 L 653.20 289.52 L 653.89 290.74 L 654.59 291.91 L 655.28 293.04 L 655.97 294.13 L 656.66 295.18 L 657.36 296.19 L 658.05 297.16 L 658.74 298.09 L 659.44 298.99 L 660.13 299.85 L 660.82 300.68 L 661.51 301.47 L 662.21 302.23 L 662.90 302.96 L 663.59 303.65 L 664.29 304.31 L 664.98 304.95 L 665.67 305.55 L 666.36 306.13 L 667.06 306.68 L 667.75 307.21 L 668.44 307.71 L 669.14 308.19 L 669.83 308.64 L 670.52 309.07 L 671.21 309.48 L 671.91 309.87 L 672.60 310.24 L 673.29 310.59 L 673.99 310.92 L 674.68 311.23 L 675.37 311.53 L 676.06 311.81 L 676.76 312.07 L 677.45 312.32 L 678.14 312.56 L 678.84 312.78 L 679.53 312.99 L 680.22 313.19 L 680.91 313.38 L 681.61 313.55 L 682.30 313.72 L 682.99 313.87 L 683.69 314.02 L 684.38 314.15 L 685.07 314.28 L 685.76 314.40 L 686.46 314.51 L 687.15 314.62 L 687.84 314.72 L 688.54 314.81 L 689.23 314.90 L 689.92 314.98 L 690.61 315.05 L 691.31 315.12 L 692.00 315.19" fill="none" stroke="var(--prussian)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="498.00" y1="316.00" x2="692.00" y2="316.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<line x1="536.21" y1="316.00" x2="536.21" y2="321.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<text x="536.21" y="336.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">18</text>
+<line x1="595.00" y1="316.00" x2="595.00" y2="321.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<text x="595.00" y="336.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">25</text>
+<line x1="653.79" y1="316.00" x2="653.79" y2="321.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<text x="653.79" y="336.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">32</text>
+<text x="595.00" y="356.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">k</text>
+<text x="26.00" y="396.00" text-anchor="start" font-size="13" fill="var(--ink-2)">横轴刻度取 np − 2σ、np、np + 2σ 三个位置。n = 10 时柱顶还参差，n = 50 时已经看不出柱子与曲线的缝。</text>
+</svg>
+<!--/FIG pb03_binom-->
+        <figcaption class="figcaption"><b>同一条曲线，三张二项分布。</b>柱高与曲线用的是同一个尺度，可以直接比高低。\(n=10\) 时柱顶还参差，\(n=50\) 时已经看不出柱子与曲线的缝。</figcaption>
+      </div>
+
+      <p>图上能看出近似的成色：\(n=10\) 时柱顶离曲线有明显的缝，\(n=50\) 时缝细到要凑近看。误差的量级约是 \(1/\sqrt{n}\)，\(n\) 增大 100 倍，近似才精确 10 倍，所以 \(n=30\) 上下的题目用这条定理是划算的，\(n=8\) 就不划算了。</p>
+
+      <div class="keyidea reveal">
+        <p>柱子为什么连成钟形？成功次数是一串 0 与 1 的和，每个 0-1 量自己只有两根柱子，谈不上钟形。把它们加起来，走到中间值的路线最多，走到两头的路线最少，\(C_n^k\) 数的就是路线条数，钟形的轮廓由这些路线堆出来。加的次数越多，轮廓越贴近同一条曲线，二项分布只是这条规律最早被看见的地方。</p>
+      </div>
+
+      <details class="fold">
+        <summary>常数 \(1/\sqrt{2\pi}\) 从哪来</summary>
+        <p>密度曲线下的面积必须等于 1，否则它算出来的不是概率。直接算 \(\int_{-\infty}^{+\infty}e^{-x^2/2}\,dx\) 得到 \(\sqrt{2\pi}\)，办法是把它平方，化成极坐标下的二重积分，角度那一路积出 \(2\pi\)。系数只能取 \(1/\sqrt{2\pi}\)，这个数是被面积条件逼出来的，不带经验成分。</p>
+      </details>
+
+      <h2 id="s-3" class="reveal">三、从一次成功到一段区间</h2>
+
+      <p>局部定理给的是单个 \(k\) 的概率，可实际问的往往是一段：命中次数在 45 到 55 之间、误差不超过 2 毫米、次品不多于 5 件。这类概率是一串相邻的 \(P_n(k)\) 相加，柱子挨着柱子，加起来正好是曲线底下的一块面积。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定理（棣莫弗-拉普拉斯积分极限定理）</p>
+        <p>条件同上，对任意 \(a&lt;b\)（\(a\) 可取 \(-\infty\)，\(b\) 可取 \(+\infty\)），当 \(n\to\infty\) 时 \(P\left(a&lt;\dfrac{X-np}{\sqrt{npq}}\le b\right)\to\Phi(b)-\Phi(a)\)，其中 \(\Phi(x)=\dfrac{1}{\sqrt{2\pi}}\int_{-\infty}^{x}e^{-t^2/2}\,dt\)。</p>
+      </div>
+
+      <p>从和到积分只差一步。标准化以后，相邻两根柱子之间的间距是 \(\Delta x=1/\sqrt{npq}\)，柱高乘以柱宽就是面积，把一块块面积加起来就是黎曼和的样子，\(n\) 大时柱宽趋于零，和就变成积分。这条定理第一次把二项分布接到一条光滑曲线上，一般化之后的版本叫中心极限定理，放在第八章。</p>
+
+      <div class="archive reveal">
+        <p class="archive-when">1733 年，伦敦</p>
+        <h3>一篇印了几十本的小册子</h3>
+        <p class="archive-quote">「当项数很多时，二项式展开各项的比值，可以用一条连续曲线的纵坐标来逼近。」</p>
+        <p class="archive-source">棣莫弗《二项级数和的近似》，1733 年（拉丁文，此处为译述）</p>
+        <p>这本小册子是他自己印的，送出去以后没什么回音。1812 年拉普拉斯在《概率的分析理论》里独立得到同一条曲线，把它接到天文观测的误差上，钟形才进入日常计算。</p>
+      </div>
+
+      <p>算的时候有个小动作不能省：二项分布落在整数点上，曲线是连着的，两端的界要各往外挪半格再标准化，叫连续性修正。\(P(45\le X\le55)\) 换成 \(P(44.5&lt;X&lt;55.5)\) 去积，\(n\) 不特别大时这一步能把误差压掉一截。</p>
+
+      <details class="fold">
+        <summary>半格为什么是 0.5</summary>
+        <p>离散的 \(k\) 在曲线眼里占的是 \([k-0.5,k+0.5)\) 这一段，它的概率等于这一段上的面积。求 \(X\le55\) 时 55 这一格要整个算进去，上界就取 55.5；求 \(X\ge45\) 时下界取 44.5。连续型的概率在单个点上为零，端点归不归那一侧不影响答案。</p>
+      </details>
+
+      <p>高尔顿板把这件事做成了机械版。钉子一层层排成三角形，小球落下来每碰一颗钉子，向左或向右各一半机会，碰到第 \(i\) 层就算做了第 \(i\) 次伯努利试验。落到最底层第 \(k\) 格，说明 8 次里有 \(k\) 次向右，这样的路线有 \(C_8^k\) 条，每条的概率是 \(2^{-8}\)，格子里的柱高就是二项概率。</p>
+
+      <div class="figure">
+        <!--FIG pb03_galton--><svg viewBox="0 0 720 470" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<text x="26.00" y="30.00" text-anchor="start" font-size="15" fill="var(--ink)">高尔顿板：小球每碰一颗钉子，向左或向右各一半机会</text>
+<text x="26.00" y="51.00" text-anchor="start" font-size="13.5" fill="var(--ink-3)">8 层钉子，底层 9 格，每格的柱高就是它落进去的概率</text>
+<line x1="360.00" y1="58.00" x2="360.00" y2="84.00" stroke="var(--ink-3)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M 356.66 75.64 L 360.00 84.00 L 363.34 75.64" fill="var(--ink-3)" stroke="var(--ink-3)" stroke-width="1" stroke-linejoin="round"/>
+<text x="372.00" y="74.00" text-anchor="start" font-size="12.5" fill="var(--ink-3)">n 颗小球</text>
+<circle cx="360.00" cy="104.00" r="3.40" fill="var(--paper)" stroke="var(--ink-3)" stroke-width="1.0"/>
+<circle cx="360.00" cy="104.00" r="1.9" fill="var(--ink-3)"/>
+<circle cx="336.00" cy="134.00" r="3.40" fill="var(--paper)" stroke="var(--ink-3)" stroke-width="1.0"/>
+<circle cx="336.00" cy="134.00" r="1.9" fill="var(--ink-3)"/>
+<circle cx="384.00" cy="134.00" r="3.40" fill="var(--paper)" stroke="var(--ink-3)" stroke-width="1.0"/>
+<circle cx="384.00" cy="134.00" r="1.9" fill="var(--ink-3)"/>
+<circle cx="312.00" cy="164.00" r="3.40" fill="var(--paper)" stroke="var(--ink-3)" stroke-width="1.0"/>
+<circle cx="312.00" cy="164.00" r="1.9" fill="var(--ink-3)"/>
+<circle cx="360.00" cy="164.00" r="3.40" fill="var(--paper)" stroke="var(--ink-3)" stroke-width="1.0"/>
+<circle cx="360.00" cy="164.00" r="1.9" fill="var(--ink-3)"/>
+<circle cx="408.00" cy="164.00" r="3.40" fill="var(--paper)" stroke="var(--ink-3)" stroke-width="1.0"/>
+<circle cx="408.00" cy="164.00" r="1.9" fill="var(--ink-3)"/>
+<circle cx="288.00" cy="194.00" r="3.40" fill="var(--paper)" stroke="var(--ink-3)" stroke-width="1.0"/>
+<circle cx="288.00" cy="194.00" r="1.9" fill="var(--ink-3)"/>
+<circle cx="336.00" cy="194.00" r="3.40" fill="var(--paper)" stroke="var(--ink-3)" stroke-width="1.0"/>
+<circle cx="336.00" cy="194.00" r="1.9" fill="var(--ink-3)"/>
+<circle cx="384.00" cy="194.00" r="3.40" fill="var(--paper)" stroke="var(--ink-3)" stroke-width="1.0"/>
+<circle cx="384.00" cy="194.00" r="1.9" fill="var(--ink-3)"/>
+<circle cx="432.00" cy="194.00" r="3.40" fill="var(--paper)" stroke="var(--ink-3)" stroke-width="1.0"/>
+<circle cx="432.00" cy="194.00" r="1.9" fill="var(--ink-3)"/>
+<circle cx="264.00" cy="224.00" r="3.40" fill="var(--paper)" stroke="var(--ink-3)" stroke-width="1.0"/>
+<circle cx="264.00" cy="224.00" r="1.9" fill="var(--ink-3)"/>
+<circle cx="312.00" cy="224.00" r="3.40" fill="var(--paper)" stroke="var(--ink-3)" stroke-width="1.0"/>
+<circle cx="312.00" cy="224.00" r="1.9" fill="var(--ink-3)"/>
+<circle cx="360.00" cy="224.00" r="3.40" fill="var(--paper)" stroke="var(--ink-3)" stroke-width="1.0"/>
+<circle cx="360.00" cy="224.00" r="1.9" fill="var(--ink-3)"/>
+<circle cx="408.00" cy="224.00" r="3.40" fill="var(--paper)" stroke="var(--ink-3)" stroke-width="1.0"/>
+<circle cx="408.00" cy="224.00" r="1.9" fill="var(--ink-3)"/>
+<circle cx="456.00" cy="224.00" r="3.40" fill="var(--paper)" stroke="var(--ink-3)" stroke-width="1.0"/>
+<circle cx="456.00" cy="224.00" r="1.9" fill="var(--ink-3)"/>
+<circle cx="240.00" cy="254.00" r="3.40" fill="var(--paper)" stroke="var(--ink-3)" stroke-width="1.0"/>
+<circle cx="240.00" cy="254.00" r="1.9" fill="var(--ink-3)"/>
+<circle cx="288.00" cy="254.00" r="3.40" fill="var(--paper)" stroke="var(--ink-3)" stroke-width="1.0"/>
+<circle cx="288.00" cy="254.00" r="1.9" fill="var(--ink-3)"/>
+<circle cx="336.00" cy="254.00" r="3.40" fill="var(--paper)" stroke="var(--ink-3)" stroke-width="1.0"/>
+<circle cx="336.00" cy="254.00" r="1.9" fill="var(--ink-3)"/>
+<circle cx="384.00" cy="254.00" r="3.40" fill="var(--paper)" stroke="var(--ink-3)" stroke-width="1.0"/>
+<circle cx="384.00" cy="254.00" r="1.9" fill="var(--ink-3)"/>
+<circle cx="432.00" cy="254.00" r="3.40" fill="var(--paper)" stroke="var(--ink-3)" stroke-width="1.0"/>
+<circle cx="432.00" cy="254.00" r="1.9" fill="var(--ink-3)"/>
+<circle cx="480.00" cy="254.00" r="3.40" fill="var(--paper)" stroke="var(--ink-3)" stroke-width="1.0"/>
+<circle cx="480.00" cy="254.00" r="1.9" fill="var(--ink-3)"/>
+<circle cx="216.00" cy="284.00" r="3.40" fill="var(--paper)" stroke="var(--ink-3)" stroke-width="1.0"/>
+<circle cx="216.00" cy="284.00" r="1.9" fill="var(--ink-3)"/>
+<circle cx="264.00" cy="284.00" r="3.40" fill="var(--paper)" stroke="var(--ink-3)" stroke-width="1.0"/>
+<circle cx="264.00" cy="284.00" r="1.9" fill="var(--ink-3)"/>
+<circle cx="312.00" cy="284.00" r="3.40" fill="var(--paper)" stroke="var(--ink-3)" stroke-width="1.0"/>
+<circle cx="312.00" cy="284.00" r="1.9" fill="var(--ink-3)"/>
+<circle cx="360.00" cy="284.00" r="3.40" fill="var(--paper)" stroke="var(--ink-3)" stroke-width="1.0"/>
+<circle cx="360.00" cy="284.00" r="1.9" fill="var(--ink-3)"/>
+<circle cx="408.00" cy="284.00" r="3.40" fill="var(--paper)" stroke="var(--ink-3)" stroke-width="1.0"/>
+<circle cx="408.00" cy="284.00" r="1.9" fill="var(--ink-3)"/>
+<circle cx="456.00" cy="284.00" r="3.40" fill="var(--paper)" stroke="var(--ink-3)" stroke-width="1.0"/>
+<circle cx="456.00" cy="284.00" r="1.9" fill="var(--ink-3)"/>
+<circle cx="504.00" cy="284.00" r="3.40" fill="var(--paper)" stroke="var(--ink-3)" stroke-width="1.0"/>
+<circle cx="504.00" cy="284.00" r="1.9" fill="var(--ink-3)"/>
+<circle cx="192.00" cy="314.00" r="3.40" fill="var(--paper)" stroke="var(--ink-3)" stroke-width="1.0"/>
+<circle cx="192.00" cy="314.00" r="1.9" fill="var(--ink-3)"/>
+<circle cx="240.00" cy="314.00" r="3.40" fill="var(--paper)" stroke="var(--ink-3)" stroke-width="1.0"/>
+<circle cx="240.00" cy="314.00" r="1.9" fill="var(--ink-3)"/>
+<circle cx="288.00" cy="314.00" r="3.40" fill="var(--paper)" stroke="var(--ink-3)" stroke-width="1.0"/>
+<circle cx="288.00" cy="314.00" r="1.9" fill="var(--ink-3)"/>
+<circle cx="336.00" cy="314.00" r="3.40" fill="var(--paper)" stroke="var(--ink-3)" stroke-width="1.0"/>
+<circle cx="336.00" cy="314.00" r="1.9" fill="var(--ink-3)"/>
+<circle cx="384.00" cy="314.00" r="3.40" fill="var(--paper)" stroke="var(--ink-3)" stroke-width="1.0"/>
+<circle cx="384.00" cy="314.00" r="1.9" fill="var(--ink-3)"/>
+<circle cx="432.00" cy="314.00" r="3.40" fill="var(--paper)" stroke="var(--ink-3)" stroke-width="1.0"/>
+<circle cx="432.00" cy="314.00" r="1.9" fill="var(--ink-3)"/>
+<circle cx="480.00" cy="314.00" r="3.40" fill="var(--paper)" stroke="var(--ink-3)" stroke-width="1.0"/>
+<circle cx="480.00" cy="314.00" r="1.9" fill="var(--ink-3)"/>
+<circle cx="528.00" cy="314.00" r="3.40" fill="var(--paper)" stroke="var(--ink-3)" stroke-width="1.0"/>
+<circle cx="528.00" cy="314.00" r="1.9" fill="var(--ink-3)"/>
+<path d="M 360.00 84.00 L 336.00 134.00 L 312.00 164.00 L 288.00 194.00 L 264.00 224.00 L 240.00 254.00 L 216.00 284.00 L 192.00 314.00 L 168.00 344.00" fill="none" stroke="var(--ink-3)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.85"/>
+<path d="M 360.00 84.00 L 336.00 134.00 L 360.00 164.00 L 336.00 194.00 L 312.00 224.00 L 336.00 254.00 L 312.00 284.00 L 336.00 314.00 L 312.00 344.00" fill="none" stroke="var(--prussian)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.85"/>
+<path d="M 360.00 84.00 L 384.00 134.00 L 408.00 164.00 L 432.00 194.00 L 456.00 224.00 L 480.00 254.00 L 504.00 284.00 L 528.00 314.00 L 552.00 344.00" fill="none" stroke="var(--ink-3)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.85"/>
+<line x1="144.00" y1="330.00" x2="144.00" y2="418.00" stroke="var(--ink-3)" stroke-width="1.0" stroke-linecap="round" stroke-linejoin="round" opacity="0.45"/>
+<line x1="192.00" y1="330.00" x2="192.00" y2="418.00" stroke="var(--ink-3)" stroke-width="1.0" stroke-linecap="round" stroke-linejoin="round" opacity="0.45"/>
+<line x1="240.00" y1="330.00" x2="240.00" y2="418.00" stroke="var(--ink-3)" stroke-width="1.0" stroke-linecap="round" stroke-linejoin="round" opacity="0.45"/>
+<line x1="288.00" y1="330.00" x2="288.00" y2="418.00" stroke="var(--ink-3)" stroke-width="1.0" stroke-linecap="round" stroke-linejoin="round" opacity="0.45"/>
+<line x1="336.00" y1="330.00" x2="336.00" y2="418.00" stroke="var(--ink-3)" stroke-width="1.0" stroke-linecap="round" stroke-linejoin="round" opacity="0.45"/>
+<line x1="384.00" y1="330.00" x2="384.00" y2="418.00" stroke="var(--ink-3)" stroke-width="1.0" stroke-linecap="round" stroke-linejoin="round" opacity="0.45"/>
+<line x1="432.00" y1="330.00" x2="432.00" y2="418.00" stroke="var(--ink-3)" stroke-width="1.0" stroke-linecap="round" stroke-linejoin="round" opacity="0.45"/>
+<line x1="480.00" y1="330.00" x2="480.00" y2="418.00" stroke="var(--ink-3)" stroke-width="1.0" stroke-linecap="round" stroke-linejoin="round" opacity="0.45"/>
+<line x1="528.00" y1="330.00" x2="528.00" y2="418.00" stroke="var(--ink-3)" stroke-width="1.0" stroke-linecap="round" stroke-linejoin="round" opacity="0.45"/>
+<line x1="576.00" y1="330.00" x2="576.00" y2="418.00" stroke="var(--ink-3)" stroke-width="1.0" stroke-linecap="round" stroke-linejoin="round" opacity="0.45"/>
+<rect x="154.61" y="416.87" width="26.78" height="1.13" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.4"/>
+<rect x="202.61" y="408.94" width="26.78" height="9.06" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.4"/>
+<rect x="250.61" y="386.28" width="26.78" height="31.72" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.4"/>
+<rect x="298.61" y="354.56" width="26.78" height="63.44" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.4"/>
+<rect x="346.61" y="338.70" width="26.78" height="79.30" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.4"/>
+<rect x="394.61" y="354.56" width="26.78" height="63.44" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.4"/>
+<rect x="442.61" y="386.28" width="26.78" height="31.72" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.4"/>
+<rect x="490.61" y="408.94" width="26.78" height="9.06" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.4"/>
+<rect x="538.61" y="416.87" width="26.78" height="1.13" fill="var(--fig-fill-2)" stroke="var(--accent-line)" stroke-width="1.4"/>
+<line x1="122.00" y1="418.00" x2="598.00" y2="418.00" stroke="var(--ink-2)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+<text x="26.00" y="436.00" text-anchor="start" font-size="12" fill="var(--ink-3)">路径条数</text>
+<text x="168.00" y="436.00" text-anchor="middle" font-size="12" fill="var(--ink-2)">1</text>
+<text x="216.00" y="436.00" text-anchor="middle" font-size="12" fill="var(--ink-2)">8</text>
+<text x="264.00" y="436.00" text-anchor="middle" font-size="12" fill="var(--ink-2)">28</text>
+<text x="312.00" y="436.00" text-anchor="middle" font-size="12" fill="var(--ink-2)">56</text>
+<text x="360.00" y="436.00" text-anchor="middle" font-size="12" fill="var(--ink-2)">70</text>
+<text x="408.00" y="436.00" text-anchor="middle" font-size="12" fill="var(--ink-2)">56</text>
+<text x="456.00" y="436.00" text-anchor="middle" font-size="12" fill="var(--ink-2)">28</text>
+<text x="504.00" y="436.00" text-anchor="middle" font-size="12" fill="var(--ink-2)">8</text>
+<text x="552.00" y="436.00" text-anchor="middle" font-size="12" fill="var(--ink-2)">1</text>
+<text x="360.00" y="460.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">每格的概率等于路径条数除以 256，中间格最多，两端各一格</text>
+<line x1="302.00" y1="164.00" x2="202.00" y2="168.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="198.00" y="156.00" text-anchor="end" font-size="12.5" fill="var(--ink-2)">每碰一颗钉子</text>
+<text x="198.00" y="174.00" text-anchor="end" font-size="12.5" fill="var(--ink-2)">向左、向右各一半</text>
+</svg>
+<!--/FIG pb03_galton-->
+        <figcaption class="figcaption"><b>8 层分流，底层 9 格。</b>路径条数 \(C_8^k\) 在中间最大，两头的格子只有一条路可走，所以柱子中间高两边低。层数加上去，轮廓就成钟形。</figcaption>
+      </div>
+
+      <h2 id="s-4" class="reveal">四、正态分布的密度与标准化</h2>
+
+      <p>前面反复用到的那条曲线有自己的名字与参数。它的密度写出来只有两个常数，一个管位置，一个管胖瘦，其他分布里那些零碎的项在这里全都不见了。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定义（正态分布）</p>
+        <p>若随机变量 \(X\) 的密度为 \(f(x)=\dfrac{1}{\sqrt{2\pi}\sigma}e^{-\frac{(x-\mu)^2}{2\sigma^2}}\)，\(-\infty&lt;x&lt;+\infty\)，其中 \(\mu\)、\(\sigma\)（\(\sigma&gt;0\)）为常数，则称 \(X\) 服从参数为 \(\mu,\sigma^2\) 的正态分布，记作 \(X\sim N(\mu,\sigma^2)\)。\(\mu=0\)、\(\sigma=1\) 时称标准正态分布，密度记作 \(\varphi(x)\)，分布函数记作 \(\Phi(x)\)。</p>
+      </div>
+
+      <p>\(\mu\) 决定曲线落在哪儿，图形关于 \(x=\mu\) 对称，两边各占一半面积；\(\sigma\) 决定胖瘦，\(\sigma\) 小则塔尖高而窄，\(\sigma\) 大则矮而宽，可总面积一直是 1。曲线的两个拐点在 \(\mu\pm\sigma\)，再往外的尾巴以 \(e^{-x^2}\) 的速度贴向横轴，永远碰不到。</p>
+
+      <p>这个密度积不出初等原函数，所以 \(N(\mu,\sigma^2)\) 的概率没法套现成的原函数来算。绕开的办法是换元，把任意一个正态搬到标准正态上，搬一次，后面的活全交给同一张表。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定理（正态分布的标准化）</p>
+        <p>设 \(X\sim N(\mu,\sigma^2)\)，则 \(Z=\dfrac{X-\mu}{\sigma}\sim N(0,1)\)，分布函数 \(F(x)=\Phi\left(\dfrac{x-\mu}{\sigma}\right)\)，从而 \(P(a&lt;X\le b)=\Phi\left(\dfrac{b-\mu}{\sigma}\right)-\Phi\left(\dfrac{a-\mu}{\sigma}\right)\)。</p>
+      </div>
+
+      <p>验证只要一行：\(P(Z\le z)=P(X\le\mu+\sigma z)=\int_{-\infty}^{\mu+\sigma z}f(x)\,dx\)，令 \(t=(x-\mu)/\sigma\)，积分换成 \(\int_{-\infty}^{z}\varphi(t)\,dt\)，被积式里的 \(\sigma\) 被换元约掉，只剩下标准的那一份。这也说明了标准化为什么一劳永逸：所有正态分布是同一个分布拉伸平移出来的。</p>
+
+      <details class="fold">
+        <summary>\(\mu\) 和 \(\sigma^2\) 为什么正好是期望与方差</summary>
+        <p>算一遍 \(\int xf(x)\,dx\) 与 \(\int(x-\mu)^2f(x)\,dx\) 就知道。换元到标准正态后，前者是 \(\mu+\sigma\int t\varphi(t)\,dt=\mu\)，后者是 \(\sigma^2\int t^2\varphi(t)\,dt=\sigma^2\)，而 \(\int t^2\varphi(t)\,dt=1\)。两个参数的名字来自这两次积分，第七章会用矩的算法再算一遍。</p>
+      </details>
+
+      <h2 id="s-5" class="reveal">五、误差为什么长成钟形</h2>
+
+      <p>望远镜读数、天平称量、基线丈量，同一个量测很多次，读数不会一样。把读数点画在数轴上，靠近真值的密、离得远的稀，两边大致对称，形状跟上面那条曲线对得上。这种散布有来由：一次测量的误差由许多互不相干的小因素叠加而成，气温、刻度、人眼的分辨、仪器的零点漂移，每个因素单独看都很小，加在一起就成了中间高两边低的形状。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定理（误差的正态模型）</p>
+        <p>若测量误差 \(\varepsilon\) 由大量相互独立的微小因素叠加而成，其中每一个的影响都比总误差小得多，则 \(\varepsilon\) 近似服从 \(N(0,\sigma^2)\)，\(\sigma\) 由这些因素的大小合成。课本把它当模型假设使用，它的分量来自中心极限定理。</p>
+      </div>
+
+      <div class="figure">
+        <!--FIG pb03_error--><svg viewBox="0 0 720 400" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<text x="26.00" y="30.00" text-anchor="start" font-size="15" fill="var(--ink)">同一段距离量 18 次，读数围着真值散开</text>
+<text x="26.00" y="51.00" text-anchor="start" font-size="13.5" fill="var(--ink-3)">横轴是读数值；曲线是这些读数的正态密度，峰在真值上</text>
+<line x1="86.00" y1="246.00" x2="654.00" y2="246.00" stroke="var(--ink-3)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/><path d="M 645.64 249.34 L 654.00 246.00 L 645.64 242.66" fill="var(--ink-3)" stroke="var(--ink-3)" stroke-width="1" stroke-linejoin="round"/>
+<path d="M 108.40 134.00 L 109.97 134.00 L 111.55 134.00 L 113.12 134.00 L 114.69 134.00 L 116.26 134.00 L 117.84 134.00 L 119.41 134.00 L 120.98 134.00 L 122.55 134.00 L 124.12 134.00 L 125.70 134.00 L 127.27 134.00 L 128.84 134.00 L 130.41 134.00 L 131.99 134.00 L 133.56 134.00 L 135.13 134.00 L 136.70 134.00 L 138.28 134.00 L 139.85 134.00 L 141.42 134.00 L 143.00 134.00 L 144.57 134.00 L 146.14 134.00 L 147.71 134.00 L 149.28 134.00 L 150.86 134.00 L 152.43 134.00 L 154.00 134.00 L 155.57 134.00 L 157.15 134.00 L 158.72 134.01 L 160.29 134.01 L 161.86 134.01 L 163.44 134.01 L 165.01 134.01 L 166.58 134.01 L 168.15 134.01 L 169.73 134.01 L 171.30 134.01 L 172.87 134.01 L 174.44 134.02 L 176.02 134.02 L 177.59 134.02 L 179.16 134.02 L 180.74 134.03 L 182.31 134.03 L 183.88 134.03 L 185.45 134.03 L 187.03 134.04 L 188.60 134.04 L 190.17 134.05 L 191.74 134.05 L 193.31 134.06 L 194.89 134.06 L 196.46 134.07 L 198.03 134.07 L 199.60 134.08 L 201.18 134.09 L 202.75 134.10 L 204.32 134.11 L 205.90 134.12 L 207.47 134.13 L 209.04 134.14 L 210.61 134.15 L 212.19 134.16 L 213.76 134.18 L 215.33 134.19 L 216.90 134.21 L 218.48 134.23 L 220.05 134.25 L 221.62 134.27 L 223.19 134.29 L 224.77 134.32 L 226.34 134.34 L 227.91 134.37 L 229.48 134.40 L 231.06 134.43 L 232.63 134.46 L 234.20 134.49 L 235.77 134.53 L 237.35 134.57 L 238.92 134.61 L 240.49 134.65 L 242.06 134.70 L 243.63 134.75 L 245.21 134.80 L 246.78 134.85 L 248.35 134.91 L 249.93 134.97 L 251.50 135.03 L 253.07 135.10 L 254.64 135.17 L 256.21 135.24 L 257.79 135.31 L 259.36 135.39 L 260.93 135.47 L 262.50 135.56 L 264.08 135.65 L 265.65 135.74 L 267.22 135.84 L 268.80 135.93 L 270.37 136.04 L 271.94 136.14 L 273.51 136.25 L 275.09 136.36 L 276.66 136.48 L 278.23 136.60 L 279.80 136.72 L 281.38 136.85 L 282.95 136.97 L 284.52 137.11 L 286.09 137.24 L 287.66 137.38 L 289.24 137.52 L 290.81 137.66 L 292.38 137.80 L 293.95 137.95 L 295.53 138.10 L 297.10 138.24 L 298.67 138.40 L 300.25 138.55 L 301.82 138.70 L 303.39 138.86 L 304.96 139.01 L 306.53 139.17 L 308.11 139.32 L 309.68 139.47 L 311.25 139.63 L 312.83 139.78 L 314.40 139.93 L 315.97 140.08 L 317.54 140.23 L 319.12 140.38 L 320.69 140.52 L 322.26 140.66 L 323.83 140.80 L 325.41 140.94 L 326.98 141.07 L 328.55 141.20 L 330.12 141.32 L 331.69 141.44 L 333.27 141.56 L 334.84 141.66 L 336.41 141.77 L 337.99 141.87 L 339.56 141.96 L 341.13 142.05 L 342.70 142.13 L 344.27 142.20 L 345.85 142.27 L 347.42 142.33 L 348.99 142.39 L 350.56 142.43 L 352.14 142.47 L 353.71 142.51 L 355.28 142.53 L 356.85 142.55 L 358.43 142.56 L 360.00 142.57 L 361.57 142.56 L 363.14 142.55 L 364.72 142.53 L 366.29 142.51 L 367.86 142.47 L 369.44 142.43 L 371.01 142.39 L 372.58 142.33 L 374.15 142.27 L 375.73 142.20 L 377.30 142.13 L 378.87 142.05 L 380.44 141.96 L 382.02 141.87 L 383.59 141.77 L 385.16 141.66 L 386.73 141.56 L 388.31 141.44 L 389.88 141.32 L 391.45 141.20 L 393.02 141.07 L 394.59 140.94 L 396.17 140.80 L 397.74 140.66 L 399.31 140.52 L 400.88 140.38 L 402.46 140.23 L 404.03 140.08 L 405.60 139.93 L 407.17 139.78 L 408.75 139.63 L 410.32 139.47 L 411.89 139.32 L 413.47 139.17 L 415.04 139.01 L 416.61 138.86 L 418.18 138.70 L 419.75 138.55 L 421.33 138.40 L 422.90 138.24 L 424.47 138.10 L 426.04 137.95 L 427.62 137.80 L 429.19 137.66 L 430.76 137.52 L 432.33 137.38 L 433.91 137.24 L 435.48 137.11 L 437.05 136.97 L 438.62 136.85 L 440.20 136.72 L 441.77 136.60 L 443.34 136.48 L 444.92 136.36 L 446.49 136.25 L 448.06 136.14 L 449.63 136.04 L 451.20 135.93 L 452.78 135.84 L 454.35 135.74 L 455.92 135.65 L 457.49 135.56 L 459.07 135.47 L 460.64 135.39 L 462.21 135.31 L 463.79 135.24 L 465.36 135.17 L 466.93 135.10 L 468.50 135.03 L 470.08 134.97 L 471.65 134.91 L 473.22 134.85 L 474.79 134.80 L 476.37 134.75 L 477.94 134.70 L 479.51 134.65 L 481.08 134.61 L 482.65 134.57 L 484.23 134.53 L 485.80 134.49 L 487.37 134.46 L 488.95 134.43 L 490.52 134.40 L 492.09 134.37 L 493.66 134.34 L 495.24 134.32 L 496.81 134.29 L 498.38 134.27 L 499.95 134.25 L 501.52 134.23 L 503.10 134.21 L 504.67 134.19 L 506.24 134.18 L 507.81 134.16 L 509.39 134.15 L 510.96 134.14 L 512.53 134.13 L 514.11 134.12 L 515.68 134.11 L 517.25 134.10 L 518.82 134.09 L 520.39 134.08 L 521.97 134.07 L 523.54 134.07 L 525.11 134.06 L 526.68 134.06 L 528.26 134.05 L 529.83 134.05 L 531.40 134.04 L 532.98 134.04 L 534.55 134.03 L 536.12 134.03 L 537.69 134.03 L 539.26 134.03 L 540.84 134.02 L 542.41 134.02 L 543.98 134.02 L 545.55 134.02 L 547.13 134.01 L 548.70 134.01 L 550.27 134.01 L 551.85 134.01 L 553.42 134.01 L 554.99 134.01 L 556.56 134.01 L 558.13 134.01 L 559.71 134.01 L 561.28 134.01 L 562.85 134.00 L 564.42 134.00 L 566.00 134.00 L 567.57 134.00 L 569.14 134.00 L 570.72 134.00 L 572.29 134.00 L 573.86 134.00 L 575.43 134.00 L 577.00 134.00 L 578.58 134.00 L 580.15 134.00 L 581.72 134.00 L 583.29 134.00 L 584.87 134.00 L 586.44 134.00 L 588.01 134.00 L 589.59 134.00 L 591.16 134.00 L 592.73 134.00 L 594.30 134.00 L 595.88 134.00 L 597.45 134.00 L 599.02 134.00 L 600.59 134.00 L 602.16 134.00 L 603.74 134.00 L 605.31 134.00 L 606.88 134.00 L 608.46 134.00 L 610.03 134.00 L 611.60 134.00" fill="none" stroke="var(--prussian)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="360.00" y1="246.00" x2="360.00" y2="128.00" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 6" opacity="0.85"/>
+<text x="360.00" y="118.00" text-anchor="middle" font-size="13.5" fill="var(--ink-2)">真值 μ</text>
+<line x1="212.00" y1="246.00" x2="212.00" y2="251.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<text x="212.00" y="267.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">μ−2σ</text>
+<line x1="286.00" y1="246.00" x2="286.00" y2="251.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<text x="286.00" y="267.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">μ−σ</text>
+<line x1="360.00" y1="246.00" x2="360.00" y2="251.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<text x="360.00" y="267.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">μ</text>
+<line x1="434.00" y1="246.00" x2="434.00" y2="251.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<text x="434.00" y="267.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">μ+σ</text>
+<line x1="508.00" y1="246.00" x2="508.00" y2="251.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<text x="508.00" y="267.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">μ+2σ</text>
+<text x="26.00" y="300.00" text-anchor="start" font-size="13" fill="var(--ink-2)">18 次读数</text>
+<circle cx="314.12" cy="292.00" r="3.4" fill="var(--prussian)"/>
+<circle cx="445.10" cy="302.00" r="3.4" fill="var(--prussian)"/>
+<circle cx="253.44" cy="292.00" r="3.4" fill="var(--prussian)"/>
+<circle cx="382.94" cy="302.00" r="3.4" fill="var(--prussian)"/>
+<circle cx="512.44" cy="292.00" r="3.4" fill="var(--prussian)"/>
+<circle cx="346.68" cy="302.00" r="3.4" fill="var(--prussian)"/>
+<circle cx="416.98" cy="292.00" r="3.4" fill="var(--prussian)"/>
+<circle cx="284.52" cy="302.00" r="3.4" fill="var(--prussian)"/>
+<circle cx="480.62" cy="292.00" r="3.4" fill="var(--prussian)"/>
+<circle cx="363.70" cy="302.00" r="3.4" fill="var(--prussian)"/>
+<circle cx="323.74" cy="292.00" r="3.4" fill="var(--prussian)"/>
+<circle cx="454.72" cy="302.00" r="3.4" fill="var(--prussian)"/>
+<circle cx="220.88" cy="292.00" r="3.4" fill="var(--prussian)"/>
+<circle cx="398.48" cy="302.00" r="3.4" fill="var(--prussian)"/>
+<circle cx="431.04" cy="292.00" r="3.4" fill="var(--prussian)"/>
+<circle cx="304.50" cy="302.00" r="3.4" fill="var(--prussian)"/>
+<circle cx="465.08" cy="292.00" r="3.4" fill="var(--prussian)"/>
+<circle cx="354.08" cy="302.00" r="3.4" fill="var(--prussian)"/>
+<line x1="512.44" y1="292.00" x2="542.44" y2="282.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="542.44" y="282.00" text-anchor="start" font-size="12.5" fill="var(--ink-2)">这一回偏了 2σ 出头</text>
+<line x1="214.96" y1="350.00" x2="505.04" y2="350.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="214.96" y1="345.00" x2="214.96" y2="355.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="505.04" y1="345.00" x2="505.04" y2="355.00" stroke="var(--ink-2)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="360.00" y="342.00" text-anchor="middle" font-size="12.5" fill="var(--ink-2)">约 95% 的读数落在区间里</text>
+</svg>
+<!--/FIG pb03_error-->
+        <figcaption class="figcaption"><b>18 次读数围着真值散开。</b>横轴是读数值，虚线是真值。点靠中间的最密，靠两边的越来越稀，轮廓就是那条正态密度。</figcaption>
+      </div>
+
+      <div class="archive reveal">
+        <p class="archive-when">1809 年，哥廷根</p>
+        <h3>《天体运动论》里的误差律</h3>
+        <p class="archive-quote">「观测的误差若由无数互不相干的原因合成，每个原因只造成很小的偏差，则误差的分布就是这条曲线。」</p>
+        <p class="archive-source">高斯《天体运动论》第 177 节，1809 年（拉丁文，此处为译述）</p>
+        <p>高斯用它给最小二乘找理由：误差按正态分布时，最小二乘给出的那个值就是最可能的一个。拉普拉斯 1812 年在误差理论里把它推开，测地、天文、弹道都照着用。</p>
+      </div>
+
+      <p>\(\sigma\) 的大小于是成了仪器的精度指标。同一台仪器量 \(n\) 次取平均，平均值的标准差是 \(\sigma/\sqrt{n}\)，想把精度提高一倍，测量次数要翻四倍。这笔账在第八章讲区间估计时会再算一遍，那时 \(\sigma\) 还要换成样本标准差。</p>
+
+      <h2 id="s-manual" class="reveal">怎么算</h2>
+
+      <p>手上那张表长这样：最左一列是 \(z\) 的整数位与第一位小数，最上一行是第二位小数，行列交叉的那一格就是 \(\Phi(z)\)。查 1.96 时先找行首 1.9，再找列首 0.06，交点上是 0.9750；反过来找分位点时，在表里挑最接近给定概率的那一格，行首列首拼起来就是 \(z\)。</p>
+
+      <ul>
+        <li><strong>先标准化。</strong>把每个端点换成 \(z=\dfrac{x-\mu}{\sigma}\)，除完保留两位小数，后面全靠这两位。</li>
+        <li><strong>再查表。</strong>表里给的是 \(\Phi(z)\)，\(z\) 只排到 0 到 3.99；\(z\) 为负时用对称性 \(\Phi(-z)=1-\Phi(z)\)。</li>
+        <li><strong>区间相减。</strong>\(P(a&lt;X&lt;b)=\Phi(z_b)-\Phi(z_a)\)，连续型在端点上的概率为零，开区间闭区间一个样。</li>
+        <li><strong>反查分位点。</strong>给概率求 \(x\)，先在表里找最接近的那个数，行首加列首得到 \(z\)，再代回 \(x=\mu+\sigma z\)。</li>
+        <li><strong>二项近似分三步。</strong>算 \(\mu=np\) 与 \(\sigma=\sqrt{npq}\)，端点各向外挪 0.5，然后照上面四步走。</li>
+        <li><strong>报数。</strong>概率报四位小数，反查出来的 \(z\) 报三位，够用了。</li>
+      </ul>
+
+      <details class="fold">
+        <summary>表里为什么只有正半轴</summary>
+        <p>标准正态关于 0 对称，负半轴的面积正好等于 1 减去镜像点的面积，印两遍只是浪费纸。有的表给的是 \(\Phi(z)-0.5\) 或上分位点，用之前先看一眼表头，三种口径差着一个常数。表末的 \(z_{0.025}=1.96\) 与 \(z_{0.05}=1.645\) 是查得最多的两个数。</p>
+      </details>
+
+      <h2 id="s-examples" class="reveal">例题</h2>
+
+      <div class="example">
+        <p class="example-head">例 <span>1</span>　设 \(X\sim B(100,0.5)\)，用正态近似求 \(P(45\le X\le55)\)，并与精确值 0.7287 比较。</p>
+        <p class="solution">\(\mu=np=50\)，\(\sigma=\sqrt{npq}=5\)。两端各挪半格得 44.5 与 55.5，标准化为 \(-1.1\) 与 \(1.1\)。查表得 \(2\Phi(1.1)-1=2\times0.8643-1=0.7286\)，与精确值只差 0.0001。</p>
+      </div>
+
+      <div class="example">
+        <p class="example-head">例 <span>2</span>　设 \(X\sim N(3,4)\)，求 \(P(2&lt;X&lt;5)\) 与 \(P(|X-3|&gt;2)\)。</p>
+        <p class="solution">\(\sigma=2\)。端点 2、5 标准化为 \(-0.5\) 与 \(1\)，概率为 \(\Phi(1)-\Phi(-0.5)=0.8413-0.3085=0.5328\)。\(P(|X-3|&gt;2)=P(|Z|&gt;1)=2(1-\Phi(1))=0.3174\)。</p>
+      </div>
+
+      <div class="example">
+        <p class="example-head">例 <span>3</span>　某仪器的测量误差 \(\varepsilon\sim N(0,0.5^2)\)（毫米），求 95% 的误差落在其中的对称区间半宽 \(d\)。</p>
+        <p class="solution">要求 \(P(|\varepsilon|\le d)=0.95\)，即 \(\Phi(d/0.5)=0.975\)。表里最接近 0.975 的是 \(\Phi(1.96)=0.9750\)，故 \(d/0.5=1.96\)，\(d\approx0.98\) 毫米。</p>
+      </div>
+
+      <h2 id="s-exercises" class="reveal">习题</h2>
+
+      <div class="exercises">
+
+        <div class="ex-group">
+          <p class="ex-group-head">A 档 <span>巩固定义与基本计算，每题五分钟内</span></p>
+
+          <p class="ex"><span class="ex-num">1.</span> 设 \(X\sim B(200,0.3)\)，写出它的标准化变量，并求均值与标准差。</p>
+          <div class="answer"><details><summary>看答案</summary><p>\(\mu=np=60\)，\(\sigma=\sqrt{npq}=\sqrt{42}\approx6.48\)，标准化变量是 \(Z=(X-60)/6.48\)。</p></details></div>
+
+          <p class="ex"><span class="ex-num">2.</span> \(n=1000\)、\(p=0.002\)，用泊松近似求恰有 3 次成功的概率。</p>
+          <div class="answer"><details><summary>看答案</summary><p>\(\lambda=np=2\)，概率为 \(\dfrac{2^3}{3!}e^{-2}=\tfrac43\times0.1353\approx0.1804\)。</p></details></div>
+
+          <p class="ex"><span class="ex-num">3.</span> 查表求 \(\Phi(1.28)\)、\(\Phi(-0.65)\)、\(\Phi(2.05)\)。</p>
+          <div class="answer"><details><summary>看答案</summary><p>依次是 0.8997、\(1-0.7422=0.2578\)、0.9798。</p></details></div>
+
+          <p class="ex"><span class="ex-num">4.</span> 设 \(X\sim N(0,1)\)，求 \(P(-1.5&lt;X&lt;1.5)\) 与 \(P(X&gt;1.96)\)。</p>
+          <div class="answer"><details><summary>看答案</summary><p>前者为 \(2\Phi(1.5)-1=2\times0.9332-1=0.8664\)；后者为 \(1-\Phi(1.96)=0.0250\)。</p></details></div>
+
+          <p class="ex"><span class="ex-num">5.</span> 设 \(X\sim N(10,4)\)，求 \(P(X&lt;12)\) 与 \(P(8&lt;X&lt;13)\)。</p>
+          <div class="answer"><details><summary>看答案</summary><p>\(\sigma=2\)。\(12\) 对应 \(z=1\)，概率 0.8413；\(8\) 与 \(13\) 对应 \(z=-1\) 与 \(1.5\)，概率 \(0.9332-0.1587=0.7745\)。</p></details></div>
+
+          <p class="ex"><span class="ex-num">6.</span> \(X\sim B(400,0.5)\)，用正态近似求 \(P(X\le210)\)。</p>
+          <div class="answer"><details><summary>看答案</summary><p>\(\mu=200\)，\(\sigma=10\)。上界取 210.5，\(z=1.05\)，概率为 \(\Phi(1.05)=0.8531\)。</p></details></div>
+        </div>
+
+        <div class="ex-group">
+          <p class="ex-group-head">B 档 <span>综合题，接近期末与考研难度</span></p>
+
+          <p class="ex"><span class="ex-num">1.</span> 1000 人参加考试，成绩近似 \(N(70,100)\)，估计 80 分以上与 60 到 80 分之间各有多少人。</p>
+          <div class="answer"><details><summary>看答案</summary><p>80 分对应 \(z=1\)，比例 \(1-0.8413=0.1587\)，约 159 人。60 到 80 分对应 \(z\) 从 \(-1\) 到 \(1\)，比例 0.6826，约 683 人。</p></details></div>
+
+          <p class="ex"><span class="ex-num">2.</span> \(X\sim B(800,0.4)\)，求 \(P(300\le X\le340)\)。</p>
+          <div class="answer"><details><summary>看答案</summary><p>\(\mu=320\)，\(\sigma=\sqrt{192}\approx13.86\)。修正后端点为 299.5 与 340.5，对应 \(z=\mp1.48\)，概率 \(2\Phi(1.48)-1=0.861\)。</p></details></div>
+
+          <p class="ex"><span class="ex-num">3.</span> 测量误差 \(\varepsilon\sim N(0,4)\)，独立测 9 次取平均，求平均误差绝对值小于 0.6 的概率。</p>
+          <div class="answer"><details><summary>看答案</summary><p>\(\sigma=2\)，平均值的标准差为 \(2/3\)。端点 \(\pm0.6\) 对应 \(z=\pm0.9\)，概率 \(2\Phi(0.9)-1=0.6318\)。</p></details></div>
+
+          <p class="ex"><span class="ex-num">4.</span> 设 \(X\sim N(\mu,\sigma^2)\)，已知 \(P(X&lt;2)=0.3\)、\(P(X&gt;6)=0.2\)，求 \(\mu\) 与 \(\sigma\)。</p>
+          <div class="answer"><details><summary>看答案</summary><p>两式给出 \((2-\mu)/\sigma=-0.524\) 与 \((6-\mu)/\sigma=0.842\)。相减得 \(4/\sigma=1.366\)，\(\sigma\approx2.93\)，回代得 \(\mu\approx3.54\)。</p></details></div>
+        </div>
+
+        <div class="ex-group">
+          <p class="ex-group-head">C 档 <span>拓展与历史原题</span></p>
+
+          <p class="ex"><span class="ex-num">1.</span>（棣莫弗，1733）用 \(\ln n!=\sum_{k=1}^{n}\ln k\) 与 \(\int_1^n\ln x\,dx\) 的差，推出 \(n!\approx\sqrt{2\pi n}\,(n/e)^n\)，并算 \(n=10\) 时与 3628800 的相对误差。</p>
+          <div class="answer"><details><summary>看答案</summary><p>\(\int_1^n\ln x\,dx=n\ln n-n+1\)，它与和式的差随 \(n\) 缓慢变化，配成 \(\tfrac12\ln(2\pi n)\) 就得到斯特林公式，常数来自瓦利斯积分。\(n=10\) 时近似值 3598695.6，相对误差 0.83%。棣莫弗给出了前几项，斯特林 1730 年补上整条式子。</p></details></div>
+
+          <p class="ex"><span class="ex-num">2.</span> 用正态近似算 \(B(100,0.5)\) 的 \(P(45\le X\le55)\)，与精确值 0.7287 对比；再把 \(n\) 换成 400 重做一遍。</p>
+          <div class="answer"><details><summary>看答案</summary><p>\(n=100\) 时近似 0.7286，误差 0.0001；\(n=400\) 时 \(\mu=200\)、\(\sigma=10\)，端点 179.5 与 220.5 对应 \(z=\pm2.05\)，得 0.9596，精确值 0.9598。误差随 \(n\) 增大而收窄，量级是 \(1/\sqrt{n}\)。</p></details></div>
+
+          <p class="ex"><span class="ex-num">3.</span> 8 层高尔顿板，求小球落在第 3 到第 5 格（含）的概率，并用正态近似核对。</p>
+          <div class="answer"><details><summary>看答案</summary><p>精确值 \(\dfrac{56+70+56}{256}=\dfrac{182}{256}=0.7109\)。按 \(B(8,\tfrac12)\) 近似，\(\mu=4\)、\(\sigma=\sqrt2\)，端点 2.5 与 5.5 对应 \(z=\pm1.06\)，得 \(2\Phi(1.06)-1=0.7108\)。8 层这么小的板子也对得上，靠的是那半步修正。</p></details></div>
+        </div>
+
+        <div class="ex-group">
+          <p class="ex-group-head">思考题 <span>不设标准答案，只给提示</span></p>
+
+          <p class="ex"><span class="ex-num">1.</span> 正态密度的原函数不是初等函数，课本为什么照样拿它算概率？</p>
+          <div class="answer"><details><summary>看提示</summary><p>要的是区间上的面积，不必写出原函数。标准化把所有正态化到同一张 \(\Phi\) 表上，表由数值积分算出来；计算机普及以前，这张表就是正态分布全部可用的部分。</p></details></div>
+
+          <p class="ex"><span class="ex-num">2.</span> \(n\) 要多大，二项分布才算接近正态？</p>
+          <div class="answer"><details><summary>看提示</summary><p>没有统一的下界，常用判据是 \(np&gt;5\) 且 \(nq&gt;5\)，偏态越重要求越大。\(p=0.5\) 时 \(n=10\) 已能看出轮廓，\(p=0.05\) 时要几百次，可以拿 \(npq\) 大小先估一下。</p></details></div>
+
+          <p class="ex"><span class="ex-num">3.</span> 高尔顿板的钉子如果一侧比另一侧容易过，底层还是钟形吗？</p>
+          <div class="answer"><details><summary>看提示</summary><p>还是钟形，中心挪到 \(np\)，形状照样光滑。真正变样的是 \(p\) 贴近 0 或 1 的时候：对称没了，右边拖一条长尾巴，泊松分布接管。</p></details></div>
+        </div>
+
+      </div>
+
+      <h2 class="reveal">延伸阅读</h2>
+      <ul class="refs">
+        <li>浙江大学《概率论与数理统计》第四版，第二章 §4 与 §5、第五章 §2。本章的记号与例题口径以这本为准。</li>
+        <li>棣莫弗《二项级数和的近似》（<em>Approximatio ad summam terminorum binomii</em>，1733），英译收在他《机遇论》1738 年第二版的附录里。</li>
+        <li>拉普拉斯《概率的分析理论》（<em>Théorie analytique des probabilités</em>，1812）第二卷，误差与最小二乘的章节。</li>
+        <li>高斯《天体运动论》（<em>Theoria motus corporum coelestium</em>，1809）第 175 至 177 节，误差正态律的原始陈述。</li>
+      </ul>
+
+    </article>
+  </div>
+
+  <div class="wrap">
+    <nav class="pager" aria-label="翻页">
+      <a class="pager-link prev" href="ch02.html"><span class="pager-dir">上一章</span><span class="pager-title">1713：伯努利的《推测术》</span></a>
+      <a class="pager-link next" href="ch04.html"><span class="pager-dir">下一章</span><span class="pager-title">1763：贝叶斯留下的论文</span></a>
+    </nav>
+  </div>
+
+</main>
+
+<footer class="footer field-dark">
+  <div class="wrap">
+    <p class="footer-mark">数学基础课</p>
+    <div class="footer-cols">
+      <div><p>三门课按同一套读法写：先看问题，再给定义与判别，最后落到计算与习题。</p></div>
+      <div><p><a href="index.html">概率论目录</a></p><p><a href="../index.html">返回主页</a></p></div>
+      <div><p>图示用脚本按真实数值画，公式由 KaTeX 排版。</p></div>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/katex/katex.min.js"></script>
+<script src="../assets/katex/auto-render.min.js"></script>
+<script src="../assets/site.js"></script>
+</body>
+</html>

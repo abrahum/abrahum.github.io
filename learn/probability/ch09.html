@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>第九章 从数据回到概率：数理统计 · 概率论与数理统计</title>
+<meta name="description" content="总体与样本、χ² 与 t 与 F 三个抽样分布、矩估计与极大似然、无偏有效一致、置信区间、假设检验与两类错误、一元线性回归。">
+<link rel="stylesheet" href="../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="nav-brand" href="../index.html">数学基础课<span> 三门课，一套读法</span></a>
+    <nav class="nav-links" aria-label="主导航">
+      <a href="index.html#map">本课目录</a>
+      <a class="xl" href="../calculus/index.html">微积分</a>
+      <a class="xl" href="../linear-algebra/index.html">线性代数</a>
+      <a class="xl" href="../complex/index.html">复变函数</a>
+      <a class="opt" href="index.html#map">下一章</a>
+    </nav>
+  </div>
+  <div class="nav-progress" aria-hidden="true"></div>
+</header>
+
+<main>
+
+  <section class="chapter">
+    <div class="wrap">
+      <div class="ch-hero-band">
+        <div>
+          <p class="ch-label reveal"><span>第九章</span><span class="ch-era">1886 年至 1933 年</span></p>
+          <h1 class="ch-title reveal reveal-2">从数据回到概率：数理统计</h1>
+          <p class="ch-deck reveal reveal-3">前八章都在做一件事：概率已知，推样本会是什么样。这一章把方向倒过来：样本已经拿到，总体的参数不知道，反过来猜它。猜要有个说法，还得说清猜得有多准，于是有了估计量、置信区间和检验。</p>
+          <div class="ch-meta reveal reveal-3">
+            <div><strong>本章知识点</strong>总体与样本、抽样分布、点估计、区间估计、假设检验、一元线性回归</div>
+            <div><strong>历史坐标</strong>高尔顿 1886 年，皮尔逊 1900 年，费希尔 1922 年，奈曼与皮尔逊 1933 年</div>
+            <div><strong>对应教材</strong>浙大《概率论与数理统计》第四版第六章至第九章</div>
+            <div><strong>前置</strong>正态分布、中心极限定理、查表用的分位点记号</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap ch-body">
+    <aside class="rail">
+      <p class="rail-title">本章提纲</p>
+      <ol>
+        <li><a href="#s-1">总体、样本、统计量</a></li>
+        <li><a href="#s-2">三个抽样分布</a></li>
+        <li><a href="#s-3">矩法与极大似然</a></li>
+        <li><a href="#s-4">无偏、有效、一致</a></li>
+        <li><a href="#s-5">区间估计</a></li>
+        <li><a href="#s-6">假设检验与两类错误</a></li>
+        <li><a href="#s-7">一元线性回归</a></li>
+        <li><a href="#s-manual">怎么算</a></li>
+        <li><a href="#s-examples">例题</a></li>
+        <li><a href="#s-exercises">习题</a></li>
+      </ol>
+      <p class="rail-title">历史坐标</p>
+      <p class="rail-who">高尔顿 1886 年<br>皮尔逊 1900 年<br>费希尔 1922 年<br>奈曼与皮尔逊 1933 年</p>
+    </aside>
+
+    <article class="prose">
+
+      <p class="lead reveal">高尔顿 1886 年把 900 多对父子的身高画在同一张图上，发现高个子父亲的儿子平均矮一点，矮个子父亲的儿子平均高一点，他把这条斜率小于 1 的直线叫回归线。他手上只有一堆数据，没有总体的参数。这一章接着往下讲：总体不知道，只抓一把样本，用样本去猜总体的参数，判断关于总体的一句话能不能信，给每个说法配上把握。</p>
+
+      <h2 id="s-1" class="reveal">一、总体、样本、统计量</h2>
+
+      <p>要报一批灯泡的平均寿命，不能全测，测完灯泡也没了；要问全国成年男性的平均身高，也不能一个个去量。两件事形状相同：想知道的数写在总体上，手上只有一部分数据。统计里把研究对象的全体叫总体，其中每一个叫个体，从总体里按机会抽出 \(n\) 个个体组成样本，\(n\) 叫样本容量。抽之前不知道抽到哪几个，所以样本写成 \(X_1,\dots,X_n\)，是一组随机变量；抽完记在纸上的数 \(x_1,\dots,x_n\) 叫样本值。</p>
+
+      <p>推断的全部动作都从这个区分出发。样本随机，凡是用样本算出来的量也跟着随机，它自己就有分布，这个分布叫抽样分布，后面第五、六节的区间与检验全靠它。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定义（总体、样本、统计量）</p>
+        <p>设 \(X_1,\dots,X_n\) 是来自总体 \(X\) 的样本。不含任何未知参数的样本函数 \(g(X_1,\dots,X_n)\) 叫<strong>统计量</strong>。常用的有几个：样本均值 \(\bar X=\dfrac{1}{n}\sum_{i=1}^{n}X_i\)，样本方差 \(S^2=\dfrac{1}{n-1}\sum_{i=1}^{n}(X_i-\bar X)^2\)，样本标准差 \(S\)，样本 \(k\) 阶原点矩 \(A_k=\dfrac{1}{n}\sum_{i=1}^{n}X_i^k\)。</p>
+      </div>
+
+      <p>「不含未知参数」这条限制很硬：\(\bar X\) 能算，式子里只有样本，\((X_1-\mu)/\sigma\) 算不出来，\(\mu\) 与 \(\sigma\) 正是缺的那两个数。构造区间和检验统计量，第一步都是把带参数的量改造成统计量，手法是第六章的标准化，扣掉期望再除以标准差。</p>
+
+      <div class="figure">
+        <!--FIG pb10_sample--><svg viewBox="0 0 720 400" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<text x="48.00" y="46.00" text-anchor="start" font-size="15.5" fill="var(--ink)">总体与样本：抽 16 个，压成一个数</text>
+<text x="48.00" y="68.00" text-anchor="start" font-size="13" fill="var(--ink-3)">左图是一次抽样的结果，右图是同一件事重复很多次之后的样子</text>
+<line x1="64.00" y1="316.00" x2="324.00" y2="316.00" stroke="var(--ink-3)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+<line x1="64.00" y1="316.00" x2="64.00" y2="78.00" stroke="var(--ink-3)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+<line x1="112.75" y1="316.00" x2="112.75" y2="321.00" stroke="var(--ink-3)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+<text x="112.75" y="336.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">150</text>
+<line x1="153.38" y1="316.00" x2="153.38" y2="321.00" stroke="var(--ink-3)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+<text x="153.38" y="336.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">160</text>
+<line x1="234.62" y1="316.00" x2="234.62" y2="321.00" stroke="var(--ink-3)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+<text x="234.62" y="336.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">180</text>
+<line x1="275.25" y1="316.00" x2="275.25" y2="321.00" stroke="var(--ink-3)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+<text x="275.25" y="336.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">190</text>
+<text x="194.00" y="354.00" text-anchor="middle" font-size="13" fill="var(--ink-3)">身高 / cm</text>
+<path d="M 64.00 315.98 L 65.00 315.98 L 66.00 315.98 L 67.00 315.97 L 68.00 315.97 L 69.00 315.97 L 70.00 315.96 L 71.00 315.96 L 72.00 315.95 L 73.00 315.95 L 74.00 315.94 L 75.00 315.94 L 76.00 315.93 L 77.00 315.92 L 78.00 315.91 L 79.00 315.90 L 80.00 315.89 L 81.00 315.87 L 82.00 315.86 L 83.00 315.85 L 84.00 315.83 L 85.00 315.81 L 86.00 315.79 L 87.00 315.77 L 88.00 315.74 L 89.00 315.71 L 90.00 315.68 L 91.00 315.65 L 92.00 315.62 L 93.00 315.58 L 94.00 315.53 L 95.00 315.49 L 96.00 315.44 L 97.00 315.38 L 98.00 315.33 L 99.00 315.26 L 100.00 315.19 L 101.00 315.12 L 102.00 315.04 L 103.00 314.95 L 104.00 314.86 L 105.00 314.76 L 106.00 314.65 L 107.00 314.53 L 108.00 314.40 L 109.00 314.27 L 110.00 314.13 L 111.00 313.97 L 112.00 313.81 L 113.00 313.63 L 114.00 313.44 L 115.00 313.24 L 116.00 313.03 L 117.00 312.81 L 118.00 312.57 L 119.00 312.31 L 120.00 312.04 L 121.00 311.76 L 122.00 311.45 L 123.00 311.14 L 124.00 310.80 L 125.00 310.45 L 126.00 310.07 L 127.00 309.68 L 128.00 309.27 L 129.00 308.84 L 130.00 308.39 L 131.00 307.92 L 132.00 307.43 L 133.00 306.91 L 134.00 306.38 L 135.00 305.82 L 136.00 305.24 L 137.00 304.64 L 138.00 304.02 L 139.00 303.37 L 140.00 302.70 L 141.00 302.01 L 142.00 301.30 L 143.00 300.56 L 144.00 299.81 L 145.00 299.03 L 146.00 298.23 L 147.00 297.41 L 148.00 296.58 L 149.00 295.72 L 150.00 294.85 L 151.00 293.96 L 152.00 293.06 L 153.00 292.14 L 154.00 291.20 L 155.00 290.26 L 156.00 289.30 L 157.00 288.34 L 158.00 287.37 L 159.00 286.39 L 160.00 285.40 L 161.00 284.42 L 162.00 283.43 L 163.00 282.45 L 164.00 281.46 L 165.00 280.48 L 166.00 279.51 L 167.00 278.55 L 168.00 277.60 L 169.00 276.66 L 170.00 275.74 L 171.00 274.83 L 172.00 273.95 L 173.00 273.08 L 174.00 272.24 L 175.00 271.42 L 176.00 270.64 L 177.00 269.88 L 178.00 269.15 L 179.00 268.46 L 180.00 267.80 L 181.00 267.18 L 182.00 266.60 L 183.00 266.06 L 184.00 265.56 L 185.00 265.11 L 186.00 264.70 L 187.00 264.33 L 188.00 264.01 L 189.00 263.74 L 190.00 263.52 L 191.00 263.34 L 192.00 263.22 L 193.00 263.14 L 194.00 263.12 L 195.00 263.14 L 196.00 263.22 L 197.00 263.34 L 198.00 263.52 L 199.00 263.74 L 200.00 264.01 L 201.00 264.33 L 202.00 264.70 L 203.00 265.11 L 204.00 265.56 L 205.00 266.06 L 206.00 266.60 L 207.00 267.18 L 208.00 267.80 L 209.00 268.46 L 210.00 269.15 L 211.00 269.88 L 212.00 270.64 L 213.00 271.42 L 214.00 272.24 L 215.00 273.08 L 216.00 273.95 L 217.00 274.83 L 218.00 275.74 L 219.00 276.66 L 220.00 277.60 L 221.00 278.55 L 222.00 279.51 L 223.00 280.48 L 224.00 281.46 L 225.00 282.45 L 226.00 283.43 L 227.00 284.42 L 228.00 285.40 L 229.00 286.39 L 230.00 287.37 L 231.00 288.34 L 232.00 289.30 L 233.00 290.26 L 234.00 291.20 L 235.00 292.14 L 236.00 293.06 L 237.00 293.96 L 238.00 294.85 L 239.00 295.72 L 240.00 296.58 L 241.00 297.41 L 242.00 298.23 L 243.00 299.03 L 244.00 299.81 L 245.00 300.56 L 246.00 301.30 L 247.00 302.01 L 248.00 302.70 L 249.00 303.37 L 250.00 304.02 L 251.00 304.64 L 252.00 305.24 L 253.00 305.82 L 254.00 306.38 L 255.00 306.91 L 256.00 307.43 L 257.00 307.92 L 258.00 308.39 L 259.00 308.84 L 260.00 309.27 L 261.00 309.68 L 262.00 310.07 L 263.00 310.45 L 264.00 310.80 L 265.00 311.14 L 266.00 311.45 L 267.00 311.76 L 268.00 312.04 L 269.00 312.31 L 270.00 312.57 L 271.00 312.81 L 272.00 313.03 L 273.00 313.24 L 274.00 313.44 L 275.00 313.63 L 276.00 313.81 L 277.00 313.97 L 278.00 314.13 L 279.00 314.27 L 280.00 314.40 L 281.00 314.53 L 282.00 314.65 L 283.00 314.76 L 284.00 314.86 L 285.00 314.95 L 286.00 315.04 L 287.00 315.12 L 288.00 315.19 L 289.00 315.26 L 290.00 315.33 L 291.00 315.38 L 292.00 315.44 L 293.00 315.49 L 294.00 315.53 L 295.00 315.58 L 296.00 315.62 L 297.00 315.65 L 298.00 315.68 L 299.00 315.71 L 300.00 315.74 L 301.00 315.77 L 302.00 315.79 L 303.00 315.81 L 304.00 315.83 L 305.00 315.85 L 306.00 315.86 L 307.00 315.87 L 308.00 315.89 L 309.00 315.90 L 310.00 315.91 L 311.00 315.92 L 312.00 315.93 L 313.00 315.94 L 314.00 315.94 L 315.00 315.95 L 316.00 315.95 L 317.00 315.96 L 318.00 315.96 L 319.00 315.97 L 320.00 315.97 L 321.00 315.97 L 322.00 315.98 L 323.00 315.98 L 324.00 315.98" fill="none" stroke="var(--ink-2)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="218.20" y1="316.00" x2="218.20" y2="307.00" stroke="var(--prussian)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" opacity="0.75"/>
+<line x1="191.64" y1="316.00" x2="191.64" y2="307.00" stroke="var(--prussian)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" opacity="0.75"/>
+<line x1="214.22" y1="316.00" x2="214.22" y2="307.00" stroke="var(--prussian)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" opacity="0.75"/>
+<line x1="190.71" y1="316.00" x2="190.71" y2="307.00" stroke="var(--prussian)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" opacity="0.75"/>
+<line x1="184.58" y1="316.00" x2="184.58" y2="307.00" stroke="var(--prussian)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" opacity="0.75"/>
+<line x1="163.29" y1="316.00" x2="163.29" y2="307.00" stroke="var(--prussian)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" opacity="0.75"/>
+<line x1="121.55" y1="316.00" x2="121.55" y2="307.00" stroke="var(--prussian)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" opacity="0.75"/>
+<line x1="159.70" y1="316.00" x2="159.70" y2="307.00" stroke="var(--prussian)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" opacity="0.75"/>
+<line x1="173.40" y1="316.00" x2="173.40" y2="307.00" stroke="var(--prussian)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" opacity="0.75"/>
+<line x1="178.17" y1="316.00" x2="178.17" y2="307.00" stroke="var(--prussian)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" opacity="0.75"/>
+<line x1="211.79" y1="316.00" x2="211.79" y2="307.00" stroke="var(--prussian)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" opacity="0.75"/>
+<line x1="230.95" y1="316.00" x2="230.95" y2="307.00" stroke="var(--prussian)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" opacity="0.75"/>
+<line x1="165.74" y1="316.00" x2="165.74" y2="307.00" stroke="var(--prussian)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" opacity="0.75"/>
+<line x1="180.66" y1="316.00" x2="180.66" y2="307.00" stroke="var(--prussian)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" opacity="0.75"/>
+<line x1="167.47" y1="316.00" x2="167.47" y2="307.00" stroke="var(--prussian)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" opacity="0.75"/>
+<line x1="181.45" y1="316.00" x2="181.45" y2="307.00" stroke="var(--prussian)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" opacity="0.75"/>
+<text x="194.00" y="251.12" text-anchor="middle" font-size="14" fill="var(--ink-2)">总体 N(170, 8)</text>
+<line x1="165.56" y1="279.94" x2="104.62" y2="152.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="104.62" y="152.00" text-anchor="start" font-size="12.5" fill="var(--ink-2)">曲线是总体的分布，参数未知</text>
+<line x1="218.20" y1="307.00" x2="88.38" y2="248.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="88.38" y="248.00" text-anchor="start" font-size="12.5" fill="var(--ink-2)">题目里能拿到手的，只有这 16 条短线</text>
+<line x1="334.00" y1="208.00" x2="390.00" y2="208.00" stroke="var(--ink-2)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M 380.71 211.71 L 390.00 208.00 L 380.71 204.29" fill="var(--ink-2)" stroke="var(--ink-2)" stroke-width="1" stroke-linejoin="round"/>
+<text x="362.00" y="192.00" text-anchor="middle" font-size="13" fill="var(--ink-2)">算一个数</text>
+<text x="362.00" y="228.00" text-anchor="middle" font-size="14" fill="var(--prussian)">x̄</text>
+<line x1="400.00" y1="316.00" x2="660.00" y2="316.00" stroke="var(--ink-3)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+<line x1="400.00" y1="316.00" x2="400.00" y2="78.00" stroke="var(--ink-3)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+<line x1="448.75" y1="316.00" x2="448.75" y2="321.00" stroke="var(--ink-3)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+<text x="448.75" y="336.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">150</text>
+<line x1="489.38" y1="316.00" x2="489.38" y2="321.00" stroke="var(--ink-3)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+<text x="489.38" y="336.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">160</text>
+<line x1="570.62" y1="316.00" x2="570.62" y2="321.00" stroke="var(--ink-3)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+<text x="570.62" y="336.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">180</text>
+<line x1="611.25" y1="316.00" x2="611.25" y2="321.00" stroke="var(--ink-3)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+<text x="611.25" y="336.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">190</text>
+<text x="530.00" y="354.00" text-anchor="middle" font-size="13" fill="var(--ink-3)">身高 / cm</text>
+<path d="M 400.00 316.00 L 401.00 316.00 L 402.00 316.00 L 403.00 316.00 L 404.00 316.00 L 405.00 316.00 L 406.00 316.00 L 407.00 316.00 L 408.00 316.00 L 409.00 316.00 L 410.00 316.00 L 411.00 316.00 L 412.00 316.00 L 413.00 316.00 L 414.00 316.00 L 415.00 316.00 L 416.00 316.00 L 417.00 316.00 L 418.00 316.00 L 419.00 316.00 L 420.00 316.00 L 421.00 316.00 L 422.00 316.00 L 423.00 316.00 L 424.00 316.00 L 425.00 316.00 L 426.00 316.00 L 427.00 316.00 L 428.00 316.00 L 429.00 316.00 L 430.00 316.00 L 431.00 316.00 L 432.00 316.00 L 433.00 316.00 L 434.00 316.00 L 435.00 316.00 L 436.00 316.00 L 437.00 316.00 L 438.00 316.00 L 439.00 316.00 L 440.00 316.00 L 441.00 316.00 L 442.00 316.00 L 443.00 316.00 L 444.00 316.00 L 445.00 316.00 L 446.00 316.00 L 447.00 316.00 L 448.00 316.00 L 449.00 316.00 L 450.00 316.00 L 451.00 316.00 L 452.00 316.00 L 453.00 316.00 L 454.00 316.00 L 455.00 316.00 L 456.00 316.00 L 457.00 316.00 L 458.00 316.00 L 459.00 316.00 L 460.00 316.00 L 461.00 316.00 L 462.00 316.00 L 463.00 316.00 L 464.00 316.00 L 465.00 316.00 L 466.00 316.00 L 467.00 316.00 L 468.00 316.00 L 469.00 316.00 L 470.00 316.00 L 471.00 316.00 L 472.00 316.00 L 473.00 316.00 L 474.00 316.00 L 475.00 316.00 L 476.00 316.00 L 477.00 316.00 L 478.00 316.00 L 479.00 316.00 L 480.00 316.00 L 481.00 316.00 L 482.00 316.00 L 483.00 316.00 L 484.00 316.00 L 485.00 316.00 L 486.00 316.00 L 487.00 316.00 L 488.00 316.00 L 489.00 316.00 L 490.00 316.00 L 491.00 316.00 L 492.00 316.00 L 493.00 315.99 L 494.00 315.99 L 495.00 315.98 L 496.00 315.97 L 497.00 315.94 L 498.00 315.91 L 499.00 315.85 L 500.00 315.77 L 501.00 315.64 L 502.00 315.44 L 503.00 315.15 L 504.00 314.74 L 505.00 314.14 L 506.00 313.30 L 507.00 312.15 L 508.00 310.59 L 509.00 308.50 L 510.00 305.78 L 511.00 302.26 L 512.00 297.82 L 513.00 292.30 L 514.00 285.57 L 515.00 277.52 L 516.00 268.06 L 517.00 257.19 L 518.00 244.93 L 519.00 231.40 L 520.00 216.82 L 521.00 201.46 L 522.00 185.73 L 523.00 170.05 L 524.00 154.95 L 525.00 140.96 L 526.00 128.61 L 527.00 118.41 L 528.00 110.78 L 529.00 106.06 L 530.00 104.47 L 531.00 106.06 L 532.00 110.78 L 533.00 118.41 L 534.00 128.61 L 535.00 140.96 L 536.00 154.95 L 537.00 170.05 L 538.00 185.73 L 539.00 201.46 L 540.00 216.82 L 541.00 231.40 L 542.00 244.93 L 543.00 257.19 L 544.00 268.06 L 545.00 277.52 L 546.00 285.57 L 547.00 292.30 L 548.00 297.82 L 549.00 302.26 L 550.00 305.78 L 551.00 308.50 L 552.00 310.59 L 553.00 312.15 L 554.00 313.30 L 555.00 314.14 L 556.00 314.74 L 557.00 315.15 L 558.00 315.44 L 559.00 315.64 L 560.00 315.77 L 561.00 315.85 L 562.00 315.91 L 563.00 315.94 L 564.00 315.97 L 565.00 315.98 L 566.00 315.99 L 567.00 315.99 L 568.00 316.00 L 569.00 316.00 L 570.00 316.00 L 571.00 316.00 L 572.00 316.00 L 573.00 316.00 L 574.00 316.00 L 575.00 316.00 L 576.00 316.00 L 577.00 316.00 L 578.00 316.00 L 579.00 316.00 L 580.00 316.00 L 581.00 316.00 L 582.00 316.00 L 583.00 316.00 L 584.00 316.00 L 585.00 316.00 L 586.00 316.00 L 587.00 316.00 L 588.00 316.00 L 589.00 316.00 L 590.00 316.00 L 591.00 316.00 L 592.00 316.00 L 593.00 316.00 L 594.00 316.00 L 595.00 316.00 L 596.00 316.00 L 597.00 316.00 L 598.00 316.00 L 599.00 316.00 L 600.00 316.00 L 601.00 316.00 L 602.00 316.00 L 603.00 316.00 L 604.00 316.00 L 605.00 316.00 L 606.00 316.00 L 607.00 316.00 L 608.00 316.00 L 609.00 316.00 L 610.00 316.00 L 611.00 316.00 L 612.00 316.00 L 613.00 316.00 L 614.00 316.00 L 615.00 316.00 L 616.00 316.00 L 617.00 316.00 L 618.00 316.00 L 619.00 316.00 L 620.00 316.00 L 621.00 316.00 L 622.00 316.00 L 623.00 316.00 L 624.00 316.00 L 625.00 316.00 L 626.00 316.00 L 627.00 316.00 L 628.00 316.00 L 629.00 316.00 L 630.00 316.00 L 631.00 316.00 L 632.00 316.00 L 633.00 316.00 L 634.00 316.00 L 635.00 316.00 L 636.00 316.00 L 637.00 316.00 L 638.00 316.00 L 639.00 316.00 L 640.00 316.00 L 641.00 316.00 L 642.00 316.00 L 643.00 316.00 L 644.00 316.00 L 645.00 316.00 L 646.00 316.00 L 647.00 316.00 L 648.00 316.00 L 649.00 316.00 L 650.00 316.00 L 651.00 316.00 L 652.00 316.00 L 653.00 316.00 L 654.00 316.00 L 655.00 316.00 L 656.00 316.00 L 657.00 316.00 L 658.00 316.00 L 659.00 316.00 L 660.00 316.00" fill="none" stroke="var(--accent-line)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="519.35" cy="315.00" r="4.6" fill="var(--prussian)"/>
+<text x="530.00" y="92.47" text-anchor="middle" font-size="14" fill="var(--accent-line)">x̄ 的分布 N(170, 2)</text>
+<line x1="519.35" y1="312.00" x2="485.31" y2="264.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="485.31" y="264.00" text-anchor="start" font-size="12.5" fill="var(--ink-2)">这一次算出来 x̄ = 167.4</text>
+<line x1="546.25" y1="287.37" x2="483.28" y2="132.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="483.28" y="132.00" text-anchor="start" font-size="12.5" fill="var(--ink-2)">16 个数的平均，分布更窄</text>
+<text x="48.00" y="382.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">16 条短线的位置随抽样变，x̄ 也跟着变；它的标准差是总体的 1/4。</text>
+</svg>
+<!--/FIG pb10_sample-->
+        <figcaption class="figcaption"><b>左边一次抽样，右边把这件事重复很多次。</b>16 条短线的位置每次都不一样，压出来的那个数也跟着变；它的分布窄，宽度是总体的 \(1/\sqrt{16}\)。</figcaption>
+      </div>
+
+      <div class="keyidea reveal">
+        <p>总体是固定的，样本是随机的。统计量随样本变，所以你给出的每个关于总体的判断，都只能配一个概率来说。</p>
+      </div>
+
+      <details class="fold">
+        <summary>样本方差为什么除以 n−1</summary>
+        <p>除以 \(n\) 的写法记作 \(S_0^2\)，它的期望是 \(\frac{n-1}{n}\sigma^2\)，平均偏小，样本越少偏得越狠。除以 \(n-1\) 之后 \(E(S^2)=\sigma^2\)，代价是它不再等于「偏差平方的平均值」。\(n\) 大于 30 时两种算法差不到 5%，小样本上看得出来。</p>
+      </details>
+
+      <h2 id="s-2" class="reveal">二、三个抽样分布</h2>
+
+      <p>正态总体下，样本均值的分布最好算：它还是正态，方差缩成 \(\sigma^2/n\)，这一点第八章已经给了。难办的是方差那一头，\(\sum (X_i-\bar X)^2\) 服从什么分布、两个方差相除又服从什么分布，都写不成初等函数，1910 年代以后统计学家干脆给它们起了名字，做成表，用到时查。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定理（χ²、t、F 的构造）</p>
+        <p>一、<strong>χ² 分布</strong>：设 \(X_1,\dots,X_n\) 相互独立，都服从 \(N(0,1)\)，则 \(X_1^2+\dots+X_n^2\sim\chi^2(n)\)；若 \(X_i\sim N(\mu,\sigma^2)\)，则 \(\sum_{i=1}^{n}\left(\dfrac{X_i-\mu}{\sigma}\right)^2\sim\chi^2(n)\)，且 \(\dfrac{(n-1)S^2}{\sigma^2}\sim\chi^2(n-1)\)。</p>
+        <p>二、<strong>t 分布</strong>：设 \(X\sim N(0,1)\)，\(Y\sim\chi^2(n)\)，\(X\) 与 \(Y\) 独立，则 \(t=\dfrac{X}{\sqrt{Y/n}}\sim t(n)\)。</p>
+        <p>三、<strong>F 分布</strong>：设 \(U\sim\chi^2(n_1)\)，\(V\sim\chi^2(n_2)\)，两者独立，则 \(F=\dfrac{U/n_1}{V/n_2}\sim F(n_1,n_2)\)。</p>
+      </div>
+
+      <p>三段构造共用同一个零件：标准正态。平方一个，得到 χ² 的一份，凑够 \(n\) 份，自由度就是 \(n\)；拿一个标准正态去比一个开过方的 χ²，分母上的 \(\sqrt{Y/n}\) 把尺度扣掉，剩下的 t 只跟自由度有关；两个 χ² 各自除掉自己的自由度再相除，尺度也摆平了，得到 F。分母上除自由度不多余，它让 F 的取值不随两个总体方差的大小漂移。</p>
+
+      <p>三张图的形状各记一句：χ² 从原点起步，先升后落，右边拖着长尾，自由度越大越胖，超过 45 就接近正态；t 与正态几乎重合，只是肩膀低一点、尾巴厚一点，\(n\) 大到 45 时 0.975 分位点降到 2.01，正态是 1.96；F 只取正值，同样右偏，检验时只查右尾，要用左尾就翻倒数 \(F_{1-\alpha}(n_1,n_2)=1/F_{\alpha}(n_2,n_1)\)。</p>
+
+      <details class="fold">
+        <summary>自由度到底是什么</summary>
+        <p>自由度数的是一组数里能自由变动的个数。\(n\) 个偏差 \(X_i-\bar X\) 加起来必须是零，知道其中 \(n-1\) 个，最后一个就被定死了，所以平方和里独立的只有 \(n-1\) 份。χ² 里的自由度同理：没有约束就是 \(n\) 份，扣掉一个约束就少一份。</p>
+      </details>
+
+      <h2 id="s-3" class="reveal">三、点估计：矩法与极大似然</h2>
+
+      <p>分布的形状定了，比如认定灯泡寿命服从指数分布、某段路上的事故数服从泊松分布，剩下的活就是给参数定一个数：用样本算出来的那个式子叫估计量，记作 \(\hat\theta\)，把数代进去得到的叫估计值。</p>
+
+      <p>矩估计的做法是让样本矩等于总体矩，有几个参数就列几个方程：泊松分布 \(E(X)=\lambda\)，于是 \(\hat\lambda=\bar x\)；正态的两个参数照抄，\(\hat\mu=\bar x\)，\(\hat\sigma^2=\frac{1}{n}\sum (x_i-\bar x)^2\)，这里分母取 \(n\)，\(S^2\) 取的是 \(n-1\)，前者是二阶中心矩，后者才是无偏的版本。</p>
+
+      <p>极大似然换一个角度问：这组数已经看见了，参数取什么值，「看见这组数」这件事最可能发生。把每个样本点的概率或密度连乘起来，得到似然函数，再挑出让 L 最大的那个参数。连乘不好求导，取对数变成连加，最大值的位置不挪。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定理（极大似然估计的步骤）</p>
+        <p>一、写出似然函数 \(L(\theta)=\prod_{i=1}^{n}f(x_i;\theta)\)，离散情形把密度换成概率 \(p(x_i;\theta)\)。</p>
+        <p>二、取对数，\(\ln L(\theta)=\sum_{i=1}^{n}\ln f(x_i;\theta)\)，连乘变成连加。</p>
+        <p>三、对每个参数求偏导，令其为零，解似然方程 \(\dfrac{\partial \ln L}{\partial \theta}=0\)。</p>
+        <p>四、方程无解或解落在边界时，回到 \(L\) 本身找最大点。若 \(\hat\theta\) 是 \(\theta\) 的极大似然估计，则 \(g(\hat\theta)\) 也是 \(g(\theta)\) 的极大似然估计。</p>
+      </div>
+
+      <p>极大似然算出来的东西不一定漂亮：均匀分布 \(U(0,\theta)\) 的似然是 \(1/\theta^n\)，随 \(\theta\) 单调下降，求导永远不为零，最大值落在边界 \(\hat\theta=\max x_i\) 上，只有回头看 \(L\) 本身才拿得到，这类题考试常出。</p>
+
+      <div class="archive reveal">
+        <p class="archive-when">1922 年，伦敦</p>
+        <h3>把样本压成一个估计量</h3>
+        <p class="archive-quote">「the method of maximum likelihood」</p>
+        <p class="archive-source">费希尔《理论统计的数学基础》，《皇家学会哲学汇刊 A 辑》第 222 卷</p>
+        <p>皮尔逊 1900 年为拟合优度检验造出 χ² 分布，二十二年后费希尔在同一份刊物上把估计问题整理成一套方法：写似然函数，取对数，求导置零。这条步骤今天印在每本教材上，名字也是他起的。1925 年他把这套办法写进《供研究者用的统计方法》，回归与方差分析跟着一起传开。</p>
+      </div>
+
+      <h2 id="s-4" class="reveal">四、估计量的三条标准</h2>
+
+      <p>同一个参数常常有好几个估计量，挑哪个得有个说法。课本给三条标准，一条比一条强：平均来说不偏，方差够小，样本多了会靠拢。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定义（无偏性、有效性、一致性）</p>
+        <p>设 \(\hat\theta\) 是参数 \(\theta\) 的估计量。若对一切 \(\theta\) 有 \(E(\hat\theta)=\theta\)，称 \(\hat\theta\) 是<strong>无偏</strong>的。若 \(\hat\theta_1\) 与 \(\hat\theta_2\) 都无偏，且 \(D(\hat\theta_1)\le D(\hat\theta_2)\)，称前者更<strong>有效</strong>。若对任意 \(\varepsilon&gt;0\) 有 \(\lim_{n\to\infty}P\{|\hat\theta-\theta|&lt;\varepsilon\}=1\)，称 \(\hat\theta\) 是<strong>一致</strong>的。</p>
+      </div>
+
+      <p>用这三条量一遍，差别立刻出来：\(\bar X\) 无偏，方差 \(\sigma^2/n\)；\(S^2\) 无偏，分母取 \(n-1\) 的来历就在这里；用 \(M=\max X_i\) 估计均匀分布的 \(\theta\)，期望是 \(\frac{n}{n+1}\theta\)，系统偏小，\(n\) 大了才补回来。有效性只在两个都无偏的估计量之间比，正态均值上 \(\bar X\) 的方差比样本中位数小，课本因此说它有效。</p>
+
+      <p>一致性最弱也最要紧，它保证数据多起来答案会靠近真值，用的是第八章的依概率收敛。大数律已经把 \(\bar X\) 的一致性给了出来，前面见过的估计量大多一致；\(M\) 也一致，只是 \(\max X_i\) 挤向 \(\theta\) 的速度不快。</p>
+
+      <h2 id="s-5" class="reveal">五、区间估计</h2>
+
+      <p>点估计给一个数，落在真值上的机会几乎为零，改给一段范围再配一个把握，信息就实在了。做法分三步：先找一个含 \(\theta\) 但分布已知的量，把它的分布从中间切掉两小块，剩下的部分写成不等式，再解出 \(\theta\) 的范围。这样的量叫枢轴量，式子里可以含参数，分布里不能含。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定理（正态均值、方差与比例的置信区间）</p>
+        <p>设样本来自 \(N(\mu,\sigma^2)\)，置信水平为 \(1-\alpha\)，样本均值为 \(\bar x\)，样本方差为 \(S^2\)。</p>
+        <p>一、\(\sigma\) 已知时 \(\mu\) 的置信区间：\(\left[\bar x-z_{\alpha/2}\dfrac{\sigma}{\sqrt n},\ \bar x+z_{\alpha/2}\dfrac{\sigma}{\sqrt n}\right]\)；</p>
+        <p>二、\(\sigma\) 未知时 \(\mu\) 的置信区间：\(\left[\bar x-t_{\alpha/2}(n-1)\dfrac{S}{\sqrt n},\ \bar x+t_{\alpha/2}(n-1)\dfrac{S}{\sqrt n}\right]\)；</p>
+        <p>三、\(\sigma^2\) 的置信区间：\(\left[\dfrac{(n-1)S^2}{\chi^2_{\alpha/2}(n-1)},\ \dfrac{(n-1)S^2}{\chi^2_{1-\alpha/2}(n-1)}\right]\)；</p>
+        <p>四、比例 \(p\) 的置信区间（\(n\) 较大）：\(\hat p\pm z_{\alpha/2}\sqrt{\dfrac{\hat p(1-\hat p)}{n}}\)，其中 \(\hat p\) 是样本频率。单侧区间把 \(\alpha/2\) 换成 \(\alpha\)，一侧端点换成 0 或 1。</p>
+      </div>
+
+      <p>0.95 这个数说的是办法，不是某一次算出来的结果：真值 \(\mu\) 固定，落在哪里不随机，随机的是样本，是每次算出的两个端点。重复抽 100 次得到 100 个区间，大约 95 个盖住 \(\mu\)，谁也说不出没盖住的那 5 个是哪几个。算完之后区间定了，\(\mu\) 也定了，盖住与否成了事实，「真值落在这个区间里的概率是 0.95」这句读法就站不住，能说的是这套做法有 95% 的把握盖住真值。</p>
+
+      <div class="keyidea reveal">
+        <p>95% 属于做法，不属于这一次的结果。重复抽样，大约 95% 的区间会盖住真值，剩下那几个谁也不知道是哪几个。</p>
+      </div>
+
+      <div class="figure">
+        <!--FIG pb10_cover--><svg viewBox="0 0 720 460" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<text x="48.00" y="36.00" text-anchor="start" font-size="15.5" fill="var(--ink)">20 次抽样，20 个 95% 的置信区间</text>
+<text x="48.00" y="58.00" text-anchor="start" font-size="12.8" fill="var(--ink-3)">每条横线是 x̄ ± 1.96·σ/√n，σ = 12，n = 25，所以半宽是 4.70；竖线是真值 μ = 100</text>
+<line x1="372.00" y1="66.00" x2="372.00" y2="402.00" stroke="var(--accent-line)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="7 6"/>
+<text x="380.00" y="66.00" text-anchor="start" font-size="13" fill="var(--accent-line)">μ = 100</text>
+<line x1="389.89" y1="74.00" x2="575.36" y2="74.00" stroke="var(--ink)" stroke-width="3.0" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="389.89" y1="70.00" x2="389.89" y2="78.00" stroke="var(--ink)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="575.36" y1="70.00" x2="575.36" y2="78.00" stroke="var(--ink)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="82.00" y="78.00" text-anchor="end" font-size="11.5" fill="var(--ink-3)">1</text>
+<text x="583.36" y="78.00" text-anchor="start" font-size="12" fill="var(--ink)">没盖住</text>
+<line x1="247.90" y1="89.60" x2="433.37" y2="89.60" stroke="var(--ink-2)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+<line x1="247.90" y1="85.60" x2="247.90" y2="93.60" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+<line x1="433.37" y1="85.60" x2="433.37" y2="93.60" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+<text x="82.00" y="93.60" text-anchor="end" font-size="11.5" fill="var(--ink-3)">2</text>
+<line x1="297.95" y1="105.20" x2="483.42" y2="105.20" stroke="var(--ink-2)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+<line x1="297.95" y1="101.20" x2="297.95" y2="109.20" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+<line x1="483.42" y1="101.20" x2="483.42" y2="109.20" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+<text x="82.00" y="109.20" text-anchor="end" font-size="11.5" fill="var(--ink-3)">3</text>
+<line x1="286.20" y1="120.80" x2="471.67" y2="120.80" stroke="var(--ink-2)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+<line x1="286.20" y1="116.80" x2="286.20" y2="124.80" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+<line x1="471.67" y1="116.80" x2="471.67" y2="124.80" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+<text x="82.00" y="124.80" text-anchor="end" font-size="11.5" fill="var(--ink-3)">4</text>
+<line x1="318.78" y1="136.40" x2="504.25" y2="136.40" stroke="var(--ink-2)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+<line x1="318.78" y1="132.40" x2="318.78" y2="140.40" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+<line x1="504.25" y1="132.40" x2="504.25" y2="140.40" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+<text x="82.00" y="140.40" text-anchor="end" font-size="11.5" fill="var(--ink-3)">5</text>
+<line x1="212.92" y1="152.00" x2="398.40" y2="152.00" stroke="var(--ink-2)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+<line x1="212.92" y1="148.00" x2="212.92" y2="156.00" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+<line x1="398.40" y1="148.00" x2="398.40" y2="156.00" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+<text x="82.00" y="156.00" text-anchor="end" font-size="11.5" fill="var(--ink-3)">6</text>
+<line x1="259.64" y1="167.60" x2="445.11" y2="167.60" stroke="var(--ink-2)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+<line x1="259.64" y1="163.60" x2="259.64" y2="171.60" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+<line x1="445.11" y1="163.60" x2="445.11" y2="171.60" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+<text x="82.00" y="171.60" text-anchor="end" font-size="11.5" fill="var(--ink-3)">7</text>
+<line x1="243.71" y1="183.20" x2="429.18" y2="183.20" stroke="var(--ink-2)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+<line x1="243.71" y1="179.20" x2="243.71" y2="187.20" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+<line x1="429.18" y1="179.20" x2="429.18" y2="187.20" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+<text x="82.00" y="187.20" text-anchor="end" font-size="11.5" fill="var(--ink-3)">8</text>
+<line x1="228.42" y1="198.80" x2="413.89" y2="198.80" stroke="var(--ink-2)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+<line x1="228.42" y1="194.80" x2="228.42" y2="202.80" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+<line x1="413.89" y1="194.80" x2="413.89" y2="202.80" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+<text x="82.00" y="202.80" text-anchor="end" font-size="11.5" fill="var(--ink-3)">9</text>
+<line x1="239.34" y1="214.40" x2="424.81" y2="214.40" stroke="var(--ink-2)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+<line x1="239.34" y1="210.40" x2="239.34" y2="218.40" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+<line x1="424.81" y1="210.40" x2="424.81" y2="218.40" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+<text x="82.00" y="218.40" text-anchor="end" font-size="11.5" fill="var(--ink-3)">10</text>
+<line x1="255.02" y1="230.00" x2="440.49" y2="230.00" stroke="var(--ink-2)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+<line x1="255.02" y1="226.00" x2="255.02" y2="234.00" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+<line x1="440.49" y1="226.00" x2="440.49" y2="234.00" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+<text x="82.00" y="234.00" text-anchor="end" font-size="11.5" fill="var(--ink-3)">11</text>
+<line x1="265.69" y1="245.60" x2="451.17" y2="245.60" stroke="var(--ink-2)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+<line x1="265.69" y1="241.60" x2="265.69" y2="249.60" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+<line x1="451.17" y1="241.60" x2="451.17" y2="249.60" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+<text x="82.00" y="249.60" text-anchor="end" font-size="11.5" fill="var(--ink-3)">12</text>
+<line x1="236.36" y1="261.20" x2="421.84" y2="261.20" stroke="var(--ink-2)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+<line x1="236.36" y1="257.20" x2="236.36" y2="265.20" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+<line x1="421.84" y1="257.20" x2="421.84" y2="265.20" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+<text x="82.00" y="265.20" text-anchor="end" font-size="11.5" fill="var(--ink-3)">13</text>
+<line x1="299.23" y1="276.80" x2="484.70" y2="276.80" stroke="var(--ink-2)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+<line x1="299.23" y1="272.80" x2="299.23" y2="280.80" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+<line x1="484.70" y1="272.80" x2="484.70" y2="280.80" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+<text x="82.00" y="280.80" text-anchor="end" font-size="11.5" fill="var(--ink-3)">14</text>
+<line x1="253.36" y1="292.40" x2="438.83" y2="292.40" stroke="var(--ink-2)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+<line x1="253.36" y1="288.40" x2="253.36" y2="296.40" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+<line x1="438.83" y1="288.40" x2="438.83" y2="296.40" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+<text x="82.00" y="296.40" text-anchor="end" font-size="11.5" fill="var(--ink-3)">15</text>
+<line x1="127.96" y1="308.00" x2="313.43" y2="308.00" stroke="var(--ink)" stroke-width="3.0" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="127.96" y1="304.00" x2="127.96" y2="312.00" stroke="var(--ink)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="313.43" y1="304.00" x2="313.43" y2="312.00" stroke="var(--ink)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="82.00" y="312.00" text-anchor="end" font-size="11.5" fill="var(--ink-3)">16</text>
+<text x="321.43" y="312.00" text-anchor="start" font-size="12" fill="var(--ink)">没盖住</text>
+<line x1="335.60" y1="323.60" x2="521.07" y2="323.60" stroke="var(--ink-2)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+<line x1="335.60" y1="319.60" x2="335.60" y2="327.60" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+<line x1="521.07" y1="319.60" x2="521.07" y2="327.60" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+<text x="82.00" y="327.60" text-anchor="end" font-size="11.5" fill="var(--ink-3)">17</text>
+<line x1="260.72" y1="339.20" x2="446.19" y2="339.20" stroke="var(--ink-2)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+<line x1="260.72" y1="335.20" x2="260.72" y2="343.20" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+<line x1="446.19" y1="335.20" x2="446.19" y2="343.20" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+<text x="82.00" y="343.20" text-anchor="end" font-size="11.5" fill="var(--ink-3)">18</text>
+<line x1="244.09" y1="354.80" x2="429.56" y2="354.80" stroke="var(--ink-2)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+<line x1="244.09" y1="350.80" x2="244.09" y2="358.80" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+<line x1="429.56" y1="350.80" x2="429.56" y2="358.80" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+<text x="82.00" y="358.80" text-anchor="end" font-size="11.5" fill="var(--ink-3)">19</text>
+<line x1="291.96" y1="370.40" x2="477.43" y2="370.40" stroke="var(--ink-2)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+<line x1="291.96" y1="366.40" x2="291.96" y2="374.40" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+<line x1="477.43" y1="366.40" x2="477.43" y2="374.40" stroke="var(--ink-2)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+<text x="82.00" y="374.40" text-anchor="end" font-size="11.5" fill="var(--ink-3)">20</text>
+<line x1="96.00" y1="402.00" x2="648.00" y2="402.00" stroke="var(--ink-3)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+<line x1="135.43" y1="402.00" x2="135.43" y2="407.00" stroke="var(--ink-3)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+<text x="135.43" y="422.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">88</text>
+<line x1="214.29" y1="402.00" x2="214.29" y2="407.00" stroke="var(--ink-3)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+<text x="214.29" y="422.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">92</text>
+<line x1="293.14" y1="402.00" x2="293.14" y2="407.00" stroke="var(--ink-3)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+<text x="293.14" y="422.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">96</text>
+<line x1="372.00" y1="402.00" x2="372.00" y2="407.00" stroke="var(--ink-3)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+<text x="372.00" y="422.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">100</text>
+<line x1="450.86" y1="402.00" x2="450.86" y2="407.00" stroke="var(--ink-3)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+<text x="450.86" y="422.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">104</text>
+<line x1="529.71" y1="402.00" x2="529.71" y2="407.00" stroke="var(--ink-3)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+<text x="529.71" y="422.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">108</text>
+<line x1="608.57" y1="402.00" x2="608.57" y2="407.00" stroke="var(--ink-3)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+<text x="608.57" y="422.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">112</text>
+<text x="648.00" y="442.00" text-anchor="end" font-size="13" fill="var(--ink-3)">样本均值与它张开的半宽</text>
+<text x="48.00" y="442.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">20 个区间里 18 个盖住 μ，2 个没有。抽之前每个的机会都是 0.95，抽完只剩事实。</text>
+</svg>
+<!--/FIG pb10_cover-->
+        <figcaption class="figcaption"><b>20 条区间，2 条没盖住真值。</b>横线越长，把握越大；横线的位置由样本决定，每次抽完才定下来，下一次又是新的两条端点。</figcaption>
+      </div>
+
+      <details class="fold">
+        <summary>σ 未知时为什么不能拿 S 顶上去查正态表</summary>
+        <p>\(S\) 自己也是随机的，用它顶掉 \(\sigma\) 会让比值多出一层波动，尾部比正态厚。t 分布就是为这件事准备的，它的分位点比 \(z\) 大一点，样本越少大得越多。\(n\) 大于 45 时两者差不到 0.05。</p>
+      </details>
+
+      <h2 id="s-6" class="reveal">六、假设检验与两类错误</h2>
+
+      <p>有人拿来一句话：这批灯泡的平均寿命是 1000 小时。数据在手得表个态，课本的做法是先接受这句话，叫原假设 \(H_0\)，再看手上的样本在这个前提下有多离谱，离谱到一定程度就拒绝它。判断离谱要事先划一条线，线外那块区域叫拒绝域，它的概率记作 \(\alpha\)，叫显著性水平，这个数在动手之前定，看完数据再改就成了凑答案。</p>
+
+      <p>表态两种，事实两种，凑成四种情形，错的那两种各有名字。\(H_0\) 本来对却被拒绝，叫第一类错误，弃真，概率不超过 \(\alpha\)；\(H_0\) 本来错却被留下，叫第二类错误，取伪，概率记作 \(\beta\)。\(\alpha\) 由自己定，\(\beta\) 由 \(\alpha\)、样本量、真假两个分布隔开多远一起决定，四个量牵着走，动一个另外三个跟着变。</p>
+
+      <div class="figure">
+        <!--FIG pb10_errors--><svg viewBox="0 0 720 420" role="img" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg">
+<text x="48.00" y="40.00" text-anchor="start" font-size="15.5" fill="var(--ink)">两类错误：同一把尺子，两种分布</text>
+<text x="48.00" y="62.00" text-anchor="start" font-size="12.8" fill="var(--ink-3)">检验 H0: μ = μ0 对 H1: μ = μ1，σ/√n = 1，临界值 c 取在 1.645；阴影是两种犯错的面积</text>
+<polygon points="406.36,350.00 406.36,286.66 408.48,290.04 410.59,293.29 412.71,296.43 414.82,299.45 416.93,302.35 419.05,305.14 421.16,307.80 423.27,310.35 425.39,312.79 427.50,315.12 429.61,317.33 431.73,319.44 433.84,321.44 435.95,323.34 438.07,325.15 440.18,326.85 442.30,328.46 444.41,329.98 446.52,331.42 448.64,332.77 450.75,334.03 452.86,335.23 454.98,336.34 457.09,337.39 459.20,338.37 461.32,339.28 463.43,340.14 465.55,340.93 467.66,341.67 469.77,342.36 471.89,343.00 474.00,343.59 476.11,344.14 478.23,344.65 480.34,345.12 482.45,345.55 484.57,345.95 486.68,346.32 488.80,346.65 490.91,346.96 493.02,347.25 495.14,347.51 497.25,347.75 499.36,347.96 501.48,348.16 503.59,348.34 505.70,348.51 507.82,348.66 509.93,348.79 512.05,348.92 514.16,349.03 516.27,349.13 518.39,349.22 520.50,349.30 522.61,349.38 524.73,349.45 526.84,349.51 528.95,349.56 531.07,349.61 533.18,349.65 535.30,349.69 537.41,349.73 539.52,349.76 541.64,349.79 543.75,349.81 545.86,349.83 547.98,349.85 550.09,349.87 552.20,349.89 554.32,349.90 556.43,349.91 558.55,349.92 560.66,349.93 562.77,349.94 564.89,349.95 567.00,349.96 569.11,349.96 571.23,349.97 573.34,349.97 575.45,349.97 577.57,349.98 579.68,349.98 581.80,349.98 583.91,349.99 586.02,349.99 588.14,349.99 590.25,349.99 592.36,349.99 594.48,349.99 596.59,349.99 598.70,349.99 600.82,350.00 602.93,350.00 605.05,350.00 607.16,350.00 609.27,350.00 611.39,350.00 613.50,350.00 615.61,350.00 617.73,350.00 619.84,350.00 621.95,350.00 624.07,350.00 626.18,350.00 628.30,350.00 630.41,350.00 632.52,350.00 634.64,350.00 636.75,350.00 638.86,350.00 640.98,350.00 643.09,350.00 645.20,350.00 647.32,350.00 649.43,350.00 651.55,350.00 653.66,350.00 655.77,350.00 657.89,350.00 660.00,350.00 660.00,350.00" fill="var(--fig-fill-2)" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="70.00,350.00 70.00,350.00 72.80,350.00 75.61,350.00 78.41,350.00 81.21,350.00 84.02,350.00 86.82,350.00 89.62,350.00 92.42,350.00 95.23,350.00 98.03,350.00 100.83,350.00 103.64,350.00 106.44,350.00 109.24,350.00 112.05,350.00 114.85,350.00 117.65,350.00 120.45,350.00 123.26,350.00 126.06,350.00 128.86,350.00 131.67,350.00 134.47,350.00 137.27,350.00 140.08,350.00 142.88,350.00 145.68,350.00 148.48,350.00 151.29,350.00 154.09,350.00 156.89,350.00 159.70,350.00 162.50,350.00 165.30,350.00 168.11,350.00 170.91,349.99 173.71,349.99 176.52,349.99 179.32,349.99 182.12,349.99 184.92,349.99 187.73,349.98 190.53,349.98 193.33,349.97 196.14,349.97 198.94,349.96 201.74,349.95 204.55,349.95 207.35,349.93 210.15,349.92 212.95,349.91 215.76,349.89 218.56,349.87 221.36,349.85 224.17,349.82 226.97,349.79 229.77,349.75 232.58,349.70 235.38,349.65 238.18,349.59 240.99,349.52 243.79,349.45 246.59,349.35 249.39,349.25 252.20,349.13 255.00,348.99 257.80,348.84 260.61,348.66 263.41,348.46 266.21,348.23 269.02,347.97 271.82,347.68 274.62,347.35 277.42,346.98 280.23,346.57 283.03,346.11 285.83,345.59 288.64,345.01 291.44,344.37 294.24,343.66 297.05,342.87 299.85,342.00 302.65,341.03 305.45,339.98 308.26,338.82 311.06,337.55 313.86,336.16 316.67,334.64 319.47,332.99 322.27,331.21 325.08,329.27 327.88,327.17 330.68,324.92 333.49,322.49 336.29,319.89 339.09,317.10 341.89,314.12 344.70,310.95 347.50,307.58 350.30,304.00 353.11,300.22 355.91,296.23 358.71,292.03 361.52,287.63 364.32,283.02 367.12,278.20 369.92,273.18 372.73,267.97 375.53,262.58 378.33,257.00 381.14,251.26 383.94,245.37 386.74,239.33 389.55,233.18 392.35,226.91 395.15,220.55 397.96,214.13 400.76,207.66 403.56,201.17 406.36,194.68 406.36,350.00" fill="var(--fig-fill)" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="70.00" y1="350.00" x2="660.00" y2="350.00" stroke="var(--ink-3)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+<line x1="172.61" y1="350.00" x2="172.61" y2="355.00" stroke="var(--ink-3)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+<text x="172.61" y="370.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">-2</text>
+<line x1="300.87" y1="350.00" x2="300.87" y2="355.00" stroke="var(--ink-3)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+<text x="300.87" y="370.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">0</text>
+<line x1="429.13" y1="350.00" x2="429.13" y2="355.00" stroke="var(--ink-3)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+<text x="429.13" y="370.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">2</text>
+<line x1="557.39" y1="350.00" x2="557.39" y2="355.00" stroke="var(--ink-3)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+<text x="557.39" y="370.00" text-anchor="middle" font-size="12.5" fill="var(--ink-3)">4</text>
+<text x="660.00" y="370.00" text-anchor="end" font-size="13" fill="var(--ink-3)">统计量的取值</text>
+<path d="M 70.00 349.62 L 71.97 349.58 L 73.93 349.53 L 75.90 349.48 L 77.87 349.42 L 79.83 349.35 L 81.80 349.28 L 83.77 349.20 L 85.73 349.12 L 87.70 349.02 L 89.67 348.92 L 91.63 348.80 L 93.60 348.68 L 95.57 348.54 L 97.53 348.39 L 99.50 348.23 L 101.47 348.05 L 103.43 347.86 L 105.40 347.65 L 107.37 347.42 L 109.33 347.17 L 111.30 346.90 L 113.27 346.60 L 115.23 346.29 L 117.20 345.94 L 119.17 345.57 L 121.13 345.17 L 123.10 344.74 L 125.07 344.28 L 127.03 343.78 L 129.00 343.24 L 130.97 342.67 L 132.93 342.05 L 134.90 341.39 L 136.87 340.69 L 138.83 339.93 L 140.80 339.12 L 142.77 338.26 L 144.73 337.35 L 146.70 336.37 L 148.67 335.34 L 150.63 334.24 L 152.60 333.07 L 154.57 331.84 L 156.53 330.53 L 158.50 329.15 L 160.47 327.69 L 162.43 326.15 L 164.40 324.53 L 166.37 322.83 L 168.33 321.04 L 170.30 319.16 L 172.27 317.19 L 174.23 315.12 L 176.20 312.96 L 178.17 310.70 L 180.13 308.35 L 182.10 305.90 L 184.07 303.34 L 186.03 300.68 L 188.00 297.92 L 189.97 295.06 L 191.93 292.10 L 193.90 289.03 L 195.87 285.86 L 197.83 282.59 L 199.80 279.22 L 201.77 275.75 L 203.73 272.18 L 205.70 268.52 L 207.67 264.76 L 209.63 260.92 L 211.60 256.99 L 213.57 252.98 L 215.53 248.89 L 217.50 244.73 L 219.47 240.50 L 221.43 236.21 L 223.40 231.86 L 225.37 227.46 L 227.33 223.01 L 229.30 218.53 L 231.27 214.01 L 233.23 209.48 L 235.20 204.93 L 237.17 200.37 L 239.13 195.81 L 241.10 191.27 L 243.07 186.74 L 245.03 182.25 L 247.00 177.79 L 248.97 173.38 L 250.93 169.02 L 252.90 164.74 L 254.87 160.53 L 256.83 156.41 L 258.80 152.38 L 260.77 148.46 L 262.73 144.65 L 264.70 140.97 L 266.67 137.42 L 268.63 134.02 L 270.60 130.77 L 272.57 127.68 L 274.53 124.75 L 276.50 122.01 L 278.47 119.44 L 280.43 117.07 L 282.40 114.89 L 284.37 112.92 L 286.33 111.15 L 288.30 109.60 L 290.27 108.26 L 292.23 107.15 L 294.20 106.26 L 296.17 105.59 L 298.13 105.16 L 300.10 104.95 L 302.07 104.98 L 304.03 105.23 L 306.00 105.72 L 307.97 106.43 L 309.93 107.37 L 311.90 108.53 L 313.87 109.92 L 315.83 111.52 L 317.80 113.33 L 319.77 115.35 L 321.73 117.57 L 323.70 119.98 L 325.67 122.59 L 327.63 125.37 L 329.60 128.33 L 331.57 131.46 L 333.53 134.75 L 335.50 138.18 L 337.47 141.76 L 339.43 145.47 L 341.40 149.30 L 343.37 153.25 L 345.33 157.29 L 347.30 161.44 L 349.27 165.66 L 351.23 169.97 L 353.20 174.33 L 355.17 178.75 L 357.13 183.22 L 359.10 187.73 L 361.07 192.26 L 363.03 196.80 L 365.00 201.36 L 366.97 205.92 L 368.93 210.47 L 370.90 215.00 L 372.87 219.51 L 374.83 223.98 L 376.80 228.42 L 378.77 232.81 L 380.73 237.15 L 382.70 241.43 L 384.67 245.64 L 386.63 249.79 L 388.60 253.86 L 390.57 257.85 L 392.53 261.76 L 394.50 265.59 L 396.47 269.32 L 398.43 272.96 L 400.40 276.51 L 402.37 279.96 L 404.33 283.31 L 406.30 286.56 L 408.27 289.70 L 410.23 292.75 L 412.20 295.69 L 414.17 298.53 L 416.13 301.27 L 418.10 303.90 L 420.07 306.44 L 422.03 308.87 L 424.00 311.20 L 425.97 313.44 L 427.93 315.58 L 429.90 317.62 L 431.87 319.57 L 433.83 321.44 L 435.80 323.21 L 437.77 324.89 L 439.73 326.50 L 441.70 328.02 L 443.67 329.46 L 445.63 330.82 L 447.60 332.11 L 449.57 333.33 L 451.53 334.48 L 453.50 335.57 L 455.47 336.59 L 457.43 337.55 L 459.40 338.46 L 461.37 339.30 L 463.33 340.10 L 465.30 340.84 L 467.27 341.54 L 469.23 342.19 L 471.20 342.80 L 473.17 343.36 L 475.13 343.89 L 477.10 344.38 L 479.07 344.84 L 481.03 345.26 L 483.00 345.66 L 484.97 346.02 L 486.93 346.36 L 488.90 346.67 L 490.87 346.96 L 492.83 347.22 L 494.80 347.47 L 496.77 347.69 L 498.73 347.90 L 500.70 348.09 L 502.67 348.27 L 504.63 348.43 L 506.60 348.57 L 508.57 348.71 L 510.53 348.83 L 512.50 348.94 L 514.47 349.04 L 516.43 349.14 L 518.40 349.22 L 520.37 349.30 L 522.33 349.37 L 524.30 349.43 L 526.27 349.49 L 528.23 349.54 L 530.20 349.59 L 532.17 349.63 L 534.13 349.67 L 536.10 349.71 L 538.07 349.74 L 540.03 349.77 L 542.00 349.79 L 543.97 349.81 L 545.93 349.83 L 547.90 349.85 L 549.87 349.87 L 551.83 349.88 L 553.80 349.90 L 555.77 349.91 L 557.73 349.92 L 559.70 349.93 L 561.67 349.94 L 563.63 349.94 L 565.60 349.95 L 567.57 349.96 L 569.53 349.96 L 571.50 349.97 L 573.47 349.97 L 575.43 349.97 L 577.40 349.98 L 579.37 349.98 L 581.33 349.98 L 583.30 349.98 L 585.27 349.99 L 587.23 349.99 L 589.20 349.99 L 591.17 349.99 L 593.13 349.99 L 595.10 349.99 L 597.07 349.99 L 599.03 350.00 L 601.00 350.00 L 602.97 350.00 L 604.93 350.00 L 606.90 350.00 L 608.87 350.00 L 610.83 350.00 L 612.80 350.00 L 614.77 350.00 L 616.73 350.00 L 618.70 350.00 L 620.67 350.00 L 622.63 350.00 L 624.60 350.00 L 626.57 350.00 L 628.53 350.00 L 630.50 350.00 L 632.47 350.00 L 634.43 350.00 L 636.40 350.00 L 638.37 350.00 L 640.33 350.00 L 642.30 350.00 L 644.27 350.00 L 646.23 350.00 L 648.20 350.00 L 650.17 350.00 L 652.13 350.00 L 654.10 350.00 L 656.07 350.00 L 658.03 350.00 L 660.00 350.00" fill="none" stroke="var(--accent-line)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 70.00 350.00 L 71.97 350.00 L 73.93 350.00 L 75.90 350.00 L 77.87 350.00 L 79.83 350.00 L 81.80 350.00 L 83.77 350.00 L 85.73 350.00 L 87.70 350.00 L 89.67 350.00 L 91.63 350.00 L 93.60 350.00 L 95.57 350.00 L 97.53 350.00 L 99.50 350.00 L 101.47 350.00 L 103.43 350.00 L 105.40 350.00 L 107.37 350.00 L 109.33 350.00 L 111.30 350.00 L 113.27 350.00 L 115.23 350.00 L 117.20 350.00 L 119.17 350.00 L 121.13 350.00 L 123.10 350.00 L 125.07 350.00 L 127.03 350.00 L 129.00 350.00 L 130.97 350.00 L 132.93 350.00 L 134.90 350.00 L 136.87 350.00 L 138.83 350.00 L 140.80 350.00 L 142.77 350.00 L 144.73 350.00 L 146.70 350.00 L 148.67 350.00 L 150.63 350.00 L 152.60 350.00 L 154.57 350.00 L 156.53 350.00 L 158.50 350.00 L 160.47 350.00 L 162.43 350.00 L 164.40 350.00 L 166.37 350.00 L 168.33 350.00 L 170.30 349.99 L 172.27 349.99 L 174.23 349.99 L 176.20 349.99 L 178.17 349.99 L 180.13 349.99 L 182.10 349.99 L 184.07 349.99 L 186.03 349.98 L 188.00 349.98 L 189.97 349.98 L 191.93 349.98 L 193.90 349.97 L 195.87 349.97 L 197.83 349.96 L 199.80 349.96 L 201.77 349.95 L 203.73 349.95 L 205.70 349.94 L 207.67 349.93 L 209.63 349.92 L 211.60 349.92 L 213.57 349.90 L 215.53 349.89 L 217.50 349.88 L 219.47 349.86 L 221.43 349.85 L 223.40 349.83 L 225.37 349.80 L 227.33 349.78 L 229.30 349.75 L 231.27 349.72 L 233.23 349.69 L 235.20 349.66 L 237.17 349.61 L 239.13 349.57 L 241.10 349.52 L 243.07 349.47 L 245.03 349.41 L 247.00 349.34 L 248.97 349.27 L 250.93 349.19 L 252.90 349.10 L 254.87 349.00 L 256.83 348.89 L 258.80 348.78 L 260.77 348.65 L 262.73 348.51 L 264.70 348.36 L 266.67 348.19 L 268.63 348.01 L 270.60 347.81 L 272.57 347.60 L 274.53 347.36 L 276.50 347.11 L 278.47 346.83 L 280.43 346.54 L 282.40 346.21 L 284.37 345.87 L 286.33 345.49 L 288.30 345.08 L 290.27 344.65 L 292.23 344.17 L 294.20 343.67 L 296.17 343.12 L 298.13 342.54 L 300.10 341.91 L 302.07 341.24 L 304.03 340.53 L 306.00 339.76 L 307.97 338.94 L 309.93 338.07 L 311.90 337.14 L 313.87 336.16 L 315.83 335.11 L 317.80 333.99 L 319.77 332.81 L 321.73 331.56 L 323.70 330.24 L 325.67 328.84 L 327.63 327.36 L 329.60 325.81 L 331.57 324.17 L 333.53 322.45 L 335.50 320.64 L 337.47 318.74 L 339.43 316.75 L 341.40 314.66 L 343.37 312.48 L 345.33 310.20 L 347.30 307.82 L 349.27 305.35 L 351.23 302.77 L 353.20 300.09 L 355.17 297.31 L 357.13 294.43 L 359.10 291.44 L 361.07 288.35 L 363.03 285.16 L 365.00 281.86 L 366.97 278.47 L 368.93 274.98 L 370.90 271.39 L 372.87 267.71 L 374.83 263.94 L 376.80 260.07 L 378.77 256.13 L 380.73 252.10 L 382.70 247.99 L 384.67 243.82 L 386.63 239.57 L 388.60 235.27 L 390.57 230.91 L 392.53 226.49 L 394.50 222.04 L 396.47 217.55 L 398.43 213.03 L 400.40 208.49 L 402.37 203.94 L 404.33 199.38 L 406.30 194.82 L 408.27 190.28 L 410.23 185.76 L 412.20 181.27 L 414.17 176.83 L 416.13 172.43 L 418.10 168.09 L 420.07 163.82 L 422.03 159.62 L 424.00 155.52 L 425.97 151.52 L 427.93 147.62 L 429.90 143.84 L 431.87 140.19 L 433.83 136.67 L 435.80 133.30 L 437.77 130.08 L 439.73 127.03 L 441.70 124.14 L 443.67 121.43 L 445.63 118.91 L 447.60 116.58 L 449.57 114.44 L 451.53 112.51 L 453.50 110.79 L 455.47 109.29 L 457.43 108.00 L 459.40 106.93 L 461.37 106.09 L 463.33 105.48 L 465.30 105.09 L 467.27 104.94 L 469.23 105.01 L 471.20 105.32 L 473.17 105.85 L 475.13 106.62 L 477.10 107.60 L 479.07 108.82 L 481.03 110.25 L 483.00 111.89 L 484.97 113.75 L 486.93 115.81 L 488.90 118.08 L 490.87 120.53 L 492.83 123.18 L 494.80 126.00 L 496.77 129.00 L 498.73 132.16 L 500.70 135.48 L 502.67 138.95 L 504.63 142.56 L 506.60 146.29 L 508.57 150.15 L 510.53 154.12 L 512.50 158.19 L 514.47 162.35 L 516.43 166.59 L 518.40 170.91 L 520.37 175.29 L 522.33 179.72 L 524.30 184.20 L 526.27 188.71 L 528.23 193.24 L 530.20 197.79 L 532.17 202.35 L 534.13 206.91 L 536.10 211.45 L 538.07 215.98 L 540.03 220.48 L 542.00 224.95 L 543.97 229.38 L 545.93 233.76 L 547.90 238.08 L 549.87 242.35 L 551.83 246.55 L 553.80 250.68 L 555.77 254.73 L 557.73 258.71 L 559.70 262.60 L 561.67 266.41 L 563.63 270.12 L 565.60 273.74 L 567.57 277.27 L 569.53 280.69 L 571.50 284.02 L 573.47 287.25 L 575.43 290.37 L 577.40 293.40 L 579.37 296.32 L 581.33 299.14 L 583.30 301.85 L 585.27 304.46 L 587.23 306.97 L 589.20 309.39 L 591.17 311.70 L 593.13 313.91 L 595.10 316.03 L 597.07 318.06 L 599.03 319.99 L 601.00 321.83 L 602.97 323.58 L 604.93 325.25 L 606.90 326.83 L 608.87 328.34 L 610.83 329.76 L 612.80 331.11 L 614.77 332.38 L 616.73 333.59 L 618.70 334.73 L 620.67 335.80 L 622.63 336.81 L 624.60 337.75 L 626.57 338.65 L 628.53 339.48 L 630.50 340.27 L 632.47 341.00 L 634.43 341.69 L 636.40 342.33 L 638.37 342.92 L 640.33 343.48 L 642.30 344.00 L 644.27 344.49 L 646.23 344.93 L 648.20 345.35 L 650.17 345.74 L 652.13 346.10 L 654.10 346.43 L 656.07 346.73 L 658.03 347.02 L 660.00 347.28" fill="none" stroke="var(--ink-2)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="406.36" y1="350.00" x2="406.36" y2="84.00" stroke="var(--ink)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 6"/>
+<text x="398.36" y="390.00" text-anchor="end" font-size="13" fill="var(--ink)">c = 1.645</text>
+<text x="412.36" y="78.00" text-anchor="start" font-size="13" fill="var(--ink-2)">拒绝域</text>
+<text x="201.47" y="165.71" text-anchor="start" font-size="14" fill="var(--accent-line)">H0：μ = μ0</text>
+<text x="496.47" y="165.71" text-anchor="start" font-size="14" fill="var(--ink-2)">H1：μ = μ1</text>
+<line x1="451.58" y1="303.93" x2="499.67" y2="200.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="499.67" y="200.00" text-anchor="start" font-size="12.5" fill="var(--ink-2)">α = 0.05：H0 为真却拒绝，弃真</text>
+<line x1="368.21" y1="264.00" x2="179.02" y2="250.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="179.02" y="250.00" text-anchor="start" font-size="12.5" fill="var(--ink-2)">β = 0.17：H0 为假却留下，取伪</text>
+<line x1="422.72" y1="158.19" x2="486.85" y2="128.00" stroke="var(--ink-3)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="486.85" y="128.00" text-anchor="start" font-size="12.5" fill="var(--ink-2)">两条曲线重叠的地方，误会从这里长出来</text>
+<text x="48.00" y="396.00" text-anchor="start" font-size="13.5" fill="var(--ink-2)">c 往右移，α 变小、β 变大，往左移反过来；想让两边同时变小，只能加样本量。</text>
+</svg>
+<!--/FIG pb10_errors-->
+        <figcaption class="figcaption"><b>拒绝域取在右边，两块阴影就是两种错。</b>\(\alpha\) 与 \(\beta\) 加起来的面积超过一半的区间时，这个检验基本分不出真假，得加样本。</figcaption>
+      </div>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定理（奈曼-皮尔逊引理）</p>
+        <p>设总体的密度为 \(f(x;\theta)\)，要检验 \(H_0:\theta=\theta_0\) 对 \(H_1:\theta=\theta_1\)。给定 \(\alpha\in(0,1)\)，在一切犯第一类错误的概率不超过 \(\alpha\) 的检验中，凡拒绝域具有形状</p>
+        <p>\[ \Lambda=\frac{L(\theta_1)}{L(\theta_0)}=\frac{\prod_{i=1}^{n}f(x_i;\theta_1)}{\prod_{i=1}^{n}f(x_i;\theta_0)}\ge c \]</p>
+        <p>的检验，其犯第二类错误的概率最小，其中常数 \(c\) 由 \(\alpha\) 定出。这样的检验叫水平为 \(\alpha\) 的一致最大功效检验。</p>
+      </div>
+
+      <p>引理把两种错误的关系说成一句话：给定 \(\alpha\) 之后，似然比检验已经是最好的，别的检验不可能在同样的 \(\alpha\) 下把 \(\beta\) 压得更低。\(\alpha\) 与 \(\beta\) 此消彼长，想把两边一起压下去只剩一条路，加样本量，样本一多，两条曲线各自变瘦，重叠的那块就薄了。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定理（单正态总体的均值与方差检验）</p>
+        <p>设样本来自 \(N(\mu,\sigma^2)\)，显著性水平为 \(\alpha\)。</p>
+        <p>一、\(\sigma\) 已知，检验 \(\mu=\mu_0\)：取 \(U=\dfrac{\bar x-\mu_0}{\sigma/\sqrt n}\)，\(H_0\) 成立时 \(U\sim N(0,1)\)，拒绝域为 \(|U|\ge z_{\alpha/2}\)。</p>
+        <p>二、\(\sigma\) 未知，检验 \(\mu=\mu_0\)：取 \(T=\dfrac{\bar x-\mu_0}{S/\sqrt n}\)，\(H_0\) 成立时 \(T\sim t(n-1)\)，拒绝域为 \(|T|\ge t_{\alpha/2}(n-1)\)。</p>
+        <p>三、检验 \(\sigma^2=\sigma_0^2\)：取 \(\chi^2=\dfrac{(n-1)S^2}{\sigma_0^2}\)，\(H_0\) 成立时 \(\chi^2\sim\chi^2(n-1)\)，拒绝域为 \(\chi^2\ge\chi^2_{\alpha/2}(n-1)\) 或 \(\chi^2\le\chi^2_{1-\alpha/2}(n-1)\)。</p>
+        <p>单侧检验把 \(\alpha/2\) 换成 \(\alpha\)，把绝对值拆成一边：\(U\ge z_\alpha\)，或 \(U\le -z_\alpha\)。</p>
+      </div>
+
+      <p>双侧检验与区间估计是一件事的两种说法。\(|T|&lt;t_{\alpha/2}(n-1)\) 时不拒绝 \(\mu_0\)，这话与「\(\mu_0\) 落在 \(\mu\) 的置信区间里」完全等价。同一组数据不会给出两套矛盾的答案。</p>
+
+      <details class="fold">
+        <summary>p 值到底在量什么</summary>
+        <p>p 值是「假如 \(H_0\) 成立，出现比手上这组样本更极端的结果的概率」。它小于 \(\alpha\) 就拒绝。它量的是数据与 \(H_0\) 顶得多厉害，不量 \(H_0\) 为真的概率，也不量这个差别在现实里重不重要。</p>
+      </details>
+
+      <div class="archive reveal">
+        <p class="archive-when">1933 年，伦敦</p>
+        <h3>一条引理把检验分了类</h3>
+        <p class="archive-quote">「On the Problem of the Most Efficient Tests of Statistical Hypotheses」</p>
+        <p class="archive-source">奈曼与皮尔逊，载《皇家学会哲学汇刊 A 辑》第 231 卷</p>
+        <p>这篇长文把「假设」写成一对相反的命题，把判断规则写成拒绝域，把犯错分成弃真与取伪两类，再用一条引理说清两者的取舍。今天课本里的 \(\alpha\)、\(\beta\)、功效、一致最大功效检验，记号多半来自这里。</p>
+      </div>
+
+      <h2 id="s-7" class="reveal">七、一元线性回归</h2>
+
+      <p>两个变量一起看，最省事的模型是一条直线 \(y=a+bx\)：最小二乘挑 \(a\) 与 \(b\)，让竖直偏差的平方和 \(Q(a,b)=\sum (y_i-a-bx_i)^2\) 最小，平方为了让正负偏差不互相抵消，也让离群点付更重的代价。对两个参数各求一次偏导，令其为零，得到两个正规方程，解出来就是下面这一组。</p>
+
+      <div class="theorem reveal">
+        <p class="theorem-label">定理（最小二乘估计与相关系数检验）</p>
+        <p>记 \(l_{xx}=\sum (x_i-\bar x)^2\)，\(l_{yy}=\sum (y_i-\bar y)^2\)，\(l_{xy}=\sum (x_i-\bar x)(y_i-\bar y)\)。最小二乘估计为</p>
+        <p>\[ \hat b=\frac{l_{xy}}{l_{xx}},\qquad \hat a=\bar y-\hat b\,\bar x, \]</p>
+        <p>回归直线必过点 \((\bar x,\bar y)\)。样本相关系数 \(r=\dfrac{l_{xy}}{\sqrt{l_{xx}\,l_{yy}}}\)，且 \(|\hat b|\) 与 \(|r|\) 同时变大变小。检验 \(H_0:\rho=0\)（\(x\) 与 \(y\) 没有线性关系）时，若 \(H_0\) 成立，</p>
+        <p>\[ t=\frac{r\sqrt{n-2}}{\sqrt{1-r^2}}\sim t(n-2), \]</p>
+        <p>拒绝域为 \(|t|\ge t_{\alpha/2}(n-2)\)。</p>
+      </div>
+
+      <p>高尔顿画的就是这条线，父子身高算出来的 \(\hat b\) 小于 1，父亲比平均高出一截，儿子平均只高出一小截，他管这个现象叫向平庸回归。名字留了下来，今天凡是拿一条线去拟合两组数据都叫回归，哪怕那条线并不比 45 度更平。</p>
+
+      <p>相关系数只量直线趋势，量不到弯曲：一组点排成整齐的抛物线，\(r\) 也可能接近零；把 \(r\) 很大读成因果，就超出了这个数能管的事。</p>
+
+      <h2 id="s-manual" class="reveal">怎么算</h2>
+
+      <ul>
+        <li><strong>先分清三样东西。</strong>哪个是总体，哪个是样本，哪个是待估参数；参数一旦被当成已知，题目就变质了。</li>
+        <li><strong>点估计两条路。</strong>矩法列方程最快；极大似然按四步走，连乘取对数再求导，边界情形回头看 L 本身。</li>
+        <li><strong>区间先找枢轴量。</strong>σ 已知用 z，σ 未知用 t，问方差用 χ²，问比例在大样本下用 z 加样本频率。</li>
+        <li><strong>检验四步。</strong>写 \(H_0\) 与 \(H_1\)，选统计量，定拒绝域，落结论。σ 已知用 U，σ 未知用 T，问方差用 χ²。</li>
+        <li><strong>查表认自由度。</strong>t 与 χ² 是 \(n-1\)，F 有两个自由度；F 的左尾用倒数翻，t 的双侧用 \(\alpha/2\)。</li>
+        <li><strong>答案写三件事。</strong>数值、单位、把握或 \(\alpha\)；只报一个数、不报把握的答案算没答完。</li>
+      </ul>
+
+      <h2 id="s-examples" class="reveal">例题</h2>
+
+      <div class="example">
+        <p class="example-head">例 <span>1</span>　设总体服从参数为 \(\lambda\) 的泊松分布，\(x_1,\dots,x_n\) 是样本值，求 \(\lambda\) 的矩估计与极大似然估计。</p>
+        <p class="solution">矩估计令 \(\bar x=E(X)=\lambda\)，得 \(\hat\lambda=\bar x\)。似然函数 \(L=\prod \lambda^{x_i}e^{-\lambda}/x_i!\)，取对数得 \(n\bar x\ln\lambda-n\lambda-\sum\ln x_i!\)，对 \(\lambda\) 求导置零得 \(\bar x/\lambda-1=0\)，所以 \(\hat\lambda=\bar x\)。两条路在这道题上撞到一起。</p>
+      </div>
+
+      <div class="example">
+        <p class="example-head">例 <span>2</span>　某批零件长度服从正态分布，抽 16 件测得 \(\bar x=20.0\) 毫米、\(S=0.4\) 毫米，求平均长度 95% 的置信区间；若已知 \(\sigma=0.4\)，区间变成多少。</p>
+        <p class="solution">\(\sigma\) 未知用 t，\(t_{0.025}(15)=2.131\)，半宽 \(2.131\times 0.4/4=0.213\)，区间 \([19.79,20.21]\)。把 \(\sigma\) 当成已知，临界值换成 1.96，半宽 0.196，区间 \([19.80,20.20]\)，窄了 0.017 毫米。</p>
+      </div>
+
+      <div class="example">
+        <p class="example-head">例 <span>3</span>　某机器灌装标称 500 克，历史标准差 8 克，抽 25 袋测得 \(\bar x=496\) 克，取 \(\alpha=0.05\)，判断这批是否偏轻。</p>
+        <p class="solution">\(U=\dfrac{496-500}{8/\sqrt{25}}=-2.5\)，双侧临界值 1.96，\(|U|=2.5\) 落进拒绝域，判断这批偏轻。若一开始就写单侧 \(H_1:\mu&lt;500\)，临界值是 1.645，结论相同，p 值约 0.006。</p>
+      </div>
+
+      <h2 id="s-exercises" class="reveal">习题</h2>
+
+      <div class="exercises">
+
+        <div class="ex-group">
+          <p class="ex-group-head">A 档 <span>巩固定义与基本计算，每题五分钟内</span></p>
+
+          <p class="ex"><span class="ex-num">1.</span> 从一批 2000 只灯泡中抽 20 只测寿命。指出总体、个体、样本、样本容量各是什么。</p>
+          <div class="answer"><details><summary>看答案</summary><p>总体是这 2000 只灯泡的寿命全体，个体是每只灯泡的寿命，样本是抽出的 20 只的寿命，样本容量 20。</p></details></div>
+
+          <p class="ex"><span class="ex-num">2.</span> 下列哪些是统计量：\(\bar X\)、\(\dfrac{\bar X-\mu}{\sigma}\)、\(S^2\)、\(\max X_i\)、\(\dfrac{1}{n}\sum X_i^2\)。</p>
+          <div class="answer"><details><summary>看答案</summary><p>除第二个之外都是。第二个含未知参数 \(\mu\) 与 \(\sigma\)，是枢轴量，不能直接算出来。</p></details></div>
+
+          <p class="ex"><span class="ex-num">3.</span> 设 \(X_1,\dots,X_9\) 独立同分布 \(N(0,1)\)，写出 \(X_1^2+\dots+X_9^2\) 与 \(\dfrac{X_1}{\sqrt{(X_2^2+\dots+X_9^2)/8}}\) 的分布。</p>
+          <div class="answer"><details><summary>看答案</summary><p>前者是 \(\chi^2(9)\)。后者正是 \(X/\sqrt{Y/n}\) 的形状，\(Y\) 是 8 个标准正态的平方和，所以服从 \(t(8)\)。</p></details></div>
+
+          <p class="ex"><span class="ex-num">4.</span> 用矩估计求均匀分布 \(U(0,\theta)\) 中 \(\theta\) 的估计量。</p>
+          <div class="answer"><details><summary>看答案</summary><p>\(E(X)=\theta/2\)，令 \(\bar X=\theta/2\)，得 \(\hat\theta=2\bar X\)。</p></details></div>
+
+          <p class="ex"><span class="ex-num">5.</span> 样本值 3.2、3.6、3.0、3.4、3.8，算样本均值与样本方差。</p>
+          <div class="answer"><details><summary>看答案</summary><p>\(\bar x=3.4\)，偏差平方和 \(0.04+0.04+0.16+0+0.16=0.40\)，\(S^2=0.40/4=0.10\)。</p></details></div>
+
+          <p class="ex"><span class="ex-num">6.</span> 正态总体抽 \(n=10\)，\(S^2=4\)，求 \(\sigma^2\) 的 95% 置信区间（\(\chi^2_{0.025}(9)=19.02\)，\(\chi^2_{0.975}(9)=2.70\)）。</p>
+          <div class="answer"><details><summary>看答案</summary><p>区间是 \(\left[\dfrac{9\times 4}{19.02},\dfrac{9\times 4}{2.70}\right]\)，即 \([1.89,13.33]\)。区间很宽，因为 \(n\) 只有 10。</p></details></div>
+        </div>
+
+        <div class="ex-group">
+          <p class="ex-group-head">B 档 <span>综合题，接近期末与考研难度</span></p>
+
+          <p class="ex"><span class="ex-num">1.</span> 设总体密度为 \(f(x)=\frac{1}{\theta}e^{-x/\theta}\)（\(x&gt;0\)），求 \(\theta\) 的极大似然估计，并说明它是否无偏。</p>
+          <div class="answer"><details><summary>看答案</summary><p>\(\ln L=-n\ln\theta-\frac{1}{\theta}\sum x_i\)，求导置零得 \(\hat\theta=\bar X\)。\(E(\bar X)=\theta\)，所以无偏；\(D(\hat\theta)=\theta^2/n\) 随 \(n\) 趋于零，也一致。</p></details></div>
+
+          <p class="ex"><span class="ex-num">2.</span> 正态总体抽 \(n=25\)，\(\bar x=10.2\)，\(S=2.0\)，求 \(\mu\) 的 95% 置信区间（\(t_{0.025}(24)=2.064\)）。</p>
+          <div class="answer"><details><summary>看答案</summary><p>半宽 \(2.064\times 2.0/5=0.826\)，区间 \([9.37,11.03]\)。</p></details></div>
+
+          <p class="ex"><span class="ex-num">3.</span> 设 \(\sigma=2\)，\(n=16\)，检验 \(H_0:\mu=10\) 对 \(H_1:\mu=11\)，拒绝域取 \(\bar X&gt;10.8\)，求两类错误的概率。</p>
+          <div class="answer"><details><summary>看答案</summary><p>\(\sigma/\sqrt n=0.5\)。\(\alpha=1-\Phi(1.6)=0.055\)，\(\beta=\Phi((10.8-11)/0.5)=\Phi(-0.4)=0.345\)。</p></details></div>
+
+          <p class="ex"><span class="ex-num">4.</span> 10 组数据算得 \(l_{xx}=60\)，\(l_{yy}=49\)，\(l_{xy}=42\)。求回归系数、相关系数，并在 \(\alpha=0.05\) 下检验线性关系是否显著（\(t_{0.025}(8)=2.306\)）。</p>
+          <div class="answer"><details><summary>看答案</summary><p>\(\hat b=0.7\)，\(r=42/\sqrt{60\times 49}=0.775\)，\(t=\dfrac{0.775\sqrt 8}{\sqrt{1-0.600}}=3.47\)，超过 2.306，线性关系显著。</p></details></div>
+        </div>
+
+        <div class="ex-group">
+          <p class="ex-group-head">C 档 <span>拓展与历史原题</span></p>
+
+          <p class="ex"><span class="ex-num">1.</span>（费希尔，1922）设总体密度为 \(f(x;\theta)=\theta x^{\theta-1}\)（\(0&lt;x&lt;1\)，\(\theta&gt;0\)），用极大似然求 \(\theta\) 的估计量。</p>
+          <div class="answer"><details><summary>看答案</summary><p>\(\ln L=n\ln\theta+(\theta-1)\sum\ln x_i\)，求导得 \(\dfrac{n}{\theta}+\sum\ln x_i=0\)，所以 \(\hat\theta=-\dfrac{n}{\sum \ln x_i}\)。费希尔 1922 年那篇文章正是拿这类单调密度做例子的。</p></details></div>
+
+          <p class="ex"><span class="ex-num">2.</span>（奈曼-皮尔逊，1933）设单个观测 \(X\) 服从密度 \(\lambda e^{-\lambda x}\)（\(x&gt;0\)），检验 \(H_0:\lambda=\lambda_0\) 对 \(H_1:\lambda=\lambda_1\)，其中 \(\lambda_1&gt;\lambda_0\)。写出似然比检验的拒绝域形状。</p>
+          <div class="answer"><details><summary>看答案</summary><p>\(\Lambda=\dfrac{\lambda_1}{\lambda_0}e^{-(\lambda_1-\lambda_0)x}\) 随 \(x\) 减小而变大，所以拒绝域形如 \(x&lt;k\)。\(\lambda\) 大时小观测更常见，拒绝域落在左边合情合理。</p></details></div>
+
+          <p class="ex"><span class="ex-num">3.</span>（高尔顿，1886）父子身高：父亲均值 68 英寸，儿子均值 69 英寸，\(l_{xx}=400\)，\(l_{yy}=300\)，\(l_{xy}=240\)。求回归直线与相关系数，并估父亲 72 英寸时儿子的平均身高。</p>
+          <div class="answer"><details><summary>看答案</summary><p>\(\hat b=0.6\)，\(\hat a=69-0.6\times 68=28.2\)，直线是 \(y=28.2+0.6x\)，\(r=240/\sqrt{400\times 300}=0.693\)。父亲 72 英寸时儿子平均 71.4 英寸，比父亲矮 0.6 英寸，斜率小于 1 就是向均值回归。</p></details></div>
+        </div>
+
+        <div class="ex-group">
+          <p class="ex-group-head">思考题 <span>不设标准答案，只给提示</span></p>
+
+          <p class="ex"><span class="ex-num">1.</span>「\(\mu\) 落在这个区间里的概率是 0.95」这句话错在哪里，什么立场下它又能算对？</p>
+          <div class="answer"><details><summary>看提示</summary><p>抽完以后区间与 \(\mu\) 都定了，谈概率没有位置。把 \(\mu\) 看成随机变量、给它一个先验分布，再按贝叶斯办法算后验概率，这句话才成立，那时得到的是可信区间。</p></details></div>
+
+          <p class="ex"><span class="ex-num">2.</span> 检验拒绝 \(H_0\)，能不能说 \(H_0\) 是假的？不拒绝，能不能说 \(H_0\) 成立？</p>
+          <div class="answer"><details><summary>看提示</summary><p>两种说法都过头。拒绝只说明样本与 \(H_0\) 的冲突超过了 \(\alpha\) 这条线，还会犯第一类错误；不拒绝只说明证据不够，可能是样本太小、\(\beta\) 太大，数据没有提供否定的力量。</p></details></div>
+
+          <p class="ex"><span class="ex-num">3.</span> 高尔顿的回归线斜率小于 1，与「高个子的儿子一定矮」差在哪里？</p>
+          <div class="answer"><details><summary>看提示</summary><p>回归线说的是平均。父亲 72 英寸，儿子平均 71.4 英寸，个体仍然有高有低，散点围着直线上下摆。把平均的规律安到每个个体头上，是最常见的一种误读。</p></details></div>
+        </div>
+
+      </div>
+
+      <h2 class="reveal">延伸阅读</h2>
+      <ul class="refs">
+        <li>盛骤、谢式千、潘承毅《概率论与数理统计》第四版，第六章至第九章。本章记号、分位点写法与例题口径都照这本。</li>
+        <li>R. A. Fisher, <em>Statistical Methods for Research Workers</em>, 1925，第 1 至 4 章。极大似然、回归与相关系数检验的原始写法。</li>
+        <li>E. L. Lehmann, <em>Fisher, Neyman, and the Creation of Classical Statistics</em>, Springer, 2011。1900 至 1933 年那场关于估计与检验的争论。</li>
+        <li>陈希孺《数理统计学简史》，湖南教育出版社，2002。χ²、t、F 三个分布各自的来历与命名经过。</li>
+      </ul>
+
+    </article>
+  </div>
+
+  <div class="wrap">
+    <nav class="pager" aria-label="翻页">
+      <a class="pager-link prev" href="ch08.html"><span class="pager-dir">上一章</span><span class="pager-title">大数定律与中心极限定理</span></a>
+      <a class="pager-link next" href="index.html"><span class="pager-dir">本课目录</span><span class="pager-title">概率论与数理统计</span></a>
+    </nav>
+  </div>
+
+</main>
+
+<footer class="footer field-dark">
+  <div class="wrap">
+    <p class="footer-mark">数学基础课</p>
+    <div class="footer-cols">
+      <div><p>概率论与数理统计。三门课用的是同一套版式与同一套练习体例。</p></div>
+      <div><p><a href="index.html">概率论与数理统计目录</a></p><p><a href="../index.html">返回主页</a></p></div>
+      <div><p>图示用脚本按真实数值画，公式由 KaTeX 排版。</p></div>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/katex/katex.min.js"></script>
+<script src="../assets/katex/auto-render.min.js"></script>
+<script src="../assets/site.js"></script>
+</body>
+</html>
