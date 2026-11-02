@@ -1,0 +1,14 @@
+{% extends "index.html" %}
+
+{% block title %}{{ section.title }}{% endblock title %}
+
+{% block content %}
+<article class="post projects-page">
+    <header>
+        <h1>{{ section.title }}</h1>
+    </header>
+    <div class="content">
+        {{ section.content | safe }}
+    </div>
+</article>
+{% endblock content %}

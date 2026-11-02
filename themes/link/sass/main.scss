@@ -499,3 +499,12 @@ ul.language-select>li {
     color: #888;
     margin-top: 0.4em;
 }
+
+/* 项目页 */
+.projects-page .content > p:first-child {
+    color: #666;
+}
+
+.project-list .home-entry + .home-entry {
+    margin-top: 0.8em;
+}
